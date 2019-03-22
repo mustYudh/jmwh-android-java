@@ -1,0 +1,7 @@
+<resources>
+
+    <style name="AppGrayTheme" parent="@style/BaseTheme">
+        <item name="android:windowBackground">@color/activity_bg</item>
+    </style>
+
+</resources>
