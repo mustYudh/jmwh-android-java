@@ -58,20 +58,20 @@ android {
 
 
     signingConfigs {
-        debug {
-            storeFile file('../keystores/jmwh.jks')
-            storePassword 'asdfghjkl'
-            keyAlias 'jmwh'
-            keyPassword 'asdfghjkl'
-            v2SigningEnabled true
-        }
-        release {
-            storeFile file('../keystores/jmwh.jks')
-            storePassword 'asdfghjkl'
-            keyAlias 'jmwh'
-            keyPassword 'asdfghjkl'
-            v2SigningEnabled true
-        }
+//        debug {
+//            storeFile file('../keystores/jmwh.jks')
+//            storePassword 'asdfghjkl'
+//            keyAlias 'jmwh'
+//            keyPassword 'asdfghjkl'
+//            v2SigningEnabled true
+//        }
+//        release {
+//            storeFile file('../keystores/jmwh.jks')
+//            storePassword 'asdfghjkl'
+//            keyAlias 'jmwh'
+//            keyPassword 'asdfghjkl'
+//            v2SigningEnabled true
+//        }
     }
 
 
@@ -108,11 +108,11 @@ android {
             debuggable true
             shrinkResources false
             minifyEnabled false
-            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
         }
 
         release {
-            productFlavors.jmwh.signingConfig signingConfigs.release
+//            productFlavors.jmwh.signingConfig signingConfigs.release
             debuggable false
             minifyEnabled true
             zipAlignEnabled true
