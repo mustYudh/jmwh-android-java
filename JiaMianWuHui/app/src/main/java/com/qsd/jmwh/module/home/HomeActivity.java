@@ -9,17 +9,17 @@ import com.denghao.control.TabItem;
 import com.denghao.control.TabView;
 import com.denghao.control.view.BottomNavigationView;
 import com.qsd.jmwh.R;
+import com.qsd.jmwh.base.BaseBarActivity;
+import com.qsd.jmwh.module.home.integrated.IntegratedRadioFragment;
 import com.qsd.jmwh.module.home.message.MessageFragment;
 import com.qsd.jmwh.module.home.park.ParkFragment;
 import com.qsd.jmwh.module.home.radio.RadioFragment;
 import com.qsd.jmwh.module.home.user.UserFragment;
-import com.test.myapplication.fragment.IntegratedRadioFragment;
-import com.yu.common.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends BaseActivity {
+public class HomeActivity extends BaseBarActivity {
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.home_activity);
@@ -27,6 +27,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void loadData() {
+        setTitle("首页");
         BottomNavigationView navigationView =  findViewById(R.id.bottom_navigation_view);
         List<TabItem> items = new ArrayList<>();
         items.add(new TabView(createTabView(), new ParkFragment()));

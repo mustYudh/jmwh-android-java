@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/app_main_bg_color"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="48dp">
+
+
+
+    <FrameLayout
+        android:id="@+id/back"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:layout_width="8dp"
+            android:layout_height="15dp"/>
+    </FrameLayout>
+
+
+
+    <LinearLayout
+        android:maxWidth="195dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:gravity="center"
+            android:id="@+id/title"
+            android:textSize="18sp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            tools:text="手机号码注册"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>

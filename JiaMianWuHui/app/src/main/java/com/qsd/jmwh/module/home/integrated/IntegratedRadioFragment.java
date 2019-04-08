@@ -1,4 +1,4 @@
-package com.test.myapplication.fragment;
+package com.qsd.jmwh.module.home.integrated;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

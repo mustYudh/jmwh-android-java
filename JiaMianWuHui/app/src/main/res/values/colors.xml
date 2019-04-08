@@ -3,4 +3,9 @@
     <color name="activity_bg">@color/white</color>
     <color name="white">#FFFFFF</color>
     <color name="app_main_color">#5943FC</color>
+    <color name="app_main_bg_color">#8A4EFC</color>
+    <color name="app_main_text_color">#333333</color>
+    
+    
+    <color name="color_888888">#888888</color>
 </resources>
