@@ -1,8 +1,6 @@
 package com.qsd.jmwh.base;
 
-import android.os.Bundle;
 import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -29,10 +27,7 @@ public abstract class BaseBarActivity extends BaseActivity {
         initBack();
     }
 
-    @Override
-    protected void setView(@Nullable Bundle savedInstanceState) {
 
-    }
 
     @Override protected View onReplaceRootView(@LayoutRes int layoutResID) {
         View rootView = super.onReplaceRootView(layoutResID);

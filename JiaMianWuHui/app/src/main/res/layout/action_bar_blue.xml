@@ -16,8 +16,9 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:scaleType="centerCrop"
             android:layout_gravity="center"
-            android:background="@color/white"
+            android:src="@drawable/ic_back_arrow"
             android:layout_width="8dp"
             android:layout_height="15dp"/>
     </FrameLayout>
