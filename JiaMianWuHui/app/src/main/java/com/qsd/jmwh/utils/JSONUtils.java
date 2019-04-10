@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @author yudneghao
@@ -778,12 +779,12 @@ public final class JSONUtils {
      *         </ul>
      */
     @SuppressWarnings("rawtypes")
-    public static Map<String, String> parseKeyAndValueToMap(JSONObject sourceObj) {
+    public static TreeMap<String, String> parseKeyAndValueToMap(JSONObject sourceObj) {
         if (sourceObj == null) {
             return null;
         }
 
-        Map<String, String> keyAndValueMap = new HashMap<String, String>();
+        TreeMap<String, String> keyAndValueMap = new TreeMap<String, String>();
         for (Iterator iter = sourceObj.keys(); iter.hasNext();) {
             String key = (String)iter.next();
             keyAndValueMap.put(key, getString(sourceObj, key, ""));
@@ -801,7 +802,7 @@ public final class JSONUtils {
      *         <li>return {@link JSONUtils#parseKeyAndValueToMap(JSONObject)}</li>
      *         </ul>
      */
-    public static Map<String, String> parseKeyAndValueToMap(String source) {
+    public static TreeMap<String, String> parseKeyAndValueToMap(String source) {
         if (StringUtils.isEmpty(source)) {
             return null;
         }

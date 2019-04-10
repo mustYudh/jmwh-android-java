@@ -9,8 +9,6 @@ import com.xuexiang.xhttp2.model.HttpHeaders;
 import com.yu.common.CommonInit;
 import com.yu.common.base.BaseApp;
 
-import static com.xuexiang.xhttp2.XHttp.getBaseUrl;
-
 public class APP extends BaseApp {
     public static final int NET_TYPE = BuildConfig.API_MODE;
     public static final boolean DEBUG = APP.NET_TYPE == 0;
@@ -41,6 +39,10 @@ public class APP extends BaseApp {
     private HttpHeaders getHttpHeaders() {
         HttpHeaders headers = new HttpHeaders();
         return headers;
+    }
+
+    private String getBaseUrl() {
+        return "http://39.96.169.148";
     }
 
     public synchronized static APP getInstance() {
