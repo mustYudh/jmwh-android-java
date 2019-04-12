@@ -30,7 +30,7 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
         switch (v.getId()) {
             case R.id.login:
                 XHttpProxy.proxy(ApiServices.class)
-                    .send("1312412")
+                    .send("15968170723")
                     .subscribeWith(new NoTipRequestSubscriber<SendVerCodeBean>() {
                         @Override
                         protected void onSuccess(SendVerCodeBean sendVerCodeBeanApiResult) {

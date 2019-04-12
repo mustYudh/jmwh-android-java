@@ -6,6 +6,6 @@ import io.reactivex.Observable;
 
 public interface ApiServices {
 //        ParameterNames = {"sMobile"}
-        @NetMethod(ParameterNames = {"sMobile"}, Url = "/gateway/rest/v3/SystemService/verifySignature")
+        @NetMethod(ParameterNames = {"sMobile"}, Url = "/SystemService/sendSMS")
         Observable<SendVerCodeBean> send(String sMobile);
 }

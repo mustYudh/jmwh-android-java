@@ -29,12 +29,15 @@ public class APP extends BaseApp {
             XHttpSDK.debug(new CustomLoggingInterceptor());
         }
         XHttpSDK.setBaseUrl(getBaseUrl());
+        XHttpSDK.setSubUrl(getSubUrl());
         XHttpSDK.addInterceptor(new CustomDynamicInterceptor());
         XHttpSDK.addInterceptor(new CustomExpiredInterceptor());
         XHttp.getInstance().setTimeout(60000);
         XHttp.getInstance().setRetryCount(3);
         XHttp.getInstance().addCommonHeaders(getHttpHeaders());
     }
+
+
 
     private HttpHeaders getHttpHeaders() {
         HttpHeaders headers = new HttpHeaders();
@@ -44,8 +47,17 @@ public class APP extends BaseApp {
     }
 
     private String getBaseUrl() {
-        return "http://39.96.169.148";
+        if (DEBUG) {
+            return "http://api.jmwhapp.com";
+        } else {
+            return "http://39.96.169.148";
+        }
     }
+
+    public String getSubUrl() {
+        return "/gateway/rest/v3";
+    }
+
 
     public synchronized static APP getInstance() {
         return instance;
