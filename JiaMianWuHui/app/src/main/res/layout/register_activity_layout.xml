@@ -9,6 +9,7 @@
 
 
     <com.qsd.jmwh.view.NormaFormItemVIew
+        android:id="@+id/phone"
         android:layout_marginTop="30dp"
         app:left_text="+86"
         app:content_hint="请输入手机号"
@@ -18,6 +19,7 @@
 
 
     <com.qsd.jmwh.view.NormaFormItemVIew
+        android:id="@+id/get_ver_code"
         app:show_top_line="false"
         app:left_text="+86"
         app:content_hint="请输入收到的验证码"
@@ -28,6 +30,7 @@
 
 
     <com.qsd.jmwh.view.NormaFormItemVIew
+        android:id="@+id/password"
         app:show_top_line="false"
         app:show_bottom_line="false"
         app:left_text="设置密码"

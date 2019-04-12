@@ -5,7 +5,9 @@ import com.xuexiang.xhttp2.annotation.NetMethod;
 import io.reactivex.Observable;
 
 public interface ApiServices {
-//        ParameterNames = {"sMobile"}
         @NetMethod(ParameterNames = {"sMobile"}, Url = "/SystemService/sendSMS")
         Observable<SendVerCodeBean> send(String sMobile);
+
+        @NetMethod(ParameterNames =  {"sAuthCode","sLoginName","sLoginMode","sPwd"}, Url = "/UserService/registUser")
+        Observable<Object> register(String sAuthCode,String sLoginName,String sLoginMode,String sPwd);
 }

@@ -18,7 +18,6 @@
 
 
         <com.qsd.jmwh.view.CircleImageView
-            android:visibility="gone"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="centerCrop"
@@ -26,7 +25,6 @@
             />
 
         <TextView
-            android:visibility="gone"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,12 +37,11 @@
             android:id="@+id/login"
             style="@style/app_blue_button"
             android:layout_marginTop="65dp"
-            android:text="测试"
+            android:text="登录"
             />
 
 
         <com.yu.common.ui.DelayClickTextView
-            android:visibility="gone"
             android:id="@+id/register"
             style="@style/app_blue_button"
             android:layout_marginTop="13dp"
@@ -52,7 +49,6 @@
             />
 
         <TextView
-            android:visibility="gone"
             android:textSize="14sp"
             android:layout_marginTop="133dp"
             android:textColor="@color/color_888888"
@@ -64,7 +60,6 @@
 
 
         <LinearLayout
-            android:visibility="gone"
             android:layout_marginTop="28dp"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
