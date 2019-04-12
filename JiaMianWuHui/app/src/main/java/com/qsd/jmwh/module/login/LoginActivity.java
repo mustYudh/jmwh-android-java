@@ -30,7 +30,7 @@ public class LoginActivity extends BaseBarActivity implements View.OnClickListen
             case R.id.login:
 //                getLaunchHe   lper().startActivity(HomeActivity.class);
                 XHttpProxy.proxy(ApiServices.class)
-                        .send()
+                        .send("1123124")
                         .subscribeWith(new NoTipRequestSubscriber<SendVerCodeBean>() {
                     @Override
                     protected void onSuccess(SendVerCodeBean sendVerCodeBeanApiResult) {

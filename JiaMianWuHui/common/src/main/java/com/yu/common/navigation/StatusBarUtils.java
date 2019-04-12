@@ -33,7 +33,7 @@ public class StatusBarUtils {
 
 
   public static void setColor(Activity activity, @ColorInt int color) {
-    setColor(activity, color, DEFAULT_STATUS_BAR_ALPHA);
+    //setColor(activity, color, DEFAULT_STATUS_BAR_ALPHA);
   }
 
 
@@ -56,7 +56,7 @@ public class StatusBarUtils {
       } else {
         decorView.addView(createStatusBarView(activity, color, statusBarAlpha));
       }
-      setRootView(activity);
+      //setRootView(activity);
     }
   }
 
@@ -79,7 +79,7 @@ public class StatusBarUtils {
 
 
   public static void setColorNoTranslucent(Activity activity, @ColorInt int color) {
-    setColor(activity, color, 0);
+    //setColor(activity, color, 0);
   }
 
 
@@ -99,7 +99,7 @@ public class StatusBarUtils {
     } else {
       contentView.addView(createStatusBarView(activity, color));
     }
-    setRootView(activity);
+    //setRootView(activity);
   }
 
 
@@ -132,7 +132,7 @@ public class StatusBarUtils {
       return;
     }
     transparentStatusBar(activity);
-    setRootView(activity);
+    //setRootView(activity);
   }
 
 
@@ -140,7 +140,7 @@ public class StatusBarUtils {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
       // 设置状态栏透明
       activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-      setRootView(activity);
+      //setRootView(activity);
     }
   }
 
@@ -358,14 +358,14 @@ public class StatusBarUtils {
    */
   private static void addTranslucentView(Activity activity,
       @IntRange(from = 0, to = 255) int statusBarAlpha) {
-    ViewGroup contentView = (ViewGroup) activity.findViewById(android.R.id.content);
-    View fakeTranslucentView = contentView.findViewById(FAKE_TRANSLUCENT_VIEW_ID);
-    if (fakeTranslucentView != null) {
-      fakeTranslucentView.setVisibility(statusBarAlpha == 0 ? View.GONE : View.VISIBLE);
-      fakeTranslucentView.setBackgroundColor(Color.argb(statusBarAlpha, 0, 0, 0));
-    } else {
-      contentView.addView(createTranslucentStatusBarView(activity, statusBarAlpha));
-    }
+    //ViewGroup contentView = (ViewGroup) activity.findViewById(android.R.id.content);
+    //View fakeTranslucentView = contentView.findViewById(FAKE_TRANSLUCENT_VIEW_ID);
+    //if (fakeTranslucentView != null) {
+    //  fakeTranslucentView.setVisibility(statusBarAlpha == 0 ? View.GONE : View.VISIBLE);
+    //  fakeTranslucentView.setBackgroundColor(Color.argb(statusBarAlpha, 0, 0, 0));
+    //} else {
+    //  contentView.addView(createTranslucentStatusBarView(activity, statusBarAlpha));
+    //}
   }
 
   /**
@@ -403,7 +403,7 @@ public class StatusBarUtils {
    * 设置根布局参数
    */
   private static void setRootView(Activity activity) {
-    ViewGroup parent = (ViewGroup) activity.findViewById(android.R.id.content);
+    ViewGroup parent = (ViewGroup) activity.findViewById(R.id.content);
     for (int i = 0, count = parent.getChildCount(); i < count; i++) {
       View childView = parent.getChildAt(i);
       if (childView instanceof ViewGroup) {

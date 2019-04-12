@@ -18,8 +18,8 @@ public class UserProfile implements Serializable {
 
   private SharedPreferencesHelper spHelper;
 
-  private String account = "";
-  private String token = "";
+  private String account = null;
+  private String token = null;
 
   private UserProfile() {
     spHelper = SharedPreferencesHelper.create(

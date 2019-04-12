@@ -16,8 +16,6 @@
 
 package com.xuexiang.xhttp2.model;
 
-import android.util.Log;
-
 /**
  * 提供的默认的标注返回api
  *
@@ -38,7 +36,6 @@ public class ApiResult<T> {
     }
 
     public ApiResult setCode(int code) {
-        Log.e("=====>",code + "");
         this.code = code;
         return this;
     }

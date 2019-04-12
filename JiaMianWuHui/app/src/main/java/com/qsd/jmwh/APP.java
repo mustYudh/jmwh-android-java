@@ -38,6 +38,8 @@ public class APP extends BaseApp {
 
     private HttpHeaders getHttpHeaders() {
         HttpHeaders headers = new HttpHeaders();
+        headers.put("Content-Type","application/x-www-form-urlencoded");
+        headers.put("Accept","*/*");
         return headers;
     }
 
