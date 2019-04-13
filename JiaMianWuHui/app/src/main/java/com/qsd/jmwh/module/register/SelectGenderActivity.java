@@ -8,12 +8,17 @@ import android.widget.ImageView;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.dialog.SelectGenderHintPop;
-import com.qsd.jmwh.module.home.HomeActivity;
+import com.qsd.jmwh.module.register.presenter.SelectGenderPresenter;
+import com.qsd.jmwh.module.register.presenter.SelectGenderViewer;
+import com.yu.common.mvp.PresenterLifeCycle;
 
-public class SelectGenderActivity extends BaseBarActivity implements View.OnClickListener {
+public class SelectGenderActivity extends BaseBarActivity implements SelectGenderViewer, View.OnClickListener {
+    @PresenterLifeCycle
+    SelectGenderPresenter mPresenter = new SelectGenderPresenter(this);
     private ImageView boy;
     private ImageView girle;
-    private int currentType = 0;
+    private int currentType = 1;
+
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.select_gender_activity_layout);
@@ -22,9 +27,9 @@ public class SelectGenderActivity extends BaseBarActivity implements View.OnClic
     @Override
     protected void loadData() {
         setTitle("选择性别");
-        boy = bindView(R.id.boy,this);
-        girle = bindView(R.id.girle,this);
-        bindView(R.id.next,this);
+        boy = bindView(R.id.boy, this);
+        girle = bindView(R.id.girle, this);
+        bindView(R.id.next, this);
         boy.setSelected(true);
     }
 
@@ -34,29 +39,33 @@ public class SelectGenderActivity extends BaseBarActivity implements View.OnClic
             case R.id.boy:
                 boy.setSelected(true);
                 girle.setSelected(false);
-                currentType = 0;
+                currentType = 1;
                 break;
             case R.id.girle:
                 boy.setSelected(false);
                 girle.setSelected(true);
-                currentType = 1;
+                currentType = 0;
                 break;
             case R.id.next:
-                doNext();
+                mPresenter.selectGender(currentType);
                 break;
         }
     }
 
-    private void doNext() {
-        if (currentType == 1) {
-            getLaunchHelper().startActivity(HomeActivity.class);
+
+    @Override
+    public void selectedSuccess(int type) {
+        if (type == 0) {
+            finish();
         } else {
-            SelectGenderHintPop selectGenderHintPop  = new SelectGenderHintPop(this);
+            SelectGenderHintPop selectGenderHintPop = new SelectGenderHintPop(this);
             selectGenderHintPop.showPopupWindow();
             selectGenderHintPop.setOnItemClickListener(new SelectGenderHintPop.ItemClickListener() {
                 @Override
                 public void onNext() {
                     getLaunchHelper().startActivity(EditRegisterCodeActivity.class);
+                    selectGenderHintPop.dismiss();
+                    finish();
                 }
 
                 @Override

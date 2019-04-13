@@ -22,7 +22,7 @@ public class NormaFormItemVIew extends LinearLayout {
     private TextView rightBtn;
     private EditText mEdit;
     private String mRightBtnText;
-    private int textLength;
+    private String  textLength;
 
     public NormaFormItemVIew(Context context) {
         super(context, null);
@@ -50,7 +50,7 @@ public class NormaFormItemVIew extends LinearLayout {
         String titleText = typedArray.getString(R.styleable.NormaFormItemVIew_left_text);
         String text = typedArray.getString(R.styleable.NormaFormItemVIew_content_text);
         String inputType = typedArray.getString(R.styleable.NormaFormItemVIew_input_type);
-        textLength = typedArray.getIndex(R.styleable.NormaFormItemVIew_length);
+        textLength = typedArray.getString(R.styleable.NormaFormItemVIew_length);
         if (!TextUtils.isEmpty(inputType)) {
             if (inputType.equals("password")) {
                 mEdit.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);
@@ -92,27 +92,30 @@ public class NormaFormItemVIew extends LinearLayout {
             rightBtn.setText(mRightBtnText);
             rightBtn.setVisibility(VISIBLE);
         }
-        mEdit.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        if (textLength != null) {
+            mEdit.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String str = s.toString();
-                if (str.length() > textLength) {
-                    mEdit.setText(str.substring(0, textLength));
-                    mEdit.requestFocus();
-                    mEdit.setSelection(mEdit.getText().length());
                 }
-            }
 
-            @Override
-            public void afterTextChanged(Editable s) {
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    String str = s.toString();
+                    if (str.length() > Integer.parseInt(textLength)) {
+                        mEdit.setText(str.substring(0, Integer.parseInt(textLength)));
+                        mEdit.requestFocus();
+                        mEdit.setSelection(mEdit.getText().length());
+                    }
+                }
 
-            }
-        });
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+        }
+
 
     }
 

@@ -22,7 +22,6 @@ public class LoginActivity extends BaseBarActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login:
-//                getLaunchHe   lper().startActivity(HomeActivity.class);
 
                 break;
         }
