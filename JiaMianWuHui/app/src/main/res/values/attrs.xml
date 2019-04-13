@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension"/>
+        <attr name="civ_border_color" format="color"/>
+        <attr name="civ_border_overlay" format="boolean"/>
+        <attr name="civ_fill_color" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="NormaFormItemVIew">
+        <attr name="show_top_line" format="boolean"/>
+        <attr name="show_bottom_line" format="boolean"/>
+        <attr name="only_read" format="boolean"/>
+        <attr name="show_edit" format="boolean"/>
+        <attr name="left_text" format="string"/>
+        <attr name="content_text" format="string"/>
+        <attr name="content_hint" format="string"/>
+        <attr name="right_button_hint" format="string"/>
+        <attr name="input_type" format="string"/>
+        <attr name="length" format="integer"/>
+    </declare-styleable>
+</resources>

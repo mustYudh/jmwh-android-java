@@ -1,14 +1,18 @@
 package com.qsd.jmwh.utils;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import android.util.Log;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * @author yudneghao
@@ -778,12 +782,12 @@ public final class JSONUtils {
      *         </ul>
      */
     @SuppressWarnings("rawtypes")
-    public static Map<String, String> parseKeyAndValueToMap(JSONObject sourceObj) {
+    public static TreeMap<String, String> parseKeyAndValueToMap(JSONObject sourceObj) {
         if (sourceObj == null) {
             return null;
         }
 
-        Map<String, String> keyAndValueMap = new HashMap<String, String>();
+        TreeMap<String, String> keyAndValueMap = new TreeMap<String, String>();
         for (Iterator iter = sourceObj.keys(); iter.hasNext();) {
             String key = (String)iter.next();
             keyAndValueMap.put(key, getString(sourceObj, key, ""));
@@ -805,17 +809,33 @@ public final class JSONUtils {
         if (StringUtils.isEmpty(source)) {
             return null;
         }
+        HashMap<String, String> map = new HashMap<>();
+        if (source.equals("{}")) {
+            Log.e("====>",source);
+            return map;
+        }
+        Gson gson = new Gson();
+        Type type = new TypeToken<HashMap<String, Object>>() {
+        }.getType();
 
         try {
-            JSONObject jsonObject = new JSONObject(source);
-            return parseKeyAndValueToMap(jsonObject);
-        } catch (JSONException e) {
-            if (isPrintException) {
-                e.printStackTrace();
-            }
-            return null;
+            map = gson.fromJson(source, type);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return map;
+
     }
+
+    public static String parseMapToJson(Map<?, ?> map) {
+        try {
+            Gson gson = new Gson();
+            return gson.toJson(map);
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
 
 
 }

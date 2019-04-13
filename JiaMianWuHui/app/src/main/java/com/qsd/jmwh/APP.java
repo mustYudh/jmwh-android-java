@@ -9,8 +9,6 @@ import com.xuexiang.xhttp2.model.HttpHeaders;
 import com.yu.common.CommonInit;
 import com.yu.common.base.BaseApp;
 
-import static com.xuexiang.xhttp2.XHttp.getBaseUrl;
-
 public class APP extends BaseApp {
     public static final int NET_TYPE = BuildConfig.API_MODE;
     public static final boolean DEBUG = APP.NET_TYPE == 0;
@@ -31,6 +29,7 @@ public class APP extends BaseApp {
             XHttpSDK.debug(new CustomLoggingInterceptor());
         }
         XHttpSDK.setBaseUrl(getBaseUrl());
+        XHttpSDK.setSubUrl(getSubUrl());
         XHttpSDK.addInterceptor(new CustomDynamicInterceptor());
         XHttpSDK.addInterceptor(new CustomExpiredInterceptor());
         XHttp.getInstance().setTimeout(60000);
@@ -38,10 +37,27 @@ public class APP extends BaseApp {
         XHttp.getInstance().addCommonHeaders(getHttpHeaders());
     }
 
+
+
     private HttpHeaders getHttpHeaders() {
         HttpHeaders headers = new HttpHeaders();
+        headers.put("Content-Type","application/x-www-form-urlencoded");
+        headers.put("Accept","*/*");
         return headers;
     }
+
+    private String getBaseUrl() {
+        if (DEBUG) {
+            return "http://api.jmwhapp.com";
+        } else {
+            return "http://39.96.169.148";
+        }
+    }
+
+    public String getSubUrl() {
+        return "/gateway/rest/v3";
+    }
+
 
     public synchronized static APP getInstance() {
         return instance;

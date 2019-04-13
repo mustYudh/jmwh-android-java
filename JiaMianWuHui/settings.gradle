@@ -1,1 +1,1 @@
-include ':app', ':bottom_tab', ':common'
+include ':app', ':bottom_tab', ':common', ':http-lib'

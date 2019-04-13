@@ -3,4 +3,15 @@
     <color name="activity_bg">@color/white</color>
     <color name="white">#FFFFFF</color>
     <color name="app_main_color">#5943FC</color>
+    <color name="app_main_bg_color">#8A4EFC</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_222222">#222222</color>
+
+
+    <color name="color_888888">#888888</color>
+    <color name="color_EEEEEE">#EEEEEE</color>
+    <color name="color_AAAAAA">#AAAAAA</color>
+    <color name="color_DDDDDD">#DDDDDD</color>
 </resources>

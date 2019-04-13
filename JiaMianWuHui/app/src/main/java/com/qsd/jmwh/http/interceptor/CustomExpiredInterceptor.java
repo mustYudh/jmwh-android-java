@@ -15,7 +15,6 @@ public class CustomExpiredInterceptor extends BaseExpiredInterceptor {
         int code = JSONUtils.getInt(bodyString, Result.CODE, 200);
         ExpiredInfo expiredInfo = new ExpiredInfo(code);
         switch (code) {
-            //TODO Token失效，需要重新获取token的code码
             case 20001:
                 expiredInfo.setExpiredType(20001);
                 expiredInfo.setBodyString(bodyString);
