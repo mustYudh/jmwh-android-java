@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.module.register.presenter.RegisterPresenter;
@@ -14,11 +15,11 @@ import com.qsd.jmwh.utils.countdown.RxCountDownAdapter;
 import com.qsd.jmwh.view.NormaFormItemVIew;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
-import com.yu.common.utils.PhoneUtils;
 
-public class RegisterActivity extends BaseBarActivity implements RegisterViewer,View.OnClickListener {
+public class RegisterActivity extends BaseBarActivity implements RegisterViewer, View.OnClickListener {
 
-    @PresenterLifeCycle RegisterPresenter mPresenter = new RegisterPresenter(this);
+    @PresenterLifeCycle
+    RegisterPresenter mPresenter = new RegisterPresenter(this);
     private NormaFormItemVIew mSendVerCode;
     private NormaFormItemVIew phoneNum;
     private NormaFormItemVIew password;
@@ -45,42 +46,48 @@ public class RegisterActivity extends BaseBarActivity implements RegisterViewer,
     private void initListener() {
         bindView(R.id.next, this);
         mSendVerCode.setRightButtonListener(v -> {
-            Log.e("=====>",phoneNum.getEditText());
-            if (TextUtils.isEmpty(phoneNum.getEditText()) || PhoneUtils.isPhoneLegal(phoneNum.getEditText())) {
-                ToastUtils.show("请输入正确手机号");
-                return;
-            }
-            RxCountDown countDown = new RxCountDown(60);
-            countDown.setCountDownTimeListener(new RxCountDownAdapter() {
+            Log.e("=====>", phoneNum.getEditText());
+            if (TextUtils.isEmpty(phoneNum.getEditText())) {
+                ToastUtils.show("手机号输入不能为空");
+            } else {
+                RxCountDown countDown = new RxCountDown(60);
+                mPresenter.sendVerCode( phoneNum.getEditText(),countDown);
+                countDown.setCountDownTimeListener(new RxCountDownAdapter() {
 
-                @Override public void onStart() {
-                    super.onStart();
-                    Log.e("=====>","start");
-                    mSendVerCode.setRightButtonEnable(false);
-                    mSendVerCode.setRightHint("60S");
-                }
-
-                @Override public void onNext(Integer time) {
-                    super.onNext(time);
-                    Log.e("=====>",time + "onNext");
-                    if (time == 0) {
-                        mSendVerCode.setRightButtonEnable(true);
-                        mSendVerCode.setRightHint("发送验证码");
-                    } else {
-                        mSendVerCode.setRightHint(time + "S");
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                        Log.e("=====>", "start");
+                        mSendVerCode.setRightButtonEnable(false);
+                        mSendVerCode.setRightHint("60S");
                     }
-                }
 
-                @Override public void onError(Throwable e) {
-                    super.onError(e);
-                    mSendVerCode.setRightHint("发送验证码");
-                    mSendVerCode.setRightButtonEnable(true);
-                }
+                    @Override
+                    public void onNext(Integer time) {
+                        super.onNext(time);
+                        Log.e("=====>", time + "onNext");
+                        if (time == 0) {
+                            mSendVerCode.setRightButtonEnable(true);
+                            mSendVerCode.setRightHint("发送验证码");
+                        } else {
+                            mSendVerCode.setRightHint(time + "S");
+                        }
+                    }
 
-                @Override public void onComplete() {
-                    super.onComplete();
-                }
-            });
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        mSendVerCode.setRightHint("发送验证码");
+                        mSendVerCode.setRightButtonEnable(true);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        super.onComplete();
+                    }
+                });
+
+            }
         });
     }
 
@@ -88,13 +95,14 @@ public class RegisterActivity extends BaseBarActivity implements RegisterViewer,
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.next:
-                mPresenter.register(phoneNum.getEditText(),password.getEditText(),mSendVerCode.getEditText());
+                mPresenter.register(phoneNum.getEditText(), password.getEditText(), mSendVerCode.getEditText());
                 break;
         }
     }
 
 
-    @Override public void registerSuccess() {
+    @Override
+    public void registerSuccess() {
         getLaunchHelper().startActivity(SelectGenderActivity.class);
         finish();
     }

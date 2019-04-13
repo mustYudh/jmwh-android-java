@@ -1,7 +1,7 @@
 package com.qsd.jmwh.module.register.presenter;
 
 import android.annotation.SuppressLint;
-import android.text.TextUtils;
+
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.register.bean.SendVerCodeBean;
@@ -10,7 +10,6 @@ import com.xuexiang.xhttp2.XHttpProxy;
 import com.xuexiang.xhttp2.exception.ApiException;
 import com.yu.common.framework.BaseViewPresenter;
 import com.yu.common.toast.ToastUtils;
-import com.yu.common.utils.PhoneUtils;
 
 /**
  * @author yudneghao
@@ -24,10 +23,6 @@ public class RegisterPresenter extends BaseViewPresenter<RegisterViewer> {
   }
 
   public void sendVerCode(String number, RxCountDown countDown) {
-    if (!TextUtils.isEmpty(number) && PhoneUtils.isPhoneLegal(number)) {
-      ToastUtils.show("请输入正确手机号");
-      return;
-    }
     XHttpProxy.proxy(ApiServices.class)
         .send(number)
         .subscribeWith(new TipRequestSubscriber<SendVerCodeBean>() {
