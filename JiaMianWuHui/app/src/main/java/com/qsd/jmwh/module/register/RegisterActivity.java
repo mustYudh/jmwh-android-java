@@ -11,6 +11,7 @@ import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.register.bean.UserInfo;
 import com.qsd.jmwh.module.register.presenter.RegisterPresenter;
 import com.qsd.jmwh.module.register.presenter.RegisterViewer;
+import com.qsd.jmwh.utils.MD5Utils;
 import com.qsd.jmwh.utils.countdown.RxCountDown;
 import com.qsd.jmwh.utils.countdown.RxCountDownAdapter;
 import com.qsd.jmwh.view.NormaFormItemVIew;
@@ -104,7 +105,7 @@ public class RegisterActivity extends BaseBarActivity implements RegisterViewer,
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.next:
-                mPresenter.register(phoneNum.getEditText(), password.getEditText(), mSendVerCode.getEditText());
+                mPresenter.register(phoneNum.getEditText(), MD5Utils.string2MD5(password.getEditText()), mSendVerCode.getEditText());
                 break;
         }
     }
