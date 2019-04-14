@@ -49,6 +49,17 @@
 
 
 
-
+<com.yu.common.ui.DelayClickTextView
+    android:visibility="gone"
+    android:textColor="@color/white"
+    android:textSize="16sp"
+    android:layout_alignParentRight="true"
+    android:gravity="center"
+    tools:text="确定"
+    android:id="@+id/right_menu"
+    android:paddingRight="15dp"
+    android:paddingLeft="15dp"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"/>
 
 </RelativeLayout>

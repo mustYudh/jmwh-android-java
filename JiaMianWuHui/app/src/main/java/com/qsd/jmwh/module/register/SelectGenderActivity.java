@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
-import com.qsd.jmwh.dialog.SelectGenderHintPop;
+import com.qsd.jmwh.dialog.SelectHintPop;
 import com.qsd.jmwh.module.register.presenter.SelectGenderPresenter;
 import com.qsd.jmwh.module.register.presenter.SelectGenderViewer;
 import com.yu.common.mvp.PresenterLifeCycle;
@@ -57,7 +57,7 @@ public class SelectGenderActivity extends BaseBarActivity implements SelectGende
                 currentType = 0;
                 break;
             case R.id.next:
-                SelectGenderHintPop selectGenderHintPop = new SelectGenderHintPop(this);
+                SelectHintPop selectGenderHintPop = new SelectHintPop(this);
                 selectGenderHintPop.setMessage("注册之后不能修改性别，并且，你不能与相同性别的用户交流。")
                         .setPositiveButton("确定", v1 -> {
                                     mPresenter.selectGender(currentType, getIntent().getIntExtra(APP_ACCOUNT, -1));

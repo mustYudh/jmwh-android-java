@@ -25,11 +25,11 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing"
             >
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN"/>
 
-                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
+            <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
 
         <activity
@@ -41,46 +41,54 @@
         </activity>
 
 
-        <activity android:name=".module.login.LoginActivity"
-                  android:screenOrientation="portrait"
-                  android:windowSoftInputMode="adjustNothing"
+        <activity
+            android:name=".module.login.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"
             />
 
-        <activity android:name=".module.register.RegisterActivity"
-                          android:screenOrientation="portrait"
-                          android:windowSoftInputMode="adjustNothing"
-        />
-
-
-        <activity android:name=".module.register.SelectGenderActivity"
-                  android:screenOrientation="portrait"
-                  android:windowSoftInputMode="adjustNothing"
+        <activity
+            android:name=".module.register.RegisterActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"
             />
-        <activity android:name=".module.register.EditRegisterCodeActivity"
-                  android:screenOrientation="portrait"
-                  android:windowSoftInputMode="adjustNothing"
-            />
-        <activity android:name=".module.register.EditUserDataActivity"
-                  android:screenOrientation="portrait"
-                  android:windowSoftInputMode="adjustResize|stateHidden"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+
+        <activity
+            android:name=".module.register.SelectGenderActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"
+            />
+        <activity
+            android:name=".module.register.EditRegisterCodeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"/>
+        <activity
+            android:name=".module.register.EditUserDataActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            />
 
         <activity
             android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme_Light"
-            android:exported="true"/>
+            android:theme="@style/Theme_Light"/>
 
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme_Light"
+            />
+
+        <activity
+            android:name=".module.ToByVipActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity
+            android:name=".module.register.DateRangeActivity"
+            android:screenOrientation="portrait"
             />
     </application>
 

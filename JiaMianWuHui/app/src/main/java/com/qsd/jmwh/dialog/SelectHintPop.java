@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.qsd.jmwh.R;
 import com.yu.common.windown.BasePopupWindow;
 
-public class SelectGenderHintPop extends BasePopupWindow {
+public class SelectHintPop extends BasePopupWindow {
     private final TextView content;
     private final TextView title;
     private final TextView ok;
@@ -19,7 +19,7 @@ public class SelectGenderHintPop extends BasePopupWindow {
 
 
 
-    public SelectGenderHintPop(Context context) {
+    public SelectHintPop(Context context) {
         super(context, LayoutInflater.from(context).inflate(R.layout.select_gender_hint_pop_layout, null),
                 RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         ok = (TextView) findViewById(R.id.ok);
@@ -30,7 +30,7 @@ public class SelectGenderHintPop extends BasePopupWindow {
 
     }
 
-    public SelectGenderHintPop setTitle(CharSequence name) {
+    public SelectHintPop setTitle(CharSequence name) {
         if (TextUtils.isEmpty(name)) {
             title.setText("提示");
         } else {
@@ -40,7 +40,7 @@ public class SelectGenderHintPop extends BasePopupWindow {
     }
 
 
-    public SelectGenderHintPop setMessage(CharSequence message) {
+    public SelectHintPop setMessage(CharSequence message) {
         if (!TextUtils.isEmpty(message)) {
             content.setText(message);
         }
@@ -48,7 +48,7 @@ public class SelectGenderHintPop extends BasePopupWindow {
     }
 
 
-    public SelectGenderHintPop setNegativeButton(CharSequence name, View.OnClickListener listener) {
+    public SelectHintPop setNegativeButton(CharSequence name, View.OnClickListener listener) {
         if (TextUtils.isEmpty(name)) {
             cancel.setText("取消");
         }
@@ -57,7 +57,7 @@ public class SelectGenderHintPop extends BasePopupWindow {
     }
 
 
-    public SelectGenderHintPop setPositiveButton(CharSequence name, View.OnClickListener listener) {
+    public SelectHintPop setPositiveButton(CharSequence name, View.OnClickListener listener) {
         if (TextUtils.isEmpty(name)) {
             ok.setText("确定");
         }
@@ -65,7 +65,7 @@ public class SelectGenderHintPop extends BasePopupWindow {
         return this;
     }
 
-    public SelectGenderHintPop setSingleButton(CharSequence name, View.OnClickListener listener) {
+    public SelectHintPop setSingleButton(CharSequence name, View.OnClickListener listener) {
         cancel.setVisibility(View.GONE);
         divider.setVisibility(View.GONE);
         ok.setVisibility(View.VISIBLE);

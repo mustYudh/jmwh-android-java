@@ -20,6 +20,7 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
             setContentView(R.layout.splash_activity_layout);
             if (UserProfile.getInstance().isAppLogin()) {
                 getLaunchHelper().startActivityForResult(HomeActivity.class,REQUEST_CODE);
+                finish();
             }
     }
 

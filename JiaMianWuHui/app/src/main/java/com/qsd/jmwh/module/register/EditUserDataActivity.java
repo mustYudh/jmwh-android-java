@@ -68,7 +68,7 @@ public class EditUserDataActivity extends BaseBarActivity implements EditUserInf
 
     private void initItemClickListener() {
         location.setOnClickSeletedItem(v -> {
-                ToastUtils.show("约会范围");
+                getLaunchHelper().startActivity(DateRangeActivity.class);
         });
         professional.setOnClickSeletedItem(v -> {
             ToastUtils.show("职业");

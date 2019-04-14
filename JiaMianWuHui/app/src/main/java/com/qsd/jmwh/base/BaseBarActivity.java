@@ -28,8 +28,8 @@ public abstract class BaseBarActivity extends BaseActivity {
     }
 
 
-
-    @Override protected View onReplaceRootView(@LayoutRes int layoutResID) {
+    @Override
+    protected View onReplaceRootView(@LayoutRes int layoutResID) {
         View rootView = super.onReplaceRootView(layoutResID);
         FrameLayout container = (FrameLayout) rootView.findViewById(R.id.action_bar_container);
         container.setVisibility(View.VISIBLE);
@@ -38,8 +38,6 @@ public abstract class BaseBarActivity extends BaseActivity {
         BarUtils.setActionBarLayout(actionBar);
         return rootView;
     }
-
-
 
 
     private void initBack() {
@@ -61,6 +59,14 @@ public abstract class BaseBarActivity extends BaseActivity {
             if (title != null) {
                 title.setText(titleName);
             }
+        }
+    }
+
+    public void setRightMenu(CharSequence text, View.OnClickListener onClickListener) {
+        if (!TextUtils.isEmpty(text)) {
+            TextView right = bindView(R.id.right_menu, onClickListener);
+            right.setText(text);
+            right.setVisibility(View.VISIBLE);
         }
     }
 }

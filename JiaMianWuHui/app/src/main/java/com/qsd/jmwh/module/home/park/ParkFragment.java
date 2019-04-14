@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.qsd.jmwh.R;
+import com.qsd.jmwh.base.BaseBarFragment;
 import com.qsd.jmwh.module.home.park.presenter.ParkPresenter;
 import com.qsd.jmwh.module.home.park.presenter.ParkViewer;
-import com.yu.common.base.BaseFragment;
 import com.yu.common.mvp.PresenterLifeCycle;
 
 /**
@@ -14,12 +14,16 @@ import com.yu.common.mvp.PresenterLifeCycle;
  * @date 2018/6/12
  */
 
-public class ParkFragment extends BaseFragment implements ParkViewer {
+public class ParkFragment extends BaseBarFragment implements ParkViewer {
 
     @PresenterLifeCycle
     ParkPresenter mPresenter = new ParkPresenter(this);
 
 
+    @Override
+    protected int getActionBarLayoutId() {
+        return R.layout.hoem_bar_layout;
+    }
 
     @Override
     protected int getContentViewId() {

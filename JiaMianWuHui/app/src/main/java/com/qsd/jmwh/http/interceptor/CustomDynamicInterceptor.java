@@ -104,11 +104,10 @@ public class CustomDynamicInterceptor extends BaseDynamicInterceptor<CustomDynam
     }
 
     private Map<String, Object> handleParams(Request request) {
-        boolean isLogin = UserProfile.getInstance().isAppLogin();
         Log.e("=======>",bodyToString(request));
         Map<String, String> oldParams = JSONUtils.parseKeyAndValueToMap(bodyToString(request));
         assert oldParams != null;
-        if (isLogin) {
+        if (!TextUtils.isEmpty(UserProfile.getInstance().getAppToken())) {
             oldParams.put("token", UserProfile.getInstance().getAppToken());
         }
         TreeMap<String, Object> newParams = new TreeMap<>();
@@ -123,10 +122,8 @@ public class CustomDynamicInterceptor extends BaseDynamicInterceptor<CustomDynam
         String singResult = MD5Utils.string2MD5(sing.toString()).toUpperCase();
         Log.e("======>加密结果", singResult);
         newParams.put("sign", singResult);
-        if (isLogin) {
-            if (oldParams.containsKey("lUserId")) {
+        if ( UserProfile.getInstance().getAppAccount() != -1) {
                 oldParams.put("lUserId", UserProfile.getInstance().getAppAccount() + "");
-            }
         }
 
         return newParams;

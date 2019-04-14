@@ -20,13 +20,11 @@ public class UserProfile implements Serializable {
 
     private SharedPreferencesHelper spHelper;
 
-    private int account;
-    private String token = null;
+
 
     private UserProfile() {
         spHelper = SharedPreferencesHelper.create(
                 APP.getInstance().getSharedPreferences(SHARE_PREFERENCES_NAME, Context.MODE_PRIVATE));
-        account = getAppAccount();
     }
 
     public synchronized static UserProfile getInstance() {
