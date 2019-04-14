@@ -7,8 +7,8 @@
     <string name="gallery_over_button_text_checked">完成(%1$d/%2$d)</string>
     <string name="gallery_image_max_size_tip">你最多只能选择%1$d张照片</string>
     <string name="gallery_page_title">%1$d/%2$d</string>
-    <string name="gallery_media_grid_image_title">图片</string>
-    <string name="gallery_media_grid_video_title">视频</string>
+    <string name="gallery_media_grid_image_title">选择图片</string>
+    <string name="gallery_media_grid_video_title">选择视频</string>
     <string name="gallery_default_request_storage_access_permission_tips">App请求读取你的相册</string>
     <string name="gallery_default_camera_access_permission_tips">App请求拍照权限,否则无法拍照</string>
     <string name="gallery_default_request_storage_write_permission_tips">App请求写入你的相册</string>

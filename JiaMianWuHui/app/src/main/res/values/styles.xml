@@ -4,6 +4,16 @@
         <item name="android:windowBackground">@color/activity_bg</item>
     </style>
 
+
+
+    <style name="Theme_Light" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/app_main_bg_color</item>
+        <item name="colorPrimaryDark">@color/app_main_bg_color</item>
+        <item name="colorAccent">@color/app_main_bg_color</item>
+        <item name="colorButtonNormal">@color/app_main_bg_color</item>
+    </style>
+
+
     <style name="app_blue_button">
         <item name="android:layout_marginLeft">41dp</item>
         <item name="android:layout_marginRight">41dp</item>

@@ -161,6 +161,10 @@ public class MediaActivity extends BaseActivity implements ActivityFragmentView 
         int toolbarHeight = (int) ThemeUtils.resolveDimen(this, R.attr.gallery_toolbar_height, R.dimen.gallery_default_toolbar_height);
         mToolbar.setMinimumHeight(toolbarHeight);
 
+
+
+
+
         int statusBarColor = ThemeUtils.resolveColor(this, R.attr.gallery_color_statusbar, R.color.gallery_default_color_statusbar);
         ThemeUtils.setStatusBarColor(statusBarColor, getWindow());
 

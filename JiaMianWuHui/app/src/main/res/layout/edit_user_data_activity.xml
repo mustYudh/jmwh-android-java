@@ -24,6 +24,7 @@
             android:paddingBottom="20dp">
 
             <com.yu.common.ui.DelayClickTextView
+                android:id="@+id/select_pic"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
