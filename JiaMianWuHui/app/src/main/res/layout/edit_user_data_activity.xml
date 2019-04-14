@@ -1,103 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/color_F4F4F4"
+            android:orientation="vertical"
+            android:id="@+id/scroll_view"
 
     >
 
 
     <LinearLayout
-        android:gravity="center"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <com.yu.common.ui.DelayClickTextView
-            android:textSize="15sp"
-            android:layout_marginTop="21dp"
-            android:textColor="@color/color_2A2A2A"
-            android:gravity="center"
-            android:text="上传头像"
-            android:background="@drawable/shape_circle_header_bg"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="centerCrop"
-            />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingTop="21dp"
+            android:paddingBottom="20dp">
+
+            <com.yu.common.ui.DelayClickTextView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:background="@drawable/shape_circle_header_bg"
+                android:gravity="center"
+                android:scaleType="centerCrop"
+                android:text="上传头像"
+                android:textColor="@color/color_2A2A2A"
+                android:textSize="15sp"
+                />
+
+            <com.qsd.jmwh.view.CircleImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
+        </FrameLayout>
 
 
         <com.qsd.jmwh.view.NormaFormItemVIew
-            android:layout_marginTop="20dp"
-            app:left_text="昵称"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:content_hint="请填写"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            app:left_text="昵称"/>
 
 
         <com.qsd.jmwh.view.NormaFormItemVIew
-            app:only_read="true"
-            app:show_top_line="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:content_hint="可以多选"
             app:left_text="约会范围"
-            app:content_hint="可以多选"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            app:only_read="true"
+            app:show_top_line="false"/>
 
         <com.qsd.jmwh.view.NormaFormItemVIew
-            app:only_read="true"
-            app:show_top_line="false"
-            app:left_text="职业"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:content_hint="请多选"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <com.qsd.jmwh.view.NormaFormItemVIew
+            app:left_text="职业"
             app:only_read="true"
-            app:show_top_line="false"
-            app:left_text="约会节目"
-            app:content_hint="可以多选"
+            app:show_top_line="false"/>
+
+        <com.qsd.jmwh.view.NormaFormItemVIew
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            app:content_hint="可以多选"
+            app:left_text="约会节目"
+            app:only_read="true"
+            app:show_top_line="false"/>
 
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_F4F4F4"
+            android:paddingLeft="15dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
-            android:textSize="13sp"
-            android:background="@color/color_F4F4F4"
             android:text="更多信息（选填）"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:textSize="13sp"/>
 
         <com.qsd.jmwh.view.NormaFormItemVIew
-            app:only_read="true"
-            app:show_top_line="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:content_hint="请选择"
             app:left_text="身高"
-            app:content_hint="请选择"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-
-        <com.qsd.jmwh.view.NormaFormItemVIew
             app:only_read="true"
-            app:show_top_line="false"
-            app:left_text="体重"
-            app:content_hint="请选择"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            app:show_top_line="false"/>
 
 
         <com.qsd.jmwh.view.NormaFormItemVIew
-            app:show_top_line="false"
-            app:left_text="个人介绍"
-            app:content_hint="请填写"
             android:layout_width="match_parent"
-            android:layout_height="90dp"/>
+            android:layout_height="wrap_content"
+            app:content_hint="请选择"
+            app:left_text="体重"
+            app:only_read="true"
+            app:show_top_line="false"/>
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingTop="13dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="14dp">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:paddingLeft="15dp"
+                android:text="个人介绍"
+                android:textColor="@color/color_2A2A2A"
+                android:textSize="15sp"/>
+
+
+            <EditText
+                android:id="@+id/edit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:ellipsize="end"
+                android:hint="请填写"
+                android:paddingRight="15dp"
+                android:textColor="@color/color_2A2A2A"
+                android:textColorHint="@color/color_AAAAAA"
+                android:textSize="15sp"/>
+
+
+        </LinearLayout>
+
+
+        <com.yu.common.ui.DelayClickTextView
+            android:id="@+id/login"
+            style="@style/app_blue_button"
+            android:layout_marginTop="30dp"
+            android:text="进入假面舞会"
+            />
+
+
+        <LinearLayout
+            android:paddingBottom="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.yu.common.ui.DelayClickTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="点击进入表示你已经阅读并同意"
+                android:textSize="12sp"/>
+
+
+            <com.yu.common.ui.DelayClickTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="《用户协议》"
+                android:textColor="@color/app_main_bg_color"
+                android:textSize="12sp"/>
+        </LinearLayout>
 
 
     </LinearLayout>
-
 
 
 </ScrollView>
