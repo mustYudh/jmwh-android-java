@@ -23,6 +23,7 @@ public class NormaFormItemVIew extends LinearLayout {
     private EditText mEdit;
     private String mRightBtnText;
     private String textLength;
+    private TextView content;
 
     public NormaFormItemVIew(Context context) {
         super(context, null);
@@ -44,7 +45,7 @@ public class NormaFormItemVIew extends LinearLayout {
         View bottomLine = findViewById(R.id.bottom_line);
         TextView title = findViewById(R.id.title);
         mEdit = findViewById(R.id.edit);
-        TextView content = findViewById(R.id.content);
+        content = findViewById(R.id.content);
         rightBtn = findViewById(R.id.right_btn);
         String hint = typedArray.getString(R.styleable.NormaFormItemVIew_content_hint);
         String titleText = typedArray.getString(R.styleable.NormaFormItemVIew_left_text);
@@ -126,6 +127,16 @@ public class NormaFormItemVIew extends LinearLayout {
     public void setRightHint(String hint) {
         if (!TextUtils.isEmpty(hint)) {
             rightBtn.setText(hint);
+        }
+    }
+
+    public void setOnClickSeletedItem(View.OnClickListener onClickSeletedItem) {
+        content.setOnClickListener(onClickSeletedItem);
+    }
+
+    public void setContentText(CharSequence contentText) {
+        if (!TextUtils.isEmpty(contentText)) {
+            content.setText(contentText);
         }
     }
 

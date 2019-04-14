@@ -6,233 +6,36 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="===" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="719ae5f2-2279-4a74-a0ca-7a39f055c4af" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/bean/EditUserInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/presenter/EditUserInfoPresenter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/presenter/EditUserInfoViewer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/select_tab_01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/select_tab_02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/select_tab_03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/select_tab_04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/un_select_tab_01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/un_select_tab_02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/un_select_tab_03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/un_select_tab_04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/tab_01.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/tab_02.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/tab_03.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/tab_04.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/userinfo/EditUserDataActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/userinfo/EditUserDataActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_back_arrow.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_back_arrow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_boy_normal.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_boy_normal.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_boy_selected.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_boy_selected.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_girl_normal.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_girl_normal.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_girl_selected.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_girl_selected.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_qq.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_qq.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_wechat.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_wechat.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/action_bar_blue.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/action_bar_blue.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/home/HomeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/home/HomeActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/EditRegisterCodeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/EditRegisterCodeActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/userinfo/EditUserDataActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/EditUserDataActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/view/NormaFormItemVIew.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/view/NormaFormItemVIew.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/edit_user_data_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/edit_user_data_activity.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/caches/build_file_checksums.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/caches/gradle_models.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__android_arch_core_common_1_1_1_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__android_arch_core_runtime_1_1_1_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__android_arch_lifecycle_common_1_1_1_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__android_arch_lifecycle_livedata_1_1_1_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__android_arch_lifecycle_livedata_core_1_1_1_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__android_arch_lifecycle_runtime_1_1_1_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__android_arch_lifecycle_viewmodel_1_1_1_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_animated_vector_drawable_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_appcompat_v7_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_asynclayoutinflater_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_collections_28_0_0_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_coordinatorlayout_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_cursoradapter_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_customview_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_documentfile_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_drawerlayout_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_exifinterface_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_interpolator_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_loader_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_localbroadcastmanager_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_print_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_recyclerview_v7_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_slidingpanelayout_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_support_annotations_28_0_0_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_support_compat_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_support_core_ui_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_support_core_utils_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_support_fragment_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_support_vector_drawable_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_swiperefreshlayout_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_versionedparcelable_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_android_support_viewpager_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_facebook_fresco_animated_base_1_3_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_facebook_fresco_animated_gif_1_3_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_facebook_fresco_drawee_1_3_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_facebook_fresco_fbcore_1_3_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_facebook_fresco_fresco_1_3_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_facebook_fresco_imagepipeline_1_3_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_facebook_fresco_imagepipeline_base_1_3_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_github_bumptech_glide_glide_3_7_0_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_nostra13_universalimageloader_universal_image_loader_1_9_5_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_parse_bolts_bolts_tasks_1_4_0_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_squareup_haha_haha_2_0_3_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_squareup_leakcanary_leakcanary_analyzer_1_5_1_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_squareup_leakcanary_leakcanary_android_1_5_1_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_squareup_leakcanary_leakcanary_android_no_op_1_5_1_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_squareup_leakcanary_leakcanary_watcher_1_5_1_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_squareup_okhttp3_okhttp_3_4_1_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_squareup_okio_okio_1_9_0_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_squareup_picasso_picasso_2_5_2_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__com_yalantis_ucrop_2_2_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__io_reactivex_rxjava2_rxandroid_2_0_1_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__io_reactivex_rxjava2_rxjava_2_1_0_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__junit_junit_4_12_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__org_hamcrest_hamcrest_core_1_3_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/libraries/Gradle__org_reactivestreams_reactive_streams_1_0_0_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/proguard-rules.pro" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/Configuration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/RxGalleryFinal.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/RxGalleryFinalApi.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/anim/Animation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/anim/AnimationListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/anim/SlideInUnderneathAnimation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/anim/SlideOutUnderneathAnimation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/bean/BucketBean.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/bean/ImageCropBean.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/bean/MediaBean.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/bean/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/imageloader/AbsImageLoader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/imageloader/FrescoImageLoader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/imageloader/GlideImageLoader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/imageloader/ImageLoaderType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/imageloader/PicassoImageLoader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/imageloader/UniversalImageLoader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/imageloader/rotate/RotateTransformation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/interactor/MediaBucketFactoryInteractor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/interactor/MediaSrcFactoryInteractor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/interactor/impl/MediaBucketFactoryInteractorImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/interactor/impl/MediaSrcFactoryInteractorImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/interactor/impl/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/interactor/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/presenter/MediaGridPresenter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/presenter/impl/MediaGridPresenterImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/presenter/impl/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/presenter/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxbus/RxBus.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxbus/RxBusDisposable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxbus/RxBusResultDisposable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxbus/event/BaseResultEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxbus/event/CloseMediaViewPageFragmentEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxbus/event/CloseRxMediaGridPageEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxbus/event/ImageMultipleResultEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxbus/event/ImageRadioResultEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxbus/event/MediaCheckChangeEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxbus/event/MediaViewPagerChangedEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxbus/event/OpenMediaPageFragmentEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxbus/event/OpenMediaPreviewFragmentEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxbus/event/RequestStorageReadAccessPermissionEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxbus/event/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxbus/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxjob/Job.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxjob/JobCreator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxjob/JobManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxjob/RxJob.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxjob/job/ImageThmbnailJob.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxjob/job/ImageThmbnailJobCreate.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxjob/job/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxjob/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/RxGalleryListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/activity/BaseActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/activity/MediaActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/activity/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/adapter/BucketAdapter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/adapter/MediaGridAdapter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/adapter/MediaPreviewAdapter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/adapter/RecyclingPagerAdapter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/adapter/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/base/IMultiImageCheckedListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/base/IRadioImageCheckedListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/fragment/BaseFragment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/fragment/MediaGridFragment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/fragment/MediaPageFragment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/fragment/MediaPreviewFragment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/fragment/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/widget/FixImageView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/widget/FixViewPager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/widget/FlexibleDividerDecoration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/widget/FooterAdapter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/widget/HorizontalDividerItemDecoration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/widget/MarginDecoration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/widget/RecyclerViewFinal.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/widget/SquareImageView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/widget/SquareLinearLayout.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/widget/SquareRelativeLayout.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/widget/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/utils/BitmapUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/utils/CameraUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/utils/DeviceUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/utils/EmptyViewUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/utils/FileUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/utils/FilenameUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/utils/IOUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/utils/Logger.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/utils/MediaScanner.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/utils/MediaType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/utils/MediaUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/utils/ModelUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/utils/OsCompat.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/utils/PermissionCheckUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/utils/SimpleDateUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/utils/StorageUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/utils/ThemeUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/utils/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/view/ActivityFragmentView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/view/MediaGridView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/view/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/uk/co/senab/photoview/Compat.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/uk/co/senab/photoview/DefaultOnDoubleTapListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/uk/co/senab/photoview/IPhotoView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/uk/co/senab/photoview/PhotoView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/uk/co/senab/photoview/PhotoViewAttacher.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/uk/co/senab/photoview/gestures/CupcakeGestureDetector.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/uk/co/senab/photoview/gestures/EclairGestureDetector.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/uk/co/senab/photoview/gestures/FroyoGestureDetector.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/uk/co/senab/photoview/gestures/GestureDetector.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/uk/co/senab/photoview/gestures/OnGestureListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/uk/co/senab/photoview/gestures/VersionedGestureDetector.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/uk/co/senab/photoview/scrollerproxy/GingerScroller.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/uk/co/senab/photoview/scrollerproxy/IcsScroller.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/uk/co/senab/photoview/scrollerproxy/PreGingerScroller.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/java/uk/co/senab/photoview/scrollerproxy/ScrollerProxy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/res/color/gallery_text_color_selector.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/res/drawable-xxhdpi-v4/gallery_ic_corner_gray.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/res/drawable-xxhdpi/gallery_bg_bucket.9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/res/drawable-xxhdpi/gallery_ic_camera.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/res/drawable-xxhdpi/gallery_ic_cross.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/res/drawable-xxxhdpi/gallery_ic_corner_selector.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/res/drawable/gallery_bucket_item_selector.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/res/drawable/gallery_button_selector.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/res/drawable/gallery_default_image.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/res/layout/gallery_activity_media.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/res/layout/gallery_adapter_bucket_item.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/res/layout/gallery_fragment_media_grid.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/res/layout/gallery_fragment_media_page.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/res/layout/gallery_fragment_media_preview.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/res/layout/gallery_loading_view_final_footer_default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/res/layout/gallery_media_image_preview_item.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/res/layout/item_gallery_media_grid.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/res/layout/item_gallery_media_grid_fresco.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/res/values/gallery_attrs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/res/values/gallery_default_theme.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/res/values/gallery_dimens.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/crop_img/src/main/res/values/gallery_strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/home_table_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/home_table_layout.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/build/classes/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -298,21 +101,22 @@
     <session id="-1571902642">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gradle" value="7" />
           <entry key="iml" value="1" />
-          <entry key="java" value="154" />
+          <entry key="java" value="165" />
           <entry key="png" value="3" />
-          <entry key="xml" value="50" />
+          <entry key="xml" value="59" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -320,24 +124,24 @@
           <entry key="Groovy" value="7" />
           <entry key="IDEA_MODULE" value="1" />
           <entry key="Image" value="3" />
-          <entry key="JAVA" value="154" />
-          <entry key="XML" value="50" />
+          <entry key="JAVA" value="165" />
+          <entry key="XML" value="59" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gradle" value="20" />
-          <entry key="java" value="3969" />
+          <entry key="java" value="4813" />
           <entry key="txt" value="5" />
-          <entry key="xml" value="928" />
+          <entry key="xml" value="1065" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="20" />
-          <entry key="JAVA" value="3969" />
+          <entry key="JAVA" value="4813" />
           <entry key="PLAIN_TEXT" value="5" />
-          <entry key="XML" value="928" />
+          <entry key="XML" value="1065" />
         </counts>
       </usages-collector>
     </session>
@@ -345,95 +149,31 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/crop_img/src/main/res/values/gallery_default_theme.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="12" column="16" lean-forward="true" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/base/BaseBarActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/action_bar_blue.xml">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/edit_user_data_activity.xml">
           <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="22" column="47" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/common/src/main/java/com/yu/common/base/BaseActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/activity/MediaActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="563">
-              <caret line="167" column="13" selection-start-line="167" selection-start-column="13" selection-end-line="167" selection-end-column="13" />
-              <folding>
-                <element signature="e#7215#7261#0" expanded="true" />
-                <element signature="e#7679#7717#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="8" column="28" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/common/src/main/res/values-v19/values-v19.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" column="70" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="70" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="4" column="48" lean-forward="true" selection-start-line="4" selection-start-column="48" selection-end-line="4" selection-end-column="48" />
+            <state relative-caret-position="209">
+              <caret line="94" column="44" selection-start-line="94" selection-start-column="27" selection-end-line="94" selection-end-column="44" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider editor-type-id="android-manifest" />
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/EditUserDataActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="581">
-              <caret line="77" selection-start-line="77" selection-end-line="77" />
+            <state relative-caret-position="653">
+              <caret line="73" column="31" selection-start-line="73" selection-start-column="31" selection-end-line="73" selection-end-column="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1346#1347#0" expanded="true" />
+                <element signature="e#1379#1380#0" expanded="true" />
+                <element signature="e#3107#3693#0" expanded="true" />
+                <element signature="e#3692#3693#0" expanded="true" />
+                <element signature="e#3124#3125#0" expanded="true" />
+                <element signature="e#3189#3190#0" expanded="true" />
+              </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/crop_img/src/main/res/drawable-xxhdpi-v4/gallery_ic_corner_gray.png">
-          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
     </leaf>
@@ -442,17 +182,14 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="layoutResourceFile_vertical" />
         <option value="resourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>size</find>
-      <find>=======&gt;</find>
-      <find>server_timestamp</find>
       <find>message:com.google.gson.internal.LinkedTreeMap</find>
       <find>handleLoginResult</find>
       <find>acc</find>
@@ -467,8 +204,6 @@
       <find>activity_</find>
       <find>content_hint</find>
       <find>glideVersion</find>
-      <find>glide</find>
-      <find>图片</find>
       <find>gallery_media_grid_image_title</find>
       <find>MediaActivity</find>
       <find>I</find>
@@ -480,6 +215,11 @@
       <find>gallery_default_toolbar_height</find>
       <find>text</find>
       <find>72</find>
+      <find>图片</find>
+      <find>glide</find>
+      <find>thumbnailSmallPath</find>
+      <find>请</find>
+      <find>昵称</find>
     </findStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -494,15 +234,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/common/src/main/java/com/yu/common/utils/PhoneUtils.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/bean/RegisterBean.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/presenter/RegisterViewer.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/data/SharedPreferencesHelper.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/register_activity_layout.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/presenter/SelectGenderViewer.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/login_activity_layout.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/presenter/RegisterPresenter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/http/interceptor/CustomDynamicInterceptor.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/http/params/PostParms.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/http/params/PostParams.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/presenter/SelectGenderPresenter.java" />
@@ -514,7 +245,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/login/bean/LoginInfo.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/login/presenter/LoginViewer.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/data/UserProfile.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/home/HomeActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/home_activity.xml" />
         <option value="$PROJECT_DIR$/bottom_tab/src/main/res/layout/bottom_navigation_control_view.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/login/presenter/LoginPresenter.java" />
@@ -525,7 +255,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/splash_activity_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/shape_circle_header_bg.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/attrs.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/view/NormaFormItemVIew.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/edit_register_code_activity_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/splash/SplashActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/login/LoginActivity.java" />
@@ -535,9 +264,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/utils/KeyboardChangeListener.java" />
         <option value="$PROJECT_DIR$/common/build.gradle" />
         <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/edit_user_data_activity.xml" />
         <option value="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/RxGalleryFinal.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/userinfo/EditUserDataActivity.java" />
         <option value="$PROJECT_DIR$/settings.gradle" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/ui/activity/MediaActivity.java" />
@@ -545,6 +272,19 @@
         <option value="$PROJECT_DIR$/crop_img/src/main/res/values/gallery_default_theme.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/crop_img/src/main/res/values/gallery_strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/tab_01.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/tab_03.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/tab_04.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/home_table_layout.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/home/HomeActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/userinfo/EditUserDataActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/presenter/EditUserInfoViewer.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/bean/EditUserInfo.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/presenter/EditUserInfoPresenter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/view/NormaFormItemVIew.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/edit_user_data_activity.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/EditUserDataActivity.java" />
       </list>
     </option>
   </component>
@@ -560,7 +300,6 @@
     </navigator>
     <panes>
       <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -586,10 +325,90 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="JiaMianWuHui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JiaMianWuHui" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JiaMianWuHui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JiaMianWuHui" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="jmwh" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JiaMianWuHui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JiaMianWuHui" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="jmwh" type="462c0819:PsiDirectoryNode" />
+              <item name="module" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JiaMianWuHui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JiaMianWuHui" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="jmwh" type="462c0819:PsiDirectoryNode" />
+              <item name="module" type="462c0819:PsiDirectoryNode" />
+              <item name="register" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JiaMianWuHui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JiaMianWuHui" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="jmwh" type="462c0819:PsiDirectoryNode" />
+              <item name="module" type="462c0819:PsiDirectoryNode" />
+              <item name="register" type="462c0819:PsiDirectoryNode" />
+              <item name="bean" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JiaMianWuHui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JiaMianWuHui" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="jmwh" type="462c0819:PsiDirectoryNode" />
+              <item name="module" type="462c0819:PsiDirectoryNode" />
+              <item name="register" type="462c0819:PsiDirectoryNode" />
+              <item name="presenter" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JiaMianWuHui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JiaMianWuHui" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="res" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JiaMianWuHui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JiaMianWuHui" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="res" type="462c0819:PsiDirectoryNode" />
+              <item name="drawable" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -602,7 +421,7 @@
     <property name="ExportApk.SignV1" value="true" />
     <property name="ExportApk.SignV2" value="true" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="Basebar&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/base/BaseBarActivity.java&#10;MediaGridFragment&#9;PSI&#9;JAVA://cn.finalteam.rxgalleryfinal.ui.fragment.MediaGridFragment&#10;Login&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/login/LoginActivity.java&#10;Logi&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/login/LoginActivity.java&#10;Splas&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/splash/SplashActivity.java&#10;Reg&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/RegisterActivity.java&#10;Spla&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/splash/SplashActivity.java&#10;Sele&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/SelectGenderActivity.java&#10;Home&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/home/HomeActivity.java&#10;User&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/data/UserProfile.java&#10;Regis&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/RegisterActivity.java&#10;Regi&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/RegisterActivity.java&#10;Cust&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/http/interceptor/CustomDynamicInterceptor.java&#10;registerac&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/RegisterActivity.java&#10;Homeac&#9;PSI&#9;JAVA://com.qsd.jmwh.module.home.HomeActivity&#10;S&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/presenter/SelectGenderPresenter.java&#10;Selec&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/presenter/SelectGenderPresenter.java&#10;Regist&#9;PSI&#9;JAVA://com.qsd.jmwh.module.register.RegisterActivity&#10;Apis&#9;FILE&#9;file:///Users/yudneghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/http/ApiServices.java&#10;App&#9;FILE&#9;file:///Users/yudneghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/APP.java&#10;CustomDynamicInterceptor&#9;PSI&#9;JAVA://com.qsd.jmwh.http.interceptor.CustomDynamicInterceptor&#10;Json&#9;FILE&#9;file:///Users/yudneghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/utils/JSONUtils.java&#10;Splashac&#9;PSI&#9;JAVA://com.qsd.jmwh.module.splash.SplashActivity&#10;Spls&#9;PSI&#9;JAVA://com.sun.java.swing.ui.SplashScreen" />
+    <property name="SearchEverywhereHistoryKey" value="Edit&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/userinfo/EditUserDataActivity.java&#10;Home&#9;PSI&#9;JAVA://com.qsd.jmwh.module.home.HomeActivity&#10;Basebar&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/base/BaseBarActivity.java&#10;MediaGridFragment&#9;PSI&#9;JAVA://cn.finalteam.rxgalleryfinal.ui.fragment.MediaGridFragment&#10;Login&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/login/LoginActivity.java&#10;Logi&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/login/LoginActivity.java&#10;Splas&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/splash/SplashActivity.java&#10;Reg&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/RegisterActivity.java&#10;Spla&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/splash/SplashActivity.java&#10;Sele&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/SelectGenderActivity.java&#10;User&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/data/UserProfile.java&#10;Regis&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/RegisterActivity.java&#10;Regi&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/RegisterActivity.java&#10;Cust&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/http/interceptor/CustomDynamicInterceptor.java&#10;registerac&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/RegisterActivity.java&#10;Homeac&#9;PSI&#9;JAVA://com.qsd.jmwh.module.home.HomeActivity&#10;S&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/presenter/SelectGenderPresenter.java&#10;Selec&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/presenter/SelectGenderPresenter.java&#10;Regist&#9;PSI&#9;JAVA://com.qsd.jmwh.module.register.RegisterActivity&#10;Apis&#9;FILE&#9;file:///Users/yudneghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/http/ApiServices.java&#10;App&#9;FILE&#9;file:///Users/yudneghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/APP.java&#10;CustomDynamicInterceptor&#9;PSI&#9;JAVA://com.qsd.jmwh.http.interceptor.CustomDynamicInterceptor&#10;Json&#9;FILE&#9;file:///Users/yudneghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/utils/JSONUtils.java&#10;Splashac&#9;PSI&#9;JAVA://com.qsd.jmwh.module.splash.SplashActivity&#10;Spls&#9;PSI&#9;JAVA://com.sun.java.swing.ui.SplashScreen" />
     <property name="android.recentlyUsedThemes" value="Base.Theme.AppCompat.Light.DarkActionBar" />
     <property name="device.picker.selection" value="174768de" />
   </component>
@@ -616,6 +435,8 @@
       <recent name="com.qsd.jmwh.http.subscriber" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi" />
       <recent name="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/utils/cutdown" />
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -711,7 +532,7 @@
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="1" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" sideWeight="0.4990566" visible="true" weight="0.31117535" />
+      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.4990566" weight="0.31117535" />
       <window_info id="Structure" order="3" sideWeight="0.5009434" side_tool="true" weight="0.29576108" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info id="Build Variants" order="5" side_tool="true" />
@@ -722,11 +543,11 @@
       <window_info anchor="bottom" id="Statistic" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.32909784" />
       <window_info anchor="bottom" id="Freeline" order="4" />
-      <window_info anchor="bottom" id="Logcat" order="5" weight="0.3424933" />
+      <window_info anchor="bottom" id="Logcat" order="5" visible="true" weight="0.3424933" />
       <window_info anchor="bottom" id="Terminal" order="6" weight="0.4664179" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Build" order="9" visible="true" weight="0.39075068" />
+      <window_info anchor="bottom" id="Build" order="9" weight="0.39075068" />
       <window_info anchor="bottom" id="Find" order="10" />
       <window_info anchor="bottom" id="Android Profiler" order="11" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
@@ -757,95 +578,24 @@
           <properties class="com.qsd.jmwh.data.UserProfile" method="isAppLogin" />
           <option name="timeStamp" value="8" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/bean/EditUserInfo.java</url>
+          <line>5</line>
+          <properties field="sNickName" class="com.qsd.jmwh.module.register.bean.EditUserInfo" />
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_background.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/select_gender_boy.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/shape_circle_header_bg.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/edit_ver_code_bg.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/register_activity_layout.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="42" column="45" lean-forward="true" selection-start-line="35" selection-start-column="2" selection-end-line="42" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/RegisterActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="29" column="41" lean-forward="true" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/view/CircleImageView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="31" column="64" selection-start-line="31" selection-start-column="64" selection-end-line="31" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/attrs.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="36" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/yu/common/framework/AbstractSupportActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="104" column="28" selection-start-line="104" selection-start-column="28" selection-end-line="104" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/splash/SplashActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-28/android/content/res/TypedArray.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="450" column="71" selection-start-line="450" selection-start-column="63" selection-end-line="450" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/SelectGenderActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="524">
-          <caret line="79" column="49" selection-start-line="79" selection-start-column="49" selection-end-line="79" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/edit_register_code_activity_layout.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="91" column="44" selection-start-line="91" selection-start-column="33" selection-end-line="91" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/EditRegisterCodeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="13" column="41" selection-start-line="13" selection-start-column="41" selection-end-line="13" selection-end-column="41" />
+          <folding>
+            <element signature="e#649#650#0" expanded="true" />
+            <element signature="e#699#700#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -854,13 +604,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="486">
           <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="33" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/view/NormaFormItemVIew.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="23" column="33" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -910,13 +653,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/yu/common/utils/ImageLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/app.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-478" />
@@ -929,25 +665,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/edit_user_data_activity.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1746">
-          <caret line="97" column="8" selection-start-line="97" selection-start-column="8" selection-end-line="97" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/RxGalleryFinal.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5130">
           <caret line="310" column="37" selection-start-line="310" selection-start-column="37" selection-end-line="310" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/crop_img/src/main/res/values/gallery_strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="48" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="48" />
         </state>
       </provider>
     </entry>
@@ -977,18 +698,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
           <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/userinfo/EditUserDataActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="48" column="32" selection-start-line="48" selection-start-column="32" selection-end-line="48" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1342#1699#0" expanded="true" />
-            <element signature="e#1698#1699#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1057,14 +766,14 @@
     <entry file="file://$PROJECT_DIR$/crop_img/src/main/res/values/gallery_default_theme.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
-          <caret line="12" column="16" lean-forward="true" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+          <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
-          <caret line="4" column="48" lean-forward="true" selection-start-line="4" selection-start-column="48" selection-end-line="4" selection-end-column="48" />
+          <caret line="4" column="48" selection-start-line="4" selection-start-column="48" selection-end-line="4" selection-end-column="48" />
         </state>
       </provider>
     </entry>
@@ -1079,17 +788,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="563">
           <caret line="167" column="13" selection-start-line="167" selection-start-column="13" selection-end-line="167" selection-end-column="13" />
-          <folding>
-            <element signature="e#7215#7261#0" expanded="true" />
-            <element signature="e#7679#7717#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="28" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -1101,11 +799,159 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crop_img/src/main/res/values/gallery_strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="52" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/tab_01.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/tab_03.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/tab_04.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/home/HomeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="610">
+          <caret line="53" column="27" selection-start-line="53" selection-start-column="27" selection-end-line="53" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/home_table_layout.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="33" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/tab_02.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="581">
-          <caret line="77" selection-start-line="77" selection-end-line="77" />
+        <state relative-caret-position="563">
+          <caret line="76" column="40" selection-start-line="76" selection-start-column="40" selection-end-line="76" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/imageloader/GlideImageLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-74">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxbus/event/ImageRadioResultEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/bean/ImageCropBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/yu/common/utils/ImageLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="38" column="77" selection-start-line="38" selection-start-column="77" selection-end-line="38" selection-end-column="77" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/bean/MediaBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="178" column="39" selection-start-line="178" selection-start-column="18" selection-end-line="178" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/presenter/EditUserInfoViewer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="35" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/bean/EditUserInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="25" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/presenter/EditUserInfoPresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#283#284#0" expanded="true" />
+            <element signature="e#312#313#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/view/NormaFormItemVIew.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="132" column="37" selection-start-line="132" selection-start-column="16" selection-end-line="132" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/edit_user_data_activity.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="94" column="44" selection-start-line="94" selection-start-column="27" selection-end-line="94" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/EditUserDataActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="653">
+          <caret line="73" column="31" selection-start-line="73" selection-start-column="31" selection-end-line="73" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1346#1347#0" expanded="true" />
+            <element signature="e#1379#1380#0" expanded="true" />
+            <element signature="e#3107#3693#0" expanded="true" />
+            <element signature="e#3692#3693#0" expanded="true" />
+            <element signature="e#3124#3125#0" expanded="true" />
+            <element signature="e#3189#3190#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

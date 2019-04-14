@@ -23,24 +23,27 @@
             android:paddingTop="21dp"
             android:paddingBottom="20dp">
 
-            <com.yu.common.ui.DelayClickTextView
-                android:id="@+id/select_pic"
+
+
+            <com.qsd.jmwh.view.CircleImageView
+                android:background="@drawable/shape_circle_header_bg"
+                android:id="@+id/header"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
-                android:background="@drawable/shape_circle_header_bg"
+                />
+
+            <com.yu.common.ui.DelayClickTextView
+                android:id="@+id/select_hint"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:text="上传头像"
                 android:gravity="center"
                 android:scaleType="centerCrop"
-                android:text="上传头像"
                 android:textColor="@color/color_2A2A2A"
                 android:textSize="15sp"
                 />
-
-            <com.qsd.jmwh.view.CircleImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:visibility="gone"/>
         </FrameLayout>
 
 
@@ -52,6 +55,7 @@
 
 
         <com.qsd.jmwh.view.NormaFormItemVIew
+            android:id="@+id/location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:content_hint="可以多选"
@@ -60,6 +64,7 @@
             app:show_top_line="false"/>
 
         <com.qsd.jmwh.view.NormaFormItemVIew
+            android:id="@+id/professional"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:content_hint="请多选"
@@ -68,6 +73,7 @@
             app:show_top_line="false"/>
 
         <com.qsd.jmwh.view.NormaFormItemVIew
+            android:id="@+id/project"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:content_hint="可以多选"
@@ -87,6 +93,7 @@
             android:textSize="13sp"/>
 
         <com.qsd.jmwh.view.NormaFormItemVIew
+            android:id="@+id/height"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:content_hint="请选择"
@@ -96,6 +103,7 @@
 
 
         <com.qsd.jmwh.view.NormaFormItemVIew
+            android:id="@+id/weight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:content_hint="请选择"
@@ -164,6 +172,7 @@
 
 
             <com.yu.common.ui.DelayClickTextView
+                android:id="@+id/agreement"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="《用户协议》"

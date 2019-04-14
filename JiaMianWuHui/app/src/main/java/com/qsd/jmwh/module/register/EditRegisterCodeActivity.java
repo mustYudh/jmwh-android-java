@@ -6,7 +6,6 @@ import android.view.View;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
-import com.qsd.jmwh.module.userinfo.EditUserDataActivity;
 
 public class EditRegisterCodeActivity extends BaseBarActivity implements View.OnClickListener {
     @Override

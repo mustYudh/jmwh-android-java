@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <com.yu.common.ui.DelayClickImageView
-        android:background="@drawable/select_gender_boy"
+        android:id="@+id/tab_icon"
         android:layout_width="22dp"
         android:layout_height="22dp"/>
 
