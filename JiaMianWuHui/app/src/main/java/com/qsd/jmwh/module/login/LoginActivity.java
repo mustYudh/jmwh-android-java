@@ -1,5 +1,6 @@
 package com.qsd.jmwh.module.login;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -52,6 +53,7 @@ public class LoginActivity extends BaseBarActivity implements LoginViewer, View.
         if (loginInfo != null) {
             UserProfile.getInstance().appLogin(loginInfo);
             getLaunchHelper().startActivity(HomeActivity.class);
+            setResult(Activity.RESULT_OK);
             finish();
         }
     }

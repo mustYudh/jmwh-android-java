@@ -27,12 +27,12 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:paddingLeft="15dp"
-            android:textColor="@color/color_333333"
+            android:textColor="@color/color_2A2A2A"
             android:textSize="15sp"
             tools:text="设置密码"/>
 
 
-        <TextView
+        <com.yu.common.ui.DelayClickTextView
             android:id="@+id/content"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
             android:lines="1"
             android:maxLines="1"
             android:paddingRight="15dp"
-            android:textColor="@color/color_333333"
+            android:textColor="@color/color_2A2A2A"
             android:textSize="15sp"
             android:visibility="gone"
             tools:text="请输入收到的验证码"/>
@@ -57,7 +57,7 @@
             android:lines="1"
             android:maxLines="1"
             android:paddingRight="15dp"
-            android:textColor="@color/color_333333"
+            android:textColor="@color/color_2A2A2A"
             android:textColorHint="@color/color_AAAAAA"
             android:textSize="15sp"
             tools:hint="请输入收到的验证码"/>

@@ -18,5 +18,6 @@
         <attr name="right_button_hint" format="string"/>
         <attr name="input_type" format="string"/>
         <attr name="length" format="string"/>
+        <attr name="hint_color" format="color"/>
     </declare-styleable>
 </resources>

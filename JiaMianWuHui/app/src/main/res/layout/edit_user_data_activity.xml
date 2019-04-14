@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+    >
+
+
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.yu.common.ui.DelayClickTextView
+            android:textSize="15sp"
+            android:layout_marginTop="21dp"
+            android:textColor="@color/color_2A2A2A"
+            android:gravity="center"
+            android:text="上传头像"
+            android:background="@drawable/shape_circle_header_bg"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            />
+
+
+        <com.qsd.jmwh.view.NormaFormItemVIew
+            android:layout_marginTop="20dp"
+            app:left_text="昵称"
+            app:content_hint="请填写"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <com.qsd.jmwh.view.NormaFormItemVIew
+            app:only_read="true"
+            app:show_top_line="false"
+            app:left_text="约会范围"
+            app:content_hint="可以多选"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <com.qsd.jmwh.view.NormaFormItemVIew
+            app:only_read="true"
+            app:show_top_line="false"
+            app:left_text="职业"
+            app:content_hint="请多选"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <com.qsd.jmwh.view.NormaFormItemVIew
+            app:only_read="true"
+            app:show_top_line="false"
+            app:left_text="约会节目"
+            app:content_hint="可以多选"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:textSize="13sp"
+            android:background="@color/color_F4F4F4"
+            android:text="更多信息（选填）"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <com.qsd.jmwh.view.NormaFormItemVIew
+            app:only_read="true"
+            app:show_top_line="false"
+            app:left_text="身高"
+            app:content_hint="请选择"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <com.qsd.jmwh.view.NormaFormItemVIew
+            app:only_read="true"
+            app:show_top_line="false"
+            app:left_text="体重"
+            app:content_hint="请选择"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <com.qsd.jmwh.view.NormaFormItemVIew
+            app:show_top_line="false"
+            app:left_text="个人介绍"
+            app:content_hint="请填写"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"/>
+
+
+
+    </LinearLayout>
+
+
+
+</ScrollView>

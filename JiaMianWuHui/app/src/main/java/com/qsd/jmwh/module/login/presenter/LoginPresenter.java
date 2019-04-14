@@ -3,6 +3,7 @@ package com.qsd.jmwh.module.login.presenter;
 import android.annotation.SuppressLint;
 import android.text.TextUtils;
 
+import com.qsd.jmwh.APP;
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.params.PostParams;
 import com.qsd.jmwh.http.subscriber.NoTipRequestSubscriber;
@@ -35,7 +36,7 @@ public class LoginPresenter extends BaseViewPresenter<LoginViewer> {
         XHttp.custom(ApiServices.class)
                 .login(PostParams.createParams()
                         .put("sLoginName", userName)
-                        .put("sPwd", MD5Utils.string2MD5(pwd))
+                        .put("sPwd", APP.DEBUG ? pwd : MD5Utils.string2MD5(pwd))
                         .creatBody())
                 .compose(RxSchedulerUtils.<ApiResult<LoginInfo>>_io_main_o())
                 .subscribeWith(new NoTipRequestSubscriber<ApiResult<LoginInfo>>() {
@@ -43,12 +44,13 @@ public class LoginPresenter extends BaseViewPresenter<LoginViewer> {
                     protected void onSuccess(ApiResult<LoginInfo> result) {
                         int code = result.getCode();
                         switch (code) {
+                            case 0:
+                                assert getViewer() != null;
+                                getViewer().handleLoginResult(result.getData());
+                                break;
                             case 3:
                                 LoginInfo loginInfo = result.getData();
                                 getLauncherHelper().startActivity(SelectGenderActivity.getIntent(getActivity(), loginInfo.lUserId));
-                                break;
-                            case 4:
-                                
                                 break;
                             default:
                                 ToastUtils.show(result.getMsg());

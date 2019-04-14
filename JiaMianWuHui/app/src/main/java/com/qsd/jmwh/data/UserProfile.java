@@ -55,7 +55,7 @@ public class UserProfile implements Serializable {
 
 
     public String getAppToken() {
-        return token;
+        return spHelper.getString(APP_TOKEN,"");
     }
 
     private void setAppToken(String token) {

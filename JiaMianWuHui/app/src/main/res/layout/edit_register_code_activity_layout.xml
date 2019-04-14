@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="31dp"
             android:text="提示"
-            android:textColor="@color/color_333333"
+            android:textColor="@color/color_2A2A2A"
             android:textSize="18sp"
             android:textStyle="bold"/>
 
@@ -100,6 +100,7 @@
                 android:textSize="15sp"/>
 
             <TextView
+                android:id="@+id/edit_user_data"
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/fs_01"

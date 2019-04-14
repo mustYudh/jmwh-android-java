@@ -23,9 +23,9 @@ public class SelectGenderActivity extends BaseBarActivity implements SelectGende
     public static String APP_ACCOUNT = "APP_ACCOUNT";
 
 
-    public static Intent getIntent(Context context,int account) {
+    public static Intent getIntent(Context context, int account) {
         Intent intent = new Intent(context, SelectGenderActivity.class);
-        intent.putExtra(APP_ACCOUNT,account);
+        intent.putExtra(APP_ACCOUNT, account);
         return intent;
     }
 
@@ -58,19 +58,14 @@ public class SelectGenderActivity extends BaseBarActivity implements SelectGende
                 break;
             case R.id.next:
                 SelectGenderHintPop selectGenderHintPop = new SelectGenderHintPop(this);
-                selectGenderHintPop.showPopupWindow();
-                selectGenderHintPop.setOnItemClickListener(new SelectGenderHintPop.ItemClickListener() {
-                    @Override
-                    public void onNext() {
-                        mPresenter.selectGender(currentType,getIntent().getIntExtra(APP_ACCOUNT,-1));
-                        selectGenderHintPop.dismiss();
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        selectGenderHintPop.dismiss();
-                    }
-                });
+                selectGenderHintPop.setMessage("注册之后不能修改性别，并且，你不能与相同性别的用户交流。")
+                        .setPositiveButton("确定", v1 -> {
+                                    mPresenter.selectGender(currentType, getIntent().getIntExtra(APP_ACCOUNT, -1));
+                                    selectGenderHintPop.dismiss();
+                                }
+                        )
+                        .setNegativeButton("取消", v12 -> selectGenderHintPop.dismiss())
+                        .showPopupWindow();
 
                 break;
         }

@@ -22,7 +22,7 @@ public class NormaFormItemVIew extends LinearLayout {
     private TextView rightBtn;
     private EditText mEdit;
     private String mRightBtnText;
-    private String  textLength;
+    private String textLength;
 
     public NormaFormItemVIew(Context context) {
         super(context, null);
@@ -49,6 +49,7 @@ public class NormaFormItemVIew extends LinearLayout {
         String hint = typedArray.getString(R.styleable.NormaFormItemVIew_content_hint);
         String titleText = typedArray.getString(R.styleable.NormaFormItemVIew_left_text);
         String text = typedArray.getString(R.styleable.NormaFormItemVIew_content_text);
+        int hintColor = typedArray.getColor(R.styleable.NormaFormItemVIew_hint_color, getResources().getColor(R.color.color_999999));
         String inputType = typedArray.getString(R.styleable.NormaFormItemVIew_input_type);
         textLength = typedArray.getString(R.styleable.NormaFormItemVIew_length);
         if (!TextUtils.isEmpty(inputType)) {
@@ -60,6 +61,8 @@ public class NormaFormItemVIew extends LinearLayout {
                 mEdit.setInputType(InputType.TYPE_CLASS_TEXT);
             }
         }
+        mEdit.setHintTextColor(hintColor);
+        content.setHintTextColor(hintColor);
         mRightBtnText = typedArray.getString(R.styleable.NormaFormItemVIew_right_button_hint);
         boolean showTopLine = typedArray.getBoolean(R.styleable.NormaFormItemVIew_show_top_line, true);
         boolean showBottomLine =
@@ -73,8 +76,8 @@ public class NormaFormItemVIew extends LinearLayout {
         if (!TextUtils.isEmpty(hint)) {
             mEdit.setHint(hint);
             mEdit.setVisibility(VISIBLE);
-        } else {
-            mEdit.setVisibility(GONE);
+            content.setHint(hint);
+            content.setTextColor(hintColor);
         }
         if (onlyRead) {
             mEdit.setVisibility(GONE);
