@@ -82,15 +82,16 @@ public class CustomDynamicInterceptor extends BaseDynamicInterceptor<CustomDynam
             assert mHttpUrl != null;
             FormBody.Builder formBody = new FormBody.Builder();
             Map<String, Object> params = handleParams(request);
-            if (params != null && params.size() > 0) {
-                for (Map.Entry<String, Object> entry : params.entrySet()) {
-                    if (entry != null && !TextUtils.isEmpty(entry.getKey()) && !TextUtils.isEmpty(entry.getValue().toString())) {
-                        formBody.add(entry.getKey(), entry.getValue().toString());
-                    }
+            if (params != null) {
+                if (params.size() > 0) {
+                    for (Map.Entry<String, Object> entry : params.entrySet()) {
+                        if (entry != null && !TextUtils.isEmpty(entry.getKey()) && !TextUtils.isEmpty(entry.getValue().toString())) {
+                            formBody.add(entry.getKey(), entry.getValue().toString());
+                        }
 
+                    }
                 }
             }
-
             RequestBody body = formBody.build();
             request = request.newBuilder()
                     .addHeader("Content-Type", "application/x-www-form-urlencoded")
@@ -104,6 +105,7 @@ public class CustomDynamicInterceptor extends BaseDynamicInterceptor<CustomDynam
 
     private Map<String, Object> handleParams(Request request) {
         boolean isLogin = UserProfile.getInstance().isAppLogin();
+        Log.e("=======>",bodyToString(request));
         Map<String, String> oldParams = JSONUtils.parseKeyAndValueToMap(bodyToString(request));
         assert oldParams != null;
         if (isLogin) {

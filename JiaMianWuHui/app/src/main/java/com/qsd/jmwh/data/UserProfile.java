@@ -4,7 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.qsd.jmwh.APP;
-import com.qsd.jmwh.module.register.bean.UserInfo;
+import com.qsd.jmwh.module.login.bean.LoginInfo;
 
 import java.io.Serializable;
 
@@ -40,7 +40,7 @@ public class UserProfile implements Serializable {
         return instance;
     }
 
-    public void appLogin(UserInfo userInfo) {
+    public void appLogin(LoginInfo userInfo) {
         setAppAccount(userInfo.lUserId);
         setAppToken(userInfo.token);
     }

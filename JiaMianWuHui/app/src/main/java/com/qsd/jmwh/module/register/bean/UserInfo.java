@@ -13,7 +13,6 @@ public class UserInfo implements Serializable {
      * sIMID : im_20
      */
 
-    public long server_timestamp;
     public int lUserId;
     public String token;
     public String sIMToken;

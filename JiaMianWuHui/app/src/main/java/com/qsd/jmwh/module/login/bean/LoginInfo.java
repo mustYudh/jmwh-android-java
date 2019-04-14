@@ -1,8 +1,8 @@
 package com.qsd.jmwh.module.login.bean;
 
-import com.qsd.jmwh.module.register.bean.UserInfo;
+import java.io.Serializable;
 
-public class LoginInfo extends UserInfo {
+public class LoginInfo implements Serializable {
 
     /**
      * server_timestamp : 1555153352107

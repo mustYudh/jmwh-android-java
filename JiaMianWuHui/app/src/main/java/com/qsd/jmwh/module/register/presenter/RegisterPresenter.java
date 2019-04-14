@@ -7,6 +7,7 @@ import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.register.bean.UserInfo;
 import com.qsd.jmwh.module.register.bean.SendVerCodeBean;
+import com.qsd.jmwh.utils.MD5Utils;
 import com.qsd.jmwh.utils.countdown.RxCountDown;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.xuexiang.xhttp2.exception.ApiException;
@@ -61,7 +62,7 @@ public class RegisterPresenter extends BaseViewPresenter<RegisterViewer> {
             return;
         }
         XHttpProxy.proxy(ApiServices.class)
-                .register(verCode, phone, "mobile", password)
+                .register(verCode, phone, "mobile", MD5Utils.string2MD5(password))
                 .subscribeWith(new TipRequestSubscriber<UserInfo>() {
 
                     @Override

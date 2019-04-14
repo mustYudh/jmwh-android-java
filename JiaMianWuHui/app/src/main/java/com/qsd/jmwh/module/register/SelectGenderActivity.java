@@ -1,5 +1,7 @@
 package com.qsd.jmwh.module.register;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -18,6 +20,14 @@ public class SelectGenderActivity extends BaseBarActivity implements SelectGende
     private ImageView boy;
     private ImageView girle;
     private int currentType = 1;
+    public static String APP_ACCOUNT = "APP_ACCOUNT";
+
+
+    public static Intent getIntent(Context context,int account) {
+        Intent intent = new Intent(context, SelectGenderActivity.class);
+        intent.putExtra(APP_ACCOUNT,account);
+        return intent;
+    }
 
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
@@ -47,7 +57,21 @@ public class SelectGenderActivity extends BaseBarActivity implements SelectGende
                 currentType = 0;
                 break;
             case R.id.next:
-                mPresenter.selectGender(currentType);
+                SelectGenderHintPop selectGenderHintPop = new SelectGenderHintPop(this);
+                selectGenderHintPop.showPopupWindow();
+                selectGenderHintPop.setOnItemClickListener(new SelectGenderHintPop.ItemClickListener() {
+                    @Override
+                    public void onNext() {
+                        mPresenter.selectGender(currentType,getIntent().getIntExtra(APP_ACCOUNT,-1));
+                        selectGenderHintPop.dismiss();
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        selectGenderHintPop.dismiss();
+                    }
+                });
+
                 break;
         }
     }
@@ -58,21 +82,8 @@ public class SelectGenderActivity extends BaseBarActivity implements SelectGende
         if (type == 0) {
             finish();
         } else {
-            SelectGenderHintPop selectGenderHintPop = new SelectGenderHintPop(this);
-            selectGenderHintPop.showPopupWindow();
-            selectGenderHintPop.setOnItemClickListener(new SelectGenderHintPop.ItemClickListener() {
-                @Override
-                public void onNext() {
-                    getLaunchHelper().startActivity(EditRegisterCodeActivity.class);
-                    selectGenderHintPop.dismiss();
-                    finish();
-                }
-
-                @Override
-                public void onCancel() {
-                    selectGenderHintPop.dismiss();
-                }
-            });
+            getLaunchHelper().startActivity(EditRegisterCodeActivity.class);
+            finish();
         }
     }
 }

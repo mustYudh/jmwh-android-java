@@ -1,4 +1,4 @@
-package com.qsd.jmwh.http.fparams;
+package com.qsd.jmwh.http.params;
 
 import java.io.File;
 import java.io.Serializable;

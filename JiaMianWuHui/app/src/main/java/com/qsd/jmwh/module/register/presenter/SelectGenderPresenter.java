@@ -2,7 +2,6 @@ package com.qsd.jmwh.module.register.presenter;
 
 import android.annotation.SuppressLint;
 
-import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.xuexiang.xhttp2.XHttpProxy;
@@ -16,15 +15,17 @@ public class SelectGenderPresenter extends BaseViewPresenter<SelectGenderViewer>
     }
 
     @SuppressLint("CheckResult")
-    public void selectGender(int nSex) {
-        XHttpProxy.proxy(ApiServices.class)
-                .selectGender(nSex, UserProfile.getInstance().getAppAccount())
-                .subscribeWith(new TipRequestSubscriber<Object>() {
-                    @Override
-                    protected void onSuccess(Object o) {
-                        assert getViewer() != null;
-                        getViewer().selectedSuccess(nSex);
-                    }
-                });
+    public void selectGender(int nSex, int account) {
+        if (account != -1) {
+            XHttpProxy.proxy(ApiServices.class)
+                    .selectGender(nSex, account)
+                    .subscribeWith(new TipRequestSubscriber<Object>() {
+                        @Override
+                        protected void onSuccess(Object o) {
+                            assert getViewer() != null;
+                            getViewer().selectedSuccess(nSex);
+                        }
+                    });
+        }
     }
 }

@@ -4,8 +4,12 @@ import com.qsd.jmwh.module.login.bean.LoginInfo;
 import com.qsd.jmwh.module.register.bean.SendVerCodeBean;
 import com.qsd.jmwh.module.register.bean.UserInfo;
 import com.xuexiang.xhttp2.annotation.NetMethod;
+import com.xuexiang.xhttp2.model.ApiResult;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
 
 public interface ApiServices {
         @NetMethod(ParameterNames = {"sMobile"}, Url = "/SystemService/sendSMS")
@@ -19,8 +23,8 @@ public interface ApiServices {
         Observable<Object> selectGender(int nSex,int lUserId);
 
 
-        @NetMethod(ParameterNames = {"sLoginName","sPwd"},Url = "/UserService/login")
-        Observable<LoginInfo> login(String sLoginName, String sPwd);
+        @POST("/gateway/rest/v3/UserService/login")
+        Observable<ApiResult<LoginInfo>> login(@Body RequestBody requestBody);
 
 
 }
