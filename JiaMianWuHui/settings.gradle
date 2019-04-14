@@ -1,1 +1,1 @@
-include ':app', ':bottom_tab', ':common', ':http-lib'
+include ':app', ':bottom_tab', ':common', ':http-lib', 'crop_img'

@@ -172,6 +172,7 @@ dependencies {
     implementation project(path: ':common')
     implementation project(path: ':http-lib')
     implementation project(path: ':bottom_tab')
+    implementation project(':crop_img')
 
     //noinspection GradleCompatible
     implementation "com.android.support:appcompat-v7:${V7_APPCOMPAT_VERSION}"
