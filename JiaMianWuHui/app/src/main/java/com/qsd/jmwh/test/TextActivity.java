@@ -28,7 +28,7 @@ public class TextActivity extends BaseActivity {
       bindView(R.id.text, new View.OnClickListener() {
         @Override public void onClick(View v) {
           new ShareAction(TextActivity.this)
-              .setPlatform(SHARE_MEDIA.SINA)//传入平台
+              .setPlatform(SHARE_MEDIA.WEIXIN)//传入平台
               .withText("hello")//分享内容
               .withMedia(thumb)
               .setCallback(new UMShareListener() {
