@@ -17,10 +17,12 @@ public class ShareAuthSDK {
   private ShareAuthSDK() {
   }
 
-  public ShareAuthSDK init(Application application) {
+  public static ShareAuthSDK init(Application application, boolean debug) {
     CONTEXT = application;
     UMConfigure.init(application, UMConfigure.DEVICE_TYPE_PHONE, "");
     MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.MANUAL);
+    MobclickAgent.setCatchUncaughtExceptions(true);
+    UMConfigure.setLogEnabled(debug);
     return SHARE_AUTH_SDK;
   }
 
