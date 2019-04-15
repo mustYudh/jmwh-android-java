@@ -1,13 +1,30 @@
 package com.qsd.jmwh.http;
 
+import com.qsd.jmwh.module.login.bean.LoginInfo;
 import com.qsd.jmwh.module.register.bean.SendVerCodeBean;
+import com.qsd.jmwh.module.register.bean.UserInfo;
 import com.xuexiang.xhttp2.annotation.NetMethod;
+import com.xuexiang.xhttp2.model.ApiResult;
+
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
 
 public interface ApiServices {
         @NetMethod(ParameterNames = {"sMobile"}, Url = "/SystemService/sendSMS")
         Observable<SendVerCodeBean> send(String sMobile);
 
         @NetMethod(ParameterNames =  {"sAuthCode","sLoginName","sLoginMode","sPwd"}, Url = "/UserService/registUser")
-        Observable<Object> register(String sAuthCode,String sLoginName,String sLoginMode,String sPwd);
+        Observable<UserInfo> register(String sAuthCode, String sLoginName, String sLoginMode, String sPwd);
+
+
+        @NetMethod(ParameterNames = {"nSex","lUserId"},Url = "/UserService/modifySex")
+        Observable<Object> selectGender(int nSex,int lUserId);
+
+
+        @POST("/gateway/rest/v3/UserService/login")
+        Observable<ApiResult<LoginInfo>> login(@Body RequestBody requestBody);
+
+
 }

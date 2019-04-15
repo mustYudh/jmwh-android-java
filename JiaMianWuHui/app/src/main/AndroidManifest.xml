@@ -12,6 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppGrayTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="${UMENG_APPKEY}"/>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="${UMENG_CHANNEL}"/>
+        <meta-data
+            android:name="SENSORS_ANALYTICS_UTM_SOURCE"
+            android:value="${UMENG_CHANNEL}"/>
+
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1"/>
+
         <activity
             android:name=".module.splash.SplashActivity"
             android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
@@ -20,9 +35,9 @@
             android:windowSoftInputMode="adjustNothing"
             >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+            <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+            <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
@@ -35,25 +50,63 @@
         </activity>
 
 
-        <activity android:name=".module.login.LoginActivity"
-                  android:screenOrientation="portrait"
-                  android:windowSoftInputMode="adjustNothing"
+        <activity
+            android:name=".module.login.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"
             />
 
-        <activity android:name=".module.register.RegisterActivity"
-                          android:screenOrientation="portrait"
-                          android:windowSoftInputMode="adjustNothing"
-        />
+        <activity
+            android:name=".module.register.RegisterActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"
+            />
 
 
-        <activity android:name=".module.register.SelectGenderActivity"
-                  android:screenOrientation="portrait"
-                  android:windowSoftInputMode="adjustNothing"
+        <activity
+            android:name=".module.register.SelectGenderActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"
             />
-        <activity android:name=".module.register.EditRegisterCodeActivity"
-                  android:screenOrientation="portrait"
-                  android:windowSoftInputMode="adjustNothing"
+        <activity
+            android:name=".module.register.EditRegisterCodeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"
             />
+        <activity
+            android:name=".module.register.EditUserDataActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            >
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN"/>-->
+
+            <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <activity
+            android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme_Light"/>
+
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme_Light"
+            />
+        <activity
+            android:name=".module.ToByVipActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity
+            android:name=".module.register.DateRangeActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".test.TextActivity"/>
     </application>
 
 </manifest>
+

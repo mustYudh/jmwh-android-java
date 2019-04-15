@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.module.home.user.presenter.UserPresenter;
 import com.qsd.jmwh.module.home.user.presenter.UserViewer;
-import com.yu.common.base.BaseFragment;
+import com.qsd.jmwh.base.BaseFragment;
 import com.yu.common.mvp.PresenterLifeCycle;
 
 /**

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="31dp"
         android:text="你是..."
-        android:textColor="@color/color_333333"
+        android:textColor="@color/color_2A2A2A"
         android:textSize="18sp"
         android:textStyle="bold"/>
 
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="男士"
-                android:textColor="@color/color_333333"
+                android:textColor="@color/color_2A2A2A"
                 android:textSize="15sp"/>
 
 
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="女士"
-                android:textColor="@color/color_333333"
+                android:textColor="@color/color_2A2A2A"
                 android:textSize="15sp"/>
 
 

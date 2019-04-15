@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.qsd.jmwh.R;
+import com.qsd.jmwh.base.BaseBarFragment;
 import com.qsd.jmwh.module.home.integrated.presenter.IntegratedRadioPresenter;
 import com.qsd.jmwh.module.home.integrated.presenter.IntegratedRadioViewer;
-import com.yu.common.base.BaseFragment;
 import com.yu.common.mvp.PresenterLifeCycle;
 
 /**
@@ -14,12 +14,15 @@ import com.yu.common.mvp.PresenterLifeCycle;
  * @date 2018/6/12
  */
 
-public class IntegratedRadioFragment extends BaseFragment implements IntegratedRadioViewer {
+public class IntegratedRadioFragment extends BaseBarFragment implements IntegratedRadioViewer {
 
     @PresenterLifeCycle
     IntegratedRadioPresenter mPresenter = new IntegratedRadioPresenter(this);
 
-
+    @Override
+    protected int getActionBarLayoutId() {
+        return R.layout.rang_bar_layout;
+    }
 
     @Override
     protected int getContentViewId() {

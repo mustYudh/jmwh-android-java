@@ -25,11 +25,7 @@ import com.yu.common.R;
 import com.yu.common.navigation.StatusBarUtils;
 
 
-/**
- * Created by chenwei on 2017/6/16.
- * 1. 通过PopupCollector实现BaseActivity对Dialog的管理
- * 2. 实现默认动画
- */
+
 public abstract class BaseDialog extends Dialog {
 
   private Activity activity;

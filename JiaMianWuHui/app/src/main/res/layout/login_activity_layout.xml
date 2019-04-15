@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
     <com.qsd.jmwh.view.NormaFormItemVIew
+        android:id="@+id/account"
         android:layout_marginTop="30dp"
         app:show_bottom_line="false"
         app:left_text="登录账号"
@@ -17,8 +18,8 @@
 
 
     <com.qsd.jmwh.view.NormaFormItemVIew
+        android:id="@+id/password"
         app:left_text="登录密码"
-        app:show_bottom_line="false"
         app:content_hint="请输入收到的验证码"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

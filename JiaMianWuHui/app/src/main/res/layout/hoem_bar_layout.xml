@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="48dp">
+
+
+
+    <TextView
+        android:gravity="center"
+        android:textColor="@color/app_main_bg_color"
+        android:text="附近"
+        android:id="@+id/back"
+        android:paddingLeft="20dp"
+        android:paddingRight="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+    </TextView>
+
+
+
+
+    <LinearLayout
+        android:layout_marginBottom="7dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/shape_circle_header_bg"
+        android:maxWidth="195dp"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+        <EditText
+            android:textColor="@color/color_2A2A2A"
+            android:gravity="center"
+            android:id="@+id/edit"
+            android:textSize="14sp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:background="@android:color/transparent"
+            android:textColorHint="@color/color_CCCCCC"
+            android:hint="搜索女士"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+
+    </LinearLayout>
+
+
+
+    <com.yu.common.ui.DelayClickTextView
+        android:textColor="@color/color_F43A50"
+        android:textSize="16sp"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:text="女士列表"
+        android:id="@+id/right_menu"
+        android:paddingRight="15dp"
+        android:paddingLeft="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

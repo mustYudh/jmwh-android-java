@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 
+import com.yu.common.launche.LauncherHelper;
+
 public abstract class BasePresenter<T extends Viewer> implements Presenter {
 
   protected T viewer;
@@ -31,6 +33,9 @@ public abstract class BasePresenter<T extends Viewer> implements Presenter {
     mHandler.postDelayed(runnable, 0);
   }
 
+  public LauncherHelper getLauncherHelper() {
+    return LauncherHelper.from(getActivity());
+  }
   public Activity getActivity() {
     if (getViewer() != null) {
       return getViewer().getActivity();

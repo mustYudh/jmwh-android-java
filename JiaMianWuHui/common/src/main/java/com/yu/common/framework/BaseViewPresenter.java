@@ -1,6 +1,7 @@
 package com.yu.common.framework;
 
 import android.view.View;
+
 import com.yu.common.mvp.BasePresenter;
 import com.yu.common.mvp.Viewer;
 
@@ -26,5 +27,7 @@ public abstract class BaseViewPresenter<T extends Viewer> extends BasePresenter<
     @Override public void willDestroy() {
 
     }
+
+
 
 }

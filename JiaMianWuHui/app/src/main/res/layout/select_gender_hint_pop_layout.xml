@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <View
         android:id="@+id/base_shadow"
@@ -24,21 +24,22 @@
         >
 
         <TextView
+            android:id="@+id/title"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/color_333333"
+            android:textColor="@color/color_2A2A2A"
             android:layout_marginTop="24dp"
             android:text="提示"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:id="@+id/content"
             android:gravity="center"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="8dp"
             android:textSize="14sp"
-            android:text="注册之后不能修改性别，并且，你不\n能与相同性别的用户交流。"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         
@@ -60,6 +61,7 @@
             android:layout_height="wrap_content"/>
 
         <View
+            android:id="@+id/divider"
             android:background="@color/color_DDDDDD"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"/>

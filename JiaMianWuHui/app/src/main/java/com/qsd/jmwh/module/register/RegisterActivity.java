@@ -3,11 +3,11 @@ package com.qsd.jmwh.module.register;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
+import com.qsd.jmwh.module.register.bean.UserInfo;
 import com.qsd.jmwh.module.register.presenter.RegisterPresenter;
 import com.qsd.jmwh.module.register.presenter.RegisterViewer;
 import com.qsd.jmwh.utils.countdown.RxCountDown;
@@ -23,6 +23,7 @@ public class RegisterActivity extends BaseBarActivity implements RegisterViewer,
     private NormaFormItemVIew mSendVerCode;
     private NormaFormItemVIew phoneNum;
     private NormaFormItemVIew password;
+    private RxCountDown countDown;
 
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
@@ -46,18 +47,18 @@ public class RegisterActivity extends BaseBarActivity implements RegisterViewer,
     private void initListener() {
         bindView(R.id.next, this);
         mSendVerCode.setRightButtonListener(v -> {
-            Log.e("=====>", phoneNum.getEditText());
             if (TextUtils.isEmpty(phoneNum.getEditText())) {
                 ToastUtils.show("手机号输入不能为空");
+            } else if (!phoneNum.getEditText().startsWith("1") || phoneNum.getEditText().length() != 11) {
+                ToastUtils.show("检查手机号输入是否正确");
             } else {
-                RxCountDown countDown = new RxCountDown(60);
-                mPresenter.sendVerCode( phoneNum.getEditText(),countDown);
+                countDown = new RxCountDown(60);
+                mPresenter.sendVerCode(phoneNum.getEditText(), countDown);
                 countDown.setCountDownTimeListener(new RxCountDownAdapter() {
 
                     @Override
                     public void onStart() {
                         super.onStart();
-                        Log.e("=====>", "start");
                         mSendVerCode.setRightButtonEnable(false);
                         mSendVerCode.setRightHint("60S");
                     }
@@ -65,7 +66,6 @@ public class RegisterActivity extends BaseBarActivity implements RegisterViewer,
                     @Override
                     public void onNext(Integer time) {
                         super.onNext(time);
-                        Log.e("=====>", time + "onNext");
                         if (time == 0) {
                             mSendVerCode.setRightButtonEnable(true);
                             mSendVerCode.setRightHint("发送验证码");
@@ -92,6 +92,14 @@ public class RegisterActivity extends BaseBarActivity implements RegisterViewer,
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (countDown != null) {
+            countDown.stopCoutdown();
+        }
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.next:
@@ -102,8 +110,8 @@ public class RegisterActivity extends BaseBarActivity implements RegisterViewer,
 
 
     @Override
-    public void registerSuccess() {
-        getLaunchHelper().startActivity(SelectGenderActivity.class);
+    public void registerSuccess(UserInfo registerBean) {
+        getLaunchHelper().startActivity(SelectGenderActivity.getIntent(getActivity(),registerBean.lUserId));
         finish();
     }
 }

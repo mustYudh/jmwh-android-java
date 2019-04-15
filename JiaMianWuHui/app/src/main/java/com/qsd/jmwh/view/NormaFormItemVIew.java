@@ -22,7 +22,8 @@ public class NormaFormItemVIew extends LinearLayout {
     private TextView rightBtn;
     private EditText mEdit;
     private String mRightBtnText;
-    private int textLength;
+    private String textLength;
+    private TextView content;
 
     public NormaFormItemVIew(Context context) {
         super(context, null);
@@ -44,13 +45,14 @@ public class NormaFormItemVIew extends LinearLayout {
         View bottomLine = findViewById(R.id.bottom_line);
         TextView title = findViewById(R.id.title);
         mEdit = findViewById(R.id.edit);
-        TextView content = findViewById(R.id.content);
+        content = findViewById(R.id.content);
         rightBtn = findViewById(R.id.right_btn);
         String hint = typedArray.getString(R.styleable.NormaFormItemVIew_content_hint);
         String titleText = typedArray.getString(R.styleable.NormaFormItemVIew_left_text);
         String text = typedArray.getString(R.styleable.NormaFormItemVIew_content_text);
+        int hintColor = typedArray.getColor(R.styleable.NormaFormItemVIew_hint_color, getResources().getColor(R.color.color_999999));
         String inputType = typedArray.getString(R.styleable.NormaFormItemVIew_input_type);
-        textLength = typedArray.getIndex(R.styleable.NormaFormItemVIew_length);
+        textLength = typedArray.getString(R.styleable.NormaFormItemVIew_length);
         if (!TextUtils.isEmpty(inputType)) {
             if (inputType.equals("password")) {
                 mEdit.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);
@@ -60,6 +62,8 @@ public class NormaFormItemVIew extends LinearLayout {
                 mEdit.setInputType(InputType.TYPE_CLASS_TEXT);
             }
         }
+        mEdit.setHintTextColor(hintColor);
+        content.setHintTextColor(hintColor);
         mRightBtnText = typedArray.getString(R.styleable.NormaFormItemVIew_right_button_hint);
         boolean showTopLine = typedArray.getBoolean(R.styleable.NormaFormItemVIew_show_top_line, true);
         boolean showBottomLine =
@@ -73,8 +77,8 @@ public class NormaFormItemVIew extends LinearLayout {
         if (!TextUtils.isEmpty(hint)) {
             mEdit.setHint(hint);
             mEdit.setVisibility(VISIBLE);
-        } else {
-            mEdit.setVisibility(GONE);
+            content.setHint(hint);
+            content.setTextColor(hintColor);
         }
         if (onlyRead) {
             mEdit.setVisibility(GONE);
@@ -92,27 +96,30 @@ public class NormaFormItemVIew extends LinearLayout {
             rightBtn.setText(mRightBtnText);
             rightBtn.setVisibility(VISIBLE);
         }
-        mEdit.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        if (textLength != null) {
+            mEdit.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String str = s.toString();
-                if (str.length() > textLength) {
-                    mEdit.setText(str.substring(0, textLength));
-                    mEdit.requestFocus();
-                    mEdit.setSelection(mEdit.getText().length());
                 }
-            }
 
-            @Override
-            public void afterTextChanged(Editable s) {
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    String str = s.toString();
+                    if (str.length() > Integer.parseInt(textLength)) {
+                        mEdit.setText(str.substring(0, Integer.parseInt(textLength)));
+                        mEdit.requestFocus();
+                        mEdit.setSelection(mEdit.getText().length());
+                    }
+                }
 
-            }
-        });
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+        }
+
 
     }
 
@@ -120,6 +127,16 @@ public class NormaFormItemVIew extends LinearLayout {
     public void setRightHint(String hint) {
         if (!TextUtils.isEmpty(hint)) {
             rightBtn.setText(hint);
+        }
+    }
+
+    public void setOnClickSeletedItem(View.OnClickListener onClickSeletedItem) {
+        content.setOnClickListener(onClickSeletedItem);
+    }
+
+    public void setContentText(CharSequence contentText) {
+        if (!TextUtils.isEmpty(contentText)) {
+            content.setText(contentText);
         }
     }
 
