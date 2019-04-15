@@ -11,7 +11,6 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.qsd.jmwh.R;
-import com.yu.common.base.BaseFragment;
 import com.yu.common.utils.BarUtils;
 
 public abstract class BaseBarFragment extends BaseFragment {

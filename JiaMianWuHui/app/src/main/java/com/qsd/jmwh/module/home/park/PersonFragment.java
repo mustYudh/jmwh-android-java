@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.qsd.jmwh.R;
-import com.yu.common.base.BaseFragment;
+import com.qsd.jmwh.base.BaseFragment;
 
 public class PersonFragment extends BaseFragment {
     @Override
