@@ -62,6 +62,10 @@ public abstract class BaseBarActivity extends BaseActivity {
         }
     }
 
+    public void showBack(boolean back) {
+        bindView(R.id.back,back);
+    }
+
     public void setRightMenu(CharSequence text, View.OnClickListener onClickListener) {
         if (!TextUtils.isEmpty(text)) {
             TextView right = bindView(R.id.right_menu, onClickListener);

@@ -3,10 +3,12 @@ package com.qsd.jmwh.base;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.qsd.jmwh.R;
 import com.yu.common.base.BaseFragment;
@@ -63,5 +65,18 @@ public abstract class BaseBarFragment extends BaseFragment {
 
     public void setTitle(CharSequence charSequence) {
         bindText(R.id.title, charSequence);
+    }
+
+    public void showBack(boolean back) {
+        bindView(R.id.back,back);
+    }
+
+
+    public void setRightMenu(CharSequence text, View.OnClickListener onClickListener) {
+        if (!TextUtils.isEmpty(text)) {
+            TextView right = bindView(R.id.right_menu, onClickListener);
+            right.setText(text);
+            right.setVisibility(View.VISIBLE);
+        }
     }
 }

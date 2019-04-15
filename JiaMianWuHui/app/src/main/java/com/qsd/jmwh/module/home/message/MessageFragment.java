@@ -2,11 +2,12 @@ package com.qsd.jmwh.module.home.message;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.qsd.jmwh.R;
+import com.qsd.jmwh.base.BaseBarFragment;
 import com.qsd.jmwh.module.home.message.presenter.MessagePresenter;
 import com.qsd.jmwh.module.home.message.presenter.MessageViewer;
-import com.yu.common.base.BaseFragment;
 import com.yu.common.mvp.PresenterLifeCycle;
 
 /**
@@ -14,7 +15,7 @@ import com.yu.common.mvp.PresenterLifeCycle;
  * @date 2018/6/12
  */
 
-public class MessageFragment extends BaseFragment implements MessageViewer {
+public class MessageFragment extends BaseBarFragment implements MessageViewer {
 
     @PresenterLifeCycle
     MessagePresenter mPresenter = new MessagePresenter(this);
@@ -33,6 +34,13 @@ public class MessageFragment extends BaseFragment implements MessageViewer {
 
     @Override
     protected void loadData() {
+        setTitle("消息中心");
+        showBack(false);
+        setRightMenu("推送设置", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
     }
 }

@@ -38,8 +38,8 @@ public class HomeActivity extends BaseActivity {
         navigationView = findViewById(R.id.bottom_navigation_view);
         List<TabItem> items = new ArrayList<>();
         items.add(new TabView(createTabView("假面舞会", R.drawable.tab_01), new ParkFragment()));
-        items.add(new TabView(createTabView("消息中心", R.drawable.tab_02), new MessageFragment()));
         items.add(new TabView(createTabView("约会电台", R.drawable.tab_03), new IntegratedRadioFragment()));
+        items.add(new TabView(createTabView("消息中心", R.drawable.tab_02), new MessageFragment()));
         items.add(new TabView(createTabView("个人中心", R.drawable.tab_04), new UserFragment()));
         navigationView.initControl(this).setPagerView(items, 0);
         navigationView.getNavgation().setTabControlHeight(60);
@@ -60,7 +60,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if (pressHandle.handlePress(KeyEvent.KEYCODE_BACK)) {
+        if (!pressHandle.handlePress(KeyEvent.KEYCODE_BACK)) {
             super.onBackPressed();
         }
 

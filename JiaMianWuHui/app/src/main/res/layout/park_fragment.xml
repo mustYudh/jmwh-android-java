@@ -3,14 +3,35 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     >
 
-
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
+        app:tabIndicatorColor="@color/app_main_bg_color"
+        app:tabBackground="@null"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        app:tabIndicatorHeight="3dp"
+        android:layout_width="220dp"
+        app:tabPaddingBottom="-4dp"
+        android:layout_height="45dp"/>
 
     <TextView
         android:gravity="center"
-        android:text="假面舞会"
+        android:background="@color/app_main_bg_color"
+        android:text="已经隐藏28位没有照片的女士"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+
 
 </LinearLayout>
