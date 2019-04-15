@@ -173,6 +173,8 @@ dependencies {
     implementation project(path: ':http-lib')
     implementation project(path: ':bottom_tab')
     implementation project(':crop_img')
+    implementation project(':share_auth')
+
 
     //noinspection GradleCompatible
     implementation "com.android.support:appcompat-v7:${V7_APPCOMPAT_VERSION}"

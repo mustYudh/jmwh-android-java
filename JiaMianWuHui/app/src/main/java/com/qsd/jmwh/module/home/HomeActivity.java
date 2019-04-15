@@ -15,7 +15,7 @@ import com.qsd.jmwh.module.home.integrated.IntegratedRadioFragment;
 import com.qsd.jmwh.module.home.message.MessageFragment;
 import com.qsd.jmwh.module.home.park.ParkFragment;
 import com.qsd.jmwh.module.home.user.UserFragment;
-import com.yu.common.base.BaseActivity;
+import com.qsd.jmwh.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;

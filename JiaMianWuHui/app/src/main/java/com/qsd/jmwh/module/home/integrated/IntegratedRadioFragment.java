@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.module.home.integrated.presenter.IntegratedRadioPresenter;
 import com.qsd.jmwh.module.home.integrated.presenter.IntegratedRadioViewer;
-import com.yu.common.base.BaseFragment;
+import com.qsd.jmwh.base.BaseFragment;
 import com.yu.common.mvp.PresenterLifeCycle;
 
 /**

@@ -11,7 +11,7 @@ import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.HomeActivity;
 import com.qsd.jmwh.module.login.LoginActivity;
 import com.qsd.jmwh.module.register.RegisterActivity;
-import com.yu.common.base.BaseActivity;
+import com.qsd.jmwh.base.BaseActivity;
 
 public class SplashActivity extends BaseActivity implements View.OnClickListener {
     private static int REQUEST_CODE = 0x123;
