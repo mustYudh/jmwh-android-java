@@ -7,7 +7,6 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.qsd.jmwh.R;
-import com.yu.common.base.BaseActivity;
 import com.yu.common.utils.BarUtils;
 
 public abstract class BaseBarActivity extends BaseActivity {
