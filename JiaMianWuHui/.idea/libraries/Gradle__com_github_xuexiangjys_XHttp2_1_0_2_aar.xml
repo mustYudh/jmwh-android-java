@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.xuexiangjys:XHttp2:1.0.2@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/XHttp2-1.0.2.aar/ab4ed60a2e4fcc75a316f3f2b0cc2edf/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/XHttp2-1.0.2.aar/ab4ed60a2e4fcc75a316f3f2b0cc2edf/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.xuexiangjys/XHttp2/1.0.2/1fa6a59b9ac219f359c009e6ddc0c23e3d85c0b7/XHttp2-1.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
