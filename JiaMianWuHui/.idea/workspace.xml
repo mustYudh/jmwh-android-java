@@ -6,42 +6,44 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="===" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="719ae5f2-2279-4a74-a0ca-7a39f055c4af" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/jniLibs/arm64-v8a/libsecurityenv.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/jniLibs/armeabi-v7a/libsecurityenv.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/jniLibs/armeabi/libsecurityenv.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/jniLibs/x86/libsecurityenv.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/libs/SecurityEnvSDK-release-1.1.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/libs/umeng-share-QQ-simplify-6.9.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/libs/umeng-share-core-6.9.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/libs/umeng-share-sina-simplify-6.9.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/libs/umeng-share-wechat-full-6.9.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/libs/umeng-shareboard-widget-6.9.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/libs/umeng-sharetool-6.9.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/libs/utdid4all-1.1.5.3_proguard.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/libs/wechat-sdk-android-without-mta-5.1.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/wxapi/WXEntryActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/test/TextActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/test_activity.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/share/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/share/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/share/proguard-rules.pro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/share/src/androidTest/java/com/yu/share/ExampleInstrumentedTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/share/src/main/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/share/src/main/java/com/yu/share/wxapi/WXEntryActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/share/src/main/res/values/strings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/share/src/test/java/com/yu/share/ExampleUnitTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/jniLibs/arm64-v8a/libsecurityenv.so" beforeDir="false" afterPath="$PROJECT_DIR$/share/src/jniLibs/arm64-v8a/libsecurityenv.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/jniLibs/armeabi-v7a/libsecurityenv.so" beforeDir="false" afterPath="$PROJECT_DIR$/share/src/jniLibs/armeabi-v7a/libsecurityenv.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/jniLibs/armeabi/libsecurityenv.so" beforeDir="false" afterPath="$PROJECT_DIR$/share/src/jniLibs/armeabi/libsecurityenv.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/jniLibs/x86/libsecurityenv.so" beforeDir="false" afterPath="$PROJECT_DIR$/share/src/jniLibs/x86/libsecurityenv.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/libs/SecurityEnvSDK-release-1.1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/share/src/libs/SecurityEnvSDK-release-1.1.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/libs/umeng-share-QQ-simplify-6.9.4.jar" beforeDir="false" afterPath="$PROJECT_DIR$/share/src/libs/umeng-share-QQ-simplify-6.9.4.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/libs/umeng-share-core-6.9.4.jar" beforeDir="false" afterPath="$PROJECT_DIR$/share/src/libs/umeng-share-core-6.9.4.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/libs/umeng-share-sina-simplify-6.9.4.jar" beforeDir="false" afterPath="$PROJECT_DIR$/share/src/libs/umeng-share-sina-simplify-6.9.4.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/libs/umeng-share-wechat-full-6.9.4.jar" beforeDir="false" afterPath="$PROJECT_DIR$/share/src/libs/umeng-share-wechat-full-6.9.4.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/libs/umeng-shareboard-widget-6.9.4.jar" beforeDir="false" afterPath="$PROJECT_DIR$/share/src/libs/umeng-shareboard-widget-6.9.4.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/libs/umeng-sharetool-6.9.4.jar" beforeDir="false" afterPath="$PROJECT_DIR$/share/src/libs/umeng-sharetool-6.9.4.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/libs/utdid4all-1.1.5.3_proguard.jar" beforeDir="false" afterPath="$PROJECT_DIR$/share/src/libs/utdid4all-1.1.5.3_proguard.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/libs/wechat-sdk-android-without-mta-5.1.4.jar" beforeDir="false" afterPath="$PROJECT_DIR$/share/src/libs/wechat-sdk-android-without-mta-5.1.4.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/APP.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/APP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/sdk/ShareAuthSDK.java" beforeDir="false" afterPath="$PROJECT_DIR$/share/src/main/java/com/yu/share/ShareAuthSDK.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/wxapi/WXEntryActivity.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/share_auth/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/share_auth/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/share_auth/proguard-rules.pro" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/share_auth/src/androidTest/java/com/yu/share_auth/ExampleInstrumentedTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/share_auth/src/main/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/share_auth/src/main/java/com/yu/share_auth/ShareAuthSDK.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/sdk/ShareAuthSDK.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/share_auth/src/main/res/values/strings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/share_auth/src/test/java/com/yu/share_auth/ExampleUnitTest.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/build/classes/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -154,40 +156,40 @@
     <session id="-747579321">
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="class" value="3" />
-          <entry key="gradle" value="13" />
+          <entry key="class" value="4" />
+          <entry key="gradle" value="19" />
           <entry key="iml" value="1" />
-          <entry key="java" value="18" />
+          <entry key="java" value="25" />
           <entry key="png" value="6" />
-          <entry key="pro" value="1" />
-          <entry key="xml" value="11" />
+          <entry key="pro" value="2" />
+          <entry key="xml" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="3" />
-          <entry key="Groovy" value="13" />
+          <entry key="CLASS" value="4" />
+          <entry key="Groovy" value="19" />
           <entry key="IDEA_MODULE" value="1" />
           <entry key="Image" value="6" />
-          <entry key="JAVA" value="18" />
-          <entry key="ProGuard File" value="1" />
-          <entry key="XML" value="11" />
+          <entry key="JAVA" value="25" />
+          <entry key="ProGuard File" value="2" />
+          <entry key="XML" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="gradle" value="109" />
-          <entry key="java" value="308" />
+          <entry key="gradle" value="148" />
+          <entry key="java" value="476" />
           <entry key="pro" value="3" />
-          <entry key="xml" value="118" />
+          <entry key="xml" value="248" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Groovy" value="109" />
-          <entry key="JAVA" value="308" />
+          <entry key="Groovy" value="148" />
+          <entry key="JAVA" value="476" />
           <entry key="ProGuard File" value="3" />
-          <entry key="XML" value="118" />
+          <entry key="XML" value="248" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -202,48 +204,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="194" column="63" selection-start-line="194" selection-start-column="35" selection-end-line="194" selection-end-column="63" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="352">
+              <caret line="99" column="38" selection-start-line="99" selection-start-column="38" selection-end-line="99" selection-end-column="38" />
             </state>
           </provider>
           <provider editor-type-id="android-manifest" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/wxapi/WXEntryActivity.java">
+        <entry file="file://$PROJECT_DIR$/share/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="46" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
+            <state relative-caret-position="368">
+              <caret line="68" selection-start-line="68" selection-end-line="68" />
             </state>
           </provider>
+          <provider editor-type-id="android-manifest" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/settings.gradle">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/APP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="53" selection-start-column="53" selection-end-column="53" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/sdk/ShareAuthSDK.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+            <state relative-caret-position="576">
+              <caret line="35" column="11" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -252,10 +237,48 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/base/BaseFragment.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/base/BaseActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="51">
-              <caret line="3" column="26" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="26" />
+              <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/test/TextActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="123">
+              <caret line="25" column="63" selection-start-line="25" selection-start-column="63" selection-end-line="25" selection-end-column="63" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common/src/main/res/drawable/corners.xml">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/share/src/main/java/com/yu/share/ShareAuthSDK.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="185">
+              <caret line="22" column="63" selection-start-line="22" selection-start-column="63" selection-end-line="22" selection-end-column="63" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common/src/main/java/com/yu/common/framework/BasicActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-629">
+              <caret line="94" selection-start-line="94" selection-end-line="94" />
             </state>
           </provider>
         </entry>
@@ -269,17 +292,12 @@
         <option value="layoutResourceFile_vertical" />
         <option value="resourceFile" />
         <option value="Class" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>civ_border_color</find>
-      <find>edit</find>
-      <find>hint</find>
-      <find>content</find>
-      <find>edit_user_data_activity</find>
-      <find>to_register</find>
       <find>activity_</find>
       <find>content_hint</find>
       <find>glideVersion</find>
@@ -304,6 +322,12 @@
       <find>PACKAGE_NAME</find>
       <find>applicationVariants</find>
       <find>instrumentTest</find>
+      <find>WRITE_EXTERNAL_STORAGE</find>
+      <find>UMConfigure</find>
+      <find>UMConfigure.init</find>
+      <find>5c822ba120365716ce0014a2</find>
+      <find>UMENG_CHANNEL</find>
+      <find>filter</find>
     </findStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -318,13 +342,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/bottom_tab/src/main/res/layout/bottom_navigation_control_view.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/login/presenter/LoginPresenter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/select_gender_hint_pop_layout.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/dialog/SelectGenderHintPop.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/SelectGenderActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/userinfo/EdituserDataActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/splash_activity_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/shape_circle_header_bg.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/attrs.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/edit_register_code_activity_layout.xml" />
@@ -360,23 +377,30 @@
         <option value="$PROJECT_DIR$/common/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/base/BaseActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/base/BaseFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/APP.java" />
         <option value="$PROJECT_DIR$/UMLibrary/build.gradle" />
         <option value="$PROJECT_DIR$/share_auth/src/main/java/com/yu/share_auth/ShareAuthSDK.java" />
         <option value="$PROJECT_DIR$/share_auth/build.gradle" />
         <option value="$PROJECT_DIR$/share_auth/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/settings.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/wxapi/WXEntryActivity.java" />
+        <option value="$PROJECT_DIR$/settings.gradle" />
+        <option value="$PROJECT_DIR$/share/src/main/java/com/yu/share/wxapi/WXEntryActivity.java" />
+        <option value="$PROJECT_DIR$/share/proguard-rules.pro" />
+        <option value="$PROJECT_DIR$/share/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/APP.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/test_activity.xml" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/share/build.gradle" />
+        <option value="$PROJECT_DIR$/share/src/main/java/com/yu/share/ShareAuthSDK.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/test/TextActivity.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="727" />
-    <option name="y" value="23" />
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="x" value="186" />
+    <option name="y" value="1080" />
     <option name="width" value="1440" />
-    <option name="height" value="877" />
+    <option name="height" value="900" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -410,13 +434,6 @@
               <item name="JiaMianWuHui" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="libs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JiaMianWuHui" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JiaMianWuHui" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -439,12 +456,7 @@
             <path>
               <item name="JiaMianWuHui" type="b2602c69:ProjectViewProjectNode" />
               <item name="JiaMianWuHui" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jmwh" type="462c0819:PsiDirectoryNode" />
-              <item name="wxapi" type="462c0819:PsiDirectoryNode" />
+              <item name="share" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -453,7 +465,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="DEBUGGABLE_DEVICE" value="cmdc-m653-13fac8aa" />
+    <property name="DEBUGGABLE_DEVICE" value="xiaomi-redmi_note_4x-34a821e10604" />
     <property name="DEBUGGABLE_PROCESS" value="com.qsd.jmwh" />
     <property name="DEBUGGER_ID" value="Auto" />
     <property name="ExportApk.ApkPath" value="$USER_HOME$/Desktop/jmwh" />
@@ -461,7 +473,7 @@
     <property name="ExportApk.SignV1" value="true" />
     <property name="ExportApk.SignV2" value="true" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="Basefr&#9;FILE&#9;file:///Users/yudneghao/Documents/jmwh/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/base/BaseFragment.java&#10;Baseac&#9;FILE&#9;file:///Users/yudneghao/Documents/jmwh/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/base/BaseBarActivity.java&#10;APP&#9;PSI&#9;JAVA://com.qsd.jmwh.APP&#10;Edit&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/userinfo/EditUserDataActivity.java&#10;Home&#9;PSI&#9;JAVA://com.qsd.jmwh.module.home.HomeActivity&#10;Basebar&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/base/BaseBarActivity.java&#10;MediaGridFragment&#9;PSI&#9;JAVA://cn.finalteam.rxgalleryfinal.ui.fragment.MediaGridFragment&#10;Login&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/login/LoginActivity.java&#10;Logi&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/login/LoginActivity.java&#10;Splas&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/splash/SplashActivity.java&#10;Reg&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/RegisterActivity.java&#10;Spla&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/splash/SplashActivity.java&#10;Sele&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/SelectGenderActivity.java&#10;User&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/data/UserProfile.java&#10;Regis&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/RegisterActivity.java&#10;Regi&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/RegisterActivity.java&#10;Cust&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/http/interceptor/CustomDynamicInterceptor.java&#10;registerac&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/RegisterActivity.java&#10;Homeac&#9;PSI&#9;JAVA://com.qsd.jmwh.module.home.HomeActivity&#10;S&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/presenter/SelectGenderPresenter.java&#10;Selec&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/presenter/SelectGenderPresenter.java&#10;Regist&#9;PSI&#9;JAVA://com.qsd.jmwh.module.register.RegisterActivity&#10;Apis&#9;FILE&#9;file:///Users/yudneghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/http/ApiServices.java&#10;App&#9;FILE&#9;file:///Users/yudneghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/APP.java&#10;CustomDynamicInterceptor&#9;PSI&#9;JAVA://com.qsd.jmwh.http.interceptor.CustomDynamicInterceptor&#10;Json&#9;FILE&#9;file:///Users/yudneghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/utils/JSONUtils.java&#10;Splashac&#9;PSI&#9;JAVA://com.qsd.jmwh.module.splash.SplashActivity&#10;Spls&#9;PSI&#9;JAVA://com.sun.java.swing.ui.SplashScreen" />
+    <property name="SearchEverywhereHistoryKey" value="Te&#9;FILE&#9;file:///Users/yudneghao/Documents/jmwh/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/test/TextActivity.java&#10;Basefr&#9;FILE&#9;file:///Users/yudneghao/Documents/jmwh/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/base/BaseFragment.java&#10;Baseac&#9;FILE&#9;file:///Users/yudneghao/Documents/jmwh/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/base/BaseBarActivity.java&#10;APP&#9;PSI&#9;JAVA://com.qsd.jmwh.APP&#10;Edit&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/userinfo/EditUserDataActivity.java&#10;Home&#9;PSI&#9;JAVA://com.qsd.jmwh.module.home.HomeActivity&#10;Basebar&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/base/BaseBarActivity.java&#10;MediaGridFragment&#9;PSI&#9;JAVA://cn.finalteam.rxgalleryfinal.ui.fragment.MediaGridFragment&#10;Login&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/login/LoginActivity.java&#10;Logi&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/login/LoginActivity.java&#10;Splas&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/splash/SplashActivity.java&#10;Reg&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/RegisterActivity.java&#10;Spla&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/splash/SplashActivity.java&#10;Sele&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/SelectGenderActivity.java&#10;User&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/data/UserProfile.java&#10;Regis&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/RegisterActivity.java&#10;Regi&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/RegisterActivity.java&#10;Cust&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/http/interceptor/CustomDynamicInterceptor.java&#10;registerac&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/RegisterActivity.java&#10;Homeac&#9;PSI&#9;JAVA://com.qsd.jmwh.module.home.HomeActivity&#10;S&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/presenter/SelectGenderPresenter.java&#10;Selec&#9;FILE&#9;file:///Users/yudenghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/module/register/presenter/SelectGenderPresenter.java&#10;Regist&#9;PSI&#9;JAVA://com.qsd.jmwh.module.register.RegisterActivity&#10;Apis&#9;FILE&#9;file:///Users/yudneghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/http/ApiServices.java&#10;App&#9;FILE&#9;file:///Users/yudneghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/APP.java&#10;CustomDynamicInterceptor&#9;PSI&#9;JAVA://com.qsd.jmwh.http.interceptor.CustomDynamicInterceptor&#10;Json&#9;FILE&#9;file:///Users/yudneghao/jmwh-android-java/JiaMianWuHui/app/src/main/java/com/qsd/jmwh/utils/JSONUtils.java&#10;Splashac&#9;PSI&#9;JAVA://com.qsd.jmwh.module.splash.SplashActivity&#10;Spls&#9;PSI&#9;JAVA://com.sun.java.swing.ui.SplashScreen" />
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="android.recentlyUsedThemes" value="Base.Theme.AppCompat.Light.DarkActionBar" />
@@ -470,10 +482,14 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/share" />
+      <recent name="$PROJECT_DIR$/app" />
       <recent name="$PROJECT_DIR$/app/src/main" />
       <recent name="$PROJECT_DIR$/app/src" />
       <recent name="$PROJECT_DIR$/share_auth/src" />
-      <recent name="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.yu.share" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.qsd.jmwh.utils" />
@@ -481,11 +497,11 @@
       <recent name="com.qsd.jmwh.http.subscriber" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/share/src" />
       <recent name="$PROJECT_DIR$/app/src" />
       <recent name="$PROJECT_DIR$/app/src/main" />
       <recent name="$PROJECT_DIR$/share_auth/src/jniLibs" />
       <recent name="$PROJECT_DIR$/share_auth/src/main/res" />
-      <recent name="$PROJECT_DIR$/share_auth/src/main/res/drawable" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -575,12 +591,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="38" y="23" width="1882" height="1057" extended-state="6" />
-    <editor active="true" />
+    <frame x="186" y="1080" width="1440" height="900" extended-state="0" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="1" />
-      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.4990566" visible="true" weight="0.2298913" />
+      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.4990566" visible="true" weight="0.3025751" />
       <window_info id="Structure" order="3" sideWeight="0.5009434" side_tool="true" weight="0.29576108" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info id="Build Variants" order="5" side_tool="true" />
@@ -589,13 +604,13 @@
       <window_info anchor="bottom" id="Run" order="0" />
       <window_info anchor="bottom" id="TODO" order="1" />
       <window_info anchor="bottom" id="Statistic" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.32909784" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.32876712" />
       <window_info anchor="bottom" id="Freeline" order="4" />
-      <window_info anchor="bottom" id="Logcat" order="5" weight="0.3424933" />
+      <window_info active="true" anchor="bottom" id="Logcat" order="5" visible="true" weight="0.36239102" />
       <window_info anchor="bottom" id="Terminal" order="6" weight="0.4656992" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Build" order="9" visible="true" weight="0.39019188" />
+      <window_info anchor="bottom" id="Build" order="9" weight="0.24408469" />
       <window_info anchor="bottom" id="Find" order="10" />
       <window_info anchor="bottom" id="Android Profiler" order="11" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
@@ -626,6 +641,12 @@
           <properties class="com.qsd.jmwh.data.UserProfile" method="isAppLogin" />
           <option name="timeStamp" value="8" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/test/TextActivity.java</url>
+          <line>42</line>
+          <properties method="onError" />
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-field">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/module/register/bean/EditUserInfo.java</url>
           <line>5</line>
@@ -636,66 +657,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/crop_img/src/main/res/values/gallery_strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="52" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/tab_01.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/tab_03.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/tab_04.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/home_table_layout.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="33" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="33" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/tab_02.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/imageloader/GlideImageLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-74">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/rxbus/event/ImageRadioResultEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/crop_img/src/main/java/cn/finalteam/rxgalleryfinal/bean/ImageCropBean.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -757,13 +718,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="653">
           <caret line="73" column="31" selection-start-line="73" selection-start-column="31" selection-end-line="73" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="23" column="60" selection-start-line="23" selection-start-column="60" selection-end-line="23" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1346#1347#0" expanded="true" />
+            <element signature="e#1379#1380#0" expanded="true" />
+            <element signature="e#3107#3693#0" expanded="true" />
+            <element signature="e#3692#3693#0" expanded="true" />
+            <element signature="e#3124#3125#0" expanded="true" />
+            <element signature="e#3189#3190#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -792,13 +755,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/base/BaseActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/base/BaseBarActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -824,13 +780,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-23">
           <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/APP.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -901,24 +850,6 @@
       </provider>
       <provider editor-type-id="android-manifest" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/sdk/ShareAuthSDK.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/share_auth/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -927,24 +858,10 @@
       </provider>
       <provider editor-type-id="android-manifest" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/settings.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="53" selection-start-column="53" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/share_auth/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-116">
           <caret line="2" column="9" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/wxapi/WXEntryActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="46" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
         </state>
       </provider>
     </entry>
@@ -955,10 +872,130 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/wxapi/WXEntryActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="53" selection-start-column="53" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/share/src/main/java/com/yu/share/wxapi/WXEntryActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="54" selection-start-line="8" selection-start-column="54" selection-end-line="8" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/share/src/libs/umeng-share-core-6.9.4.jar!/com/umeng/socialize/PlatformConfig.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="63" column="42" selection-start-line="63" selection-start-column="38" selection-end-line="63" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/share/proguard-rules.pro">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="30" column="31" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/share/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="68" selection-start-line="68" selection-end-line="68" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/test_activity.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="23" lean-forward="true" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/share/src/main/java/com/yu/share/ShareAuthSDK.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="22" column="63" selection-start-line="22" selection-start-column="63" selection-end-line="22" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/yu/common/framework/BasicActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-629">
+          <caret line="94" selection-start-line="94" selection-end-line="94" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="99" column="38" selection-start-line="99" selection-start-column="38" selection-end-line="99" selection-end-column="38" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="36" column="16" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="194" column="63" selection-start-line="194" selection-start-column="35" selection-end-line="194" selection-end-column="63" />
+        <state relative-caret-position="305">
+          <caret line="179" column="18" selection-start-line="179" selection-start-column="4" selection-end-line="179" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/share/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="23" lean-forward="true" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/APP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="35" column="11" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/base/BaseActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/main/res/drawable/corners.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qsd/jmwh/test/TextActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="25" column="63" selection-start-line="25" selection-start-column="63" selection-end-line="25" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
