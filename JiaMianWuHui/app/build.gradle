@@ -159,7 +159,16 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
 }
+
+
 
 repositories {
     flatDir {
@@ -173,25 +182,26 @@ dependencies {
     implementation project(path: ':http-lib')
     implementation project(path: ':bottom_tab')
     implementation project(':crop_img')
-    implementation project(':share_auth')
-
-
     //noinspection GradleCompatible
     implementation "com.android.support:appcompat-v7:${V7_APPCOMPAT_VERSION}"
     implementation "com.android.support.constraint:constraint-layout:${CONSTRAIT_SUPPORT_VERSION}"
     implementation "com.android.support:design:${DESIGIN_SUPPORT_VERSION}"
     implementation "com.android.support:recyclerview-v7:${V7_APPCOMPAT_VERSION}"
-
     //test
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.android.support:multidex:1.0.3'
-
-
-
-
-
-
+    implementation files('src/libs/SecurityEnvSDK-release-1.1.0.jar')
+    implementation files('src/libs/umeng-share-core-6.9.4.jar')
+    implementation files('src/libs/umeng-share-QQ-simplify-6.9.4.jar')
+    implementation files('src/libs/umeng-share-sina-simplify-6.9.4.jar')
+    implementation files('src/libs/umeng-share-wechat-full-6.9.4.jar')
+    implementation files('src/libs/umeng-shareboard-widget-6.9.4.jar')
+    implementation files('src/libs/umeng-sharetool-6.9.4.jar')
+    implementation files('src/libs/utdid4all-1.1.5.3_proguard.jar')
+    implementation files('src/libs/wechat-sdk-android-without-mta-5.1.4.jar')
+    api  'com.umeng.umsdk:analytics:8.0.0'
+    api  'com.umeng.umsdk:common:2.0.0'
 
 }

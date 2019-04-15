@@ -8,7 +8,7 @@ import com.xuexiang.xhttp2.XHttpSDK;
 import com.xuexiang.xhttp2.model.HttpHeaders;
 import com.yu.common.CommonInit;
 import com.yu.common.base.BaseApp;
-import com.yu.share_auth.ShareAuthSDK;
+import com.qsd.jmwh.sdk.ShareAuthSDK;
 
 public class APP extends BaseApp {
   public static final int NET_TYPE = BuildConfig.API_MODE;

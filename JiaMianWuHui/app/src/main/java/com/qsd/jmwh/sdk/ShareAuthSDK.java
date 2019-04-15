@@ -1,4 +1,4 @@
-package com.yu.share_auth;
+package com.qsd.jmwh.sdk;
 
 import android.app.Application;
 import android.content.Context;
