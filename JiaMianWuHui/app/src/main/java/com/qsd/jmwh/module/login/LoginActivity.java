@@ -38,6 +38,7 @@ public class LoginActivity extends BaseBarActivity implements LoginViewer, View.
             case R.id.login:
                 mPresenter.login(getTextResult(R.id.account), getTextResult(R.id.password));
                 break;
+                default:
         }
     }
 

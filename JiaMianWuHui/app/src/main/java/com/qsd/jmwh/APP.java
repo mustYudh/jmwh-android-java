@@ -1,7 +1,6 @@
 package com.qsd.jmwh;
 
 import com.qsd.jmwh.http.interceptor.CustomDynamicInterceptor;
-import com.qsd.jmwh.http.interceptor.CustomExpiredInterceptor;
 import com.qsd.jmwh.http.interceptor.CustomLoggingInterceptor;
 import com.xuexiang.xhttp2.XHttp;
 import com.xuexiang.xhttp2.XHttpSDK;
@@ -19,7 +18,7 @@ public class APP extends BaseApp {
     APP.instance = this;
     super.onCreate();
     CommonInit.init(this);
-    ShareAuthSDK.init(this,DEBUG);
+    ShareAuthSDK.init(this, DEBUG);
     initHttp();
   }
 
@@ -32,7 +31,7 @@ public class APP extends BaseApp {
     XHttpSDK.setBaseUrl(getBaseUrl());
     XHttpSDK.setSubUrl(getSubUrl());
     XHttpSDK.addInterceptor(new CustomDynamicInterceptor());
-    XHttpSDK.addInterceptor(new CustomExpiredInterceptor());
+    //XHttpSDK.addInterceptor(new CustomExpiredInterceptor());
     XHttp.getInstance().setTimeout(60000);
     XHttp.getInstance().setRetryCount(3);
     XHttp.getInstance().addCommonHeaders(getHttpHeaders());

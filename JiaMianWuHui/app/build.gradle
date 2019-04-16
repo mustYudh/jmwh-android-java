@@ -102,7 +102,7 @@ android {
         def proguardReacNativeRule = '../proguard-rule/proguard-rules-react-native-0.46.0.pro'
         def proguardRemoveLogRule = '../proguard-rule/proguard-rules-remove-logs.pro'
         def proguardThirdPartServiceRule = '../proguard-rule/proguard-rules-third-part-service.pro'
-        def proguardUmengSharedRule = '../proguard-rule/proguard-rules-umeng-share.pro'
+        def proguardUmengSharedRule = '../proguard-rule/proguard-rules-umeng-startShare.pro'
 
         debug {
             debuggable true

@@ -12,7 +12,7 @@ public class CustomExpiredInterceptor extends BaseExpiredInterceptor {
 
     @Override
     protected ExpiredInfo isResponseExpired(Response oldResponse, String bodyString) {
-        int code = JSONUtils.getInt(bodyString, Result.CODE, 200);
+        int code = JSONUtils.getInt(bodyString, Result.CODE, 0);
         ExpiredInfo expiredInfo = new ExpiredInfo(code);
         switch (code) {
             case 20001:

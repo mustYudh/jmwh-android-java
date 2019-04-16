@@ -67,6 +67,7 @@
 
 
             <com.yu.common.ui.DelayClickImageView
+                android:id="@+id/wechat_login"
                 android:layout_marginRight="54dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -75,6 +76,7 @@
                 />
 
             <com.yu.common.ui.DelayClickImageView
+                android:id="@+id/qq_login"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:scaleType="centerCrop"

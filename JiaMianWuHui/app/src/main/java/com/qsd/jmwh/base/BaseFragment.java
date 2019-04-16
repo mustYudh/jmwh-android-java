@@ -2,7 +2,9 @@ package com.qsd.jmwh.base;
 
 import android.view.View;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.socialize.UMShareAPI;
 import com.yu.common.framework.BasicFragment;
+import java.util.Objects;
 
 public abstract class BaseFragment extends BasicFragment {
     @Override
@@ -18,5 +20,10 @@ public abstract class BaseFragment extends BasicFragment {
     @Override public void onPause() {
         super.onPause();
         MobclickAgent.onPause(getActivity());
+    }
+
+    @Override public void onDestroy() {
+        super.onDestroy();
+        UMShareAPI.get(Objects.requireNonNull(getActivity())).release();
     }
 }

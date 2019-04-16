@@ -72,4 +72,5 @@ public abstract class BaseBarActivity extends BaseActivity {
             right.setVisibility(View.VISIBLE);
         }
     }
+
 }
