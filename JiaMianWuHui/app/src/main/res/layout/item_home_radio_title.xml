@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="94dp"
-              android:gravity="center_vertical"
-    >
-
+              android:layout_height="wrap_content"
+              android:layout_marginTop="10dp"
+              android:layout_marginBottom="10dp"
+              android:gravity="center_vertical">
 
     <com.qsd.jmwh.view.CircleImageView
+        android:id="@+id/iv_headimg"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:scaleType="centerCrop"
-        android:id="@+id/iv_headimg"
         android:layout_marginLeft="10dp"
+        android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher"/>
 
 
@@ -30,6 +30,7 @@
 
             <TextView
                 android:includeFontPadding="false"
+                android:id="@+id/tv_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="曾经是好女孩"
@@ -38,50 +39,21 @@
                 />
 
             <ImageView
-                android:layout_width="16dp"
+                android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_marginLeft="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/pic_home_photo"/>
+                android:src="@drawable/woman"/>
 
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="6"
-                android:textColor="#ff8a4efc"
-                android:textSize="12sp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="付费相册"
-                android:textColor="#ffff7724"
-                android:textSize="12sp"
-                />
 
         </LinearLayout>
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:ellipsize="end"
-            android:includeFontPadding="false"
-            android:singleLine="true"
-            android:text="杭州市 · 前台 · 21岁 · 388m"
-            android:textColor="#ff666666"
-            android:textSize="12sp"
-            />
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -99,12 +71,15 @@
                 />
 
             <TextView
-                android:layout_width="49dp"
-                android:layout_height="17dp"
+                android:id="@+id/tv_ctime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="6dp"
+                android:ellipsize="end"
                 android:includeFontPadding="false"
-                android:text="当前在线"
-                android:textColor="#ff8a4efc"
+                android:singleLine="true"
+                android:text="发布于 2019.3.29 14:28"
+                android:textColor="#ff666666"
                 android:textSize="12sp"
                 />
         </LinearLayout>
@@ -113,10 +88,10 @@
     </LinearLayout>
 
     <ImageView
-        android:layout_width="15dp"
-        android:layout_height="14dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="18dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/collect_select"/>
+        android:src="@drawable/iv_more"/>
 </LinearLayout>
