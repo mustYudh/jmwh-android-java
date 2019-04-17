@@ -12,6 +12,10 @@
       android:layout_height="match_parent"
       >
   </android.support.v7.widget.RecyclerView>
+  <View
+      android:background="@color/color_EEEEEE"
+      android:layout_width="0.5dp"
+      android:layout_height="match_parent"/>
 
   <android.support.v7.widget.RecyclerView
       android:id="@+id/city"

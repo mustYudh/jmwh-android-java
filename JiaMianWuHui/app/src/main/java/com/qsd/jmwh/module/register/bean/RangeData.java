@@ -16,5 +16,6 @@ public class RangeData implements Serializable {
     public String sName;
     public int nStatus;
     public int nLevel;
+    public boolean selected;
   }
 }
