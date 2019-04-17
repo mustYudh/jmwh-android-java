@@ -54,7 +54,7 @@ public class RangeItemPop extends BasePopupWindow {
         for (String data : sDateProList) {
             ProjectBean projectBean = new ProjectBean();
             projectBean.name = data;
-            projectBean.selected = true;
+            projectBean.selected = false;
             datas.add(projectBean);
         }
         RecyclerView recyclerView = bindView(R.id.list_data);
