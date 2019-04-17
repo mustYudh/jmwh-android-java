@@ -3,8 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<TextView
-    android:text="列表页"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_person"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

@@ -1,10 +1,12 @@
-package com.qsd.jmwh.module.home.park;
+package com.qsd.jmwh.module.home.park.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-class HomeParkPageAdapter extends FragmentStatePagerAdapter {
+import com.qsd.jmwh.module.home.park.PersonFragment;
+
+public class HomeParkPageAdapter extends FragmentStatePagerAdapter {
     public HomeParkPageAdapter(FragmentManager fm) {
         super(fm);
     }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarFragment;
+import com.qsd.jmwh.module.home.park.adapter.HomeParkPageAdapter;
 import com.qsd.jmwh.module.home.park.presenter.ParkPresenter;
 import com.qsd.jmwh.module.home.park.presenter.ParkViewer;
 import com.qsd.jmwh.view.ProxyDrawable;
