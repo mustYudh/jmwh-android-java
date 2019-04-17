@@ -26,23 +26,26 @@ public class SelectInfoPop extends BasePopupWindow {
     void onSelected(SelectData selectData);
   }
 
-  public void setoNDataSelectedListener(DataSelectedListener dataSelectedListener) {
+  public SelectInfoPop setoNDataSelectedListener(DataSelectedListener dataSelectedListener) {
     mDataSelectedListener = dataSelectedListener;
+    return this;
   }
 
   public SelectInfoPop(Context context) {
     super(context, LayoutInflater.from(context).inflate(R.layout.select_info_pop, null),
         RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+    bindView(R.id.base_shadow, v -> dismiss());
   }
 
-  public void setTitle(String titleName) {
+  public SelectInfoPop setTitle(String titleName) {
     TextView title = bindView(R.id.title);
     if (!TextUtils.isEmpty(titleName) && title != null) {
       title.setText(titleName);
     }
+    return this;
   }
 
-  public void setData(List<SelectData> selectData) {
+  public SelectInfoPop setData(List<SelectData> selectData) {
     RecyclerView recyclerView = bindView(R.id.content_list);
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     SelectPopDataAdapter adapter = new SelectPopDataAdapter(R.layout.item_select_data, selectData);
@@ -50,8 +53,10 @@ public class SelectInfoPop extends BasePopupWindow {
     adapter.setOnItemClickListener((adapter1, view, position) -> {
       if (mDataSelectedListener != null) {
         mDataSelectedListener.onSelected((SelectData) adapter1.getData().get(position));
+        dismiss();
       }
     });
+    return this;
   }
 
   @Override protected View getBackgroundShadow() {

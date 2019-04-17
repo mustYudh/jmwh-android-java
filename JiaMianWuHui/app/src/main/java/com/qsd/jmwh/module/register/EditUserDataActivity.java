@@ -8,21 +8,23 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
+import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
+import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.module.home.HomeActivity;
 import com.qsd.jmwh.module.register.bean.EditUserInfo;
+import com.qsd.jmwh.module.register.bean.SelectData;
+import com.qsd.jmwh.module.register.dialog.SelectInfoPop;
 import com.qsd.jmwh.module.register.presenter.EditUserInfoPresenter;
 import com.qsd.jmwh.module.register.presenter.EditUserInfoViewer;
 import com.qsd.jmwh.view.NormaFormItemVIew;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 import com.yu.common.utils.ImageLoader;
-
-import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
-import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
-import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EditUserDataActivity extends BaseBarActivity
     implements EditUserInfoViewer, View.OnClickListener {
@@ -76,8 +78,9 @@ public class EditUserDataActivity extends BaseBarActivity
 
   private void initItemClickListener() {
     location.setOnClickSeletedItem(v -> {
-      getLaunchHelper().startActivity(DateRangeActivity.getIntent(getActivity(), getIntent().getStringExtra(TOKEN),
-          getIntent().getIntExtra(USER_ID, -1)));
+      getLaunchHelper().startActivity(
+          DateRangeActivity.getIntent(getActivity(), getIntent().getStringExtra(TOKEN),
+              getIntent().getIntExtra(USER_ID, -1)));
     });
     professional.setOnClickSeletedItem(v -> {
 
@@ -86,10 +89,54 @@ public class EditUserDataActivity extends BaseBarActivity
 
     });
     height.setOnClickSeletedItem(v -> {
+      List<SelectData> datas = new ArrayList<>();
+      for (int i = 0; i < 8; i++) {
+        SelectData data = new SelectData();
+        if (i != 0) {
+          data.key = 140 + i * 10;
+          data.value = 140 + i * 10 + "CM";
+          datas.add(data);
+        } else {
+          data.key = -1;
+          data.value = "不显示";
+        }
+      }
+      SelectInfoPop infoPop = new SelectInfoPop(getActivity());
+      infoPop.setTitle("请选择身高").setData(datas).setoNDataSelectedListener(selectData -> {
+
+      }).showPopupWindow();
     });
     weight.setOnClickSeletedItem(v -> {
+      List<SelectData> datas = new ArrayList<>();
+      for (int i = 0; i < 8; i++) {
+        SelectData data = new SelectData();
+        if (i != 0) {
+          data.key = 30 + i * 10;
+          data.value = 30 + i * 10 + "KG";
+          datas.add(data);
+        } else {
+          data.key = -1;
+          data.value = "不显示";
+        }
+      }
+      SelectInfoPop infoPop = new SelectInfoPop(getActivity());
+      infoPop.setTitle("请选择体重").setData(datas).setoNDataSelectedListener(selectData -> {
+
+      }).showPopupWindow();
     });
   }
+
+  //List<SelectData> datas = new ArrayList<>();
+  //    for (int i = 0; i < 30; i++) {
+  //  SelectData data = new SelectData();
+  //  data.key = 18 + i;
+  //  data.value = 18 + i + "岁";
+  //  datas.add(data);
+  //}
+  //SelectInfoPop infoPop = new SelectInfoPop(getActivity());
+  //    infoPop.setTitle("请选择年龄").setData(datas).setoNDataSelectedListener(selectData -> {
+  //
+  //}).showPopupWindow();
 
   @Override protected void onDestroy() {
     super.onDestroy();
