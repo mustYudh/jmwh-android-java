@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarFragment;
 import com.qsd.jmwh.module.home.radio.adapter.HomeRadioRvAdapter;
+import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
 import com.qsd.jmwh.module.home.radio.bean.LocalHomeRadioListBean;
 import com.qsd.jmwh.module.home.radio.presenter.RadioPresenter;
 import com.qsd.jmwh.module.home.radio.presenter.RadioViewer;
@@ -29,6 +30,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
     private List<LocalHomeRadioListBean> dataList = new ArrayList<>();
     @PresenterLifeCycle
     RadioPresenter mPresenter = new RadioPresenter(this);
+    private RecyclerView rv_radio;
 
     @Override
     protected int getActionBarLayoutId() {
@@ -61,38 +63,51 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
     private void initView() {
         TextView tv_left = bindView(R.id.tv_left);
         TextView tv_right = bindView(R.id.tv_right);
-        RecyclerView rv_radio = bindView(R.id.rv_radio);
+        rv_radio = bindView(R.id.rv_radio);
         rv_radio.setLayoutManager(new LinearLayoutManager(getActivity()));
-        for (int i = 0; i < 10; i++) {
-            LocalHomeRadioListBean localHomeRadioListTitleBean = new LocalHomeRadioListBean();
-            localHomeRadioListTitleBean.headImg = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1555492730491&di=c215bb2003caff5961e1044cde4f25b8&imgtype=0&src=http%3A%2F%2Fwww.qqaiqin.com%2Fuploads%2Fallimg%2F150318%2F4-15031Q61929-50.jpg";
-            localHomeRadioListTitleBean.userName = "曾经是好女孩" + i;
-            localHomeRadioListTitleBean.count_num = i;
-            localHomeRadioListTitleBean.is_like = 1;
-            localHomeRadioListTitleBean.cTime = "2019.4.10 14:28";
-            localHomeRadioListTitleBean.itemType = 0;
-            dataList.add(localHomeRadioListTitleBean);
+        mPresenter.initRadioData(30.17722,120.2007,1,0,0);
 
-            LocalHomeRadioListBean localHomeRadioListLabelBean = new LocalHomeRadioListBean();
-            localHomeRadioListLabelBean.label = list;
-            localHomeRadioListLabelBean.itemType = 1;
-            dataList.add(localHomeRadioListLabelBean);
 
-            LocalHomeRadioListBean localHomeRadioListPicBean = new LocalHomeRadioListBean();
-            localHomeRadioListPicBean.picList = picList;
-            localHomeRadioListPicBean.itemType = 2;
-            dataList.add(localHomeRadioListPicBean);
+    }
 
-            LocalHomeRadioListBean localHomeRadioListBottomBean = new LocalHomeRadioListBean();
-            localHomeRadioListBottomBean.is_like = 1;
-            localHomeRadioListBottomBean.count_num = i;
-            localHomeRadioListBottomBean.is_apply = 0;
-            localHomeRadioListBottomBean.itemType = 3;
-            dataList.add(localHomeRadioListBottomBean);
+    @Override
+    public void getDataSuccess(HomeRadioListBean homeRadioListBean) {
+        if (homeRadioListBean != null){
+            if (homeRadioListBean.cdoList != null && homeRadioListBean.cdoList.size() != 0){
+                for (int i = 0; i < homeRadioListBean.cdoList.size(); i++) {
+                    HomeRadioListBean.CdoListBean cdoListBean = homeRadioListBean.cdoList.get(i);
+                    LocalHomeRadioListBean localHomeRadioListTitleBean = new LocalHomeRadioListBean();
+                    localHomeRadioListTitleBean.headImg = cdoListBean.cdoUserData.sUserHeadPic;
+                    localHomeRadioListTitleBean.userName = cdoListBean.cdoUserData.sNickName;
+                    localHomeRadioListTitleBean.count_num = i;
+                    localHomeRadioListTitleBean.is_like = 1;
+                    localHomeRadioListTitleBean.sex = cdoListBean.nSex;
+                    localHomeRadioListTitleBean.cTime = cdoListBean.dCreateTime;
+                    localHomeRadioListTitleBean.itemType = 0;
+                    dataList.add(localHomeRadioListTitleBean);
+
+                    LocalHomeRadioListBean localHomeRadioListLabelBean = new LocalHomeRadioListBean();
+                    localHomeRadioListLabelBean.label = list;
+                    localHomeRadioListLabelBean.itemType = 1;
+                    dataList.add(localHomeRadioListLabelBean);
+
+                    LocalHomeRadioListBean localHomeRadioListPicBean = new LocalHomeRadioListBean();
+                    localHomeRadioListPicBean.picList = picList;
+                    localHomeRadioListPicBean.itemType = 2;
+                    dataList.add(localHomeRadioListPicBean);
+
+                    LocalHomeRadioListBean localHomeRadioListBottomBean = new LocalHomeRadioListBean();
+                    localHomeRadioListBottomBean.is_like = 1;
+                    localHomeRadioListBottomBean.count_num = i;
+                    localHomeRadioListBottomBean.is_apply = 0;
+                    localHomeRadioListBottomBean.itemType = 3;
+                    dataList.add(localHomeRadioListBottomBean);
+                }
+
+                HomeRadioRvAdapter adapter = new HomeRadioRvAdapter(dataList, getActivity());
+                rv_radio.setAdapter(adapter);
+            }
         }
-
-        HomeRadioRvAdapter adapter = new HomeRadioRvAdapter(dataList, getActivity());
-        rv_radio.setAdapter(adapter);
 
     }
 }
