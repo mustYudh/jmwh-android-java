@@ -14,6 +14,11 @@ public class EditUserInfoPresenter extends BaseViewPresenter<EditUserInfoViewer>
         getViewer().setUserHeaderSuccess(url);
     }
 
+
+    public void getDateProject() {
+        getViewer().showDateProjectList(null);
+    }
+
     public void editUserInfo(EditUserInfo editUserInfo) {
         assert getViewer() != null;
         getViewer().commitUserInfo();

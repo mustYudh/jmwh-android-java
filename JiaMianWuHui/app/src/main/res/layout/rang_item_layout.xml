@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <View
+        android:id="@+id/base_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#64000000"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/shape_app_whit_bg_radious8"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="约会节目"
+            android:textColor="@color/color_222222"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_data"
+            android:layout_width="match_parent"
+            android:layout_height="243dp">
+        </android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <com.yu.common.ui.DelayClickTextView
+                android:id="@+id/ok"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingLeft="31dp"
+                android:paddingRight="16dp"
+                android:text="确定"
+                android:textColor="@color/app_main_bg_color"
+                android:textSize="15sp"/>
+
+
+            <com.yu.common.ui.DelayClickTextView
+                android:id="@+id/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingLeft="15dp"
+                android:paddingRight="31dp"
+                android:text="取消"
+                android:textColor="@color/app_main_bg_color"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
