@@ -107,7 +107,10 @@ public class CustomDynamicInterceptor extends BaseDynamicInterceptor<CustomDynam
     Map<String, String> oldParams = JSONUtils.parseKeyAndValueToMap(bodyToString(request));
     assert oldParams != null;
     TreeMap<String, Object> newParams = new TreeMap<>();
-    newParams.put("sDeviceType", "Android");
+    newParams.put("sDeviceType", "Ios");
+    if (UserProfile.getInstance().getAppAccount() != -1) {
+      newParams.put("lUserId", UserProfile.getInstance().getAppAccount() + "");
+    }
     newParams.putAll(oldParams);
     StringBuilder sing = new StringBuilder();
     for (Map.Entry<String, Object> m : newParams.entrySet()) {
@@ -121,11 +124,9 @@ public class CustomDynamicInterceptor extends BaseDynamicInterceptor<CustomDynam
     Log.e("======>加密结果", singResult);
     newParams.put("sign", singResult);
     if (UserProfile.getInstance().isAppLogin()) {
-      if (UserProfile.getInstance().getAppAccount() != -1) {
-        oldParams.put("lUserId", UserProfile.getInstance().getAppAccount() + "");
-      }
+
       if (!TextUtils.isEmpty(UserProfile.getInstance().getAppToken())) {
-        oldParams.put("token", UserProfile.getInstance().getAppToken());
+        newParams.put("token", UserProfile.getInstance().getAppToken());
       }
     }
 
