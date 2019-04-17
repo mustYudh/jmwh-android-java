@@ -1,5 +1,6 @@
 package com.qsd.jmwh.module.register;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ public class DateRangeActivity extends BaseBarActivity implements DateRangeViewe
     private static final String USER_ID = "user_id";
     private static final String TITLE = "title";
     private static final String LEVEL = "level";
+    public static final String RANGE_RESULT = "range_result";
     public static final int PROVINCE = 0;
     public static final int CITY = 1;
 
@@ -35,6 +37,7 @@ public class DateRangeActivity extends BaseBarActivity implements DateRangeViewe
     private RecyclerView mCity;
     private RangeDataAdapter mProvinceAdapter;
     private RangCityAdapter mRangCityAdapter;
+    private RangeData.Range mRange;
 
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
@@ -55,7 +58,7 @@ public class DateRangeActivity extends BaseBarActivity implements DateRangeViewe
         setTitle(getIntent().getStringExtra(TITLE));
         initView();
         Intent intent = getIntent();
-        mPresenter.getRangeData(intent.getIntExtra(LEVEL,-1), 0, intent.getIntExtra(USER_ID, -1), intent.getStringExtra(TOKEN), PROVINCE);
+        mPresenter.getRangeData(intent.getIntExtra(LEVEL, -1), 0, intent.getIntExtra(USER_ID, -1), intent.getStringExtra(TOKEN), PROVINCE);
     }
 
     private void initListener(Intent intent) {
@@ -67,9 +70,19 @@ public class DateRangeActivity extends BaseBarActivity implements DateRangeViewe
         if (mRangCityAdapter != null) {
             mRangCityAdapter.setOnItemClickListener((adapter, view, position) -> {
                 notifyDataSetChanged(intent, adapter, position, CITY);
+                mRange = (RangeData.Range) adapter.getData().get(position);
             });
         }
-        setRightMenu("确定", v -> finish());
+        setRightMenu("确定", v -> {
+            if (mRange != null) {
+                Intent result = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(RANGE_RESULT, mRange);
+                result.putExtra(RANGE_RESULT, bundle);
+                setResult(Activity.RESULT_OK, result);
+            }
+            finish();
+        });
     }
 
     private void notifyDataSetChanged(Intent intent, BaseQuickAdapter adapter, int position,
@@ -83,7 +96,7 @@ public class DateRangeActivity extends BaseBarActivity implements DateRangeViewe
         selected.selected = true;
         adapter.notifyDataSetChanged();
         if (type == PROVINCE) {
-            mPresenter.getRangeData(intent.getIntExtra(LEVEL,-1), range.get(position).lId, intent.getIntExtra(USER_ID, -1),
+            mPresenter.getRangeData(intent.getIntExtra(LEVEL, -1), range.get(position).lId, intent.getIntExtra(USER_ID, -1),
                     intent.getStringExtra(TOKEN), CITY);
         }
     }
@@ -102,7 +115,7 @@ public class DateRangeActivity extends BaseBarActivity implements DateRangeViewe
             mProvinceAdapter = new RangeDataAdapter(R.layout.item_range_province, provinces);
             mProvince.setAdapter(mProvinceAdapter);
             RangeData.Range range = provinces.get(0);
-            mPresenter.getRangeData(getIntent().getIntExtra(LEVEL,-1), range.lId, getIntent().getIntExtra(USER_ID, -1), getIntent().getStringExtra(TOKEN), CITY);
+            mPresenter.getRangeData(getIntent().getIntExtra(LEVEL, -1), range.lId, getIntent().getIntExtra(USER_ID, -1), getIntent().getStringExtra(TOKEN), CITY);
             initListener(getIntent());
         }
     }

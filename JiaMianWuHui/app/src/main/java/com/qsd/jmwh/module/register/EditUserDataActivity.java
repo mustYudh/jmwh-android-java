@@ -1,5 +1,6 @@
 package com.qsd.jmwh.module.register;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.module.home.HomeActivity;
 import com.qsd.jmwh.module.register.bean.EditUserInfo;
+import com.qsd.jmwh.module.register.bean.RangeData;
 import com.qsd.jmwh.module.register.bean.SelectData;
 import com.qsd.jmwh.module.register.dialog.RangeItemPop;
 import com.qsd.jmwh.module.register.dialog.SelectInfoPop;
@@ -25,6 +27,7 @@ import com.yu.common.utils.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
 import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
@@ -37,6 +40,8 @@ public class EditUserDataActivity extends BaseBarActivity
 
     private static final String TOKEN = "token";
     private static final String USER_ID = "user_id";
+    private static final int DATE_RANGE_REQUEST_CODE = 0X123;
+    private static final int PROJECT_REQUEST_CODE = 0X124;
 
     private TextView headerHint;
     private ImageView selectHeader;
@@ -86,19 +91,15 @@ public class EditUserDataActivity extends BaseBarActivity
     }
 
     private void initItemClickListener() {
-        location.setOnClickSelectedItem(v -> {
-            getLaunchHelper().startActivity(
-                    DateRangeActivity.getIntent(getActivity(), 1, getIntent().getStringExtra(TOKEN),
-                            getIntent().getIntExtra(USER_ID, -1), "约会范围"));
-        });
-        professional.setOnClickSelectedItem(v -> {
-            getLaunchHelper().startActivity(
-                    DateRangeActivity.getIntent(getActivity(), 0, getIntent().getStringExtra(TOKEN),
-                            getIntent().getIntExtra(USER_ID, -1), "职业"));
-        });
-        project.setOnClickSelectedItem(v -> {
-            mPresenter.getDateProject();
-        });
+        location.setOnClickSelectedItem(v ->
+                getLaunchHelper().startActivityForResult(
+                        DateRangeActivity.getIntent(getActivity(), 1, getIntent().getStringExtra(TOKEN),
+                                getIntent().getIntExtra(USER_ID, -1), "约会范围"), DATE_RANGE_REQUEST_CODE));
+        professional.setOnClickSelectedItem(v ->
+                getLaunchHelper().startActivityForResult(
+                        DateRangeActivity.getIntent(getActivity(), 0, getIntent().getStringExtra(TOKEN),
+                                getIntent().getIntExtra(USER_ID, -1), "职业"), PROJECT_REQUEST_CODE));
+        project.setOnClickSelectedItem(v -> mPresenter.getDateProject());
         height.setOnClickSelectedItem(v -> {
             List<SelectData> datas = new ArrayList<>();
             for (int i = 0; i < 8; i++) {
@@ -193,13 +194,37 @@ public class EditUserDataActivity extends BaseBarActivity
     public void showDateProjectList(List<String> list) {
         RangeItemPop rangeItemPop = new RangeItemPop(getActivity());
         rangeItemPop.setData(list).setData(list).setOnSelectedProjectListener(selected -> {
+            Set<Integer> keys = selected.keySet();
+            for (int i = 0; i < keys.size(); i++) {
+                if (i != keys.size() -1) {
 
+                }
+            }
+//            project.setContentText();
         }).showPopupWindow();
     }
+
 
     @Override
     public void commitUserInfo() {
         getLaunchHelper().startActivity(HomeActivity.class);
         finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            Bundle bundle = data.getBundleExtra(DateRangeActivity.RANGE_RESULT);
+            RangeData.Range range = (RangeData.Range) bundle.getSerializable(DateRangeActivity.RANGE_RESULT);
+            if (range != null) {
+                if (requestCode == DATE_RANGE_REQUEST_CODE) {
+
+                } else if (requestCode == PROJECT_REQUEST_CODE) {
+                    professional.setContentText(range.sName);
+
+                }
+            }
+        }
     }
 }
