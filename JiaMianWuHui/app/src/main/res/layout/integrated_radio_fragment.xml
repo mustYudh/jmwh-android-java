@@ -5,19 +5,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
+
     <com.yu.common.ui.DelayClickTextView
-        android:textSize="13sp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/color_F5A623_alpha"
         android:gravity="center"
         android:text="健康约会，请勿广播低俗内容，一经发现，将做删除处理"
         android:textColor="@color/color_F5A623"
-        android:background="@color/color_F5A623_alpha"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"/>
+        android:textSize="13sp"/>
 
     <TextView
-        android:gravity="center"
-        android:text="约会电台"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="约会电台"/>
 
 </LinearLayout>

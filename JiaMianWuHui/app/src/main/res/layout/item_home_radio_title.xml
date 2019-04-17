@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="10dp"
+              android:layout_marginBottom="10dp"
+              android:gravity="center_vertical">
+
+    <com.qsd.jmwh.view.CircleImageView
+        android:id="@+id/iv_headimg"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginLeft="10dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher"/>
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            >
+
+            <com.yu.common.ui.DelayClickTextView
+                android:id="@+id/tv_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="曾经是好女孩"
+                android:textColor="#ff222222"
+                android:textSize="15sp"
+                />
+
+            <com.yu.common.ui.DelayClickImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginLeft="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/woman"/>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical">
+
+            <com.yu.common.ui.DelayClickTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_home_person"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:paddingLeft="6dp"
+                android:paddingTop="3dp"
+                android:paddingRight="6dp"
+                android:paddingBottom="3dp"
+                android:text="真实"
+                android:textColor="#ffffffff"
+                android:textSize="10sp"
+                />
+
+            <com.yu.common.ui.DelayClickTextView
+                android:id="@+id/tv_ctime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:text="发布于 2019.3.29 14:28"
+                android:textColor="#ff666666"
+                android:textSize="12sp"
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <com.yu.common.ui.DelayClickImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="18dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/iv_more"/>
+</LinearLayout>

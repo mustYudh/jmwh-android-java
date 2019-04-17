@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseFragment;
+import com.qsd.jmwh.module.home.park.adapter.PersonRvAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ public class PersonFragment extends BaseFragment {
     private void initView() {
         RecyclerView rv_person = bindView(R.id.rv_person);
         rv_person.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+        PersonRvAdapter adapter = new PersonRvAdapter(R.layout.item_person, list, getActivity());
+        rv_person.setAdapter(adapter);
     }
 }

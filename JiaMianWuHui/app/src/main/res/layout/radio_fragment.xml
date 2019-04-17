@@ -1,7 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:overScrollMode="never"
+    android:scrollbars="none">
 
-</android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp">
+
+
+            <com.yu.common.ui.DelayClickTextView
+                android:id="@+id/tv_left"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="2"
+                android:background="@drawable/shape_home_radio_left"
+                android:gravity="center"
+                android:text="约会范围：不限地区"
+                android:textColor="#ffffffff"
+                android:textSize="15sp"/>
+
+
+            <com.yu.common.ui.DelayClickTextView
+                android:id="@+id/tv_right"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_home_radio_right"
+                android:gravity="center"
+                android:text="我要广播"
+                android:textColor="#ffffffff"
+                android:textSize="15sp"/>
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="blocksDescendants">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_radio"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never"
+                android:scrollbars="none"/>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</ScrollView>
