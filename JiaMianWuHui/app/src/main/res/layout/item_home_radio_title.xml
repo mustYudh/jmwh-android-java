@@ -28,17 +28,17 @@
             android:gravity="center_vertical"
             >
 
-            <TextView
-                android:includeFontPadding="false"
+            <com.yu.common.ui.DelayClickTextView
                 android:id="@+id/tv_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:includeFontPadding="false"
                 android:text="曾经是好女孩"
                 android:textColor="#ff222222"
                 android:textSize="15sp"
                 />
 
-            <ImageView
+            <com.yu.common.ui.DelayClickImageView
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_marginLeft="5dp"
@@ -55,7 +55,7 @@
             android:layout_marginTop="5dp"
             android:gravity="center_vertical">
 
-            <TextView
+            <com.yu.common.ui.DelayClickTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_home_person"
@@ -70,7 +70,7 @@
                 android:textSize="10sp"
                 />
 
-            <TextView
+            <com.yu.common.ui.DelayClickTextView
                 android:id="@+id/tv_ctime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
 
     </LinearLayout>
 
-    <ImageView
+    <com.yu.common.ui.DelayClickImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"

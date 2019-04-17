@@ -13,12 +13,12 @@
         android:orientation="horizontal">
 
 
-        <ImageView
+        <com.yu.common.ui.DelayClickImageView
 
             android:layout_width="13dp"
             android:layout_height="13dp"/>
 
-        <TextView
+        <com.yu.common.ui.DelayClickTextView
             android:id="@+id/tv_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

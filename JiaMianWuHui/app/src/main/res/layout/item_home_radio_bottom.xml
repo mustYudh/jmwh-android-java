@@ -11,12 +11,12 @@
         android:layout_marginLeft="10dp"
         android:gravity="center">
 
-        <ImageView
+        <com.yu.common.ui.DelayClickImageView
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:src="@drawable/zan"/>
 
-        <TextView
+        <com.yu.common.ui.DelayClickTextView
             android:id="@+id/tv_zan"
             android:layout_width="13dp"
             android:layout_height="17dp"
@@ -35,12 +35,12 @@
         android:layout_marginLeft="28dp"
         android:gravity="center">
 
-        <ImageView
+        <com.yu.common.ui.DelayClickImageView
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:src="@drawable/comment"/>
 
-        <TextView
+        <com.yu.common.ui.DelayClickTextView
             android:id="@+id/tv_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,12 +58,12 @@
         android:layout_marginLeft="28dp"
         android:gravity="center">
 
-        <ImageView
+        <com.yu.common.ui.DelayClickImageView
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:src="@drawable/apply"/>
 
-        <TextView
+        <com.yu.common.ui.DelayClickTextView
             android:id="@+id/tv_apply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -7,11 +7,11 @@
 
 
     <com.qsd.jmwh.view.CircleImageView
+        android:id="@+id/iv_headimg"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:scaleType="centerCrop"
-        android:id="@+id/iv_headimg"
         android:layout_marginLeft="10dp"
+        android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher"/>
 
 
@@ -28,16 +28,16 @@
             android:gravity="center_vertical"
             >
 
-            <TextView
-                android:includeFontPadding="false"
+            <com.yu.common.ui.DelayClickTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:includeFontPadding="false"
                 android:text="曾经是好女孩"
                 android:textColor="#ff222222"
                 android:textSize="15sp"
                 />
 
-            <ImageView
+            <com.yu.common.ui.DelayClickImageView
                 android:layout_width="16dp"
                 android:layout_height="12dp"
                 android:layout_marginLeft="5dp"
@@ -45,7 +45,7 @@
                 android:src="@drawable/pic_home_photo"/>
 
 
-            <TextView
+            <com.yu.common.ui.DelayClickTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -54,7 +54,7 @@
                 android:textSize="12sp"
                 />
 
-            <TextView
+            <com.yu.common.ui.DelayClickTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -66,7 +66,7 @@
         </LinearLayout>
 
 
-        <TextView
+        <com.yu.common.ui.DelayClickTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp">
 
-            <TextView
+            <com.yu.common.ui.DelayClickTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_home_person"
@@ -98,7 +98,7 @@
                 android:textSize="10sp"
                 />
 
-            <TextView
+            <com.yu.common.ui.DelayClickTextView
                 android:layout_width="49dp"
                 android:layout_height="17dp"
                 android:layout_marginLeft="6dp"
@@ -112,7 +112,7 @@
 
     </LinearLayout>
 
-    <ImageView
+    <com.yu.common.ui.DelayClickImageView
         android:layout_width="15dp"
         android:layout_height="14dp"
         android:layout_marginLeft="5dp"
