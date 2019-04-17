@@ -21,11 +21,13 @@ public class SelectGenderActivity extends BaseBarActivity implements SelectGende
     private ImageView girle;
     private int currentType = 1;
     public static String APP_ACCOUNT = "APP_ACCOUNT";
+    public static String APP_TOKEN = "APP_TOKEN";
 
 
-    public static Intent getIntent(Context context, int account) {
+    public static Intent getIntent(Context context, int account,String token) {
         Intent intent = new Intent(context, SelectGenderActivity.class);
         intent.putExtra(APP_ACCOUNT, account);
+        intent.putExtra(APP_TOKEN, token);
         return intent;
     }
 
@@ -77,7 +79,7 @@ public class SelectGenderActivity extends BaseBarActivity implements SelectGende
         if (type == 0) {
             finish();
         } else {
-            getLaunchHelper().startActivity(EditRegisterCodeActivity.class);
+            getLaunchHelper().startActivity(EditRegisterCodeActivity.getIntent(getActivity(),getIntent().getStringExtra(APP_TOKEN),getIntent().getIntExtra(APP_ACCOUNT,-1)));
             finish();
         }
     }

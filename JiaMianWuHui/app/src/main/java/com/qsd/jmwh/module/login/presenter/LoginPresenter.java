@@ -50,7 +50,7 @@ public class LoginPresenter extends BaseViewPresenter<LoginViewer> {
                                 break;
                             case 3:
                                 LoginInfo loginInfo = result.getData();
-                                getLauncherHelper().startActivity(SelectGenderActivity.getIntent(getActivity(), loginInfo.lUserId));
+                                getLauncherHelper().startActivity(SelectGenderActivity.getIntent(getActivity(), loginInfo.lUserId,loginInfo.token));
                                 break;
                             default:
                                 ToastUtils.show(result.getMsg());

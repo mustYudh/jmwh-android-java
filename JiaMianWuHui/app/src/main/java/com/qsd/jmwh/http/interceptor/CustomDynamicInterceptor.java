@@ -106,23 +106,27 @@ public class CustomDynamicInterceptor extends BaseDynamicInterceptor<CustomDynam
     Log.e("=======>", bodyToString(request));
     Map<String, String> oldParams = JSONUtils.parseKeyAndValueToMap(bodyToString(request));
     assert oldParams != null;
-    if (!TextUtils.isEmpty(UserProfile.getInstance().getAppToken())) {
-      oldParams.put("token", UserProfile.getInstance().getAppToken());
-    }
     TreeMap<String, Object> newParams = new TreeMap<>();
     newParams.put("sDeviceType", "Android");
     newParams.putAll(oldParams);
     StringBuilder sing = new StringBuilder();
     for (Map.Entry<String, Object> m : newParams.entrySet()) {
-      sing.append(m.getKey()).append("=").append(m.getValue().toString()).append("&");
+      if (!m.getKey().equals("lUserId") && !m.getKey().equals("token")) {
+        sing.append(m.getKey()).append("=").append(m.getValue().toString()).append("&");
+      }
     }
     sing.append("secretkey=405e73b3d");
     Log.e("======>明文结果", sing.toString());
     String singResult = MD5Utils.string2MD5(sing.toString()).toUpperCase();
     Log.e("======>加密结果", singResult);
     newParams.put("sign", singResult);
-    if (UserProfile.getInstance().getAppAccount() != -1) {
-      oldParams.put("lUserId", UserProfile.getInstance().getAppAccount() + "");
+    if (UserProfile.getInstance().isAppLogin()) {
+      if (UserProfile.getInstance().getAppAccount() != -1) {
+        oldParams.put("lUserId", UserProfile.getInstance().getAppAccount() + "");
+      }
+      if (!TextUtils.isEmpty(UserProfile.getInstance().getAppToken())) {
+        oldParams.put("token", UserProfile.getInstance().getAppToken());
+      }
     }
 
     return newParams;

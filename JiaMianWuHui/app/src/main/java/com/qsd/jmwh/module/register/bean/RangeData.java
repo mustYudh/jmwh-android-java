@@ -10,8 +10,8 @@ import java.util.List;
 public class RangeData implements Serializable {
   public List<Range> cdoList;
 
-  class Range implements Serializable {
-    public int Id;
+  public class Range implements Serializable {
+    public int lId;
     public int ParentId;
     public String sName;
     public int nStatus;

@@ -3,6 +3,7 @@ package com.qsd.jmwh.module.register.presenter;
 import android.annotation.SuppressLint;
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.NoTipRequestSubscriber;
+import com.qsd.jmwh.module.register.DateRangeActivity;
 import com.qsd.jmwh.module.register.bean.RangeData;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.framework.BaseViewPresenter;
@@ -18,13 +19,20 @@ import com.yu.common.framework.BaseViewPresenter;
     super(viewer);
   }
 
-  public void getRangeData(int nLevel, int lParentId, int lUserId, String token) {
+  public void getRangeData(int nLevel, int lParentId, int lUserId, String token, int type) {
     if (lUserId != -1) {
       XHttpProxy.proxy(ApiServices.class)
           .getDateRange(nLevel, lParentId, lUserId, token)
           .subscribeWith(new NoTipRequestSubscriber<RangeData>() {
             @Override protected void onSuccess(RangeData rangeData) {
-
+              assert getViewer() != null;
+              if (rangeData.cdoList != null) {
+                if (type == DateRangeActivity.PROVINCE) {
+                  getViewer().setProvince(rangeData.cdoList);
+                } else {
+                  getViewer().setCity(rangeData.cdoList);
+                }
+              }
             }
           });
     }

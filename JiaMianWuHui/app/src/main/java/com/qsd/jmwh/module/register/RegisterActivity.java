@@ -111,7 +111,7 @@ public class RegisterActivity extends BaseBarActivity implements RegisterViewer,
 
     @Override
     public void registerSuccess(UserInfo registerBean) {
-        getLaunchHelper().startActivity(SelectGenderActivity.getIntent(getActivity(),registerBean.lUserId));
+        getLaunchHelper().startActivity(SelectGenderActivity.getIntent(getActivity(),registerBean.lUserId,registerBean.token));
         finish();
     }
 }
