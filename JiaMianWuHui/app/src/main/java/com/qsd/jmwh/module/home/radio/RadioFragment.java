@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
+import com.denghao.control.view.utils.UpdataCurrentFragment;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarFragment;
 import com.qsd.jmwh.module.home.radio.adapter.HomeRadioRvAdapter;
@@ -23,7 +24,7 @@ import java.util.List;
  * @date 2018/6/12
  */
 
-public class RadioFragment extends BaseBarFragment implements RadioViewer {
+public class RadioFragment extends BaseBarFragment implements RadioViewer, UpdataCurrentFragment {
 
     private List<String> list = new ArrayList<>();
     private List<String> picList = new ArrayList<>();
@@ -44,7 +45,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
 
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
-
+        initView();
     }
 
     @Override
@@ -56,8 +57,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
         picList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1555493287324&di=fef30213ca19443872acb22e26d26c8a&imgtype=0&src=http%3A%2F%2Fimg2.ph.126.net%2F2zB3_wWPXlEW0RdwQa8d6A%3D%3D%2F2268688312388037455.jpg");
         picList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1555493287324&di=1629a936b3378aafdc65adf49c811730&imgtype=0&src=http%3A%2F%2Fs14.sinaimg.cn%2Fmw690%2F001R5mFczy77zmp12q15d%26690");
         picList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1555493287324&di=b5645b9945daadcdb356e63ed3815fc1&imgtype=0&src=http%3A%2F%2Fs1.sinaimg.cn%2Fmw690%2F006fmRRJzy745Jb6KxG00%26690");
-
-        initView();
+        mPresenter.initRadioData(30.17722,120.2007,1,0,0);
     }
 
     private void initView() {
@@ -65,10 +65,10 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
         TextView tv_right = bindView(R.id.tv_right);
         rv_radio = bindView(R.id.rv_radio);
         rv_radio.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mPresenter.initRadioData(30.17722,120.2007,1,0,0);
-
-
     }
+
+
+
 
     @Override
     public void getDataSuccess(HomeRadioListBean homeRadioListBean) {
@@ -109,5 +109,10 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
             }
         }
 
+    }
+
+    @Override
+    public void update(Bundle bundle) {
+        loadData();
     }
 }

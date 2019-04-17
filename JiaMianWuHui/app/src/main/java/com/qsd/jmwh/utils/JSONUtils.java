@@ -1,8 +1,14 @@
 package com.qsd.jmwh.utils;
 
 import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,9 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * @author yudneghao
@@ -815,7 +818,7 @@ public final class JSONUtils {
             return map;
         }
         Gson gson = new Gson();
-        Type type = new TypeToken<HashMap<String, Object>>() {
+        Type type = new TypeToken<HashMap<String, String>>() {
         }.getType();
 
         try {

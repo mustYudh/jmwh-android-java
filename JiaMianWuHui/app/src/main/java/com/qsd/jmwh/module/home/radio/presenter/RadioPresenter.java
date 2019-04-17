@@ -26,7 +26,7 @@ public class RadioPresenter extends BaseViewPresenter<RadioViewer> {
     @SuppressLint("CheckResult")
     public void initRadioData(double nLat, double nLng,int nTab, int pageindex, int nSex) {
         XHttpProxy.proxy(ApiServices.class)
-                .getRadioDate(nLat, nLng, nTab, pageindex, nSex)
+                .getRadioDate(nLat, nLng, nTab, pageindex, nSex,"")
                 .subscribeWith(new TipRequestSubscriber<HomeRadioListBean>() {
                     @Override
                     protected void onSuccess(HomeRadioListBean homeRadioListBean) {
