@@ -1,6 +1,7 @@
 package com.qsd.jmwh.http;
 
 import com.qsd.jmwh.module.login.bean.LoginInfo;
+import com.qsd.jmwh.module.register.bean.DateProjectBean;
 import com.qsd.jmwh.module.register.bean.RangeData;
 import com.qsd.jmwh.module.register.bean.SendVerCodeBean;
 import com.qsd.jmwh.module.register.bean.UserInfo;
@@ -27,8 +28,11 @@ public interface ApiServices {
         Observable<ApiResult<LoginInfo>> login(@Body RequestBody requestBody);
 
 
-
         @NetMethod(ParameterNames = {"nLevel","lParentId","lUserId","token"},Url = "/TwosomeService/getTwosomeList")
         Observable<RangeData> getDateRange(int nLevel,int lParentId,int lUserId,String token);
+
+
+        @NetMethod(Url = "/SystemService/getUserConfigInfo")
+        Observable<DateProjectBean> getDateProject();
 
 }

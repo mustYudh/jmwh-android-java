@@ -92,6 +92,16 @@
             android:text="更多信息（选填）"
             android:textSize="13sp"/>
 
+
+        <com.qsd.jmwh.view.NormaFormItemVIew
+            android:id="@+id/age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:content_hint="请选择"
+            app:left_text="年龄"
+            app:only_read="true"
+            app:show_top_line="false"/>
+
         <com.qsd.jmwh.view.NormaFormItemVIew
             android:id="@+id/height"
             android:layout_width="match_parent"

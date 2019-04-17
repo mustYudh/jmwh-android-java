@@ -18,8 +18,7 @@
       android:id="@+id/base_container"
       android:orientation="vertical"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:minHeight="386dp"
+      android:layout_height="386dp"
       >
 
     <TextView

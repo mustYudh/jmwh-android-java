@@ -130,13 +130,14 @@ public class NormaFormItemVIew extends LinearLayout {
         }
     }
 
-    public void setOnClickSeletedItem(View.OnClickListener onClickSeletedItem) {
+    public void setOnClickSelectedItem(View.OnClickListener onClickSeletedItem) {
         content.setOnClickListener(onClickSeletedItem);
     }
 
     public void setContentText(CharSequence contentText) {
         if (!TextUtils.isEmpty(contentText)) {
             content.setText(contentText);
+            content.setTextColor(getContext().getResources().getColor(R.color.color_222222));
         }
     }
 
