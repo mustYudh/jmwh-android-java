@@ -111,7 +111,7 @@ public class CustomDynamicInterceptor extends BaseDynamicInterceptor<CustomDynam
     newParams.putAll(oldParams);
     StringBuilder sing = new StringBuilder();
     for (Map.Entry<String, Object> m : newParams.entrySet()) {
-      if (!m.getKey().equals("lUserId") && !m.getKey().equals("token")) {
+      if (!m.getKey().equals("token")) {
         sing.append(m.getKey()).append("=").append(m.getValue().toString()).append("&");
       }
     }
