@@ -3,12 +3,65 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     >
 
-    <TextView
-        android:gravity="center"
-        android:text="个人中心"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="210dp">
+
+        <LinearLayout
+            android:background="@color/app_main_bg_color"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <com.qsd.jmwh.view.CircleImageView
+                android:id="@+id/header"
+                android:layout_marginTop="35dp"
+                android:background="@color/color_EEEEEE"
+                android:layout_width="65dp"
+                android:layout_height="65dp"/>
+
+            <TextView
+                android:layout_marginTop="12dp"
+                android:layout_below="@+id/header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="桃花盛开的地方"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                />
+
+            <TextView
+                android:textSize="12sp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/white"
+                android:text="杭州市 · 学生 · 21岁"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+            <TextView
+                android:textSize="12sp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/white"
+                android:text="约会范围：上海市，北京市"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_gravity="right"
+            android:padding="18dp"
+            android:layout_marginTop="22dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
+
+    
+
 
 </LinearLayout>

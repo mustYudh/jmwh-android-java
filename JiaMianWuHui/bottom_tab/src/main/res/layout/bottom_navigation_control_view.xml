@@ -14,7 +14,10 @@
       android:layout_weight="1"
       >
   </FrameLayout>
-
+<View
+    android:background="#F4F4F4"
+    android:layout_width="match_parent"
+    android:layout_height="05dp"/>
   <LinearLayout
       android:id="@+id/tab_control"
       android:layout_width="match_parent"

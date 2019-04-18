@@ -1,5 +1,6 @@
 package com.qsd.jmwh.module.register;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -77,6 +78,7 @@ public class SelectGenderActivity extends BaseBarActivity implements SelectGende
     @Override
     public void selectedSuccess(int type) {
         if (type == 0) {
+            setResult(Activity.RESULT_OK);
             finish();
         } else {
             getLaunchHelper().startActivity(EditRegisterCodeActivity.getIntent(getActivity(),getIntent().getStringExtra(APP_TOKEN),getIntent().getIntExtra(APP_ACCOUNT,-1)));

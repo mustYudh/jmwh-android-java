@@ -42,10 +42,10 @@ public class SplashActivity extends BaseActivity
   @Override public void onClick(View v) {
     switch (v.getId()) {
       case R.id.login:
-        getLaunchHelper().startActivity(LoginActivity.class);
+        getLaunchHelper().startActivityForResult(LoginActivity.class,REQUEST_CODE);
         break;
       case R.id.register:
-        getLaunchHelper().startActivity(RegisterActivity.class);
+        getLaunchHelper().startActivityForResult(RegisterActivity.class,REQUEST_CODE);
         break;
       case R.id.qq_login:
         boolean installQQ = UMShareAPI.get(getActivity()).isInstall(getActivity(),SHARE_MEDIA.QQ);
