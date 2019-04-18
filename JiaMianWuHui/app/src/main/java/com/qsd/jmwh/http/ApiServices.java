@@ -6,6 +6,7 @@ import com.qsd.jmwh.module.register.bean.DateProjectBean;
 import com.qsd.jmwh.module.register.bean.RangeData;
 import com.qsd.jmwh.module.register.bean.SendVerCodeBean;
 import com.qsd.jmwh.module.register.bean.UserInfo;
+import com.qsd.jmwh.module.register.bean.VipInfoBean;
 import com.xuexiang.xhttp2.annotation.NetMethod;
 import com.xuexiang.xhttp2.model.ApiResult;
 
@@ -36,5 +37,6 @@ public interface ApiServices {
         @NetMethod(ParameterNames = {"nLat","nLng","sDatingRange","nTab","pageindex","nSex"},Url = "/DatingService/getDatingList")
         Observable<HomeRadioListBean> getRadioDate(String nLat, String nLng,String sDatingRange, String nTab, String pageindex,String nSex);
 
-
+        @NetMethod(ParameterNames = {"lUserId","token"},Url = "/GoodsService/getVIPPayInfo")
+        Observable<VipInfoBean> getVipInfoList(int lUserId,String token);
 }
