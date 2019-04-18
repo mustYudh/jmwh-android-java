@@ -33,7 +33,7 @@ public interface ApiServices {
         @NetMethod(Url = "/SystemService/getUserConfigInfo")
         Observable<DateProjectBean> getDateProject();
 
-        @NetMethod(ParameterNames = {"nLat","nLng","nTab","pageindex","nSex"},Url = "/DatingService/getDatingList")
-        Observable<HomeRadioListBean> getRadioDate(double nLat, double nLng, int nTab, int pageindex,int nSex);
+        @NetMethod(ParameterNames = {"nLat","nLng","sDatingRange","nTab","pageindex","nSex"},Url = "/DatingService/getDatingList")
+        Observable<HomeRadioListBean> getRadioDate(String nLat, String nLng,String sDatingRange, String nTab, String pageindex,String nSex);
 
 }

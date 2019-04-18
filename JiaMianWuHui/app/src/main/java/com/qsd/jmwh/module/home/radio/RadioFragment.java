@@ -65,7 +65,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
         TextView tv_right = bindView(R.id.tv_right);
         rv_radio = bindView(R.id.rv_radio);
         rv_radio.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mPresenter.initRadioData(30.17722,120.2007,1,0,0);
+        mPresenter.initRadioData("30.17722","120.2007","","1","0","0");
 
 
     }
