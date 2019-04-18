@@ -12,7 +12,7 @@ public class HomeRadioListBean implements Serializable {
 
     public static class CdoListBean {
         /**
-         * lDatingId : 9
+         * lDatingId : 10
          * lUserId : 8
          * sDatingTitle : sDatingTitle
          * sDatingRange : sDatingRange
@@ -20,15 +20,16 @@ public class HomeRadioListBean implements Serializable {
          * sDatingTimeExt : 中午
          * sContent : sContent
          * nSex : 1
-         * nLikeCount : 0
+         * nLikeCount : 1
          * nApplyCount : 0
+         * nCommentCount : 0
          * bCommentType : true
          * bHiddenType : false
-         * dCreateTime : 2019-04-16 18:15:14
+         * dCreateTime : 2019-04-17 23:08:50
          * nRecommendType : 0
          * distance_um : 6146976
          * cdoUserData : {"sNickName":"","sUserHeadPic":"","nAuthType":0}
-         * sImg : 3
+         * sImg : []
          */
 
         public int lDatingId;
@@ -41,13 +42,14 @@ public class HomeRadioListBean implements Serializable {
         public int nSex;
         public int nLikeCount;
         public int nApplyCount;
+        public int nCommentCount;
         public boolean bCommentType;
         public boolean bHiddenType;
         public String dCreateTime;
         public int nRecommendType;
         public int distance_um;
         public CdoUserDataBean cdoUserData;
-        public String sImg;
+        public List<String> sImg;
 
         public static class CdoUserDataBean {
             /**

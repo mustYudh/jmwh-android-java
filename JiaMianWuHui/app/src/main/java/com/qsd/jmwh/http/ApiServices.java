@@ -36,4 +36,5 @@ public interface ApiServices {
         @NetMethod(ParameterNames = {"nLat","nLng","sDatingRange","nTab","pageindex","nSex"},Url = "/DatingService/getDatingList")
         Observable<HomeRadioListBean> getRadioDate(String nLat, String nLng,String sDatingRange, String nTab, String pageindex,String nSex);
 
+
 }

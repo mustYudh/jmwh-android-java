@@ -91,7 +91,7 @@
             android:theme="@style/Theme_Light"
             />
         <activity
-            android:name=".module.ToByVipActivity"
+            android:name=".module.register.ToByVipActivity"
             android:screenOrientation="portrait"
             />
 

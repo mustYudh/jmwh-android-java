@@ -9,7 +9,6 @@ import android.view.View;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.dialog.SelectHintPop;
-import com.qsd.jmwh.module.ToByVipActivity;
 import com.qsd.jmwh.module.home.HomeActivity;
 
 public class EditRegisterCodeActivity extends BaseBarActivity implements View.OnClickListener {
