@@ -117,6 +117,21 @@
         <activity android:name=".module.home.user.activity.PrivacySettingActivity"
                   android:screenOrientation="portrait"
             />
+        <activity android:name=".module.home.user.activity.SettingActivity"
+                  android:screenOrientation="portrait"
+            />
+        <activity android:name=".module.home.user.activity.PushSettingActivity"
+                  android:screenOrientation="portrait"
+            />
+        <activity android:name=".module.home.user.activity.SettingPhoneNumberActivity"
+                  android:screenOrientation="portrait"
+            />
+        <activity android:name=".module.home.user.activity.EditPasswordActivity"
+                  android:screenOrientation="portrait"
+            />
+        <activity android:name=".module.home.user.activity.MoneyBagActivity"
+                  android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>

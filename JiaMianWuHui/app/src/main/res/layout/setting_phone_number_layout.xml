@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/color_F4F4F4"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.qsd.jmwh.view.NormaFormItemVIew
+        app:length="11"
+        android:id="@+id/phone"
+        app:input_type="number"
+        android:layout_marginTop="30dp"
+        app:left_text="+86"
+        app:content_hint="请输入手机号"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.qsd.jmwh.view.NormaFormItemVIew>
+
+
+    <com.qsd.jmwh.view.NormaFormItemVIew
+        app:length="6"
+        app:input_type="number"
+        android:id="@+id/get_ver_code"
+        app:show_top_line="false"
+        app:left_text="验证码"
+        app:content_hint="请输入收到的验证码"
+        android:layout_width="match_parent"
+        app:right_button_hint="发送验证码"
+        android:layout_height="wrap_content">
+    </com.qsd.jmwh.view.NormaFormItemVIew>
+
+
+    <com.yu.common.ui.DelayClickTextView
+        android:id="@+id/next"
+        style="@style/app_blue_button"
+        android:layout_marginTop="97dp"
+        android:text="确定"
+        />
+
+</LinearLayout>

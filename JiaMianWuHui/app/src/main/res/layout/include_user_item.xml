@@ -38,6 +38,7 @@
         android:layout_height="187dp">
         
         <com.yu.common.ui.DelayClickImageView
+            android:id="@+id/add_photo"
             android:layout_marginTop="25dp"
             android:src="@drawable/ic_add_button"
             android:layout_width="75dp"
@@ -93,6 +94,7 @@
 
 
     <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/setting"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="49dp"

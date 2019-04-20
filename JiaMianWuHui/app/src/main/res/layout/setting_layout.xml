@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_F4F4F4"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/push"
+        app:user_left_text="消息推送设置"
+        app:show_line="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/phone_number"
+        android:layout_marginTop="10dp"
+        app:user_left_text="手机号码"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/edit_password"
+        app:user_left_text="修改密码"
+        app:show_line="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <com.qsd.jmwh.view.UserItemView
+        android:layout_marginTop="10dp"
+        app:user_left_text="清除图片缓存"
+        app:user_hint_text="0.00M"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.qsd.jmwh.view.UserItemView
+        app:user_left_text="设置App开锁密码"
+        app:show_line="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <com.qsd.jmwh.view.UserItemView
+        app:showArrow="false"
+        android:layout_marginTop="10dp"
+        app:user_left_text="假面舞会用户使用协议"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <com.qsd.jmwh.view.UserItemView
+        app:showArrow="false"
+        app:left_text_color="#FF001F"
+        android:layout_marginTop="10dp"
+        app:user_left_text="退出登录"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
