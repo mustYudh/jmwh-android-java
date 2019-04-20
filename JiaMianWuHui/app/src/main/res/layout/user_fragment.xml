@@ -1,100 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:overScrollMode="never"
+    android:scrollbars="none">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="210dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
-        <LinearLayout
-            android:background="@color/app_main_bg_color"
-            android:gravity="center_horizontal"
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
-            <com.qsd.jmwh.view.CircleImageView
-                android:id="@+id/header"
-                android:layout_marginTop="35dp"
-                android:src="@color/color_EEEEEE"
-                android:layout_width="65dp"
-                android:layout_height="65dp"/>
+            android:layout_height="210dp">
 
-            <TextView
-                android:layout_marginTop="12dp"
-                android:layout_below="@+id/header"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/app_main_bg_color"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <com.qsd.jmwh.view.CircleImageView
+                    android:id="@+id/header"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:layout_marginTop="35dp"
+                    android:src="@color/color_EEEEEE"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/header"
+                    android:layout_marginTop="12dp"
+                    android:text="桃花盛开的地方"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="杭州市 · 学生 · 21岁"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="约会范围：上海市，北京市"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="桃花盛开的地方"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                />
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right"
+                android:layout_marginTop="22dp"
+                android:padding="18dp"
+                android:src="@drawable/ic_point"/>
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_marginTop="-15dp"
+            android:background="@drawable/shape_gary_top_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="14dp">
 
             <TextView
-                android:textSize="12sp"
-                android:layout_marginTop="5dp"
+                android:layout_width="34dp"
+                android:layout_height="20dp"
+                android:background="@drawable/shape_bulue_btn"
+                android:gravity="center"
+                android:text="可靠"
                 android:textColor="@color/white"
-                android:text="杭州市 · 学生 · 21岁"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
+                android:textSize="10sp"/>
 
             <TextView
-                android:textSize="12sp"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/white"
-                android:text="约会范围：上海市，北京市"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="他通过了面具公园对他微信朋友全的身份安全审核。"
+                android:textColor="@color/color_666666"
+                android:textSize="13sp"/>
+
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="right"
-            android:layout_marginTop="22dp"
-            android:padding="18dp"
-            android:src="@drawable/ic_point"/>
-    </FrameLayout>
 
-    
-    
-    <LinearLayout
-        android:paddingLeft="14dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:layout_marginTop="-15dp"
-        android:background="@drawable/shape_gary_top_bg"
-        android:layout_width="match_parent"
-        android:layout_height="49dp">
+        <include layout="@layout/include_user_item"/>
 
-        <TextView
-            android:gravity="center"
-            android:textSize="10sp"
-            android:textColor="@color/white"
-            android:text="可靠"
-            android:background="@drawable/shape_bulue_btn"
-            android:layout_width="34dp"
-            android:layout_height="20dp"/>
-
-        <TextView
-            android:layout_marginLeft="5dp"
-            android:gravity="center_vertical"
-            android:textColor="@color/color_666666"
-            android:textSize="13sp"
-            android:text="他通过了面具公园对他微信朋友全的身份安全审核。"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
 
     </LinearLayout>
-    
 
-
-</LinearLayout>
+</ScrollView>

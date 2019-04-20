@@ -20,4 +20,14 @@
         <attr name="length" format="string"/>
         <attr name="hint_color" format="color"/>
     </declare-styleable>
+
+    <declare-styleable name="UserItemView">
+        <attr name="type" format="string"/>
+        <attr name="showArrow" format="boolean"/>
+        <attr name="left_text_color" format="color"/>
+        <attr name="hint_text_color" format="color"/>
+        <attr name="user_left_text" format="string"/>
+        <attr name="user_hint_text" format="string"/>
+        <attr name="show_line" format="boolean"/>
+    </declare-styleable>
 </resources>

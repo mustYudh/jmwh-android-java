@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_EEEEEE"
+    android:orientation="vertical">
+
+    <com.qsd.jmwh.view.UserItemView
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:user_hint_text="升级会员尊享约会特权"
+        app:user_left_text="会员"/>
+
+    <com.qsd.jmwh.view.UserItemView
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:user_left_text="钱包"
+        app:user_hint_text="0.00元，0假面币"/>
+
+    <com.qsd.jmwh.view.UserItemView
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:show_line="false"
+        app:user_left_text="隐私设置"/>
+    
+    
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="187dp">
+        
+        <com.yu.common.ui.DelayClickImageView
+            android:layout_marginTop="25dp"
+            android:src="@drawable/ic_add_button"
+            android:layout_width="75dp"
+            android:layout_height="75dp"/>
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:text="上传我的第一张照片"
+            android:textSize="16sp"
+            android:textColor="@color/color_2A2A2A"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:text="照片可以让女士对约会更有安全感"
+            android:textSize="13sp"
+            android:textColor="@color/color_AAAAAA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:paddingLeft="15dp"
+        android:gravity="center_vertical"
+        android:text="长按图片可以排序，请勿上传非法裸露低俗内容，严重者封号。"
+        android:textColor="@color/color_666666"
+        android:textSize="12sp"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"/>
+
+
+    <com.qsd.jmwh.view.UserItemView
+        app:hint_text_color="@color/app_main_bg_color"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:user_left_text="历史访客"
+        app:user_hint_text="有5人看过你"/>
+
+
+    <com.qsd.jmwh.view.UserItemView
+        app:hint_text_color="@color/app_main_bg_color"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:show_line="false"
+        app:user_left_text="阅后即焚"
+        app:user_hint_text="(有2个人焚毁了你的照片) 一键恢复"/>
+
+
+
+
+
+    <com.qsd.jmwh.view.UserItemView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:user_left_text="设置"
+        app:user_hint_text="消息推送、修改密码"/>
+
+    <com.qsd.jmwh.view.UserItemView
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:user_left_text="帮朋友申请验证码"
+        />
+
+    <com.qsd.jmwh.view.UserItemView
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:show_line="false"
+        app:user_left_text="分享假面舞会给朋友"
+        />
+
+
+
+
+    <com.qsd.jmwh.view.UserItemView
+        android:layout_marginTop="10dp"
+        app:left_text_color="@color/app_main_bg_color"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:user_left_text="有问题？联系客服"
+        />
+
+
+    <com.qsd.jmwh.view.UserItemView
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:user_left_text="当前版本"
+        app:user_hint_text="1.0"
+        app:showArrow="false"
+        android:layout_marginBottom="10dp"
+        />
+
+
+</LinearLayout>
