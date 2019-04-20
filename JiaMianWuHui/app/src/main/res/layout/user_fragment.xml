@@ -52,15 +52,48 @@
         </LinearLayout>
 
         <ImageView
-            android:layout_gravity="right"
-            android:padding="18dp"
-            android:layout_marginTop="22dp"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/ic_point"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right"
+            android:layout_marginTop="22dp"
+            android:padding="18dp"
+            android:src="@drawable/ic_point"/>
     </FrameLayout>
 
+    
+    
+    <LinearLayout
+        android:paddingLeft="14dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginTop="-15dp"
+        android:background="@drawable/shape_gary_top_bg"
+        android:layout_width="match_parent"
+        android:layout_height="49dp">
+
+        <TextView
+            android:gravity="center"
+            android:textSize="10sp"
+            android:textColor="@color/white"
+            android:text="可靠"
+            android:background="@drawable/shape_bulue_btn"
+            android:layout_width="34dp"
+            android:layout_height="20dp"/>
+
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/color_666666"
+            android:textSize="13sp"
+            android:text="他通过了面具公园对他微信朋友全的身份安全审核。"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
     
 
 
