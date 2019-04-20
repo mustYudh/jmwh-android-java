@@ -40,7 +40,7 @@ public class UserItemView extends LinearLayout {
     @SuppressLint("Recycle")
     private void initView(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.UserItemView);
-        LayoutInflater.from(context).inflate(R.layout.inflate_user_item, this, true);
+        View view = LayoutInflater.from(context).inflate(R.layout.inflate_user_item, this, true);
         TextView leftTextView = findViewById(R.id.left_text);
         switchView = findViewById(R.id.switch_button);
         selectBtn = findViewById(R.id.select_button);
@@ -58,11 +58,12 @@ public class UserItemView extends LinearLayout {
             switch (type) {
                 case "switch":
                     arrow.setVisibility(GONE);
-                    selectBtn.setVisibility(VISIBLE);
+                    switchView.setVisibility(VISIBLE);
                     break;
                 case "selected":
                     arrow.setVisibility(GONE);
-                    switchView.setVisibility(VISIBLE);
+                    selectBtn.setVisibility(VISIBLE);
+                    selectBtn.setOnClickListener(v -> setButtonSelected(!buttonSelected));
                     break;
             }
         }

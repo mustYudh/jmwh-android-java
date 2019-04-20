@@ -111,8 +111,8 @@ public class CustomDynamicInterceptor extends BaseDynamicInterceptor<CustomDynam
         assert oldParams != null;
         TreeMap<String, Object> newParams = new TreeMap<>();
         newParams.put("sDeviceType", "IOS");
-        if (UserProfile.getInstance().getAppAccount() != -1) {
-//            newParams.put("lUserId", UserProfile.getInstance().getAppAccount() + "");
+        if (UserProfile.getInstance().getAppAccount() != -1 && !oldParams.keySet().contains("lUserId")) {
+            newParams.put("lUserId", UserProfile.getInstance().getAppAccount() + "");
         }
         newParams.putAll(oldParams);
         StringBuilder sing = new StringBuilder();
@@ -128,7 +128,7 @@ public class CustomDynamicInterceptor extends BaseDynamicInterceptor<CustomDynam
         String singResult = MD5Utils.string2MD5(sing.toString()).toUpperCase();
         Log.e("======>加密结果", singResult);
         newParams.put("sign", singResult);
-        if (UserProfile.getInstance().isAppLogin()) {
+        if (UserProfile.getInstance().isAppLogin() && !newParams.keySet().contains("token")) {
             if (!TextUtils.isEmpty(UserProfile.getInstance().getAppToken())) {
                 newParams.put("token", UserProfile.getInstance().getAppToken());
             }

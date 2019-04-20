@@ -1,51 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/color_F4F4F4"
-            android:orientation="vertical"
-            android:id="@+id/scroll_view"
 
-    >
 
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/color_F4F4F4"
+    android:overScrollMode="never"
+    android:scrollbars="none">
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <FrameLayout
+        <TextView
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:textSize="13sp"
+            android:text="个人详情"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:paddingTop="21dp"
-            android:paddingBottom="20dp">
-
-
-
-            <com.qsd.jmwh.view.CircleImageView
-                android:background="@drawable/shape_circle_header_bg"
-                android:id="@+id/header"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                />
-
-            <com.yu.common.ui.DelayClickTextView
-                android:id="@+id/select_hint"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:text="上传头像"
-                android:gravity="center"
-                android:scaleType="centerCrop"
-                android:textColor="@color/color_2A2A2A"
-                android:textSize="15sp"
-                />
-        </FrameLayout>
-
+            android:layout_height="33dp"/>
 
         <com.qsd.jmwh.view.NormaFormItemVIew
             android:layout_width="match_parent"
@@ -99,9 +75,40 @@
             android:paddingLeft="15dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:text="更多信息（选填）"
+            android:text="社交账号（选填）"
             android:textSize="13sp"/>
 
+        <com.qsd.jmwh.view.NormaFormItemVIew
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:content_hint="请填写"
+            app:left_text="微信"/>
+
+        <com.qsd.jmwh.view.NormaFormItemVIew
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:content_hint="请填写"
+            app:show_top_line="false"
+            app:left_text="QQ"/>
+
+
+        <com.qsd.jmwh.view.UserItemView
+            app:type="switch"
+            app:showArrow="false"
+            app:user_left_text="我的用户资料隐藏社交账号"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_F4F4F4"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="更多信息（选填）"
+            android:textSize="13sp"/>
 
 
 
@@ -126,6 +133,7 @@
 
 
         <LinearLayout
+            android:layout_marginBottom="23dp"
             android:layout_width="match_parent"
             android:layout_height="90dp"
             android:background="@color/white"
@@ -161,40 +169,5 @@
         </LinearLayout>
 
 
-        <com.yu.common.ui.DelayClickTextView
-            android:id="@+id/login"
-            style="@style/app_blue_button"
-            android:layout_marginTop="30dp"
-            android:text="进入假面舞会"
-            />
-
-
-        <LinearLayout
-            android:paddingBottom="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <com.yu.common.ui.DelayClickTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="点击进入表示你已经阅读并同意"
-                android:textSize="12sp"/>
-
-
-            <com.yu.common.ui.DelayClickTextView
-                android:id="@+id/agreement"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="《用户协议》"
-                android:textColor="@color/app_main_bg_color"
-                android:textSize="12sp"/>
-        </LinearLayout>
-
-
     </LinearLayout>
-
-
 </ScrollView>

@@ -1,51 +1,35 @@
-package com.qsd.jmwh.module.register;
+package com.qsd.jmwh.module.home.user.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
-import com.qsd.jmwh.module.home.HomeActivity;
-import com.qsd.jmwh.module.register.bean.EditUserInfo;
+import com.qsd.jmwh.data.UserProfile;
+import com.qsd.jmwh.module.home.user.presenter.EditUserInfoPresenter;
+import com.qsd.jmwh.module.home.user.presenter.EditUserInfoViewer;
+import com.qsd.jmwh.module.register.DateRangeActivity;
 import com.qsd.jmwh.module.register.bean.RangeData;
 import com.qsd.jmwh.module.register.bean.SelectData;
 import com.qsd.jmwh.module.register.dialog.RangeItemPop;
 import com.qsd.jmwh.module.register.dialog.SelectInfoPop;
-import com.qsd.jmwh.module.register.presenter.EditUserInfoPresenter;
-import com.qsd.jmwh.module.register.presenter.EditUserInfoViewer;
 import com.qsd.jmwh.view.NormaFormItemVIew;
 import com.yu.common.mvp.PresenterLifeCycle;
-import com.yu.common.toast.ToastUtils;
-import com.yu.common.utils.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
-import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
-import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
+import static com.qsd.jmwh.module.register.EditUserDataActivity.DATE_RANGE_REQUEST_CODE;
+import static com.qsd.jmwh.module.register.EditUserDataActivity.PROJECT_REQUEST_CODE;
 
-public class EditUserDataActivity extends BaseBarActivity
-        implements EditUserInfoViewer, View.OnClickListener {
+public class EditUserInfoActivity extends BaseBarActivity implements View.OnClickListener, EditUserInfoViewer {
     @PresenterLifeCycle
-    EditUserInfoPresenter mPresenter = new EditUserInfoPresenter(this);
+    private EditUserInfoPresenter mPresenter = new EditUserInfoPresenter(this);
 
-    private static final String TOKEN = "token";
-    private static final String USER_ID = "user_id";
-    public static final int DATE_RANGE_REQUEST_CODE = 0X123;
-    public static final int PROJECT_REQUEST_CODE = 0X124;
-
-    private TextView headerHint;
-    private ImageView selectHeader;
-    private String userHeaderUrl;
     private NormaFormItemVIew location;
     private NormaFormItemVIew professional;
     private NormaFormItemVIew project;
@@ -53,28 +37,21 @@ public class EditUserDataActivity extends BaseBarActivity
     private NormaFormItemVIew weight;
     private NormaFormItemVIew age;
 
-    public static Intent getIntent(Context context, String token, int lUserId) {
-        Intent starter = new Intent(context, EditUserDataActivity.class);
-        starter.putExtra(TOKEN, token);
-        starter.putExtra(USER_ID, lUserId);
-        return starter;
-    }
 
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
-        setContentView(R.layout.edit_user_data_activity);
+        setContentView(R.layout.edit_user_info_layout);
     }
 
     @Override
     protected void loadData() {
-        setTitle("完善资料");
+        setTitle("编辑资料");
         initView();
         initListener();
+        setRightMenu("保存", v -> commitUserInfo());
     }
 
     private void initView() {
-        headerHint = bindView(R.id.select_hint);
-        selectHeader = bindView(R.id.header);
         location = bindView(R.id.location);
         professional = bindView(R.id.professional);
         project = bindView(R.id.project);
@@ -84,21 +61,26 @@ public class EditUserDataActivity extends BaseBarActivity
     }
 
     private void initListener() {
-        selectHeader.setOnClickListener(this);
         bindView(R.id.login, this);
         bindView(R.id.agreement, this);
         initItemClickListener();
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
+
+
     private void initItemClickListener() {
         location.setOnClickSelectedItem(v ->
                 getLaunchHelper().startActivityForResult(
-                        DateRangeActivity.getIntent(getActivity(), 1, getIntent().getStringExtra(TOKEN),
-                                getIntent().getIntExtra(USER_ID, -1), "约会范围"), DATE_RANGE_REQUEST_CODE));
+                        DateRangeActivity.getIntent(getActivity(), 1, UserProfile.getInstance().getAppToken(),
+                                UserProfile.getInstance().getAppAccount(), "约会范围"), DATE_RANGE_REQUEST_CODE));
         professional.setOnClickSelectedItem(v ->
                 getLaunchHelper().startActivityForResult(
-                        DateRangeActivity.getIntent(getActivity(), 0, getIntent().getStringExtra(TOKEN),
-                                getIntent().getIntExtra(USER_ID, -1), "职业"), PROJECT_REQUEST_CODE));
+                        DateRangeActivity.getIntent(getActivity(), 0, UserProfile.getInstance().getAppToken(),
+                                UserProfile.getInstance().getAppAccount(), "职业"), PROJECT_REQUEST_CODE));
         project.setOnClickSelectedItem(v -> mPresenter.getDateProject());
         height.setOnClickSelectedItem(v -> {
             List<SelectData> datas = new ArrayList<>();
@@ -150,66 +132,25 @@ public class EditUserDataActivity extends BaseBarActivity
         });
     }
 
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.header:
-                RxGalleryFinalApi.getInstance(EditUserDataActivity.this)
-                        .openGalleryRadioImgDefault(new RxBusResultDisposable<ImageRadioResultEvent>() {
-                            @Override
-                            protected void onEvent(ImageRadioResultEvent imageRadioResultEvent)
-                                    throws Exception {
-                                if (!TextUtils.isEmpty(imageRadioResultEvent.getResult().getThumbnailSmallPath())) {
-                                    mPresenter.setHeader(imageRadioResultEvent.getResult().getThumbnailSmallPath());
-                                }
-                            }
-                        });
-                break;
-            case R.id.login:
-                EditUserInfo editUserInfo = new EditUserInfo();
-                mPresenter.editUserInfo(editUserInfo);
-                break;
-            case R.id.agreement:
-                ToastUtils.show("用户协议");
-                break;
-            default:
-        }
-    }
-
-    @Override
-    public void setUserHeaderSuccess(String url) {
-        userHeaderUrl = url;
-        headerHint.setVisibility(View.GONE);
-        selectHeader.setVisibility(View.VISIBLE);
-        ImageLoader.loadCenterCrop(EditUserDataActivity.this, url, selectHeader, R.mipmap.ic_launcher);
-    }
-
     @Override
     public void showDateProjectList(List<String> list) {
         RangeItemPop rangeItemPop = new RangeItemPop(getActivity());
         rangeItemPop.setData(list).setData(list).setOnSelectedProjectListener(selected -> {
             Set<Integer> keys = selected.keySet();
             for (int i = 0; i < keys.size(); i++) {
-                if (i != keys.size() -1) {
+                if (i != keys.size() - 1) {
 
                 }
             }
-//            project.setContentText();
         }).showPopupWindow();
     }
 
-
     @Override
     public void commitUserInfo() {
-        getLaunchHelper().startActivity(HomeActivity.class);
         finish();
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

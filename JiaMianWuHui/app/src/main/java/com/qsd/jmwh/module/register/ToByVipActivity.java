@@ -111,7 +111,7 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
             adapter.notifyDataSetChanged();
             cdoListBean = (VipInfoBean.CdoListBean) adapter.getData().get(position);
             bindView(R.id.money_root, true);
-            payCount.setText(cdoListBean.nGoodsRealFee + ".00");
+            payCount.setText((int) cdoListBean.nGoodsRealFee + ".00");
             notifyDataSetChanged();
         });
         payTypeAdapter.setOnItemClickListener((adapter, view, position) -> {
