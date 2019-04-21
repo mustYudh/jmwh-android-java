@@ -12,8 +12,21 @@ public class HomeParkPageAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
-    public Fragment getItem(int i) {
-        return new PersonFragment();
+    public Fragment getItem(int position) {
+        Fragment ft = null;
+        switch (position) {
+            case 0:
+                ft = PersonFragment.newInstance("0");
+                break;
+            case 1:
+                ft = PersonFragment.newInstance("1");
+                break;
+            case 2:
+                ft = PersonFragment.newInstance("2");
+                break;
+
+        }
+        return ft;
     }
 
     @Override

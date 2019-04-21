@@ -110,7 +110,8 @@ public class CustomDynamicInterceptor extends BaseDynamicInterceptor<CustomDynam
         }
         assert oldParams != null;
         TreeMap<String, Object> newParams = new TreeMap<>();
-        newParams.put("sDeviceType", "IOS");
+        newParams.put("sDeviceType", "Android");
+
         if (UserProfile.getInstance().getAppAccount() != -1 && !oldParams.keySet().contains("lUserId")) {
             newParams.put("lUserId", UserProfile.getInstance().getAppAccount() + "");
         }
