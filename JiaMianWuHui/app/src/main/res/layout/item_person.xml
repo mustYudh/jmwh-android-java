@@ -33,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
                 android:text="曾经是好女孩"
+                android:id="@+id/tv_user_name"
                 android:textColor="#ff222222"
                 android:textSize="15sp"
                 />

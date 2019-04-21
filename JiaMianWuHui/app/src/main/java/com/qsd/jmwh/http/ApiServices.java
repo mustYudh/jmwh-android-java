@@ -1,5 +1,6 @@
 package com.qsd.jmwh.http;
 
+import com.qsd.jmwh.module.home.park.bean.HomePersonListBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
 import com.qsd.jmwh.module.login.bean.LoginInfo;
 import com.qsd.jmwh.module.register.bean.DateProjectBean;
@@ -16,27 +17,30 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface ApiServices {
-        @NetMethod(ParameterNames = {"sMobile"}, Url = "/SystemService/sendSMS")
-        Observable<SendVerCodeBean> send(String sMobile);
+    @NetMethod(ParameterNames = {"sMobile"}, Url = "/SystemService/sendSMS")
+    Observable<SendVerCodeBean> send(String sMobile);
 
-        @NetMethod(ParameterNames =  {"sAuthCode","sLoginName","sLoginMode","sPwd"}, Url = "/UserService/registUser")
-        Observable<UserInfo> register(String sAuthCode, String sLoginName, String sLoginMode, String sPwd);
+    @NetMethod(ParameterNames = {"sAuthCode", "sLoginName", "sLoginMode", "sPwd"}, Url = "/UserService/registUser")
+    Observable<UserInfo> register(String sAuthCode, String sLoginName, String sLoginMode, String sPwd);
 
-        @NetMethod(ParameterNames = {"nSex","lUserId"},Url = "/UserService/modifySex")
-        Observable<Object> selectGender(int nSex,int lUserId);
+    @NetMethod(ParameterNames = {"nSex", "lUserId"}, Url = "/UserService/modifySex")
+    Observable<Object> selectGender(int nSex, int lUserId);
 
-        @POST("/gateway/rest/v3/UserService/login")
-        Observable<ApiResult<LoginInfo>> login(@Body RequestBody requestBody);
+    @POST("/gateway/rest/v3/UserService/login")
+    Observable<ApiResult<LoginInfo>> login(@Body RequestBody requestBody);
 
-        @NetMethod(ParameterNames = {"nLevel","lParentId","lUserId","token"},Url = "/TwosomeService/getTwosomeList")
-        Observable<RangeData> getDateRange(int nLevel,int lParentId,int lUserId,String token);
+    @NetMethod(ParameterNames = {"nLevel", "lParentId", "lUserId", "token"}, Url = "/TwosomeService/getTwosomeList")
+    Observable<RangeData> getDateRange(int nLevel, int lParentId, int lUserId, String token);
 
-        @NetMethod(Url = "/SystemService/getUserConfigInfo")
-        Observable<DateProjectBean> getDateProject();
+    @NetMethod(Url = "/SystemService/getUserConfigInfo")
+    Observable<DateProjectBean> getDateProject();
 
-        @NetMethod(ParameterNames = {"nLat","nLng","sDatingRange","nTab","pageindex","nSex"},Url = "/DatingService/getDatingList")
-        Observable<HomeRadioListBean> getRadioDate(String nLat, String nLng,String sDatingRange, String nTab, String pageindex,String nSex);
+    @NetMethod(ParameterNames = {"nLat", "nLng", "sDatingRange", "nTab", "pageindex", "nSex"}, Url = "/DatingService/getDatingList")
+    Observable<HomeRadioListBean> getRadioDate(String nLat, String nLng, String sDatingRange, String nTab, String pageindex, String nSex);
 
-        @NetMethod(ParameterNames = {"lUserId","token"},Url = "/GoodsService/getVIPPayInfo")
-        Observable<VipInfoBean> getVipInfoList(int lUserId,String token);
+    @NetMethod(ParameterNames = {"lUserId", "token"}, Url = "/GoodsService/getVIPPayInfo")
+    Observable<VipInfoBean> getVipInfoList(int lUserId, String token);
+
+    @NetMethod(ParameterNames = {"nLat", "nLng", "nTab", "sNickName", "pageindex", "nSex"}, Url = "/UserService/getUserList")
+    Observable<HomePersonListBean> getPersonListDate(String nLat, String nLng, String nTab, String sNickName, String pageindex, String nSex);
 }
