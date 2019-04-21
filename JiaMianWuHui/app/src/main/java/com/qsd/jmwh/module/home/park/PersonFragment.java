@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseFragment;
@@ -18,6 +20,7 @@ public class PersonFragment extends BaseFragment implements PersonViewer {
     PersonPresenter mPresenter = new PersonPresenter(this);
     private RecyclerView rv_person;
     private PersonRvAdapter adapter;
+    private TextView tv_top_num;
 
     @Override
     protected int getContentViewId() {
@@ -50,6 +53,7 @@ public class PersonFragment extends BaseFragment implements PersonViewer {
 
     private void initView(String home_type) {
         rv_person = bindView(R.id.rv_person);
+        tv_top_num = bindView(R.id.tv_top_num);
         rv_person.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         mPresenter.initPersonListData("111.00", "222.00", home_type, "", "0", "0");
@@ -68,8 +72,16 @@ public class PersonFragment extends BaseFragment implements PersonViewer {
             } else {
                 //空页面
             }
+            if (homePersonListBean.nNotExistGalaryCount != 0){
+                tv_top_num.setVisibility(View.VISIBLE);
+                tv_top_num.setText("已经隐藏" + homePersonListBean.nNotExistGalaryCount + "位没有照片的女士");
+            }else {
+                tv_top_num.setVisibility(View.GONE);
+            }
+
         } else {
             //错误界面
+            tv_top_num.setVisibility(View.GONE);
         }
     }
 }

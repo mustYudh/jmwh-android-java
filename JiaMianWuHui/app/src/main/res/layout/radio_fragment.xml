@@ -50,19 +50,28 @@
 
         </LinearLayout>
 
-        <RelativeLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:descendantFocusability="blocksDescendants">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            >
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_radio"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:nestedScrollingEnabled="false"
-                android:overScrollMode="never"
-                android:scrollbars="none"/>
-        </RelativeLayout>
+                android:layout_height="wrap_content"
+                android:descendantFocusability="blocksDescendants">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_radio"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
+                    android:scrollbars="none"/>
+            </RelativeLayout>
+
+            <include layout="@layout/layout_empty"/>
+        </FrameLayout>
 
 
     </LinearLayout>

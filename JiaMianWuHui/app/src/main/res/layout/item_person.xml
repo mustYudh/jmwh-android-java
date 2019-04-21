@@ -47,6 +47,7 @@
 
 
             <com.yu.common.ui.DelayClickTextView
+                android:id="@+id/tv_photo_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -68,6 +69,7 @@
 
 
         <com.yu.common.ui.DelayClickTextView
+            android:id="@+id/tv_middle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -85,6 +87,7 @@
             android:layout_marginTop="5dp">
 
             <com.yu.common.ui.DelayClickTextView
+                android:id="@+id/tv_auth_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_home_person"
@@ -100,6 +103,7 @@
                 />
 
             <com.yu.common.ui.DelayClickTextView
+                android:id="@+id/tv_online"
                 android:layout_width="49dp"
                 android:layout_height="17dp"
                 android:layout_marginLeft="6dp"
