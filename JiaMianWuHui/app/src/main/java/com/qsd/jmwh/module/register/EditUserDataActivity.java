@@ -27,6 +27,7 @@ import com.yu.common.utils.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
 import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
@@ -166,8 +167,8 @@ public class EditUserDataActivity extends BaseBarActivity
                             protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) {
                                 if (!TextUtils.isEmpty(imageRadioResultEvent.getResult().getThumbnailSmallPath())) {
                                     mPresenter.setHeader(imageRadioResultEvent.getResult().getThumbnailSmallPath(),
-                                            "maskba/" + getIntent().getIntExtra(USER_ID, -1) + "/head_" + getIntent().getIntExtra(USER_ID, -1) + ".jpg",
-                                            getIntent().getStringExtra(USER_ID), getIntent().getStringExtra(TOKEN));
+                                             + getIntent().getIntExtra(USER_ID, -1) + "/head_" + UUID.randomUUID().toString() + ".jpg",
+                                            getIntent().getIntExtra(USER_ID,-1) + "", getIntent().getStringExtra(TOKEN));
                                 }
                             }
                         });
