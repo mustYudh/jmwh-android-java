@@ -3,6 +3,7 @@ package com.qsd.jmwh.http;
 import com.qsd.jmwh.module.home.park.bean.HomePersonListBean;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
+import com.qsd.jmwh.module.home.user.bean.UserCenterMyInfo;
 import com.qsd.jmwh.module.login.bean.LoginInfo;
 import com.qsd.jmwh.module.register.bean.DateProjectBean;
 import com.qsd.jmwh.module.register.bean.RangeData;
@@ -63,5 +64,8 @@ public interface ApiServices {
 
     @NetMethod(ParameterNames= {"lUserId","sAuthCode","token"},Url = "/UserService/getUserRegistAuthCode")
     Observable<Object> getUserAuthByCode(int lUserId,String token,String code);
+
+    @NetMethod(Url = "/UserService/getMyUserCenterInfo")
+    Observable<UserCenterMyInfo> getUserCenterInfo();
 
 }

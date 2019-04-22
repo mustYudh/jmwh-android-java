@@ -18,8 +18,7 @@
         android:id="@+id/money_bag"
         android:layout_width="match_parent"
         android:layout_height="49dp"
-        app:user_left_text="钱包"
-        app:user_hint_text="0.00元，0假面币"/>
+        app:user_left_text="钱包"/>
 
     <com.qsd.jmwh.view.UserItemView
         android:id="@+id/privacy_setting"

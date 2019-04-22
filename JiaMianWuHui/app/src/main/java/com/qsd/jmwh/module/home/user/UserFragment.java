@@ -3,7 +3,9 @@ package com.qsd.jmwh.module.home.user;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.denghao.control.view.utils.UpdataCurrentFragment;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseFragment;
 import com.qsd.jmwh.data.UserProfile;
@@ -11,10 +13,13 @@ import com.qsd.jmwh.module.home.user.activity.EditUserInfoActivity;
 import com.qsd.jmwh.module.home.user.activity.MoneyBagActivity;
 import com.qsd.jmwh.module.home.user.activity.PrivacySettingActivity;
 import com.qsd.jmwh.module.home.user.activity.SettingActivity;
+import com.qsd.jmwh.module.home.user.bean.UserCenterMyInfo;
 import com.qsd.jmwh.module.home.user.presenter.UserPresenter;
 import com.qsd.jmwh.module.home.user.presenter.UserViewer;
 import com.qsd.jmwh.module.register.ToByVipActivity;
+import com.qsd.jmwh.view.UserItemView;
 import com.yu.common.mvp.PresenterLifeCycle;
+import com.yu.common.utils.ImageLoader;
 
 import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
 import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
@@ -26,7 +31,7 @@ import cn.finalteam.rxgalleryfinal.utils.Logger;
  * @date 2018/6/12
  */
 
-public class UserFragment extends BaseFragment implements UserViewer, View.OnClickListener {
+public class UserFragment extends BaseFragment implements UserViewer, View.OnClickListener, UpdataCurrentFragment {
 
     @PresenterLifeCycle
     private UserPresenter mPresenter = new UserPresenter(this);
@@ -94,5 +99,29 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
                     }
                 }).open();
 
+    }
+
+    @Override
+    public void setUserInfo(UserCenterMyInfo userInfo) {
+        UserCenterMyInfo.CdoUserBean cdoUser = userInfo.cdoUser;
+        UserCenterMyInfo.CdoWalletDataBean walletData = userInfo.cdoWalletData;
+        bindText(R.id.sNickName, cdoUser.sNickName);
+        bindText(R.id.sDateRange, "约会范围：" + cdoUser.sDateRange);
+        bindText(R.id.job_age_loc, cdoUser.sCity + " · " + cdoUser.sJob + " · " + cdoUser.sAge + "岁");
+        ImageView header = bindView(R.id.header);
+        ImageLoader.loadCenterCrop(getActivity(), cdoUser.sUserHeadPic, header, R.mipmap.ic_launcher);
+        UserItemView money = bindView(R.id.money_bag);
+        money.setHint(walletData.nMoney + "元，" + walletData.nMaskBallCoin + "假面币");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        update(getArguments());
+    }
+
+    @Override
+    public void update(Bundle bundle) {
+        mPresenter.getMyInfo();
     }
 }

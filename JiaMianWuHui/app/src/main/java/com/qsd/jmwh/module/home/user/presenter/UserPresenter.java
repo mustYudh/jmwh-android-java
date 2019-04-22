@@ -1,8 +1,12 @@
 package com.qsd.jmwh.module.home.user.presenter;
 
 
-import android.view.View;
+import android.annotation.SuppressLint;
 
+import com.qsd.jmwh.http.ApiServices;
+import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
+import com.qsd.jmwh.module.home.user.bean.UserCenterMyInfo;
+import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.framework.BaseViewPresenter;
 
 /**
@@ -10,7 +14,7 @@ import com.yu.common.framework.BaseViewPresenter;
  * @date 2019/3/7
  */
 
-
+@SuppressLint("CheckResult")
 public class UserPresenter extends BaseViewPresenter<UserViewer> {
 
 
@@ -18,23 +22,15 @@ public class UserPresenter extends BaseViewPresenter<UserViewer> {
         super(viewer);
     }
 
-    @Override
-    public void createdView(View view) {
 
-    }
+    public void getMyInfo() {
+        XHttpProxy.proxy(ApiServices.class)
+                .getUserCenterInfo()
+                .subscribeWith(new TipRequestSubscriber<UserCenterMyInfo>() {
+                    @Override
+                    protected void onSuccess(UserCenterMyInfo userCenterMyInfo) {
 
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void willDestroy() {
-
+                    }
+                });
     }
 }
