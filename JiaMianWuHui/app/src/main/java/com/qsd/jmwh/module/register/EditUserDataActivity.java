@@ -192,13 +192,15 @@ public class EditUserDataActivity extends BaseBarActivity
         rangeItemPop.setData(list).setData(list).setOnSelectedProjectListener(selected -> {
             if (selected.size() > 4) {
                 ToastUtils.show("最多只能选择4个");
+                rangeItemPop.dismiss();
             } else {
                 StringBuilder result = new StringBuilder();
                 for (int i = 0; i < selected.size(); i++) {
                     result.append(selected.get(i))
                         .append((i != selected.size() - 1) ? ";" : "");
                 }
-                project.setContentText(result);
+                project.setContentText(result.toString());
+                rangeItemPop.dismiss();
             }
         }).showPopupWindow();
     }
