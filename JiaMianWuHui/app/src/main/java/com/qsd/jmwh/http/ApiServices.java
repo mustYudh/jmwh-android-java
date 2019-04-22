@@ -61,7 +61,7 @@ public interface ApiServices {
     @NetMethod(ParameterNames= {"lUserId","token"},Url = "/UserService/getUserRegistAuthCode")
     Observable<Object> getCod(int lUserId, String token);
 
-    @NetMethod(ParameterNames= {"lUserId","sAuthCode"},Url = "/UserService/getUserRegistAuthCode")
-    Observable<Object> getUserAuthByCode(int lUserId,String code);
+    @NetMethod(ParameterNames= {"lUserId","sAuthCode","token"},Url = "/UserService/getUserRegistAuthCode")
+    Observable<Object> getUserAuthByCode(int lUserId,String token,String code);
 
 }

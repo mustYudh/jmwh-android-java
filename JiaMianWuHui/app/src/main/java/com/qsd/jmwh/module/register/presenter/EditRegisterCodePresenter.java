@@ -15,9 +15,9 @@ public class EditRegisterCodePresenter extends BaseViewPresenter<EditRegisterCod
     }
 
 
-    public void commitCode(int userCode, String code) {
+    public void commitCode(int userCode,String token, String code) {
         XHttpProxy.proxy(ApiServices.class)
-                .getUserAuthByCode(userCode,code)
+                .getUserAuthByCode(userCode,token,code)
                 .subscribeWith(new TipRequestSubscriber<Object>() {
                     @Override
                     protected void onSuccess(Object o) {

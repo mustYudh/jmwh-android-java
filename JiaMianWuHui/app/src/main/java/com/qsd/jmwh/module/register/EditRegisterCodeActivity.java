@@ -68,7 +68,7 @@ public class EditRegisterCodeActivity extends BaseBarActivity implements View.On
                     selectHintPop.setTitle("验证码验证通过")
                             .setMessage("欢迎加入假面舞会！请勿把您的的账户泄露给他人，一经发现登录异常，账户会被自动冻结。")
                             .setSingleButton("好的", v1 -> {
-                                mPresenter.commitCode(getIntent().getIntExtra(USER_ID, -1),code);
+                                mPresenter.commitCode(getIntent().getIntExtra(USER_ID, -1),getIntent().getStringExtra(TOKEN),code);
                                 selectHintPop.dismiss();
                             })
                             .showPopupWindow();
