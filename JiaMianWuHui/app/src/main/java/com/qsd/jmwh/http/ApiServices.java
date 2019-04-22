@@ -52,10 +52,16 @@ public interface ApiServices {
     Observable<GetRadioConfigListBean> getConfigList(String nType);
 
     @NetMethod(ParameterNames = {"sNickName", "sDateRange", "sAge", "sJob", "sDatePro", "sHeight",
-            "sWeight", "lUserId", "sIntroduce", "token","sUserHeadPic","sBust","QQ","WX"}, Url = "/UserService/modifyUserInfo")
+            "sWeight", "lUserId", "sIntroduce", "token", "sUserHeadPic", "sBust", "QQ", "WX"}, Url = "/UserService/modifyUserInfo")
     Observable<Object> modifyUserInfo(String sNickName, String sDateRange, String sAge, String sJob,
                                       String sDatePro, String sHeight, String sWeight, String lUserId,
-                                      String sIntroduce, String token,String sUserHeadPic,String sBust,String QQ,String WX);
+                                      String sIntroduce, String token, String sUserHeadPic, String sBust, String QQ, String WX);
 
+
+    @NetMethod(ParameterNames= {"lUserId","token"},Url = "/UserService/getUserRegistAuthCode")
+    Observable<Object> getCod(int lUserId, String token);
+
+    @NetMethod(ParameterNames= {"lUserId","sAuthCode"},Url = "/UserService/getUserRegistAuthCode")
+    Observable<Object> getUserAuthByCode(int lUserId,String code);
 
 }

@@ -13,10 +13,9 @@ import android.widget.TextView;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
-import com.qsd.jmwh.module.home.HomeActivity;
 import com.qsd.jmwh.module.register.bean.RangeData;
 import com.qsd.jmwh.module.register.bean.SelectData;
-import com.qsd.jmwh.module.register.bean.UploaduserInfoParams;
+import com.qsd.jmwh.module.register.bean.UploadUserInfoParams;
 import com.qsd.jmwh.module.register.dialog.RangeItemPop;
 import com.qsd.jmwh.module.register.dialog.SelectInfoPop;
 import com.qsd.jmwh.module.register.presenter.EditUserInfoPresenter;
@@ -41,6 +40,7 @@ public class EditUserDataActivity extends BaseBarActivity
 
     private static final String TOKEN = "token";
     private static final String USER_ID = "user_id";
+    private static final String SEX = "sex";
     public static final int DATE_RANGE_REQUEST_CODE = 0X123;
     public static final int PROJECT_REQUEST_CODE = 0X124;
     private List<String> ranges = new ArrayList<>();
@@ -56,10 +56,11 @@ public class EditUserDataActivity extends BaseBarActivity
     private NormaFormItemVIew sNickName;
     private String headerUrl;
 
-    public static Intent getIntent(Context context, String token, int lUserId) {
+    public static Intent getIntent(Context context, String token, int lUserId,int sex) {
         Intent starter = new Intent(context, EditUserDataActivity.class);
         starter.putExtra(TOKEN, token);
         starter.putExtra(USER_ID, lUserId);
+        starter.putExtra(SEX, sex);
         return starter;
     }
 
@@ -170,14 +171,14 @@ public class EditUserDataActivity extends BaseBarActivity
                             protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) {
                                 if (!TextUtils.isEmpty(imageRadioResultEvent.getResult().getThumbnailSmallPath())) {
                                     mPresenter.setHeader(imageRadioResultEvent.getResult().getThumbnailSmallPath(),
-                                             + getIntent().getIntExtra(USER_ID, -1) + "/head_" + UUID.randomUUID().toString() + ".jpg",
-                                            getIntent().getIntExtra(USER_ID,-1) + "", getIntent().getStringExtra(TOKEN));
+                                            +getIntent().getIntExtra(USER_ID, -1) + "/head_" + UUID.randomUUID().toString() + ".jpg",
+                                            getIntent().getIntExtra(USER_ID, -1) + "", getIntent().getStringExtra(TOKEN));
                                 }
                             }
                         });
                 break;
             case R.id.login:
-                UploaduserInfoParams params = new UploaduserInfoParams();
+                UploadUserInfoParams params = new UploadUserInfoParams();
                 params.sNickName = sNickName.getText();
                 params.sDateRange = location.getText();
                 params.sAge = age.getText();
@@ -186,11 +187,12 @@ public class EditUserDataActivity extends BaseBarActivity
                 params.sHeight = height.getText();
                 params.sWeight = weight.getText();
                 params.sUserHeadPic = headerUrl;
-                params.lUserId = getIntent().getIntExtra(USER_ID,-1) + "";
+                params.lUserId = getIntent().getIntExtra(USER_ID, -1) + "";
                 EditText edit = bindView(R.id.edit_sIntroduce);
                 params.sIntroduce = edit.getText().toString().trim();
                 params.token = getIntent().getStringExtra(TOKEN);
                 mPresenter.uploadUserInfo(params);
+
                 break;
             case R.id.agreement:
                 ToastUtils.show("用户协议");
@@ -229,8 +231,7 @@ public class EditUserDataActivity extends BaseBarActivity
 
     @Override
     public void commitUserInfo() {
-        getLaunchHelper().startActivity(HomeActivity.class);
-        finish();
+        mPresenter.getCode(getIntent().getIntExtra(USER_ID, -1), getIntent().getStringExtra(TOKEN),getIntent().getIntExtra(SEX,-1));
     }
 
 
