@@ -1,5 +1,6 @@
 package com.qsd.jmwh.module.home.radio.presenter;
 
+import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
 import com.yu.common.mvp.Viewer;
 
@@ -9,4 +10,6 @@ import com.yu.common.mvp.Viewer;
  */
 public interface RadioViewer extends Viewer {
     void getDataSuccess(HomeRadioListBean homeRadioListBean);
+
+    void getConfigDataSuccess(GetRadioConfigListBean configListBean);
 }

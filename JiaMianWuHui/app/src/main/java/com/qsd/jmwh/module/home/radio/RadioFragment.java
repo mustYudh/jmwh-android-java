@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarFragment;
 import com.qsd.jmwh.module.home.radio.adapter.HomeRadioRvAdapter;
+import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
 import com.qsd.jmwh.module.home.radio.bean.LocalHomeRadioListBean;
 import com.qsd.jmwh.module.home.radio.presenter.RadioPresenter;
@@ -51,6 +52,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
     @Override
     protected void loadData() {
         mPresenter.initRadioData("30.17722", "120.2007", "", "1", "0", "");
+
     }
 
     private void initView() {
@@ -59,6 +61,13 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
         rv_radio = bindView(R.id.rv_radio);
         ll_empty = bindView(R.id.ll_empty);
         rv_radio.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        tv_right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.initRadioConfigData("0");
+            }
+        });
     }
 
 
@@ -104,5 +113,12 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
             }
         }
 
+    }
+
+    @Override
+    public void getConfigDataSuccess(GetRadioConfigListBean configListBean) {
+        if (configListBean != null && configListBean.cdoList != null && configListBean.cdoList.size() != 0){
+            
+        }
     }
 }
