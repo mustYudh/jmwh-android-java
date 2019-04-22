@@ -3,7 +3,6 @@ package com.qsd.jmwh.module.login.presenter;
 import android.annotation.SuppressLint;
 import android.text.TextUtils;
 
-import com.qsd.jmwh.APP;
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.params.PostParams;
 import com.qsd.jmwh.http.subscriber.NoTipRequestSubscriber;
@@ -36,7 +35,7 @@ public class LoginPresenter extends BaseViewPresenter<LoginViewer> {
         XHttp.custom(ApiServices.class)
                 .login(PostParams.createParams()
                         .put("sLoginName", userName)
-                        .put("sPwd", APP.DEBUG ? pwd : MD5Utils.string2MD5(pwd))
+                        .put("sPwd",MD5Utils.string2MD5(pwd))
                         .creatBody())
                 .compose(RxSchedulerUtils.<ApiResult<LoginInfo>>_io_main_o())
                 .subscribeWith(new NoTipRequestSubscriber<ApiResult<LoginInfo>>() {
