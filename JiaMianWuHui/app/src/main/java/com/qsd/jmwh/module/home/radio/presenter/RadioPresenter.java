@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
+import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.framework.BaseViewPresenter;
@@ -32,6 +33,20 @@ public class RadioPresenter extends BaseViewPresenter<RadioViewer> {
                     protected void onSuccess(HomeRadioListBean homeRadioListBean) {
                         assert getViewer() != null;
                         getViewer().getDataSuccess(homeRadioListBean);
+                    }
+                });
+    }
+
+
+    @SuppressLint("CheckResult")
+    public void initRadioConfigData(String nType) {
+        XHttpProxy.proxy(ApiServices.class)
+                .getConfigList(nType)
+                .subscribeWith(new TipRequestSubscriber<GetRadioConfigListBean>() {
+                    @Override
+                    protected void onSuccess(GetRadioConfigListBean configListBean) {
+                        assert getViewer() != null;
+                        getViewer().getConfigDataSuccess(configListBean);
                     }
                 });
     }

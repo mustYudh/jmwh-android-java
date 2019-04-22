@@ -1,6 +1,7 @@
 package com.qsd.jmwh.http;
 
 import com.qsd.jmwh.module.home.park.bean.HomePersonListBean;
+import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
 import com.qsd.jmwh.module.login.bean.LoginInfo;
 import com.qsd.jmwh.module.register.bean.DateProjectBean;
@@ -46,4 +47,7 @@ public interface ApiServices {
 
     @NetMethod(ParameterNames = {"lUserId","token","sUserHeadPic"}, Url = "/UserService/modifyHeadPic")
     Observable<Object> uploadHeader(String lUserId,String token,String sUserHeadPic);
+
+    @NetMethod(ParameterNames = {"nType"}, Url = "/DatingService/getDatingConfigList")
+    Observable<GetRadioConfigListBean> getConfigList(String nType);
 }
