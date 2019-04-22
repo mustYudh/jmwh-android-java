@@ -14,6 +14,7 @@ import com.qsd.jmwh.module.home.radio.adapter.HomeRadioRvAdapter;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
 import com.qsd.jmwh.module.home.radio.bean.LocalHomeRadioListBean;
+import com.qsd.jmwh.module.home.radio.dialog.RadioItemPop;
 import com.qsd.jmwh.module.home.radio.presenter.RadioPresenter;
 import com.qsd.jmwh.module.home.radio.presenter.RadioViewer;
 import com.yu.common.mvp.PresenterLifeCycle;
@@ -118,7 +119,10 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
     @Override
     public void getConfigDataSuccess(GetRadioConfigListBean configListBean) {
         if (configListBean != null && configListBean.cdoList != null && configListBean.cdoList.size() != 0){
-            
+            RadioItemPop infoPop = new RadioItemPop(getActivity());
+            infoPop.setOutsideTouchable(true);
+            infoPop.setTitle("发布约会广播").setData(configListBean.cdoList).showPopupWindow();
+
         }
     }
 }
