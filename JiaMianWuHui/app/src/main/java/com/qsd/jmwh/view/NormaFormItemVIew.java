@@ -145,9 +145,14 @@ public class NormaFormItemVIew extends LinearLayout {
         rightBtn.setEnabled(enable);
     }
 
-    public String getEditText() {
+    public String getText() {
         String text = mEdit.getText().toString().trim();
-        return !TextUtils.isEmpty(text) ? text : "";
+        if (!TextUtils.isEmpty(text)) {
+            return text;
+        } else {
+            return content.getText().toString().trim();
+        }
+
     }
 
     public void setRightButtonListener(View.OnClickListener listener) {

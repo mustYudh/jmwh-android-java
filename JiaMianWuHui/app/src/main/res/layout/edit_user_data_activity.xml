@@ -48,6 +48,7 @@
 
 
         <com.qsd.jmwh.view.NormaFormItemVIew
+            android:id="@+id/sNickName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:content_hint="请填写"
@@ -145,7 +146,7 @@
 
 
             <EditText
-                android:id="@+id/edit"
+                android:id="@+id/edit_sIntroduce"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

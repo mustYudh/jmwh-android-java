@@ -47,13 +47,13 @@ public class RegisterActivity extends BaseBarActivity implements RegisterViewer,
     private void initListener() {
         bindView(R.id.next, this);
         mSendVerCode.setRightButtonListener(v -> {
-            if (TextUtils.isEmpty(phoneNum.getEditText())) {
+            if (TextUtils.isEmpty(phoneNum.getText())) {
                 ToastUtils.show("手机号输入不能为空");
-            } else if (!phoneNum.getEditText().startsWith("1") || phoneNum.getEditText().length() != 11) {
+            } else if (!phoneNum.getText().startsWith("1") || phoneNum.getText().length() != 11) {
                 ToastUtils.show("检查手机号输入是否正确");
             } else {
                 countDown = new RxCountDown(60);
-                mPresenter.sendVerCode(phoneNum.getEditText(), countDown);
+                mPresenter.sendVerCode(phoneNum.getText(), countDown);
                 countDown.setCountDownTimeListener(new RxCountDownAdapter() {
 
                     @Override
@@ -103,7 +103,7 @@ public class RegisterActivity extends BaseBarActivity implements RegisterViewer,
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.next:
-                mPresenter.register(phoneNum.getEditText(), password.getEditText(), mSendVerCode.getEditText());
+                mPresenter.register(phoneNum.getText(), password.getText(), mSendVerCode.getText());
                 break;
         }
     }

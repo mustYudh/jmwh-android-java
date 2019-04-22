@@ -45,7 +45,7 @@ public class LoginActivity extends BaseBarActivity implements LoginViewer, View.
 
     private String getTextResult(@IdRes int id) {
         NormaFormItemVIew editText = bindView(id);
-        return editText.getEditText();
+        return editText.getText();
     }
 
 

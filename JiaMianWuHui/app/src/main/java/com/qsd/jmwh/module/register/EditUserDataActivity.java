@@ -7,15 +7,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.module.home.HomeActivity;
-import com.qsd.jmwh.module.register.bean.EditUserInfo;
 import com.qsd.jmwh.module.register.bean.RangeData;
 import com.qsd.jmwh.module.register.bean.SelectData;
+import com.qsd.jmwh.module.register.bean.UploaduserInfoParams;
 import com.qsd.jmwh.module.register.dialog.RangeItemPop;
 import com.qsd.jmwh.module.register.dialog.SelectInfoPop;
 import com.qsd.jmwh.module.register.presenter.EditUserInfoPresenter;
@@ -46,13 +47,14 @@ public class EditUserDataActivity extends BaseBarActivity
 
     private TextView headerHint;
     private ImageView selectHeader;
-    private String userHeaderUrl;
     private NormaFormItemVIew location;
     private NormaFormItemVIew professional;
     private NormaFormItemVIew project;
     private NormaFormItemVIew height;
     private NormaFormItemVIew weight;
     private NormaFormItemVIew age;
+    private NormaFormItemVIew sNickName;
+    private String headerUrl;
 
     public static Intent getIntent(Context context, String token, int lUserId) {
         Intent starter = new Intent(context, EditUserDataActivity.class);
@@ -82,6 +84,7 @@ public class EditUserDataActivity extends BaseBarActivity
         height = bindView(R.id.height);
         weight = bindView(R.id.weight);
         age = bindView(R.id.age);
+        sNickName = bindView(R.id.sNickName);
     }
 
     private void initListener() {
@@ -174,8 +177,20 @@ public class EditUserDataActivity extends BaseBarActivity
                         });
                 break;
             case R.id.login:
-                EditUserInfo editUserInfo = new EditUserInfo();
-                mPresenter.editUserInfo(editUserInfo);
+                UploaduserInfoParams params = new UploaduserInfoParams();
+                params.sNickName = sNickName.getText();
+                params.sDateRange = location.getText();
+                params.sAge = age.getText();
+                params.sJob = professional.getText();
+                params.sDatePro = project.getText();
+                params.sHeight = height.getText();
+                params.sWeight = weight.getText();
+                params.sUserHeadPic = headerUrl;
+                params.lUserId = getIntent().getIntExtra(USER_ID,-1) + "";
+                EditText edit = bindView(R.id.edit_sIntroduce);
+                params.sIntroduce = edit.getText().toString().trim();
+                params.token = getIntent().getStringExtra(TOKEN);
+                mPresenter.uploadUserInfo(params);
                 break;
             case R.id.agreement:
                 ToastUtils.show("用户协议");
@@ -186,9 +201,9 @@ public class EditUserDataActivity extends BaseBarActivity
 
     @Override
     public void setUserHeaderSuccess(String url) {
-        userHeaderUrl = url;
         headerHint.setVisibility(View.GONE);
         selectHeader.setVisibility(View.VISIBLE);
+        headerUrl = url;
         ImageLoader.loadCenterCrop(EditUserDataActivity.this, url, selectHeader, R.mipmap.ic_launcher);
     }
 
