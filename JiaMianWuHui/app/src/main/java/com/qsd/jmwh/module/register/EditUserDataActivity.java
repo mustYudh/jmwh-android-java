@@ -9,7 +9,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
+import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
+import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.module.home.HomeActivity;
@@ -24,14 +26,8 @@ import com.qsd.jmwh.view.NormaFormItemVIew;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 import com.yu.common.utils.ImageLoader;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
-import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
-import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
-import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
 
 public class EditUserDataActivity extends BaseBarActivity
         implements EditUserInfoViewer, View.OnClickListener {
@@ -42,6 +38,7 @@ public class EditUserDataActivity extends BaseBarActivity
     private static final String USER_ID = "user_id";
     public static final int DATE_RANGE_REQUEST_CODE = 0X123;
     public static final int PROJECT_REQUEST_CODE = 0X124;
+    private List<String> ranges = new ArrayList<>();
 
     private TextView headerHint;
     private ImageView selectHeader;
@@ -163,10 +160,9 @@ public class EditUserDataActivity extends BaseBarActivity
                 RxGalleryFinalApi.getInstance(EditUserDataActivity.this)
                         .openGalleryRadioImgDefault(new RxBusResultDisposable<ImageRadioResultEvent>() {
                             @Override
-                            protected void onEvent(ImageRadioResultEvent imageRadioResultEvent)
-                                    throws Exception {
+                            protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) {
                                 if (!TextUtils.isEmpty(imageRadioResultEvent.getResult().getThumbnailSmallPath())) {
-                                    mPresenter.setHeader(imageRadioResultEvent.getResult().getThumbnailSmallPath());
+                                    mPresenter.setHeader(imageRadioResultEvent.getResult().getThumbnailSmallPath(),getIntent().getIntExtra(USER_ID,-1) + "/head_uuid.jpg");
                                 }
                             }
                         });
@@ -194,13 +190,16 @@ public class EditUserDataActivity extends BaseBarActivity
     public void showDateProjectList(List<String> list) {
         RangeItemPop rangeItemPop = new RangeItemPop(getActivity());
         rangeItemPop.setData(list).setData(list).setOnSelectedProjectListener(selected -> {
-            Set<Integer> keys = selected.keySet();
-            for (int i = 0; i < keys.size(); i++) {
-                if (i != keys.size() -1) {
-
+            if (selected.size() > 4) {
+                ToastUtils.show("最多只能选择4个");
+            } else {
+                StringBuilder result = new StringBuilder();
+                for (int i = 0; i < selected.size(); i++) {
+                    result.append(selected.get(i))
+                        .append((i != selected.size() - 1) ? ";" : "");
                 }
+                project.setContentText(result);
             }
-//            project.setContentText();
         }).showPopupWindow();
     }
 
@@ -211,6 +210,7 @@ public class EditUserDataActivity extends BaseBarActivity
         finish();
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -219,6 +219,25 @@ public class EditUserDataActivity extends BaseBarActivity
             RangeData.Range range = (RangeData.Range) bundle.getSerializable(DateRangeActivity.RANGE_RESULT);
             if (range != null) {
                 if (requestCode == DATE_RANGE_REQUEST_CODE) {
+                    if (ranges.size() < 4) {
+                        if (range.selected && !TextUtils.isEmpty(range.sName)) {
+                            if (!ranges.contains(range.sName)) {
+                                ranges.add(range.sName);
+                            } else {
+                                ToastUtils.show("您已经选择过了");
+                            }
+                        }
+                        StringBuilder result = new StringBuilder();
+                        for (int i = 0; i < ranges.size(); i++) {
+                            result.append(ranges.get(i))
+                                .append((i != ranges.size() - 1) ? ";" : "");
+                        }
+                        location.setContentText(result.toString());
+                    } else {
+                       ToastUtils.show("最多只能选择4个,即将重新选择");
+                        ranges.clear();
+                        location.setContentText("");
+                    }
 
                 } else if (requestCode == PROJECT_REQUEST_CODE) {
                     professional.setContentText(range.sName);

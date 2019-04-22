@@ -10,7 +10,6 @@ import com.alibaba.sdk.android.oss.common.auth.OSSCredentialProvider;
 import com.alibaba.sdk.android.oss.common.auth.OSSStsTokenCredentialProvider;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
-import com.qsd.jmwh.thrid.oss.AliOssTokenBean;
 import com.qsd.jmwh.thrid.oss.PersistenceResponse;
 import java.util.UUID;
 
@@ -25,8 +24,7 @@ public class UploadImage {
   /**
    * 同步上传图片到阿里云
    */
-  public static PersistenceResponse uploadImage(Context context, AliOssTokenBean aliOssTokenBean,
-      final String fileAbsPath) {
+  public static PersistenceResponse uploadImage(Context context, String objectName,final String fileAbsPath) {
 
     //*********************** 构造 OSSClient ***********************
 
@@ -46,10 +44,10 @@ public class UploadImage {
      * 例：用户id为1的用户的存储路径为：maskba/1/head_uuid.jpg
      */
 
-    final String endpoint = aliOssTokenBean.baseUrl;
+    final String endpoint = "http://oss-cn-beijing.aliyuncs.com";
     final String accessKeyId = "LTAIfv7eDTneohKq";
     final String secretKeyId = "7jlQEkyUqW6EiYPktRCUmgM2ItsQpp";
-    final String securityToken = aliOssTokenBean.securityToken;
+    final String securityToken = "";
 
     OSSCredentialProvider credentialProvider =
         new OSSStsTokenCredentialProvider(accessKeyId, secretKeyId, securityToken);
@@ -59,7 +57,6 @@ public class UploadImage {
     //*********************** 拼接 request url ***********************
 
     final String bucketName = "maskball";
-    final String objectName = aliOssTokenBean.objectName;
 
     final String uploadObjectKey = objectName + SLASH + UUID.randomUUID().toString();
     final String[] splitUrlParts = endpoint.split(DOUBLE_SLASH);
@@ -73,7 +70,6 @@ public class UploadImage {
         + uploadObjectKey;
     String cloudUrl =
         putObjectFromLocalFile(oss, bucketName, uploadObjectKey, fileAbsPath) ? requestUrlSB : null;
-
     PersistenceResponse response = new PersistenceResponse();
     response.cloudUrl = cloudUrl;
     response.success = !TextUtils.isEmpty(cloudUrl);
