@@ -9,9 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
-import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
-import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
+
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.module.home.HomeActivity;
@@ -26,8 +24,13 @@ import com.qsd.jmwh.view.NormaFormItemVIew;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 import com.yu.common.utils.ImageLoader;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
+import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
+import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
 
 public class EditUserDataActivity extends BaseBarActivity
         implements EditUserInfoViewer, View.OnClickListener {
@@ -162,7 +165,9 @@ public class EditUserDataActivity extends BaseBarActivity
                             @Override
                             protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) {
                                 if (!TextUtils.isEmpty(imageRadioResultEvent.getResult().getThumbnailSmallPath())) {
-                                    mPresenter.setHeader(imageRadioResultEvent.getResult().getThumbnailSmallPath(),getIntent().getIntExtra(USER_ID,-1) + "/head_uuid.jpg");
+                                    mPresenter.setHeader(imageRadioResultEvent.getResult().getThumbnailSmallPath(),
+                                            "maskba/" + getIntent().getIntExtra(USER_ID, -1) + "/head_" + getIntent().getIntExtra(USER_ID, -1) + ".jpg",
+                                            getIntent().getStringExtra(USER_ID), getIntent().getStringExtra(TOKEN));
                                 }
                             }
                         });
@@ -197,7 +202,7 @@ public class EditUserDataActivity extends BaseBarActivity
                 StringBuilder result = new StringBuilder();
                 for (int i = 0; i < selected.size(); i++) {
                     result.append(selected.get(i))
-                        .append((i != selected.size() - 1) ? ";" : "");
+                            .append((i != selected.size() - 1) ? ";" : "");
                 }
                 project.setContentText(result.toString());
                 rangeItemPop.dismiss();
@@ -232,11 +237,11 @@ public class EditUserDataActivity extends BaseBarActivity
                         StringBuilder result = new StringBuilder();
                         for (int i = 0; i < ranges.size(); i++) {
                             result.append(ranges.get(i))
-                                .append((i != ranges.size() - 1) ? ";" : "");
+                                    .append((i != ranges.size() - 1) ? ";" : "");
                         }
                         location.setContentText(result.toString());
                     } else {
-                       ToastUtils.show("最多只能选择4个,即将重新选择");
+                        ToastUtils.show("最多只能选择4个,即将重新选择");
                         ranges.clear();
                         location.setContentText("");
                     }

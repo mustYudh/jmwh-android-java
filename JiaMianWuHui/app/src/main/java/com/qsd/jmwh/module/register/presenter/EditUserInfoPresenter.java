@@ -17,11 +17,19 @@ public class EditUserInfoPresenter extends BaseViewPresenter<EditUserInfoViewer>
         super(viewer);
     }
 
-    public void setHeader(String path,String objectName) {
-        assert getViewer() != null;
+    public void setHeader(String path,String objectName,String userId,String token) {
         PersistenceResponse response = UploadImage.uploadImage(getActivity(),objectName,path);
         if (response.success) {
-            getViewer().setUserHeaderSuccess(response.cloudUrl);
+            XHttpProxy.proxy(ApiServices.class)
+                    .uploadHeader(userId,token,response.cloudUrl)
+                        .safeSubscribe(new TipRequestSubscriber<Object>() {
+                            @Override
+                            protected void onSuccess(Object o) {
+                                assert getViewer() != null;
+                                getViewer().setUserHeaderSuccess(response.cloudUrl);
+                            }
+                        });
+
         }
 
     }

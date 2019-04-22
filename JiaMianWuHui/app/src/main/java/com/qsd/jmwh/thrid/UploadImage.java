@@ -2,6 +2,7 @@ package com.qsd.jmwh.thrid;
 
 import android.content.Context;
 import android.text.TextUtils;
+
 import com.alibaba.sdk.android.oss.ClientConfiguration;
 import com.alibaba.sdk.android.oss.OSS;
 import com.alibaba.sdk.android.oss.OSSClient;
@@ -11,7 +12,6 @@ import com.alibaba.sdk.android.oss.common.auth.OSSStsTokenCredentialProvider;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
 import com.qsd.jmwh.thrid.oss.PersistenceResponse;
-import java.util.UUID;
 
 public class UploadImage {
 
@@ -58,7 +58,7 @@ public class UploadImage {
 
     final String bucketName = "maskball";
 
-    final String uploadObjectKey = objectName + SLASH + UUID.randomUUID().toString();
+
     final String[] splitUrlParts = endpoint.split(DOUBLE_SLASH);
 
     String requestUrlSB = splitUrlParts[0]
@@ -67,9 +67,9 @@ public class UploadImage {
         + DOT
         + splitUrlParts[1]
         + SLASH
-        + uploadObjectKey;
+        + objectName;
     String cloudUrl =
-        putObjectFromLocalFile(oss, bucketName, uploadObjectKey, fileAbsPath) ? requestUrlSB : null;
+        putObjectFromLocalFile(oss, bucketName, objectName, fileAbsPath) ? requestUrlSB : null;
     PersistenceResponse response = new PersistenceResponse();
     response.cloudUrl = cloudUrl;
     response.success = !TextUtils.isEmpty(cloudUrl);

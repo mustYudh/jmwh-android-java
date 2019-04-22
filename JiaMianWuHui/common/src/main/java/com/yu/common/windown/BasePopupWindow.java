@@ -49,6 +49,7 @@ public abstract class BasePopupWindow extends PopupWindow {
     this(context, contentView, width, height, false);
   }
 
+
   public BasePopupWindow(Context context, View contentView, int w, int h, boolean focusable) {
     super(contentView, w, h, focusable);
     initContext(context);

@@ -43,4 +43,8 @@ public interface ApiServices {
 
     @NetMethod(ParameterNames = {"nLat", "nLng", "nTab", "sNickName", "pageindex", "nSex"}, Url = "/UserService/getUserList")
     Observable<HomePersonListBean> getPersonListDate(String nLat, String nLng, String nTab, String sNickName, String pageindex, String nSex);
+
+
+    @NetMethod(ParameterNames = {"lUserId","token","sUserHeadPic"}, Url = "/UserService/modifyHeadPic")
+    Observable<Object> uploadHeader(String lUserId,String token,String sUserHeadPic);
 }
