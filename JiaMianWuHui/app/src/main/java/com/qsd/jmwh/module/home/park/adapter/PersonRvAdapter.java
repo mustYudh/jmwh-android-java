@@ -29,10 +29,17 @@ public class PersonRvAdapter extends BaseQuickAdapter<HomePersonListBean.CdoList
         helper.setText(R.id.tv_user_name, item.sNickName);
         helper.setText(R.id.tv_photo_num, item.nGalaryCapacity + "");
         if (item.distance_um >= 1000) {
-            helper.setText(R.id.tv_middle, item.sDateRange + " · " + item.sJob + " · " + item.sAge + " · " + (item.distance_um / 1000) + "km");
+            if (item.bHiddenRang){
+                helper.setText(R.id.tv_middle, item.sDateRange + " · " + item.sJob + " · " + item.sAge);
+            }else {
+                helper.setText(R.id.tv_middle, item.sDateRange + " · " + item.sJob + " · " + item.sAge + " · " + (item.distance_um / 1000) + "km");
+            }
         } else {
-            helper.setText(R.id.tv_middle, item.sDateRange + " · " + item.sJob + " · " + item.sAge + " · " + item.distance_um + "m");
-
+            if (item.bHiddenRang){
+                helper.setText(R.id.tv_middle, item.sDateRange + " · " + item.sJob + " · " + item.sAge);
+            }else {
+                helper.setText(R.id.tv_middle, item.sDateRange + " · " + item.sJob + " · " + item.sAge + " · " + item.distance_um + "m");
+            }
         }
         if (item.nOnLine == 0) {
             //在线

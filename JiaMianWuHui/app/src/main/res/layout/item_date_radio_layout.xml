@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <com.yu.common.ui.DelayClickImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/button_selected"
+            />
+        <com.yu.common.ui.DelayClickTextView
+            android:id="@+id/project_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/city_select_text_color"
+            android:textSize="13sp"
+            android:layout_marginTop="7dp"
+            tools:text="看电影"
+            />
+    </LinearLayout>
+
+
+    <View
+        android:background="@color/color_EEEEEE"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        />
+
+
+</LinearLayout>
