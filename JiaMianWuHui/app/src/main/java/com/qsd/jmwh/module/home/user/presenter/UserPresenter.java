@@ -29,7 +29,8 @@ public class UserPresenter extends BaseViewPresenter<UserViewer> {
                 .subscribeWith(new TipRequestSubscriber<UserCenterMyInfo>() {
                     @Override
                     protected void onSuccess(UserCenterMyInfo userCenterMyInfo) {
-
+                        assert getViewer() != null;
+                        getViewer().setUserInfo(userCenterMyInfo);
                     }
                 });
     }

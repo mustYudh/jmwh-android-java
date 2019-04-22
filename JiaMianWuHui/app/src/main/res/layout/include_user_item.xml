@@ -126,10 +126,10 @@
 
 
     <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/app_version"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         app:user_left_text="当前版本"
-        app:user_hint_text="1.0"
         app:showArrow="false"
         android:layout_marginBottom="10dp"
         />

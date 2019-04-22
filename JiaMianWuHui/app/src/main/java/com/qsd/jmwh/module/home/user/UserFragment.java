@@ -1,5 +1,8 @@
 package com.qsd.jmwh.module.home.user;
 
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -20,6 +23,8 @@ import com.qsd.jmwh.module.register.ToByVipActivity;
 import com.qsd.jmwh.view.UserItemView;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.utils.ImageLoader;
+
+import java.util.Objects;
 
 import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
 import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
@@ -112,6 +117,21 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
         ImageLoader.loadCenterCrop(getActivity(), cdoUser.sUserHeadPic, header, R.mipmap.ic_launcher);
         UserItemView money = bindView(R.id.money_bag);
         money.setHint(walletData.nMoney + "元，" + walletData.nMaskBallCoin + "假面币");
+        UserItemView appVersion = bindView(R.id.app_version);
+        appVersion.setHint(getAppVersion(Objects.requireNonNull(getActivity())));
+    }
+
+    private static String getAppVersion(Context context) {
+        PackageManager manager = context.getPackageManager();
+        String name = null;
+        try {
+            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+            name = info.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return name;
     }
 
     @Override
