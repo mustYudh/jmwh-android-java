@@ -1,11 +1,12 @@
 package com.qsd.jmwh.module.register.presenter;
 
 import android.annotation.SuppressLint;
-
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.register.bean.DateProjectBean;
 import com.qsd.jmwh.module.register.bean.EditUserInfo;
+import com.qsd.jmwh.thrid.UploadImage;
+import com.qsd.jmwh.thrid.oss.PersistenceResponse;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.framework.BaseViewPresenter;
 
@@ -16,9 +17,13 @@ public class EditUserInfoPresenter extends BaseViewPresenter<EditUserInfoViewer>
         super(viewer);
     }
 
-    public void setHeader(String url) {
+    public void setHeader(String path,String objectName) {
         assert getViewer() != null;
-        getViewer().setUserHeaderSuccess(url);
+        PersistenceResponse response = UploadImage.uploadImage(getActivity(),objectName,path);
+        if (response.success) {
+            getViewer().setUserHeaderSuccess(response.cloudUrl);
+        }
+
     }
 
 

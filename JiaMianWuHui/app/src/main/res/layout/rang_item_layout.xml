@@ -43,25 +43,25 @@
             android:orientation="horizontal">
 
             <com.yu.common.ui.DelayClickTextView
-                android:id="@+id/ok"
+                android:id="@+id/cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:paddingLeft="31dp"
                 android:paddingRight="16dp"
-                android:text="确定"
+                android:text="取消"
                 android:textColor="@color/app_main_bg_color"
                 android:textSize="15sp"/>
 
 
             <com.yu.common.ui.DelayClickTextView
-                android:id="@+id/cancel"
+                android:id="@+id/ok"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:paddingLeft="15dp"
                 android:paddingRight="31dp"
-                android:text="取消"
+                android:text="确定"
                 android:textColor="@color/app_main_bg_color"
                 android:textSize="15sp"/>
         </LinearLayout>

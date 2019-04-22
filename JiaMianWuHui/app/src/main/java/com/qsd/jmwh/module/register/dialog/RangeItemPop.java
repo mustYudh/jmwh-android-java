@@ -6,24 +6,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.module.register.adapter.DateRangeProjectAdapter;
 import com.qsd.jmwh.module.register.bean.ProjectBean;
 import com.yu.common.windown.BasePopupWindow;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class RangeItemPop extends BasePopupWindow {
-    private Map<Integer, String> selectedProject = new HashMap<>();
+    private List<String> selectedProject = new ArrayList<>();
 
     private SelectedProjectListener selectedProjectListener;
 
     public interface SelectedProjectListener {
-        void onSelected(Map<Integer, String> selected);
+        void onSelected(List<String> selected);
     }
 
     public RangeItemPop setOnSelectedProjectListener(SelectedProjectListener selectedProjectListener) {
@@ -44,7 +40,6 @@ public class RangeItemPop extends BasePopupWindow {
             if (selectedProjectListener != null) {
                 selectedProjectListener.onSelected(selectedProject);
             }
-            dismiss();
         });
     }
 
@@ -67,7 +62,7 @@ public class RangeItemPop extends BasePopupWindow {
             adapter1.notifyDataSetChanged();
             ProjectBean project = (ProjectBean) adapter1.getData().get(position);
             if (project.selected) {
-                selectedProject.put(position, project.name);
+                selectedProject.add(project.name);
             }
         });
         return this;

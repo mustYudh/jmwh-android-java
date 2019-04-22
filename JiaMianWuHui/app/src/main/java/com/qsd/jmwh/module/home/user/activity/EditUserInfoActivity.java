@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
-
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
@@ -18,10 +18,9 @@ import com.qsd.jmwh.module.register.dialog.RangeItemPop;
 import com.qsd.jmwh.module.register.dialog.SelectInfoPop;
 import com.qsd.jmwh.view.NormaFormItemVIew;
 import com.yu.common.mvp.PresenterLifeCycle;
-
+import com.yu.common.toast.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import static com.qsd.jmwh.module.register.EditUserDataActivity.DATE_RANGE_REQUEST_CODE;
 import static com.qsd.jmwh.module.register.EditUserDataActivity.PROJECT_REQUEST_CODE;
@@ -29,6 +28,7 @@ import static com.qsd.jmwh.module.register.EditUserDataActivity.PROJECT_REQUEST_
 public class EditUserInfoActivity extends BaseBarActivity implements View.OnClickListener, EditUserInfoViewer {
     @PresenterLifeCycle
     private EditUserInfoPresenter mPresenter = new EditUserInfoPresenter(this);
+    private List<String> ranges = new ArrayList<>();
 
     private NormaFormItemVIew location;
     private NormaFormItemVIew professional;
@@ -136,11 +136,16 @@ public class EditUserInfoActivity extends BaseBarActivity implements View.OnClic
     public void showDateProjectList(List<String> list) {
         RangeItemPop rangeItemPop = new RangeItemPop(getActivity());
         rangeItemPop.setData(list).setData(list).setOnSelectedProjectListener(selected -> {
-            Set<Integer> keys = selected.keySet();
-            for (int i = 0; i < keys.size(); i++) {
-                if (i != keys.size() - 1) {
-
+            if (selected.size() > 4) {
+                ToastUtils.show("最多只能选择4个");
+            } else {
+                StringBuilder result = new StringBuilder();
+                for (int i = 0; i < selected.size(); i++) {
+                    result.append(selected.get(i))
+                        .append((i != selected.size() - 1) ? ";" : "");
                 }
+                project.setContentText(result.toString());
+                rangeItemPop.dismiss();
             }
         }).showPopupWindow();
     }
@@ -151,7 +156,6 @@ public class EditUserInfoActivity extends BaseBarActivity implements View.OnClic
     }
 
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -160,6 +164,25 @@ public class EditUserInfoActivity extends BaseBarActivity implements View.OnClic
             RangeData.Range range = (RangeData.Range) bundle.getSerializable(DateRangeActivity.RANGE_RESULT);
             if (range != null) {
                 if (requestCode == DATE_RANGE_REQUEST_CODE) {
+                    if (ranges.size() < 4) {
+                        if (range.selected && !TextUtils.isEmpty(range.sName)) {
+                            if (!ranges.contains(range.sName)) {
+                                ranges.add(range.sName);
+                            } else {
+                                ToastUtils.show("您已经选择过了");
+                            }
+                        }
+                        StringBuilder result = new StringBuilder();
+                        for (int i = 0; i < ranges.size(); i++) {
+                            result.append(ranges.get(i))
+                                .append((i != ranges.size() - 1) ? ";" : "");
+                        }
+                        location.setContentText(result.toString());
+                    } else {
+                        ToastUtils.show("最多只能选择4个,即将重新选择");
+                        ranges.clear();
+                        location.setContentText("");
+                    }
 
                 } else if (requestCode == PROJECT_REQUEST_CODE) {
                     professional.setContentText(range.sName);
