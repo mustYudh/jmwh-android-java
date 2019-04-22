@@ -50,7 +50,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -193,7 +193,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.android.support:multidex:1.0.3'
-    implementation 'com.aliyun.dpa:oss-android-sdk:2.4.5'
+    implementation 'com.aliyun.dpa:oss-android-sdk:+'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
     implementation 'ch.ielse:switchbutton:1.0.1'
 
