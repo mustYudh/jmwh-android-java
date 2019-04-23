@@ -1,11 +1,16 @@
 package com.qsd.jmwh.module.register.presenter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
+import android.util.Log;
 
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
+import com.qsd.jmwh.module.register.EditRegisterCodeActivity;
 import com.qsd.jmwh.module.register.bean.DateProjectBean;
 import com.qsd.jmwh.module.register.bean.UploadUserInfoParams;
+import com.qsd.jmwh.module.register.bean.UserAuthCodeBean;
 import com.qsd.jmwh.thrid.UploadImage;
 import com.qsd.jmwh.thrid.oss.PersistenceResponse;
 import com.xuexiang.xhttp2.XHttpProxy;
@@ -71,10 +76,14 @@ public class EditUserInfoPresenter extends BaseViewPresenter<EditUserInfoViewer>
             getActivity().finish();
         } else {
             XHttpProxy.proxy(ApiServices.class)
-                    .getCod(code,token).subscribeWith(new TipRequestSubscriber<Object>() {
+                    .getCod(code,token).subscribeWith(new TipRequestSubscriber<UserAuthCodeBean>() {
                 @Override
-                protected void onSuccess(Object o) {
-                    ToastUtils.show("邀请码已发送");
+                protected void onSuccess(UserAuthCodeBean result) {
+                    ToastUtils.show("邀请码获取成功");
+                    Intent intent = new Intent();
+                    Log.e("=========>获取成功1",result.sAuthCode);
+                    intent.putExtra(EditRegisterCodeActivity.GET_AUTH_CODE_RESULT,result.sAuthCode);
+                    getActivity().setResult(Activity.RESULT_OK,intent);
                     getActivity().finish();
                 }
             });

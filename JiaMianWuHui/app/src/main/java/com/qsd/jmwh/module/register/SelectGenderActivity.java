@@ -25,7 +25,8 @@ public class SelectGenderActivity extends BaseBarActivity implements SelectGende
     public static String APP_TOKEN = "APP_TOKEN";
 
 
-    public static Intent getIntent(Context context, int account,String token) {
+
+    public static Intent getIntent(Context context, int account, String token) {
         Intent intent = new Intent(context, SelectGenderActivity.class);
         intent.putExtra(APP_ACCOUNT, account);
         intent.putExtra(APP_TOKEN, token);
@@ -75,16 +76,17 @@ public class SelectGenderActivity extends BaseBarActivity implements SelectGende
     }
 
 
+
     @Override
     public void selectedSuccess(int type) {
         if (type == 0) {
             setResult(Activity.RESULT_OK);
             getLaunchHelper().startActivity(
                     EditUserDataActivity.getIntent(getActivity(), getIntent().getStringExtra(APP_TOKEN),
-                            getIntent().getIntExtra(APP_ACCOUNT, -1),type));
+                            getIntent().getIntExtra(APP_ACCOUNT, -1), type));
             finish();
         } else {
-            getLaunchHelper().startActivity(EditRegisterCodeActivity.getIntent(getActivity(),getIntent().getStringExtra(APP_TOKEN),getIntent().getIntExtra(APP_ACCOUNT,-1),type));
+            getLaunchHelper().startActivity(EditRegisterCodeActivity.getIntent(getActivity(), getIntent().getStringExtra(APP_TOKEN), getIntent().getIntExtra(APP_ACCOUNT, -1), type));
             setResult(Activity.RESULT_OK);
             finish();
         }

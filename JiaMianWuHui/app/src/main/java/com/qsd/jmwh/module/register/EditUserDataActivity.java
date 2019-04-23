@@ -38,6 +38,8 @@ public class EditUserDataActivity extends BaseBarActivity
     @PresenterLifeCycle
     EditUserInfoPresenter mPresenter = new EditUserInfoPresenter(this);
 
+
+
     private static final String TOKEN = "token";
     private static final String USER_ID = "user_id";
     private static final String SEX = "sex";

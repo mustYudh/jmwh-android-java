@@ -1,10 +1,12 @@
 package com.qsd.jmwh.module.register;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -29,7 +31,10 @@ public class EditRegisterCodeActivity extends BaseBarActivity implements View.On
     private static final String USER_ID = "user_id";
     private static final String SEX = "sex";
 
-    public static Intent getIntent(Context context, String token, int lUserId,int sex) {
+    public static int GET_AUTH_CODE_REQUEST = 124;
+    public static String GET_AUTH_CODE_RESULT = "get_auth_code_result";
+
+    public static Intent getIntent(Context context, String token, int lUserId, int sex) {
         Intent starter = new Intent(context, EditRegisterCodeActivity.class);
         starter.putExtra(TOKEN, token);
         starter.putExtra(USER_ID, lUserId);
@@ -53,9 +58,9 @@ public class EditRegisterCodeActivity extends BaseBarActivity implements View.On
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.to_register:
-                getLaunchHelper().startActivity(
+                getLaunchHelper().startActivityForResult(
                         EditUserDataActivity.getIntent(getActivity(), getIntent().getStringExtra(TOKEN),
-                                getIntent().getIntExtra(USER_ID, -1),getIntent().getIntExtra(SEX,-1)));
+                                getIntent().getIntExtra(USER_ID, -1), getIntent().getIntExtra(SEX, -1)), GET_AUTH_CODE_REQUEST);
                 break;
             case R.id.to_by:
                 getLaunchHelper().startActivity(ToByVipActivity.getIntent(getActivity(), getIntent().getIntExtra(USER_ID, -1), getIntent().getStringExtra(TOKEN)));
@@ -68,7 +73,7 @@ public class EditRegisterCodeActivity extends BaseBarActivity implements View.On
                     selectHintPop.setTitle("验证码验证通过")
                             .setMessage("欢迎加入假面舞会！请勿把您的的账户泄露给他人，一经发现登录异常，账户会被自动冻结。")
                             .setSingleButton("好的", v1 -> {
-                                mPresenter.commitCode(getIntent().getIntExtra(USER_ID, -1),getIntent().getStringExtra(TOKEN),code);
+                                mPresenter.commitCode(getIntent().getIntExtra(USER_ID, -1), getIntent().getStringExtra(TOKEN), code);
                                 selectHintPop.dismiss();
                             })
                             .showPopupWindow();
@@ -77,6 +82,20 @@ public class EditRegisterCodeActivity extends BaseBarActivity implements View.On
                 }
                 break;
             default:
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            String result = data.getStringExtra(GET_AUTH_CODE_RESULT);
+            Log.e("=========>获取成功",result);
+            EditText editText = bindView(R.id.code);
+            if (!TextUtils.isEmpty(result)) {
+                editText.setText(result);
+            }
+
         }
     }
 

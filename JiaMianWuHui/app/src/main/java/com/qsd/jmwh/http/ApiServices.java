@@ -8,6 +8,7 @@ import com.qsd.jmwh.module.login.bean.LoginInfo;
 import com.qsd.jmwh.module.register.bean.DateProjectBean;
 import com.qsd.jmwh.module.register.bean.RangeData;
 import com.qsd.jmwh.module.register.bean.SendVerCodeBean;
+import com.qsd.jmwh.module.register.bean.UserAuthCodeBean;
 import com.qsd.jmwh.module.register.bean.UserInfo;
 import com.qsd.jmwh.module.register.bean.VipInfoBean;
 import com.xuexiang.xhttp2.annotation.NetMethod;
@@ -60,9 +61,9 @@ public interface ApiServices {
 
 
     @NetMethod(ParameterNames= {"lUserId","token"},Url = "/UserService/getUserRegistAuthCode")
-    Observable<Object> getCod(int lUserId, String token);
+    Observable<UserAuthCodeBean> getCod(int lUserId, String token);
 
-    @NetMethod(ParameterNames= {"lUserId","sAuthCode","token"},Url = "/UserService/getUserRegistAuthCode")
+    @NetMethod(ParameterNames= {"lUserId","token","sAuthCode"},Url = "/UserService/userAuthByCode")
     Observable<Object> getUserAuthByCode(int lUserId,String token,String code);
 
     @NetMethod(Url = "/UserService/getMyUserCenterInfo")

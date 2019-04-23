@@ -1,7 +1,7 @@
 package com.qsd.jmwh.base;
 
-import android.content.Intent;
 import android.view.View;
+
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.UMShareAPI;
 import com.yu.common.framework.BasicActivity;
@@ -22,10 +22,6 @@ public abstract class BaseActivity extends BasicActivity {
         MobclickAgent.onPause(this);
     }
 
-    @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
-    }
 
     @Override protected void onDestroy() {
         super.onDestroy();

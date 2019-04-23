@@ -73,20 +73,22 @@
 
 
     <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/nViewCount"
         app:hint_text_color="@color/app_main_bg_color"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         app:user_left_text="历史访客"
-        app:user_hint_text="有5人看过你"/>
+        />
 
 
     <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/nDestroyImgCount"
         app:hint_text_color="@color/app_main_bg_color"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         app:show_line="false"
         app:user_left_text="阅后即焚"
-        app:user_hint_text="(有2个人焚毁了你的照片) 一键恢复"/>
+        />
 
 
 
