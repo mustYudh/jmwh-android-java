@@ -42,7 +42,7 @@ public class SplashPresenter extends BaseViewPresenter<SplashViewer> {
                                 getLauncherHelper().startActivity(SelectGenderActivity.getIntent(getActivity(), loginInfo.lUserId, loginInfo.token));
                                 break;
                             case 4:
-                                getLaunchHelper().startActivity(EditRegisterCodeActivity.getIntent(getActivity(), loginInfo.token, loginInfo.lUserId,loginInfo.nSex,1));
+                                getLaunchHelper().startActivity(EditRegisterCodeActivity.getIntent(getActivity(), loginInfo.token, loginInfo.lUserId,loginInfo.nSex,0));
                                 break;
                             case 5:
                                 getLauncherHelper().startActivity(EditUserDataActivity.getIntent(getActivity(), loginInfo.token, loginInfo.lUserId,loginInfo.nSex));

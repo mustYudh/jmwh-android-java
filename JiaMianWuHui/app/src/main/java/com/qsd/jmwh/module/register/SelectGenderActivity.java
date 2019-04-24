@@ -86,7 +86,7 @@ public class SelectGenderActivity extends BaseBarActivity implements SelectGende
                             getIntent().getIntExtra(APP_ACCOUNT, -1), type));
             finish();
         } else {
-            getLaunchHelper().startActivity(EditRegisterCodeActivity.getIntent(getActivity(), getIntent().getStringExtra(APP_TOKEN), getIntent().getIntExtra(APP_ACCOUNT, -1), type,0));
+            getLaunchHelper().startActivity(EditRegisterCodeActivity.getIntent(getActivity(), getIntent().getStringExtra(APP_TOKEN), getIntent().getIntExtra(APP_ACCOUNT, -1), type,1));
             setResult(Activity.RESULT_OK);
             finish();
         }

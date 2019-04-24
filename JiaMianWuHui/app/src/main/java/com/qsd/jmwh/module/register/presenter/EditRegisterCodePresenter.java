@@ -9,7 +9,6 @@ import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.register.bean.UserAuthCodeBean;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.framework.BaseViewPresenter;
-import com.yu.common.toast.ToastUtils;
 
 @SuppressLint("CheckResult")
 public class EditRegisterCodePresenter extends BaseViewPresenter<EditRegisterCodeViewer> {
@@ -37,7 +36,6 @@ public class EditRegisterCodePresenter extends BaseViewPresenter<EditRegisterCod
                 .getCod(code,token).subscribeWith(new NoTipRequestSubscriber<UserAuthCodeBean>() {
             @Override
             protected void onSuccess(UserAuthCodeBean result) {
-                ToastUtils.show("邀请码获取成功");
                 if (result != null && !TextUtils.isEmpty(result.sAuthCode)) {
                     assert getViewer() != null;
                     getViewer().getUserCode(result.sAuthCode);
