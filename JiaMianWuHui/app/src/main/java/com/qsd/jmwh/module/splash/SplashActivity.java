@@ -119,6 +119,11 @@ public class SplashActivity extends BaseActivity
 
     @Override
     public void authLoginSuccess(LoginInfo loginInfo) {
-
+        if (loginInfo != null) {
+            UserProfile.getInstance().appLogin(loginInfo);
+            getLaunchHelper().startActivity(HomeActivity.class);
+            setResult(Activity.RESULT_OK);
+            finish();
+        }
     }
 }
