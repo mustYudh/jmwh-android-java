@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseActivity;
@@ -37,6 +38,7 @@ public class SplashActivity extends BaseActivity
     bindView(R.id.wechat_login, this);
     bindView(R.id.qq_login, this);
     mAuthLoginHelp = new AuthLoginHelp(getActivity());
+    mAuthLoginHelp.callback(this);
   }
 
   @Override public void onClick(View v) {
@@ -75,18 +77,20 @@ public class SplashActivity extends BaseActivity
   }
 
   @Override public void onStart(SHARE_MEDIA media) {
-
+    Log.e("======onStart","吊起SDK");
   }
 
   @Override public void onComplete(SHARE_MEDIA media, int i, Map<String, String> map) {
-
+    for (Map.Entry<String, String> stringStringEntry : map.entrySet()) {
+      Log.e("========onComplete" + stringStringEntry.getKey(),stringStringEntry.getValue());
+    }
   }
 
   @Override public void onError(SHARE_MEDIA media, int i, Throwable throwable) {
-
+    Log.e("======onError","onError");
   }
 
   @Override public void onCancel(SHARE_MEDIA media, int i) {
-
+    Log.e("======onCancel","onCancel");
   }
 }

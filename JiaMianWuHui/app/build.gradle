@@ -105,6 +105,7 @@ android {
         def proguardUmengSharedRule = '../proguard-rule/proguard-rules-umeng-startShare.pro'
 
         debug {
+            productFlavors.jmwh.signingConfig signingConfigs.release
             debuggable true
             shrinkResources false
             minifyEnabled false
