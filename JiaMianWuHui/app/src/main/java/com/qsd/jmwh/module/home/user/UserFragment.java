@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -20,15 +21,18 @@ import com.qsd.jmwh.module.home.user.bean.UserCenterMyInfo;
 import com.qsd.jmwh.module.home.user.presenter.UserPresenter;
 import com.qsd.jmwh.module.home.user.presenter.UserViewer;
 import com.qsd.jmwh.module.register.ToByVipActivity;
+import com.qsd.jmwh.module.splash.SplashActivity;
 import com.qsd.jmwh.view.UserItemView;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.utils.ImageLoader;
 
 import java.util.Objects;
+import java.util.UUID;
 
 import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
 import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
 import cn.finalteam.rxgalleryfinal.rxbus.event.ImageMultipleResultEvent;
+import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
 import cn.finalteam.rxgalleryfinal.utils.Logger;
 
 /**
@@ -64,6 +68,7 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
         bindView(R.id.privacy_setting, this);
         bindView(R.id.setting, this);
         bindView(R.id.add_photo, this);
+        bindView(R.id.header, this);
     }
 
     @Override
@@ -88,6 +93,18 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
                 break;
             case R.id.add_photo:
                 addPhoto();
+                break;
+            case R.id.header:
+                RxGalleryFinalApi.getInstance(getActivity())
+                        .openGalleryRadioImgDefault(new RxBusResultDisposable<ImageRadioResultEvent>() {
+                            @Override
+                            protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) {
+                                if (!TextUtils.isEmpty(imageRadioResultEvent.getResult().getThumbnailSmallPath())) {
+                                    mPresenter.setHeader(imageRadioResultEvent.getResult().getThumbnailSmallPath(),
+                                            +UserProfile.getInstance().getAppAccount() + "/head_" + UUID.randomUUID().toString() + ".jpg", UserProfile.getInstance().getAppAccount() + "");
+                                }
+                            }
+                        });
                 break;
             default:
         }
@@ -128,6 +145,12 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
         UserProfile.getInstance().setPhoneNo(cdoUser.sMobile);
     }
 
+    @Override
+    public void setUserHeaderSuccess(String url) {
+        ImageView header = bindView(R.id.header);
+        ImageLoader.loadCenterCrop(getActivity(), url, header, R.mipmap.ic_launcher);
+    }
+
     private static String getAppVersion(Context context) {
         PackageManager manager = context.getPackageManager();
         String name = null;
@@ -145,10 +168,16 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
     public void onResume() {
         super.onResume();
         update(getArguments());
+
     }
 
     @Override
     public void update(Bundle bundle) {
-        mPresenter.getMyInfo();
+        if (UserProfile.getInstance().isAppLogin()) {
+            mPresenter.getMyInfo();
+        } else {
+            getLaunchHelper().startActivity(SplashActivity.class);
+            finish();
+        }
     }
 }

@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
+import com.qsd.jmwh.utils.MD5Utils;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.framework.BaseViewPresenter;
 import com.yu.common.toast.ToastUtils;
@@ -38,7 +39,7 @@ public class EditPasswordPresenter extends BaseViewPresenter<EditPasswordViewer>
             return;
         }
         XHttpProxy.proxy(ApiServices.class)
-                    .modifyPassword(oldPwd,againPwd)
+                    .modifyPassword(oldPwd, MD5Utils.string2MD5(againPwd))
                     .subscribeWith(new TipRequestSubscriber<Object>() {
                         @Override
                         protected void onSuccess(Object o) {

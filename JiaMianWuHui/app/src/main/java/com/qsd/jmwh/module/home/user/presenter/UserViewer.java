@@ -9,4 +9,6 @@ import com.yu.common.mvp.Viewer;
  */
 public interface UserViewer extends Viewer {
     void setUserInfo(UserCenterMyInfo userInfo);
+
+    void setUserHeaderSuccess(String url);
 }

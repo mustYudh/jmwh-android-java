@@ -30,6 +30,7 @@
 
 
     <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/clear_cache"
         android:layout_marginTop="10dp"
         app:user_left_text="清除图片缓存"
         app:user_hint_text="0.00M"
@@ -52,6 +53,7 @@
 
 
     <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/logout"
         app:showArrow="false"
         app:left_text_color="#FF001F"
         android:layout_marginTop="10dp"
