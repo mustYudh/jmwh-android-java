@@ -50,7 +50,7 @@ public class UserCenterMyInfo implements Serializable {
         public String nAuthType;
         public String sAuthInfo;
         public String sIntroduce;
-
+        public String sMobile;
 
     }
 

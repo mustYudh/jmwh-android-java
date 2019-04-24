@@ -60,16 +60,23 @@ public interface ApiServices {
                                       String sIntroduce, String token, String sUserHeadPic, String sBust, String QQ, String WX);
 
 
-    @NetMethod(ParameterNames= {"lUserId","token"},Url = "/UserService/getUserRegistAuthCode")
+    @NetMethod(ParameterNames = {"lUserId", "token"}, Url = "/UserService/getUserRegistAuthCode")
     Observable<UserAuthCodeBean> getCod(int lUserId, String token);
 
-    @NetMethod(ParameterNames= {"lUserId","token","sAuthCode"},Url = "/UserService/userAuthByCode")
-    Observable<Object> getUserAuthByCode(int lUserId,String token,String code);
+    @NetMethod(ParameterNames = {"lUserId", "token", "sAuthCode"}, Url = "/UserService/userAuthByCode")
+    Observable<Object> getUserAuthByCode(int lUserId, String token, String code);
 
     @NetMethod(Url = "/UserService/getMyUserCenterInfo")
     Observable<UserCenterMyInfo> getUserCenterInfo();
 
     @POST("/gateway/rest/v3/UserService/loginByWxAndQQ")
     Observable<ApiResult<LoginInfo>> authLogin(@Body RequestBody requestBody);
+
+    @NetMethod(ParameterNames = {"sLoginName", "sPwd", "sAuthCode"}, Url = "/v3/UserService/modifyPwd")
+    Observable<Object> bindPhone(String sLoginName, String sPwd, String sAuthCode);
+
+
+    @NetMethod(ParameterNames = {"sLoginName", "sPwd"}, Url = "/UserService/modifyPwd")
+    Observable<Object> modifyPassword(String sLoginName, String sPwd);
 
 }

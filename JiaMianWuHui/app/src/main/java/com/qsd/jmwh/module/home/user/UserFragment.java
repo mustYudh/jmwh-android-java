@@ -125,6 +125,7 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
         money.setHint(walletData.nMoney + "元，" + walletData.nMaskBallCoin + "假面币");
         UserItemView appVersion = bindView(R.id.app_version);
         appVersion.setHint(getAppVersion(Objects.requireNonNull(getActivity())));
+        UserProfile.getInstance().setPhoneNo(cdoUser.sMobile);
     }
 
     private static String getAppVersion(Context context) {

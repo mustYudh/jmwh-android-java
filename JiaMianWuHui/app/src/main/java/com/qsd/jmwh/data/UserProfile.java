@@ -16,6 +16,7 @@ public class UserProfile implements Serializable {
 
     private static final String APP_ACCOUNT = "account";
     private static final String APP_TOKEN = "token";
+    private static final String PHONE_NO = "phone_no";
 
 
     private SharedPreferencesHelper spHelper;
@@ -60,6 +61,16 @@ public class UserProfile implements Serializable {
         spHelper.putString(APP_TOKEN, token);
     }
 
+    public void setPhoneNo(String phoneNo) {
+        if (!TextUtils.isEmpty(phoneNo)) {
+            spHelper.putString(PHONE_NO,phoneNo);
+        }
+
+    }
+
+    public String getPhoneNo() {
+        return spHelper.getString(PHONE_NO,"");
+    }
 
     public boolean isAppLogin() {
         return !TextUtils.isEmpty(getAppToken()) && getAppAccount() != -1;
