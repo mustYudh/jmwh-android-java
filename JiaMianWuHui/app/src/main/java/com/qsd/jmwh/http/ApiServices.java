@@ -69,4 +69,7 @@ public interface ApiServices {
     @NetMethod(Url = "/UserService/getMyUserCenterInfo")
     Observable<UserCenterMyInfo> getUserCenterInfo();
 
+    @POST("/gateway/rest/v3/UserService/loginByWxAndQQ")
+    Observable<ApiResult<LoginInfo>> authLogin(@Body RequestBody requestBody);
+
 }

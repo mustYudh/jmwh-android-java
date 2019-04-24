@@ -13,6 +13,7 @@ import android.widget.EditText;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.dialog.SelectHintPop;
+import com.qsd.jmwh.module.home.HomeActivity;
 import com.qsd.jmwh.module.register.presenter.EditRegisterCodePresenter;
 import com.qsd.jmwh.module.register.presenter.EditRegisterCodeViewer;
 import com.yu.common.mvp.PresenterLifeCycle;
@@ -30,15 +31,17 @@ public class EditRegisterCodeActivity extends BaseBarActivity implements View.On
     private static final String TOKEN = "token";
     private static final String USER_ID = "user_id";
     private static final String SEX = "sex";
+    private static final String TYPE = "sex";
 
     public static int GET_AUTH_CODE_REQUEST = 124;
     public static String GET_AUTH_CODE_RESULT = "get_auth_code_result";
 
-    public static Intent getIntent(Context context, String token, int lUserId, int sex) {
+    public static Intent getIntent(Context context, String token, int lUserId, int sex,int type) {
         Intent starter = new Intent(context, EditRegisterCodeActivity.class);
         starter.putExtra(TOKEN, token);
         starter.putExtra(USER_ID, lUserId);
         starter.putExtra(SEX, sex);
+        starter.putExtra(TYPE, type);
         return starter;
     }
 
@@ -101,7 +104,24 @@ public class EditRegisterCodeActivity extends BaseBarActivity implements View.On
 
     @Override
     public void registerSuccess() {
-        ToastUtils.show("认证通过，请登录");
-        finish();
+        if (getIntent().getIntExtra(TYPE,-1) == 0) {
+            getLaunchHelper().startActivity(HomeActivity.class);
+        } else {
+            ToastUtils.show("认证通过，请登录");
+            finish();
+        }
+
+    }
+
+    @Override
+    public void getUserCode(String code) {
+        EditText editText = bindView(R.id.code);
+        editText.setText(code);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.getUserCode(getIntent().getIntExtra(USER_ID,-1),getIntent().getStringExtra(TOKEN));
     }
 }

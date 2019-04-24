@@ -4,4 +4,5 @@ import com.yu.common.mvp.Viewer;
 
 public interface EditRegisterCodeViewer extends Viewer {
     void registerSuccess();
+    void getUserCode(String code);
 }
