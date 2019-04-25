@@ -3,7 +3,6 @@ package com.qsd.jmwh.module.home.user.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.widget.EditText;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
@@ -21,6 +20,7 @@ public class EditPasswordActivity extends BaseBarActivity implements EditPasswor
     private NormaFormItemVIew mSendVerCode;
     private RxCountDown countDown;
     private NormaFormItemVIew phoneNum;
+    private NormaFormItemVIew againPwdEdit;
 
 
     @Override
@@ -30,16 +30,13 @@ public class EditPasswordActivity extends BaseBarActivity implements EditPasswor
 
     @Override
     protected void loadData() {
-        setTitle("修改密码");
-        EditText oldPwdEdit = bindView(R.id.old_pwd);
-        EditText newPwdEdit = bindView(R.id.new_pwd);
-        EditText againPwdEdit = bindView(R.id.again_pwd);
+        setTitle("重置密码");
+        againPwdEdit = bindView(R.id.again_pwd);
         mSendVerCode = bindView(R.id.get_ver_code);
         phoneNum = bindView(R.id.phone);
 
         sendVerCode();
-        bindView(R.id.next, v -> mPresenter.modifyPassword(oldPwdEdit.getText().toString().trim(),
-                newPwdEdit.getText().toString().trim(), againPwdEdit.getText().toString().trim(), mSendVerCode.getText()));
+        bindView(R.id.next, v -> mPresenter.modifyPassword(phoneNum,againPwdEdit.getText(), mSendVerCode.getText()));
     }
 
     private void sendVerCode() {

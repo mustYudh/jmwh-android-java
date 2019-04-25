@@ -51,6 +51,21 @@
         android:src="@drawable/ic_gary_arrow"/>
 
     <TextView
+        android:visibility="gone"
+        android:id="@+id/vip_tag"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/vip_bg"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/right_hint"
+        android:text="VIP"
+        android:gravity="center"
+        android:textSize="10sp"
+        android:layout_width="32dp"
+        android:textColor="@color/white"
+        android:layout_height="16dp"/>
+
+    <TextView
+        tools:text="124124"
         android:id="@+id/right_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

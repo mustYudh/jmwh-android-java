@@ -36,6 +36,9 @@ public class EditUserInfoActivity extends BaseBarActivity implements View.OnClic
     private NormaFormItemVIew height;
     private NormaFormItemVIew weight;
     private NormaFormItemVIew age;
+    private NormaFormItemVIew qq;
+    private NormaFormItemVIew weChat;
+    private NormaFormItemVIew measure;
 
 
     @Override
@@ -58,6 +61,10 @@ public class EditUserInfoActivity extends BaseBarActivity implements View.OnClic
         height = bindView(R.id.height);
         weight = bindView(R.id.weight);
         age = bindView(R.id.age);
+        qq = bindView(R.id.qq);
+        weChat = bindView(R.id.we_chat);
+        weChat = bindView(R.id.measure);
+        bindView(R.id.measure,UserProfile.getInstance().getSex() == 0);
     }
 
     private void initListener() {

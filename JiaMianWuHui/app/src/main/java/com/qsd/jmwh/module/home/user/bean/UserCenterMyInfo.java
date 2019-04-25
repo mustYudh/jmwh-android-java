@@ -37,7 +37,7 @@ public class UserCenterMyInfo implements Serializable {
          * sAuthInfo : 你通过了VIP特权用户的身份安全审核
          * sIntroduce : 这个人很懒，什么也没留下
          */
-
+        public String dVIPInvalidTime;
         public int lUserId;
         public String sNickName;
         public String sUserHeadPic;

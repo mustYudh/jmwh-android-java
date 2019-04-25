@@ -131,6 +131,11 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
         bindText(R.id.sDateRange, "约会范围：" + cdoUser.sDateRange);
         bindText(R.id.job_age_loc, cdoUser.sCity + " · " + cdoUser.sJob + " · " + cdoUser.sAge + "岁");
         bindText(R.id.auth_info, cdoUser.sAuthInfo);
+        UserItemView vip = bindView(R.id.vip);
+        vip.showTag(cdoUser.bVIP);
+        if (!TextUtils.isEmpty(cdoUser.dVIPInvalidTime)) {
+            vip.setHint(cdoUser.dVIPInvalidTime + "到期");
+        }
         UserItemView nViewCount = bindView(R.id.nViewCount);
         nViewCount.setHint("有" + userInfo.nViewCount + "人看过你");
         UserItemView nDestroyImgCount = bindView(R.id.nDestroyImgCount);

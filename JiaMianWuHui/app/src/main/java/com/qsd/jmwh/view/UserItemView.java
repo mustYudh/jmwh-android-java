@@ -91,6 +91,11 @@ public class UserItemView extends LinearLayout {
         return this;
     }
 
+    public void showTag(boolean show) {
+        TextView textView = findViewById(R.id.vip_tag);
+        textView.setVisibility(show ? VISIBLE : GONE);
+    }
+
 
     public boolean isButtonSelected() {
         return buttonSelected;

@@ -8,6 +8,7 @@ import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.register.bean.SendVerCodeBean;
 import com.qsd.jmwh.utils.MD5Utils;
 import com.qsd.jmwh.utils.countdown.RxCountDown;
+import com.qsd.jmwh.view.NormaFormItemVIew;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.xuexiang.xhttp2.exception.ApiException;
 import com.yu.common.framework.BaseViewPresenter;
@@ -39,29 +40,22 @@ public class EditPasswordPresenter extends BaseViewPresenter<EditPasswordViewer>
     }
 
 
-    public void modifyPassword(String oldPwd, String newPwd,String againPwd,String sAuthCode) {
-        if (TextUtils.isEmpty(oldPwd)) {
-            ToastUtils.show("原密码输入不能为空");
-            return;
+    public void modifyPassword(NormaFormItemVIew phoneNum, String againPwd, String sAuthCode) {
+        if (TextUtils.isEmpty(phoneNum.getText())) {
+            ToastUtils.show("手机号输入不能为空");
+        } else if (!phoneNum.getText().startsWith("1") || phoneNum.getText().length() != 11) {
+            ToastUtils.show("检查手机号输入是否正确");
         }
-        if (TextUtils.isEmpty(newPwd)) {
-            ToastUtils.show("新码输入不能为空");
+        if (TextUtils.isEmpty(sAuthCode)) {
+            ToastUtils.show("验证码输入不能为空");
             return;
         }
         if (TextUtils.isEmpty(againPwd)) {
-            ToastUtils.show("确认信密码输入不能为空");
-            return;
-        }
-        if (!newPwd.equals(againPwd)) {
-            ToastUtils.show("两次输入密码不一致");
-            return;
-        }
-        if (oldPwd.equals(againPwd)) {
-            ToastUtils.show("新密码不能与原密码相同");
+            ToastUtils.show("新密码输入不能为空");
             return;
         }
         XHttpProxy.proxy(ApiServices.class)
-                    .modifyPassword(oldPwd, MD5Utils.string2MD5(againPwd),sAuthCode)
+                    .modifyPassword(phoneNum.getText(), MD5Utils.string2MD5(againPwd),sAuthCode)
                     .subscribeWith(new TipRequestSubscriber<Object>() {
                         @Override
                         protected void onSuccess(Object o) {

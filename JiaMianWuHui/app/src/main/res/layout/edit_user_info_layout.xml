@@ -79,12 +79,14 @@
             android:textSize="13sp"/>
 
         <com.qsd.jmwh.view.NormaFormItemVIew
+            android:id="@+id/we_chat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:content_hint="请填写"
             app:left_text="微信"/>
 
         <com.qsd.jmwh.view.NormaFormItemVIew
+            android:id="@+id/qq"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:content_hint="请填写"
@@ -128,6 +130,16 @@
             android:layout_height="wrap_content"
             app:content_hint="请选择"
             app:left_text="体重"
+            app:only_read="true"
+            app:show_top_line="false"/>
+
+        <com.qsd.jmwh.view.NormaFormItemVIew
+            android:visibility="gone"
+            android:id="@+id/measure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:content_hint="请选择"
+            app:left_text="胸围"
             app:only_read="true"
             app:show_top_line="false"/>
 
