@@ -1,9 +1,7 @@
 package cn.finalteam.rxgalleryfinal.ui.adapter;
 
-import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -93,7 +91,7 @@ public class MediaGridAdapter extends RecyclerView.Adapter<MediaGridAdapter.Grid
     public void onBindViewHolder(GridViewHolder holder, int position) {
         MediaBean mediaBean = mMediaBeanList.get(position);
         if (mediaBean.getId() == Integer.MIN_VALUE) {
-            holder.mCbCheck.setVisibility(View.GONE);
+//            holder.mCbCheck.setVisibility(View.GONE);
             holder.mIvMediaImage.setVisibility(View.GONE);
             holder.mLlCamera.setVisibility(View.VISIBLE);
             holder.mIvCameraImage.setImageDrawable(mCameraImage);
@@ -102,15 +100,15 @@ public class MediaGridAdapter extends RecyclerView.Adapter<MediaGridAdapter.Grid
             holder.mIvCameraImage.setBackgroundColor(mCameraImageBgColor);
         } else {
             if (mConfiguration.isRadio()) {
-                holder.mCbCheck.setVisibility(View.GONE);
+//                holder.mCbCheck.setVisibility(View.GONE);
             } else {
-                holder.mCbCheck.setVisibility(View.VISIBLE);
-                holder.mCbCheck.setOnClickListener(new OnCheckBoxClickListener(mediaBean));
-                holder.mCbCheck.setOnCheckedChangeListener(new OnCheckBoxCheckListener(mediaBean));
+//                holder.mCbCheck.setVisibility(View.VISIBLE);
+//                holder.mCbCheck.setOnClickListener(new OnCheckBoxClickListener(mediaBean));
+//                holder.mCbCheck.setOnCheckedChangeListener(new OnCheckBoxCheckListener(mediaBean));
             }
             holder.mIvMediaImage.setVisibility(View.VISIBLE);
             holder.mLlCamera.setVisibility(View.GONE);
-            holder.mCbCheck.setChecked(mMediaActivity.getCheckedList() != null && mMediaActivity.getCheckedList().contains(mediaBean));
+//            holder.mCbCheck.setChecked(mMediaActivity.getCheckedList() != null && mMediaActivity.getCheckedList().contains(mediaBean));
             String bitPath = mediaBean.getThumbnailBigPath();
             String smallPath = mediaBean.getThumbnailSmallPath();
 
@@ -152,7 +150,7 @@ public class MediaGridAdapter extends RecyclerView.Adapter<MediaGridAdapter.Grid
 
     static class GridViewHolder extends RecyclerView.ViewHolder {
 
-        final AppCompatCheckBox mCbCheck;
+//        final AppCompatCheckBox mCbCheck;
         final LinearLayout mLlCamera;
         final TextView mTvCameraTxt;
         final ImageView mIvCameraImage;
@@ -163,14 +161,14 @@ public class MediaGridAdapter extends RecyclerView.Adapter<MediaGridAdapter.Grid
         GridViewHolder(View itemView) {
             super(itemView);
             mIvMediaImage = itemView.findViewById(R.id.iv_media_image);
-            mCbCheck = (AppCompatCheckBox) itemView.findViewById(R.id.cb_check);
+//            mCbCheck = (AppCompatCheckBox) itemView.findViewById(R.id.cb_check);
             relativeLayout = (SquareRelativeLayout) itemView.findViewById(R.id.rootView);
             mLlCamera = (LinearLayout) itemView.findViewById(R.id.ll_camera);
             mTvCameraTxt = (TextView) itemView.findViewById(R.id.tv_camera_txt);
             mIvCameraImage = (ImageView) itemView.findViewById(R.id.iv_camera_image);
 
             int checkTint = ThemeUtils.resolveColor(itemView.getContext(), R.attr.gallery_checkbox_button_tint_color, R.color.gallery_default_checkbox_button_tint_color);
-            CompoundButtonCompat.setButtonTintList(mCbCheck, ColorStateList.valueOf(checkTint));
+//            CompoundButtonCompat.setButtonTintList(mCbCheck, ColorStateList.valueOf(checkTint));
         }
     }
 

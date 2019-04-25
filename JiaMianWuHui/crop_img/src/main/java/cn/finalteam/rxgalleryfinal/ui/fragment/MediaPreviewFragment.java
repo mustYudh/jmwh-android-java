@@ -1,13 +1,10 @@
 package cn.finalteam.rxgalleryfinal.ui.fragment;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.CompoundButtonCompat;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -40,7 +37,7 @@ public class MediaPreviewFragment extends BaseFragment implements ViewPager.OnPa
 
     DisplayMetrics mScreenSize;
 
-    private AppCompatCheckBox mCbCheck;
+//    private AppCompatCheckBox mCbCheck;
     private ViewPager mViewPager;
     private List<MediaBean> mMediaBeanList;
     private RelativeLayout mRlRootView;
@@ -73,7 +70,7 @@ public class MediaPreviewFragment extends BaseFragment implements ViewPager.OnPa
 
     @Override
     public void onViewCreatedOk(View view, @Nullable Bundle savedInstanceState) {
-        mCbCheck = (AppCompatCheckBox) view.findViewById(R.id.cb_check);
+//        mCbCheck = (AppCompatCheckBox) view.findViewById(R.id.cb_check);
         mViewPager = (ViewPager) view.findViewById(R.id.view_pager);
         mRlRootView = (RelativeLayout) view.findViewById(R.id.rl_root_view);
         mScreenSize = DeviceUtils.getScreenSize(getContext());
@@ -86,7 +83,7 @@ public class MediaPreviewFragment extends BaseFragment implements ViewPager.OnPa
                 ThemeUtils.resolveColor(getActivity(), R.attr.gallery_page_bg, R.color.gallery_default_page_bg),
                 ContextCompat.getDrawable(getActivity(), ThemeUtils.resolveDrawableRes(getActivity(), R.attr.gallery_default_image, R.drawable.gallery_default_image)));
         mViewPager.setAdapter(mMediaPreviewAdapter);
-        mCbCheck.setOnClickListener(this);
+//        mCbCheck.setOnClickListener(this);
 
         if (savedInstanceState != null) {
             mPagerPosition = savedInstanceState.getInt(EXTRA_PAGE_INDEX);
@@ -106,9 +103,9 @@ public class MediaPreviewFragment extends BaseFragment implements ViewPager.OnPa
     public void setTheme() {
         super.setTheme();
         int checkTint = ThemeUtils.resolveColor(getContext(), R.attr.gallery_checkbox_button_tint_color, R.color.gallery_default_checkbox_button_tint_color);
-        CompoundButtonCompat.setButtonTintList(mCbCheck, ColorStateList.valueOf(checkTint));
+//        CompoundButtonCompat.setButtonTintList(mCbCheck, ColorStateList.valueOf(checkTint));
         int cbTextColor = ThemeUtils.resolveColor(getContext(), R.attr.gallery_checkbox_text_color, R.color.gallery_default_checkbox_text_color);
-        mCbCheck.setTextColor(cbTextColor);
+//        mCbCheck.setTextColor(cbTextColor);
 
         int pageColor = ThemeUtils.resolveColor(getContext(), R.attr.gallery_page_bg, R.color.gallery_default_page_bg);
         mRlRootView.setBackgroundColor(pageColor);
@@ -141,10 +138,10 @@ public class MediaPreviewFragment extends BaseFragment implements ViewPager.OnPa
     public void onPageSelected(int position) {
         mPagerPosition = position;
         MediaBean mediaBean = mMediaBeanList.get(position);
-        mCbCheck.setChecked(false);
+//        mCbCheck.setChecked(false);
         //判断是否选择
         if (mMediaActivity != null && mMediaActivity.getCheckedList() != null) {
-            mCbCheck.setChecked(mMediaActivity.getCheckedList().contains(mediaBean));
+//            mCbCheck.setChecked(mMediaActivity.getCheckedList().contains(mediaBean));
         }
 
         RxBus.getDefault().post(new MediaViewPagerChangedEvent(position, mMediaBeanList.size(), true));
@@ -165,7 +162,7 @@ public class MediaPreviewFragment extends BaseFragment implements ViewPager.OnPa
                 && !mMediaActivity.getCheckedList().contains(mediaBean)) {
             Toast.makeText(getContext(), getResources()
                     .getString(R.string.gallery_image_max_size_tip, mConfiguration.getMaxSize()), Toast.LENGTH_SHORT).show();
-            mCbCheck.setChecked(false);
+//            mCbCheck.setChecked(false);
         } else {
             RxBus.getDefault().post(new MediaCheckChangeEvent(mediaBean));
         }

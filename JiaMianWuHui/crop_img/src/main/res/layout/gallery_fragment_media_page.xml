@@ -19,6 +19,7 @@
         android:paddingRight="15dp">
 
         <android.support.v7.widget.AppCompatCheckBox
+            android:buttonTint="#FFFFFF"
             android:id="@+id/cb_page_check"
             style="@style/Widget.AppCompat.CompoundButton.CheckBox"
             android:layout_width="wrap_content"
@@ -26,6 +27,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_margin="2dp"
+            android:textColor="@color/gallery_default_toolbar_widget_color"
             android:text="选中" />
     </RelativeLayout>
 

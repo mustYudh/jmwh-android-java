@@ -1,15 +1,13 @@
 package cn.finalteam.rxgalleryfinal.ui.fragment;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.CompoundButtonCompat;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -43,7 +41,7 @@ public class MediaPageFragment extends BaseFragment implements ViewPager.OnPageC
 
     DisplayMetrics mScreenSize;
 
-    private AppCompatCheckBox mCbCheck;
+    private CheckBox mCbCheck;
     private ViewPager mViewPager;
     private MediaPreviewAdapter mMediaPreviewAdapter;
     private ArrayList<MediaBean> mMediaBeanList;
@@ -77,7 +75,7 @@ public class MediaPageFragment extends BaseFragment implements ViewPager.OnPageC
 
     @Override
     public void onViewCreatedOk(View view, @Nullable Bundle savedInstanceState) {
-        mCbCheck = (AppCompatCheckBox) view.findViewById(R.id.cb_page_check);
+        mCbCheck =  view.findViewById(R.id.cb_page_check);
         mViewPager = (ViewPager) view.findViewById(R.id.view_pager_page);
         mRlRootView = (RelativeLayout) view.findViewById(R.id.rl_page_root_view);
         mScreenSize = DeviceUtils.getScreenSize(getContext());
@@ -120,10 +118,10 @@ public class MediaPageFragment extends BaseFragment implements ViewPager.OnPageC
     @Override
     public void setTheme() {
         super.setTheme();
-        int checkTint = ThemeUtils.resolveColor(getContext(), R.attr.gallery_checkbox_button_tint_color, R.color.gallery_default_checkbox_button_tint_color);
-        CompoundButtonCompat.setButtonTintList(mCbCheck, ColorStateList.valueOf(checkTint));
-        int cbTextColor = ThemeUtils.resolveColor(getContext(), R.attr.gallery_checkbox_text_color, R.color.gallery_default_checkbox_text_color);
-        mCbCheck.setTextColor(cbTextColor);
+//        int checkTint = ThemeUtils.resolveColor(getContext(), R.attr.gallery_checkbox_button_tint_color, R.color.gallery_default_checkbox_button_tint_color);
+//        CompoundButtonCompat.setButtonTintList(mCbCheck, ColorStateList.valueOf(checkTint));
+//        int cbTextColor = ThemeUtils.resolveColor(getContext(), R.attr.gallery_checkbox_text_color, R.color.gallery_default_checkbox_text_color);
+//        mCbCheck.setTextColor(cbTextColor);
 
         int pageColor = ThemeUtils.resolveColor(getContext(), R.attr.gallery_page_bg, R.color.gallery_default_page_bg);
         mRlRootView.setBackgroundColor(pageColor);

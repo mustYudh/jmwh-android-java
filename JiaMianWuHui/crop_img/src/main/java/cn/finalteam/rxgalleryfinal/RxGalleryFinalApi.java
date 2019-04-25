@@ -508,7 +508,7 @@ public class RxGalleryFinalApi {
                 break;
             case SelectRXType.TYPE_SELECT_MULTI:
                 rxGalleryFinal.multiple();
-                rxGalleryFinal.maxSize(9);
+                rxGalleryFinal.maxSize(1);
                 break;
             default:
                 Logger.e("open mt is error!!!");
