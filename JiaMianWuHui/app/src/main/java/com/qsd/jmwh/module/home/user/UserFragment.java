@@ -131,8 +131,10 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
         bindText(R.id.sDateRange, "约会范围：" + cdoUser.sDateRange);
         bindText(R.id.job_age_loc, cdoUser.sCity + " · " + cdoUser.sJob + " · " + cdoUser.sAge + "岁");
         bindText(R.id.auth_info, cdoUser.sAuthInfo);
-        bindText(R.id.nViewCount, "有" + userInfo.nViewCount + "人看过你");
-        bindText(R.id.nDestroyImgCount, "(有" + userInfo.nDestroyImgCount + "个人焚毁了你的照片) 一键恢复");
+        UserItemView nViewCount = bindView(R.id.nViewCount);
+        nViewCount.setHint("有" + userInfo.nViewCount + "人看过你");
+        UserItemView nDestroyImgCount = bindView(R.id.nDestroyImgCount);
+        nDestroyImgCount.setHint("(有" + userInfo.nDestroyImgCount + "个人焚毁了你的照片) 一键恢复");
         int authType = Integer.parseInt(cdoUser.nAuthType);
         String result = authType == 0 ? "未认证" : "通过";
         bindText(R.id.auth_type, result);

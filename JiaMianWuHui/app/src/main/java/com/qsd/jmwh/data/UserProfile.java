@@ -17,6 +17,7 @@ public class UserProfile implements Serializable {
     private static final String APP_ACCOUNT = "account";
     private static final String APP_TOKEN = "token";
     private static final String PHONE_NO = "phone_no";
+    private static final String SEX = "sex";
 
 
     private SharedPreferencesHelper spHelper;
@@ -42,6 +43,15 @@ public class UserProfile implements Serializable {
     public void appLogin(LoginInfo userInfo) {
         setAppAccount(userInfo.lUserId);
         setAppToken(userInfo.token);
+        setSex(userInfo.nSex);
+    }
+
+    private void setSex(int sex) {
+        spHelper.putInt(SEX,sex);
+    }
+
+    public int getSex() {
+        return spHelper.getInt(SEX,-1);
     }
 
     public int getAppAccount() {

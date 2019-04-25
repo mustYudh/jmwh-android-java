@@ -76,7 +76,7 @@ public interface ApiServices {
     Observable<Object> bindPhone(String sLoginName, String sPwd, String sAuthCode);
 
 
-    @NetMethod(ParameterNames = {"sLoginName", "sPwd"}, Url = "/UserService/modifyPwd")
-    Observable<Object> modifyPassword(String sLoginName, String sPwd);
+    @NetMethod(ParameterNames = {"sLoginName", "sPwd","sAuthCode"}, Url = "/UserService/modifyPwd")
+    Observable<Object> modifyPassword(String sLoginName, String sPwd,String sAuthCode);
 
 }
