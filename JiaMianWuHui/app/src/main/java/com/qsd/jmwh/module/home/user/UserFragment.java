@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -22,6 +23,8 @@ import com.qsd.jmwh.module.home.user.presenter.UserPresenter;
 import com.qsd.jmwh.module.home.user.presenter.UserViewer;
 import com.qsd.jmwh.module.register.ToByVipActivity;
 import com.qsd.jmwh.module.splash.SplashActivity;
+import com.qsd.jmwh.thrid.UploadImage;
+import com.qsd.jmwh.thrid.oss.PersistenceResponse;
 import com.qsd.jmwh.view.UserItemView;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.utils.ImageLoader;
@@ -33,7 +36,6 @@ import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
 import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
 import cn.finalteam.rxgalleryfinal.rxbus.event.ImageMultipleResultEvent;
 import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
-import cn.finalteam.rxgalleryfinal.utils.Logger;
 
 /**
  * @author yudneghao
@@ -117,7 +119,10 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
                 .setImageMultipleResultEvent(new RxBusResultDisposable<ImageMultipleResultEvent>() {
                     @Override
                     protected void onEvent(ImageMultipleResultEvent imageMultipleResultEvent) throws Exception {
-                        Logger.i("多选图片的回调");
+                        Log.e("多选图片的回调",imageMultipleResultEvent.getResult().get(0).getOriginalPath());
+                        String path = imageMultipleResultEvent.getResult().get(0).getOriginalPath();
+                        PersistenceResponse response = UploadImage.uploadImage(getActivity(), UserProfile.getInstance().getObjectName(),path);
+
                     }
                 }).open();
 

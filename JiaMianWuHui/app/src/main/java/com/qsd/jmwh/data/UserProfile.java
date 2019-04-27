@@ -7,6 +7,7 @@ import com.qsd.jmwh.APP;
 import com.qsd.jmwh.module.login.bean.LoginInfo;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 public class UserProfile implements Serializable {
 
@@ -94,5 +95,9 @@ public class UserProfile implements Serializable {
         spHelper.clear();
     }
 
+
+    public String getObjectName() {
+       return getAppAccount() + "/head_" + UUID.randomUUID().toString() + ".jpg";
+    }
 
 }
