@@ -16,7 +16,7 @@ public class PhotoDestroySelectPresenter extends BaseViewPresenter<PhotoDestroyS
 
 
 
-    public void uploadFile(String sFileUrl, int nAttribute, int nInfoType, int nFileType, int nFileFee) {
+    public void uploadFile(String sFileUrl,int nAttribute,int nInfoType,int nFileType,int nFileFee) {
         XHttpProxy.proxy(ApiServices.class)
                     .addFile(sFileUrl,nAttribute,nInfoType,nFileType,nFileFee)
                     .subscribeWith(new TipRequestSubscriber<Object>() {

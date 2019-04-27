@@ -61,7 +61,7 @@ public class PhotoDestroySelectActivity extends BaseBarActivity implements Photo
                 break;
             case R.id.next_action:
                 PersistenceResponse response = UploadImage.uploadImage(getActivity(), UserProfile.getInstance().getObjectName(), getIntent().getStringExtra(URL));
-                mPresenter.uploadFile(response.cloudUrl, 0, 0, nFileType, 0);
+                mPresenter.uploadFile(response.cloudUrl, 0, 0,selected ? 1 : 0,0);
                 break;
         }
     }

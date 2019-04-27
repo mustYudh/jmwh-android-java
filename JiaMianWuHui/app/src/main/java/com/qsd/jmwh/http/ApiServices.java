@@ -89,6 +89,6 @@ public interface ApiServices {
     Observable<Object> getRegisterCode(String token, String sSource, String sReferrer, String WX, String sCity);
 
 
-    @NetMethod(ParameterNames = {"sFileUrl","nAttribute","nInfoType","nFileType",},Url = "/MaskballService/addFile")
+    @NetMethod(ParameterNames = {"sFileUrl","nAttribute","nInfoType","nFileType","nFileFee"},Url = "/MaskballService/addFile")
     Observable<Object> addFile(String sFileUrl,int nAttribute,int nInfoType,int nFileType,int nFileFee);
 }
