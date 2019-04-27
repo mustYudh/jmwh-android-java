@@ -88,6 +88,9 @@ public class EditUserDataActivity extends BaseBarActivity
         weight = bindView(R.id.weight);
         age = bindView(R.id.age);
         sNickName = bindView(R.id.sNickName);
+        boolean isGirl = getIntent().getIntExtra(SEX,-1) == 0;
+        bindView(R.id.bust,isGirl);
+        bindView(R.id.social,isGirl);
     }
 
     private void initListener() {

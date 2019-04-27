@@ -65,7 +65,6 @@
         android:layout_height="16dp"/>
 
     <TextView
-        tools:text="124124"
         android:id="@+id/right_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

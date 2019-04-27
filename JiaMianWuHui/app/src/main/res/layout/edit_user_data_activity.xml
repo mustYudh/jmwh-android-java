@@ -93,6 +93,48 @@
             app:show_top_line="false"/>
 
 
+
+        <LinearLayout
+            android:id="@+id/social"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_F4F4F4"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="社交账号（选填）"
+                android:textSize="13sp"/>
+
+            <com.qsd.jmwh.view.NormaFormItemVIew
+                android:id="@+id/we_chat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:content_hint="请填写"
+                app:left_text="微信"/>
+
+            <com.qsd.jmwh.view.NormaFormItemVIew
+                android:id="@+id/qq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:content_hint="请填写"
+                app:show_top_line="false"
+                app:left_text="QQ"/>
+
+
+            <com.qsd.jmwh.view.UserItemView
+                app:type="switch"
+                app:showArrow="false"
+                app:user_left_text="我的用户资料隐藏社交账号"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -102,6 +144,9 @@
             android:paddingBottom="10dp"
             android:text="更多信息（选填）"
             android:textSize="13sp"/>
+
+
+
 
 
 
@@ -124,6 +169,17 @@
             app:left_text="体重"
             app:only_read="true"
             app:show_top_line="false"/>
+
+        <com.qsd.jmwh.view.NormaFormItemVIew
+            android:visibility="gone"
+            android:id="@+id/bust"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:content_hint="请选择"
+            app:left_text="胸围"
+            app:only_read="true"
+            app:show_top_line="false"/>
+
 
 
         <LinearLayout
