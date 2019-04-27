@@ -36,6 +36,7 @@ import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
 import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
 import cn.finalteam.rxgalleryfinal.rxbus.event.ImageMultipleResultEvent;
 import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
+import cn.finalteam.rxgalleryfinal.ui.base.IRadioImageCheckedListener;
 
 /**
  * @author yudneghao
@@ -46,7 +47,7 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
 
     @PresenterLifeCycle
     private UserPresenter mPresenter = new UserPresenter(this);
-
+    private String selectPhotoUrl;
 
     @Override
     protected int getContentViewId() {
@@ -101,12 +102,21 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
                         .openGalleryRadioImgDefault(new RxBusResultDisposable<ImageRadioResultEvent>() {
                             @Override
                             protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) {
-                                if (!TextUtils.isEmpty(imageRadioResultEvent.getResult().getThumbnailSmallPath())) {
-                                    mPresenter.setHeader(imageRadioResultEvent.getResult().getThumbnailSmallPath(),
-                                            +UserProfile.getInstance().getAppAccount() + "/head_" + UUID.randomUUID().toString() + ".jpg", UserProfile.getInstance().getAppAccount() + "");
-                                }
+                                selectPhotoUrl = imageRadioResultEvent.getResult().getThumbnailSmallPath();
                             }
-                        });
+                        }).onCropImageResult(new IRadioImageCheckedListener() {
+                    @Override
+                    public void cropAfter(Object t) {
+                        if (!TextUtils.isEmpty(selectPhotoUrl)) {
+                            mPresenter.setHeader(selectPhotoUrl, +UserProfile.getInstance().getAppAccount() + "/head_" + UUID.randomUUID().toString() + ".jpg", UserProfile.getInstance().getAppAccount() + "");
+                        }
+                    }
+
+                    @Override
+                    public boolean isActivityFinish() {
+                        return true;
+                    }
+                });
                 break;
             default:
         }

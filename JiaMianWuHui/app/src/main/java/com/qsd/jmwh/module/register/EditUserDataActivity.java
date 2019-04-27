@@ -33,6 +33,7 @@ import java.util.UUID;
 import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
 import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
 import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
+import cn.finalteam.rxgalleryfinal.ui.base.IRadioImageCheckedListener;
 
 public class EditUserDataActivity extends BaseBarActivity
         implements EditUserInfoViewer, View.OnClickListener {
@@ -62,6 +63,7 @@ public class EditUserDataActivity extends BaseBarActivity
     private UserItemView switchSocial;
     private String headerUrl;
     private String bugsSize = "";
+    private String selectPhotoUrl;
 
     public static Intent getIntent(Context context, String token, int lUserId, int sex) {
         Intent starter = new Intent(context, EditUserDataActivity.class);
@@ -208,15 +210,28 @@ public class EditUserDataActivity extends BaseBarActivity
             case R.id.header:
                 RxGalleryFinalApi.getInstance(EditUserDataActivity.this)
                         .openGalleryRadioImgDefault(new RxBusResultDisposable<ImageRadioResultEvent>() {
+
+
                             @Override
                             protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) {
-                                if (!TextUtils.isEmpty(imageRadioResultEvent.getResult().getThumbnailSmallPath())) {
-                                    mPresenter.setHeader(imageRadioResultEvent.getResult().getThumbnailSmallPath(),
-                                            +getIntent().getIntExtra(USER_ID, -1) + "/head_" + UUID.randomUUID().toString() + ".jpg",
-                                            getIntent().getIntExtra(USER_ID, -1) + "", getIntent().getStringExtra(TOKEN));
-                                }
+                                selectPhotoUrl = imageRadioResultEvent.getResult().getThumbnailSmallPath();
                             }
-                        });
+                        }).onCropImageResult(new IRadioImageCheckedListener() {
+                    @Override
+                    public void cropAfter(Object t) {
+                        if (!TextUtils.isEmpty(selectPhotoUrl)) {
+                            mPresenter.setHeader(selectPhotoUrl,
+                                    +getIntent().getIntExtra(USER_ID, -1) + "/head_" + UUID.randomUUID().toString() + ".jpg",
+                                    getIntent().getIntExtra(USER_ID, -1) + "", getIntent().getStringExtra(TOKEN));
+                        }
+                    }
+
+                    @Override
+                    public boolean isActivityFinish() {
+                        return true;
+                    }
+                });
+                ;
                 break;
             case R.id.login:
                 UploadUserInfoParams params = new UploadUserInfoParams();
