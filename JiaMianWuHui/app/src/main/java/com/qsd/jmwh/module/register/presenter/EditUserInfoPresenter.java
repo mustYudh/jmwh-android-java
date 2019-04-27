@@ -46,7 +46,7 @@ public class EditUserInfoPresenter extends BaseViewPresenter<EditUserInfoViewer>
                 .modifyUserInfo(params.sNickName, params.sDateRange, params.sAge, params.sJob,
                         params.sDatePro, params.sHeight, params.sWeight, params.lUserId,
                         params.sIntroduce, params.token,params.sUserHeadPic,params.sBust,
-                        params.QQ,params.WX)
+                        params.QQ,params.WX,params.bHiddenQQandWX)
                 .subscribeWith(new TipRequestSubscriber<Object>() {
                     @Override
                     protected void onSuccess(Object o) {

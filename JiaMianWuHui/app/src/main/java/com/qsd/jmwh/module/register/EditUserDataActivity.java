@@ -21,6 +21,7 @@ import com.qsd.jmwh.module.register.dialog.SelectInfoPop;
 import com.qsd.jmwh.module.register.presenter.EditUserInfoPresenter;
 import com.qsd.jmwh.module.register.presenter.EditUserInfoViewer;
 import com.qsd.jmwh.view.NormaFormItemVIew;
+import com.qsd.jmwh.view.UserItemView;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 import com.yu.common.utils.ImageLoader;
@@ -39,7 +40,6 @@ public class EditUserDataActivity extends BaseBarActivity
     EditUserInfoPresenter mPresenter = new EditUserInfoPresenter(this);
 
 
-
     private static final String TOKEN = "token";
     private static final String USER_ID = "user_id";
     private static final String SEX = "sex";
@@ -56,9 +56,14 @@ public class EditUserDataActivity extends BaseBarActivity
     private NormaFormItemVIew weight;
     private NormaFormItemVIew age;
     private NormaFormItemVIew sNickName;
+    private NormaFormItemVIew bust;
+    private NormaFormItemVIew wechat;
+    private NormaFormItemVIew qq;
+    private UserItemView switchSocial;
     private String headerUrl;
+    private String bugsSize = "";
 
-    public static Intent getIntent(Context context, String token, int lUserId,int sex) {
+    public static Intent getIntent(Context context, String token, int lUserId, int sex) {
         Intent starter = new Intent(context, EditUserDataActivity.class);
         starter.putExtra(TOKEN, token);
         starter.putExtra(USER_ID, lUserId);
@@ -87,10 +92,14 @@ public class EditUserDataActivity extends BaseBarActivity
         height = bindView(R.id.height);
         weight = bindView(R.id.weight);
         age = bindView(R.id.age);
+        bust = bindView(R.id.bust);
+        wechat = bindView(R.id.we_chat);
+        qq = bindView(R.id.qq);
         sNickName = bindView(R.id.sNickName);
-        boolean isGirl = getIntent().getIntExtra(SEX,-1) == 0;
-        bindView(R.id.bust,isGirl);
-        bindView(R.id.social,isGirl);
+        switchSocial = bindView(R.id.switch_social);
+        boolean isGirl = getIntent().getIntExtra(SEX, -1) == 0;
+        bindView(R.id.bust, isGirl);
+        bindView(R.id.social, isGirl);
     }
 
     private void initListener() {
@@ -158,6 +167,33 @@ public class EditUserDataActivity extends BaseBarActivity
                     age.setContentText(selectData.value)
             ).showPopupWindow();
         });
+        bust.setOnClickSelectedItem(v -> {
+            List<SelectData> datas = new ArrayList<>();
+            for (int i = 0; i < 10; i++) {
+                SelectData data = new SelectData();
+                data.key = 30 + i;
+                data.value = (30 + i) + "";
+                datas.add(data);
+            }
+            String[] NO = {"A", "B", "C", "D", "E", "F", "G"};
+            List<SelectData> bustSize = new ArrayList<>();
+            for (String s : NO) {
+                SelectData data = new SelectData();
+                data.value = s;
+                bustSize.add(data);
+            }
+            SelectInfoPop infoPop = new SelectInfoPop(getActivity());
+            infoPop.setTitle("胸围大小").setData(datas).setoNDataSelectedListener(selectData -> {
+                bugsSize = "";
+                bugsSize += selectData.value;
+                SelectInfoPop bustPop = new SelectInfoPop(getActivity());
+                bustPop.setTitle("胸围类型").setData(bustSize).setoNDataSelectedListener(data -> {
+                            bugsSize += data.value;
+                            bust.setContentText(bugsSize);
+                        }
+                ).showPopupWindow();
+            }).showPopupWindow();
+        });
     }
 
 
@@ -191,6 +227,10 @@ public class EditUserDataActivity extends BaseBarActivity
                 params.sDatePro = project.getText();
                 params.sHeight = height.getText();
                 params.sWeight = weight.getText();
+                params.QQ = qq.getText();
+                params.WX = wechat.getText();
+                params.sBust = bust.getText();
+                params.bHiddenQQandWX = switchSocial.getSwitched();
                 params.sUserHeadPic = headerUrl;
                 params.lUserId = getIntent().getIntExtra(USER_ID, -1) + "";
                 EditText edit = bindView(R.id.edit_sIntroduce);
@@ -236,7 +276,7 @@ public class EditUserDataActivity extends BaseBarActivity
 
     @Override
     public void commitUserInfo() {
-        mPresenter.getCode(getIntent().getIntExtra(USER_ID, -1), getIntent().getStringExtra(TOKEN),getIntent().getIntExtra(SEX,-1));
+        mPresenter.getCode(getIntent().getIntExtra(USER_ID, -1), getIntent().getStringExtra(TOKEN), getIntent().getIntExtra(SEX, -1));
     }
 
 

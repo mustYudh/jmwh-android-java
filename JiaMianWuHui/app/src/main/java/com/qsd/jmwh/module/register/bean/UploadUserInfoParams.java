@@ -15,6 +15,7 @@ public class UploadUserInfoParams {
     public String sUserHeadPic = "";
     public String QQ = "";
     public String WX = "";
+    public boolean bHiddenQQandWX = true;
 //
 //    public boolean checkEmpty() {
 //        if (!TextUtils.isEmpty(sNickName)) {

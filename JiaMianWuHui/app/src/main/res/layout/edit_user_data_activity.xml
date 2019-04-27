@@ -108,7 +108,7 @@
                 android:paddingLeft="15dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:text="社交账号（选填）"
+                android:text="社交账号（最少填写1个）"
                 android:textSize="13sp"/>
 
             <com.qsd.jmwh.view.NormaFormItemVIew
@@ -128,6 +128,7 @@
 
 
             <com.qsd.jmwh.view.UserItemView
+                android:id="@+id/switch_social"
                 app:type="switch"
                 app:showArrow="false"
                 app:user_left_text="我的用户资料隐藏社交账号"
