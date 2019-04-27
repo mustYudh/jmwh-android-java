@@ -24,6 +24,7 @@
             android:layout_height="33dp"/>
 
         <com.qsd.jmwh.view.NormaFormItemVIew
+            android:id="@+id/sNickName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:content_hint="请填写"
@@ -95,6 +96,7 @@
 
 
         <com.qsd.jmwh.view.UserItemView
+            android:id="@+id/switchSocial"
             app:type="switch"
             app:showArrow="false"
             app:user_left_text="我的用户资料隐藏社交账号"
@@ -165,7 +167,7 @@
 
 
             <EditText
-                android:id="@+id/edit"
+                android:id="@+id/edit_sIntroduce"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

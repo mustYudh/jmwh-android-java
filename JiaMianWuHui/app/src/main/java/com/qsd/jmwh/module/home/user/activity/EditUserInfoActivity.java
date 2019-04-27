@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
+
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
@@ -14,11 +16,14 @@ import com.qsd.jmwh.module.home.user.presenter.EditUserInfoViewer;
 import com.qsd.jmwh.module.register.DateRangeActivity;
 import com.qsd.jmwh.module.register.bean.RangeData;
 import com.qsd.jmwh.module.register.bean.SelectData;
+import com.qsd.jmwh.module.register.bean.UploadUserInfoParams;
 import com.qsd.jmwh.module.register.dialog.RangeItemPop;
 import com.qsd.jmwh.module.register.dialog.SelectInfoPop;
 import com.qsd.jmwh.view.NormaFormItemVIew;
+import com.qsd.jmwh.view.UserItemView;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,15 +36,18 @@ public class EditUserInfoActivity extends BaseBarActivity implements View.OnClic
     private List<String> ranges = new ArrayList<>();
 
     private NormaFormItemVIew location;
+    private NormaFormItemVIew sNickName;
     private NormaFormItemVIew professional;
     private NormaFormItemVIew project;
     private NormaFormItemVIew height;
     private NormaFormItemVIew weight;
     private NormaFormItemVIew age;
     private NormaFormItemVIew qq;
-    private NormaFormItemVIew weChat;
+    private NormaFormItemVIew wechat;
     private NormaFormItemVIew measure;
-
+    private UserItemView switchSocial;
+    private String bugsSize;
+    private EditText edit;
 
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
@@ -56,15 +64,19 @@ public class EditUserInfoActivity extends BaseBarActivity implements View.OnClic
 
     private void initView() {
         location = bindView(R.id.location);
+        sNickName = bindView(R.id.sNickName);
         professional = bindView(R.id.professional);
         project = bindView(R.id.project);
         height = bindView(R.id.height);
         weight = bindView(R.id.weight);
         age = bindView(R.id.age);
         qq = bindView(R.id.qq);
-        weChat = bindView(R.id.we_chat);
-        weChat = bindView(R.id.measure);
-        bindView(R.id.measure,UserProfile.getInstance().getSex() == 0);
+        wechat = bindView(R.id.we_chat);
+        measure = bindView(R.id.measure);
+        measure = bindView(R.id.measure);
+        switchSocial = bindView(R.id.switchSocial);
+        edit = bindView(R.id.edit_sIntroduce);
+        bindView(R.id.measure, UserProfile.getInstance().getSex() == 0);
     }
 
     private void initListener() {
@@ -137,6 +149,33 @@ public class EditUserInfoActivity extends BaseBarActivity implements View.OnClic
                     age.setContentText(selectData.value)
             ).showPopupWindow();
         });
+        measure.setOnClickSelectedItem(v -> {
+            List<SelectData> datas = new ArrayList<>();
+            for (int i = 0; i < 10; i++) {
+                SelectData data = new SelectData();
+                data.key = 30 + i;
+                data.value = (30 + i) + "";
+                datas.add(data);
+            }
+            String[] NO = {"A", "B", "C", "D", "E", "F", "G"};
+            List<SelectData> bustSize = new ArrayList<>();
+            for (String s : NO) {
+                SelectData data = new SelectData();
+                data.value = s;
+                bustSize.add(data);
+            }
+            SelectInfoPop infoPop = new SelectInfoPop(getActivity());
+            infoPop.setTitle("胸围大小").setData(datas).setoNDataSelectedListener(selectData -> {
+                bugsSize = "";
+                bugsSize += selectData.value;
+                SelectInfoPop bustPop = new SelectInfoPop(getActivity());
+                bustPop.setTitle("胸围类型").setData(bustSize).setoNDataSelectedListener(data -> {
+                            bugsSize += data.value;
+                            measure.setContentText(bugsSize);
+                        }
+                ).showPopupWindow();
+            }).showPopupWindow();
+        });
     }
 
     @Override
@@ -149,7 +188,7 @@ public class EditUserInfoActivity extends BaseBarActivity implements View.OnClic
                 StringBuilder result = new StringBuilder();
                 for (int i = 0; i < selected.size(); i++) {
                     result.append(selected.get(i))
-                        .append((i != selected.size() - 1) ? ";" : "");
+                            .append((i != selected.size() - 1) ? ";" : "");
                 }
                 project.setContentText(result.toString());
                 rangeItemPop.dismiss();
@@ -159,7 +198,22 @@ public class EditUserInfoActivity extends BaseBarActivity implements View.OnClic
 
     @Override
     public void commitUserInfo() {
-        finish();
+        UploadUserInfoParams params = new UploadUserInfoParams();
+        params.sNickName = sNickName.getText();
+        params.sDateRange = location.getText();
+        params.sAge = age.getText();
+        params.sJob = professional.getText();
+        params.sDatePro = project.getText();
+        params.sHeight = height.getText();
+        params.sWeight = weight.getText();
+        params.QQ = qq.getText();
+        params.WX = wechat.getText();
+        params.sBust = measure.getText();
+        params.bHiddenQQandWX = switchSocial.getSwitched();
+        params.lUserId = UserProfile.getInstance().getAppAccount() + "";
+        params.sIntroduce = edit.getText().toString().trim();
+        params.token = UserProfile.getInstance().getAppToken();
+        mPresenter.uploadUserInfo(params);
     }
 
 
@@ -182,7 +236,7 @@ public class EditUserInfoActivity extends BaseBarActivity implements View.OnClic
                         StringBuilder result = new StringBuilder();
                         for (int i = 0; i < ranges.size(); i++) {
                             result.append(ranges.get(i))
-                                .append((i != ranges.size() - 1) ? ";" : "");
+                                    .append((i != ranges.size() - 1) ? ";" : "");
                         }
                         location.setContentText(result.toString());
                     } else {
