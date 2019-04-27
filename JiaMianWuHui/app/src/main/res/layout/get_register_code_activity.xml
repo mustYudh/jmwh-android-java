@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    >
+    <EditText
+        android:id="@+id/edit_city"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:lines="1"
+        android:maxLines="1"
+        android:paddingRight="15dp"
+        android:textColor="@color/color_2A2A2A"
+        android:textColorHint="@color/color_AAAAAA"
+        android:textSize="15sp"
+        android:hint="你在哪个城市？"/>
+
+    <View
+        android:background="@color/color_EEEEEE"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+
+    <EditText
+        android:id="@+id/where_know"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:lines="1"
+        android:maxLines="1"
+        android:paddingRight="15dp"
+        android:textColor="@color/color_2A2A2A"
+        android:textColorHint="@color/color_AAAAAA"
+        android:textSize="15sp"
+        android:hint="你从哪里知道假面舞会？？"/>
+
+    <View
+        android:background="@color/color_EEEEEE"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+
+    <EditText
+        android:id="@+id/we_chat"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:lines="1"
+        android:maxLines="1"
+        android:paddingRight="15dp"
+        android:textColor="@color/color_2A2A2A"
+        android:textColorHint="@color/color_AAAAAA"
+        android:textSize="15sp"
+        android:hint="微信号码（我们可能会加你微信）？"/>
+
+    <View
+        android:background="@color/color_EEEEEE"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+    <EditText
+        android:id="@+id/referees"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:lines="1"
+        android:maxLines="1"
+        android:paddingRight="15dp"
+        android:textColor="@color/color_2A2A2A"
+        android:textColorHint="@color/color_AAAAAA"
+        android:textSize="15sp"
+        android:hint="推荐人（如果没有则不用填写）？"/>
+
+    <View
+        android:background="@color/color_EEEEEE"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+
+
+
+    <com.yu.common.ui.DelayClickTextView
+        android:id="@+id/next"
+        style="@style/app_blue_button"
+        android:layout_marginTop="40dp"
+        android:text="提交申请"
+        />
+
+
+
+</LinearLayout>
