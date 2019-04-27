@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -16,6 +15,7 @@ import com.qsd.jmwh.base.BaseFragment;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.user.activity.EditUserInfoActivity;
 import com.qsd.jmwh.module.home.user.activity.MoneyBagActivity;
+import com.qsd.jmwh.module.home.user.activity.PhotoDestroySelectActivity;
 import com.qsd.jmwh.module.home.user.activity.PrivacySettingActivity;
 import com.qsd.jmwh.module.home.user.activity.SettingActivity;
 import com.qsd.jmwh.module.home.user.bean.UserCenterMyInfo;
@@ -23,8 +23,6 @@ import com.qsd.jmwh.module.home.user.presenter.UserPresenter;
 import com.qsd.jmwh.module.home.user.presenter.UserViewer;
 import com.qsd.jmwh.module.register.ToByVipActivity;
 import com.qsd.jmwh.module.splash.SplashActivity;
-import com.qsd.jmwh.thrid.UploadImage;
-import com.qsd.jmwh.thrid.oss.PersistenceResponse;
 import com.qsd.jmwh.view.UserItemView;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.utils.ImageLoader;
@@ -34,7 +32,6 @@ import java.util.UUID;
 
 import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
 import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
-import cn.finalteam.rxgalleryfinal.rxbus.event.ImageMultipleResultEvent;
 import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
 import cn.finalteam.rxgalleryfinal.ui.base.IRadioImageCheckedListener;
 
@@ -123,19 +120,17 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
     }
 
     private void addPhoto() {
-        RxGalleryFinalApi
-                .getInstance(getActivity())
-                .setType(RxGalleryFinalApi.SelectRXType.TYPE_IMAGE, RxGalleryFinalApi.SelectRXType.TYPE_SELECT_MULTI)
-                .setImageMultipleResultEvent(new RxBusResultDisposable<ImageMultipleResultEvent>() {
+        RxGalleryFinalApi instance = RxGalleryFinalApi.getInstance(getActivity());
+        instance.openSingGalleryRadioImgDefault(
+                new RxBusResultDisposable<ImageRadioResultEvent>() {
                     @Override
-                    protected void onEvent(ImageMultipleResultEvent imageMultipleResultEvent) throws Exception {
-                        Log.e("多选图片的回调",imageMultipleResultEvent.getResult().get(0).getOriginalPath());
-                        String path = imageMultipleResultEvent.getResult().get(0).getOriginalPath();
-                        PersistenceResponse response = UploadImage.uploadImage(getActivity(), UserProfile.getInstance().getObjectName(),path);
-
+                    protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) {
+                        String imgUrl = imageRadioResultEvent.getResult().getOriginalPath();
+                        if (!TextUtils.isEmpty(imgUrl)) {
+                            getLaunchHelper().startActivity(PhotoDestroySelectActivity.getIntent(getActivity(),imgUrl));
+                        }
                     }
-                }).open();
-
+                });
     }
 
     @Override

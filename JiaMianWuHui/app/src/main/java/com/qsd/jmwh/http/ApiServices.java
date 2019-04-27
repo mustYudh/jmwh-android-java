@@ -59,6 +59,11 @@ public interface ApiServices {
                                       String sDatePro, String sHeight, String sWeight, String lUserId,
                                       String sIntroduce, String token, String sUserHeadPic, String sBust, String QQ, String WX, Boolean bHiddenQQandWX);
 
+    @NetMethod(ParameterNames = {"sNickName", "sDateRange", "sAge", "sJob", "sDatePro", "sHeight",
+            "sWeight", "lUserId", "sIntroduce", "token", "sUserHeadPic", "sBust", "QQ", "WX", "bHiddenQQandWX"}, Url = "/UserService/modifyUser")
+    Observable<Object> modifyUserCenter(String sNickName, String sDateRange, String sAge, String sJob,
+                                      String sDatePro, String sHeight, String sWeight, String lUserId,
+                                      String sIntroduce, String token, String sUserHeadPic, String sBust, String QQ, String WX, Boolean bHiddenQQandWX);
 
     @NetMethod(ParameterNames = {"lUserId", "token"}, Url = "/UserService/getUserRegistAuthCode")
     Observable<UserAuthCodeBean> getCod(int lUserId, String token);

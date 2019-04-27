@@ -32,7 +32,7 @@ public class EditUserInfoPresenter extends BaseViewPresenter<EditUserInfoViewer>
 
     public void uploadUserInfo(UploadUserInfoParams params) {
         XHttpProxy.proxy(ApiServices.class)
-                .modifyUserInfo(params.sNickName, params.sDateRange, params.sAge, params.sJob,
+                .modifyUserCenter(params.sNickName, params.sDateRange, params.sAge, params.sJob,
                         params.sDatePro, params.sHeight, params.sWeight, params.lUserId,
                         params.sIntroduce, params.token,params.sUserHeadPic,params.sBust,
                         params.QQ,params.WX,params.bHiddenQQandWX)

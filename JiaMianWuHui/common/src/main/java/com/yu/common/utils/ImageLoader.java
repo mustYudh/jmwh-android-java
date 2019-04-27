@@ -39,7 +39,9 @@ public class ImageLoader {
     public static void loadCenterCrop(Context context, String url, ImageView view, int defaultResId) {
         Glide.with(context).load(url).centerCrop().dontAnimate().placeholder(defaultResId).into(view);
     }
-
+    public static void loadCenterCrop(Context context, String url, ImageView view) {
+        Glide.with(context).load(url).centerCrop().dontAnimate().into(view);
+    }
     public static void loadFitCenter(Context context, String url, ImageView view, int defaultResId) {
         Glide.with(context).load(url).fitCenter().dontAnimate().placeholder(defaultResId).into(view);
     }

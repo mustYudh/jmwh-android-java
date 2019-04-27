@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+
+    <ImageView
+        android:id="@+id/resource"
+        android:layout_width="match_parent"
+        android:layout_height="375dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/app_main_bg_color"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="32dp"
+        >
+
+        <LinearLayout
+            android:id="@+id/select_destroy"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <com.yu.common.ui.DelayClickImageView
+                android:id="@+id/select_destroy_btn"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/button_selected"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="阅后即焚（查看后2秒内焚毁）"
+                android:textColor="@color/white"
+                android:textSize="14sp"/>
+
+
+        </LinearLayout>
+
+
+
+
+        <com.yu.common.ui.DelayClickTextView
+            android:id="@+id/next_action"
+            android:layout_width="77dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/white_btn_bg"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@color/app_main_bg_color"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+</RelativeLayout>

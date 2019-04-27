@@ -566,6 +566,23 @@ public class RxGalleryFinalApi {
         return mRxApi;
     }
 
+
+    /**
+     * 单选默认设置
+     */
+    public RxGalleryFinalApi openSingGalleryRadioImgDefault(RxBusResultDisposable<ImageRadioResultEvent> rxBusResultDisposable) {
+        Logger.i("----rxGalleryFinal---" + rxGalleryFinal);
+        if (rxGalleryFinal == null)
+            return null;
+        rxGalleryFinal
+                .image()
+                .radio()
+                .imageLoader(ImageLoaderType.GLIDE)
+                .subscribe(rxBusResultDisposable)
+                .openGallery();
+        return mRxApi;
+    }
+
     /**
      * 选择类型
      */
