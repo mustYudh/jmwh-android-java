@@ -27,6 +27,10 @@
             android:name="android.max_aspect"
             android:value="2.1"/>
 
+        <meta-data
+            android:name="com.qsd.jmwh.utils.glide.OkHttpGlideModule"
+            android:value="GlideModule"/>
+
         <activity
             android:name=".module.splash.SplashActivity"
             android:configChanges="keyboard|orientation|keyboardHidden|screenSize"

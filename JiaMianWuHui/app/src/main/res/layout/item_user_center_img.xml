@@ -6,7 +6,6 @@
 
     <ImageView
         android:id="@+id/destroy_img"
-        android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher"
         android:layout_width="93dp"
         android:layout_height="93dp"/>

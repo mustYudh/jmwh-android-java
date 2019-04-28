@@ -30,8 +30,11 @@ import java.util.ArrayList;
 
 public class DestroyPhotoTag extends BasicAdapter<UserCenterMyInfo.CdoimgListBean> {
     private AddImageListener addImageListener;
+
     public interface AddImageListener {
         void clickAdd();
+
+        void clickImage(UserCenterMyInfo.CdoimgListBean cdoimgListBean);
     }
 
     public void setAddImageListener(AddImageListener addImageListener) {
@@ -44,7 +47,7 @@ public class DestroyPhotoTag extends BasicAdapter<UserCenterMyInfo.CdoimgListBea
 
     @Override
     protected BaseHolder<UserCenterMyInfo.CdoimgListBean> getHolder(Context context) {
-        return new BaseHolder<UserCenterMyInfo.CdoimgListBean>(context,R.layout.item_user_center_img) {
+        return new BaseHolder<UserCenterMyInfo.CdoimgListBean>(context, R.layout.item_user_center_img) {
             @Override
             public void bindData(UserCenterMyInfo.CdoimgListBean item) {
                 ImageView imageView = findViewId(R.id.destroy_img);
@@ -59,6 +62,11 @@ public class DestroyPhotoTag extends BasicAdapter<UserCenterMyInfo.CdoimgListBea
                 } else {
                     findViewId(R.id.destroy_tag).setVisibility(item.nFileType == 1 ? View.VISIBLE : View.GONE);
                     ImageLoader.loadCenterCrop(imageView.getContext(), item.sFileUrl, imageView);
+                    imageView.setOnClickListener(v -> {
+                        if (addImageListener != null) {
+                            addImageListener.clickImage(item);
+                        }
+                    });
                 }
             }
         };

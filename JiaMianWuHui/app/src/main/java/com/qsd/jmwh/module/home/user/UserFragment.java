@@ -172,7 +172,17 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
             userInfo.cdoimgList.add(userCenterMyInfo);
             DestroyPhotoTag destroyPhotoTag = new DestroyPhotoTag(userInfo.cdoimgList);
             recyclerView.setAdapter(destroyPhotoTag);
-            destroyPhotoTag.setAddImageListener(this::addPhoto);
+            destroyPhotoTag.setAddImageListener(new DestroyPhotoTag.AddImageListener() {
+                @Override
+                public void clickAdd() {
+                    addPhoto();
+                }
+
+                @Override
+                public void clickImage(UserCenterMyInfo.CdoimgListBean cdoimgListBean) {
+                    getLaunchHelper().startActivity(PhotoDestroySelectActivity.getIntent(getActivity(),cdoimgListBean));
+                }
+            });
         }
 
 

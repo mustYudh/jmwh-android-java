@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
+import com.qsd.jmwh.module.home.user.bean.UserCenterMyInfo;
 import com.qsd.jmwh.module.home.user.presenter.PhotoDestroySelectPresenter;
 import com.qsd.jmwh.module.home.user.presenter.PhotoDestroySelectViewer;
 import com.qsd.jmwh.thrid.UploadImage;
@@ -28,7 +30,8 @@ public class PhotoDestroySelectActivity extends BaseBarActivity implements Photo
     private ImageView selectDestroy;
     private LinearLayout selectDestroyBtn;
     private boolean selected = false;
-    private int nFileType = 0;
+    private static int nFileType = 0;
+    private static int lFileId = 0;
 
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
@@ -41,10 +44,20 @@ public class PhotoDestroySelectActivity extends BaseBarActivity implements Photo
         return starter;
     }
 
+    public static Intent getIntent(Context context, UserCenterMyInfo.CdoimgListBean cdoimgListBean) {
+        Intent starter = new Intent(context, PhotoDestroySelectActivity.class);
+        starter.putExtra(URL, cdoimgListBean.sFileUrl);
+        nFileType = cdoimgListBean.nFileType;
+        lFileId = cdoimgListBean.lFileId;
+        return starter;
+    }
+
     @Override
     protected void loadData() {
         ImageView resource = bindView(R.id.resource);
-        ImageLoader.loadCenterCrop(getActivity(), getIntent().getStringExtra(URL), resource);
+        String url = getIntent().getStringExtra(URL);
+        Log.e("=====>",url);
+        ImageLoader.loadCenterCrop(getActivity(),url, resource);
         selectDestroy = bindView(R.id.select_destroy_btn);
         selectDestroyBtn = bindView(R.id.select_destroy, this);
         TextView nextAction = bindView(R.id.next_action, this);
