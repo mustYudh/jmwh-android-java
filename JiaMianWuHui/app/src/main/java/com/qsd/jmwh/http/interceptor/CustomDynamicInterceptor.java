@@ -134,6 +134,9 @@ public class CustomDynamicInterceptor extends BaseDynamicInterceptor<CustomDynam
                 newParams.put("token", UserProfile.getInstance().getAppToken());
             }
         }
+        if (newParams.containsKey("lUserId") && newParams.get("lUserId") == null) {
+            newParams.remove("lUserId");
+        }
 
         return newParams;
     }

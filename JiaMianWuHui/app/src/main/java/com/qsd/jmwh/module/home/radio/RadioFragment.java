@@ -122,7 +122,6 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
             RadioItemPop infoPop = new RadioItemPop(getActivity());
             infoPop.setOutsideTouchable(true);
             infoPop.setTitle("发布约会广播").setData(configListBean.cdoList).showPopupWindow();
-
         }
     }
 }
