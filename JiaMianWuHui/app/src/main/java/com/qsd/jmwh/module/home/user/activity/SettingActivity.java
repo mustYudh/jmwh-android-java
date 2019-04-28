@@ -57,7 +57,7 @@ public class SettingActivity extends BaseBarActivity {
         clearCache.setOnClickListener(v -> {
             glideCacheUtil.clearImageDiskCache(getActivity());
             ToastUtils.show("清除成功");
-            clearCache.setHint("0.00MB");
+            clearCache.setHint("0.00Byte");
         });
     }
 

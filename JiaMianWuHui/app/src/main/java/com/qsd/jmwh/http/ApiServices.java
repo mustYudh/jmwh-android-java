@@ -91,4 +91,7 @@ public interface ApiServices {
 
     @NetMethod(ParameterNames = {"sFileUrl","nAttribute","nInfoType","nFileType","nFileFee"},Url = "/MaskballService/addFile")
     Observable<Object> addFile(String sFileUrl,int nAttribute,int nInfoType,int nFileType,int nFileFee);
+
+    @NetMethod(ParameterNames = {"lFileId","nInfoType"},Url = "/MaskballService/delFile")
+    Observable<Object> deleteFile(int lFileId,int nInfoType);
 }

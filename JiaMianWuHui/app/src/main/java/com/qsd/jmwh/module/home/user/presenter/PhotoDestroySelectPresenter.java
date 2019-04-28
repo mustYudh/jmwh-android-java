@@ -6,6 +6,7 @@ import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.framework.BaseViewPresenter;
+import com.yu.common.toast.ToastUtils;
 
 @SuppressLint("CheckResult")
 public class PhotoDestroySelectPresenter extends BaseViewPresenter<PhotoDestroySelectViewer> {
@@ -25,5 +26,17 @@ public class PhotoDestroySelectPresenter extends BaseViewPresenter<PhotoDestroyS
                             getActivity().finish();
                         }
                     });
+    }
+
+    public void deleteFile(int lFileId,int nInfoType) {
+            XHttpProxy.proxy(ApiServices.class)
+                    .deleteFile(lFileId,nInfoType).subscribeWith(new TipRequestSubscriber<Object>() {
+                @Override
+                protected void onSuccess(Object o) {
+                    ToastUtils.show("删除成功");
+                    getActivity().finish();
+                }
+            });
+
     }
 }

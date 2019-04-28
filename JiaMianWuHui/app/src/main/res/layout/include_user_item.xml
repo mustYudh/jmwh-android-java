@@ -64,6 +64,9 @@
     </LinearLayout>
 
     <com.qsd.jmwh.view.NoscrollerGridView
+        android:background="@color/white"
+        android:horizontalSpacing="2dp"
+        android:verticalSpacing="2dp"
         android:numColumns="4"
         android:visibility="gone"
         android:id="@+id/user_center_photo"

@@ -6,7 +6,8 @@
 
     <ImageView
         android:id="@+id/destroy_img"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/ic_add_button"
+        android:scaleType="center"
         android:layout_width="93dp"
         android:layout_height="93dp"/>
     
@@ -18,6 +19,6 @@
         android:textColor="@color/white"
         android:textSize="12sp"
         android:background="@color/app_main_color"
-        android:layout_width="93dp"
+        android:layout_width="92dp"
         android:layout_height="30dp"/>
 </FrameLayout>

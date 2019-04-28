@@ -81,5 +81,17 @@ public class UserCenterMyInfo implements Serializable {
         public int nFileFee;
         public int nAttribute;
         public boolean last;
+
+        @Override
+        public String toString() {
+            return "CdoimgListBean{" +
+                    "lFileId=" + lFileId +
+                    ", sFileUrl='" + sFileUrl + '\'' +
+                    ", nFileType=" + nFileType +
+                    ", nFileFee=" + nFileFee +
+                    ", nAttribute=" + nAttribute +
+                    ", last=" + last +
+                    '}';
+        }
     }
 }
