@@ -5,10 +5,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.denghao.control.view.utils.UpdataCurrentFragment;
@@ -130,7 +129,7 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
                     protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) {
                         String imgUrl = imageRadioResultEvent.getResult().getOriginalPath();
                         if (!TextUtils.isEmpty(imgUrl)) {
-                            getLaunchHelper().startActivity(PhotoDestroySelectActivity.getIntent(getActivity(),imgUrl));
+                            getLaunchHelper().startActivity(PhotoDestroySelectActivity.getIntent(getActivity(), imgUrl));
                         }
                     }
                 });
@@ -164,15 +163,17 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
         appVersion.setHint(getAppVersion(Objects.requireNonNull(getActivity())));
         UserProfile.getInstance().setPhoneNo(cdoUser.sMobile);
         boolean show = userInfo.cdoimgList.size() > 0;
-        bindView(R.id.upload_img_root,!show);
+        bindView(R.id.upload_img_root, !show);
         if (show) {
-            RecyclerView recyclerView = bindView(R.id.user_center_photo);
+            GridView recyclerView = bindView(R.id.user_center_photo);
             recyclerView.setVisibility(View.VISIBLE);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            DestroyPhotoTag destroyPhotoTag = new DestroyPhotoTag(R.layout.item_user_center_img,userInfo.cdoimgList);
+            UserCenterMyInfo.CdoimgListBean userCenterMyInfo = new UserCenterMyInfo.CdoimgListBean();
+            userCenterMyInfo.last = true;
+            userInfo.cdoimgList.add(userCenterMyInfo);
+            DestroyPhotoTag destroyPhotoTag = new DestroyPhotoTag(userInfo.cdoimgList);
             recyclerView.setAdapter(destroyPhotoTag);
+            destroyPhotoTag.setAddImageListener(this::addPhoto);
         }
-
 
 
     }

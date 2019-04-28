@@ -1,7 +1,7 @@
 package com.qsd.jmwh.module.home.user.bean;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
 
 public class UserCenterMyInfo implements Serializable {
 
@@ -19,7 +19,7 @@ public class UserCenterMyInfo implements Serializable {
     public CdoWalletDataBean cdoWalletData;
     public int nDestroyImgCount;
     public int nViewCount;
-    public List<CdoimgListBean> cdoimgList;
+    public ArrayList<CdoimgListBean> cdoimgList;
 
 
     public static class CdoUserBean {
@@ -80,6 +80,6 @@ public class UserCenterMyInfo implements Serializable {
         public int nFileType;
         public int nFileFee;
         public int nAttribute;
-
+        public boolean last;
     }
 }

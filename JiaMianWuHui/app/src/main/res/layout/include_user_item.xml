@@ -63,12 +63,13 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <com.qsd.jmwh.view.NoscrollerGridView
+        android:numColumns="4"
         android:visibility="gone"
         android:id="@+id/user_center_photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    </android.support.v7.widget.RecyclerView>
+    </com.qsd.jmwh.view.NoscrollerGridView>
 
 
 
