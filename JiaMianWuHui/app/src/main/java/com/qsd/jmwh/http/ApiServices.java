@@ -38,8 +38,8 @@ public interface ApiServices {
     @NetMethod(Url = "/SystemService/getUserConfigInfo")
     Observable<DateProjectBean> getDateProject();
 
-    @NetMethod(ParameterNames = {"nLat", "nLng", "sDatingRange", "nTab", "pageindex", "nSex"}, Url = "/DatingService/getDatingList")
-    Observable<HomeRadioListBean> getRadioDate(String nLat, String nLng, String sDatingRange, String nTab, String pageindex, String nSex);
+    @NetMethod(ParameterNames = {"lUserId","nLat", "nLng", "sDatingRange", "nTab", "pageindex", "nSex"}, Url = "/DatingService/getDatingList")
+    Observable<HomeRadioListBean> getRadioDate(String lUserId,String nLat, String nLng, String sDatingRange, String nTab, String pageindex, String nSex);
 
     @NetMethod(ParameterNames = {"lUserId", "token"}, Url = "/GoodsService/getVIPPayInfo")
     Observable<VipInfoBean> getVipInfoList(int lUserId, String token);
