@@ -52,7 +52,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
 
     @Override
     protected void loadData() {
-        mPresenter.initRadioData("30.17722", "120.2007", "", "1", "0", "");
+        mPresenter.initRadioData("","111.00", "222.00", "", "1", "0", "0");
 
     }
 
@@ -122,7 +122,6 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
             RadioItemPop infoPop = new RadioItemPop(getActivity());
             infoPop.setOutsideTouchable(true);
             infoPop.setTitle("发布约会广播").setData(configListBean.cdoList).showPopupWindow();
-
         }
     }
 }
