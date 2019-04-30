@@ -1,131 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.qsd.jmwh">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.qsd.jmwh">
 
-    <application
-        android:name=".APP"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppGrayTheme"
-        tools:ignore="GoogleAppIndexingWarning">
-        <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="${UMENG_APPKEY}"/>
-        <meta-data
-            android:name="UMENG_CHANNEL"
-            android:value="${UMENG_CHANNEL}"/>
-        <meta-data
-            android:name="SENSORS_ANALYTICS_UTM_SOURCE"
-            android:value="${UMENG_CHANNEL}"/>
-        <meta-data
-            android:name="android.max_aspect"
-            android:value="2.1"/>
+  <application
+      android:name=".APP"
+      android:allowBackup="true"
+      android:icon="@mipmap/ic_launcher"
+      android:label="@string/app_name"
+      android:roundIcon="@mipmap/ic_launcher_round"
+      android:supportsRtl="true"
+      android:theme="@style/AppGrayTheme"
+      tools:ignore="GoogleAppIndexingWarning">
+    <meta-data
+        android:name="UMENG_APPKEY"
+        android:value="${UMENG_APPKEY}"/>
+    <meta-data
+        android:name="UMENG_CHANNEL"
+        android:value="${UMENG_CHANNEL}"/>
+    <meta-data
+        android:name="SENSORS_ANALYTICS_UTM_SOURCE"
+        android:value="${UMENG_CHANNEL}"/>
+    <meta-data
+        android:name="android.max_aspect"
+        android:value="2.1"/>
 
-        <meta-data
-            android:name="com.qsd.jmwh.utils.glide.OkHttpGlideModule"
-            android:value="GlideModule"/>
+    <meta-data
+        android:name="com.qsd.jmwh.utils.glide.OkHttpGlideModule"
+        android:value="GlideModule"/>
 
-        <activity
-            android:name=".module.splash.SplashActivity"
-            android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+    <activity
+        android:name=".module.splash.SplashActivity"
+        android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
+        android:launchMode="singleTask"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="adjustNothing">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".module.home.HomeActivity"
-            android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing">
-        </activity>
-        <activity
-            android:name=".module.login.LoginActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing"/>
-        <activity
-            android:name=".module.register.RegisterActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing"/>
-        <activity
-            android:name=".module.register.SelectGenderActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing"/>
-        <activity
-            android:name=".module.register.EditRegisterCodeActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing"/>
-        <activity
-            android:name=".module.register.EditUserDataActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity
-            android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme_Light"/>
-        <activity
-            android:name="com.yalantis.ucrop.UCropActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme_Light"/>
-        <activity
-            android:name=".module.register.ToByVipActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".module.register.DateRangeActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".test.TextActivity">
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </activity>
+    <activity
+        android:name=".module.home.HomeActivity"
+        android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
+        android:launchMode="singleTask"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="adjustNothing">
+    </activity>
+    <activity
+        android:name=".module.login.LoginActivity"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="adjustNothing"/>
+    <activity
+        android:name=".module.register.RegisterActivity"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="adjustNothing"/>
+    <activity
+        android:name=".module.register.SelectGenderActivity"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="adjustNothing"/>
+    <activity
+        android:name=".module.register.EditRegisterCodeActivity"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="adjustNothing"/>
+    <activity
+        android:name=".module.register.EditUserDataActivity"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="adjustResize|stateHidden"/>
+    <activity
+        android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"
+        android:exported="true"
+        android:screenOrientation="portrait"
+        android:theme="@style/Theme_Light"/>
+    <activity
+        android:name="com.yalantis.ucrop.UCropActivity"
+        android:screenOrientation="portrait"
+        android:theme="@style/Theme_Light"/>
+    <activity
+        android:name=".module.register.ToByVipActivity"
+        android:screenOrientation="portrait"/>
+    <activity
+        android:name=".module.register.DateRangeActivity"
+        android:screenOrientation="portrait"/>
+    <activity android:name=".test.TextActivity">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN"/> -->
+      <!-- <intent-filter> -->
+      <!-- <action android:name="android.intent.action.MAIN"/> -->
 
 
-            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
-            <!-- </intent-filter> -->
-        </activity>
-        <activity
-            android:name=".wxapi.WXEntryActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="true"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-        <activity
-            android:name=".module.home.user.activity.EditUserInfoActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".module.home.user.activity.PrivacySettingActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".module.home.user.activity.SettingActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".module.home.user.activity.PushSettingActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".module.home.user.activity.SettingPhoneNumberActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".module.home.user.activity.EditPasswordActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".module.home.user.activity.MoneyBagActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".module.register.GetRegisterCode"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".module.home.user.activity.PhotoDestroySelectActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".module.home.radio.activity.ReleaseAppointmentActivity">
-        </activity>
-    </application>
+      <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+      <!-- </intent-filter> -->
+    </activity>
+    <activity
+        android:name=".wxapi.WXPayEntryActivity"
+        android:exported="true"
+        android:launchMode="singleTop"
+        />
+    <activity
+        android:name=".wxapi.WXEntryActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize"
+        android:exported="true"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+    <activity
+        android:name=".module.home.user.activity.EditUserInfoActivity"
+        android:screenOrientation="portrait"/>
+    <activity
+        android:name=".module.home.user.activity.PrivacySettingActivity"
+        android:screenOrientation="portrait"/>
+    <activity
+        android:name=".module.home.user.activity.SettingActivity"
+        android:screenOrientation="portrait"/>
+    <activity
+        android:name=".module.home.user.activity.PushSettingActivity"
+        android:screenOrientation="portrait"/>
+    <activity
+        android:name=".module.home.user.activity.SettingPhoneNumberActivity"
+        android:screenOrientation="portrait"/>
+    <activity
+        android:name=".module.home.user.activity.EditPasswordActivity"
+        android:screenOrientation="portrait"/>
+    <activity
+        android:name=".module.home.user.activity.MoneyBagActivity"
+        android:screenOrientation="portrait"/>
+    <activity
+        android:name=".module.register.GetRegisterCode"
+        android:screenOrientation="portrait"/>
+    <activity
+        android:name=".module.home.user.activity.PhotoDestroySelectActivity"
+        android:screenOrientation="portrait"/>
+    <activity android:name=".module.home.radio.activity.ReleaseAppointmentActivity">
+    </activity>
+  </application>
 
 </manifest>

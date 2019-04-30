@@ -6,10 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.module.register.adapter.PayTypeAdapter;
@@ -21,7 +19,6 @@ import com.qsd.jmwh.module.register.presenter.ToByVipPresenter;
 import com.qsd.jmwh.module.register.presenter.ToByVipViewer;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,7 +63,7 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
         payType.setLayoutManager(new LinearLayoutManager(getActivity()));
         bindView(R.id.pay, v -> {
             if (currentType != null) {
-                ToastUtils.show(currentType.type + "");
+                mPresenter.pay(cdoListBean.lGoodsId,currentType.type);
             } else {
                 ToastUtils.show("请选择支付方式");
             }
@@ -82,7 +79,6 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
 
     @Override
     public void getVipInfo(VipInfoBean vipInfoBean) {
-        Log.e("=====>", vipInfoBean.nMoney + "");
         currentMoney = Double.parseDouble(vipInfoBean.nMoney);
         VipTextAdapter vipTextAdapter = new VipTextAdapter(R.layout.item_vip_text_layout, vipInfoBean.sVIPPrivilegeList);
         vipTextList.setAdapter(vipTextAdapter);
@@ -98,6 +94,7 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
                 payTypeBean.type = Integer.parseInt(payType);
                 payTypeBeans.add(payTypeBean);
             }
+
         }
         payTypeAdapter = new PayTypeAdapter(R.layout.item_pay_type_layout, payTypeBeans);
         payType.setAdapter(payTypeAdapter);

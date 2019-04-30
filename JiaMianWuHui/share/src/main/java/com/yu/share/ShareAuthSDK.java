@@ -24,16 +24,14 @@ public class ShareAuthSDK {
     MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.MANUAL);
     MobclickAgent.setCatchUncaughtExceptions(true);
     UMConfigure.setLogEnabled(debug);
-    PlatformConfig.setWeixin("wx860254f6f0a55fc6", "228c301ab1cc5f57b3e2ca8a5fa4f926");
-    PlatformConfig.setQQZone("101567701", "78a5ff5f467d76670540a65f719af131");
-    PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad","http://sns.whalecloud.com");
+    PlatformConfig.setWeixin(Key.WX_APP_ID, Key.WX_APP_KEY);
+    PlatformConfig.setQQZone(Key.QQ_APPID, Key.QQ_APP_KEY);
+    PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad",
+        "http://sns.whalecloud.com");
     return SHARE_AUTH_SDK;
   }
-
 
   public Context getContent() {
     return CONTEXT;
   }
-
-
 }

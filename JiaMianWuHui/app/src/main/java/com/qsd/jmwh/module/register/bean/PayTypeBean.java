@@ -6,4 +6,5 @@ public class PayTypeBean implements Serializable {
     public int type;
     public boolean selected;
     public String money;
+    public int lGoodsId;
 }
