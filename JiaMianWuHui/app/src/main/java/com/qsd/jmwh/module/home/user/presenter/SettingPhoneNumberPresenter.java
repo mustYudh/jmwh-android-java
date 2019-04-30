@@ -33,7 +33,7 @@ public class SettingPhoneNumberPresenter extends BaseViewPresenter<SettingPhoneN
                     @Override
                     public void onError(ApiException e) {
                         super.onError(e);
-                        countDown.stopCoutdown();
+                        countDown.stop();
                     }
                 });
     }

@@ -9,6 +9,7 @@ import com.qsd.jmwh.module.register.bean.VipInfoBean;
 import com.qsd.jmwh.utils.PayUtils;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.framework.BaseViewPresenter;
+import com.yu.common.toast.ToastUtils;
 
 @SuppressLint("CheckResult")
 public class ToByVipPresenter extends BaseViewPresenter<ToByVipViewer> {
@@ -34,7 +35,6 @@ public class ToByVipPresenter extends BaseViewPresenter<ToByVipViewer> {
 
 
     public void pay(int lGoodsId, int type) {
-
         XHttpProxy.proxy(ApiServices.class)
                 .pay(lGoodsId, type).subscribeWith(new TipRequestSubscriber<PayInfo>() {
             @Override
@@ -43,16 +43,24 @@ public class ToByVipPresenter extends BaseViewPresenter<ToByVipViewer> {
                         .getPayResult(new PayUtils.PayCallBack() {
                             @Override
                             public void onPaySuccess(int type) {
+                                ToastUtils.show("支付成功");
                                 getActivity().finish();
                             }
 
                             @Override
                             public void onFailed(int type) {
-
+                                ToastUtils.show("支付失败，请重试");
                             }
 
                         });
             }
         });
+    }
+
+
+    @Override
+    public void willDestroy() {
+        super.willDestroy();
+        PayUtils.getInstance().recycle();
     }
 }

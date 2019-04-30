@@ -52,7 +52,8 @@ public class RegisterActivity extends BaseBarActivity implements RegisterViewer,
             } else if (!phoneNum.getText().startsWith("1") || phoneNum.getText().length() != 11) {
                 ToastUtils.show("检查手机号输入是否正确");
             } else {
-                countDown = new RxCountDown(60);
+                countDown = new RxCountDown();
+                countDown.start(60);
                 mPresenter.sendVerCode(phoneNum.getText(), countDown);
                 countDown.setCountDownTimeListener(new RxCountDownAdapter() {
 
@@ -95,7 +96,7 @@ public class RegisterActivity extends BaseBarActivity implements RegisterViewer,
     protected void onDestroy() {
         super.onDestroy();
         if (countDown != null) {
-            countDown.stopCoutdown();
+            countDown.stop();
         }
     }
 

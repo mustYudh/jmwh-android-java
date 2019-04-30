@@ -35,7 +35,8 @@ public class SettingPhoneNumberActivity extends BaseBarActivity implements Setti
             } else if (!phoneNum.getText().startsWith("1") || phoneNum.getText().length() != 11) {
                 ToastUtils.show("检查手机号输入是否正确");
             } else {
-                countDown = new RxCountDown(60);
+                countDown = new RxCountDown();
+                countDown.start(60);
                 mPresenter.sendVerCode(phoneNum.getText(), countDown);
                 countDown.setCountDownTimeListener(new RxCountDownAdapter() {
 

@@ -22,7 +22,7 @@ public class PayInfo implements Serializable {
    */
 
   public long server_timestamp;
-  public int lOrderId;
+  public int lOrderId = -1;
   public String appid;
   public String noncestr;
   @SerializedName("package")

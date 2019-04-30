@@ -38,7 +38,7 @@ public class RegisterPresenter extends BaseViewPresenter<RegisterViewer> {
                     @Override
                     public void onError(ApiException e) {
                         super.onError(e);
-                        countDown.stopCoutdown();
+                        countDown.stop();
                     }
                 });
     }

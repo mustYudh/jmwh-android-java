@@ -116,4 +116,7 @@ public interface ApiServices {
 
   @NetMethod(ParameterNames = { "lGoodsId", "nPayType" }, Url = "/OrderService/getBuyVIPPaySign")
   Observable<PayInfo> pay(long lGoodsId, int nPayType);
+
+  @NetMethod(ParameterNames = { "lOrderId" }, Url = "/OrderService/checkOrderPaySuccess")
+  Observable<PayInfo> checkPaySuccess(long lOrderId);
 }
