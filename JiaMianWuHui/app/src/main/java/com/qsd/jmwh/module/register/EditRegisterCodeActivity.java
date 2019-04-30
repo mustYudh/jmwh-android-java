@@ -12,12 +12,16 @@ import android.widget.EditText;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
+import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.dialog.SelectHintPop;
 import com.qsd.jmwh.module.home.HomeActivity;
+import com.qsd.jmwh.module.login.bean.LoginInfo;
 import com.qsd.jmwh.module.register.presenter.EditRegisterCodePresenter;
 import com.qsd.jmwh.module.register.presenter.EditRegisterCodeViewer;
+import com.qsd.jmwh.module.splash.bean.RegisterSuccess;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
+import org.greenrobot.eventbus.EventBus;
 
 public class EditRegisterCodeActivity extends BaseBarActivity implements View.OnClickListener, EditRegisterCodeViewer {
     @PresenterLifeCycle
@@ -107,7 +111,12 @@ public class EditRegisterCodeActivity extends BaseBarActivity implements View.On
         if (getIntent().getIntExtra(TYPE,-1) == 0) {
             getLaunchHelper().startActivity(HomeActivity.class);
         } else {
-            ToastUtils.show("认证通过，请登录");
+            EventBus.getDefault().post(new RegisterSuccess(true));
+            LoginInfo info = new LoginInfo();
+            info.lUserId = getIntent().getIntExtra(USER_ID,-1);
+            info.token = getIntent().getStringExtra(TOKEN);
+            UserProfile.getInstance().appLogin(info);
+            getLaunchHelper().startActivity(HomeActivity.class);
             finish();
         }
 
