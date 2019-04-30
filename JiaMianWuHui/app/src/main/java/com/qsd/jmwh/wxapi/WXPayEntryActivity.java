@@ -10,6 +10,7 @@ import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.yu.common.toast.ToastUtils;
 
+import static com.qsd.jmwh.utils.PayUtils.PAY_TYPE;
 import static com.qsd.jmwh.utils.PayUtils.WX_PAY_INFO;
 
 /**
@@ -21,17 +22,18 @@ public class WXPayEntryActivity extends WXEntryActivity implements IWXAPIEventHa
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     PayInfo info = (PayInfo) getIntent().getSerializableExtra(WX_PAY_INFO);
-    PayUtils.getInstance().pay(this, 2, info);
+    PayUtils.getInstance().wxPay(this, 2, info);
   }
 
   @Override public void onResp(BaseResp baseResp) {
-    PayUtils.WXPayCallBack wxPayCallBack = PayUtils.getInstance().getWXPayCallback();
+    PayUtils.PayCallBack wxPayCallBack = PayUtils.getInstance().getWXPayCallback();
+    int type = getIntent().getIntExtra(PAY_TYPE,-1);
     if (baseResp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
       switch (baseResp.errCode) {
         case BaseResp.ErrCode.ERR_OK:
           Toast.makeText(this, "微信支付成功", Toast.LENGTH_SHORT).show();
           if (wxPayCallBack != null) {
-            wxPayCallBack.onPaySuccess();
+            wxPayCallBack.onPaySuccess(type);
           }
           break;
         case BaseResp.ErrCode.ERR_COMM:
@@ -39,18 +41,24 @@ public class WXPayEntryActivity extends WXEntryActivity implements IWXAPIEventHa
           break;
         case BaseResp.ErrCode.ERR_USER_CANCEL:
           if (wxPayCallBack != null) {
-            wxPayCallBack.onCancel();
+            wxPayCallBack.onFailed(type);
           }
           ToastUtils.show("未支付");
           break;
         case BaseResp.ErrCode.ERR_AUTH_DENIED:
+          if (wxPayCallBack != null) {
+            wxPayCallBack.onFailed(type);
+          }
           ToastUtils.show("微信支付无权限");
           break;
         default:
+          if (wxPayCallBack != null) {
+            wxPayCallBack.onFailed(type);
+          }
           ToastUtils.show("微信支付出错");
           break;
       }
-      PayUtils.getInstance().setWXPayResult(null);
+      PayUtils.getInstance().getPayResult(null);
     }
     finish();
     overridePendingTransition(R.anim.activity_alpha_out, R.anim.activity_alpha_out);

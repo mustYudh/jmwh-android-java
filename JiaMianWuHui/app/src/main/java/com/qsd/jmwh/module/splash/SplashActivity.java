@@ -115,7 +115,7 @@ public class SplashActivity extends BaseActivity
   }
 
   @Override public void onCancel(SHARE_MEDIA media, int i) {
-    Log.e("======onCancel", "onCancel");
+    Log.e("======onFailed", "onFailed");
   }
 
   @Override public void authLoginSuccess(LoginInfo loginInfo) {
