@@ -37,7 +37,7 @@ public class VipInfoBean implements Serializable {
          * sGoodsAttribute : 0.5
          */
 
-        public int lGoodsId;
+        public int lGoodsId = -1;
         public String sGoodsName;
         public double nGoodsRealFee;
         public double nGoodsSaleFee;

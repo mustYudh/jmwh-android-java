@@ -43,7 +43,7 @@ public class ToByVipPresenter extends BaseViewPresenter<ToByVipViewer> {
                         .getPayResult(new PayUtils.PayCallBack() {
                             @Override
                             public void onPaySuccess(int type) {
-
+                                getActivity().finish();
                             }
 
                             @Override

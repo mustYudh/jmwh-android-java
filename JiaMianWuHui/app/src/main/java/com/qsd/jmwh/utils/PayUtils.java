@@ -1,7 +1,10 @@
 package com.qsd.jmwh.utils;
 
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.text.TextUtils;
 
 import com.alipay.sdk.app.PayTask;
@@ -43,9 +46,7 @@ public class PayUtils {
 
     private void startPay(Activity context, int type, PayInfo info) {
         if (type == 1) {
-            boolean installWeChat =
-                    UMShareAPI.get(context).isInstall(context, SHARE_MEDIA.ALIPAY);
-            if (installWeChat) {
+            if (checkAliPayInstalled(context)) {
                 final Runnable payRunnable = () -> {
                     PayTask aliPay = new PayTask(context);
                     Map<String, String> result = aliPay.payV2(info.sPaySign, true);
@@ -68,6 +69,7 @@ public class PayUtils {
             } else {
                 ToastUtils.show("请先安装支付宝");
             }
+
         } else if (type == 2) {
             PayReq request = new PayReq();
             request.appId = info.appid;
@@ -119,4 +121,15 @@ public class PayUtils {
     public void wxPay(Activity context, int type, PayInfo info) {
         startPay(context, type, info);
     }
+
+
+    public static boolean checkAliPayInstalled(Context context) {
+
+        Uri uri = Uri.parse("alipays://platformapi/startApp");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        ComponentName componentName = intent.resolveActivity(context.getPackageManager());
+        return componentName != null;
+    }
+
+
 }
