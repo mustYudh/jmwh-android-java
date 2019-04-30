@@ -1,5 +1,6 @@
 package com.qsd.jmwh.module.register.bean;
 
+import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 /**
@@ -20,16 +21,17 @@ public class PayInfo implements Serializable {
    * timestamp : 1556612491
    */
 
-  private long server_timestamp;
-  private int lOrderId;
-  private String appid;
-  private String noncestr;
-  private String packageX;
-  private String partnerid;
-  private String prepayid;
-  private String sign;
-  private String timestamp;
-  private String sPaySign;
-  private long s3rdUserId;
-  private long s3rdOrderId;
+  public long server_timestamp;
+  public int lOrderId;
+  public String appid;
+  public String noncestr;
+  @SerializedName("package")
+  public String packageX;
+  public String partnerid;
+  public String prepayid;
+  public String sign;
+  public String timestamp;
+  public String sPaySign;
+  public long s3rdUserId;
+  public long s3rdOrderId;
 }

@@ -114,6 +114,6 @@ public interface ApiServices {
   @NetMethod(ParameterNames = { "lFileId", "nInfoType" }, Url = "/MaskballService/delFile")
   Observable<Object> deleteFile(int lFileId, int nInfoType);
 
-  @NetMethod(ParameterNames = { "lGoodsId", "nInfoType" }, Url = "/MaskballService/delFile")
+  @NetMethod(ParameterNames = { "lGoodsId", "nPayType" }, Url = "/OrderService/getBuyVIPPaySign")
   Observable<PayInfo> pay(long lGoodsId, int nPayType);
 }

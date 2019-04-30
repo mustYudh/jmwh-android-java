@@ -1,13 +1,14 @@
 package com.qsd.jmwh.module.register.presenter;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.register.bean.PayInfo;
 import com.qsd.jmwh.module.register.bean.VipInfoBean;
+import com.qsd.jmwh.utils.PayUtils;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.framework.BaseViewPresenter;
-
 
 @SuppressLint("CheckResult")
 public class ToByVipPresenter extends BaseViewPresenter<ToByVipViewer> {
@@ -37,7 +38,15 @@ public class ToByVipPresenter extends BaseViewPresenter<ToByVipViewer> {
       XHttpProxy.proxy(ApiServices.class)
           .pay(lGoodsId,type).subscribeWith(new TipRequestSubscriber<PayInfo>() {
         @Override protected void onSuccess(PayInfo info) {
-          //WXPayUtils.getInstance(getActivity()).sendRequest();
+          PayUtils.getInstance().startWXPay(getActivity(),info).setWXPayResult(new PayUtils.WXPayCallBack() {
+            @Override public void onPaySuccess() {
+
+            }
+
+            @Override public void onCancel() {
+              Log.e("=====>","取消支付");
+            }
+          });
         }
       });
     }
