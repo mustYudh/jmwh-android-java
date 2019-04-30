@@ -40,7 +40,7 @@ public class ToByVipPresenter extends BaseViewPresenter<ToByVipViewer> {
         @Override protected void onSuccess(PayInfo info) {
           PayUtils.getInstance().startWXPay(getActivity(),info).setWXPayResult(new PayUtils.WXPayCallBack() {
             @Override public void onPaySuccess() {
-
+                getActivity().finish();
             }
 
             @Override public void onCancel() {

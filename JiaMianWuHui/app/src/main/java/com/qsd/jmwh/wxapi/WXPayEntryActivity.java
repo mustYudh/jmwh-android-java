@@ -2,6 +2,7 @@ package com.qsd.jmwh.wxapi;
 
 import android.os.Bundle;
 import android.widget.Toast;
+import com.qsd.jmwh.R;
 import com.qsd.jmwh.module.register.bean.PayInfo;
 import com.qsd.jmwh.utils.PayUtils;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
@@ -52,5 +53,6 @@ public class WXPayEntryActivity extends WXEntryActivity implements IWXAPIEventHa
       PayUtils.getInstance().setWXPayResult(null);
     }
     finish();
+    overridePendingTransition(R.anim.activity_alpha_out, R.anim.activity_alpha_out);
   }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="transparent">#00000000</color>
     <color name="activity_bg">@color/white</color>
     <color name="white">#FFFFFF</color>
     <color name="app_main_color">#5943FC</color>
