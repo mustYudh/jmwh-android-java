@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.qsd.jmwh.R;
@@ -48,10 +47,20 @@ public class ParkFragment extends BaseBarFragment implements ParkViewer, TabLayo
     private void initView() {
         TabLayout tabLayout = bindView(R.id.tab_layout);
         ViewPager viewPager = bindView(R.id.view_pager);
-        initTabLayout(tabLayout,viewPager);
+        initTabLayout(tabLayout, viewPager);
     }
 
-    private void initTabLayout(TabLayout tabLayout,ViewPager viewPager) {
+    private void initTabLayout(TabLayout tabLayout, ViewPager viewPager) {
+        View tabStrip = tabLayout.getChildAt(0);
+        if (tabStrip != null) {
+            ProxyDrawable proxyDrawable = new ProxyDrawable(tabStrip, 7);
+            proxyDrawable.setIndicatorColor(Res.color(R.color.app_main_bg_color));
+            proxyDrawable.setIndicatorPaddingLeft(DensityUtil.dip2px(getActivity(), 25));
+            proxyDrawable.setIndicatorPaddingRight(DensityUtil.dip2px(getActivity(), 25));
+            proxyDrawable.setRadius(DensityUtil.dip2px(2));
+            proxyDrawable.setIndicatorPaddingTop(DensityUtil.dip2px(getActivity(), 7));
+            tabStrip.setBackground(proxyDrawable);
+        }
         tabLayout.addOnTabSelectedListener(this);
         HomeParkPageAdapter adapter = new HomeParkPageAdapter(getChildFragmentManager());
         viewPager.setAdapter(adapter);
@@ -60,7 +69,7 @@ public class ParkFragment extends BaseBarFragment implements ParkViewer, TabLayo
             TabLayout.Tab tab = tabLayout.getTabAt(i);
             if (tab != null) {
                 View view = View.inflate(getActivity(), R.layout.item_home_tab, null);
-                TextView textView =  view.findViewById(R.id.title);
+                TextView textView = view.findViewById(R.id.title);
                 if (i == 0) {
                     textView.setText("附近");
                     textView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
@@ -77,19 +86,7 @@ public class ParkFragment extends BaseBarFragment implements ParkViewer, TabLayo
                 }
                 tab.setCustomView(view);
             }
-
         }
-        ProxyDrawable proxyDrawable = new ProxyDrawable(tabLayout, 1);
-        LinearLayout tabStrip = (LinearLayout) tabLayout.getChildAt(0);
-        proxyDrawable.setIndicatorColor(Res.color(R.color.app_main_bg_color));
-        proxyDrawable.setIndicatorPaddingLeft(
-                DensityUtil.dip2px(getActivity(), 22f));
-        proxyDrawable.setIndicatorPaddingRight(
-                DensityUtil.dip2px(getActivity(), 22f));
-        proxyDrawable.setIndicatorPaddingTop(
-                DensityUtil.dip2px(getActivity(), 3f));
-        tabStrip.setBackground(proxyDrawable);
-
     }
 
     @Override

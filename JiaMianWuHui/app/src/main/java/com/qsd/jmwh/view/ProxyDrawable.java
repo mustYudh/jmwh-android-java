@@ -57,7 +57,6 @@ public class ProxyDrawable extends Drawable {
     int mIndicatorRight = getIntValue("indicatorRight") - indicatorPaddingRight;
     int mSelectedIndicatorHeight = getIntValue("selectedIndicatorHeight");
     int height = view.getHeight();
-    /*mSelectedIndicatorHeight / 2*/
     if (mIndicatorLeft >= 0 && mIndicatorRight > mIndicatorLeft) {
       drawRectF.set(mIndicatorLeft, height - mSelectedIndicatorHeight - DensityUtil.dip2px(indicatorHeight) + indicatorPaddingTop, mIndicatorRight,
           height - DensityUtil.dip2px(indicatorHeight) + indicatorPaddingTop);

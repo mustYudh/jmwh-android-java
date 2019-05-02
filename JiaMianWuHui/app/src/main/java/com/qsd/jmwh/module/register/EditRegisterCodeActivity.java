@@ -70,7 +70,7 @@ public class EditRegisterCodeActivity extends BaseBarActivity implements View.On
                                 getIntent().getIntExtra(USER_ID, -1), getIntent().getIntExtra(SEX, -1)), GET_AUTH_CODE_REQUEST);
                 break;
             case R.id.to_by:
-                getLaunchHelper().startActivity(ToByVipActivity.getIntent(getActivity(), getIntent().getIntExtra(USER_ID, -1), getIntent().getStringExtra(TOKEN)));
+                getLaunchHelper().startActivityForResult(ToByVipActivity.getIntent(getActivity(), getIntent().getIntExtra(USER_ID, -1), getIntent().getStringExtra(TOKEN),true),GET_AUTH_CODE_REQUEST);
                 break;
             case R.id.login:
                 EditText editText = bindView(R.id.code);

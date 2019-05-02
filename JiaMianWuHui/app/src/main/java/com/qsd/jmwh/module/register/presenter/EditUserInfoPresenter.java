@@ -3,6 +3,7 @@ package com.qsd.jmwh.module.register.presenter;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
@@ -17,7 +18,7 @@ import com.qsd.jmwh.thrid.UploadImage;
 import com.qsd.jmwh.thrid.oss.PersistenceResponse;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.framework.BaseViewPresenter;
-import com.yu.common.toast.ToastUtils;
+
 import org.greenrobot.eventbus.EventBus;
 
 @SuppressLint("CheckResult") public class EditUserInfoPresenter
@@ -80,7 +81,7 @@ import org.greenrobot.eventbus.EventBus;
           .getCod(userId, token)
           .subscribeWith(new TipRequestSubscriber<UserAuthCodeBean>() {
             @Override protected void onSuccess(UserAuthCodeBean result) {
-              ToastUtils.show("邀请码获取成功");
+//              ToastUtils.show("邀请码获取成功");
               Intent intent = new Intent();
               intent.putExtra(EditRegisterCodeActivity.GET_AUTH_CODE_RESULT, result.sAuthCode);
               getActivity().setResult(Activity.RESULT_OK, intent);

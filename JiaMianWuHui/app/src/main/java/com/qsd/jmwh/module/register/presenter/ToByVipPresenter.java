@@ -1,10 +1,14 @@
 package com.qsd.jmwh.module.register.presenter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
+import com.qsd.jmwh.module.register.EditRegisterCodeActivity;
 import com.qsd.jmwh.module.register.bean.PayInfo;
+import com.qsd.jmwh.module.register.bean.UserAuthCodeBean;
 import com.qsd.jmwh.module.register.bean.VipInfoBean;
 import com.qsd.jmwh.utils.PayUtils;
 import com.xuexiang.xhttp2.XHttpProxy;
@@ -34,25 +38,40 @@ public class ToByVipPresenter extends BaseViewPresenter<ToByVipViewer> {
     }
 
 
-    public void pay(int lGoodsId, int type) {
+    public void pay(int lGoodsId, int type, int userId, String token, boolean isRegister) {
         XHttpProxy.proxy(ApiServices.class)
                 .pay(lGoodsId, type).subscribeWith(new TipRequestSubscriber<PayInfo>() {
             @Override
             protected void onSuccess(PayInfo info) {
-                PayUtils.getInstance().pay(getActivity(), type, info)
-                        .getPayResult(new PayUtils.PayCallBack() {
-                            @Override
-                            public void onPaySuccess(int type) {
-                                ToastUtils.show("支付成功");
-                                getActivity().finish();
-                            }
+                ToastUtils.show("支付成功");
+                if (isRegister) {
+                    PayUtils.getInstance().pay(getActivity(), type, info)
+                            .getPayResult(new PayUtils.PayCallBack() {
+                                @Override
+                                public void onPaySuccess(int type) {
+                                    XHttpProxy.proxy(ApiServices.class)
+                                            .getCod(userId, token)
+                                            .subscribeWith(new TipRequestSubscriber<UserAuthCodeBean>() {
+                                                @Override
+                                                protected void onSuccess(UserAuthCodeBean result) {
+                                                    Intent intent = new Intent();
+                                                    intent.putExtra(EditRegisterCodeActivity.GET_AUTH_CODE_RESULT, result.sAuthCode);
+                                                    getActivity().setResult(Activity.RESULT_OK, intent);
+                                                    getActivity().finish();
+                                                }
+                                            });
+                                }
 
-                            @Override
-                            public void onFailed(int type) {
-                                ToastUtils.show("支付失败，请重试");
-                            }
+                                @Override
+                                public void onFailed(int type) {
+                                    ToastUtils.show("支付失败，请重试");
+                                }
 
-                        });
+                            });
+                } else {
+                    getActivity().finish();
+                }
+
             }
         });
     }

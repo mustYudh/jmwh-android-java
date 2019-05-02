@@ -79,7 +79,8 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
             case R.id.vip:
                 getLaunchHelper().startActivity(ToByVipActivity.getIntent(getActivity(),
                         UserProfile.getInstance().getAppAccount(),
-                        UserProfile.getInstance().getAppToken()));
+                        UserProfile.getInstance().getAppToken()
+                        , false));
                 break;
             case R.id.money_bag:
                 getLaunchHelper().startActivity(MoneyBagActivity.class);
@@ -180,7 +181,7 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
 
                 @Override
                 public void clickImage(UserCenterMyInfo.CdoimgListBean cdoimgListBean) {
-                    getLaunchHelper().startActivity(PhotoDestroySelectActivity.getIntent(getActivity(),cdoimgListBean));
+                    getLaunchHelper().startActivity(PhotoDestroySelectActivity.getIntent(getActivity(), cdoimgListBean));
                 }
             });
         }

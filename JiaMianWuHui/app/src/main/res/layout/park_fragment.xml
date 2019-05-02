@@ -9,14 +9,13 @@
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout"
-        app:tabIndicatorColor="@color/app_main_bg_color"
-        app:tabBackground="@null"
-        app:tabGravity="fill"
-        app:tabMode="fixed"
-        app:tabIndicatorHeight="3dp"
         android:layout_width="220dp"
-        app:tabPaddingBottom="-4dp"
-        android:layout_height="45dp"/>
+        android:layout_height="45dp"
+        app:tabBackground="@null"
+        app:tabIndicatorColor="@color/transparent"
+        app:tabIndicatorHeight="4dp"
+        app:tabMinWidth="70dp"/>
+
 
 
 

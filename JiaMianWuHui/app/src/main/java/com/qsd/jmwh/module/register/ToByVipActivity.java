@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.module.register.adapter.PayTypeAdapter;
@@ -19,6 +20,7 @@ import com.qsd.jmwh.module.register.presenter.ToByVipPresenter;
 import com.qsd.jmwh.module.register.presenter.ToByVipViewer;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +36,7 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
     private VipInfoBean.CdoListBean cdoListBean;
     private final static String USER_ID = "user_id";
     private final static String TOKEN = "token";
+    private final static String IS_REGISTER = "is_register";
     private TextView payCount;
     private double currentMoney;
     private PayTypeBean currentType;
@@ -44,10 +47,11 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
         initView();
     }
 
-    public static Intent getIntent(Context context, int lUserId, String token) {
+    public static Intent getIntent(Context context, int lUserId, String token, boolean isRegister) {
         Intent intent = new Intent(context, ToByVipActivity.class);
         intent.putExtra(USER_ID, lUserId);
         intent.putExtra(TOKEN, token);
+        intent.putExtra(IS_REGISTER, isRegister);
         return intent;
     }
 
@@ -63,7 +67,10 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
         payType.setLayoutManager(new LinearLayoutManager(getActivity()));
         bindView(R.id.pay, v -> {
             if (currentType != null) {
-                mPresenter.pay(cdoListBean.lGoodsId,currentType.type);
+                mPresenter.pay(cdoListBean.lGoodsId, currentType.type,
+                        getIntent().getIntExtra(USER_ID, -1),
+                        getIntent().getStringExtra(TOKEN),
+                        getIntent().getBooleanExtra(IS_REGISTER, false));
             } else {
                 ToastUtils.show("请选择支付方式");
             }
