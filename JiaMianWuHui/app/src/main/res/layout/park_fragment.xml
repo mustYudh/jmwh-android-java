@@ -11,7 +11,8 @@
         android:id="@+id/tab_layout"
         android:layout_width="220dp"
         android:layout_height="45dp"
-        app:tabBackground="@null"
+        app:tabBackground="@android:color/transparent"
+        app:tabRippleColor="@android:color/transparent"
         app:tabIndicatorColor="@color/transparent"
         app:tabIndicatorHeight="4dp"
         app:tabMinWidth="70dp"/>

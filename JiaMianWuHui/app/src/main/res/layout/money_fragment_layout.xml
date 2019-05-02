@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:text="每当有人付费查看你的相册、向你发红包，多的手机会进入到钱包。每当你举报用户成功，系统会自动把您最近3天向她支付过的所有费用退回到这里。你可以随时提现（处理时间2个工作日内），提现将收取2%手续费。"
+        android:textColor="@color/color_666666"
+        android:textSize="13sp"/>
+
+
+    <LinearLayout
+        android:layout_below="@+id/hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginRight="15dp"
+        android:orientation="horizontal">
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:elevation="4dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true"
+            app:cardCornerRadius="2dp"
+            app:cardMaxElevation="2dp"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="96dp"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="25dp"
+                >
+
+                <TextView
+                    android:paddingTop="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="面具币总额（个）"
+                    android:textColor="@color/color_2A2A2A"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="11dp"
+                    android:text="0.00"
+                    android:textColor="@color/color_2A2A2A"
+                    android:textSize="25sp"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:cardPreventCornerOverlap="true"
+            app:cardElevation="2dp"
+            app:cardCornerRadius="2dp"
+            app:cardMaxElevation="2dp"
+            app:cardUseCompatPadding="true"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="96dp"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="25dp"
+                >
+
+                <TextView
+                    android:paddingTop="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="面具币总额（个）"
+                    android:textColor="@color/color_2A2A2A"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.00"
+                    android:layout_marginTop="11dp"
+                    android:textColor="@color/color_2A2A2A"
+                    android:textSize="25sp"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+
+        <View
+            android:background="@color/color_EEEEEE"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+
+            <com.yu.common.ui.DelayClickTextView
+                android:textColor="@color/black"
+                android:text="提现"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
