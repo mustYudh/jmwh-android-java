@@ -48,15 +48,6 @@
             android:name="com.qsd.jmwh.utils.glide.OkHttpGlideModule"
             android:value="GlideModule"/>
 
-        <meta-data
-            android:name="com.baidu.lbsapi.API_KEY"
-            android:value="${BAIDU_LOCATION}"/>
-
-        <service
-            android:name="com.baidu.location.f"
-            android:enabled="true"
-            android:process=":remote"/>
-
         <activity
             android:name=".module.splash.SplashActivity"
             android:configChanges="keyboard|orientation|keyboardHidden|screenSize"

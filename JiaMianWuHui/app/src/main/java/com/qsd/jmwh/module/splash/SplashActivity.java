@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseActivity;
 import com.qsd.jmwh.data.UserProfile;
@@ -22,10 +23,12 @@ import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 import com.yu.share.AuthLoginHelp;
 import com.yu.share.callback.AuthLoginCallback;
-import java.util.Map;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.Map;
 
 public class SplashActivity extends BaseActivity
     implements View.OnClickListener, AuthLoginCallback, SplashViewer {
