@@ -17,7 +17,6 @@ import com.qsd.jmwh.module.home.message.MessageFragment;
 import com.qsd.jmwh.module.home.park.ParkFragment;
 import com.qsd.jmwh.module.home.radio.RadioFragment;
 import com.qsd.jmwh.module.home.user.UserFragment;
-import com.qsd.jmwh.thrid.baidu.LocationServices;
 import com.qsd.jmwh.utils.PressHandle;
 import com.qsd.jmwh.utils.countdown.RxCountDown;
 import com.qsd.jmwh.utils.countdown.RxCountDownAdapter;
@@ -56,22 +55,18 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onStart() {
                 super.onStart();
-                LocationServices.getInstance(getApplicationContext()).start();
             }
 
 
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                LocationServices.getInstance(getApplicationContext()).stop();
                 looperTime.restart(LOCATION_UPLOAD_TIMER,true);
             }
 
             @Override
             public void onComplete() {
                 super.onComplete();
-                LocationServices.getInstance(getApplicationContext()).stop();
-                LocationServices.getInstance(getApplicationContext()).start();
                 looperTime.restart(LOCATION_UPLOAD_TIMER,true);
             }
         });
@@ -102,6 +97,5 @@ public class HomeActivity extends BaseActivity {
         if (looperTime != null) {
             looperTime.stop();
         }
-        LocationServices.getInstance(getApplicationContext()).stop();
     }
 }
