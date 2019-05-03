@@ -61,6 +61,11 @@ public class RxCountDown {
     }
 
 
+    public void restart(int time,boolean restart) {
+        isStart = !restart;
+        start(time);
+    }
+
     public void start(int time) {
         if (!isStart) {
             if (time < 0) {

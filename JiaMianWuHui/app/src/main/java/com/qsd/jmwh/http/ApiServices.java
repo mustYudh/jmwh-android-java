@@ -119,4 +119,7 @@ public interface ApiServices {
 
   @NetMethod(ParameterNames = { "lOrderId" }, Url = "/OrderService/checkOrderPaySuccess")
   Observable<PayInfo> checkPaySuccess(long lOrderId);
+
+  @NetMethod(ParameterNames = {"nLng","nLat"},Url = "/UserService/modifyLngAndLat")
+  Observable<Object> modifyLngAndLat(String nLng,String nLat);
 }

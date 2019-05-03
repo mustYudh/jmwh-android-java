@@ -17,7 +17,10 @@ import com.qsd.jmwh.module.home.message.MessageFragment;
 import com.qsd.jmwh.module.home.park.ParkFragment;
 import com.qsd.jmwh.module.home.radio.RadioFragment;
 import com.qsd.jmwh.module.home.user.UserFragment;
+import com.qsd.jmwh.thrid.baidu.LocationServices;
 import com.qsd.jmwh.utils.PressHandle;
+import com.qsd.jmwh.utils.countdown.RxCountDown;
+import com.qsd.jmwh.utils.countdown.RxCountDownAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,9 @@ public class HomeActivity extends BaseActivity {
     private PressHandle pressHandle = new PressHandle(this);
 
     private BottomNavigationView navigationView;
+    private RxCountDown looperTime = new RxCountDown();
+    private final static int LOCATION_UPLOAD_TIMER = 10;
+
 
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
@@ -46,6 +52,30 @@ public class HomeActivity extends BaseActivity {
         navigationView.getControl().setOnTabClickListener((position, view) -> {
 
         });
+        looperTime.setCountDownTimeListener(new RxCountDownAdapter() {
+            @Override
+            public void onStart() {
+                super.onStart();
+                LocationServices.getInstance(getApplicationContext()).start();
+            }
+
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                LocationServices.getInstance(getApplicationContext()).stop();
+                looperTime.restart(LOCATION_UPLOAD_TIMER,true);
+            }
+
+            @Override
+            public void onComplete() {
+                super.onComplete();
+                LocationServices.getInstance(getApplicationContext()).stop();
+                LocationServices.getInstance(getApplicationContext()).start();
+                looperTime.restart(LOCATION_UPLOAD_TIMER,true);
+            }
+        });
+        looperTime.start(LOCATION_UPLOAD_TIMER);
     }
 
 
@@ -63,6 +93,15 @@ public class HomeActivity extends BaseActivity {
         if (!pressHandle.handlePress(KeyEvent.KEYCODE_BACK)) {
             super.onBackPressed();
         }
+    }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (looperTime != null) {
+            looperTime.stop();
+        }
+        LocationServices.getInstance(getApplicationContext()).stop();
     }
 }

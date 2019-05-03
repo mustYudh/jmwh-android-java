@@ -40,6 +40,7 @@ ext {
     uMengKey = '5c822ba120365716ce0014a2'
     uMengChannel = 'jmwh'
     nimKey = '20fee5c3c32934e1ad3f74cf5ecb94bb'
+    baidu = 'uLcQRjd7Yfz4ZK7AbqmvrIwehVOHrS4x'
 
     applicationId = 'com.qsd.jmwh'
     compileSdkVersion = 28

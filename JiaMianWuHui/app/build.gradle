@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 
 enum ApiEnvEnum {
-    DEV(0, "假面舞会-测试"), ONLINE(1, "假面舞会"), PRE_RELEASE(2, "假面舞会-预发")
+    DEV(0, "假面舞会_测试"), ONLINE(1, "假面舞会"), PRE_RELEASE(2, "假面舞会-预发")
 
     private final int value
     private final String name
@@ -41,7 +41,8 @@ android {
                                 APP_NAME     : appNameStr,
                                 UMENG_APPKEY : rootProject.ext.uMengKey,
                                 UMENG_CHANNEL: rootProject.ext.uMengChannel,
-                                YX_KEY       : rootProject.ext.nimKey]
+                                YX_KEY       : rootProject.ext.nimKey,
+                                BAIDU_LOCATION: rootProject.ext.baidu]
 
         ndk {
             abiFilters "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
@@ -89,7 +90,8 @@ android {
                                     APP_NAME     : appNameStr,
                                     UMENG_APPKEY : rootProject.ext.uMengKey,
                                     UMENG_CHANNEL: rootProject.ext.uMengChannel,
-                                    YX_KEY       : rootProject.ext.nimKey]
+                                    YX_KEY       : rootProject.ext.nimKey,
+                                    BAIDU_LOCATION: rootProject.ext.baidu]
         }
     }
 
@@ -163,6 +165,7 @@ android {
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
+            jni.srcDirs = []
         }
     }
 
@@ -177,7 +180,8 @@ repositories {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'src/libs')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+//    implementation fileTree(include: ['*.jar'], dir: 'src/libs')
     implementation project(path: ':common')
     implementation project(path: ':http-lib')
     implementation project(path: ':bottom_tab')
