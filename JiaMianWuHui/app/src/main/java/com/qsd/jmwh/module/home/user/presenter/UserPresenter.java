@@ -6,7 +6,7 @@ import android.annotation.SuppressLint;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
-import com.qsd.jmwh.module.home.user.bean.UserCenterMyInfo;
+import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
 import com.qsd.jmwh.thrid.UploadImage;
 import com.qsd.jmwh.thrid.oss.PersistenceResponse;
 import com.xuexiang.xhttp2.XHttpProxy;
@@ -47,9 +47,9 @@ public class UserPresenter extends BaseViewPresenter<UserViewer> {
     public void getMyInfo() {
         XHttpProxy.proxy(ApiServices.class)
                 .getUserCenterInfo()
-                .subscribeWith(new TipRequestSubscriber<UserCenterMyInfo>() {
+                .subscribeWith(new TipRequestSubscriber<UserCenterInfo>() {
                     @Override
-                    protected void onSuccess(UserCenterMyInfo userCenterMyInfo) {
+                    protected void onSuccess(UserCenterInfo userCenterMyInfo) {
                         assert getViewer() != null;
                         getViewer().setUserInfo(userCenterMyInfo);
                     }

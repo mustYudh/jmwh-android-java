@@ -216,6 +216,7 @@
 
 
             <com.yu.common.ui.DelayClickTextView
+                android:id="@+id/withdrawal"
                 android:textColor="@color/black"
                 android:text="提现"
                 android:textSize="16sp"

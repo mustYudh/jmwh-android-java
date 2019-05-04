@@ -20,7 +20,7 @@ import com.qsd.jmwh.module.home.user.activity.PhotoDestroySelectActivity;
 import com.qsd.jmwh.module.home.user.activity.PrivacySettingActivity;
 import com.qsd.jmwh.module.home.user.activity.SettingActivity;
 import com.qsd.jmwh.module.home.user.adapter.DestroyPhotoTag;
-import com.qsd.jmwh.module.home.user.bean.UserCenterMyInfo;
+import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
 import com.qsd.jmwh.module.home.user.presenter.UserPresenter;
 import com.qsd.jmwh.module.home.user.presenter.UserViewer;
 import com.qsd.jmwh.module.register.ToByVipActivity;
@@ -137,9 +137,9 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
     }
 
     @Override
-    public void setUserInfo(UserCenterMyInfo userInfo) {
-        UserCenterMyInfo.CdoUserBean cdoUser = userInfo.cdoUser;
-        UserCenterMyInfo.CdoWalletDataBean walletData = userInfo.cdoWalletData;
+    public void setUserInfo(UserCenterInfo userInfo) {
+        UserCenterInfo.CdoUserBean cdoUser = userInfo.cdoUser;
+        UserCenterInfo.CdoWalletDataBean walletData = userInfo.cdoWalletData;
         bindText(R.id.sNickName, cdoUser.sNickName);
         bindText(R.id.sDateRange, "约会范围：" + cdoUser.sDateRange);
         bindText(R.id.job_age_loc, cdoUser.sCity + " · " + cdoUser.sJob + " · " + cdoUser.sAge + "岁");
@@ -168,7 +168,7 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
         if (show) {
             GridView recyclerView = bindView(R.id.user_center_photo);
             recyclerView.setVisibility(View.VISIBLE);
-            UserCenterMyInfo.CdoimgListBean userCenterMyInfo = new UserCenterMyInfo.CdoimgListBean();
+            UserCenterInfo.CdoimgListBean userCenterMyInfo = new UserCenterInfo.CdoimgListBean();
             userCenterMyInfo.last = true;
             userInfo.cdoimgList.add(userCenterMyInfo);
             DestroyPhotoTag destroyPhotoTag = new DestroyPhotoTag(userInfo.cdoimgList);
@@ -180,7 +180,7 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
                 }
 
                 @Override
-                public void clickImage(UserCenterMyInfo.CdoimgListBean cdoimgListBean) {
+                public void clickImage(UserCenterInfo.CdoimgListBean cdoimgListBean) {
                     getLaunchHelper().startActivity(PhotoDestroySelectActivity.getIntent(getActivity(), cdoimgListBean));
                 }
             });

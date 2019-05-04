@@ -1,14 +1,14 @@
 package com.qsd.jmwh.module.home.user.adapter;
 
-//public class DestroyPhotoTag extends BaseQuickAdapter<UserCenterMyInfo.CdoimgListBean, BaseViewHolder> {
+//public class DestroyPhotoTag extends BaseQuickAdapter<UserCenterInfo.CdoimgListBean, BaseViewHolder> {
 //
-//    public DestroyPhotoTag(int layoutResId, @Nullable List<UserCenterMyInfo.CdoimgListBean> data) {
+//    public DestroyPhotoTag(int layoutResId, @Nullable List<UserCenterInfo.CdoimgListBean> data) {
 //        super(layoutResId, data);
 //    }
 //
 //
 //    @Override
-//    protected void convert(BaseViewHolder helper, UserCenterMyInfo.CdoimgListBean item) {
+//    protected void convert(BaseViewHolder helper, UserCenterInfo.CdoimgListBean item) {
 //        helper.setVisible(R.id.destroy_tag, item.nFileType == 1);
 //        ImageView imageView = helper.getView(R.id.destroy_img);
 //        ImageLoader.loadCenterCrop(imageView.getContext(), item.sFileUrl, imageView);
@@ -23,33 +23,33 @@ import android.widget.ImageView;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseHolder;
 import com.qsd.jmwh.base.BasicAdapter;
-import com.qsd.jmwh.module.home.user.bean.UserCenterMyInfo;
+import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
 import com.yu.common.utils.ImageLoader;
 
 import java.util.ArrayList;
 
-public class DestroyPhotoTag extends BasicAdapter<UserCenterMyInfo.CdoimgListBean> {
+public class DestroyPhotoTag extends BasicAdapter<UserCenterInfo.CdoimgListBean> {
     private AddImageListener addImageListener;
 
     public interface AddImageListener {
         void clickAdd();
 
-        void clickImage(UserCenterMyInfo.CdoimgListBean cdoimgListBean);
+        void clickImage(UserCenterInfo.CdoimgListBean cdoimgListBean);
     }
 
     public void setAddImageListener(AddImageListener addImageListener) {
         this.addImageListener = addImageListener;
     }
 
-    public DestroyPhotoTag(ArrayList<UserCenterMyInfo.CdoimgListBean> list) {
+    public DestroyPhotoTag(ArrayList<UserCenterInfo.CdoimgListBean> list) {
         super(list);
     }
 
     @Override
-    protected BaseHolder<UserCenterMyInfo.CdoimgListBean> getHolder(Context context) {
-        return new BaseHolder<UserCenterMyInfo.CdoimgListBean>(context, R.layout.item_user_center_img) {
+    protected BaseHolder<UserCenterInfo.CdoimgListBean> getHolder(Context context) {
+        return new BaseHolder<UserCenterInfo.CdoimgListBean>(context, R.layout.item_user_center_img) {
             @Override
-            public void bindData(UserCenterMyInfo.CdoimgListBean item) {
+            public void bindData(UserCenterInfo.CdoimgListBean item) {
                 ImageView imageView = findViewId(R.id.destroy_img);
                 if (item.last) {
                     imageView.setImageResource(R.drawable.ic_add_button);

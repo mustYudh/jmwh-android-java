@@ -3,7 +3,7 @@ package com.qsd.jmwh.module.home.user.bean;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class UserCenterMyInfo implements Serializable {
+public class UserCenterInfo implements Serializable {
 
     /**
      * server_timestamp : 1555951643197

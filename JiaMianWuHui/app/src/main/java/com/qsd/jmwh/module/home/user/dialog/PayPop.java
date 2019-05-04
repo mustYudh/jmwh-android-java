@@ -28,9 +28,8 @@ public class PayPop extends BasePopupWindow {
         return this;
     }
 
-    public PayPop setSingleButton(View.OnClickListener listener) {
-        cancel.setVisibility(View.GONE);
-        ok.setVisibility(View.VISIBLE);
+    public PayPop setNegativeButton(View.OnClickListener listener) {
+        cancel.setOnClickListener(listener);
         return this;
     }
 

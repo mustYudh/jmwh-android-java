@@ -13,7 +13,7 @@ import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.dialog.SelectHintPop;
-import com.qsd.jmwh.module.home.user.bean.UserCenterMyInfo;
+import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
 import com.qsd.jmwh.module.home.user.presenter.PhotoDestroySelectPresenter;
 import com.qsd.jmwh.module.home.user.presenter.PhotoDestroySelectViewer;
 import com.qsd.jmwh.thrid.UploadImage;
@@ -44,7 +44,7 @@ public class PhotoDestroySelectActivity extends BaseBarActivity implements Photo
         return starter;
     }
 
-    public static Intent getIntent(Context context, UserCenterMyInfo.CdoimgListBean cdoimgListBean) {
+    public static Intent getIntent(Context context, UserCenterInfo.CdoimgListBean cdoimgListBean) {
         Intent starter = new Intent(context, PhotoDestroySelectActivity.class);
         starter.putExtra(URL, cdoimgListBean.sFileUrl);
         starter.putExtra(FILE_TYPE, cdoimgListBean.nFileType);

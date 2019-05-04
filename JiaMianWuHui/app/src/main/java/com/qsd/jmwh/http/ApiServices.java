@@ -3,7 +3,7 @@ package com.qsd.jmwh.http;
 import com.qsd.jmwh.module.home.park.bean.HomePersonListBean;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
-import com.qsd.jmwh.module.home.user.bean.UserCenterMyInfo;
+import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
 import com.qsd.jmwh.module.login.bean.LoginInfo;
 import com.qsd.jmwh.module.register.bean.DateProjectBean;
 import com.qsd.jmwh.module.register.bean.PayInfo;
@@ -88,7 +88,7 @@ public interface ApiServices {
       String token, String code);
 
   @NetMethod(Url = "/UserService/getMyUserCenterInfo")
-  Observable<UserCenterMyInfo> getUserCenterInfo();
+  Observable<UserCenterInfo> getUserCenterInfo();
 
   @POST("/gateway/rest/v3/UserService/loginByWxAndQQ") Observable<ApiResult<LoginInfo>> authLogin(
       @Body RequestBody requestBody);

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseFragment;
+import com.qsd.jmwh.module.home.park.activity.LookUserInfoActivity;
 import com.qsd.jmwh.module.home.park.adapter.PersonRvAdapter;
 import com.qsd.jmwh.module.home.park.bean.HomePersonListBean;
 import com.qsd.jmwh.module.home.park.presenter.PersonPresenter;
@@ -69,6 +70,10 @@ public class PersonFragment extends BaseFragment implements PersonViewer {
                 } else {
                     adapter.setNewData(homePersonListBean.cdoList);
                 }
+                adapter.setOnItemClickListener((adapter, view, position) -> {
+                   HomePersonListBean.CdoListBean cdoListBean = (HomePersonListBean.CdoListBean) adapter.getData().get(position);
+                   getLaunchHelper().startActivity(LookUserInfoActivity.getIntent(getActivity(),cdoListBean.lUserId));
+                });
             } else {
                 //空页面
             }

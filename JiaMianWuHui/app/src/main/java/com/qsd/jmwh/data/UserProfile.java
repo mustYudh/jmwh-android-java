@@ -19,10 +19,12 @@ public class UserProfile implements Serializable {
     private static final String APP_TOKEN = "token";
     private static final String PHONE_NO = "phone_no";
     private static final String SEX = "sex";
+    private static final String LAT = "lat";
+    private static final String LNG = "lng";
+
 
 
     private SharedPreferencesHelper spHelper;
-
 
 
     private UserProfile() {
@@ -86,6 +88,26 @@ public class UserProfile implements Serializable {
     public boolean isAppLogin() {
         return !TextUtils.isEmpty(getAppToken()) && getAppAccount() != -1;
     }
+
+    public void setLat(String lat) {
+        spHelper.putString(LAT,lat);
+    }
+
+    public String getLat() {
+        return spHelper.getString(LAT,"111.00");
+    }
+
+
+
+    public void setLng(String lng) {
+        spHelper.putString(LNG,lng);
+    }
+
+
+    public String getLng() {
+        return spHelper.getString(LNG,"222.00");
+    }
+
 
 
     /**
