@@ -20,6 +20,7 @@
 
 
     <LinearLayout
+        android:id="@+id/coin_root"
         android:layout_below="@+id/hint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -115,6 +116,73 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/alipay_hint"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/coin_root"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:background="@color/color_EEEEEE"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+
+        <RelativeLayout
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:textColor="@color/color_2A2A2A"
+                android:textSize="15sp"
+                android:text="支付宝账号"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/arrow"
+                android:rotation="180"
+                android:tint="#E2D5D5"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_back_arrow"
+                android:layout_width="14dp"
+                android:layout_height="match_parent"/>
+
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:text="请填写接受提现的支付宝账号"
+                android:textColor="@color/color_666666"
+                android:textSize="13sp"
+                android:layout_toLeftOf="@+id/arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+
+        <View
+            android:background="@color/color_EEEEEE"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+    </LinearLayout>
+
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/alipay_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.RecyclerView>
 
 
 

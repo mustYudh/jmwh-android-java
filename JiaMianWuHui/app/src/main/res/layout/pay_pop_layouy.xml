@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/rl_root"
+    android:layout_height="match_parent">
+
+
+    <View
+        android:id="@+id/base_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#64000000"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/shape_app_whit_bg_radious8"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_alipay"
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="现金将汇入你的支付宝"
+                android:textColor="@color/color_333333"
+                android:textSize="17sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_marginTop="20dp"
+            android:background="@color/color_EEEEEE"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+
+        <EditText
+            android:paddingLeft="20dp"
+            android:paddingBottom="5dp"
+            android:gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@android:color/transparent"
+            android:ellipsize="end"
+            android:hint="支付宝账号"
+            android:paddingRight="20dp"
+            android:textColor="@color/color_333333"
+            android:textColorHint="@color/color_888888"
+            android:textSize="15sp"/>
+
+
+
+        <View
+            android:background="@color/color_EEEEEE"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+
+
+
+        <EditText
+            android:paddingLeft="20dp"
+            android:paddingBottom="5dp"
+            android:gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@android:color/transparent"
+            android:ellipsize="end"
+            android:hint="姓名（必填，防止汇错款）"
+            android:paddingRight="20dp"
+            android:textColor="@color/color_333333"
+            android:textColorHint="@color/color_888888"
+            android:textSize="15sp"/>
+
+
+
+        <View
+            android:background="@color/color_EEEEEE"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+
+        <LinearLayout
+            android:id="@+id/ll_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <com.yu.common.ui.DelayClickTextView
+                android:id="@+id/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingLeft="31dp"
+                android:paddingRight="16dp"
+                android:text="取消"
+                android:textColor="@color/app_main_bg_color"
+                android:textSize="15sp"/>
+
+
+            <com.yu.common.ui.DelayClickTextView
+                android:id="@+id/ok"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingLeft="15dp"
+                android:paddingRight="31dp"
+                android:text="确定"
+                android:textColor="@color/app_main_bg_color"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
