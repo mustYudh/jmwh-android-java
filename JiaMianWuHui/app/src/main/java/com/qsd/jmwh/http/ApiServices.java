@@ -1,6 +1,7 @@
 package com.qsd.jmwh.http;
 
 import com.qsd.jmwh.module.home.park.bean.HomePersonListBean;
+import com.qsd.jmwh.module.home.park.bean.OtherUserInfoBean;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
 import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
@@ -14,6 +15,7 @@ import com.qsd.jmwh.module.register.bean.UserInfo;
 import com.qsd.jmwh.module.register.bean.VipInfoBean;
 import com.xuexiang.xhttp2.annotation.NetMethod;
 import com.xuexiang.xhttp2.model.ApiResult;
+
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
@@ -122,4 +124,8 @@ public interface ApiServices {
 
   @NetMethod(ParameterNames = {"nLng","nLat"},Url = "/UserService/modifyLngAndLat")
   Observable<Object> modifyLngAndLat(String nLng,String nLat);
+
+
+  @NetMethod(ParameterNames = {"lUserId","nLng","nLat"},Url = "/UserService/getUserCenterInfo")
+  Observable<OtherUserInfoBean> getOtherUserInfo(int lUserId, String nLat, String nLng);
 }

@@ -7,12 +7,13 @@ import android.support.annotation.Nullable;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseActivity;
+import com.qsd.jmwh.data.UserProfile;
+import com.qsd.jmwh.module.home.park.bean.OtherUserInfoBean;
 import com.qsd.jmwh.module.home.park.presenter.LookUserInfoPresenter;
 import com.qsd.jmwh.module.home.park.presenter.LookUserInfoViewer;
-import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
 import com.yu.common.mvp.PresenterLifeCycle;
 
-public class LookUserInfoActivity extends BaseActivity implements LookUserInfoViewer {
+public class LookUserInfoActivity extends BaseActivity implements LookUserInfoViewer{
 
     @PresenterLifeCycle
     private LookUserInfoPresenter mPresenter = new LookUserInfoPresenter(this);
@@ -32,11 +33,12 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
 
     @Override
     protected void loadData() {
-
+        mPresenter.getUserInfo(getIntent().getIntExtra(USER_ID, -1),
+                UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng());
     }
 
     @Override
-    public void setUserInfo(UserCenterInfo userCenterInfo) {
+    public void setUserInfo(OtherUserInfoBean userCenterInfo) {
 
     }
 }
