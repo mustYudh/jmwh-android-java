@@ -3,6 +3,8 @@ package com.yu.location;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
+import com.yu.location.impl.IpGetLocation;
+import com.yu.location.impl.IpLocCallback;
 
 /***
  * 单点定位示例，用来展示基本的定位结果，配置在LocationService.java中
@@ -13,7 +15,6 @@ import android.widget.TextView;
  *
  */
 public class LocationActivity extends Activity {
-    private LocationUtils locationUtils;
     private TextView LocationResult;
 
 
@@ -23,8 +24,12 @@ public class LocationActivity extends Activity {
         super.onCreate(savedInstanceState);
         // -----------demo view config ------------
         setContentView(R.layout.location);
-        locationUtils = new LocationUtils();
-        LocationResult =  findViewById(R.id.textView1);
+
+        IpGetLocation.getLocationByIP(new IpLocCallback() {
+            @Override public void getLoc(long id, ILocation iLocation) {
+                ((TextView) findViewById(R.id.textView1)).setText("" + iLocation);
+            }
+        },-1);
     }
 
 
@@ -32,20 +37,12 @@ public class LocationActivity extends Activity {
 
     @Override
     protected void onStop() {
-        locationUtils.stop();
         super.onStop();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        locationUtils.start(this);
-        locationUtils.setCallBack(new LocationUtils.ResultCallBack() {
-            @Override
-            public void setText(String text) {
-                LocationResult.setText(text);
-            }
-        });
     }
 
 
