@@ -35,6 +35,7 @@
 
 
     <com.qsd.jmwh.view.NormaFormItemVIew
+        android:id="@+id/height"
         app:show_top_line="false"
         app:left_text="身高"
         app:only_read="true"
@@ -42,6 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <com.qsd.jmwh.view.NormaFormItemVIew
+        android:id="@+id/weight"
         app:show_top_line="false"
         app:left_text="体重"
         app:only_read="true"
@@ -50,6 +52,7 @@
         android:layout_height="wrap_content"/>
 
     <com.qsd.jmwh.view.NormaFormItemVIew
+        android:id="@+id/bust"
         app:show_top_line="false"
         app:left_text="胸围"
         app:only_read="true"
@@ -57,6 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <com.qsd.jmwh.view.NormaFormItemVIew
+        android:id="@+id/project"
         app:show_top_line="false"
         app:left_text="约会节目"
         app:only_read="true"
@@ -64,20 +68,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <com.qsd.jmwh.view.NormaFormItemVIew
+        android:id="@+id/qq"
         app:show_top_line="false"
         app:left_text="QQ"
         app:only_read="true"
-        app:hint_color="@color/color_F43A50"
+        app:content_color="@color/color_F43A50"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <com.qsd.jmwh.view.NormaFormItemVIew
+        android:id="@+id/wechat"
         app:show_top_line="false"
         app:left_text="微信"
         app:only_read="true"
-        app:hint_color="@color/color_F43A50"
+        app:content_color="@color/color_F43A50"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <com.qsd.jmwh.view.NormaFormItemVIew
+        android:id="@+id/sIntroduce"
         app:show_top_line="false"
         app:left_text="个人介绍"
         app:only_read="true"

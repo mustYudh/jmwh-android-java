@@ -19,6 +19,7 @@
         <attr name="input_type" format="string"/>
         <attr name="length" format="string"/>
         <attr name="hint_color" format="color"/>
+        <attr name="content_color" format="color"/>
     </declare-styleable>
 
     <declare-styleable name="UserItemView">
