@@ -75,6 +75,40 @@
     </com.qsd.jmwh.view.NoscrollerGridView>
 
 
+    <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/my_evaluation"
+        android:layout_marginTop="10dp"
+        app:hint_text_color="@color/app_main_bg_color"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:user_left_text="我的评价"
+        />
+
+    <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/my_radio"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:hint_text_color="@color/app_main_bg_color"
+        app:user_left_text="我的广播"
+        />
+    <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/my_like"
+        app:hint_text_color="@color/app_main_bg_color"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:user_left_text="我喜欢的"
+        />
+    <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/black_list"
+        app:hint_text_color="@color/app_main_bg_color"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:user_left_text="黑名单"
+        />
+
+
+
+
 
 
     <com.qsd.jmwh.view.UserItemView
