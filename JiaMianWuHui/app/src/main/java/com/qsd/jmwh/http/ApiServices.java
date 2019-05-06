@@ -130,6 +130,6 @@ public interface ApiServices {
   @NetMethod(ParameterNames = {"lUserId","nLng","nLat"},Url = "/UserService/getUserCenterInfo")
   Observable<OtherUserInfoBean> getOtherUserInfo(int lUserId, double nLat, double nLng);
 
-  @NetMethod(ParameterNames = {"nLat","nLng","nType"},Url = "/UserLoveService/addLoveUser")
+  @NetMethod(ParameterNames = {"nLat","nLng","nType"},Url = "/UserLoveService/getUserLoveList")
   Observable<MineLikeBean> getMineLikeList(double nLat, double nLng,String nType);
 }
