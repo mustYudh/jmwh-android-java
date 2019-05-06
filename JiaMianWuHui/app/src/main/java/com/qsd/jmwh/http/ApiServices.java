@@ -4,6 +4,7 @@ import com.qsd.jmwh.module.home.park.bean.HomePersonListBean;
 import com.qsd.jmwh.module.home.park.bean.OtherUserInfoBean;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
+import com.qsd.jmwh.module.home.user.bean.MineLikeBean;
 import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
 import com.qsd.jmwh.module.login.bean.LoginInfo;
 import com.qsd.jmwh.module.register.bean.DateProjectBean;
@@ -128,4 +129,7 @@ public interface ApiServices {
 
   @NetMethod(ParameterNames = {"lUserId","nLng","nLat"},Url = "/UserService/getUserCenterInfo")
   Observable<OtherUserInfoBean> getOtherUserInfo(int lUserId, double nLat, double nLng);
+
+  @NetMethod(ParameterNames = {"nLng","nLat","nType"},Url = "/UserLoveService/addLoveUser")
+  Observable<MineLikeBean> getMineLikeList(double nLat, double nLng,String nType);
 }
