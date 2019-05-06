@@ -37,11 +37,11 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         buildConfigField("int", "API_MODE", "${(envStr as ApiEnvEnum).value}")
-        manifestPlaceholders = [PACKAGE_NAME : rootProject.ext.applicationId,
-                                APP_NAME     : appNameStr,
-                                UMENG_APPKEY : rootProject.ext.uMengKey,
-                                UMENG_CHANNEL: rootProject.ext.uMengChannel,
-                                YX_KEY       : rootProject.ext.nimKey,
+        manifestPlaceholders = [PACKAGE_NAME  : rootProject.ext.applicationId,
+                                APP_NAME      : appNameStr,
+                                UMENG_APPKEY  : rootProject.ext.uMengKey,
+                                UMENG_CHANNEL : rootProject.ext.uMengChannel,
+                                YX_KEY        : rootProject.ext.nimKey,
                                 BAIDU_LOCATION: rootProject.ext.baidu]
 
         ndk {
@@ -86,11 +86,11 @@ android {
     productFlavors {
         jmwh {
             applicationId rootProject.ext.applicationId
-            manifestPlaceholders = [PACKAGE_NAME : rootProject.ext.applicationId,
-                                    APP_NAME     : appNameStr,
-                                    UMENG_APPKEY : rootProject.ext.uMengKey,
-                                    UMENG_CHANNEL: rootProject.ext.uMengChannel,
-                                    YX_KEY       : rootProject.ext.nimKey,
+            manifestPlaceholders = [PACKAGE_NAME  : rootProject.ext.applicationId,
+                                    APP_NAME      : appNameStr,
+                                    UMENG_APPKEY  : rootProject.ext.uMengKey,
+                                    UMENG_CHANNEL : rootProject.ext.uMengChannel,
+                                    YX_KEY        : rootProject.ext.nimKey,
                                     BAIDU_LOCATION: rootProject.ext.baidu]
         }
     }
@@ -202,7 +202,7 @@ dependencies {
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
     implementation 'ch.ielse:switchbutton:1.0.1'
     implementation 'org.greenrobot:eventbus:3.1.1'
-    implementation (name: 'alipaySdk-15.6.2-20190416165036', ext: 'aar')
+    implementation(name: 'alipaySdk-15.6.2-20190416165036', ext: 'aar')
     implementation project(path: ':location')
 
 }
