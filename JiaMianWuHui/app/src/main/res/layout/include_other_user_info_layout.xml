@@ -2,17 +2,18 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
 
     <LinearLayout
-        android:gravity="center"
-        android:background="@color/color_F2F2F2"
-        android:orientation="horizontal"
+        android:id="@+id/empty_view"
         android:layout_width="match_parent"
-        android:layout_height="93dp">
+        android:layout_height="93dp"
+        android:background="@color/color_F2F2F2"
+        android:gravity="center"
+        android:orientation="horizontal">
 
 
         <TextView
@@ -26,130 +27,142 @@
     </LinearLayout>
 
 
-    <android.support.v7.widget.RecyclerView
+    <com.qsd.jmwh.view.NoscrollerGridView
+        android:visibility="gone"
+        android:id="@+id/user_center_photo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </android.support.v7.widget.RecyclerView>
-
-
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:horizontalSpacing="2dp"
+        android:numColumns="4"
+        android:verticalSpacing="2dp">
+    </com.qsd.jmwh.view.NoscrollerGridView>
 
 
     <com.qsd.jmwh.view.NormaFormItemVIew
-        app:show_top_line="false"
+        android:id="@+id/height"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint_color="@color/app_main_color"
         app:left_text="身高"
         app:only_read="true"
-        app:hint_color="@color/app_main_color"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <com.qsd.jmwh.view.NormaFormItemVIew
-        app:show_top_line="false"
-        app:left_text="体重"
-        app:only_read="true"
-        app:hint_color="@color/app_main_color"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        app:show_top_line="false"/>
 
     <com.qsd.jmwh.view.NormaFormItemVIew
-        app:show_top_line="false"
+        android:id="@+id/weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint_color="@color/app_main_color"
+        app:left_text="体重"
+        app:only_read="true"
+        app:show_top_line="false"/>
+
+    <com.qsd.jmwh.view.NormaFormItemVIew
+        android:id="@+id/bust"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint_color="@color/app_main_color"
         app:left_text="胸围"
         app:only_read="true"
-        app:hint_color="@color/app_main_color"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        app:show_top_line="false"/>
+
     <com.qsd.jmwh.view.NormaFormItemVIew
-        app:show_top_line="false"
+        android:id="@+id/project"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint_color="@color/app_main_color"
         app:left_text="约会节目"
         app:only_read="true"
-        app:hint_color="@color/app_main_color"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        app:show_top_line="false"/>
+
     <com.qsd.jmwh.view.NormaFormItemVIew
-        app:show_top_line="false"
+        android:id="@+id/qq"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:content_color="@color/color_F43A50"
         app:left_text="QQ"
         app:only_read="true"
-        app:hint_color="@color/color_F43A50"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        app:show_top_line="false"/>
+
     <com.qsd.jmwh.view.NormaFormItemVIew
-        app:show_top_line="false"
+        android:id="@+id/wechat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:content_color="@color/color_F43A50"
         app:left_text="微信"
         app:only_read="true"
-        app:hint_color="@color/color_F43A50"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        app:show_top_line="false"/>
+
     <com.qsd.jmwh.view.NormaFormItemVIew
-        app:show_top_line="false"
+        android:id="@+id/sIntroduce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint_color="@color/app_main_color"
         app:left_text="个人介绍"
         app:only_read="true"
-        app:hint_color="@color/app_main_color"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        app:show_top_line="false"/>
 
 
     <TextView
-        android:paddingRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="79dp"
         android:paddingLeft="15dp"
         android:paddingTop="20dp"
-        android:text="注：请勿通过约会进行不法交易，如果被举报核实，将做封号处理。"
-        android:layout_width="match_parent"
-        android:layout_height="79dp"/>
-
-
+        android:paddingRight="15dp"
+        android:text="注：请勿通过约会进行不法交易，如果被举报核实，将做封号处理。"/>
 
 
     <LinearLayout
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
 
 
         <View
-            android:background="@color/color_EEEEEE"
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"/>
+            android:layout_height="0.5dp"
+            android:background="@color/color_EEEEEE"/>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
             <com.yu.common.ui.DelayClickTextView
-                android:textSize="16sp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:text="评价"
-                android:gravity="center"
                 android:textColor="@color/app_main_color"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"/>
+                android:textSize="16sp"/>
 
 
             <com.yu.common.ui.DelayClickTextView
-                android:textColor="@color/app_main_color"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:text="私聊"
-                android:textSize="16sp"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"/>
+                android:textColor="@color/app_main_color"
+                android:textSize="16sp"/>
 
 
             <com.yu.common.ui.DelayClickTextView
-                android:textColor="@color/app_main_color"
-                android:text="社交账号"
-                android:textSize="16sp"
-                android:gravity="center"
-                android:layout_weight="1"
+                android:id="@+id/social_account"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="社交账号"
+                android:textColor="@color/app_main_color"
+                android:textSize="16sp"/>
 
         </LinearLayout>
 
 
     </LinearLayout>
-
-
-
 
 
 </LinearLayout>

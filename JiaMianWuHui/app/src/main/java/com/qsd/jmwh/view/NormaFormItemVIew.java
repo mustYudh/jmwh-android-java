@@ -51,6 +51,7 @@ public class NormaFormItemVIew extends LinearLayout {
         String titleText = typedArray.getString(R.styleable.NormaFormItemVIew_left_text);
         String text = typedArray.getString(R.styleable.NormaFormItemVIew_content_text);
         int hintColor = typedArray.getColor(R.styleable.NormaFormItemVIew_hint_color, getResources().getColor(R.color.color_999999));
+        int textColor = typedArray.getColor(R.styleable.NormaFormItemVIew_content_color, getResources().getColor(R.color.color_999999));
         String inputType = typedArray.getString(R.styleable.NormaFormItemVIew_input_type);
         textLength = typedArray.getString(R.styleable.NormaFormItemVIew_length);
         if (!TextUtils.isEmpty(inputType)) {
@@ -64,6 +65,7 @@ public class NormaFormItemVIew extends LinearLayout {
         }
         mEdit.setHintTextColor(hintColor);
         content.setHintTextColor(hintColor);
+        content.setTextColor(textColor);
         mRightBtnText = typedArray.getString(R.styleable.NormaFormItemVIew_right_button_hint);
         boolean showTopLine = typedArray.getBoolean(R.styleable.NormaFormItemVIew_show_top_line, true);
         boolean showBottomLine =
@@ -138,6 +140,12 @@ public class NormaFormItemVIew extends LinearLayout {
         if (!TextUtils.isEmpty(contentText)) {
             content.setText(contentText);
             content.setTextColor(getContext().getResources().getColor(R.color.color_222222));
+        }
+    }
+
+    public void setContent(CharSequence contentText) {
+        if (!TextUtils.isEmpty(contentText)) {
+            content.setText(contentText);
         }
     }
 
