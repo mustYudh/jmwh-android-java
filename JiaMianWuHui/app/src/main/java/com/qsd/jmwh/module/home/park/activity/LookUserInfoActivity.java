@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseActivity;
 import com.qsd.jmwh.data.UserProfile;
-import com.qsd.jmwh.module.home.park.adapter.UserPhothAdapter;
+import com.qsd.jmwh.module.home.park.adapter.UserPhotoAdapter;
 import com.qsd.jmwh.module.home.park.bean.OtherUserInfoBean;
 import com.qsd.jmwh.module.home.park.presenter.LookUserInfoPresenter;
 import com.qsd.jmwh.module.home.park.presenter.LookUserInfoViewer;
@@ -84,6 +84,7 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
         if (authType == 0) {
             result = R.drawable.ic_not_auth;
         } else if (authType == 3) {
+            bindView(R.id.video_auth,true);
             result = R.drawable.ic_video_auth;
         } else {
             result = R.drawable.ic_info_auth;
@@ -94,7 +95,7 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
         ArrayList<OtherUserInfoBean.CdoFileListDataBean> list = userCenterInfo.cdoFileListData;
         bindView(R.id.empty_view, list.size() == 0);
         GridView gridView = bindView(R.id.user_center_photo, list.size() > 0);
-        gridView.setAdapter(new UserPhothAdapter(list));
+        gridView.setAdapter(new UserPhotoAdapter(list));
     }
 
     @Override

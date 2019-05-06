@@ -176,6 +176,7 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
         if (authType == 0) {
             result = R.drawable.ic_not_auth;
         } else if (authType == 3) {
+            bindView(R.id.video_auth,true);
             result = R.drawable.ic_video_auth;
         } else {
             result = R.drawable.ic_info_auth;
