@@ -1,8 +1,6 @@
 package com.yu.location;
 
-/**
- * @author chenwei
- */
+
 public interface ILocationClient {
 
   /**

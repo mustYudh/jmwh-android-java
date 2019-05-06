@@ -1,8 +1,7 @@
 package com.qsd.jmwh.module.home.presenter;
 
-
-import android.view.View;
-
+import android.os.Handler;
+import com.qsd.jmwh.utils.LocationHelper;
 import com.yu.common.framework.BaseViewPresenter;
 
 /**
@@ -13,28 +12,24 @@ import com.yu.common.framework.BaseViewPresenter;
 
 public class HomePresenter extends BaseViewPresenter<HomeViewer> {
 
+    private Handler handler=new Handler();
+    private Runnable runnable = new Runnable() {
+        @Override public void run() {
+            LocationHelper.getInstance(getActivity()).requestLocationToLocal();
+            handler.postDelayed(this,1000 * 60 * 5);
+        }
+    };
 
     public HomePresenter(HomeViewer viewer) {
         super(viewer);
     }
 
-    @Override
-    public void createdView(View view) {
-
+    public void modifyLngAndLat() {
+        handler.postDelayed(runnable, 1000 * 60 * 5);
     }
 
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void willDestroy() {
-
+    @Override public void willDestroy() {
+        super.willDestroy();
+        handler.removeCallbacks(runnable);
     }
 }

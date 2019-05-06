@@ -19,9 +19,6 @@ class BaiDuLocationService {
 
   private BDLocationListener mBDLocationListener;
 
-  /***
-   * @param context
-   */
   BaiDuLocationService(Context context) {
     mHandler = new Handler(Looper.getMainLooper());
     client = new LocationClient(context);

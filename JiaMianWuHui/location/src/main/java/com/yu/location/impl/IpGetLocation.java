@@ -14,10 +14,7 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import org.json.JSONObject;
 
-/**
- * @author chenwei
- * @date 2018/2/8
- */
+
 public class IpGetLocation {
   private static final String TAG = "IpGetLocation";
 
@@ -33,7 +30,7 @@ public class IpGetLocation {
           JSONObject ipJson = new JSONObject(new IpGetLocation().requestGet(null));
           JSONObject content = ipJson.optJSONObject("content");
           JSONObject point = content == null ? null : content.optJSONObject("point");
-
+          JSONObject addressDetail = content == null ? null : content.optJSONObject("address_detail");
           ILocation iLocation = null;
 
           if (point != null) {
@@ -44,6 +41,14 @@ public class IpGetLocation {
               iLocation = new ILocation();
               iLocation.setLatitude(Double.parseDouble(latStr));
               iLocation.setLongitude(Double.parseDouble(lonStr));
+            }
+          }
+
+          if (addressDetail != null) {
+            String city = addressDetail.getString("city");
+            if (!TextUtils.isEmpty(city) ) {
+              assert iLocation != null;
+              iLocation.setCityName(city);
             }
           }
 

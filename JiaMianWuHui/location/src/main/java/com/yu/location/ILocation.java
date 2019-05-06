@@ -2,13 +2,12 @@ package com.yu.location;
 
 import java.io.Serializable;
 
-/**
- * @author chenwei
- */
+
 public class ILocation implements Serializable {
 
   public double longitude = 0;
   public double latitude = 0;
+  public String cityName;
 
   public double getLongitude() {
     return longitude;
@@ -26,6 +25,12 @@ public class ILocation implements Serializable {
     this.latitude = latitude;
   }
 
+  public String getCityName() {
+    return cityName;
+  }
+  public void setCityName(String cityName) {
+    this.cityName = cityName;
+  }
   public boolean isEmpty() {
     return Math.abs(longitude) < 0.01 || Math.abs(latitude) < 0.01;
   }

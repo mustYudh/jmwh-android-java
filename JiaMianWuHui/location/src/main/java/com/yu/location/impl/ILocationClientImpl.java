@@ -8,9 +8,7 @@ import com.yu.location.ILocation;
 import com.yu.location.ILocationClient;
 import com.yu.location.LocationListener;
 
-/**
- * @author chenwei
- */
+
 public class ILocationClientImpl implements ILocationClient {
   private static final String TAG = "ILocationClientImpl";
 

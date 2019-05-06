@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseFragment;
+import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.park.activity.LookUserInfoActivity;
 import com.qsd.jmwh.module.home.park.adapter.PersonRvAdapter;
 import com.qsd.jmwh.module.home.park.bean.HomePersonListBean;
@@ -57,7 +58,7 @@ public class PersonFragment extends BaseFragment implements PersonViewer {
         tv_top_num = bindView(R.id.tv_top_num);
         rv_person.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        mPresenter.initPersonListData("111.00", "222.00", home_type, "", "0", "0");
+        mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), home_type, "", "0", "0");
     }
 
     @Override

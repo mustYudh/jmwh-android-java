@@ -14,7 +14,7 @@ public class PersonPresenter extends BaseViewPresenter<PersonViewer> {
     }
 
     @SuppressLint("CheckResult")
-    public void initPersonListData(String nLat, String nLng, String nTab, String nickName, String pageindex, String nSex) {
+    public void initPersonListData(double nLat, double nLng, String nTab, String nickName, String pageindex, String nSex) {
         XHttpProxy.proxy(ApiServices.class)
                 .getPersonListDate(nLat, nLng, nTab, nickName, pageindex, nSex)
                 .subscribeWith(new TipRequestSubscriber<HomePersonListBean>() {

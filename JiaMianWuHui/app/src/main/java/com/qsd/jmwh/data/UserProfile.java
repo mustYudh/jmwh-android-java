@@ -11,115 +11,112 @@ import java.util.UUID;
 
 public class UserProfile implements Serializable {
 
-    private static UserProfile instance;
+  private static UserProfile instance;
 
-    private static final String SHARE_PREFERENCES_NAME = ".public_profile";
+  private static final String SHARE_PREFERENCES_NAME = ".public_profile";
 
-    private static final String APP_ACCOUNT = "account";
-    private static final String APP_TOKEN = "token";
-    private static final String PHONE_NO = "phone_no";
-    private static final String SEX = "sex";
-    private static final String LAT = "lat";
-    private static final String LNG = "lng";
+  private static final String APP_ACCOUNT = "account";
+  private static final String APP_TOKEN = "token";
+  private static final String PHONE_NO = "phone_no";
+  private static final String SEX = "sex";
+  private static final String LAT = "lat";
+  private static final String LNG = "lng";
+  private static final String CITY_NAME = "city_name";
 
+  private SharedPreferencesHelper spHelper;
 
+  private UserProfile() {
+    spHelper = SharedPreferencesHelper.create(
+        APP.getInstance().getSharedPreferences(SHARE_PREFERENCES_NAME, Context.MODE_PRIVATE));
+  }
 
-    private SharedPreferencesHelper spHelper;
-
-
-    private UserProfile() {
-        spHelper = SharedPreferencesHelper.create(
-                APP.getInstance().getSharedPreferences(SHARE_PREFERENCES_NAME, Context.MODE_PRIVATE));
-    }
-
-    public synchronized static UserProfile getInstance() {
+  public synchronized static UserProfile getInstance() {
+    if (instance == null) {
+      synchronized (UserProfile.class) {
         if (instance == null) {
-            synchronized (UserProfile.class) {
-                if (instance == null) {
-                    instance = new UserProfile();
-                }
-            }
+          instance = new UserProfile();
         }
-        return instance;
+      }
     }
+    return instance;
+  }
 
-    public void appLogin(LoginInfo userInfo) {
-        setAppAccount(userInfo.lUserId);
-        setAppToken(userInfo.token);
-        setSex(userInfo.nSex);
+  public void appLogin(LoginInfo userInfo) {
+    setAppAccount(userInfo.lUserId);
+    setAppToken(userInfo.token);
+    setSex(userInfo.nSex);
+  }
+
+  private void setSex(int sex) {
+    spHelper.putInt(SEX, sex);
+  }
+
+  public int getSex() {
+    return spHelper.getInt(SEX, -1);
+  }
+
+  public int getAppAccount() {
+    return spHelper.getInt(APP_ACCOUNT, -1);
+  }
+
+  private void setAppAccount(int account) {
+    spHelper.putInt(APP_ACCOUNT, account);
+  }
+
+  public String getAppToken() {
+    return spHelper.getString(APP_TOKEN, "");
+  }
+
+  private void setAppToken(String token) {
+    spHelper.putString(APP_TOKEN, token);
+  }
+
+  public void setPhoneNo(String phoneNo) {
+    if (!TextUtils.isEmpty(phoneNo)) {
+      spHelper.putString(PHONE_NO, phoneNo);
     }
+  }
 
-    private void setSex(int sex) {
-        spHelper.putInt(SEX,sex);
-    }
+  public String getPhoneNo() {
+    return spHelper.getString(PHONE_NO, "");
+  }
 
-    public int getSex() {
-        return spHelper.getInt(SEX,-1);
-    }
+  public boolean isAppLogin() {
+    return !TextUtils.isEmpty(getAppToken()) && getAppAccount() != -1;
+  }
 
-    public int getAppAccount() {
-        return spHelper.getInt(APP_ACCOUNT, -1);
-    }
+  public void setCityName(String cityName) {
+        spHelper.putString(CITY_NAME,cityName);
+  }
 
-    private void setAppAccount(int account) {
-        spHelper.putInt(APP_ACCOUNT, account);
-    }
+  public String getCityName() {
+    return spHelper.getString(CITY_NAME,"");
+  }
 
+  public void setLat(float lat) {
+    spHelper.putFloat(LAT, lat);
+  }
 
-    public String getAppToken() {
-        return spHelper.getString(APP_TOKEN,"");
-    }
+  public float getLat() {
+    return spHelper.getFloat(LAT, 0);
+  }
 
-    private void setAppToken(String token) {
-        spHelper.putString(APP_TOKEN, token);
-    }
+  public void setLng(float lng) {
+    spHelper.putFloat(LNG, lng);
+  }
 
-    public void setPhoneNo(String phoneNo) {
-        if (!TextUtils.isEmpty(phoneNo)) {
-            spHelper.putString(PHONE_NO,phoneNo);
-        }
+  public float getLng() {
+    return spHelper.getFloat(LNG, 0);
+  }
 
-    }
+  /**
+   * 退出登录
+   */
+  public void clean() {
+    spHelper.clear();
+  }
 
-    public String getPhoneNo() {
-        return spHelper.getString(PHONE_NO,"");
-    }
-
-    public boolean isAppLogin() {
-        return !TextUtils.isEmpty(getAppToken()) && getAppAccount() != -1;
-    }
-
-    public void setLat(String lat) {
-        spHelper.putString(LAT,lat);
-    }
-
-    public String getLat() {
-        return spHelper.getString(LAT,"111.00");
-    }
-
-
-
-    public void setLng(String lng) {
-        spHelper.putString(LNG,lng);
-    }
-
-
-    public String getLng() {
-        return spHelper.getString(LNG,"222.00");
-    }
-
-
-
-    /**
-     * 退出登录
-     */
-    public void clean() {
-        spHelper.clear();
-    }
-
-
-    public String getObjectName() {
-       return getAppAccount() + "/head_" + UUID.randomUUID().toString() + ".jpg";
-    }
-
+  public String getObjectName() {
+    return getAppAccount() + "/head_" + UUID.randomUUID().toString() + ".jpg";
+  }
 }

@@ -54,8 +54,8 @@ public interface ApiServices {
 
   @NetMethod(ParameterNames = {
       "nLat", "nLng", "nTab", "sNickName", "pageindex", "nSex"
-  }, Url = "/UserService/getUserList") Observable<HomePersonListBean> getPersonListDate(String nLat,
-      String nLng, String nTab, String sNickName, String pageindex, String nSex);
+  }, Url = "/UserService/getUserList") Observable<HomePersonListBean> getPersonListDate(double nLat,
+      double nLng, String nTab, String sNickName, String pageindex, String nSex);
 
   @NetMethod(ParameterNames = {
       "lUserId", "token", "sUserHeadPic"
@@ -122,10 +122,10 @@ public interface ApiServices {
   @NetMethod(ParameterNames = { "lOrderId" }, Url = "/OrderService/checkOrderPaySuccess")
   Observable<PayInfo> checkPaySuccess(long lOrderId);
 
-  @NetMethod(ParameterNames = {"nLng","nLat"},Url = "/UserService/modifyLngAndLat")
-  Observable<Object> modifyLngAndLat(String nLng,String nLat);
+  @NetMethod(ParameterNames = {"nLng","nLat","sCity"},Url = "/UserService/modifyLngAndLat")
+  Observable<Object> modifyLngAndLat(double nLng,double nLat,String sCity);
 
 
   @NetMethod(ParameterNames = {"lUserId","nLng","nLat"},Url = "/UserService/getUserCenterInfo")
-  Observable<OtherUserInfoBean> getOtherUserInfo(int lUserId, String nLat, String nLng);
+  Observable<OtherUserInfoBean> getOtherUserInfo(int lUserId, double nLat, double nLng);
 }
