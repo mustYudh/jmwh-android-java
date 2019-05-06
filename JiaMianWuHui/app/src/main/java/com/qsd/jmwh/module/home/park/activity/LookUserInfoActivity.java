@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseActivity;
 import com.qsd.jmwh.data.UserProfile;
+import com.qsd.jmwh.module.home.park.adapter.UserPhothAdapter;
 import com.qsd.jmwh.module.home.park.bean.OtherUserInfoBean;
 import com.qsd.jmwh.module.home.park.presenter.LookUserInfoPresenter;
 import com.qsd.jmwh.module.home.park.presenter.LookUserInfoViewer;
@@ -18,7 +20,7 @@ import com.qsd.jmwh.view.NormaFormItemVIew;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.utils.ImageLoader;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class LookUserInfoActivity extends BaseActivity implements LookUserInfoViewer, View.OnClickListener {
 
@@ -89,9 +91,10 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
         ImageView authStatus = bindView(R.id.auth_type);
         authStatus.setImageResource(result);
         bindText(R.id.auth_info, userData.sAuthInfo);
-        List<OtherUserInfoBean.CdoFileListDataBean> list = userCenterInfo.cdoFileListData;
+        ArrayList<OtherUserInfoBean.CdoFileListDataBean> list = userCenterInfo.cdoFileListData;
         bindView(R.id.empty_view, list.size() == 0);
-
+        GridView gridView = bindView(R.id.user_center_photo, list.size() > 0);
+        gridView.setAdapter(new UserPhothAdapter(list));
     }
 
     @Override

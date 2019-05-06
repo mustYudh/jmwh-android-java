@@ -1,7 +1,7 @@
 package com.qsd.jmwh.module.home.park.bean;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
 
 public class OtherUserInfoBean implements Serializable {
 
@@ -21,7 +21,7 @@ public class OtherUserInfoBean implements Serializable {
     public boolean bVIP;
     public CdoUserDataBean cdoUserData;
     public boolean bExistDating;
-    public List<CdoFileListDataBean> cdoFileListData;
+    public ArrayList<CdoFileListDataBean> cdoFileListData;
 
 
     public static class CdoUserDataBean {

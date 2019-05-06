@@ -17,7 +17,7 @@ import okhttp3.internal.http.HttpHeaders;
 public class CustomLoggingInterceptor extends HttpLoggingInterceptor {
 
     public CustomLoggingInterceptor() {
-        super("custom");
+        super("JMWH_HTTP_RESULT");
         setLevel(Level.PARAM);
     }
 
