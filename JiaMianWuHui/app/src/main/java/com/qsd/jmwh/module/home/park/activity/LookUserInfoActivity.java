@@ -67,6 +67,7 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
             bindView(R.id.social_account, false);
         }
         ImageLoader.loadCenterCrop(getActivity(), userData.sUserHeadPic, bindView(R.id.header));
+        ImageLoader.blurTransformation(getActivity(), userData.sUserHeadPic, bindView(R.id.header_bg),4,10);
         bindText(R.id.sNickName, userData.sNickName);
         NormaFormItemVIew height = bindView(R.id.height);
         height.setContentText(userData.sHeight);

@@ -185,6 +185,7 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
         authStatus.setImageResource(result);
         ImageView header = bindView(R.id.header);
         ImageLoader.loadCenterCrop(getActivity(), cdoUser.sUserHeadPic, header, R.mipmap.ic_launcher);
+        ImageLoader.blurTransformation(getActivity(), cdoUser.sUserHeadPic, bindView(R.id.header_bg),4,10);
         UserItemView money = bindView(R.id.money_bag);
         money.setHint(walletData.nMoney + "元，" + walletData.nMaskBallCoin + "假面币");
         UserItemView appVersion = bindView(R.id.app_version);

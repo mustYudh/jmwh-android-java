@@ -6,11 +6,12 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 
 import java.io.File;
 import java.util.concurrent.ExecutionException;
+
+import jp.wasabeef.glide.transformations.BlurTransformation;
 
 public class ImageLoader {
     private ImageLoader() {
@@ -52,8 +53,25 @@ public class ImageLoader {
         Glide.with(context).load(url).fitCenter().dontAnimate().placeholder(defaultResId).into(view);
     }
 
-    public static void getBitmap(Context context, String url, SimpleTarget<android.graphics.Bitmap> target) {
-        Glide.with( context ).load(url).asBitmap().into(target );
+    public static void blurTransformation(Context context, String url, ImageView view) {
+        Glide.with(context)
+                .load(url)
+                .centerCrop()
+                .dontAnimate()
+                // 设置高斯模糊
+                .bitmapTransform(new BlurTransformation(context, 24,8))
+                .into(view);
+    }
+
+
+    public static void blurTransformation(Context context, String url, ImageView view,int radius,int sampling) {
+        Glide.with(context)
+                .load(url)
+                .centerCrop()
+                .dontAnimate()
+                // 设置高斯模糊
+                .bitmapTransform(new BlurTransformation(context, radius,sampling))
+                .into(view);
     }
 
     /**

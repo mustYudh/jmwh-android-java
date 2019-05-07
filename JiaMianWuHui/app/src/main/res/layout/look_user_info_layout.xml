@@ -18,10 +18,15 @@
             android:layout_width="match_parent"
             android:layout_height="210dp">
 
+            <ImageView
+                android:id="@+id/header_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/app_main_bg_color"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
@@ -92,6 +97,8 @@
                 android:padding="18dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_back_arrow"/>
+
+
         </FrameLayout>
 
 
@@ -111,10 +118,10 @@
 
             <TextView
                 android:id="@+id/auth_info"
-                android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
+                android:layout_weight="1"
                 android:ellipsize="end"
                 android:gravity="center_vertical"
                 android:maxLines="1"
@@ -124,16 +131,15 @@
                 tools:text="他通过了面具公园对他微信朋友全的身份安全审核。"/>
 
 
-
             <ImageView
-                android:visibility="gone"
                 android:id="@+id/video_auth"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_video"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_width="20dp"
-                android:layout_height="20dp"/>
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_video"
+                android:visibility="gone"/>
 
 
         </LinearLayout>
