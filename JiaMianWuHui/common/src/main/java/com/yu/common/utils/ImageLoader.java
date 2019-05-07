@@ -75,6 +75,17 @@ public class ImageLoader {
                 .into(view);
     }
 
+
+    public static void blurTransformation(Context context, int res, ImageView view,int radius,int sampling) {
+        Glide.with(context)
+                .load(res)
+                .centerCrop()
+                .dontAnimate()
+                // 设置高斯模糊
+                .bitmapTransform(new BlurTransformation(context, radius,sampling))
+                .into(view);
+    }
+
     /**
      * 带监听处理
      *

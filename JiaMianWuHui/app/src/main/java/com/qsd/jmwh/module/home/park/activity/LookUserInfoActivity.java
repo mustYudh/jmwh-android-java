@@ -96,7 +96,10 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
         ArrayList<OtherUserInfoBean.CdoFileListDataBean> list = userCenterInfo.cdoFileListData;
         bindView(R.id.empty_view, list.size() == 0);
         GridView gridView = bindView(R.id.user_center_photo, list.size() > 0);
-        gridView.setAdapter(new UserPhotoAdapter(list));
+        gridView.setAdapter(new UserPhotoAdapter(list,userCenterInfo.bOpenImg));
+        bindView(R.id.unlock_all_photo_root,!userCenterInfo.bOpenImg);
+
+
     }
 
     @Override

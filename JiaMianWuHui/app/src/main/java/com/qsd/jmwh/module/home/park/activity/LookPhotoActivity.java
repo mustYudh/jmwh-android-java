@@ -36,7 +36,7 @@ public class LookPhotoActivity extends BaseActivity {
             ImageLoader.loadCenterCrop(getActivity(), url, photo);
         } else if (type == 1) {
             ImageView imageView = bindView(R.id.destroy_root_bg, true);
-            imageView.setImageResource(R.drawable.ic_destory_img_bg);
+            imageView.setImageResource(R.drawable.ic_destroy_img_bg);
             ImageLoader.blurTransformation(getActivity(), url, photo, 20, 3);
             bindView(R.id.destroy_img_toot, true);
         } else if (type == 2) {

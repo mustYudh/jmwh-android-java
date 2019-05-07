@@ -26,18 +26,65 @@
 
     </LinearLayout>
 
-
-    <com.qsd.jmwh.view.NoscrollerGridView
-        android:visibility="gone"
-        android:id="@+id/user_center_photo"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:horizontalSpacing="2dp"
-        android:numColumns="4"
-        android:verticalSpacing="2dp">
-    </com.qsd.jmwh.view.NoscrollerGridView>
+        android:layout_height="wrap_content">
 
+        <com.qsd.jmwh.view.NoscrollerGridView
+            android:id="@+id/user_center_photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:horizontalSpacing="2dp"
+            android:numColumns="4"
+            android:verticalSpacing="2dp"
+            android:visibility="gone">
+        </com.qsd.jmwh.view.NoscrollerGridView>
+
+        <FrameLayout
+            android:visibility="gone"
+            android:id="@+id/unlock_all_photo_root"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:background="#B45800FF"
+                android:id="@+id/unlock_all_photo"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:textSize="13sp"
+                    android:textColor="@color/white"
+                    android:text="她设置了付费相册"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <com.yu.common.ui.DelayClickTextView
+                    android:textSize="15sp"
+                    android:textColor="@color/app_main_color"
+                    android:gravity="center"
+                    android:text="解锁相册5元，会员免费"
+                    android:background="@drawable/white_btn_bg"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="41dp"
+                    android:layout_marginLeft="41dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"/>
+            </LinearLayout>
+
+
+
+        </FrameLayout>
+
+
+
+    </FrameLayout>
 
     <com.qsd.jmwh.view.NormaFormItemVIew
         android:id="@+id/height"
