@@ -16,6 +16,7 @@ import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseFragment;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.user.activity.EditUserInfoActivity;
+import com.qsd.jmwh.module.home.user.activity.MineBlackMenuActivity;
 import com.qsd.jmwh.module.home.user.activity.MineLikeActivity;
 import com.qsd.jmwh.module.home.user.activity.MoneyBagActivity;
 import com.qsd.jmwh.module.home.user.activity.PhotoDestroySelectActivity;
@@ -134,7 +135,7 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
                 getLaunchHelper().startActivity(MineLikeActivity.class);
                 break;
             case R.id.black_list:
-
+                getLaunchHelper().startActivity(MineBlackMenuActivity.class);
                 break;
             default:
         }
