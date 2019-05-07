@@ -78,7 +78,7 @@ public class OtherUserInfoBean implements Serializable {
 
     }
 
-    public static class CdoFileListDataBean {
+    public static class CdoFileListDataBean implements Serializable {
         /**
          * lFileId : 2
          * sFileUrl : https://maskball.oss-cn-beijing.aliyuncs.com/headpic/222.jpg

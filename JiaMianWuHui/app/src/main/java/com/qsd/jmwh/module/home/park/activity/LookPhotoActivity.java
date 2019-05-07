@@ -8,38 +8,43 @@ import android.widget.ImageView;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseActivity;
+import com.qsd.jmwh.module.home.park.bean.OtherUserInfoBean;
 import com.yu.common.utils.ImageLoader;
 
 public class LookPhotoActivity extends BaseActivity {
-    private final static String URL = "url";
-    private final static String TYPE = "type";
+    private final static String DATA = "data";
 
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.look_photo_layout);
     }
 
-    public static Intent getIntent(Context context, String url, int type) {
+    public static Intent getIntent(Context context, OtherUserInfoBean.CdoFileListDataBean data) {
         Intent starter = new Intent(context, LookPhotoActivity.class);
-        starter.putExtra(URL, url);
-        starter.putExtra(TYPE, type);
+        starter.putExtra(DATA, data);
         return starter;
     }
 
     @Override
     protected void loadData() {
-        String imageUrl = getIntent().getStringExtra(URL);
-        int type = getIntent().getIntExtra(TYPE, 0);
+        OtherUserInfoBean.CdoFileListDataBean data = (OtherUserInfoBean.CdoFileListDataBean) getIntent().getSerializableExtra(DATA);
+        String url = data.sFileUrl;
+        int type = data.nFileType;
         ImageView photo = bindView(R.id.photo);
         if (type == 0) {
-            ImageLoader.loadCenterCrop(getActivity(), imageUrl, photo);
+            bindView(R.id.destroy_img_toot, false);
+            ImageLoader.loadCenterCrop(getActivity(), url, photo);
         } else if (type == 1) {
-            bindView(R.id.destroy_img_toot,true);
-            ImageLoader.blurTransformation(getActivity(), imageUrl, photo);
+            ImageView imageView = bindView(R.id.destroy_root_bg, true);
+            imageView.setImageResource(R.drawable.ic_destory_img_bg);
+            ImageLoader.blurTransformation(getActivity(), url, photo, 20, 3);
+            bindView(R.id.destroy_img_toot, true);
         } else if (type == 2) {
-            bindView(R.id.destroy_img_toot,true);
-            bindView(R.id.pay_btn,true);
-            ImageLoader.blurTransformation(getActivity(), imageUrl, photo);
+            ImageView imageView = bindView(R.id.destroy_root_bg, true);
+            imageView.setImageResource(R.drawable.ic_red_bag_bg);
+            ImageLoader.blurTransformation(getActivity(), url, photo, 20, 3);
+            bindView(R.id.red_bag_root, true);
+            bindView(R.id.pay_btn, true);
         }
         bindView(R.id.back, v -> onBackPressed());
     }

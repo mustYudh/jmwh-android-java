@@ -1,6 +1,7 @@
 package com.qsd.jmwh.module.home.park.adapter;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,19 +27,24 @@ public class UserPhotoAdapter extends BasicAdapter<OtherUserInfoBean.CdoFileList
             @Override
             public void bindData(OtherUserInfoBean.CdoFileListDataBean data) {
                 ImageView userPic = findViewId(R.id.user_img);
+                ImageView photoBg = findViewId(R.id.photo_bg);
                 TextView hint = findViewId(R.id.image_hint);
                 if (data.nFileType == 0) {
-                    ImageLoader.loadCenterCrop(userPic.getContext(), data.sFileUrl,userPic);
+                    photoBg.setVisibility(View.GONE);
+                    ImageLoader.loadCenterCrop(userPic.getContext(), data.sFileUrl, userPic);
                 } else if (data.nFileType == 1) {
-                    ImageLoader.blurTransformation(userPic.getContext(), data.sFileUrl,userPic);
+                    photoBg.setVisibility(View.VISIBLE);
+                    photoBg.setImageResource(R.drawable.ic_destory_img_bg);
+                    ImageLoader.blurTransformation(userPic.getContext(), data.sFileUrl, userPic);
                     hint.setText("阅后即焚\n照片");
-                }if (data.nFileType == 2) {
-                    ImageLoader.blurTransformation(userPic.getContext(), data.sFileUrl,userPic);
+                }
+                if (data.nFileType == 2) {
+                    photoBg.setVisibility(View.VISIBLE);
+                    photoBg.setImageResource(R.drawable.ic_red_bag_bg);
+                    ImageLoader.blurTransformation(userPic.getContext(), data.sFileUrl, userPic);
                     hint.setText("阅后即焚的\n红包照片");
                 }
-
-                userPic.setOnClickListener(v -> LauncherHelper.from(context).startActivity(LookPhotoActivity.getIntent(context,data.sFileUrl,data.nFileType)));
-
+                userPic.setOnClickListener(v -> LauncherHelper.from(context).startActivity(LookPhotoActivity.getIntent(context, data)));
             }
         };
     }

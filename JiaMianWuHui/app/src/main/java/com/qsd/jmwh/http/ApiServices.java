@@ -110,9 +110,9 @@ public interface ApiServices {
       String sSource, String sReferrer, String WX, String sCity);
 
   @NetMethod(ParameterNames = {
-      "sFileUrl", "nAttribute", "nInfoType", "nFileType", "nFileFee"
+      "sFileUrl", "nAttribute", "nInfoType", "nFileType", "nFileFee","sFileCoverUrl"
   }, Url = "/MaskballService/addFile") Observable<Object> addFile(String sFileUrl, int nAttribute,
-      int nInfoType, int nFileType, int nFileFee);
+      int nInfoType, int nFileType, int nFileFee,String sFileCoverUrl);
 
   @NetMethod(ParameterNames = { "lFileId", "nInfoType" }, Url = "/MaskballService/delFile")
   Observable<Object> deleteFile(int lFileId, int nInfoType);
