@@ -3,12 +3,15 @@ package com.yu.common.utils;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
 import java.io.File;
 import java.util.concurrent.ExecutionException;
+
+import jp.wasabeef.glide.transformations.BlurTransformation;
 
 public class ImageLoader {
     private ImageLoader() {
@@ -18,6 +21,7 @@ public class ImageLoader {
     /**
      * fitCenter() 是裁剪技术，即缩放图像让图像都测量出来等于或小于 ImageView 的边界范围。该图像将会完全显示，但可能不会填满整个 ImageView。
      * 如果你想直接显示图片而没有任何淡入淡出效果，在 Glide 的建造者中调用 .dontAnimate() 。
+     *
      * @param context
      * @param url
      * @param view
@@ -31,6 +35,7 @@ public class ImageLoader {
     /**
      * CenterCrop()是一个裁剪技术，即缩放图像让它填充到 ImageView 界限内并且侧键额外的部分。ImageView 可能会完全填充，但图像可能不会完整显示。
      * 如果你想直接显示图片而没有任何淡入淡出效果，在 Glide 的建造者中调用 .dontAnimate() 。
+     *
      * @param context
      * @param url
      * @param view
@@ -39,11 +44,46 @@ public class ImageLoader {
     public static void loadCenterCrop(Context context, String url, ImageView view, int defaultResId) {
         Glide.with(context).load(url).centerCrop().dontAnimate().placeholder(defaultResId).into(view);
     }
+
     public static void loadCenterCrop(Context context, String url, ImageView view) {
         Glide.with(context).load(url).centerCrop().dontAnimate().into(view);
     }
+
     public static void loadFitCenter(Context context, String url, ImageView view, int defaultResId) {
         Glide.with(context).load(url).fitCenter().dontAnimate().placeholder(defaultResId).into(view);
+    }
+
+    public static void blurTransformation(Context context, String url, ImageView view) {
+        Glide.with(context)
+                .load(url)
+                .centerCrop()
+                .dontAnimate()
+                // 设置高斯模糊
+                .bitmapTransform(new BlurTransformation(context, 24,8))
+                .into(view);
+    }
+
+
+
+    public static void blurTransformation(Context context, String url, ImageView view,int radius,int sampling) {
+        Glide.with(context)
+                .load(url)
+                .centerCrop()
+                .dontAnimate()
+                // 设置高斯模糊
+                .bitmapTransform(new BlurTransformation(context, radius,sampling))
+                .into(view);
+    }
+
+
+    public static void blurTransformation(Context context, int res, ImageView view,int radius,int sampling) {
+        Glide.with(context)
+                .load(res)
+                .centerCrop()
+                .dontAnimate()
+                // 设置高斯模糊
+                .bitmapTransform(new BlurTransformation(context, radius,sampling))
+                .into(view);
     }
 
     /**
@@ -54,11 +94,11 @@ public class ImageLoader {
      * @param view
      * @param listener
      */
-    public static void loadFitCenter(Context context, String url, ImageView view, RequestListener listener) {
+    public static void loadFitCenter(Context context, String url, ImageView view, RequestListener<? super String, com.bumptech.glide.load.resource.drawable.GlideDrawable> listener) {
         Glide.with(context).load(url).fitCenter().dontAnimate().listener(listener).into(view);
     }
 
-    public static void loadCenterCrop(Context context, String url, ImageView view, RequestListener listener) {
+    public static void loadCenterCrop(Context context, String url, ImageView view, RequestListener<? super String, com.bumptech.glide.load.resource.drawable.GlideDrawable> listener) {
         Glide.with(context).load(url).centerCrop().dontAnimate().listener(listener).into(view);
     }
 

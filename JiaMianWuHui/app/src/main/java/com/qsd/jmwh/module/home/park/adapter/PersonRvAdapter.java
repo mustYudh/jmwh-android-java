@@ -60,8 +60,5 @@ public class PersonRvAdapter extends BaseQuickAdapter<HomePersonListBean.CdoList
             helper.setText(R.id.tv_auth_type, "未认证");
             tv_auth_type.setBackground(context.getResources().getDrawable(R.drawable.shape_home_person_no));
         }
-
-
-
     }
 }

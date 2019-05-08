@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,6 +16,8 @@ import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseFragment;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.user.activity.EditUserInfoActivity;
+import com.qsd.jmwh.module.home.user.activity.MineBlackMenuActivity;
+import com.qsd.jmwh.module.home.user.activity.MineLikeActivity;
 import com.qsd.jmwh.module.home.user.activity.MoneyBagActivity;
 import com.qsd.jmwh.module.home.user.activity.PhotoDestroySelectActivity;
 import com.qsd.jmwh.module.home.user.activity.PrivacySettingActivity;
@@ -71,6 +74,10 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
         bindView(R.id.setting, this);
         bindView(R.id.add_photo, this);
         bindView(R.id.header, this);
+        bindView(R.id.my_evaluation, this);
+        bindView(R.id.my_radio, this);
+        bindView(R.id.my_like, this);
+        bindView(R.id.black_list, this);
     }
 
     @Override
@@ -118,6 +125,18 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
                     }
                 });
                 break;
+            case R.id.my_evaluation:
+
+                break;
+            case R.id.my_radio:
+
+                break;
+            case R.id.my_like:
+                getLaunchHelper().startActivity(MineLikeActivity.class);
+                break;
+            case R.id.black_list:
+                getLaunchHelper().startActivity(MineBlackMenuActivity.class);
+                break;
             default:
         }
     }
@@ -154,10 +173,20 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
         UserItemView nDestroyImgCount = bindView(R.id.nDestroyImgCount);
         nDestroyImgCount.setHint("(有" + userInfo.nDestroyImgCount + "个人焚毁了你的照片) 一键恢复");
         int authType = Integer.parseInt(cdoUser.nAuthType);
-        String result = authType == 0 ? "未认证" : "通过";
-        bindText(R.id.auth_type, result);
+        @DrawableRes int result;
+        if (authType == 0) {
+            result = R.drawable.ic_not_auth;
+        } else if (authType == 3) {
+            bindView(R.id.video_auth,true);
+            result = R.drawable.ic_video_auth;
+        } else {
+            result = R.drawable.ic_info_auth;
+        }
+        ImageView authStatus = bindView(R.id.auth_type);
+        authStatus.setImageResource(result);
         ImageView header = bindView(R.id.header);
         ImageLoader.loadCenterCrop(getActivity(), cdoUser.sUserHeadPic, header, R.mipmap.ic_launcher);
+        ImageLoader.blurTransformation(getActivity(), cdoUser.sUserHeadPic, bindView(R.id.header_bg),4,10);
         UserItemView money = bindView(R.id.money_bag);
         money.setHint(walletData.nMoney + "元，" + walletData.nMaskBallCoin + "假面币");
         UserItemView appVersion = bindView(R.id.app_version);

@@ -4,6 +4,7 @@ import com.qsd.jmwh.module.home.park.bean.HomePersonListBean;
 import com.qsd.jmwh.module.home.park.bean.OtherUserInfoBean;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
+import com.qsd.jmwh.module.home.user.bean.MineLikeBean;
 import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
 import com.qsd.jmwh.module.login.bean.LoginInfo;
 import com.qsd.jmwh.module.register.bean.DateProjectBean;
@@ -109,9 +110,9 @@ public interface ApiServices {
       String sSource, String sReferrer, String WX, String sCity);
 
   @NetMethod(ParameterNames = {
-      "sFileUrl", "nAttribute", "nInfoType", "nFileType", "nFileFee"
+      "sFileUrl", "nAttribute", "nInfoType", "nFileType", "nFileFee","sFileCoverUrl"
   }, Url = "/MaskballService/addFile") Observable<Object> addFile(String sFileUrl, int nAttribute,
-      int nInfoType, int nFileType, int nFileFee);
+      int nInfoType, int nFileType, int nFileFee,String sFileCoverUrl);
 
   @NetMethod(ParameterNames = { "lFileId", "nInfoType" }, Url = "/MaskballService/delFile")
   Observable<Object> deleteFile(int lFileId, int nInfoType);
@@ -128,4 +129,7 @@ public interface ApiServices {
 
   @NetMethod(ParameterNames = {"lUserId","nLng","nLat"},Url = "/UserService/getUserCenterInfo")
   Observable<OtherUserInfoBean> getOtherUserInfo(int lUserId, double nLat, double nLng);
+
+  @NetMethod(ParameterNames = {"nLat","nLng","nType"},Url = "/UserLoveService/getUserLoveList")
+  Observable<MineLikeBean> getMineLikeList(double nLat, double nLng,String nType);
 }
