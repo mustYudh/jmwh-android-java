@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 
 enum ApiEnvEnum {
-    DEV(0, "假面舞会_测试"), ONLINE(1, "假面舞会"), PRE_RELEASE(2, "假面舞会-预发")
+    DEV(0, "假面舞会测试"), ONLINE(1, "假面舞会"), PRE_RELEASE(2, "假面舞会预发")
 
     private final int value
     private final String name
@@ -33,10 +33,10 @@ android {
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
         flavorDimensions "versionCode"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+
         buildConfigField("int", "API_MODE", "${(envStr as ApiEnvEnum).value}")
+
         manifestPlaceholders = [PACKAGE_NAME : rootProject.ext.applicationId,
                                 APP_NAME     : appNameStr,
                                 UMENG_APPKEY : rootProject.ext.uMengKey,
@@ -45,15 +45,10 @@ android {
                                 BAIDU_LOCATION: rootProject.ext.baidu]
 
         ndk {
-            abiFilters "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
+            abiFilters "armeabi-v7a"
         }
     }
-    buildTypes {
-        release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
+
 
 
 
@@ -63,7 +58,6 @@ android {
             storePassword 'asdfghjkl'
             keyAlias 'jmwh'
             keyPassword 'asdfghjkl'
-            v2SigningEnabled true
         }
         release {
             storeFile file('../keystores/jmwh.jks')
@@ -79,7 +73,7 @@ android {
         abi {
             reset()
             universalApk false
-            include "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
+            include "armeabi-v7a"
         }
     }
 
@@ -96,6 +90,23 @@ android {
     }
 
 
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def outputFileAbsolutePath = output.outputFileName
+            def isRelease = outputFileAbsolutePath.indexOf("release")
+            outputFileName = isRelease >= 0 ? "app-release.apk" : "app-debug.apk"
+        }
+
+        variant.outputs.all { output ->
+            def versionCodes = ["armeabi-v7a": 1]
+            def abi = output.getFilter(com.android.build.OutputFile.ABI)
+            if (abi != null) {
+                output.versionCodeOverride = versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
+            }
+        }
+    }
+
     buildTypes {
 
         def defaultProguardRule = 'proguard-rules.pro'
@@ -103,12 +114,11 @@ android {
         def proguardReacNativeRule = '../proguard-rule/proguard-rules-react-native-0.46.0.pro'
         def proguardRemoveLogRule = '../proguard-rule/proguard-rules-remove-logs.pro'
         def proguardThirdPartServiceRule = '../proguard-rule/proguard-rules-third-part-service.pro'
-        def proguardUmengSharedRule = '../proguard-rule/proguard-rules-umeng-startShare.pro'
+        def proguardUmengSharedRule = '../proguard-rule/proguard-rules-umeng-share.pro'
 
         debug {
-            productFlavors.jmwh.signingConfig signingConfigs.release
+            crunchPngs false //关闭crunchPng优化, 以加快构建
             debuggable true
-            shrinkResources false
             minifyEnabled false
             signingConfig signingConfigs.release
         }
@@ -120,45 +130,47 @@ android {
             zipAlignEnabled true
 
             proguardFiles getDefaultProguardFile("proguard-android.txt"), defaultProguardRule,
-                    proguardBaseRule, proguardReacNativeRule,
-                    proguardRemoveLogRule,
-                    proguardThirdPartServiceRule,
-                    proguardUmengSharedRule
+                proguardBaseRule, proguardReacNativeRule,
+                proguardRemoveLogRule,
+                proguardThirdPartServiceRule,
+                proguardUmengSharedRule
         }
-    }
-
-
-    applicationVariants.all { variant ->
-
-        variant.outputs.all { output ->
-            def outputFileAbsolutePath = output.outputFileName
-            def isRelease = outputFileAbsolutePath.indexOf("release")
-            outputFileName = isRelease >= 0 ? "app-release.apk" : "app-debug.apk"
-        }
-
-        variant.outputs.all { output ->
-            def versionCodes = ["armeabi-v7a": 1, "x86": 2, "x86_64": 3, "arm64-v8a": 4]
-            def abi = output.getFilter(com.android.build.OutputFile.ABI)
-            if (abi != null) {
-                output.versionCodeOverride = versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
-            }
-        }
-    }
-
-    dexOptions {
-        preDexLibraries false
-    }
-
-    lintOptions {
-        disable "MissingTranslation"
-
-        abortOnError false
     }
 
     compileOptions {
-        encoding 'UTF-8'
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        //开启增量编译
+        incremental = true
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    def enableCruncher = { ->
+        return !isDebug()
+    }
+    //禁用cruncher, 以加速编译
+    aaptOptions {
+        cruncherEnabled = enableCruncher()
+        cruncherProcesses = 0
+    }
+
+    //在Android代码块中添加如下配置：（可优化最上图中transformClassDexBuilderForDebug的时间）
+    dexOptions {
+        preDexLibraries true
+        maxProcessCount
+        dexInProcess true
+        preDexLibraries true
+        javaMaxHeapSize "2g"
+    }
+
+    //跳过Lint和Test相关的task, 以加速编译
+    if (isDebug()) {
+        gradle.taskGraph.whenReady {
+            tasks.each { task ->
+                if (task.name.contains("Test") || task.name.contains("Lint")) {
+                    task.enabled = false
+                }
+            }
+        }
     }
 
 

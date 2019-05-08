@@ -45,10 +45,12 @@ public class APP extends BaseApp {
   }
 
   private String getBaseUrl() {
-    if (DEBUG) {
+    if (APP.NET_TYPE == 1) {
+      return "http://api.jmwhapp.com";
+    } else if (APP.NET_TYPE == 2) {
       return "http://api.jmwhapp.com";
     } else {
-      return "http://39.96.169.148";
+      return "http://api.jmwhapp.com";
     }
   }
 

@@ -1,7 +1,10 @@
 package com.qsd.jmwh.module.splash;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -58,8 +61,20 @@ public class SplashActivity extends BaseActivity
     bindView(R.id.register, this);
     bindView(R.id.wechat_login, this);
     bindView(R.id.qq_login, this);
+    bindText(R.id.app_name,getAppName(this));
     mAuthLoginHelp = new AuthLoginHelp(getActivity());
     mAuthLoginHelp.callback(this);
+  }
+
+  public static String getAppName(Context context) {
+    PackageInfo pkg = null;
+    try {
+      pkg = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+      return pkg.applicationInfo.loadLabel(context.getPackageManager()).toString();
+    } catch (PackageManager.NameNotFoundException e) {
+      e.printStackTrace();
+    }
+    return "";
   }
 
   @Override public void onClick(View v) {
