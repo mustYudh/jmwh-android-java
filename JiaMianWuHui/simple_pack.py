@@ -11,7 +11,6 @@ apk_name="app-release.apk"
 print "脚本名：", sys.argv[0]
 
 _clean = False;
-_jenkins = False;
 _install = False;
 
 _api_mode="DEV";
@@ -27,12 +26,10 @@ for i in range(1, len(sys.argv)):
         _clean = True;
     if (sys.argv[i]=="install"):
         _install = True;
-    if (sys.argv[i]=="jenkins"):
-        _jenkins = True;
 
 gradleOrder="./gradlew clean assembleJmwhRelease -PAPI_MODE="+_api_mode;
 
-print "环境参数 ", " api_mode=",_api_mode, " clean=",_clean, "install=",_install,"jenkins=",_jenkins
+print "环境参数 ", " api_mode=",_api_mode, " clean=",_clean, "install=",_install
 
 
 def removeFilesStartsWith(dir,str):
@@ -52,8 +49,6 @@ removeFilesStartsWith(apks_release_dir,"app-")
 if _clean==True:
     sys.exit(0)
 
-if _jenkins==True:
-    sys.exit(0)
 
 
 
