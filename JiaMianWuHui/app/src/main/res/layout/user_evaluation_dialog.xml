@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:background="#A6000000"
+    android:gravity="center"
+    >
+
+    <LinearLayout
+        android:background="@drawable/shape_app_whit_bg_radious8"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.yu.common.ui.DelayClickImageView
+            android:id="@+id/close"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="right"
+            android:src="@drawable/ic_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.qsd.jmwh.view.CircleImageView
+            android:id="@+id/header"
+            android:layout_gravity="center"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            />
+
+
+        <TextView
+            android:id="@+id/sNickName"
+            android:layout_marginTop="14dp"
+            tools:text="桃花盛开的地方"
+            android:textColor="@color/color_222222"
+            android:textSize="17sp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:text="他的真实评价"
+            android:layout_gravity="center"
+            android:textColor="@color/color_999999"
+            android:textSize="13sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <GridView
+            android:numColumns="4"
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="196dp">
+
+        </GridView>
+
+
+        <com.yu.common.ui.DelayClickTextView
+            android:id="@+id/login"
+            android:layout_marginBottom="30dp"
+            style="@style/app_blue_button"
+            android:layout_marginTop="35dp"
+            android:text="评价他"
+            />
+
+
+    </LinearLayout>
+
+</LinearLayout>

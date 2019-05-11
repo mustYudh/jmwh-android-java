@@ -16,6 +16,7 @@ import com.qsd.jmwh.module.home.park.adapter.UserPhotoAdapter;
 import com.qsd.jmwh.module.home.park.bean.OtherUserInfoBean;
 import com.qsd.jmwh.module.home.park.presenter.LookUserInfoPresenter;
 import com.qsd.jmwh.module.home.park.presenter.LookUserInfoViewer;
+import com.qsd.jmwh.module.home.user.dialog.EvaluationDialog;
 import com.qsd.jmwh.view.NormaFormItemVIew;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.utils.ImageLoader;
@@ -26,6 +27,8 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
 
     @PresenterLifeCycle
     private LookUserInfoPresenter mPresenter = new LookUserInfoPresenter(this);
+    private String sNickName;
+    private String header;
 
     private final static String USER_ID = "user_id";
 
@@ -48,6 +51,7 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
 
     private void initListener() {
         bindView(R.id.back, this);
+        bindView(R.id.evaluation, this);
     }
 
     @Override
@@ -67,6 +71,9 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
             bindView(R.id.social_account, false);
         }
         ImageLoader.loadCenterCrop(getActivity(), userData.sUserHeadPic, bindView(R.id.header));
+        header = userData.sUserHeadPic;
+        sNickName = userData.sNickName;
+
         ImageLoader.blurTransformation(getActivity(), userData.sUserHeadPic, bindView(R.id.header_bg),4,10);
         bindText(R.id.sNickName, userData.sNickName);
         NormaFormItemVIew height = bindView(R.id.height);
@@ -107,6 +114,10 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
         switch (v.getId()) {
             case R.id.back:
                 finish();
+                break;
+            case R.id.evaluation:
+                EvaluationDialog evaluationDialog = new EvaluationDialog(getActivity(),header,sNickName);
+                evaluationDialog.showPopupWindow();
                 break;
         }
     }

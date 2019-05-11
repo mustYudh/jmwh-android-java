@@ -60,7 +60,7 @@ public class UserCenterInfo implements Serializable {
          * nMaskBallCoin : 1000
          */
 
-        public int nMoney;
+//        public int nMoney;
         public int nMaskBallCoin;
 
 
