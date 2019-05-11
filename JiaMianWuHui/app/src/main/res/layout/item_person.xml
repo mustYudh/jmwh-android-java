@@ -29,11 +29,11 @@
             >
 
             <com.yu.common.ui.DelayClickTextView
+                android:id="@+id/tv_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
                 android:text="曾经是好女孩"
-                android:id="@+id/tv_user_name"
                 android:textColor="#ff222222"
                 android:textSize="15sp"
                 />
@@ -117,11 +117,21 @@
 
     </LinearLayout>
 
-    <com.yu.common.ui.DelayClickImageView
-        android:layout_width="15dp"
-        android:layout_height="14dp"
+    <RelativeLayout
+        android:id="@+id/rl_love"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginRight="18dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/collect_select"/>
+        >
+
+        <com.yu.common.ui.DelayClickImageView
+            android:id="@+id/iv_love"
+            android:layout_width="15dp"
+            android:layout_height="14dp"
+            android:layout_centerInParent="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/collect_select"/>
+
+    </RelativeLayout>
+
 </LinearLayout>

@@ -2,6 +2,7 @@ package com.qsd.jmwh.module.home.park.adapter;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -9,6 +10,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.module.home.user.bean.MineLikeBean;
 import com.qsd.jmwh.view.CircleImageView;
+import com.yu.common.ui.DelayClickImageView;
 import com.yu.common.ui.DelayClickTextView;
 
 import java.util.List;
@@ -27,7 +29,7 @@ public class MineLikeRvAdapter extends BaseQuickAdapter<MineLikeBean.CdoListBean
         DelayClickTextView tv_online = helper.getView(R.id.tv_online);
         Glide.with(context).load(item.sUserHeadPic).into(iv_headimg);
         helper.setText(R.id.tv_user_name, item.sNickName);
-//        helper.setText(R.id.tv_photo_num, item.nGalaryCapacity + "");
+        helper.setText(R.id.tv_photo_num, item.nGalaryCapacity + "");
         if (item.distance_um >= 1000) {
             helper.setText(R.id.tv_middle, item.sDateRange + " · " + item.sJob + " · " + item.sAge + " · " + (item.distance_um / 1000) + "km");
         } else {
@@ -43,14 +45,39 @@ public class MineLikeRvAdapter extends BaseQuickAdapter<MineLikeBean.CdoListBean
         }
 
         DelayClickTextView tv_auth_type = helper.getView(R.id.tv_auth_type);
-//        if (item.nAuthType == 1) {
-//            //已认证
-//            helper.setText(R.id.tv_auth_type, "真实");
-//            tv_auth_type.setBackground(context.getResources().getDrawable(R.drawable.shape_home_person));
-//        } else {
-//            //未认证
-//            helper.setText(R.id.tv_auth_type, "未认证");
-//            tv_auth_type.setBackground(context.getResources().getDrawable(R.drawable.shape_home_person_no));
-//        }
+        if (item.nAuthType == 1) {
+            //已认证
+            helper.setText(R.id.tv_auth_type, "真实");
+            tv_auth_type.setBackground(context.getResources().getDrawable(R.drawable.shape_home_person));
+        } else {
+            //未认证
+            helper.setText(R.id.tv_auth_type, "未认证");
+            tv_auth_type.setBackground(context.getResources().getDrawable(R.drawable.shape_home_person_no));
+        }
+
+        DelayClickImageView iv_love = helper.getView(R.id.iv_love);
+        if (item.blove) {
+            iv_love.setImageResource(R.drawable.collect_select);
+        } else {
+            iv_love.setImageResource(R.drawable.collect);
+        }
+        helper.getView(R.id.rl_love).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onMineLikeItemClickListener != null) {
+                    onMineLikeItemClickListener.setOnMineLikeItemClick(iv_love, helper.getLayoutPosition(), item.blove, item.lUserId + "");
+                }
+            }
+        });
+    }
+
+    public interface OnMineLikeItemClickListener {
+        void setOnMineLikeItemClick(DelayClickImageView iv_love, int position, boolean is_love, String lLoveUserId);
+    }
+
+    OnMineLikeItemClickListener onMineLikeItemClickListener;
+
+    public void setOnPersonItemClickListener(OnMineLikeItemClickListener onMineLikeItemClickListener) {
+        this.onMineLikeItemClickListener = onMineLikeItemClickListener;
     }
 }

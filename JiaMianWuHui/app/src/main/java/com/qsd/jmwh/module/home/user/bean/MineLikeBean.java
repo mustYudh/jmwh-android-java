@@ -37,5 +37,9 @@ public class MineLikeBean implements Serializable {
         public int nOnLine;
         public String dOffLineTime;
         public int distance_um;
+        public int nAuthType;
+        public int nGalaryCapacity;
+        public boolean blove;
+        public boolean is_black;
     }
 }
