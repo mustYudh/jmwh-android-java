@@ -110,7 +110,7 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
         bindView(R.id.empty_view, list.size() == 0);
         GridView gridView = bindView(R.id.user_center_photo, list.size() > 0);
         boolean isOpen = userCenterInfo.bOpenImg || userCenterInfo.bVIP;
-        gridView.setAdapter(new UserPhotoAdapter(list, isOpen));
+        gridView.setAdapter(new UserPhotoAdapter(list, isOpen,userCenterInfo.bVIP));
         bindView(R.id.unlock_all_photo_root, !userCenterInfo.bOpenImg && !userCenterInfo.bVIP);
         bindText(R.id.dGalaryVal, "解锁相册" + userData.dGalaryVal + "假面币，会员免费");
         bindView(R.id.dGalaryVal, this);

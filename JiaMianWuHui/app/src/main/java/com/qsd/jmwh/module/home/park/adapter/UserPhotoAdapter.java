@@ -17,10 +17,12 @@ import java.util.ArrayList;
 
 public class UserPhotoAdapter extends BasicAdapter<OtherUserInfoBean.CdoFileListDataBean> {
     private boolean isOpenAll = true;
+    private boolean isVip;
 
-    public UserPhotoAdapter(ArrayList<OtherUserInfoBean.CdoFileListDataBean> list, boolean isOpenAll) {
+    public UserPhotoAdapter(ArrayList<OtherUserInfoBean.CdoFileListDataBean> list, boolean isOpenAll,boolean isVip) {
         super(list);
         this.isOpenAll = isOpenAll;
+        this.isVip = isVip;
     }
 
     @Override
@@ -59,7 +61,7 @@ public class UserPhotoAdapter extends BasicAdapter<OtherUserInfoBean.CdoFileList
                         }
 
                     }
-                    userPic.setOnClickListener(v -> LauncherHelper.from(context).startActivity(LookPhotoActivity.getIntent(context, data)));
+                    userPic.setOnClickListener(v -> LauncherHelper.from(context).startActivity(LookPhotoActivity.getIntent(context, data,isVip)));
                 } else {
                     ImageLoader.blurTransformation(userPic.getContext(), data.sFileUrl, userPic);
                 }

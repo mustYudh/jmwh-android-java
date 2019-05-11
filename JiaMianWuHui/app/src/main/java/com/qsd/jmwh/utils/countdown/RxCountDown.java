@@ -61,7 +61,7 @@ public class RxCountDown {
     }
 
 
-    public void restart(int time,boolean restart) {
+    public void restart(int time, boolean restart) {
         isStart = !restart;
         start(time);
     }
@@ -120,13 +120,22 @@ public class RxCountDown {
         }
     }
 
+
+    public boolean isStop() {
+        return stop;
+    }
+
     public void stop() {
-        if (!stop && timeListener != null) {
-            timeListener = null;
-        }
         if (getDisposable() != null && !getDisposable().isDisposed()) {
             getDisposable().dispose();
         }
         isStart = false;
+        if (timeListener != null) {
+            timeListener.onComplete();
+        }
+        stop = true;
+        if (timeListener != null) {
+            timeListener = null;
+        }
     }
 }

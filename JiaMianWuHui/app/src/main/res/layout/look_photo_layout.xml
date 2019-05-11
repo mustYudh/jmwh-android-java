@@ -25,6 +25,7 @@
             android:paddingRight="20dp">
 
             <ImageView
+                android:id="@+id/back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -87,7 +88,7 @@
                 android:textSize="18sp"/>
 
             <TextView
-                android:id="@+id/hint"
+                android:id="@+id/vip_hint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -96,7 +97,7 @@
                 android:textSize="14sp"/>
 
             <com.yu.common.ui.DelayClickTextView
-                android:id="@+id/pay_btn"
+                android:id="@+id/buy_vip"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="41dp"
