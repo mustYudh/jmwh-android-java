@@ -66,6 +66,7 @@
                     android:layout_height="wrap_content"/>
 
                 <com.yu.common.ui.DelayClickTextView
+                    android:id="@+id/dGalaryVal"
                     android:textSize="15sp"
                     android:textColor="@color/app_main_color"
                     android:gravity="center"

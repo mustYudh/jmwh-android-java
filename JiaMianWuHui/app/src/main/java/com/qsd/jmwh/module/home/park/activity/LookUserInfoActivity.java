@@ -12,12 +12,15 @@ import android.widget.ImageView;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseActivity;
 import com.qsd.jmwh.data.UserProfile;
+import com.qsd.jmwh.dialog.SelectHintPop;
 import com.qsd.jmwh.module.home.park.adapter.UserPhotoAdapter;
 import com.qsd.jmwh.module.home.park.bean.OtherUserInfoBean;
 import com.qsd.jmwh.module.home.park.presenter.LookUserInfoPresenter;
 import com.qsd.jmwh.module.home.park.presenter.LookUserInfoViewer;
 import com.qsd.jmwh.module.home.user.dialog.EvaluationDialog;
+import com.qsd.jmwh.module.register.ToByVipActivity;
 import com.qsd.jmwh.view.NormaFormItemVIew;
+import com.yu.common.launche.LauncherHelper;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.utils.ImageLoader;
 
@@ -29,6 +32,8 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
     private LookUserInfoPresenter mPresenter = new LookUserInfoPresenter(this);
     private String sNickName;
     private String header;
+    private int userID;
+    private int dGalaryVal;
 
     private final static String USER_ID = "user_id";
 
@@ -46,6 +51,7 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
     @Override
     protected void loadData() {
         initListener();
+        userID = getIntent().getIntExtra(USER_ID, -1);
         mPresenter.getUserInfo(getIntent().getIntExtra(USER_ID, -1), UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng());
     }
 
@@ -74,7 +80,7 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
         header = userData.sUserHeadPic;
         sNickName = userData.sNickName;
 
-        ImageLoader.blurTransformation(getActivity(), userData.sUserHeadPic, bindView(R.id.header_bg),4,10);
+        ImageLoader.blurTransformation(getActivity(), userData.sUserHeadPic, bindView(R.id.header_bg), 4, 10);
         bindText(R.id.sNickName, userData.sNickName);
         NormaFormItemVIew height = bindView(R.id.height);
         height.setContentText(userData.sHeight);
@@ -92,7 +98,7 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
         if (authType == 0) {
             result = R.drawable.ic_not_auth;
         } else if (authType == 3) {
-            bindView(R.id.video_auth,true);
+            bindView(R.id.video_auth, true);
             result = R.drawable.ic_video_auth;
         } else {
             result = R.drawable.ic_info_auth;
@@ -103,11 +109,14 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
         ArrayList<OtherUserInfoBean.CdoFileListDataBean> list = userCenterInfo.cdoFileListData;
         bindView(R.id.empty_view, list.size() == 0);
         GridView gridView = bindView(R.id.user_center_photo, list.size() > 0);
-        gridView.setAdapter(new UserPhotoAdapter(list,userCenterInfo.bOpenImg));
-        bindView(R.id.unlock_all_photo_root,!userCenterInfo.bOpenImg);
-
-
+        boolean isOpen = userCenterInfo.bOpenImg || userCenterInfo.bVIP;
+        gridView.setAdapter(new UserPhotoAdapter(list, isOpen));
+        bindView(R.id.unlock_all_photo_root, !userCenterInfo.bOpenImg && !userCenterInfo.bVIP);
+        bindText(R.id.dGalaryVal, "解锁相册" + userData.dGalaryVal + "假面币，会员免费");
+        bindView(R.id.dGalaryVal, this);
+        dGalaryVal = userData.dGalaryVal;
     }
+
 
     @Override
     public void onClick(View v) {
@@ -116,9 +125,29 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
                 finish();
                 break;
             case R.id.evaluation:
-                EvaluationDialog evaluationDialog = new EvaluationDialog(getActivity(),header,sNickName);
+                EvaluationDialog evaluationDialog = new EvaluationDialog(getActivity(), header, sNickName, userID);
                 evaluationDialog.showPopupWindow();
                 break;
+            case R.id.dGalaryVal:
+                SelectHintPop selectHintPop = new SelectHintPop(getActivity());
+                selectHintPop.setTitle("解锁付费相册")
+                        .setPositiveButton("成为会员，免费解锁相册", v1 -> {
+                            LauncherHelper.from(getActivity()).startActivity(ToByVipActivity
+                                    .getIntent(getActivity(), UserProfile.getInstance().getAppAccount(),
+                                            UserProfile.getInstance().getAppToken(), false));
+                            selectHintPop.dismiss();
+                        }).setNegativeButton("付费解锁 (" + dGalaryVal + "假面币)", v12 -> {
+                    mPresenter.buyGalleryPay(userID, dGalaryVal);
+                    selectHintPop.dismiss();
+                }).setBottomButton("取消", v13 -> selectHintPop.dismiss());
+                selectHintPop.showPopupWindow();
+                break;
         }
+    }
+
+
+    @Override
+    public void refreshData() {
+        loadData();
     }
 }

@@ -17,7 +17,8 @@ import java.util.ArrayList;
 
 public class UserPhotoAdapter extends BasicAdapter<OtherUserInfoBean.CdoFileListDataBean> {
     private boolean isOpenAll = true;
-    public UserPhotoAdapter(ArrayList<OtherUserInfoBean.CdoFileListDataBean> list,boolean isOpenAll) {
+
+    public UserPhotoAdapter(ArrayList<OtherUserInfoBean.CdoFileListDataBean> list, boolean isOpenAll) {
         super(list);
         this.isOpenAll = isOpenAll;
     }
@@ -36,15 +37,27 @@ public class UserPhotoAdapter extends BasicAdapter<OtherUserInfoBean.CdoFileList
                         ImageLoader.loadCenterCrop(userPic.getContext(), data.sFileUrl, userPic);
                     } else if (data.nFileType == 1) {
                         photoBg.setVisibility(View.VISIBLE);
-                        photoBg.setImageResource(R.drawable.ic_destroy_img_bg);
                         ImageLoader.blurTransformation(userPic.getContext(), data.sFileUrl, userPic);
-                        hint.setText("阅后即焚\n照片");
+                        if (data.bView == 0) {
+                            photoBg.setImageResource(R.drawable.ic_destroy_photo);
+                            hint.setText("照片已焚毁");
+                        } else {
+                            photoBg.setImageResource(R.drawable.ic_destroy_img_bg);
+                            hint.setText("阅后即焚\n照片");
+                        }
+
                     }
                     if (data.nFileType == 2) {
                         photoBg.setVisibility(View.VISIBLE);
-                        photoBg.setImageResource(R.drawable.ic_red_bag_bg);
                         ImageLoader.blurTransformation(userPic.getContext(), data.sFileUrl, userPic);
-                        hint.setText("阅后即焚的\n红包照片");
+                        if (data.bView == 0) {
+                            photoBg.setImageResource(R.drawable.ic_destroy_photo);
+                            hint.setText("照片已焚毁");
+                        } else {
+                            photoBg.setImageResource(R.drawable.ic_red_bag_bg);
+                            hint.setText("阅后即焚的\n红包照片");
+                        }
+
                     }
                     userPic.setOnClickListener(v -> LauncherHelper.from(context).startActivity(LookPhotoActivity.getIntent(context, data)));
                 } else {

@@ -56,10 +56,19 @@
 
 
         <GridView
+            android:listSelector="@android:color/transparent"
+            android:layout_marginTop="15dp"
+            android:horizontalSpacing="5dp"
+            android:verticalSpacing="12dp"
+            android:layout_marginLeft="33dp"
+            android:layout_marginRight="33dp"
             android:numColumns="4"
             android:id="@+id/list"
+            android:background="@color/transparent"
+            android:scrollbars="none"
+            android:overScrollMode="never"
             android:layout_width="match_parent"
-            android:layout_height="196dp">
+            android:layout_height="145dp">
 
         </GridView>
 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+
+    <com.yu.common.ui.DelayClickTextView
+        android:id="@+id/count"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:background="@drawable/select_evaluation"
+        android:layout_width="55dp"
+        android:layout_height="36dp"/>
+
+    <TextView
+        android:id="@+id/evaluation"
+        android:textColor="@color/color_222222"
+        android:textSize="13sp"
+        android:layout_marginTop="13dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
