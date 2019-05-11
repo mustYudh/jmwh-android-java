@@ -2,6 +2,7 @@ package com.qsd.jmwh.module.home.park.adapter;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -9,6 +10,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.module.home.park.bean.HomePersonListBean;
 import com.qsd.jmwh.view.CircleImageView;
+import com.yu.common.ui.DelayClickImageView;
 import com.yu.common.ui.DelayClickTextView;
 
 import java.util.List;
@@ -29,15 +31,15 @@ public class PersonRvAdapter extends BaseQuickAdapter<HomePersonListBean.CdoList
         helper.setText(R.id.tv_user_name, item.sNickName);
         helper.setText(R.id.tv_photo_num, item.nGalaryCapacity + "");
         if (item.distance_um >= 1000) {
-            if (item.bHiddenRang){
+            if (item.bHiddenRang) {
                 helper.setText(R.id.tv_middle, item.sDateRange + " · " + item.sJob + " · " + item.sAge);
-            }else {
+            } else {
                 helper.setText(R.id.tv_middle, item.sDateRange + " · " + item.sJob + " · " + item.sAge + " · " + (item.distance_um / 1000) + "km");
             }
         } else {
-            if (item.bHiddenRang){
+            if (item.bHiddenRang) {
                 helper.setText(R.id.tv_middle, item.sDateRange + " · " + item.sJob + " · " + item.sAge);
-            }else {
+            } else {
                 helper.setText(R.id.tv_middle, item.sDateRange + " · " + item.sJob + " · " + item.sAge + " · " + item.distance_um + "m");
             }
         }
@@ -45,7 +47,7 @@ public class PersonRvAdapter extends BaseQuickAdapter<HomePersonListBean.CdoList
             //在线
             tv_online.setText("当前在线");
             tv_online.setTextColor(context.getResources().getColor(R.color.app_main_color));
-        } else if (item.nOnLine == 1){
+        } else if (item.nOnLine == 1) {
             tv_online.setText("当前在线");
             tv_online.setTextColor(context.getResources().getColor(R.color.color_666666));
         }
@@ -60,5 +62,33 @@ public class PersonRvAdapter extends BaseQuickAdapter<HomePersonListBean.CdoList
             helper.setText(R.id.tv_auth_type, "未认证");
             tv_auth_type.setBackground(context.getResources().getDrawable(R.drawable.shape_home_person_no));
         }
+
+        DelayClickImageView iv_love = helper.getView(R.id.iv_love);
+        if (item.blove) {
+            iv_love.setImageResource(R.drawable.collect_select);
+        } else {
+            iv_love.setImageResource(R.drawable.collect);
+        }
+        helper.getView(R.id.rl_love).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onPersonItemClickListener != null) {
+                    onPersonItemClickListener.setOnPersonItemClick(iv_love, helper.getLayoutPosition(), item.blove, item.lUserId + "");
+                }
+            }
+        });
     }
+
+    public interface OnPersonItemClickListener {
+        void setOnPersonItemClick(DelayClickImageView iv_love, int position, boolean is_love, String lLoveUserId);
+    }
+
+    OnPersonItemClickListener onPersonItemClickListener;
+
+    public void setOnPersonItemClickListener(OnPersonItemClickListener onPersonItemClickListener) {
+        this.onPersonItemClickListener = onPersonItemClickListener;
+    }
+
+
 }
+

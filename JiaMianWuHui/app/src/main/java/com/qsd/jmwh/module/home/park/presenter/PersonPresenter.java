@@ -7,6 +7,7 @@ import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.home.park.bean.HomePersonListBean;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.framework.BaseViewPresenter;
+import com.yu.common.ui.DelayClickImageView;
 
 public class PersonPresenter extends BaseViewPresenter<PersonViewer> {
     public PersonPresenter(PersonViewer viewer) {
@@ -22,6 +23,19 @@ public class PersonPresenter extends BaseViewPresenter<PersonViewer> {
                     protected void onSuccess(HomePersonListBean homePersonListBean) {
                         assert getViewer() != null;
                         getViewer().getDataSuccess(homePersonListBean);
+                    }
+                });
+    }
+
+    @SuppressLint("CheckResult")
+    public void initAddLoveUser(String lLoveUserId, String nType, boolean is_love, int position, DelayClickImageView iv_love) {
+        XHttpProxy.proxy(ApiServices.class)
+                .addLoveUser(lLoveUserId, nType, is_love)
+                .subscribeWith(new TipRequestSubscriber<Object>() {
+                    @Override
+                    protected void onSuccess(Object o) {
+                        assert getViewer() != null;
+                        getViewer().addLoveUserSuccess(is_love, position,iv_love);
                     }
                 });
     }
