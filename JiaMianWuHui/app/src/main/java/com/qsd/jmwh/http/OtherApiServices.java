@@ -19,4 +19,8 @@ public interface OtherApiServices {
     @NetMethod(ParameterNames = {"lBuyImgId","nPayVal","nPayType"},Url = "/OrderService/getBuyImgPaySign")
     Observable<Object> getBuyImgPaySign(int lBuyImgId,int nPayVal,int nPayType);
 
+
+
+    @NetMethod(ParameterNames = {"lBuyOtherUserId","nPayType","nPayVal"},Url = "/OrderService/getBuyContactPaySign")
+    Observable<Object> getBuyContactPaySign(int lBuyOtherUserId,int nPayType,int nPayVal);
 }

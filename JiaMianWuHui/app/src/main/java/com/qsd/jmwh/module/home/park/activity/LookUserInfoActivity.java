@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -13,6 +14,7 @@ import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseActivity;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.dialog.SelectHintPop;
+import com.qsd.jmwh.dialog.ShareDialog;
 import com.qsd.jmwh.module.home.park.adapter.UserPhotoAdapter;
 import com.qsd.jmwh.module.home.park.bean.OtherUserInfoBean;
 import com.qsd.jmwh.module.home.park.presenter.LookUserInfoPresenter;
@@ -22,6 +24,7 @@ import com.qsd.jmwh.module.register.ToByVipActivity;
 import com.qsd.jmwh.view.NormaFormItemVIew;
 import com.yu.common.launche.LauncherHelper;
 import com.yu.common.mvp.PresenterLifeCycle;
+import com.yu.common.toast.ToastUtils;
 import com.yu.common.utils.ImageLoader;
 
 import java.util.ArrayList;
@@ -32,6 +35,7 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
     private LookUserInfoPresenter mPresenter = new LookUserInfoPresenter(this);
     private String sNickName;
     private String header;
+    private boolean isVip;
     private int userID;
     private int dGalaryVal;
 
@@ -58,23 +62,43 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
     private void initListener() {
         bindView(R.id.back, this);
         bindView(R.id.evaluation, this);
+        bindView(R.id.social_account, this);
+        bindView(R.id.chat, this);
+        bindView(R.id.share, this);
     }
 
     @Override
     public void setUserInfo(OtherUserInfoBean userCenterInfo) {
         OtherUserInfoBean.CdoUserDataBean userData = userCenterInfo.cdoUserData;
+        isVip = userCenterInfo.bVIP;
+        int nSubViewUserCount = userCenterInfo.nSubViewUserCount;
+        if (nSubViewUserCount <= 3) {
+            SelectHintPop hint = new SelectHintPop(this);
+            hint.setTitle("查看人数提示")
+                    .setMessage("你今天还能查看" + nSubViewUserCount + "位女士，非会员用户每天只能查看10位女士。")
+                    .setPositiveButton("升级会员", v1 -> {
+                        buyVip();
+                        hint.dismiss();
+                    })
+                    .setNegativeButton("继续查看", v12 -> hint.dismiss())
+                    .showPopupWindow();
+        }
         NormaFormItemVIew bust = bindView(R.id.bust);
         if (userData.nSex == 0) {
             bust.setContentText(userData.sBust);
-            NormaFormItemVIew qq = bindView(R.id.qq);
-            qq.setContent(userData.QQ);
-            NormaFormItemVIew wechat = bindView(R.id.wechat);
-            wechat.setContent(userData.WX);
+            NormaFormItemVIew qq = bindView(R.id.qq, this);
+            qq.setContent(isVip ? userData.QQ : "已填写，点击查看");
+            NormaFormItemVIew weChat = bindView(R.id.wechat, this);
+            weChat.setContent(isVip ? userData.WX : "已填写，点击查看");
+            bindView(R.id.social_account,
+                    (!TextUtils.isEmpty(userData.QQ) || !TextUtils.isEmpty(userData.WX))
+                            && UserProfile.getInstance().getAppAccount() != userID);
         } else {
             bindView(R.id.bust, false);
             bindView(R.id.qq, false);
             bindView(R.id.we_chat, false);
             bindView(R.id.social_account, false);
+            bindView(R.id.chat, false);
         }
         ImageLoader.loadCenterCrop(getActivity(), userData.sUserHeadPic, bindView(R.id.header));
         header = userData.sUserHeadPic;
@@ -109,9 +133,9 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
         ArrayList<OtherUserInfoBean.CdoFileListDataBean> list = userCenterInfo.cdoFileListData;
         bindView(R.id.empty_view, list.size() == 0);
         GridView gridView = bindView(R.id.user_center_photo, list.size() > 0);
-        boolean isOpen = userCenterInfo.bOpenImg || userCenterInfo.bVIP;
-        gridView.setAdapter(new UserPhotoAdapter(list, isOpen,userCenterInfo.bVIP));
-        bindView(R.id.unlock_all_photo_root, !userCenterInfo.bOpenImg && !userCenterInfo.bVIP);
+        boolean isOpen = userCenterInfo.bOpenImg || isVip;
+        gridView.setAdapter(new UserPhotoAdapter(list, isOpen, isVip));
+        bindView(R.id.unlock_all_photo_root, !userCenterInfo.bOpenImg && !isVip);
         bindText(R.id.dGalaryVal, "解锁相册" + userData.dGalaryVal + "假面币，会员免费");
         bindView(R.id.dGalaryVal, this);
         dGalaryVal = userData.dGalaryVal;
@@ -132,9 +156,7 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
                 SelectHintPop selectHintPop = new SelectHintPop(getActivity());
                 selectHintPop.setTitle("解锁付费相册")
                         .setPositiveButton("成为会员，免费解锁相册", v1 -> {
-                            LauncherHelper.from(getActivity()).startActivity(ToByVipActivity
-                                    .getIntent(getActivity(), UserProfile.getInstance().getAppAccount(),
-                                            UserProfile.getInstance().getAppToken(), false));
+                            buyVip();
                             selectHintPop.dismiss();
                         }).setNegativeButton("付费解锁 (" + dGalaryVal + "假面币)", v12 -> {
                     mPresenter.buyGalleryPay(userID, dGalaryVal);
@@ -142,7 +164,53 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
                 }).setBottomButton("取消", v13 -> selectHintPop.dismiss());
                 selectHintPop.showPopupWindow();
                 break;
+            case R.id.chat:
+                if (userID == UserProfile.getInstance().getAppAccount()) {
+                    ToastUtils.show("不能私信自己");
+                } else {
+
+                }
+                break;
+            case R.id.qq:
+                toChat();
+                break;
+            case R.id.wechat:
+                toChat();
+                break;
+            case R.id.social_account:
+                toChat();
+                break;
+            case R.id.share:
+                ShareDialog shareDialog = new ShareDialog(getActivity());
+                shareDialog.showPopupWindow();
+                break;
         }
+    }
+
+    private void toChat() {
+        if (!isVip) {
+            SelectHintPop hint = new SelectHintPop(this);
+            hint.setTitle("联系她")
+                    .setMessage("查看 " + sNickName + " 的全部资料和私聊她")
+                    .setPositiveButton("成为会员 免费私聊", v1 -> {
+                        buyVip();
+                        hint.dismiss();
+                    })
+                    .setNegativeButton("付费查看和私聊 (10假面币)", v12 -> {
+                        mPresenter.buyContactPay(userID);
+                        hint.dismiss();
+                    }).setBottomButton("取消", v13 -> hint.dismiss())
+                    .showPopupWindow();
+        } else {
+            ToastUtils.show("私信");
+        }
+    }
+
+
+    private void buyVip() {
+        LauncherHelper.from(getActivity()).startActivity(ToByVipActivity
+                .getIntent(getActivity(), UserProfile.getInstance().getAppAccount(),
+                        UserProfile.getInstance().getAppToken(), false));
     }
 
 

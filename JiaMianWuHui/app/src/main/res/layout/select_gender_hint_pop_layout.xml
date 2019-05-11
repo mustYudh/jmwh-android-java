@@ -12,8 +12,8 @@
         />
 
     <LinearLayout
-        android:layout_marginLeft="53dp"
-        android:layout_marginRight="53dp"
+        android:layout_marginLeft="43dp"
+        android:layout_marginRight="43dp"
         android:layout_centerVertical="true"
         android:id="@+id/base_container"
         android:layout_width="match_parent"

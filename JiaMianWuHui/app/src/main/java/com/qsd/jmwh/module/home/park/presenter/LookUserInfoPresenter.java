@@ -44,4 +44,16 @@ public class LookUserInfoPresenter extends BaseViewPresenter<LookUserInfoViewer>
     }
 
 
+    public void buyContactPay(int lBuyOtherUserId) {
+        XHttpProxy.proxy(OtherApiServices.class)
+                .getBuyContactPaySign(lBuyOtherUserId,5,10).subscribeWith(new TipRequestSubscriber<Object>() {
+            @Override
+            protected void onSuccess(Object o) {
+                assert getViewer() != null;
+                getViewer().refreshData();
+            }
+        });
+    }
+
+
 }
