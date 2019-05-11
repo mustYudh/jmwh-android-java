@@ -1,59 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/white"
-    android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="48dp">
-
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@color/white">
 
 
     <com.yu.common.ui.DelayClickTextView
-        android:textSize="14sp"
+        android:id="@+id/left_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:text="最新发布"
-        android:textColor="@color/app_main_bg_color"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"/>
-
+        android:text="最新发布"
+        android:textColor="@color/app_main_bg_color"
+        android:textSize="14sp"/>
 
 
     <LinearLayout
-        android:maxWidth="195dp"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:gravity="center"
+        android:maxWidth="195dp"
         android:orientation="horizontal"
         >
+
         <TextView
-            android:gravity="center"
             android:id="@+id/title"
-            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:ellipsize="end"
+            android:gravity="center"
             android:maxLines="1"
             android:singleLine="true"
-            android:textColor="@color/color_222222"
             android:text="约会电台"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:textColor="@color/color_222222"
+            android:textSize="18sp"/>
 
     </LinearLayout>
 
 
-
     <com.yu.common.ui.DelayClickTextView
-        android:textColor="@color/app_main_bg_color"
-        android:textSize="14sp"
+        android:id="@+id/right_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:gravity="center"
-        android:text="确定"
-        android:id="@+id/right_menu"
-        android:paddingRight="15dp"
         android:paddingLeft="15dp"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"/>
+        android:paddingRight="15dp"
+        android:text="全部"
+        android:textColor="@color/app_main_bg_color"
+        android:textSize="14sp"/>
 
 </RelativeLayout>

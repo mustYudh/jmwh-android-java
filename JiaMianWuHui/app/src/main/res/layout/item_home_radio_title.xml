@@ -116,6 +116,7 @@
         <com.yu.common.ui.DelayClickImageView
             android:layout_width="13dp"
             android:layout_height="13dp"
+            android:layout_gravity="top"
             android:src="@drawable/liaotian"/>
 
         <com.yu.common.ui.DelayClickTextView
@@ -123,6 +124,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
+            android:includeFontPadding="false"
             android:text="夜蒲聚会 / 不限时间，上海市"
             android:textColor="#ff666666"
             android:textSize="14sp"
@@ -141,6 +143,7 @@
         <com.yu.common.ui.DelayClickImageView
             android:layout_width="13dp"
             android:layout_height="13dp"
+            android:layout_gravity="top"
             android:src="@drawable/zhuti"/>
 
         <com.yu.common.ui.DelayClickTextView
@@ -148,6 +151,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
+            android:includeFontPadding="false"
             android:text="大叔勿扰"
             android:textColor="#ff666666"
             android:textSize="14sp"

@@ -25,9 +25,22 @@ public class RadioPresenter extends BaseViewPresenter<RadioViewer> {
     }
 
     @SuppressLint("CheckResult")
-    public void initRadioData(String lUserId,String nLat, String nLng,String sDatingRange,String nTab, String pageindex, String nSex) {
+    public void initRadioData(String lUserId, double nLat, double nLng, String sDatingRange, String nTab, String pageindex, String nSex) {
         XHttpProxy.proxy(ApiServices.class)
-                .getRadioDate(lUserId,nLat, nLng, sDatingRange,nTab, pageindex, nSex)
+                .getRadioDate(lUserId, nLat, nLng, sDatingRange, nTab, pageindex, nSex)
+                .subscribeWith(new TipRequestSubscriber<HomeRadioListBean>() {
+                    @Override
+                    protected void onSuccess(HomeRadioListBean homeRadioListBean) {
+                        assert getViewer() != null;
+                        getViewer().getDataSuccess(homeRadioListBean);
+                    }
+                });
+    }
+
+    @SuppressLint("CheckResult")
+    public void initRadioDataAll(String lUserId, double nLat, double nLng, String sDatingRange, String nTab, String pageindex) {
+        XHttpProxy.proxy(ApiServices.class)
+                .getRadioDateAll(lUserId, nLat, nLng, sDatingRange, nTab, pageindex)
                 .subscribeWith(new TipRequestSubscriber<HomeRadioListBean>() {
                     @Override
                     protected void onSuccess(HomeRadioListBean homeRadioListBean) {

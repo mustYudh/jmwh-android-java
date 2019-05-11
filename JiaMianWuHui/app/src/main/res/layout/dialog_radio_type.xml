@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/white"
+              android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:visibility="visible">
+
+
+        <TextView
+            android:textStyle="bold"
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="选择排序条件"
+            android:textColor="@color/color_222222"
+            android:textSize="15sp"
+            />
+
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_EEEEEE"/>
+
+    <LinearLayout
+        android:id="@+id/ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:visibility="visible">
+
+
+        <TextView
+            android:id="@+id/tv_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="最新发布"
+            android:textColor="@color/color_222222"
+            android:textSize="15sp"
+            />
+
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_EEEEEE"/>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:visibility="visible">
+
+
+        <TextView
+            android:id="@+id/tv_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="最近约会"
+            android:textColor="@color/color_222222"
+            android:textSize="15sp"
+            />
+
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_EEEEEE"/>
+
+    <LinearLayout
+        android:id="@+id/ll_other"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:visibility="visible">
+
+
+        <TextView
+            android:id="@+id/tv_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="男士"
+            android:textColor="@color/color_222222"
+            android:textSize="15sp"
+            />
+
+
+    </LinearLayout>
+</LinearLayout>
