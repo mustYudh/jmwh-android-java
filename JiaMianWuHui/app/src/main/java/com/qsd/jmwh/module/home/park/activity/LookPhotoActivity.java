@@ -13,16 +13,26 @@ import android.widget.TextView;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseActivity;
 import com.qsd.jmwh.data.UserProfile;
+import com.qsd.jmwh.dialog.SelectHintPop;
 import com.qsd.jmwh.module.home.park.bean.OtherUserInfoBean;
+import com.qsd.jmwh.module.home.park.presenter.LookPhotoPresenter;
+import com.qsd.jmwh.module.home.park.presenter.LookPhotoViewer;
 import com.qsd.jmwh.module.register.ToByVipActivity;
 import com.qsd.jmwh.utils.countdown.RxCountDown;
 import com.qsd.jmwh.utils.countdown.RxCountDownAdapter;
 import com.yu.common.launche.LauncherHelper;
+import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.utils.ImageLoader;
 
-public class LookPhotoActivity extends BaseActivity {
+public class LookPhotoActivity extends BaseActivity implements LookPhotoViewer {
     private final static String DATA = "data";
     private final static String IS_VIP = "is_vip";
+    private ImageView photo;
+    private TextView timeText;
+    private TextView destroyTitle;
+    private String url;
+    @PresenterLifeCycle
+    private LookPhotoPresenter mPresenter = new LookPhotoPresenter(this);
     private RxCountDown rxCountDown = new RxCountDown();
 
     @Override
@@ -41,82 +51,96 @@ public class LookPhotoActivity extends BaseActivity {
     @Override
     protected void loadData() {
         OtherUserInfoBean.CdoFileListDataBean data = (OtherUserInfoBean.CdoFileListDataBean) getIntent().getSerializableExtra(DATA);
-        String url = data.sFileUrl;
+        url = data.sFileUrl;
         int type = data.nFileType;
-        ImageView photo = bindView(R.id.photo);
-        TextView timeText = bindView(R.id.right_menu);
-        TextView destroyTitle = bindView(R.id.title);
-        boolean isVip = getIntent().getBooleanExtra(IS_VIP, false);
+        photo = bindView(R.id.photo);
+        timeText = bindView(R.id.right_menu);
+        destroyTitle = bindView(R.id.title);
         if (type == 0) {
             bindView(R.id.destroy_img_toot, false);
             ImageLoader.loadCenterCrop(getActivity(), url, photo);
         } else if (type == 1) {
             showView(timeText, url, photo, false);
-            rxCountDown.setCountDownTimeListener(new RxCountDownAdapter() {
-                @Override
-                public void onStart() {
-                    super.onStart();
-                    showView(timeText, url, photo, true);
-                }
-
-                @SuppressLint("SetTextI18n")
-                @Override
-                public void onNext(Integer time) {
-                    super.onNext(time);
-                    timeText.setText(time + "S");
-                }
-
-                @Override
-                public void onError(Throwable e) {
-                    super.onError(e);
-                    showView(timeText, url, photo, false);
-
-                }
-
-                @Override
-                public void onComplete() {
-                    super.onComplete();
-                    showView(timeText, url, photo, false);
-                    destroyTitle.setText("照片已经焚毁");
-                    if (!isVip) {
-                        bindText(R.id.vip_hint,"会员可延长查看时间至6秒");
-                        bindView(R.id.buy_vip,true);
-                    } else {
-                        bindView(R.id.vip_hint,false);
-                    }
-                }
-            });
-            photo.setOnTouchListener((v, event) -> {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        rxCountDown.start(isVip ? 6 : 2);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        rxCountDown.stop();
-                        break;
-                    case MotionEvent.ACTION_CANCEL:
-                        rxCountDown.stop();
-                        break;
-                }
-                return true;
-            });
+            lookPhoto();
         } else if (type == 2) {
             ImageView imageView = bindView(R.id.destroy_root_bg, true);
             imageView.setImageResource(R.drawable.ic_red_bag_bg);
+            bindText(R.id.money, data.nFileFee + "");
             ImageLoader.blurTransformation(getActivity(), url, photo, 20, 3);
             bindView(R.id.red_bag_root, true);
 
         }
         bindView(R.id.back, v -> onBackPressed());
-        bindView(R.id.buy_vip, v ->
-                {
+        bindView(R.id.buy_vip, v -> {
                     LauncherHelper.from(getActivity()).startActivity(ToByVipActivity
                             .getIntent(getActivity(), UserProfile.getInstance().getAppAccount(),
                                     UserProfile.getInstance().getAppToken(), false));
                     finish();
                 }
-
         );
+        bindView(R.id.pay, v -> {
+            SelectHintPop pay = new SelectHintPop(this);
+            pay.setMessage("确认支付")
+                    .setPositiveButton("确定", v1 -> {
+                        mPresenter.pay(data.lFileId,data.nFileFee);
+                        pay.dismiss();
+                    })
+                    .setNegativeButton("取消", v12 -> pay.dismiss())
+                    .showPopupWindow();
+        });
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void lookPhoto() {
+        boolean isVip = getIntent().getBooleanExtra(IS_VIP, false);
+        rxCountDown.setCountDownTimeListener(new RxCountDownAdapter() {
+            @Override
+            public void onStart() {
+                super.onStart();
+                showView(timeText, url, photo, true);
+            }
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onNext(Integer time) {
+                super.onNext(time);
+                timeText.setText(time + "S");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                showView(timeText, url, photo, false);
+
+            }
+
+            @Override
+            public void onComplete() {
+                super.onComplete();
+                showView(timeText, url, photo, false);
+                destroyTitle.setText("照片已经焚毁");
+                if (!isVip) {
+                    bindText(R.id.vip_hint, "会员可延长查看时间至6秒");
+                    bindView(R.id.buy_vip, true);
+                } else {
+                    bindView(R.id.vip_hint, false);
+                }
+            }
+        });
+        photo.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    rxCountDown.start(isVip ? 6 : 2);
+                    break;
+                case MotionEvent.ACTION_UP:
+                    rxCountDown.stop();
+                    break;
+                case MotionEvent.ACTION_CANCEL:
+                    rxCountDown.stop();
+                    break;
+            }
+            return true;
+        });
     }
 
     private void showView(TextView timeText, String url, ImageView photo, boolean show) {
@@ -140,5 +164,12 @@ public class LookPhotoActivity extends BaseActivity {
         if (!rxCountDown.isStop()) {
             rxCountDown.stop();
         }
+    }
+
+    @Override
+    public void paySuccess() {
+        bindView(R.id.red_bag_root, false);
+        showView(timeText, url, photo, false);
+        lookPhoto();
     }
 }
