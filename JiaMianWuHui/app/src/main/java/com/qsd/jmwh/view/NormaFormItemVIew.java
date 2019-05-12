@@ -24,6 +24,7 @@ public class NormaFormItemVIew extends LinearLayout {
     private String mRightBtnText;
     private String textLength;
     private TextView content;
+    private View rootView;
 
     public NormaFormItemVIew(Context context) {
         super(context, null);
@@ -39,7 +40,7 @@ public class NormaFormItemVIew extends LinearLayout {
     }
 
     private void initView(Context context, AttributeSet attrs) {
-        LayoutInflater.from(context).inflate(R.layout.inflate_normal_item_layout, this, true);
+        rootView = LayoutInflater.from(context).inflate(R.layout.inflate_normal_item_layout, this, true);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.NormaFormItemVIew);
         View topLine = findViewById(R.id.top_line);
         View bottomLine = findViewById(R.id.bottom_line);
@@ -140,12 +141,16 @@ public class NormaFormItemVIew extends LinearLayout {
         if (!TextUtils.isEmpty(contentText)) {
             content.setText(contentText);
             content.setTextColor(getContext().getResources().getColor(R.color.color_222222));
+        } else {
+            rootView.setVisibility(GONE);
         }
     }
 
     public void setContent(CharSequence contentText) {
         if (!TextUtils.isEmpty(contentText)) {
             content.setText(contentText);
+        } else {
+            rootView.setVisibility(GONE);
         }
     }
 

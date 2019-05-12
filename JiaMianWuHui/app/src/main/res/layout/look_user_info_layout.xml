@@ -15,6 +15,7 @@
 
 
         <FrameLayout
+            android:background="@color/color_222222"
             android:layout_width="match_parent"
             android:layout_height="210dp">
 
@@ -68,24 +69,33 @@
                     tools:text="约会范围：上海市，北京市"/>
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="right"
-                android:layout_marginTop="12dp"
-                android:layout_marginRight="38dp"
-                android:padding="18dp"
-                android:src="@drawable/ic_share"/>
+            <LinearLayout
+                android:gravity="right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/edit_user_info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_gravity="right"
-                android:layout_marginTop="22dp"
-                android:padding="18dp"
-                android:src="@drawable/ic_point"/>
+
+                <ImageView
+                    android:id="@+id/share"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="12dp"
+                    android:padding="18dp"
+                    android:src="@drawable/ic_share"/>
+
+
+                <ImageView
+                    android:id="@+id/more_action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="22dp"
+                    android:padding="18dp"
+                    android:src="@drawable/ic_point"/>
+
+
+            </LinearLayout>
+
 
             <ImageView
                 android:id="@+id/back"

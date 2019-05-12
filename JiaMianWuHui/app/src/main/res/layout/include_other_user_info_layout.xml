@@ -32,6 +32,9 @@
 
         <com.qsd.jmwh.view.NoscrollerGridView
             android:id="@+id/user_center_photo"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="none"
+            android:overScrollMode="never"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -66,6 +69,7 @@
                     android:layout_height="wrap_content"/>
 
                 <com.yu.common.ui.DelayClickTextView
+                    android:id="@+id/dGalaryVal"
                     android:textSize="15sp"
                     android:textColor="@color/app_main_color"
                     android:gravity="center"
@@ -177,6 +181,7 @@
             android:orientation="horizontal">
 
             <com.yu.common.ui.DelayClickTextView
+                android:id="@+id/evaluation"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -187,6 +192,7 @@
 
 
             <com.yu.common.ui.DelayClickTextView
+                android:id="@+id/chat"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -197,6 +203,7 @@
 
 
             <com.yu.common.ui.DelayClickTextView
+                android:visibility="gone"
                 android:id="@+id/social_account"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

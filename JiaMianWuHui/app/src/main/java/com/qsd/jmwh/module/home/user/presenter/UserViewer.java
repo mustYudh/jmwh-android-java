@@ -11,4 +11,6 @@ public interface UserViewer extends Viewer {
     void setUserInfo(UserCenterInfo userInfo);
 
     void setUserHeaderSuccess(String url);
+
+    void refreshData();
 }

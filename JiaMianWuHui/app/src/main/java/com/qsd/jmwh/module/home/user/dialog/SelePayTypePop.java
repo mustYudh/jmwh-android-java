@@ -9,9 +9,10 @@ import com.qsd.jmwh.R;
 import com.yu.common.windown.BasePopupWindow;
 
 public class SelePayTypePop extends BasePopupWindow {
-    public SelePayTypePop(Context context, View contentView, int width, int height) {
+    public SelePayTypePop(Context context) {
         super(context, LayoutInflater.from(context).inflate(R.layout.sele_pay_type_pop_layout, null),
                 RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+        bindView(R.id.close, v -> dismiss());
     }
 
     @Override

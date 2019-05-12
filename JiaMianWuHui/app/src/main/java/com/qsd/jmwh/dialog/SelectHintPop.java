@@ -15,7 +15,9 @@ public class SelectHintPop extends BasePopupWindow {
     private final TextView title;
     private final TextView ok;
     private final TextView cancel;
+    private final TextView bottomBtn;
     private final View divider;
+    private final View bottomDivider;
 
 
 
@@ -24,9 +26,11 @@ public class SelectHintPop extends BasePopupWindow {
                 RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         ok = (TextView) findViewById(R.id.ok);
         cancel = (TextView) findViewById(R.id.cancel);
+        bottomBtn = (TextView) findViewById(R.id.bottom_btn);
         title = (TextView) findViewById(R.id.title);
         content = (TextView) findViewById(R.id.content);
         divider = (View) findViewById(R.id.divider);
+        bottomDivider = (View) findViewById(R.id.bottom_divider);
 
     }
 
@@ -43,6 +47,9 @@ public class SelectHintPop extends BasePopupWindow {
     public SelectHintPop setMessage(CharSequence message) {
         if (!TextUtils.isEmpty(message)) {
             content.setText(message);
+            content.setVisibility(View.VISIBLE);
+        } else {
+            content.setVisibility(View.GONE);
         }
         return this;
     }
@@ -51,6 +58,8 @@ public class SelectHintPop extends BasePopupWindow {
     public SelectHintPop setNegativeButton(CharSequence name, View.OnClickListener listener) {
         if (TextUtils.isEmpty(name)) {
             cancel.setText("取消");
+        } else {
+            cancel.setText(name);
         }
         cancel.setOnClickListener(listener);
         return this;
@@ -60,6 +69,8 @@ public class SelectHintPop extends BasePopupWindow {
     public SelectHintPop setPositiveButton(CharSequence name, View.OnClickListener listener) {
         if (TextUtils.isEmpty(name)) {
             ok.setText("确定");
+        } else {
+            ok.setText(name);
         }
         ok.setOnClickListener(listener);
         return this;
@@ -70,6 +81,20 @@ public class SelectHintPop extends BasePopupWindow {
         divider.setVisibility(View.GONE);
         ok.setVisibility(View.VISIBLE);
         setPositiveButton(name,listener);
+        return this;
+    }
+
+
+    public SelectHintPop setBottomButton(CharSequence name, View.OnClickListener listener) {
+        bottomDivider.setVisibility(View.VISIBLE);
+        bottomBtn.setVisibility(View.VISIBLE);
+        if (!TextUtils.isEmpty(name)) {
+            bottomBtn.setText(name);
+        } else {
+            bottomBtn.setVisibility(View.GONE);
+            bottomDivider.setVisibility(View.GONE);
+        }
+        bottomBtn.setOnClickListener(listener);
         return this;
     }
 

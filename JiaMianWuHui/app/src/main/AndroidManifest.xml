@@ -162,6 +162,9 @@
         <activity android:name=".module.home.park.activity.LookPhotoActivity"
                   android:screenOrientation="portrait"
             />
+        <activity android:name=".module.home.park.activity.ToReportActivity"
+                  android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>

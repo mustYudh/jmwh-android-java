@@ -5,12 +5,14 @@ import android.annotation.SuppressLint;
 
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.http.ApiServices;
+import com.qsd.jmwh.http.OtherApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
 import com.qsd.jmwh.thrid.UploadImage;
 import com.qsd.jmwh.thrid.oss.PersistenceResponse;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.framework.BaseViewPresenter;
+import com.yu.common.toast.ToastUtils;
 
 /**
  * @author yudneghao
@@ -54,5 +56,19 @@ public class UserPresenter extends BaseViewPresenter<UserViewer> {
                         getViewer().setUserInfo(userCenterMyInfo);
                     }
                 });
+    }
+
+    public void destroyImgBrowsingHis() {
+        XHttpProxy.proxy(OtherApiServices.class)
+                .destroyImgBrowsingHis(UserProfile.getInstance().getLat(),
+                        UserProfile.getInstance().getLng())
+        .subscribeWith(new TipRequestSubscriber<Object>() {
+            @Override
+            protected void onSuccess(Object o) {
+                ToastUtils.show("恢复成功");
+                assert getViewer() != null;
+                getViewer().refreshData();
+            }
+        });
     }
 }

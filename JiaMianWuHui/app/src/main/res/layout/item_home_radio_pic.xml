@@ -12,6 +12,9 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none"
+        android:overScrollMode="never"
         android:horizontalSpacing="5dp"
         android:numColumns="3"
         android:verticalSpacing="5dp"/>
