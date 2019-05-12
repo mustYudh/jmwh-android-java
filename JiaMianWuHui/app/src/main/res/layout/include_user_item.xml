@@ -8,11 +8,22 @@
     android:orientation="vertical">
 
     <com.qsd.jmwh.view.UserItemView
+        android:visibility="gone"
         android:id="@+id/vip"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         app:user_hint_text="升级会员尊享约会特权"
         app:user_left_text="会员"/>
+
+
+
+    <com.qsd.jmwh.view.UserItemView
+        android:visibility="gone"
+        android:id="@+id/auth"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:user_hint_text="经过认证的女生更受欢迎哦~"
+        app:user_left_text="认证"/>
 
     <com.qsd.jmwh.view.UserItemView
         android:id="@+id/money_bag"
@@ -65,6 +76,9 @@
 
     <com.qsd.jmwh.view.NoscrollerGridView
         android:background="@color/white"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none"
+        android:overScrollMode="never"
         android:horizontalSpacing="2dp"
         android:verticalSpacing="2dp"
         android:numColumns="4"
@@ -118,6 +132,7 @@
         android:layout_width="match_parent"
         android:layout_height="49dp"
         app:user_left_text="历史访客"
+        app:showArrow="false"
         />
 
 
@@ -149,6 +164,7 @@
         />
 
     <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/share"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         app:show_line="false"

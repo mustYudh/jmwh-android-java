@@ -23,4 +23,15 @@ public interface OtherApiServices {
 
     @NetMethod(ParameterNames = {"lBuyOtherUserId","nPayType","nPayVal"},Url = "/OrderService/getBuyContactPaySign")
     Observable<Object> getBuyContactPaySign(int lBuyOtherUserId,int nPayType,int nPayVal);
+
+
+    @NetMethod(ParameterNames = {"lLoveUserId","nType"}, Url = "/UserLoveService/delLoveUser")
+    Observable<Object> toBlackList(int lLoveUserId,int nType);
+
+
+    @NetMethod(ParameterNames = {"lUserId","lBrowseInfoId","nPayType","nBrowseInfType"},Url = "/MaskballService/addBrowsingHis")
+    Observable<Object> addBrowsingHis(int lUserId,int lBrowseInfoId,int nPayType,int nBrowseInfType);
+
+    @NetMethod(ParameterNames = {"nLat","nLng"},Url = "/MaskballService/destroyImgBrowsingHis")
+    Observable<Object> destroyImgBrowsingHis(float nLat,float nLng);
 }

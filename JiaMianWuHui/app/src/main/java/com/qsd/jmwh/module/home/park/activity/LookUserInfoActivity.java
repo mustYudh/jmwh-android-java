@@ -17,6 +17,7 @@ import com.qsd.jmwh.dialog.SelectHintPop;
 import com.qsd.jmwh.dialog.ShareDialog;
 import com.qsd.jmwh.module.home.park.adapter.UserPhotoAdapter;
 import com.qsd.jmwh.module.home.park.bean.OtherUserInfoBean;
+import com.qsd.jmwh.module.home.park.dialog.MoreActionDialog;
 import com.qsd.jmwh.module.home.park.presenter.LookUserInfoPresenter;
 import com.qsd.jmwh.module.home.park.presenter.LookUserInfoViewer;
 import com.qsd.jmwh.module.home.user.dialog.EvaluationDialog;
@@ -38,6 +39,7 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
     private boolean isVip;
     private int userID;
     private int dGalaryVal;
+    private int authType;
 
     private final static String USER_ID = "user_id";
 
@@ -56,6 +58,13 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
     protected void loadData() {
         initListener();
         userID = getIntent().getIntExtra(USER_ID, -1);
+        bindView(R.id.more_action, UserProfile.getInstance().getAppAccount() != userID);
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         mPresenter.getUserInfo(getIntent().getIntExtra(USER_ID, -1), UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng());
     }
 
@@ -65,6 +74,7 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
         bindView(R.id.social_account, this);
         bindView(R.id.chat, this);
         bindView(R.id.share, this);
+        bindView(R.id.more_action, this);
     }
 
     @Override
@@ -117,7 +127,7 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
         sIntroduce.setContentText(userData.sIntroduce);
         bindText(R.id.job_age_loc, userData.sCity + " · " + userData.sJob + " · " + userData.sAge + " · " + userData.nOnLine + "m");
         bindText(R.id.sDateRange, "约会范围：" + userData.sDateRange + " · " + userData.nOffLineMin + "分钟前");
-        int authType = userData.nAuthType;
+        authType = userData.nAuthType;
         @DrawableRes int result;
         if (authType == 0) {
             result = R.drawable.ic_not_auth;
@@ -125,7 +135,12 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
             bindView(R.id.video_auth, true);
             result = R.drawable.ic_video_auth;
         } else {
-            result = R.drawable.ic_info_auth;
+            if (userData.nSex == 1) {
+                result = R.drawable.ic_reliable;
+            } else {
+                result = R.drawable.ic_info_auth;
+            }
+
         }
         ImageView authStatus = bindView(R.id.auth_type);
         authStatus.setImageResource(result);
@@ -134,7 +149,7 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
         bindView(R.id.empty_view, list.size() == 0);
         GridView gridView = bindView(R.id.user_center_photo, list.size() > 0);
         boolean isOpen = userCenterInfo.bOpenImg || isVip;
-        gridView.setAdapter(new UserPhotoAdapter(list, isOpen, isVip));
+        gridView.setAdapter(new UserPhotoAdapter(list, isOpen, isVip,userID));
         bindView(R.id.unlock_all_photo_root, !userCenterInfo.bOpenImg && !isVip);
         bindText(R.id.dGalaryVal, "解锁相册" + userData.dGalaryVal + "假面币，会员免费");
         bindView(R.id.dGalaryVal, this);
@@ -184,26 +199,46 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
                 ShareDialog shareDialog = new ShareDialog(getActivity());
                 shareDialog.showPopupWindow();
                 break;
+            case R.id.more_action:
+                MoreActionDialog moreActionDialog = new MoreActionDialog(getActivity(), userID);
+                moreActionDialog.showPopupWindow();
+                break;
         }
     }
 
     private void toChat() {
-        if (!isVip) {
-            SelectHintPop hint = new SelectHintPop(this);
-            hint.setTitle("联系她")
-                    .setMessage("查看 " + sNickName + " 的全部资料和私聊她")
-                    .setPositiveButton("成为会员 免费私聊", v1 -> {
-                        buyVip();
-                        hint.dismiss();
-                    })
-                    .setNegativeButton("付费查看和私聊 (10假面币)", v12 -> {
-                        mPresenter.buyContactPay(userID);
-                        hint.dismiss();
-                    }).setBottomButton("取消", v13 -> hint.dismiss())
-                    .showPopupWindow();
+        if (UserProfile.getInstance().getSex() == 1) {
+            if (!isVip) {
+                SelectHintPop hint = new SelectHintPop(this);
+                hint.setTitle("联系她")
+                        .setMessage("查看 " + sNickName + " 的全部资料和私聊她")
+                        .setPositiveButton("成为会员 免费私聊", v1 -> {
+                            buyVip();
+                            hint.dismiss();
+                        })
+                        .setNegativeButton("付费查看和私聊 (10假面币)", v12 -> {
+                            mPresenter.buyContactPay(userID);
+                            hint.dismiss();
+                        }).setBottomButton("取消", v13 -> hint.dismiss())
+                        .showPopupWindow();
+            } else {
+                ToastUtils.show("私信");
+            }
         } else {
-            ToastUtils.show("私信");
+            if (authType == 0) {
+                SelectHintPop hint = new SelectHintPop(this);
+                hint.setTitle("你还没有进行认证")
+                        .setMessage("认证你的真实性之后，才能私聊男士用户。")
+                        .setPositiveButton("马上认证", v1 -> {
+                            hint.dismiss();
+                        })
+                        .setNegativeButton("取消", v12 -> hint.dismiss()).showPopupWindow();
+
+            } else {
+                ToastUtils.show("私信");
+            }
         }
+
     }
 
 

@@ -27,30 +27,35 @@ import com.yu.common.utils.ImageLoader;
 public class LookPhotoActivity extends BaseActivity implements LookPhotoViewer {
     private final static String DATA = "data";
     private final static String IS_VIP = "is_vip";
+    private final static String USER_ID = "user_id";
     private ImageView photo;
     private TextView timeText;
     private TextView destroyTitle;
     private String url;
+    private int nPayType;
+    private int nBrowseInfType;
     @PresenterLifeCycle
     private LookPhotoPresenter mPresenter = new LookPhotoPresenter(this);
     private RxCountDown rxCountDown = new RxCountDown();
+    private OtherUserInfoBean.CdoFileListDataBean data;
 
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.look_photo_layout);
     }
 
-    public static Intent getIntent(Context context, OtherUserInfoBean.CdoFileListDataBean data, boolean isVip) {
+    public static Intent getIntent(Context context, OtherUserInfoBean.CdoFileListDataBean data, boolean isVip, int userId) {
         Intent starter = new Intent(context, LookPhotoActivity.class);
         starter.putExtra(DATA, data);
         starter.putExtra(IS_VIP, isVip);
+        starter.putExtra(USER_ID, userId);
         return starter;
     }
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void loadData() {
-        OtherUserInfoBean.CdoFileListDataBean data = (OtherUserInfoBean.CdoFileListDataBean) getIntent().getSerializableExtra(DATA);
+        data = (OtherUserInfoBean.CdoFileListDataBean) getIntent().getSerializableExtra(DATA);
         url = data.sFileUrl;
         int type = data.nFileType;
         photo = bindView(R.id.photo);
@@ -61,6 +66,8 @@ public class LookPhotoActivity extends BaseActivity implements LookPhotoViewer {
             ImageLoader.loadCenterCrop(getActivity(), url, photo);
         } else if (type == 1) {
             showView(timeText, url, photo, false);
+            nPayType = 0;
+            nBrowseInfType = 1;
             lookPhoto();
         } else if (type == 2) {
             ImageView imageView = bindView(R.id.destroy_root_bg, true);
@@ -68,7 +75,8 @@ public class LookPhotoActivity extends BaseActivity implements LookPhotoViewer {
             bindText(R.id.money, data.nFileFee + "");
             ImageLoader.blurTransformation(getActivity(), url, photo, 20, 3);
             bindView(R.id.red_bag_root, true);
-
+            nPayType = data.nFileFee;
+            nBrowseInfType = 3;
         }
         bindView(R.id.back, v -> onBackPressed());
         bindView(R.id.buy_vip, v -> {
@@ -82,7 +90,7 @@ public class LookPhotoActivity extends BaseActivity implements LookPhotoViewer {
             SelectHintPop pay = new SelectHintPop(this);
             pay.setMessage("确认支付")
                     .setPositiveButton("确定", v1 -> {
-                        mPresenter.pay(data.lFileId,data.nFileFee);
+                        mPresenter.pay(data.lFileId, data.nFileFee);
                         pay.dismiss();
                     })
                     .setNegativeButton("取消", v12 -> pay.dismiss())
@@ -91,7 +99,7 @@ public class LookPhotoActivity extends BaseActivity implements LookPhotoViewer {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void lookPhoto() {
+    public void lookPhoto() {
         boolean isVip = getIntent().getBooleanExtra(IS_VIP, false);
         rxCountDown.setCountDownTimeListener(new RxCountDownAdapter() {
             @Override
@@ -130,7 +138,7 @@ public class LookPhotoActivity extends BaseActivity implements LookPhotoViewer {
         photo.setOnTouchListener((v, event) -> {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    rxCountDown.start(isVip ? 6 : 2);
+                    mPresenter.addBrowsingHis(getIntent().getIntExtra(USER_ID, -1), data.lFileId, nPayType, nBrowseInfType);
                     break;
                 case MotionEvent.ACTION_UP:
                     rxCountDown.stop();
@@ -141,6 +149,11 @@ public class LookPhotoActivity extends BaseActivity implements LookPhotoViewer {
             }
             return true;
         });
+    }
+
+    public void startLookPhoto() {
+        boolean isVip = getIntent().getBooleanExtra(IS_VIP, false);
+        rxCountDown.start(isVip ? 6 : 2);
     }
 
     private void showView(TextView timeText, String url, ImageView photo, boolean show) {
@@ -158,13 +171,6 @@ public class LookPhotoActivity extends BaseActivity implements LookPhotoViewer {
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (!rxCountDown.isStop()) {
-            rxCountDown.stop();
-        }
-    }
 
     @Override
     public void paySuccess() {

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/color_F2F2F2"
+    >
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:text="如果您在最近3天层在假面舞会向她支付过  查看社交账号/相册/红包 费用，则我们核实举报之后，系统将自动向您退回消费金额"
+        android:textColor="@color/color_333333"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:paddingTop="15dp"
+        android:paddingBottom="5dp"
+        android:textSize="16sp"
+        android:textColor="@color/color_999999"
+        android:text="请选择举报原因"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <com.qsd.jmwh.view.UserItemView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:showArrow="false"
+        app:type="selected"
+        app:user_left_text="发广告"/>
+    <com.qsd.jmwh.view.UserItemView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:showArrow="false"
+        app:type="selected"
+        app:user_left_text="骚扰谩骂"/>
+    <com.qsd.jmwh.view.UserItemView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:showArrow="false"
+        app:type="selected"
+        app:user_left_text="虚假照片"/>
+    <com.qsd.jmwh.view.UserItemView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:showArrow="false"
+        app:type="selected"
+        app:user_left_text="色情低俗"/>
+    <com.qsd.jmwh.view.UserItemView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:showArrow="false"
+        app:type="selected"
+        app:user_left_text="她是骗子"/>
+
+
+
+
+    <LinearLayout
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginLeft="15dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textSize="16sp"
+            android:textColor="@color/color_999999"
+            android:text="请提供相关截图，以便我们核实"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <com.qsd.jmwh.view.NoscrollerGridView
+            android:id="@+id/report_image"
+            android:background="@color/white"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="none"
+            android:overScrollMode="never"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.qsd.jmwh.view.NoscrollerGridView>
+
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+    <com.yu.common.ui.DelayClickTextView
+        android:id="@+id/commit"
+        style="@style/app_blue_button"
+        android:layout_marginTop="30dp"
+        android:text="提交"
+        />
+
+
+
+
+
+</LinearLayout>

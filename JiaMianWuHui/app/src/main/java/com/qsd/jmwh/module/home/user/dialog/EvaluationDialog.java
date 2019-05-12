@@ -38,7 +38,7 @@ public class EvaluationDialog extends BasePopupWindow {
                 .subscribeWith(new NoTipRequestSubscriber<EvaluationBean>() {
                     @Override
                     protected void onSuccess(EvaluationBean evaluationBean) {
-                        EvaluationAdapter adapter = new EvaluationAdapter(evaluationBean.cdoList);
+                        EvaluationAdapter adapter = new EvaluationAdapter(evaluationBean.cdoList,userID);
                         list.setAdapter(adapter);
                     }
                 });
