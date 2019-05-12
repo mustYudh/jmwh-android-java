@@ -47,15 +47,15 @@ public class MoneyBagActivity extends BaseBarActivity implements
             if (tab != null) {
                 View view = View.inflate(getActivity(), R.layout.item_home_tab, null);
                 TextView textView = view.findViewById(R.id.title);
-                if (i == 0) {
-                    textView.setText("现金");
-                    textView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-                } else {
+//                if (i == 0) {
+//                    textView.setText("现金");
+//                    textView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+//                } else {
                     textView.setText("假面币");
                     textView.setTextColor(Res.color(R.color.color_666666));
                     textView.setTextSize(15);
                     textView.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-                }
+//                }
                 tab.setCustomView(view);
             }
         }

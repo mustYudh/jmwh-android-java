@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/setting1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:showArrow="false"
@@ -15,6 +16,7 @@
         app:user_left_text="私聊消息通知"/>
 
     <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/setting2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:showArrow="false"
@@ -23,6 +25,7 @@
 
 
     <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/setting3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:showArrow="false"
@@ -30,6 +33,7 @@
         app:user_left_text="有女生通过了我的查看请求"/>
 
     <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/setting4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:showArrow="false"

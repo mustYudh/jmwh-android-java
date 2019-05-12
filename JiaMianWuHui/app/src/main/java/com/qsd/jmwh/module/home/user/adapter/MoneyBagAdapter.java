@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.qsd.jmwh.module.home.user.fragment.JiaMianCoinFragment;
-import com.qsd.jmwh.module.home.user.fragment.MoneyFragment;
 
 public class MoneyBagAdapter extends FragmentStatePagerAdapter {
 
@@ -15,16 +14,16 @@ public class MoneyBagAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
-        if (i == 0) {
-            return new MoneyFragment();
-        } else {
+//        if (i == 0) {
+//            return new MoneyFragment();
+//        } else {
             return new JiaMianCoinFragment();
-        }
+//        }
 
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return 1;
     }
 }

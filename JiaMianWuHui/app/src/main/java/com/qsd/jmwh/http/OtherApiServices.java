@@ -1,6 +1,8 @@
 package com.qsd.jmwh.http;
 
 import com.qsd.jmwh.module.home.user.bean.EvaluationBean;
+import com.qsd.jmwh.module.home.user.bean.PrivacySettingStatusBean;
+import com.qsd.jmwh.module.home.user.bean.PushSettingBean;
 import com.xuexiang.xhttp2.annotation.NetMethod;
 
 import io.reactivex.Observable;
@@ -34,4 +36,15 @@ public interface OtherApiServices {
 
     @NetMethod(ParameterNames = {"nLat","nLng"},Url = "/MaskballService/destroyImgBrowsingHis")
     Observable<Object> destroyImgBrowsingHis(float nLat,float nLng);
+
+    @NetMethod(Url = "/MaskballService/getUserCofig")
+    Observable<PushSettingBean> getUserConfig();
+
+
+    @NetMethod(ParameterNames = {"nSetting1","nSetting2","nSetting3","nSetting4"},Url = "/MaskBallService/setUserCofig")
+    Observable<PushSettingBean> setUserCofig(int nSetting1,int nSetting2,int nSetting3,int nSetting4);
+
+
+    @NetMethod(Url = "/MaskBallService/getUserPrivacy")
+    Observable<PrivacySettingStatusBean> getUserPrivacy();
 }

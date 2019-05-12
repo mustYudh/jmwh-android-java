@@ -15,6 +15,7 @@ import com.denghao.control.view.utils.UpdataCurrentFragment;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseFragment;
 import com.qsd.jmwh.data.UserProfile;
+import com.qsd.jmwh.dialog.SelectHintPop;
 import com.qsd.jmwh.dialog.ShareDialog;
 import com.qsd.jmwh.module.home.user.activity.EditUserInfoActivity;
 import com.qsd.jmwh.module.home.user.activity.MineBlackMenuActivity;
@@ -85,6 +86,7 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
         bindView(R.id.my_evaluation, this);
         bindView(R.id.share, this);
         bindView(R.id.nDestroyImgCount, this);
+        bindView(R.id.setting_money_img, this);
     }
 
     @Override
@@ -142,7 +144,7 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
                 getLaunchHelper().startActivity(MineBlackMenuActivity.class);
                 break;
             case R.id.my_evaluation:
-                EvaluationDialog dialog = new EvaluationDialog(getActivity(),header,sNickName,UserProfile.getInstance().getAppAccount());
+                EvaluationDialog dialog = new EvaluationDialog(getActivity(), header, sNickName, UserProfile.getInstance().getAppAccount());
                 dialog.showPopupWindow();
                 break;
             case R.id.share:
@@ -151,6 +153,15 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
                 break;
             case R.id.nDestroyImgCount:
                 mPresenter.destroyImgBrowsingHis();
+                break;
+            case R.id.setting_money_img:
+                SelectHintPop selectHintPop = new SelectHintPop(getActivity());
+                selectHintPop.setTitle("设置红包照片")
+                        .setMessage("最多可以选择2张照片作为红包照片，用户必须向你发红包才能查看（红包金额随机，每个不超过3元）")
+                        .setSingleButton("继续", v1 -> {
+                            selectHintPop.dismiss();
+                        })
+                        .setBottomButton("取消", v12 -> selectHintPop.dismiss()).showPopupWindow();
                 break;
             default:
         }
@@ -205,7 +216,7 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
             }
         }
         if (UserProfile.getInstance().getSex() == 0) {
-            UserItemView auth = bindView(R.id.auth,true);
+            UserItemView auth = bindView(R.id.auth, true);
             auth.setHint(authType == 0 ? "经过认证的女生更受欢迎哦~" : "更新认证");
         }
 
@@ -220,6 +231,7 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
         appVersion.setHint(getAppVersion(Objects.requireNonNull(getActivity())));
         UserProfile.getInstance().setPhoneNo(cdoUser.sMobile);
         boolean show = userInfo.cdoimgList.size() > 0;
+        bindView(R.id.setting_money_img, show && UserProfile.getInstance().getSex() == 0);
         bindView(R.id.upload_img_root, !show);
         if (show) {
             GridView recyclerView = bindView(R.id.user_center_photo);

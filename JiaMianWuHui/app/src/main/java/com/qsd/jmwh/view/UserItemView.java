@@ -22,6 +22,11 @@ public class UserItemView extends LinearLayout {
 
     private boolean buttonSelected;
     private TextView hintTextView;
+    private SwitchListener swichlistener;
+
+    public interface SwitchListener {
+        void onSwitch(boolean switchStatus);
+    }
 
     public UserItemView(Context context) {
         super(context, null);
@@ -83,6 +88,14 @@ public class UserItemView extends LinearLayout {
         }
     }
 
+
+    public UserItemView setSelectListener(View.OnClickListener selectListener) {
+        if (selectListener != null) {
+            selectBtn.setOnClickListener(selectListener);
+        }
+
+    }
+
     public UserItemView setButtonSelected(boolean selected) {
         if (selectBtn != null) {
             selectBtn.setSelected(selected);
@@ -123,9 +136,22 @@ public class UserItemView extends LinearLayout {
     }
 
 
-    public UserItemView setSwichlistener(SwitchView.OnStateChangedListener swichlistener) {
+    public UserItemView setSwichlistener(SwitchListener swichlistener) {
+        this.swichlistener = swichlistener;
         if (switchView != null && swichlistener != null) {
-            switchView.setOnStateChangedListener(swichlistener);
+            switchView.setOnStateChangedListener(new SwitchView.OnStateChangedListener() {
+                @Override
+                public void toggleToOn(SwitchView view) {
+                    switchView.toggleSwitch(true);
+                    swichlistener.onSwitch(true);
+                }
+
+                @Override
+                public void toggleToOff(SwitchView view) {
+                    switchView.toggleSwitch(false);
+                    swichlistener.onSwitch(false);
+                }
+            });
         }
         return this;
     }
