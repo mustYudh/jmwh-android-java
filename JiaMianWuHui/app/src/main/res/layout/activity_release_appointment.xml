@@ -13,11 +13,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:gravity="center"
         android:orientation="vertical">
 
 
         <LinearLayout
+            android:id="@+id/ll_qiwang"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/white"
@@ -35,6 +37,7 @@
 
 
             <TextView
+                android:id="@+id/tv_qiwang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -54,6 +57,7 @@
 
 
         <LinearLayout
+            android:id="@+id/ll_city"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/white"
@@ -62,6 +66,7 @@
             >
 
             <TextView
+                android:id="@+id/tv_city"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="15dp"
@@ -88,6 +93,7 @@
             android:background="@color/color_EEEEEE"/>
 
         <LinearLayout
+            android:id="@+id/ll_date"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/white"
@@ -105,6 +111,7 @@
 
 
             <TextView
+                android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -122,6 +129,7 @@
             android:background="@color/color_EEEEEE"/>
 
         <LinearLayout
+            android:id="@+id/ll_time"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/white"
@@ -139,6 +147,7 @@
 
 
             <TextView
+                android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -191,11 +200,13 @@
 
 
             <EditText
+                android:id="@+id/et_buchong"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:ellipsize="end"
+                android:gravity="top"
                 android:hint="谈吐文明的人更受欢迎，请勿发布低俗、色情交易、或者曝光他人隐私的内容…"
                 android:paddingRight="15dp"
                 android:textColor="@color/color_2A2A2A"
@@ -205,19 +216,23 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_EEEEEE"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="115dp"
             android:background="@color/white"
             android:orientation="horizontal"
-            android:paddingTop="13dp"
             android:paddingRight="15dp"
-            android:paddingBottom="14dp">
+            >
 
             <LinearLayout
                 android:layout_width="90dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -241,29 +256,111 @@
             </LinearLayout>
 
 
+            <com.qsd.jmwh.view.NoSlidingGridView
+                android:id="@+id/gv_photo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_weight="1"
+                android:numColumns="3"/>
+
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/color_EEEEEE"
-            android:gravity="center"
             android:orientation="horizontal"
-            android:paddingTop="13dp"
-            android:paddingBottom="14dp">
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
                 android:text="注：请勿上传裸露低俗的照片，严重者将封号处理。"
                 android:textColor="@color/color_999999"
-                android:textSize="15sp"/>
+                android:textSize="13sp"/>
 
 
         </LinearLayout>
 
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_EEEEEE"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="15dp"
+                android:text="禁止评论"
+                android:textColor="@color/color_2A2A2A"
+                android:textSize="15sp"/>
+
+
+            <ch.ielse.view.SwitchView
+                android:id="@+id/sw_one"
+                android:layout_width="36dp"
+                android:layout_height="21dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                app:primaryColor="@color/app_main_bg_color"
+                app:primaryColorDark="@color/app_main_bg_color"/>
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_EEEEEE"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="15dp"
+                android:text="对同性别用户隐藏"
+                android:textColor="@color/color_2A2A2A"
+                android:textSize="15sp"/>
+
+
+            <ch.ielse.view.SwitchView
+                android:id="@+id/sw_two"
+                android:layout_width="36dp"
+                android:layout_height="21dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                app:primaryColor="@color/app_main_bg_color"
+                app:primaryColorDark="@color/app_main_bg_color"/>
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_EEEEEE"/>
 
         <com.yu.common.ui.DelayClickTextView
             android:id="@+id/login"
@@ -273,29 +370,17 @@
             />
 
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_sure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="30dp">
-
-            <com.yu.common.ui.DelayClickTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="点击进入表示你已经阅读并同意"
-                android:textSize="12sp"/>
-
-
-            <com.yu.common.ui.DelayClickTextView
-                android:id="@+id/agreement"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="《用户协议》"
-                android:textColor="@color/app_main_bg_color"
-                android:textSize="12sp"/>
-        </LinearLayout>
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="30dp"
+            android:includeFontPadding="false"
+            android:text="会员免费，非会员需支付12.00元"
+            android:textColor="#ff999999"
+            android:textSize="13sp"
+            />
 
 
     </LinearLayout>

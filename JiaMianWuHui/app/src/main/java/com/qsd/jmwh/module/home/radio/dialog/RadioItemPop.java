@@ -1,6 +1,7 @@
 package com.qsd.jmwh.module.home.radio.dialog;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.qsd.jmwh.R;
+import com.qsd.jmwh.module.home.radio.activity.ReleaseAppointmentActivity;
 import com.qsd.jmwh.module.home.radio.adapter.DateRadioListDialogAdapter;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.yu.common.windown.BasePopupWindow;
@@ -63,7 +65,7 @@ public class RadioItemPop extends BasePopupWindow {
         DateRadioListDialogAdapter adapter = new DateRadioListDialogAdapter(R.layout.item_date_radio_layout, sDateProList,getContext());
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener((adapter1, view, position) -> {
-
+            getContext().startActivity(new Intent(getContext(),ReleaseAppointmentActivity.class).putExtra("activity_title",sDateProList.get(position).sDatingConfigName));
         });
         return this;
     }
