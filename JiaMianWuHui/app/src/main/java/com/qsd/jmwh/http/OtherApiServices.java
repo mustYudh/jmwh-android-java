@@ -1,6 +1,7 @@
 package com.qsd.jmwh.http;
 
 import com.qsd.jmwh.module.home.user.bean.EvaluationBean;
+import com.qsd.jmwh.module.home.user.bean.PayInfoBean;
 import com.qsd.jmwh.module.home.user.bean.PrivacySettingStatusBean;
 import com.qsd.jmwh.module.home.user.bean.PushSettingBean;
 import com.xuexiang.xhttp2.annotation.NetMethod;
@@ -49,4 +50,9 @@ public interface OtherApiServices {
 
     @NetMethod(ParameterNames = {"nType","nStatus","dGalaryVal"},Url = "/MaskBallService/setUserPrivacy")
     Observable<Object> setUserPrivacy(int nType,int nStatus,int dGalaryVal);
+
+
+    @NetMethod(Url = "/OrderService/getPayInfo")
+    Observable<PayInfoBean> getPayInfo();
+
 }

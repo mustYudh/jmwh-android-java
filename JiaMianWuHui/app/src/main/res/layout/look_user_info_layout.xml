@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:overScrollMode="never"
-    android:scrollbars="none">
+    android:orientation="vertical"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -69,9 +69,9 @@
             </LinearLayout>
 
             <LinearLayout
-                android:gravity="right"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="right">
 
 
                 <ImageView
@@ -153,9 +153,56 @@
 
         </LinearLayout>
 
-        <include layout="@layout/include_other_user_info_layout"/>
+        <ScrollView
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            android:scrollbars="none">
 
+            <include layout="@layout/include_other_user_info_layout"/>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <com.yu.common.ui.DelayClickTextView
+                android:id="@+id/evaluation"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="评价"
+                android:textColor="@color/app_main_color"
+                android:textSize="16sp"/>
+
+
+            <com.yu.common.ui.DelayClickTextView
+                android:id="@+id/chat"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="私聊"
+                android:textColor="@color/app_main_color"
+                android:textSize="16sp"/>
+
+
+            <com.yu.common.ui.DelayClickTextView
+                android:id="@+id/social_account"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="社交账号"
+                android:textColor="@color/app_main_color"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+
+        </LinearLayout>
     </LinearLayout>
 
-</ScrollView>
+</LinearLayout>
 
