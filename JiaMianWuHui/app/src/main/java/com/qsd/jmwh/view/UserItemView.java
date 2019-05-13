@@ -22,7 +22,6 @@ public class UserItemView extends LinearLayout {
 
     private boolean buttonSelected;
     private TextView hintTextView;
-    private SwitchListener swichlistener;
 
     public interface SwitchListener {
         void onSwitch(boolean switchStatus);
@@ -137,7 +136,6 @@ public class UserItemView extends LinearLayout {
 
 
     public UserItemView setSwichlistener(SwitchListener swichlistener) {
-        this.swichlistener = swichlistener;
         if (switchView != null && swichlistener != null) {
             switchView.setOnStateChangedListener(new SwitchView.OnStateChangedListener() {
                 @Override

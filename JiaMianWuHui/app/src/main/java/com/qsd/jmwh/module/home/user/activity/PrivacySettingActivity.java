@@ -25,8 +25,6 @@ public class PrivacySettingActivity extends BaseBarActivity implements PrivacySe
     private UserItemView showAccount;
     private boolean publicInfoStatus;
     private boolean payInfoStatus;
-    private boolean showLocationStatus;
-    private boolean showAccountStatus;
     private final static String USER_NAME = "user_name";
     private final static String HEADER = "header";
 
@@ -43,7 +41,6 @@ public class PrivacySettingActivity extends BaseBarActivity implements PrivacySe
     }
 
 
-
     @Override
     protected void loadData() {
         setTitle("隐私设置");
@@ -52,9 +49,7 @@ public class PrivacySettingActivity extends BaseBarActivity implements PrivacySe
         showLocation = bindView(R.id.show_location);
         showAccount = bindView(R.id.show_account);
         mPresenter.getUserConfig();
-        publicInfo.setSelectListener(v -> {
-            mPresenter.setUserPrivacy(0, publicInfoStatus ? 1 : 0, 0);
-        });
+        publicInfo.setSelectListener(v -> mPresenter.setUserPrivacy(0, publicInfoStatus ? 1 : 0, 0));
         payInfo.setSelectListener(v -> {
             SelectHintPop selectHintPop = new SelectHintPop(getActivity());
             selectHintPop
@@ -63,7 +58,7 @@ public class PrivacySettingActivity extends BaseBarActivity implements PrivacySe
                     .setSingleButton("确定", v1 -> {
                         SetPhotoMoneyPop setPhotoMoneyPop = new SetPhotoMoneyPop(getActivity(),
                                 getIntent().getStringExtra(HEADER), getIntent().getStringExtra(USER_NAME), (money) -> {
-                            mPresenter.setUserPrivacy(1, publicInfoStatus ? 0 : 1, money);
+                            mPresenter.setUserPrivacy(1, payInfoStatus ? 0 : 1, money);
                         });
                         setPhotoMoneyPop.showPopupWindow();
                         selectHintPop.dismiss();
@@ -81,17 +76,14 @@ public class PrivacySettingActivity extends BaseBarActivity implements PrivacySe
     }
 
 
-
     @Override
     public void getPrivacySettingStatus(PrivacySettingStatusBean statusBean) {
         publicInfoStatus = statusBean.cdoData.nInfoSet == 0;
         payInfoStatus = statusBean.cdoData.nInfoSet == 1;
-        showLocationStatus = statusBean.cdoData.bHiddenRang;
-        showAccountStatus = statusBean.cdoData.bHiddenQQandWX;
         publicInfo.setSelected(publicInfoStatus);
         payInfo.setSelected(payInfoStatus);
-        showLocation.setSwichButton(showLocationStatus);
-        showAccount.setSwichButton(showAccountStatus);
+        showLocation.setSwichButton(statusBean.cdoData.bHiddenRang);
+        showAccount.setSwichButton(statusBean.cdoData.bHiddenQQandWX);
     }
 
     @Override
