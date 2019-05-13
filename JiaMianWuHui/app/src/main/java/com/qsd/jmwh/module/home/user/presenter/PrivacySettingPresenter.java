@@ -25,4 +25,14 @@ public class PrivacySettingPresenter extends BaseViewPresenter<PrivacySettingVie
             }
         });
     }
+
+    public void setUserPrivacy(int nType,int nStatus,int dGalaryVal) {
+        XHttpProxy.proxy(OtherApiServices.class).setUserPrivacy(nType,nStatus,dGalaryVal).subscribeWith(new TipRequestSubscriber<Object>() {
+            @Override
+            protected void onSuccess(Object o) {
+                assert getViewer() != null;
+                getViewer().setSuccess(nType,nStatus);
+            }
+        });
+    }
 }

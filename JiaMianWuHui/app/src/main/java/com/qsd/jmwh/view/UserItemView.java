@@ -93,7 +93,7 @@ public class UserItemView extends LinearLayout {
         if (selectListener != null) {
             selectBtn.setOnClickListener(selectListener);
         }
-
+        return this;
     }
 
     public UserItemView setButtonSelected(boolean selected) {

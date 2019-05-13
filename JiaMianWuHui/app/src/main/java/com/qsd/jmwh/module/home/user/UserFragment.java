@@ -105,7 +105,7 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
                 getLaunchHelper().startActivity(EditUserInfoActivity.class);
                 break;
             case R.id.privacy_setting:
-                getLaunchHelper().startActivity(PrivacySettingActivity.class);
+                getLaunchHelper().startActivity(PrivacySettingActivity.getIntent(getActivity(),sNickName,header));
                 break;
             case R.id.setting:
                 getLaunchHelper().startActivity(SettingActivity.class);

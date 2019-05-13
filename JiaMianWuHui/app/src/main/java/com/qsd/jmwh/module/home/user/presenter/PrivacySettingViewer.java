@@ -5,6 +5,7 @@ import com.yu.common.mvp.Viewer;
 
 public interface PrivacySettingViewer extends Viewer {
 
-    public void getPrivacySettingStatus(PrivacySettingStatusBean statusBean);
+    void getPrivacySettingStatus(PrivacySettingStatusBean statusBean);
+    void setSuccess(int type,int status);
 
 }
