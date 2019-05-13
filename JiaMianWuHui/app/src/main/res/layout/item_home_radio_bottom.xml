@@ -6,12 +6,14 @@
 
 
     <LinearLayout
+        android:id="@+id/ll_zan"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
         android:gravity="center">
 
         <com.yu.common.ui.DelayClickImageView
+            android:id="@+id/iv_like"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:src="@drawable/zan"/>
@@ -58,6 +60,7 @@
         android:gravity="center">
 
         <com.yu.common.ui.DelayClickImageView
+            android:id="@+id/iv_apply"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:src="@drawable/apply"/>
@@ -67,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="报名"
+            android:text="报名(1)"
             android:textColor="#ff666666"
             android:textSize="12sp"
             />
