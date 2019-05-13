@@ -52,8 +52,13 @@ public interface ApiServices {
             "lUserId", "nLat", "nLng", "sDatingRange", "nTab", "pageindex", "nSex"
     }, Url = "/DatingService/getDatingList")
     Observable<HomeRadioListBean> getRadioDate(
-            String lUserId, String nLat, String nLng, String sDatingRange, String nTab, String pageindex,
+            String lUserId, double nLat, double nLng, String sDatingRange, String nTab, String pageindex,
             String nSex);
+
+    @NetMethod(ParameterNames = {
+            "lUserId", "nLat", "nLng", "sDatingRange", "nTab", "pageindex"}, Url = "/DatingService/getDatingList")
+    Observable<HomeRadioListBean> getRadioDateAll(
+            String lUserId, double nLat, double nLng, String sDatingRange, String nTab, String pageindex);
 
     @NetMethod(ParameterNames = {"lUserId", "token"}, Url = "/GoodsService/getVIPPayInfo")
     Observable<VipInfoBean> getVipInfoList(int lUserId, String token);
@@ -147,6 +152,6 @@ public interface ApiServices {
     @NetMethod(ParameterNames = {"nLat", "nLng", "nType"}, Url = "/UserLoveService/getUserLoveList")
     Observable<MineLikeBean> getMineLikeList(double nLat, double nLng, String nType);
 
-    @NetMethod(ParameterNames = {"lLoveUserId", "nType","is_love"}, Url = "/UserLoveService/addLoveUser")
-    Observable<Object> addLoveUser(String lLoveUserId, String nType,boolean is_love);
+    @NetMethod(ParameterNames = {"lLoveUserId", "nType", "is_love"}, Url = "/UserLoveService/addLoveUser")
+    Observable<Object> addLoveUser(String lLoveUserId, String nType, boolean is_love);
 }

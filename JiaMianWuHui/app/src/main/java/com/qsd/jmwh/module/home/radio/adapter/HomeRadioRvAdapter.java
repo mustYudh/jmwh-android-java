@@ -30,7 +30,7 @@ public class HomeRadioRvAdapter extends BaseMultiItemQuickAdapter<LocalHomeRadio
         switch (item.itemType) {
             case 0:
                 CircleImageView iv_headimg = helper.getView(R.id.iv_headimg);
-                Glide.with(context).load("https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1319625412,2949035306&fm=26&gp=0.jpg").into(iv_headimg);
+                Glide.with(context).load(item.headImg).into(iv_headimg);
                 helper.setText(R.id.tv_user_name, item.userName);
                 helper.setText(R.id.tv_ctime, item.cTime);
                 helper.setText(R.id.tv_label_top, item.sDatingTitle + " / " + item.sDatingTime + "," + item.sDatingRange);
