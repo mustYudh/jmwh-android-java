@@ -222,7 +222,7 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
                         }).setBottomButton("取消", v13 -> hint.dismiss())
                         .showPopupWindow();
             } else {
-                ToastUtils.show("私信");
+                ToastUtils.show("即将上线尽请期待");
             }
         } else {
             if (authType == 0) {
