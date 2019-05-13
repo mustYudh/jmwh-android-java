@@ -38,6 +38,7 @@
         android:layout_height="wrap_content"/>
 
     <com.qsd.jmwh.view.UserItemView
+        android:visibility="gone"
         app:user_left_text="设置App开锁密码"
         app:show_line="false"
         android:layout_width="match_parent"
