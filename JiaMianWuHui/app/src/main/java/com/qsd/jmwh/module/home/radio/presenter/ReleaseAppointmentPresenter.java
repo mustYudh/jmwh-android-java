@@ -10,8 +10,6 @@ import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.framework.BaseViewPresenter;
-import com.yu.common.ui.DelayClickImageView;
-import com.yu.common.ui.DelayClickTextView;
 
 /**
  * @author yudneghao
@@ -19,10 +17,10 @@ import com.yu.common.ui.DelayClickTextView;
  */
 
 
-public class RadioPresenter extends BaseViewPresenter<RadioViewer> {
+public class ReleaseAppointmentPresenter extends BaseViewPresenter<ReleaseAppointmentViewer> {
 
 
-    public RadioPresenter(RadioViewer viewer) {
+    public ReleaseAppointmentPresenter(ReleaseAppointmentViewer viewer) {
         super(viewer);
     }
 
@@ -64,39 +62,5 @@ public class RadioPresenter extends BaseViewPresenter<RadioViewer> {
                         getViewer().getConfigDataSuccess(configListBean);
                     }
                 });
-    }
-
-
-    @SuppressLint("CheckResult")
-    public void addDatingLikeCount(String lDatingId, String lJoinerId, String lInitiatorId, DelayClickImageView iv_like, DelayClickTextView tv_like, int position, int is_like) {
-        XHttpProxy.proxy(ApiServices.class)
-                .addDatingLikeCount(lDatingId,lJoinerId,lInitiatorId)
-                .subscribeWith(new TipRequestSubscriber<Object>() {
-                    @Override
-                    protected void onSuccess(Object o) {
-                        assert getViewer() != null;
-                        getViewer().addDatingLikeCountSuccess(iv_like,tv_like,position,is_like);
-                    }
-                });
-    }
-
-    @Override
-    public void createdView(View view) {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void willDestroy() {
-
     }
 }

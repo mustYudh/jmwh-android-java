@@ -148,7 +148,7 @@ public abstract class BasicFragment extends AbstractExtendsFragment {
 
 
     protected LauncherHelper getLaunchHelper() {
-        return LauncherHelper.from(getActivity());
+        return LauncherHelper.from(this);
     }
 
 }

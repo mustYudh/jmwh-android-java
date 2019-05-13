@@ -154,4 +154,7 @@ public interface ApiServices {
 
     @NetMethod(ParameterNames = {"lLoveUserId", "nType", "is_love"}, Url = "/UserLoveService/addLoveUser")
     Observable<Object> addLoveUser(String lLoveUserId, String nType, boolean is_love);
+
+    @NetMethod(ParameterNames = {"lDatingId", "lJoinerId", "lInitiatorId"}, Url = "/DatingService/addDatingLikeCount")
+    Observable<Object> addDatingLikeCount(String lDatingId, String lJoinerId, String lInitiatorId);
 }

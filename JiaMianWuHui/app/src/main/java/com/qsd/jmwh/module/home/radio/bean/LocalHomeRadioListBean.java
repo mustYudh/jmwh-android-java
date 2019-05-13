@@ -12,12 +12,15 @@ public class LocalHomeRadioListBean implements MultiItemEntity {
     }
 
     public int itemType;
+    public int lDatingId;
+    public int lUserId;
     public String headImg;
     public String userName;
     public String cTime;
     public List<String> picList;
     public int is_like;
     public int like_count;
+    public int nApplyCount;
     public int count_num;
     public int sex;
     public int is_apply;
