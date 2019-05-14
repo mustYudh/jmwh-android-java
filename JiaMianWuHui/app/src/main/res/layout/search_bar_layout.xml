@@ -7,25 +7,26 @@
     android:background="@color/white">
 
 
-    <TextView
-        android:id="@+id/back"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll_back"
+        android:layout_width="50dp"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:paddingLeft="20dp"
-        android:paddingRight="18dp"
-        android:text="附近"
-        android:textColor="@color/app_main_bg_color">
+        android:gravity="center">
 
-    </TextView>
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/back"/>
+    </LinearLayout>
 
 
     <LinearLayout
-        android:id="@+id/ll_edit"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_centerHorizontal="true"
         android:layout_gravity="bottom"
+        android:layout_marginRight="20dp"
         android:layout_marginBottom="7dp"
         android:layout_weight="1"
         android:background="@drawable/shape_circle_header_bg"
@@ -38,33 +39,19 @@
 
         <EditText
             android:id="@+id/edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="@android:color/transparent"
             android:ellipsize="end"
             android:gravity="center_vertical"
-            android:hint="搜索女士"
-            android:imeOptions="actionSearch"
+            android:hint="输入用户昵称/职业进行搜索"
             android:maxLines="1"
             android:singleLine="true"
+            android:imeOptions="actionSearch"
             android:textColor="@color/color_2A2A2A"
             android:textColorHint="@color/color_CCCCCC"
             android:textSize="14sp"/>
 
 
     </LinearLayout>
-
-
-    <com.yu.common.ui.DelayClickTextView
-        android:id="@+id/right_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:gravity="center"
-        android:paddingLeft="18dp"
-        android:paddingRight="15dp"
-        android:text="女士列表"
-        android:textColor="@color/color_F43A50"
-        android:textSize="16sp"/>
-
 </LinearLayout>

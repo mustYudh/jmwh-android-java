@@ -3,20 +3,27 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_empty"
-    android:visibility="gone"
-    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
+    android:visibility="gone"
     >
 
+
+    <ImageView
+        android:layout_width="66dp"
+        android:layout_height="54dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="200dp"
+        android:src="@drawable/img_null"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="200dp"
-        android:text="暂无数据哦~"/>
+        android:layout_marginTop="15dp"
+        android:text="暂无数据哦~~"/>
 
 
 </LinearLayout>

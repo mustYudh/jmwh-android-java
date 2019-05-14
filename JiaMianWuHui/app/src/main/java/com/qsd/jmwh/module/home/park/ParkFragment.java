@@ -1,16 +1,21 @@
 package com.qsd.jmwh.module.home.park;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.text.InputType;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarFragment;
 import com.qsd.jmwh.data.UserProfile;
+import com.qsd.jmwh.module.home.park.activity.SearchActivity;
 import com.qsd.jmwh.module.home.park.adapter.HomeParkPageAdapter;
 import com.qsd.jmwh.module.home.park.presenter.ParkPresenter;
 import com.qsd.jmwh.module.home.park.presenter.ParkViewer;
@@ -47,11 +52,19 @@ public class ParkFragment extends BaseBarFragment implements ParkViewer, TabLayo
     }
 
     private void initView() {
+        EditText edit = bindView(R.id.edit);
+        edit.setInputType(InputType.TYPE_NULL);
         right_menu = bindView(R.id.right_menu);
+        LinearLayout ll_edit = bindView(R.id.ll_edit);
         TabLayout tabLayout = bindView(R.id.tab_layout);
         ViewPager viewPager = bindView(R.id.view_pager);
         initTabLayout(tabLayout, viewPager);
-
+        ll_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), SearchActivity.class).putExtra("SEX", !sex ? "0" : "1"));
+            }
+        });
 
     }
 

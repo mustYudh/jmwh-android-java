@@ -159,12 +159,14 @@
         </activity>
         <activity android:name=".module.home.user.activity.MineBlackMenuActivity">
         </activity>
-        <activity android:name=".module.home.park.activity.LookPhotoActivity"
-                  android:screenOrientation="portrait"
-            />
-        <activity android:name=".module.home.park.activity.ToReportActivity"
-                  android:screenOrientation="portrait"
-            />
+        <activity
+            android:name=".module.home.park.activity.LookPhotoActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".module.home.park.activity.ToReportActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".module.home.park.activity.SearchActivity">
+        </activity>
     </application>
 
 </manifest>
