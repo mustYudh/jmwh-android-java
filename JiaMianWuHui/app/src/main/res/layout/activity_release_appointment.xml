@@ -363,7 +363,7 @@
             android:background="@color/color_EEEEEE"/>
 
         <com.yu.common.ui.DelayClickTextView
-            android:id="@+id/login"
+            android:id="@+id/tv_sure"
             style="@style/app_blue_button"
             android:layout_marginTop="30dp"
             android:text="进入假面舞会"
@@ -371,7 +371,6 @@
 
 
         <TextView
-            android:id="@+id/tv_sure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"

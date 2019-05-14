@@ -110,9 +110,9 @@ public class RadioPresenter extends BaseViewPresenter<RadioViewer> {
 
 
     @SuppressLint("CheckResult")
-    public void addDatingEnroll(String lDatingId, String lJoinerId, String lInitiatorId, LocalHomeRadioListBean item) {
+    public void addDatingEnroll(String lDatingId, String lJoinerId, String lInitiatorId, String sContent,LocalHomeRadioListBean item) {
         XHttpProxy.proxy(ApiServices.class)
-                .addDatingEnroll(lDatingId, lJoinerId, lInitiatorId)
+                .addDatingEnroll(lDatingId, lJoinerId, lInitiatorId,sContent)
                 .subscribeWith(new TipRequestSubscriber<Object>() {
                     @Override
                     protected void onSuccess(Object o) {

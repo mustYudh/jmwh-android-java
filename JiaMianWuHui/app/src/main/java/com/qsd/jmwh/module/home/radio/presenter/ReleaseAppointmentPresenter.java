@@ -2,12 +2,10 @@ package com.qsd.jmwh.module.home.radio.presenter;
 
 
 import android.annotation.SuppressLint;
-import android.view.View;
 
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
-import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.framework.BaseViewPresenter;
 
@@ -25,31 +23,17 @@ public class ReleaseAppointmentPresenter extends BaseViewPresenter<ReleaseAppoin
     }
 
     @SuppressLint("CheckResult")
-    public void initRadioData(String lUserId, double nLat, double nLng, String sDatingRange, String nTab, String pageindex, String nSex) {
+    public void addDatingData(String sDatingTitle, String sDatingRange, String sDatingTime, String sDatingTimeExt, String sContent, String nSex, double nLng, double nLat, String bCommentType, String bHiddenType, String sImg, String sDatingHope) {
         XHttpProxy.proxy(ApiServices.class)
-                .getRadioDate(lUserId, nLat, nLng, sDatingRange, nTab, pageindex, nSex)
-                .subscribeWith(new TipRequestSubscriber<HomeRadioListBean>() {
+                .addDating(sDatingTitle, sDatingRange, sDatingTime, sDatingTimeExt, sContent, nSex, nLat, nLng, bCommentType, bHiddenType, sImg, sDatingHope)
+                .subscribeWith(new TipRequestSubscriber<Object>() {
                     @Override
-                    protected void onSuccess(HomeRadioListBean homeRadioListBean) {
+                    protected void onSuccess(Object o) {
                         assert getViewer() != null;
-                        getViewer().getDataSuccess(homeRadioListBean);
+                        getViewer().addDatingSuccess();
                     }
                 });
     }
-
-    @SuppressLint("CheckResult")
-    public void initRadioDataAll(String lUserId, double nLat, double nLng, String sDatingRange, String nTab, String pageindex) {
-        XHttpProxy.proxy(ApiServices.class)
-                .getRadioDateAll(lUserId, nLat, nLng, sDatingRange, nTab, pageindex)
-                .subscribeWith(new TipRequestSubscriber<HomeRadioListBean>() {
-                    @Override
-                    protected void onSuccess(HomeRadioListBean homeRadioListBean) {
-                        assert getViewer() != null;
-                        getViewer().getDataSuccess(homeRadioListBean);
-                    }
-                });
-    }
-
 
     @SuppressLint("CheckResult")
     public void initRadioConfigData(String nType) {
@@ -60,6 +44,17 @@ public class ReleaseAppointmentPresenter extends BaseViewPresenter<ReleaseAppoin
                     protected void onSuccess(GetRadioConfigListBean configListBean) {
                         assert getViewer() != null;
                         getViewer().getConfigDataSuccess(configListBean);
+                    }
+                });
+    }
+
+    public void uploadFile(String sFileUrl,int nAttribute,int nInfoType,int nFileType,int nFileFee) {
+        XHttpProxy.proxy(ApiServices.class)
+                .addFile(sFileUrl,nAttribute,nInfoType,nFileType,nFileFee,"")
+                .subscribeWith(new TipRequestSubscriber<Object>() {
+                    @Override
+                    protected void onSuccess(Object o) {
+                        getActivity().finish();
                     }
                 });
     }
