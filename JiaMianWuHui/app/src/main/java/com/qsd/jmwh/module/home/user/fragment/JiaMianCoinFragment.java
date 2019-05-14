@@ -53,7 +53,8 @@ public class JiaMianCoinFragment extends BaseFragment implements View.OnClickLis
             mPresenter.getInfo(pageIndex);
         });
         recyclerView = bindView(R.id.list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(linearLayoutManager);
         mPresenter.getInfo(pageIndex);
     }
 
