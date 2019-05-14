@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -31,7 +32,7 @@ public class SelectHintPop extends BasePopupWindow {
         content = (TextView) findViewById(R.id.content);
         divider = (View) findViewById(R.id.divider);
         bottomDivider = (View) findViewById(R.id.bottom_divider);
-
+        setFocusable(true);
     }
 
     public SelectHintPop setTitle(CharSequence name) {
@@ -95,6 +96,30 @@ public class SelectHintPop extends BasePopupWindow {
             bottomDivider.setVisibility(View.GONE);
         }
         bottomBtn.setOnClickListener(listener);
+        return this;
+    }
+
+
+
+    public interface GetTextInputListener {
+        void getText(String input);
+    }
+
+    public SelectHintPop setEditButton(CharSequence name, GetTextInputListener listener) {
+        bindView(R.id.input,true);
+        if (TextUtils.isEmpty(name)) {
+            ok.setText("确定");
+        } else {
+            ok.setText(name);
+        }
+        cancel.setVisibility(View.GONE);
+        divider.setVisibility(View.GONE);
+        ok.setVisibility(View.VISIBLE);
+        ok.setOnClickListener(v -> {
+            EditText input = bindView(R.id.input);
+            listener.getText(input.getText().toString().trim());
+            dismiss();
+        });
         return this;
     }
 
