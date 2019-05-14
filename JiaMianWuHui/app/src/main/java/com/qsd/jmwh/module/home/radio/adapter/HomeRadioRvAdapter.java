@@ -11,8 +11,10 @@ import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.radio.bean.LocalHomeRadioListBean;
 import com.qsd.jmwh.view.CircleImageView;
 import com.qsd.jmwh.view.NoSlidingGridView;
+import com.yu.common.toast.ToastUtils;
 import com.yu.common.ui.DelayClickImageView;
 import com.yu.common.ui.DelayClickTextView;
+import com.yu.common.utils.ImageLoader;
 
 import java.util.List;
 
@@ -34,6 +36,7 @@ public class HomeRadioRvAdapter extends BaseMultiItemQuickAdapter<LocalHomeRadio
             case 0:
                 CircleImageView iv_headimg = helper.getView(R.id.iv_headimg);
                 Glide.with(context).load(item.headImg).into(iv_headimg);
+                ImageLoader.loadCenterCrop(context, item.headImg, iv_headimg, R.drawable.zhanwei);
                 helper.setText(R.id.tv_user_name, item.userName);
                 helper.setText(R.id.tv_ctime, item.cTime);
                 helper.setText(R.id.tv_label_top, item.sDatingTitle + " / " + item.sDatingTime + "," + item.sDatingRange);
@@ -46,6 +49,14 @@ public class HomeRadioRvAdapter extends BaseMultiItemQuickAdapter<LocalHomeRadio
                     //女
                     iv_sex.setImageResource(R.drawable.woman);
                 }
+                helper.getView(R.id.ll_root).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (onRadioItemClickListener != null) {
+                            onRadioItemClickListener.setOnPersonInfoItemClick(item.lUserId);
+                        }
+                    }
+                });
                 break;
             case 1:
                 NoSlidingGridView gv_pic = helper.getView(R.id.gv_pic);
@@ -81,6 +92,20 @@ public class HomeRadioRvAdapter extends BaseMultiItemQuickAdapter<LocalHomeRadio
                         }
                     }
                 });
+
+                helper.getView(R.id.ll_comment).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (!item.bCommentType) {
+                            //不能评价
+                            ToastUtils.show("该广播禁止评论");
+                            return;
+                        }
+                        if (onRadioItemClickListener != null) {
+                            onRadioItemClickListener.setOnAddContentItemClick(item);
+                        }
+                    }
+                });
                 break;
         }
     }
@@ -88,6 +113,10 @@ public class HomeRadioRvAdapter extends BaseMultiItemQuickAdapter<LocalHomeRadio
 
     public interface OnRadioItemClickListener {
         void setOnRadioItemClick(DelayClickImageView iv_like, DelayClickTextView tv_like, int position, int is_like, String lDatingId, String lJoinerId, String lInitiatorId);
+
+        void setOnPersonInfoItemClick(int lLoveUserId);
+
+        void setOnAddContentItemClick(LocalHomeRadioListBean item);
     }
 
     OnRadioItemClickListener onRadioItemClickListener;

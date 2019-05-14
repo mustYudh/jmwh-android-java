@@ -1,7 +1,9 @@
 package com.qsd.jmwh.module.home.radio.presenter;
 
+import com.qsd.jmwh.module.home.radio.bean.GetDatingUserVipBean;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
+import com.qsd.jmwh.module.home.radio.bean.LocalHomeRadioListBean;
 import com.yu.common.mvp.Viewer;
 import com.yu.common.ui.DelayClickImageView;
 import com.yu.common.ui.DelayClickTextView;
@@ -16,4 +18,8 @@ public interface RadioViewer extends Viewer {
     void getConfigDataSuccess(GetRadioConfigListBean configListBean);
 
     void addDatingLikeCountSuccess(DelayClickImageView iv_like, DelayClickTextView tv_like, int position, int is_like);
+
+    void getDatingUserVIPSuccess(GetDatingUserVipBean getDatingUserVipBean,LocalHomeRadioListBean item);
+
+    void addDatingCommentCountSuccess(LocalHomeRadioListBean item);
 }

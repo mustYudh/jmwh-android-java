@@ -42,7 +42,7 @@ public class ImageLoader {
      * @param defaultResId
      */
     public static void loadCenterCrop(Context context, String url, ImageView view, int defaultResId) {
-        Glide.with(context).load(url).centerCrop().placeholder(defaultResId).into(view);
+        Glide.with(context).load(url).centerCrop().placeholder(defaultResId).error(defaultResId).into(view);
     }
 
     public static void loadCenterCrop(Context context, String url, ImageView view) {
@@ -59,30 +59,29 @@ public class ImageLoader {
                 .centerCrop()
 
                 // 设置高斯模糊
-                .bitmapTransform(new BlurTransformation(context, 24,8))
+                .bitmapTransform(new BlurTransformation(context, 24, 8))
                 .into(view);
     }
 
 
-
-    public static void blurTransformation(Context context, String url, ImageView view,int radius,int sampling) {
+    public static void blurTransformation(Context context, String url, ImageView view, int radius, int sampling) {
         Glide.with(context)
                 .load(url)
                 .centerCrop()
 
                 // 设置高斯模糊
-                .bitmapTransform(new BlurTransformation(context, radius,sampling))
+                .bitmapTransform(new BlurTransformation(context, radius, sampling))
                 .into(view);
     }
 
 
-    public static void blurTransformation(Context context, int res, ImageView view,int radius,int sampling) {
+    public static void blurTransformation(Context context, int res, ImageView view, int radius, int sampling) {
         Glide.with(context)
                 .load(res)
                 .centerCrop()
 
                 // 设置高斯模糊
-                .bitmapTransform(new BlurTransformation(context, radius,sampling))
+                .bitmapTransform(new BlurTransformation(context, radius, sampling))
                 .into(view);
     }
 

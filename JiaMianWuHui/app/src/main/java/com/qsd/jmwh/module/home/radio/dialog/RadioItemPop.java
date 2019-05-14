@@ -41,13 +41,12 @@ public class RadioItemPop extends BasePopupWindow {
     }
 
     public RadioItemPop(Context context) {
-        super(context, LayoutInflater.from(context).inflate(R.layout.rang_item_layout, null),
+        super(context, LayoutInflater.from(context).inflate(R.layout.radio_item_layout, null),
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         initView();
     }
 
     private void initView() {
-        bindView(R.id.ll_bottom).setVisibility(View.GONE);
         bindView(R.id.cancel, v -> dismiss());
         bindView(R.id.rl_root, v -> dismiss());
         bindView(R.id.ok, v -> {
@@ -65,6 +64,7 @@ public class RadioItemPop extends BasePopupWindow {
         DateRadioListDialogAdapter adapter = new DateRadioListDialogAdapter(R.layout.item_date_radio_layout, sDateProList,getContext());
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener((adapter1, view, position) -> {
+            this.dismiss();
             getContext().startActivity(new Intent(getContext(),ReleaseAppointmentActivity.class).putExtra("activity_title",sDateProList.get(position).sDatingConfigName));
         });
         return this;

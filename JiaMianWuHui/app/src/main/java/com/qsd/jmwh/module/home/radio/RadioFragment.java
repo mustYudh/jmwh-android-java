@@ -1,20 +1,30 @@
 package com.qsd.jmwh.module.home.radio;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarFragment;
 import com.qsd.jmwh.data.UserProfile;
+import com.qsd.jmwh.module.home.park.activity.LookUserInfoActivity;
 import com.qsd.jmwh.module.home.radio.adapter.HomeRadioRvAdapter;
+import com.qsd.jmwh.module.home.radio.bean.GetDatingUserVipBean;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
 import com.qsd.jmwh.module.home.radio.bean.LocalHomeRadioListBean;
@@ -24,10 +34,12 @@ import com.qsd.jmwh.module.home.radio.presenter.RadioViewer;
 import com.qsd.jmwh.module.register.DateRangeActivity;
 import com.qsd.jmwh.module.register.bean.RangeData;
 import com.qsd.jmwh.utils.DialogUtils;
+import com.qsd.jmwh.view.CircleImageView;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 import com.yu.common.ui.DelayClickImageView;
 import com.yu.common.ui.DelayClickTextView;
+import com.yu.common.utils.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +64,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
     private DelayClickTextView left_menu;
     private TextView tv_left;
     private HomeRadioRvAdapter adapter;
+    private Dialog commentDialog;
 
     @Override
     protected int getActionBarLayoutId() {
@@ -121,6 +134,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                     if (cdoListBean.cdoUserData != null) {
                         localHomeRadioListTitleBean.headImg = cdoListBean.cdoUserData.sUserHeadPic;
                         localHomeRadioListTitleBean.userName = cdoListBean.cdoUserData.sNickName;
+                        localHomeRadioListTitleBean.lUserId = cdoListBean.cdoUserData.lUserId;
                     }
                     localHomeRadioListTitleBean.sDatingRange = cdoListBean.sDatingRange;
                     localHomeRadioListTitleBean.sDatingTime = cdoListBean.sDatingTime;
@@ -144,6 +158,11 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                     localHomeRadioListBottomBean.lDatingId = cdoListBean.lDatingId;
                     localHomeRadioListBottomBean.lUserId = cdoListBean.lUserId;
                     localHomeRadioListBottomBean.nApplyCount = cdoListBean.nApplyCount;
+                    localHomeRadioListBottomBean.bCommentType = cdoListBean.bCommentType;
+                    localHomeRadioListBottomBean.sex = cdoListBean.nSex;
+                    if (cdoListBean.cdoUserData != null) {
+                        localHomeRadioListTitleBean.bVIP = cdoListBean.cdoUserData.bVIP;
+                    }
                     localHomeRadioListBottomBean.itemType = 2;
                     dataList.add(localHomeRadioListBottomBean);
                 }
@@ -158,6 +177,16 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                     @Override
                     public void setOnRadioItemClick(DelayClickImageView iv_like, DelayClickTextView tv_like, int position, int is_like, String lDatingId, String lJoinerId, String lInitiatorId) {
                         mPresenter.addDatingLikeCount(lDatingId, lJoinerId, lInitiatorId, iv_like, tv_like, position, is_like);
+                    }
+
+                    @Override
+                    public void setOnPersonInfoItemClick(int lLoveUserId) {
+                        getLaunchHelper().startActivity(LookUserInfoActivity.getIntent(getActivity(), lLoveUserId));
+                    }
+
+                    @Override
+                    public void setOnAddContentItemClick(LocalHomeRadioListBean item) {
+                        mPresenter.getDatingUserVIP(item);
                     }
                 });
                 ll_empty.setVisibility(View.GONE);
@@ -192,6 +221,78 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
             iv_like.setImageResource(R.drawable.zan_select);
             ToastUtils.show("点赞成功");
         }
+    }
+
+    @Override
+    public void getDatingUserVIPSuccess(GetDatingUserVipBean getDatingUserVipBean, LocalHomeRadioListBean item) {
+        if (getDatingUserVipBean != null) {
+            if (item.sex == 1 && !getDatingUserVipBean.bVIP) {
+                //非会员,男士
+                ToastUtils.show("非会员不能评论");
+                return;
+            }
+
+            showCommentDialog(item);
+        }
+    }
+
+    @Override
+    public void addDatingCommentCountSuccess(LocalHomeRadioListBean item) {
+        item.count_num = item.count_num + 1;
+        adapter.notifyDataSetChanged();
+        ToastUtils.show("评论成功");
+    }
+
+    /**
+     * 评论弹窗
+     */
+    private void showCommentDialog(LocalHomeRadioListBean item) {
+        commentDialog = new Dialog(getActivity(), R.style.DialogComment);
+        View view = View.inflate(getActivity(), R.layout.dialog_comment_layout, null);
+        commentDialog.setContentView(view);
+        WindowManager.LayoutParams attributes = commentDialog.getWindow().getAttributes();
+        attributes.width = ViewPager.LayoutParams.MATCH_PARENT;
+        attributes.height = ViewGroup.LayoutParams.MATCH_PARENT;
+        attributes.gravity = Gravity.CENTER;
+        commentDialog.setCanceledOnTouchOutside(true);
+        commentDialog.getWindow().setAttributes(attributes);
+        commentDialog.show();
+
+        final EditText et_talk = commentDialog.findViewById(R.id.et_talk);
+        TextView tv_send = commentDialog.findViewById(R.id.tv_send);
+
+        CircleImageView iv_headimg = commentDialog.findViewById(R.id.iv_headimg_other);
+        ImageLoader.loadCenterCrop(getActivity(), UserProfile.getInstance().getUserPic(), iv_headimg, R.drawable.zhanwei);
+
+        tv_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (TextUtils.isEmpty(et_talk.getText().toString().trim())) {
+                    ToastUtils.show("内容不能为空");
+                } else {
+                    if (commentDialog.isShowing()) {
+                        commentDialog.dismiss();
+                    }
+                    mPresenter.addDatingCommentCount(item.lDatingId + "", UserProfile.getInstance().getAppAccount() + "", item.lUserId + "", et_talk.getText().toString().trim(), item);
+                }
+            }
+        });
+
+        LinearLayout ll_root = commentDialog.findViewById(R.id.ll_root);
+
+        ll_root.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                InputMethodManager inputMgr = (InputMethodManager) getActivity()
+                        .getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMgr.toggleSoftInput(InputMethodManager.HIDE_NOT_ALWAYS, 0);
+
+                if (commentDialog.isShowing()) {
+                    commentDialog.dismiss();
+                }
+            }
+        });
     }
 
 

@@ -69,10 +69,20 @@ public class MineLikeRvAdapter extends BaseQuickAdapter<MineLikeBean.CdoListBean
                 }
             }
         });
+        helper.getView(R.id.ll_root).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onMineLikeItemClickListener != null) {
+                    onMineLikeItemClickListener.setOnPersonInfoItemClick(item.lUserId);
+                }
+            }
+        });
     }
 
     public interface OnMineLikeItemClickListener {
         void setOnMineLikeItemClick(DelayClickImageView iv_love, int position, boolean is_love, String lLoveUserId);
+
+        void setOnPersonInfoItemClick(int lLoveUserId);
     }
 
     OnMineLikeItemClickListener onMineLikeItemClickListener;

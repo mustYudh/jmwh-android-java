@@ -2,6 +2,7 @@ package com.qsd.jmwh.http;
 
 import com.qsd.jmwh.module.home.park.bean.HomePersonListBean;
 import com.qsd.jmwh.module.home.park.bean.OtherUserInfoBean;
+import com.qsd.jmwh.module.home.radio.bean.GetDatingUserVipBean;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
 import com.qsd.jmwh.module.home.user.bean.MineLikeBean;
@@ -157,4 +158,11 @@ public interface ApiServices {
 
     @NetMethod(ParameterNames = {"lDatingId", "lJoinerId", "lInitiatorId"}, Url = "/DatingService/addDatingLikeCount")
     Observable<Object> addDatingLikeCount(String lDatingId, String lJoinerId, String lInitiatorId);
+
+    @NetMethod(Url = "/DatingService/getDatingUserVIP")
+    Observable<GetDatingUserVipBean> getDatingUserVIP();
+
+    @NetMethod(ParameterNames = {"lDatingId", "lJoinerId", "lInitiatorId", "sContent"}, Url = "/DatingService/addDatingCommentCount")
+    Observable<Object> addDatingCommentCount(String lDatingId, String lJoinerId, String lInitiatorId, String sContent);
+
 }
