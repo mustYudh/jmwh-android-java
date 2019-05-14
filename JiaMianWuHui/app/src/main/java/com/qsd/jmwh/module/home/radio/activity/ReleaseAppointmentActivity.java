@@ -56,6 +56,8 @@ public class ReleaseAppointmentActivity extends BaseBarActivity implements View.
     private TextView tv_time;
     @PresenterLifeCycle
     ReleaseAppointmentPresenter mPresenter = new ReleaseAppointmentPresenter(this);
+    private RadioLoveRvAdapter radioLoveRvAdapter;
+    private List<GetRadioConfigListBean.CdoListBean> cdoList;
 
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
@@ -130,6 +132,7 @@ public class ReleaseAppointmentActivity extends BaseBarActivity implements View.
     @Override
     public void getConfigDataSuccess(GetRadioConfigListBean configListBean) {
         if (configListBean != null && configListBean.cdoList != null && configListBean.cdoList.size() != 0) {
+            cdoList = configListBean.cdoList;
             showLoveDialog(configListBean.cdoList);
         }
     }
@@ -273,8 +276,8 @@ public class ReleaseAppointmentActivity extends BaseBarActivity implements View.
 
         RecyclerView rv_love = loveDialog.findViewById(R.id.rv_love);
         rv_love.setLayoutManager(new LinearLayoutManager(getActivity()));
-        RadioLoveRvAdapter adapter = new RadioLoveRvAdapter(R.layout.item_radio_love, cdoList, getActivity());
-        rv_love.setAdapter(adapter);
+        radioLoveRvAdapter = new RadioLoveRvAdapter(R.layout.item_radio_love, cdoList, getActivity());
+        rv_love.setAdapter(radioLoveRvAdapter);
     }
 
     /**

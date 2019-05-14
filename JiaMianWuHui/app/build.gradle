@@ -130,10 +130,10 @@ android {
             zipAlignEnabled true
 
             proguardFiles getDefaultProguardFile("proguard-android.txt"), defaultProguardRule,
-                proguardBaseRule, proguardReacNativeRule,
-                proguardRemoveLogRule,
-                proguardThirdPartServiceRule,
-                proguardUmengSharedRule
+                    proguardBaseRule, proguardReacNativeRule,
+                    proguardRemoveLogRule,
+                    proguardThirdPartServiceRule,
+                    proguardUmengSharedRule
         }
     }
 

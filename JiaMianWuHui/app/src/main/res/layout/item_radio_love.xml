@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/ll_root"
               android:layout_width="match_parent"
               android:layout_height="48dp"
               android:orientation="vertical"
@@ -8,6 +7,7 @@
 
 
     <LinearLayout
+        android:id="@+id/ll_root"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -21,7 +21,7 @@
             android:layout_height="18dp"
             android:layout_marginLeft="20dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_button_selected"/>
+            android:src="@drawable/ic_button_unselected"/>
 
 
         <TextView
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="看脸"
-            android:textColor="#ff8a4efc"
+            android:textColor="@color/color_333333"
             android:textSize="15sp"
             />
     </LinearLayout>
