@@ -175,45 +175,7 @@
             android:layout_height="0.5dp"
             android:background="@color/color_EEEEEE"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
 
-            <com.yu.common.ui.DelayClickTextView
-                android:id="@+id/evaluation"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="评价"
-                android:textColor="@color/app_main_color"
-                android:textSize="16sp"/>
-
-
-            <com.yu.common.ui.DelayClickTextView
-                android:id="@+id/chat"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="私聊"
-                android:textColor="@color/app_main_color"
-                android:textSize="16sp"/>
-
-
-            <com.yu.common.ui.DelayClickTextView
-                android:visibility="gone"
-                android:id="@+id/social_account"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="社交账号"
-                android:textColor="@color/app_main_color"
-                android:textSize="16sp"/>
-
-        </LinearLayout>
 
 
     </LinearLayout>

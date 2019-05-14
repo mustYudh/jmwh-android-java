@@ -88,6 +88,19 @@
         android:layout_height="wrap_content">
     </com.qsd.jmwh.view.NoscrollerGridView>
 
+    <com.yu.common.ui.DelayClickTextView
+        android:id="@+id/setting_money_img"
+        android:visibility="gone"
+        android:paddingRight="15dp"
+        android:paddingTop="17dp"
+        android:paddingBottom="10dp"
+        android:background="@color/white"
+        android:textSize="15sp"
+        android:textColor="@color/app_main_bg_color"
+        android:gravity="right"
+        android:text="设置红包照片"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <com.qsd.jmwh.view.UserItemView
         android:id="@+id/my_evaluation"

@@ -18,6 +18,7 @@
         android:textSize="13sp"/>
 
     <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/public_info"
         app:type="selected"
         app:showArrow="false"
         app:user_left_text="公开（推荐）"
@@ -25,6 +26,7 @@
         android:layout_height="wrap_content"/>
 
     <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/pay_info"
         app:type="selected"
         app:showArrow="false"
         app:user_left_text="相册付费查看"
@@ -34,6 +36,7 @@
 
 
     <com.qsd.jmwh.view.UserItemView
+        android:visibility="gone"
         app:type="selected"
         app:showArrow="false"
         app:user_left_text="查看前通过我的验证"
@@ -42,6 +45,7 @@
 
 
     <com.qsd.jmwh.view.UserItemView
+        android:visibility="gone"
         app:type="selected"
         app:showArrow="false"
         app:show_line="false"
@@ -60,6 +64,7 @@
 
 
     <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/show_location"
         app:type="switch"
         app:showArrow="false"
         app:user_left_text="对他人隐藏我的距离"
@@ -76,6 +81,7 @@
         android:textSize="13sp"/>
 
     <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/show_account"
         app:type="switch"
         app:showArrow="false"
         app:show_line="false"

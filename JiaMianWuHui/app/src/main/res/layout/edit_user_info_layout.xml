@@ -96,6 +96,7 @@
 
 
         <com.qsd.jmwh.view.UserItemView
+            android:visibility="gone"
             android:id="@+id/switchSocial"
             app:type="switch"
             app:showArrow="false"
