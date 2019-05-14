@@ -50,8 +50,6 @@ public class ReleaseAppointmentActivity extends BaseBarActivity implements View.
     private List<String> allLocationSelectedPicture = new ArrayList<>();
     private GridAdapter adapter;
     private DialogUtils loveDialog, timeDialog;
-    private boolean is_one = false;
-    private boolean is_two = false;
     private TextView tv_city;
     private TextView tv_time;
     @PresenterLifeCycle

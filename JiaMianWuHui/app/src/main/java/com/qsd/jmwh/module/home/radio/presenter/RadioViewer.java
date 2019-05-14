@@ -19,7 +19,9 @@ public interface RadioViewer extends Viewer {
 
     void addDatingLikeCountSuccess(DelayClickImageView iv_like, DelayClickTextView tv_like, int position, int is_like);
 
-    void getDatingUserVIPSuccess(GetDatingUserVipBean getDatingUserVipBean,LocalHomeRadioListBean item);
+    void getDatingUserVIPSuccess(int type,GetDatingUserVipBean getDatingUserVipBean,LocalHomeRadioListBean item);
 
     void addDatingCommentCountSuccess(LocalHomeRadioListBean item);
+
+    void addDatingEnrollSuccess(LocalHomeRadioListBean item);
 }

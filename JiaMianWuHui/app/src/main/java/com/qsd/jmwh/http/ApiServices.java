@@ -165,4 +165,8 @@ public interface ApiServices {
     @NetMethod(ParameterNames = {"lDatingId", "lJoinerId", "lInitiatorId", "sContent"}, Url = "/DatingService/addDatingCommentCount")
     Observable<Object> addDatingCommentCount(String lDatingId, String lJoinerId, String lInitiatorId, String sContent);
 
+    @NetMethod(ParameterNames = {"lDatingId", "lJoinerId", "lInitiatorId"}, Url = "/DatingService/addDatingEnroll")
+    Observable<Object> addDatingEnroll(String lDatingId, String lJoinerId, String lInitiatorId);
+
+
 }
