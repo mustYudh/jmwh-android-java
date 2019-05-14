@@ -44,6 +44,10 @@ import com.yu.common.utils.ImageLoader;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
+import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
+import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
+
 import static com.qsd.jmwh.module.register.EditUserDataActivity.DATE_RANGE_REQUEST_CODE;
 
 /**
@@ -57,7 +61,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
     RadioPresenter mPresenter = new RadioPresenter(this);
     private RecyclerView rv_radio;
     private LinearLayout ll_empty;
-    private DialogUtils typeDialog;
+    private DialogUtils typeDialog, enrollDialog;
     private int sexType = 0;
     private int disType = 0;
     private DelayClickTextView right_menu;
@@ -186,7 +190,12 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
 
                     @Override
                     public void setOnAddContentItemClick(LocalHomeRadioListBean item) {
-                        mPresenter.getDatingUserVIP(item);
+                        mPresenter.getDatingUserVIP(0, item);
+                    }
+
+                    @Override
+                    public void setOnAddDatingEnrollItemClick(LocalHomeRadioListBean item) {
+                        mPresenter.getDatingUserVIP(1, item);
                     }
                 });
                 ll_empty.setVisibility(View.GONE);
@@ -224,15 +233,26 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
     }
 
     @Override
-    public void getDatingUserVIPSuccess(GetDatingUserVipBean getDatingUserVipBean, LocalHomeRadioListBean item) {
+    public void getDatingUserVIPSuccess(int type, GetDatingUserVipBean getDatingUserVipBean, LocalHomeRadioListBean item) {
         if (getDatingUserVipBean != null) {
-            if (item.sex == 1 && !getDatingUserVipBean.bVIP) {
-                //非会员,男士
-                ToastUtils.show("非会员不能评论");
-                return;
+            if (type == 0) {
+                //评论
+                if (item.sex == 1 && !getDatingUserVipBean.bVIP) {
+                    //非会员,男士
+                    ToastUtils.show("非会员不能评论");
+                    return;
+                }
+                showCommentDialog(item);
+            } else {
+                //报名
+                if (item.sex == 1 && !getDatingUserVipBean.bVIP) {
+                    //非会员,男士
+                    ToastUtils.show("非会员不能报名");
+                    return;
+                }
+                showEnrollDialog(item);
             }
 
-            showCommentDialog(item);
         }
     }
 
@@ -241,6 +261,14 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
         item.count_num = item.count_num + 1;
         adapter.notifyDataSetChanged();
         ToastUtils.show("评论成功");
+    }
+
+    @Override
+    public void addDatingEnrollSuccess(LocalHomeRadioListBean item) {
+        item.is_apply = 1;
+        item.nApplyCount = item.nApplyCount + 1;
+        adapter.notifyDataSetChanged();
+        ToastUtils.show("报名成功,如果对方觉得合适将会联系您!");
     }
 
     /**
@@ -408,6 +436,58 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
         } else {
             typeDialog.findViewById(R.id.ll_other).setVisibility(View.VISIBLE);
         }
+    }
+
+
+    /**
+     * 报名弹窗
+     */
+    private void showEnrollDialog(LocalHomeRadioListBean item) {
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (enrollDialog.isShowing()) {
+                    enrollDialog.dismiss();
+                }
+                switch (v.getId()) {
+                    case R.id.ll_top:
+                        addPhoto(item);
+                        break;
+                    case R.id.ll_bottom:
+
+                        break;
+
+                }
+            }
+        };
+
+        enrollDialog = new DialogUtils.Builder(getActivity())
+                .view(R.layout.dialog_radio_enroll)
+                .gravity(Gravity.CENTER)
+                .style(R.style.Dialog)
+                .cancelTouchout(true)
+                .addViewOnclick(R.id.ll_bottom, listener)
+                .addViewOnclick(R.id.ll_top, listener)
+                .build();
+        enrollDialog.show();
+
+    }
+
+    /**
+     * 选择图片
+     */
+    private void addPhoto(LocalHomeRadioListBean item) {
+        RxGalleryFinalApi instance = RxGalleryFinalApi.getInstance(getActivity());
+        instance.openSingGalleryRadioImgDefault(
+                new RxBusResultDisposable<ImageRadioResultEvent>() {
+                    @Override
+                    protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) {
+                        String imgUrl = imageRadioResultEvent.getResult().getOriginalPath();
+                        if (!TextUtils.isEmpty(imgUrl)) {
+                            mPresenter.addDatingEnroll(item.lDatingId + "", UserProfile.getInstance().getAppAccount() + "", item.lUserId + "", item);
+                        }
+                    }
+                });
     }
 
     @Override

@@ -106,6 +106,26 @@ public class HomeRadioRvAdapter extends BaseMultiItemQuickAdapter<LocalHomeRadio
                         }
                     }
                 });
+
+                helper.getView(R.id.ll_enroll).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (item.is_apply == 1) {
+                            ToastUtils.show("不能取消报名哦");
+                            return;
+                        }
+
+                        if (item.sex == UserProfile.getInstance().getSex()) {
+                            //不能报名
+                            ToastUtils.show("抱歉,不能报名其他同性别人士的广播哦");
+                            return;
+                        }
+
+                        if (onRadioItemClickListener != null) {
+                            onRadioItemClickListener.setOnAddDatingEnrollItemClick(item);
+                        }
+                    }
+                });
                 break;
         }
     }
@@ -117,6 +137,8 @@ public class HomeRadioRvAdapter extends BaseMultiItemQuickAdapter<LocalHomeRadio
         void setOnPersonInfoItemClick(int lLoveUserId);
 
         void setOnAddContentItemClick(LocalHomeRadioListBean item);
+
+        void setOnAddDatingEnrollItemClick(LocalHomeRadioListBean item);
     }
 
     OnRadioItemClickListener onRadioItemClickListener;

@@ -83,9 +83,9 @@ public class RadioPresenter extends BaseViewPresenter<RadioViewer> {
     }
 
     @SuppressLint("CheckResult")
-    public void addDatingCommentCount(String lDatingId, String lJoinerId, String lInitiatorId,String sContent,LocalHomeRadioListBean item) {
+    public void addDatingCommentCount(String lDatingId, String lJoinerId, String lInitiatorId, String sContent, LocalHomeRadioListBean item) {
         XHttpProxy.proxy(ApiServices.class)
-                .addDatingCommentCount(lDatingId, lJoinerId, lInitiatorId,sContent)
+                .addDatingCommentCount(lDatingId, lJoinerId, lInitiatorId, sContent)
                 .subscribeWith(new TipRequestSubscriber<Object>() {
                     @Override
                     protected void onSuccess(Object o) {
@@ -96,14 +96,28 @@ public class RadioPresenter extends BaseViewPresenter<RadioViewer> {
     }
 
     @SuppressLint("CheckResult")
-    public void getDatingUserVIP(LocalHomeRadioListBean item) {
+    public void getDatingUserVIP(int type, LocalHomeRadioListBean item) {
         XHttpProxy.proxy(ApiServices.class)
                 .getDatingUserVIP()
                 .subscribeWith(new TipRequestSubscriber<GetDatingUserVipBean>() {
                     @Override
                     protected void onSuccess(GetDatingUserVipBean getDatingUserVipBean) {
                         assert getViewer() != null;
-                        getViewer().getDatingUserVIPSuccess(getDatingUserVipBean, item);
+                        getViewer().getDatingUserVIPSuccess(type, getDatingUserVipBean, item);
+                    }
+                });
+    }
+
+
+    @SuppressLint("CheckResult")
+    public void addDatingEnroll(String lDatingId, String lJoinerId, String lInitiatorId, LocalHomeRadioListBean item) {
+        XHttpProxy.proxy(ApiServices.class)
+                .addDatingEnroll(lDatingId, lJoinerId, lInitiatorId)
+                .subscribeWith(new TipRequestSubscriber<Object>() {
+                    @Override
+                    protected void onSuccess(Object o) {
+                        assert getViewer() != null;
+                        getViewer().addDatingEnrollSuccess(item);
                     }
                 });
     }
