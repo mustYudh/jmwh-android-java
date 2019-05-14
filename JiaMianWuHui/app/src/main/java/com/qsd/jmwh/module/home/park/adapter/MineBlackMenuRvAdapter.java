@@ -44,11 +44,21 @@ public class MineBlackMenuRvAdapter extends BaseQuickAdapter<MineLikeBean.CdoLis
                 }
             }
         });
+        helper.getView(R.id.ll_root).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onMineLikeItemClickListener != null) {
+                    onMineLikeItemClickListener.setOnPersonInfoItemClick(item.lUserId);
+                }
+            }
+        });
     }
 
 
     public interface OnMineLikeItemClickListener {
         void setOnMineLikeItemClick(DelayClickTextView tv_black, int position, boolean is_black, String lLoveUserId);
+
+        void setOnPersonInfoItemClick(int lLoveUserId);
     }
 
     OnMineLikeItemClickListener onMineLikeItemClickListener;

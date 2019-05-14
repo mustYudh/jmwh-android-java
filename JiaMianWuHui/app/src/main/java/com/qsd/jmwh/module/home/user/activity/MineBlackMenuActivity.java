@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
+import com.qsd.jmwh.module.home.park.activity.LookUserInfoActivity;
 import com.qsd.jmwh.module.home.park.adapter.MineBlackMenuRvAdapter;
 import com.qsd.jmwh.module.home.user.bean.MineLikeBean;
 import com.qsd.jmwh.module.home.user.presenter.MineLikePresenter;
@@ -60,6 +61,11 @@ public class MineBlackMenuActivity extends BaseBarActivity implements MineLikeVi
                     @Override
                     public void setOnMineLikeItemClick(DelayClickTextView tv_black, int position, boolean is_black, String lLoveUserId) {
                         mPresenter.initAddBlackUser(lLoveUserId, "1", is_black, position, tv_black);
+                    }
+
+                    @Override
+                    public void setOnPersonInfoItemClick(int lLoveUserId) {
+                        getLaunchHelper().startActivity(LookUserInfoActivity.getIntent(getActivity(), lLoveUserId));
                     }
                 });
             } else {

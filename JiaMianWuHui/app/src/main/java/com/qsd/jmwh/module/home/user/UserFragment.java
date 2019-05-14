@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -285,7 +286,7 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
     public void onResume() {
         super.onResume();
         update(getArguments());
-
+        Log.e("aaaa","走了吗");
     }
 
     @Override

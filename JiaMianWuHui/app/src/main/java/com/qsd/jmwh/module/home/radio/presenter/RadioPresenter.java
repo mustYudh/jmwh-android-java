@@ -6,8 +6,10 @@ import android.view.View;
 
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
+import com.qsd.jmwh.module.home.radio.bean.GetDatingUserVipBean;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
+import com.qsd.jmwh.module.home.radio.bean.LocalHomeRadioListBean;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.framework.BaseViewPresenter;
 import com.yu.common.ui.DelayClickImageView;
@@ -70,12 +72,38 @@ public class RadioPresenter extends BaseViewPresenter<RadioViewer> {
     @SuppressLint("CheckResult")
     public void addDatingLikeCount(String lDatingId, String lJoinerId, String lInitiatorId, DelayClickImageView iv_like, DelayClickTextView tv_like, int position, int is_like) {
         XHttpProxy.proxy(ApiServices.class)
-                .addDatingLikeCount(lDatingId,lJoinerId,lInitiatorId)
+                .addDatingLikeCount(lDatingId, lJoinerId, lInitiatorId)
                 .subscribeWith(new TipRequestSubscriber<Object>() {
                     @Override
                     protected void onSuccess(Object o) {
                         assert getViewer() != null;
-                        getViewer().addDatingLikeCountSuccess(iv_like,tv_like,position,is_like);
+                        getViewer().addDatingLikeCountSuccess(iv_like, tv_like, position, is_like);
+                    }
+                });
+    }
+
+    @SuppressLint("CheckResult")
+    public void addDatingCommentCount(String lDatingId, String lJoinerId, String lInitiatorId,String sContent,LocalHomeRadioListBean item) {
+        XHttpProxy.proxy(ApiServices.class)
+                .addDatingCommentCount(lDatingId, lJoinerId, lInitiatorId,sContent)
+                .subscribeWith(new TipRequestSubscriber<Object>() {
+                    @Override
+                    protected void onSuccess(Object o) {
+                        assert getViewer() != null;
+                        getViewer().addDatingCommentCountSuccess(item);
+                    }
+                });
+    }
+
+    @SuppressLint("CheckResult")
+    public void getDatingUserVIP(LocalHomeRadioListBean item) {
+        XHttpProxy.proxy(ApiServices.class)
+                .getDatingUserVIP()
+                .subscribeWith(new TipRequestSubscriber<GetDatingUserVipBean>() {
+                    @Override
+                    protected void onSuccess(GetDatingUserVipBean getDatingUserVipBean) {
+                        assert getViewer() != null;
+                        getViewer().getDatingUserVIPSuccess(getDatingUserVipBean, item);
                     }
                 });
     }

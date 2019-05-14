@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarFragment;
+import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.park.adapter.HomeParkPageAdapter;
 import com.qsd.jmwh.module.home.park.presenter.ParkPresenter;
 import com.qsd.jmwh.module.home.park.presenter.ParkViewer;
@@ -24,9 +25,10 @@ import com.yu.common.utils.DensityUtil;
  */
 
 public class ParkFragment extends BaseBarFragment implements ParkViewer, TabLayout.OnTabSelectedListener {
-
+    private boolean sex = false;
     @PresenterLifeCycle
     ParkPresenter mPresenter = new ParkPresenter(this);
+    private TextView right_menu;
 
 
     @Override
@@ -45,9 +47,12 @@ public class ParkFragment extends BaseBarFragment implements ParkViewer, TabLayo
     }
 
     private void initView() {
+        right_menu = bindView(R.id.right_menu);
         TabLayout tabLayout = bindView(R.id.tab_layout);
         ViewPager viewPager = bindView(R.id.view_pager);
         initTabLayout(tabLayout, viewPager);
+
+
     }
 
     private void initTabLayout(TabLayout tabLayout, ViewPager viewPager) {
@@ -87,6 +92,16 @@ public class ParkFragment extends BaseBarFragment implements ParkViewer, TabLayo
                 tab.setCustomView(view);
             }
         }
+
+        right_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sex = !sex;
+                adapter.getFragment(viewPager.getCurrentItem()).mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), viewPager.getCurrentItem() + "", "", "0", !sex ? "0" : "1");
+                right_menu.setText(!sex ? "女士列表" : "男士列表");
+            }
+        });
+
     }
 
     @Override
@@ -103,6 +118,8 @@ public class ParkFragment extends BaseBarFragment implements ParkViewer, TabLayo
             textView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
             textView.setTextSize(22);
         }
+        right_menu.setText("女士列表");
+        sex = false;
     }
 
     @Override

@@ -7,9 +7,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.bumptech.glide.Glide;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.utils.ScreentUtils;
+import com.yu.common.utils.ImageLoader;
 
 import java.util.List;
 
@@ -57,7 +57,7 @@ public class HomeRadioPicGvAdapter extends BaseAdapter {
         para.width = (int) (width / 3);
         para.height = (int) (width / 3);
         holder.iv_pic.setLayoutParams(para);
-        Glide.with(context).load(list.get(i)).into(holder.iv_pic);
+        ImageLoader.loadCenterCrop(context, list.get(i), holder.iv_pic, R.drawable.zhanwei);
         return view;
     }
 

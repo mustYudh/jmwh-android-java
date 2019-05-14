@@ -17,6 +17,8 @@ public class LocalHomeRadioListBean implements MultiItemEntity {
     public String headImg;
     public String userName;
     public String cTime;
+    public boolean bVIP;
+    public boolean bCommentType;
     public List<String> picList;
     public int is_like;
     public int like_count;

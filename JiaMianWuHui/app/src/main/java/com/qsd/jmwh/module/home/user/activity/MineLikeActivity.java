@@ -10,6 +10,7 @@ import android.view.View;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
+import com.qsd.jmwh.module.home.park.activity.LookUserInfoActivity;
 import com.qsd.jmwh.module.home.park.adapter.MineLikeRvAdapter;
 import com.qsd.jmwh.module.home.user.bean.MineLikeBean;
 import com.qsd.jmwh.module.home.user.presenter.MineLikePresenter;
@@ -71,6 +72,11 @@ public class MineLikeActivity extends BaseBarActivity implements MineLikeViewer 
                         } else {
                             mPresenter.initAddLoveUser(lLoveUserId, "0", is_love, position, iv_love);
                         }
+                    }
+
+                    @Override
+                    public void setOnPersonInfoItemClick(int lLoveUserId) {
+                        getLaunchHelper().startActivity(LookUserInfoActivity.getIntent(getActivity(), lLoveUserId));
                     }
                 });
             } else {
