@@ -68,9 +68,9 @@ public class MineLikeActivity extends BaseBarActivity implements MineLikeViewer 
                     @Override
                     public void setOnMineLikeItemClick(DelayClickImageView iv_love, int position, boolean is_love, String lLoveUserId) {
                         if (is_love) {
-                            showLoveDialog(lLoveUserId, iv_love, position, is_love);
+                            showLoveDialog(lLoveUserId, iv_love, position);
                         } else {
-                            mPresenter.initAddLoveUser(lLoveUserId, "0", is_love, position, iv_love);
+                            mPresenter.initAddLoveUser(lLoveUserId, "0", position, iv_love);
                         }
                     }
 
@@ -86,20 +86,26 @@ public class MineLikeActivity extends BaseBarActivity implements MineLikeViewer 
     }
 
     @Override
-    public void addLoveUserSuccess(boolean is_love, int position, DelayClickImageView iv_love) {
-        if (is_love) {
-            list.get(position).blove = false;
-            iv_love.setImageResource(R.drawable.collect);
-            ToastUtils.show("取消收藏成功");
-        } else {
-            list.get(position).blove = true;
-            iv_love.setImageResource(R.drawable.collect_select);
-            ToastUtils.show("收藏成功");
-        }
+    public void addLoveUserSuccess(int position, DelayClickImageView iv_love) {
+        list.get(position).blove = true;
+        iv_love.setImageResource(R.drawable.collect_select);
+        ToastUtils.show("收藏成功");
     }
 
     @Override
-    public void addBlackUserSuccess(boolean is_black, int position, DelayClickTextView tv_black) {
+    public void delLoveUserSuccess(int position, DelayClickImageView iv_love) {
+        list.get(position).blove = false;
+        iv_love.setImageResource(R.drawable.collect);
+        ToastUtils.show("取消收藏成功");
+    }
+
+    @Override
+    public void addBlackUserSuccess(int position, DelayClickTextView tv_black) {
+
+    }
+
+    @Override
+    public void delBlackUserSuccess(int position, DelayClickTextView tv_black) {
 
     }
 
@@ -107,7 +113,7 @@ public class MineLikeActivity extends BaseBarActivity implements MineLikeViewer 
     /**
      * 取消收藏弹窗
      */
-    private void showLoveDialog(String lLoveUserId, DelayClickImageView iv_love, int position, boolean is_love) {
+    private void showLoveDialog(String lLoveUserId, DelayClickImageView iv_love, int position) {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,7 +127,7 @@ public class MineLikeActivity extends BaseBarActivity implements MineLikeViewer 
                         if (loveDialog.isShowing()) {
                             loveDialog.dismiss();
                         }
-                        mPresenter.initAddLoveUser(lLoveUserId, "0", is_love, position, iv_love);
+                        mPresenter.initdelLoveUser(lLoveUserId, "0", position, iv_love);
                         break;
                 }
             }

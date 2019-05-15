@@ -24,7 +24,7 @@
     <application
         android:name=".APP"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/app_icon"
         android:label="${APP_NAME}"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -167,6 +167,10 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".module.home.park.activity.SearchActivity">
         </activity>
+        <activity
+            android:name=".module.home.radio.activity.ViewBigImageActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
