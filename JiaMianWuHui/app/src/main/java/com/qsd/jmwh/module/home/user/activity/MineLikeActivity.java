@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
@@ -30,6 +31,7 @@ public class MineLikeActivity extends BaseBarActivity implements MineLikeViewer 
     private MineLikeRvAdapter adapter;
     private DialogUtils loveDialog;
     private List<MineLikeBean.CdoListBean> list = new ArrayList<>();
+    private LinearLayout ll_empty;
 
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
@@ -42,7 +44,7 @@ public class MineLikeActivity extends BaseBarActivity implements MineLikeViewer 
     @Override
     protected void loadData() {
         setTitle("我喜欢的");
-
+        ll_empty = bindView(R.id.ll_empty);
         rv_like = bindView(R.id.rv_like);
         rv_like.setLayoutManager(new LinearLayoutManager(getActivity()));
         mPresenter.getMineLikeData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), "0");
@@ -79,8 +81,12 @@ public class MineLikeActivity extends BaseBarActivity implements MineLikeViewer 
                         getLaunchHelper().startActivity(LookUserInfoActivity.getIntent(getActivity(), lLoveUserId));
                     }
                 });
+                rv_like.setVisibility(View.VISIBLE);
+                ll_empty.setVisibility(View.GONE);
             } else {
                 //空界面
+                rv_like.setVisibility(View.GONE);
+                ll_empty.setVisibility(View.VISIBLE);
             }
         }
     }
