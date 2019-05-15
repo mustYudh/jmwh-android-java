@@ -2,10 +2,12 @@ package com.qsd.jmwh.http;
 
 import com.qsd.jmwh.module.home.user.bean.AccountBalance;
 import com.qsd.jmwh.module.home.user.bean.EvaluationBean;
+import com.qsd.jmwh.module.home.user.bean.GoodsInfoBean;
 import com.qsd.jmwh.module.home.user.bean.MaskBallCoinBean;
 import com.qsd.jmwh.module.home.user.bean.PayInfoBean;
 import com.qsd.jmwh.module.home.user.bean.PrivacySettingStatusBean;
 import com.qsd.jmwh.module.home.user.bean.PushSettingBean;
+import com.qsd.jmwh.module.register.bean.PayInfo;
 import com.xuexiang.xhttp2.annotation.NetMethod;
 
 import io.reactivex.Observable;
@@ -68,5 +70,13 @@ public interface OtherApiServices {
 
     @NetMethod(ParameterNames = {"sAliPayAccount","sAliPayName"},Url = "/AccountBalanceService/modifyAliPay")
     Observable<Object> modifyAliPay(String sAliPayAccount, String sAliPayName);
+
+
+    @NetMethod(ParameterNames = {"nGoodsType"},Url = "/GoodsService/getGoods")
+    Observable<GoodsInfoBean> getGoods(int nGoodsType);
+
+
+    @NetMethod(ParameterNames = {"lGoodsId","nPayType"},Url = "/OrderService/getBuyDatingPaySign")
+    Observable<PayInfo> getBuyDatingPaySign(int lGoodsId,int nPayType);
 
 }

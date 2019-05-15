@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import com.qsd.jmwh.http.OtherApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.home.user.bean.AccountBalance;
+import com.qsd.jmwh.module.home.user.bean.GoodsInfoBean;
 import com.qsd.jmwh.module.home.user.bean.MaskBallCoinBean;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xuexiang.xhttp2.XHttpProxy;
@@ -84,6 +85,16 @@ public class JiaMianCoinPresenter extends BaseViewPresenter<JiaMianCoinViewer> {
             protected void onSuccess(Object o) {
                 ToastUtils.show("添加提现账号成功");
                 getInfo(0, null, 0);
+            }
+        });
+    }
+
+    public void getGoods() {
+        XHttpProxy.proxy(OtherApiServices.class).getGoods(8).subscribeWith(new TipRequestSubscriber<GoodsInfoBean>() {
+            @Override
+            protected void onSuccess(GoodsInfoBean goodsInfoBean) {
+                assert getViewer() != null;
+                getViewer().setGoodsInfo(goodsInfoBean.cdoList);
             }
         });
     }

@@ -17,6 +17,7 @@
       >
 
     <TextView
+        android:id="@+id/goods_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/color_2A2A2A"
@@ -26,6 +27,7 @@
 
 
     <TextView
+        android:id="@+id/goods_real_fee"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="13dp"
@@ -36,6 +38,7 @@
         tools:text="¥ 80.00"
         />
     <TextView
+        android:id="@+id/goods_sale_fee"
         android:layout_width="wrap_content"
         android:layout_height="28dp"
         android:background="@drawable/shape_app_main_button_bg"

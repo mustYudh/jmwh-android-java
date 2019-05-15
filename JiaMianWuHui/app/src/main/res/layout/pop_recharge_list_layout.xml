@@ -30,7 +30,6 @@
 
 
     <android.support.v7.widget.RecyclerView
-        tools:listitem="@layout/item_jia_mian_coin_layout"
         android:layout_marginBottom="25dp"
         android:id="@+id/list"
         android:layout_width="match_parent"

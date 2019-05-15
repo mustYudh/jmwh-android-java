@@ -12,11 +12,13 @@ import com.qsd.jmwh.base.BaseFragment;
 import com.qsd.jmwh.dialog.SelectHintPop;
 import com.qsd.jmwh.module.home.user.adapter.WithdrawalAdapter;
 import com.qsd.jmwh.module.home.user.bean.AccountBalance;
+import com.qsd.jmwh.module.home.user.bean.GoodsInfoBean;
 import com.qsd.jmwh.module.home.user.bean.MaskBallCoinBean;
 import com.qsd.jmwh.module.home.user.dialog.PayPop;
-import com.qsd.jmwh.module.home.user.dialog.SelePayTypePop;
+import com.qsd.jmwh.module.home.user.dialog.RechargeListDialog;
 import com.qsd.jmwh.module.home.user.presenter.JiaMianCoinPresenter;
 import com.qsd.jmwh.module.home.user.presenter.JiaMianCoinViewer;
+import com.qsd.jmwh.utils.PayUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
@@ -94,8 +96,7 @@ public class JiaMianCoinFragment extends BaseFragment implements View.OnClickLis
                 selectHintPop.showPopupWindow();
                 break;
             case R.id.top_up:
-                SelePayTypePop selePayTypePop = new SelePayTypePop(getActivity());
-                selePayTypePop.showPopupWindow();
+                mPresenter.getGoods();
                 break;
 
         }
@@ -129,5 +130,21 @@ public class JiaMianCoinFragment extends BaseFragment implements View.OnClickLis
             selectHintPop.dismiss();
         }).setNegativeButton("取消", v -> selectHintPop.dismiss()).showPopupWindow();
 
+    }
+
+    @Override
+    public void setGoodsInfo(List<GoodsInfoBean.CdoListBean> goods) {
+        RechargeListDialog dialog = new RechargeListDialog(getActivity(), goods, new PayUtils.PayCallBack() {
+            @Override
+            public void onPaySuccess(int type) {
+                loadData();
+            }
+
+            @Override
+            public void onFailed(int type) {
+
+            }
+        });
+        dialog.showPopupWindow();
     }
 }
