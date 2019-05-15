@@ -15,7 +15,8 @@
         android:paddingLeft="20dp"
         android:paddingRight="18dp"
         android:text="附近"
-        android:textColor="@color/app_main_bg_color">
+        android:textColor="@color/app_main_bg_color"
+        android:visibility="gone">
 
     </TextView>
 
@@ -26,6 +27,7 @@
         android:layout_height="30dp"
         android:layout_centerHorizontal="true"
         android:layout_gravity="bottom"
+        android:layout_marginLeft="15dp"
         android:layout_marginBottom="7dp"
         android:layout_weight="1"
         android:background="@drawable/shape_circle_header_bg"

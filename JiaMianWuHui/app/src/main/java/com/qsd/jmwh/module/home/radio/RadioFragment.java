@@ -24,6 +24,7 @@ import com.qsd.jmwh.base.BaseBarFragment;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.park.activity.LookUserInfoActivity;
 import com.qsd.jmwh.module.home.radio.adapter.HomeRadioRvAdapter;
+import com.qsd.jmwh.module.home.radio.bean.DataRefreshRadioDataEvent;
 import com.qsd.jmwh.module.home.radio.bean.GetDatingUserVipBean;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
@@ -33,6 +34,8 @@ import com.qsd.jmwh.module.home.radio.presenter.RadioPresenter;
 import com.qsd.jmwh.module.home.radio.presenter.RadioViewer;
 import com.qsd.jmwh.module.register.DateRangeActivity;
 import com.qsd.jmwh.module.register.bean.RangeData;
+import com.qsd.jmwh.thrid.UploadImage;
+import com.qsd.jmwh.thrid.oss.PersistenceResponse;
 import com.qsd.jmwh.utils.DialogUtils;
 import com.qsd.jmwh.view.CircleImageView;
 import com.yu.common.mvp.PresenterLifeCycle;
@@ -40,6 +43,10 @@ import com.yu.common.toast.ToastUtils;
 import com.yu.common.ui.DelayClickImageView;
 import com.yu.common.ui.DelayClickTextView;
 import com.yu.common.utils.ImageLoader;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +76,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
     private TextView tv_left;
     private HomeRadioRvAdapter adapter;
     private Dialog commentDialog;
+    private String select_city = "";
 
     @Override
     protected int getActionBarLayoutId() {
@@ -464,7 +472,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
         enrollDialog = new DialogUtils.Builder(getActivity())
                 .view(R.layout.dialog_radio_enroll)
                 .gravity(Gravity.CENTER)
-                .style(R.style.Dialog)
+                .style(R.style.Dialog_NoAnimation)
                 .cancelTouchout(true)
                 .addViewOnclick(R.id.ll_bottom, listener)
                 .addViewOnclick(R.id.ll_top, listener)
@@ -484,7 +492,9 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                     protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) {
                         String imgUrl = imageRadioResultEvent.getResult().getOriginalPath();
                         if (!TextUtils.isEmpty(imgUrl)) {
-                            mPresenter.addDatingEnroll(item.lDatingId + "", UserProfile.getInstance().getAppAccount() + "", item.lUserId + "", item);
+                            PersistenceResponse response = UploadImage.uploadImage(getActivity(), UserProfile.getInstance().getObjectName(), imgUrl);
+
+                            mPresenter.addDatingEnroll(item.lDatingId + "", UserProfile.getInstance().getAppAccount() + "", item.lUserId + "", response.cloudUrl, item);
                         }
                     }
                 });
@@ -499,6 +509,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
             if (range != null) {
                 if (requestCode == DATE_RANGE_REQUEST_CODE) {
                     tv_left.setText(range.sName);
+                    select_city = range.sName;
                     switch (sexType) {
                         case 0:
                             mPresenter.initRadioDataAll("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), range.sName + "", (disType == 0 ? 1 : 2) + "", "0");
@@ -513,6 +524,34 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
 
                 }
             }
+        }
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    //刷新数据
+    @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行
+    public void onEvent(DataRefreshRadioDataEvent event) {
+        switch (sexType) {
+            case 0:
+                mPresenter.initRadioDataAll("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), select_city + "", (disType == 0 ? 1 : 2) + "", "0");
+                break;
+            case 1:
+                mPresenter.initRadioData("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), select_city + "", (disType == 0 ? 1 : 2) + "", "0", "0");
+                break;
+            case 2:
+                mPresenter.initRadioData("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), select_city + "", (disType == 0 ? 1 : 2) + "", "0", "1");
+                break;
         }
     }
 }
