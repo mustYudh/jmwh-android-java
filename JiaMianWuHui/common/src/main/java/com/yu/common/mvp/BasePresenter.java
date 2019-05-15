@@ -1,10 +1,10 @@
 package com.yu.common.mvp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 
 import com.yu.common.launche.LauncherHelper;
 
@@ -36,7 +36,7 @@ public abstract class BasePresenter<T extends Viewer> implements Presenter {
   public LauncherHelper getLauncherHelper() {
     return LauncherHelper.from(getActivity());
   }
-  public Activity getActivity() {
+  public FragmentActivity getActivity() {
     if (getViewer() != null) {
       return getViewer().getActivity();
     }
