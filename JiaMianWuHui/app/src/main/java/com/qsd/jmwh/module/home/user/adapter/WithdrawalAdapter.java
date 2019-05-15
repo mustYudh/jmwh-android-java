@@ -1,6 +1,5 @@
 package com.qsd.jmwh.module.home.user.adapter;
 
-import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -9,12 +8,10 @@ import com.qsd.jmwh.R;
 import com.qsd.jmwh.module.home.user.bean.AccountBalance;
 import com.yu.common.utils.ImageLoader;
 
-import java.util.List;
-
 public class WithdrawalAdapter extends BaseQuickAdapter<AccountBalance.CdoAccountBalanceListBean, BaseViewHolder> {
 
-    public WithdrawalAdapter(int layoutResId, @Nullable List<AccountBalance.CdoAccountBalanceListBean> data) {
-        super(layoutResId, data);
+    public WithdrawalAdapter(int layoutResId) {
+        super(layoutResId);
     }
 
     @Override

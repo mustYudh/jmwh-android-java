@@ -21,12 +21,16 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 
+import java.util.List;
+
 public class JiaMianCoinFragment extends BaseFragment implements View.OnClickListener, JiaMianCoinViewer {
     @PresenterLifeCycle
     private JiaMianCoinPresenter mPresenter = new JiaMianCoinPresenter(this);
 
     private int pageIndex;
     private RecyclerView recyclerView;
+    private WithdrawalAdapter adapter;
+    private SmartRefreshLayout refresh;
 
     @Override
     protected int getContentViewId() {
@@ -43,19 +47,21 @@ public class JiaMianCoinFragment extends BaseFragment implements View.OnClickLis
         bindView(R.id.withdrawal, this);
         bindView(R.id.top_up, this);
         bindView(R.id.ll_withdrawal, this);
-        SmartRefreshLayout layout = bindView(R.id.refresh);
-        layout.setOnRefreshListener(refreshLayout -> {
+        refresh = bindView(R.id.refresh);
+        refresh.setOnRefreshListener(refreshLayout -> {
             pageIndex = 0;
-            mPresenter.getInfo(pageIndex);
+            mPresenter.getInfo(pageIndex,refreshLayout,0);
         });
-        layout.setOnLoadMoreListener(refreshLayout -> {
+        refresh.setOnLoadMoreListener(refreshLayout -> {
             pageIndex++;
-            mPresenter.getInfo(pageIndex);
+            mPresenter.getInfo(pageIndex,refreshLayout,1);
         });
         recyclerView = bindView(R.id.list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
-        mPresenter.getInfo(pageIndex);
+        adapter = new WithdrawalAdapter(R.layout.item_withdrawal_layout);
+        recyclerView.setAdapter(adapter);
+        mPresenter.getInfo(pageIndex,null,0);
     }
 
     @Override
@@ -103,8 +109,15 @@ public class JiaMianCoinFragment extends BaseFragment implements View.OnClickLis
         if (!TextUtils.isEmpty(listBean.sAliPayAccount) && !TextUtils.isEmpty(listBean.sAliPayName)) {
             bindText(R.id.ali_pay_hint, listBean.sAliPayAccount + "(" + listBean.sAliPayName + "）");
         }
-        WithdrawalAdapter adapter = new WithdrawalAdapter(R.layout.item_withdrawal_layout, accountBalance.cdoAccountBalanceList);
-        recyclerView.setAdapter(adapter);
+        List<AccountBalance.CdoAccountBalanceListBean> data = accountBalance.cdoAccountBalanceList;
+        if (data != null && data.size() > 0) {
+            adapter.addData(data);
+            adapter.loadMoreComplete();
+            adapter.setEnableLoadMore(true);
+        } else {
+            adapter.loadMoreEnd();
+        }
+
     }
 
     @Override
