@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
@@ -26,6 +28,7 @@ public class MineBlackMenuActivity extends BaseBarActivity implements MineLikeVi
     private RecyclerView rv_list;
     private MineBlackMenuRvAdapter adapter;
     private List<MineLikeBean.CdoListBean> list = new ArrayList<>();
+    private LinearLayout ll_empty;
 
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
@@ -39,8 +42,9 @@ public class MineBlackMenuActivity extends BaseBarActivity implements MineLikeVi
     protected void loadData() {
         setTitle("黑名单");
         rv_list = bindView(R.id.rv_list);
+        ll_empty = bindView(R.id.ll_empty);
         rv_list.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mPresenter.getMineLikeData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), "0");
+        mPresenter.getMineLikeData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), "1");
     }
 
     @Override
@@ -60,7 +64,12 @@ public class MineBlackMenuActivity extends BaseBarActivity implements MineLikeVi
                 adapter.setOnPersonItemClickListener(new MineBlackMenuRvAdapter.OnMineLikeItemClickListener() {
                     @Override
                     public void setOnMineLikeItemClick(DelayClickTextView tv_black, int position, boolean is_black, String lLoveUserId) {
-                        mPresenter.initAddBlackUser(lLoveUserId, "1", is_black, position, tv_black);
+                        if (is_black) {
+                            mPresenter.initDelLoveUser(lLoveUserId, "1", position, tv_black);
+                        } else {
+                            mPresenter.initAddBlackUser(lLoveUserId, "1", position, tv_black);
+                        }
+
                     }
 
                     @Override
@@ -68,28 +77,38 @@ public class MineBlackMenuActivity extends BaseBarActivity implements MineLikeVi
                         getLaunchHelper().startActivity(LookUserInfoActivity.getIntent(getActivity(), lLoveUserId));
                     }
                 });
+                rv_list.setVisibility(View.VISIBLE);
+                ll_empty.setVisibility(View.GONE);
             } else {
                 //空界面
+                rv_list.setVisibility(View.GONE);
+                ll_empty.setVisibility(View.VISIBLE);
             }
         }
 
     }
 
     @Override
-    public void addLoveUserSuccess(boolean is_love, int position, DelayClickImageView iv_love) {
+    public void addLoveUserSuccess(int position, DelayClickImageView iv_love) {
 
     }
 
     @Override
-    public void addBlackUserSuccess(boolean is_black, int position, DelayClickTextView tv_black) {
-        if (is_black) {
-            list.get(position).is_black = false;
-            tv_black.setText("对她屏蔽");
-            ToastUtils.show("取消黑名单成功");
-        } else {
-            list.get(position).is_black = true;
-            tv_black.setText("取消屏蔽");
-            ToastUtils.show("加入黑名单成功");
-        }
+    public void delLoveUserSuccess(int position, DelayClickImageView tv_black) {
+
+    }
+
+    @Override
+    public void addBlackUserSuccess(int position, DelayClickTextView tv_black) {
+        list.get(position).is_black = true;
+        tv_black.setText("取消屏蔽");
+        ToastUtils.show("加入黑名单成功");
+    }
+
+    @Override
+    public void delBlackUserSuccess(int position, DelayClickTextView tv_black) {
+        list.get(position).is_black = false;
+        tv_black.setText("对她屏蔽");
+        ToastUtils.show("取消黑名单成功");
     }
 }

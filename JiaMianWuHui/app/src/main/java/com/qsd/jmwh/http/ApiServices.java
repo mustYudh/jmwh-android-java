@@ -153,8 +153,11 @@ public interface ApiServices {
     @NetMethod(ParameterNames = {"nLat", "nLng", "nType"}, Url = "/UserLoveService/getUserLoveList")
     Observable<MineLikeBean> getMineLikeList(double nLat, double nLng, String nType);
 
-    @NetMethod(ParameterNames = {"lLoveUserId", "nType", "is_love"}, Url = "/UserLoveService/addLoveUser")
-    Observable<Object> addLoveUser(String lLoveUserId, String nType, boolean is_love);
+    @NetMethod(ParameterNames = {"lLoveUserId", "nType"}, Url = "/UserLoveService/addLoveUser")
+    Observable<Object> addLoveUser(String lLoveUserId, String nType);
+
+    @NetMethod(ParameterNames = {"lLoveUserId", "nType"}, Url = "/UserLoveService/delLoveUser")
+    Observable<Object> delLoveUser(String lLoveUserId, String nType);
 
     @NetMethod(ParameterNames = {"lDatingId", "lJoinerId", "lInitiatorId"}, Url = "/DatingService/addDatingLikeCount")
     Observable<Object> addDatingLikeCount(String lDatingId, String lJoinerId, String lInitiatorId);

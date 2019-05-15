@@ -12,7 +12,11 @@ import com.yu.common.ui.DelayClickTextView;
 public interface MineLikeViewer extends Viewer {
     void getMineLikeList(MineLikeBean mineLikeBean);
 
-    void addLoveUserSuccess(boolean is_love, int position, DelayClickImageView iv_love);
+    void addLoveUserSuccess(int position, DelayClickImageView iv_love);
 
-    void addBlackUserSuccess(boolean is_black, int position, DelayClickTextView tv_black);
+    void delLoveUserSuccess(int position, DelayClickImageView iv_love);
+
+    void addBlackUserSuccess(int position, DelayClickTextView tv_black);
+
+    void delBlackUserSuccess(int position, DelayClickTextView tv_black);
 }

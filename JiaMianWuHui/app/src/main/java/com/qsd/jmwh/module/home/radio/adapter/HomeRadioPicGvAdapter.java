@@ -17,6 +17,7 @@ public class HomeRadioPicGvAdapter extends BaseAdapter {
     private Context context;
     private List<String> list;
 
+
     public HomeRadioPicGvAdapter(Context context, List<String> list) {
         this.context = context;
         this.list = list;

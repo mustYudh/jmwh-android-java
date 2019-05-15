@@ -11,5 +11,7 @@ import com.yu.common.ui.DelayClickImageView;
 public interface SearchViewer extends Viewer {
     void getDataSuccess(HomePersonListBean homePersonListBean);
 
-    void addLoveUserSuccess(boolean is_love, int position, DelayClickImageView iv_love);
+    void addLoveUserSuccess(int position, DelayClickImageView iv_love);
+
+    void delLoveUserSuccess(int position, DelayClickImageView iv_love);
 }

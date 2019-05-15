@@ -38,28 +38,54 @@ public class MineLikePresenter extends BaseViewPresenter<MineLikeViewer> {
 
 
     @SuppressLint("CheckResult")
-    public void initAddLoveUser(String lLoveUserId, String nType, boolean is_love, int position, DelayClickImageView iv_love) {
+    public void initAddLoveUser(String lLoveUserId, String nType, int position, DelayClickImageView iv_love) {
         XHttpProxy.proxy(ApiServices.class)
-                .addLoveUser(lLoveUserId, nType, is_love)
+                .addLoveUser(lLoveUserId, nType)
                 .subscribeWith(new TipRequestSubscriber<Object>() {
                     @Override
                     protected void onSuccess(Object o) {
                         assert getViewer() != null;
-                        getViewer().addLoveUserSuccess(is_love, position, iv_love);
+                        getViewer().addLoveUserSuccess(position, iv_love);
+                    }
+                });
+    }
+
+    @SuppressLint("CheckResult")
+    public void initdelLoveUser(String lLoveUserId, String nType, int position, DelayClickImageView iv_love) {
+        XHttpProxy.proxy(ApiServices.class)
+                .delLoveUser(lLoveUserId, nType)
+                .subscribeWith(new TipRequestSubscriber<Object>() {
+                    @Override
+                    protected void onSuccess(Object o) {
+                        assert getViewer() != null;
+                        getViewer().delLoveUserSuccess(position, iv_love);
                     }
                 });
     }
 
 
     @SuppressLint("CheckResult")
-    public void initAddBlackUser(String lLoveUserId, String nType, boolean is_black, int position, DelayClickTextView tv_black) {
+    public void initAddBlackUser(String lLoveUserId, String nType, int position, DelayClickTextView tv_black) {
         XHttpProxy.proxy(ApiServices.class)
-                .addLoveUser(lLoveUserId, nType, is_black)
+                .addLoveUser(lLoveUserId, nType)
                 .subscribeWith(new TipRequestSubscriber<Object>() {
                     @Override
                     protected void onSuccess(Object o) {
                         assert getViewer() != null;
-                        getViewer().addBlackUserSuccess(is_black, position, tv_black);
+                        getViewer().addBlackUserSuccess(position, tv_black);
+                    }
+                });
+    }
+
+    @SuppressLint("CheckResult")
+    public void initDelLoveUser(String lLoveUserId, String nType, int position, DelayClickTextView tv_black) {
+        XHttpProxy.proxy(ApiServices.class)
+                .delLoveUser(lLoveUserId, nType)
+                .subscribeWith(new TipRequestSubscriber<Object>() {
+                    @Override
+                    protected void onSuccess(Object o) {
+                        assert getViewer() != null;
+                        getViewer().delBlackUserSuccess(position, tv_black);
                     }
                 });
     }

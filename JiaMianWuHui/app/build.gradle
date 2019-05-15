@@ -192,8 +192,8 @@ repositories {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-//    implementation fileTree(include: ['*.jar'], dir: 'src/libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //    implementation fileTree(include: ['*.jar'], dir: 'src/libs')
     implementation project(path: ':common')
     implementation project(path: ':http-lib')
     implementation project(path: ':bottom_tab')
@@ -219,5 +219,5 @@ dependencies {
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-25'
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-25'//没有使用特殊Header，可以不加这行
     implementation 'com.android.support:appcompat-v7:25.3.1'//版本 23以上（必须）
-
+    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
 }
