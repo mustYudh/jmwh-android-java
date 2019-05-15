@@ -18,6 +18,7 @@ public class SettingActivity extends BaseBarActivity {
     private UserItemView push;
     private UserItemView logout;
     private UserItemView clearCache;
+    private UserItemView agreement;
     GlideCacheUtil glideCacheUtil = GlideCacheUtil.getInstance();
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class SettingActivity extends BaseBarActivity {
     private void initView() {
         phoneNumber = bindView(R.id.phone_number);
         editPassword = bindView(R.id.edit_password);
+        agreement = bindView(R.id.agreement);
         logout = bindView(R.id.logout);
         clearCache = bindView(R.id.clear_cache);
         push = bindView(R.id.push);
@@ -40,6 +42,7 @@ public class SettingActivity extends BaseBarActivity {
         push.setOnClickListener(v -> getLaunchHelper().startActivity(PushSettingActivity.class));
         phoneNumber.setOnClickListener(v -> getLaunchHelper().startActivity(SettingPhoneNumberActivity.class));
         editPassword.setOnClickListener(v -> getLaunchHelper().startActivity(EditPasswordActivity.class));
+        agreement.setOnClickListener(v -> getLaunchHelper().startActivity(WebViewActivity.class));
         logout.setOnClickListener(v -> {
             SelectHintPop logoutPop = new SelectHintPop(getActivity());
             logoutPop.setTitle("温馨提示")

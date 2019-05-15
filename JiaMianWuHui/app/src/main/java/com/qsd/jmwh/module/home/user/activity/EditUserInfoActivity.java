@@ -80,14 +80,11 @@ public class EditUserInfoActivity extends BaseBarActivity implements View.OnClic
     }
 
     private void initListener() {
-        bindView(R.id.login, this);
-        bindView(R.id.agreement, this);
         initItemClickListener();
     }
 
     @Override
     public void onClick(View v) {
-
     }
 
 
