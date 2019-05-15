@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:gravity="center"
+      android:orientation="horizontal"
+      android:paddingLeft="15dp"
+      android:paddingRight="15dp"
+      >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_2A2A2A"
+        android:textSize="15sp"
+        tools:text="60个假面币"
+        />
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="13dp"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:textColor="@color/color_999999"
+        android:textSize="15sp"
+        tools:text="¥ 80.00"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:background="@drawable/shape_app_main_button_bg"
+        android:gravity="center"
+        android:minWidth="81dp"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        tools:text="$123"
+        />
+  </LinearLayout>
+  <View
+      android:id="@+id/line"
+      android:layout_width="match_parent"
+      android:layout_height="0.5dp"
+      android:background="@color/color_EEEEEE"
+      />
+</LinearLayout>
