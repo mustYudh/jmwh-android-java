@@ -111,7 +111,6 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
             bindView(R.id.qq, false);
             bindView(R.id.we_chat, false);
             bindView(R.id.social_account, false);
-            bindView(R.id.chat, false);
         }
         ImageLoader.loadCenterCrop(getActivity(), userData.sUserHeadPic, bindView(R.id.header));
         header = userData.sUserHeadPic;
@@ -248,7 +247,7 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
     private void buyVip() {
         LauncherHelper.from(getActivity()).startActivity(ToByVipActivity
                 .getIntent(getActivity(), UserProfile.getInstance().getAppAccount(),
-                        UserProfile.getInstance().getAppToken(), false));
+                        UserProfile.getInstance().getAppToken()));
     }
 
 

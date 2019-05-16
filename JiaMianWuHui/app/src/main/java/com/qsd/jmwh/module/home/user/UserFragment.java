@@ -100,7 +100,7 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
                 getLaunchHelper().startActivity(ToByVipActivity.getIntent(getActivity(),
                         UserProfile.getInstance().getAppAccount(),
                         UserProfile.getInstance().getAppToken()
-                        , false));
+                        ));
                 break;
             case R.id.money_bag:
                 getLaunchHelper().startActivity(MoneyBagActivity.class);

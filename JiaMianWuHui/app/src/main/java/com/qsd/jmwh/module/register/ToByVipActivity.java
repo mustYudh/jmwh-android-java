@@ -47,11 +47,10 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
         initView();
     }
 
-    public static Intent getIntent(Context context, int lUserId, String token, boolean isRegister) {
+    public static Intent getIntent(Context context, int lUserId, String token) {
         Intent intent = new Intent(context, ToByVipActivity.class);
         intent.putExtra(USER_ID, lUserId);
         intent.putExtra(TOKEN, token);
-        intent.putExtra(IS_REGISTER, isRegister);
         return intent;
     }
 
@@ -69,8 +68,7 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
             if (currentType != null) {
                 mPresenter.pay(cdoListBean.lGoodsId, currentType.type,
                         getIntent().getIntExtra(USER_ID, -1),
-                        getIntent().getStringExtra(TOKEN),
-                        getIntent().getBooleanExtra(IS_REGISTER, false));
+                        getIntent().getStringExtra(TOKEN));
             } else {
                 ToastUtils.show("请选择支付方式");
             }
