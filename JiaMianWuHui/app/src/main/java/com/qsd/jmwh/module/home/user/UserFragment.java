@@ -18,6 +18,7 @@ import com.qsd.jmwh.base.BaseFragment;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.dialog.SelectHintPop;
 import com.qsd.jmwh.dialog.ShareDialog;
+import com.qsd.jmwh.module.home.user.activity.AuthCenterActivity;
 import com.qsd.jmwh.module.home.user.activity.EditUserInfoActivity;
 import com.qsd.jmwh.module.home.user.activity.MineBlackMenuActivity;
 import com.qsd.jmwh.module.home.user.activity.MineLikeActivity;
@@ -25,6 +26,7 @@ import com.qsd.jmwh.module.home.user.activity.MoneyBagActivity;
 import com.qsd.jmwh.module.home.user.activity.PhotoDestroySelectActivity;
 import com.qsd.jmwh.module.home.user.activity.PrivacySettingActivity;
 import com.qsd.jmwh.module.home.user.activity.SettingActivity;
+import com.qsd.jmwh.module.home.user.activity.SettingMoneyPhotoActivity;
 import com.qsd.jmwh.module.home.user.adapter.DestroyPhotoTag;
 import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
 import com.qsd.jmwh.module.home.user.dialog.EvaluationDialog;
@@ -88,6 +90,7 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
         bindView(R.id.share, this);
         bindView(R.id.nDestroyImgCount, this);
         bindView(R.id.setting_money_img, this);
+        bindView(R.id.auth, this);
     }
 
     @Override
@@ -160,9 +163,13 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
                 selectHintPop.setTitle("设置红包照片")
                         .setMessage("最多可以选择2张照片作为红包照片，用户必须向你发红包才能查看（红包金额随机，每个不超过3元）")
                         .setSingleButton("继续", v1 -> {
+                            getLaunchHelper().startActivity(SettingMoneyPhotoActivity.class);
                             selectHintPop.dismiss();
                         })
                         .setBottomButton("取消", v12 -> selectHintPop.dismiss()).showPopupWindow();
+                break;
+            case R.id.auth:
+                getLaunchHelper().startActivity(AuthCenterActivity.class);
                 break;
             default:
         }
