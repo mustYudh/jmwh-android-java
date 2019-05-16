@@ -124,4 +124,14 @@ public class PhotoDestroySelectActivity extends BaseBarActivity implements Photo
                 break;
         }
     }
+
+    @Override
+    public void modifySuccess(int fileType) {
+//       if () {
+//           ToastUtils.show("修改照片类型为阅后即焚");
+//       } else {
+//
+//       }
+       
+    }
 }

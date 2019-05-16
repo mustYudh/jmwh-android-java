@@ -79,4 +79,8 @@ public interface OtherApiServices {
     @NetMethod(ParameterNames = {"lGoodsId","nPayType"},Url = "/OrderService/getBuyDatingPaySign")
     Observable<PayInfo> getBuyDatingPaySign(int lGoodsId,int nPayType);
 
+
+    @NetMethod(ParameterNames = {"nFileType","nFileFee","lFileId"} ,Url = "/MaskballService/modifyFile")
+    Observable<PayInfo> modifyFile(int nFileType,int nFileFee,int lFileId);
+
 }
