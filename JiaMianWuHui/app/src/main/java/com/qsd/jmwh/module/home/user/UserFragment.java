@@ -16,7 +16,6 @@ import com.denghao.control.view.utils.UpdataCurrentFragment;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseFragment;
 import com.qsd.jmwh.data.UserProfile;
-import com.qsd.jmwh.dialog.SelectHintPop;
 import com.qsd.jmwh.dialog.ShareDialog;
 import com.qsd.jmwh.module.home.user.activity.AuthCenterActivity;
 import com.qsd.jmwh.module.home.user.activity.EditUserInfoActivity;
@@ -26,8 +25,7 @@ import com.qsd.jmwh.module.home.user.activity.MoneyBagActivity;
 import com.qsd.jmwh.module.home.user.activity.PhotoDestroySelectActivity;
 import com.qsd.jmwh.module.home.user.activity.PrivacySettingActivity;
 import com.qsd.jmwh.module.home.user.activity.SettingActivity;
-import com.qsd.jmwh.module.home.user.activity.SettingMoneyPhotoActivity;
-import com.qsd.jmwh.module.home.user.adapter.DestroyPhotoTag;
+import com.qsd.jmwh.module.home.user.adapter.DestroyPhotoTagAdapter;
 import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
 import com.qsd.jmwh.module.home.user.dialog.EvaluationDialog;
 import com.qsd.jmwh.module.home.user.presenter.UserPresenter;
@@ -159,14 +157,17 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
                 mPresenter.destroyImgBrowsingHis();
                 break;
             case R.id.setting_money_img:
-                SelectHintPop selectHintPop = new SelectHintPop(getActivity());
-                selectHintPop.setTitle("设置红包照片")
-                        .setMessage("最多可以选择2张照片作为红包照片，用户必须向你发红包才能查看（红包金额随机，每个不超过3元）")
-                        .setSingleButton("继续", v1 -> {
-                            getLaunchHelper().startActivity(SettingMoneyPhotoActivity.class);
-                            selectHintPop.dismiss();
-                        })
-                        .setBottomButton("取消", v12 -> selectHintPop.dismiss()).showPopupWindow();
+                RxGalleryFinalApi instance = RxGalleryFinalApi.getInstance(getActivity());
+                instance.openSingGalleryRadioImgDefault(
+                        new RxBusResultDisposable<ImageRadioResultEvent>() {
+                            @Override
+                            protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) {
+                                String imgUrl = imageRadioResultEvent.getResult().getOriginalPath();
+                                if (!TextUtils.isEmpty(imgUrl)) {
+                                    getLaunchHelper().startActivity(PhotoDestroySelectActivity.getIntent(getActivity(), imgUrl,true));
+                                }
+                            }
+                        });
                 break;
             case R.id.auth:
                 getLaunchHelper().startActivity(AuthCenterActivity.class);
@@ -183,7 +184,7 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
                     protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) {
                         String imgUrl = imageRadioResultEvent.getResult().getOriginalPath();
                         if (!TextUtils.isEmpty(imgUrl)) {
-                            getLaunchHelper().startActivity(PhotoDestroySelectActivity.getIntent(getActivity(), imgUrl));
+                            getLaunchHelper().startActivity(PhotoDestroySelectActivity.getIntent(getActivity(), imgUrl,false));
                         }
                     }
                 });
@@ -247,9 +248,9 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
             UserCenterInfo.CdoimgListBean userCenterMyInfo = new UserCenterInfo.CdoimgListBean();
             userCenterMyInfo.last = true;
             userInfo.cdoimgList.add(userCenterMyInfo);
-            DestroyPhotoTag destroyPhotoTag = new DestroyPhotoTag(userInfo.cdoimgList);
+            DestroyPhotoTagAdapter destroyPhotoTag = new DestroyPhotoTagAdapter(userInfo.cdoimgList);
             recyclerView.setAdapter(destroyPhotoTag);
-            destroyPhotoTag.setAddImageListener(new DestroyPhotoTag.AddImageListener() {
+            destroyPhotoTag.setAddImageListener(new DestroyPhotoTagAdapter.AddImageListener() {
                 @Override
                 public void clickAdd() {
                     addPhoto();

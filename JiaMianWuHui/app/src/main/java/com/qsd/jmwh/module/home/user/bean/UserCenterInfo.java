@@ -81,6 +81,7 @@ public class UserCenterInfo implements Serializable {
         public int nFileFee;
         public int nAttribute;
         public boolean last;
+        public int nStatus;
 
         @Override
         public String toString() {

@@ -1,8 +1,8 @@
 package com.qsd.jmwh.module.home.user.adapter;
 
-//public class DestroyPhotoTag extends BaseQuickAdapter<UserCenterInfo.CdoimgListBean, BaseViewHolder> {
+//public class DestroyPhotoTagAdapter extends BaseQuickAdapter<UserCenterInfo.CdoimgListBean, BaseViewHolder> {
 //
-//    public DestroyPhotoTag(int layoutResId, @Nullable List<UserCenterInfo.CdoimgListBean> data) {
+//    public DestroyPhotoTagAdapter(int layoutResId, @Nullable List<UserCenterInfo.CdoimgListBean> data) {
 //        super(layoutResId, data);
 //    }
 //
@@ -19,16 +19,18 @@ package com.qsd.jmwh.module.home.user.adapter;
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseHolder;
 import com.qsd.jmwh.base.BasicAdapter;
 import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
+import com.yu.common.ui.Res;
 import com.yu.common.utils.ImageLoader;
 
 import java.util.ArrayList;
 
-public class DestroyPhotoTag extends BasicAdapter<UserCenterInfo.CdoimgListBean> {
+public class DestroyPhotoTagAdapter extends BasicAdapter<UserCenterInfo.CdoimgListBean> {
     private AddImageListener addImageListener;
 
     public interface AddImageListener {
@@ -41,7 +43,7 @@ public class DestroyPhotoTag extends BasicAdapter<UserCenterInfo.CdoimgListBean>
         this.addImageListener = addImageListener;
     }
 
-    public DestroyPhotoTag(ArrayList<UserCenterInfo.CdoimgListBean> list) {
+    public DestroyPhotoTagAdapter(ArrayList<UserCenterInfo.CdoimgListBean> list) {
         super(list);
     }
 
@@ -60,7 +62,23 @@ public class DestroyPhotoTag extends BasicAdapter<UserCenterInfo.CdoimgListBean>
                     });
                     findViewId(R.id.destroy_tag).setVisibility(View.GONE);
                 } else {
-                    findViewId(R.id.destroy_tag).setVisibility(item.nFileType == 1 ? View.VISIBLE : View.GONE);
+                    TextView tag = findViewId(R.id.destroy_tag);
+                    tag.setVisibility(item.nFileType != 0? View.VISIBLE : View.GONE);
+                    if (item.nFileType == 1) {
+                        tag.setBackgroundColor(Res.color(R.color.color_815DBE));
+                        tag.setText("阅后即焚");
+                    } else if (item.nFileType == 2) {
+                        if (item.nStatus == 3) {
+                            tag.setBackgroundColor(Res.color(R.color.color_BD955C));
+                            tag.setText("待审核");
+                        } else if (item.nStatus == 4) {
+                            tag.setBackgroundColor(Res.color(R.color.color_5B5751));
+                            tag.setText("审核失败");
+                        } else {
+                            tag.setBackgroundColor(Res.color(R.color.color_BC6C6D));
+                            tag.setText(item.nStatus == 3 ? "红包" : "阅后即焚红包");
+                        }
+                    }
                     ImageLoader.loadCenterCrop(imageView.getContext(), item.sFileUrl, imageView);
                     imageView.setOnClickListener(v -> {
                         if (addImageListener != null) {
