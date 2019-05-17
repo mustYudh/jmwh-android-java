@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:scrollbars="none"
+    android:overScrollMode="never"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<LinearLayout
     android:background="@color/color_EEEEEE"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
+
     <FrameLayout
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="205dp">
+
+        <FrameLayout
+            android:id="@+id/video"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+        </FrameLayout>
 
     </FrameLayout>
 
@@ -34,7 +49,7 @@
 
 
     <com.yu.common.ui.DelayClickTextView
-        android:id="@+id/login"
+        android:id="@+id/uploading"
         style="@style/app_blue_button"
         android:layout_marginTop="35dp"
         android:text="审核中（24小时内）"
@@ -49,3 +64,4 @@
         android:layout_height="wrap_content"/>
 
 </LinearLayout>
+</ScrollView>

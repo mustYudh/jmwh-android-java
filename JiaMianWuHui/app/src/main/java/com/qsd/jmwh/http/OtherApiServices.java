@@ -7,6 +7,7 @@ import com.qsd.jmwh.module.home.user.bean.MaskBallCoinBean;
 import com.qsd.jmwh.module.home.user.bean.PayInfoBean;
 import com.qsd.jmwh.module.home.user.bean.PrivacySettingStatusBean;
 import com.qsd.jmwh.module.home.user.bean.PushSettingBean;
+import com.qsd.jmwh.module.home.user.bean.WomenVideoBean;
 import com.qsd.jmwh.module.register.bean.PayInfo;
 import com.xuexiang.xhttp2.annotation.NetMethod;
 
@@ -83,4 +84,9 @@ public interface OtherApiServices {
     @NetMethod(ParameterNames = {"nFileType","nFileFee","lFileId"} ,Url = "/MaskballService/modifyFile")
     Observable<PayInfo> modifyFile(int nFileType,int nFileFee,int lFileId);
 
+    @NetMethod(Url = "/MaskballService/getWomenVedio")
+    Observable<WomenVideoBean> getWomenVideo();
+
+    @NetMethod(ParameterNames = {"sFileUrl","sFileCoverUrl"},Url = "/UserService/userAuthByVideo")
+    Observable<Object> userAuthByVideo(String sFileUrl,String sFileCoverUrl);
 }

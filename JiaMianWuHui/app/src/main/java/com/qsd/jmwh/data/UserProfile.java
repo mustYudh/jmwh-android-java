@@ -129,4 +129,8 @@ public class UserProfile implements Serializable {
     public String getObjectName() {
         return getAppAccount() + "/head_" + UUID.randomUUID().toString() + ".jpg";
     }
+
+    public String getObjectName(String name,String type) {
+        return getAppAccount() + "/" + name + "_" + UUID.randomUUID().toString() + "." + type;
+    }
 }
