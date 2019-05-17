@@ -1,76 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
+
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:overScrollMode="never"
     android:background="@color/white"
-    android:scrollbars="none">
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingTop="90dp">
+
+
+    <com.qsd.jmwh.view.CircleImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher_round"
+        />
+
+    <TextView
+        android:id="@+id/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:textColor="@color/color_2A2A2A"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <com.yu.common.ui.DelayClickTextView
+        android:id="@+id/login"
+        style="@style/app_blue_button"
+        android:layout_marginTop="65dp"
+        android:text="登录"
+        />
+
+
+    <com.yu.common.ui.DelayClickTextView
+        android:id="@+id/register"
+        style="@style/app_blue_button"
+        android:layout_marginTop="13dp"
+        android:text="手机号码注册"
+        />
+
+
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
+        android:paddingBottom="44dp"
+        android:gravity="center|bottom"
+        android:layout_weight="1"
         android:orientation="vertical"
-        android:paddingTop="90dp">
-
-
-        <com.qsd.jmwh.view.CircleImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/ic_launcher_round"
-            />
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
 
         <TextView
-            android:id="@+id/app_name"
-            android:textStyle="bold"
+            android:paddingBottom="28dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:textColor="@color/color_2A2A2A"
-            android:textSize="20sp"/>
-
-        <com.yu.common.ui.DelayClickTextView
-            android:id="@+id/login"
-            style="@style/app_blue_button"
-            android:layout_marginTop="65dp"
-            android:text="登录"
-            />
-
-
-        <com.yu.common.ui.DelayClickTextView
-            android:id="@+id/register"
-            style="@style/app_blue_button"
-            android:layout_marginTop="13dp"
-            android:text="手机号码注册"
-            />
-
-        <TextView
-            android:textSize="14sp"
-            android:layout_marginTop="133dp"
-            android:textColor="@color/color_888888"
             android:text="其它登录方式"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-
+            android:textColor="@color/color_888888"
+            android:textSize="14sp"/>
 
 
         <LinearLayout
-            android:layout_marginTop="28dp"
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
 
             <com.yu.common.ui.DelayClickImageView
                 android:id="@+id/wechat_login"
-                android:layout_marginRight="54dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_marginRight="54dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_wechat"
                 />
@@ -83,9 +85,11 @@
                 android:src="@drawable/ic_qq"
                 />
         </LinearLayout>
+
     </LinearLayout>
 
+</LinearLayout>
 
 
 
-</ScrollView>
+

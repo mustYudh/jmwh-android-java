@@ -21,7 +21,6 @@
 
 
     <com.qsd.jmwh.view.NormaFormItemVIew
-        app:length="6"
         app:input_type="number"
         android:id="@+id/get_ver_code"
         app:show_top_line="false"

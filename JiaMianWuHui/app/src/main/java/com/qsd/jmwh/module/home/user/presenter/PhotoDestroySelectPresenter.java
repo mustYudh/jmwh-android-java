@@ -3,6 +3,7 @@ package com.qsd.jmwh.module.home.user.presenter;
 import android.annotation.SuppressLint;
 
 import com.qsd.jmwh.http.ApiServices;
+import com.qsd.jmwh.http.OtherApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.framework.BaseViewPresenter;
@@ -37,6 +38,18 @@ public class PhotoDestroySelectPresenter extends BaseViewPresenter<PhotoDestroyS
                     getActivity().finish();
                 }
             });
+
+    }
+
+    public void modifyFile(int nFileType,int nFileFee,int lFileId) {
+        XHttpProxy.proxy(OtherApiServices.class)
+                .modifyFile(nFileType,nFileFee,lFileId).subscribeWith(new TipRequestSubscriber<Object>() {
+            @Override
+            protected void onSuccess(Object o) {
+                assert getViewer() != null;
+                getViewer().modifySuccess(nFileType);
+            }
+        });
 
     }
 }

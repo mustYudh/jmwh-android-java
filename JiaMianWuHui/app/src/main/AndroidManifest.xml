@@ -171,8 +171,17 @@
             android:name=".module.home.radio.activity.ViewBigImageActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
-        <activity android:name=".module.home.user.activity.WebViewActivity"
-                  android:screenOrientation="portrait"
+        <activity
+            android:name=".module.home.user.activity.WebViewActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".module.home.user.activity.SettingMoneyPhotoActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".module.home.user.activity.AuthCenterActivity"
+            android:screenOrientation="portrait"
             />
     </application>
 

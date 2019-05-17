@@ -38,17 +38,16 @@ public class ToByVipPresenter extends BaseViewPresenter<ToByVipViewer> {
     }
 
 
-    public void pay(int lGoodsId, int type, int userId, String token, boolean isRegister) {
+    public void pay(int lGoodsId, int type, int userId, String token) {
         XHttpProxy.proxy(ApiServices.class)
                 .pay(lGoodsId, type).subscribeWith(new TipRequestSubscriber<PayInfo>() {
             @Override
             protected void onSuccess(PayInfo info) {
-                ToastUtils.show("支付成功");
-                if (isRegister) {
                     PayUtils.getInstance().pay(getActivity(), type, info)
                             .getPayResult(new PayUtils.PayCallBack() {
                                 @Override
                                 public void onPaySuccess(int type) {
+                                    ToastUtils.show("支付成功");
                                     XHttpProxy.proxy(ApiServices.class)
                                             .getCod(userId, token)
                                             .subscribeWith(new TipRequestSubscriber<UserAuthCodeBean>() {
@@ -60,17 +59,17 @@ public class ToByVipPresenter extends BaseViewPresenter<ToByVipViewer> {
                                                     getActivity().finish();
                                                 }
                                             });
+                                    getActivity().finish();
                                 }
 
                                 @Override
                                 public void onFailed(int type) {
                                     ToastUtils.show("支付失败，请重试");
+                                    getActivity().finish();
                                 }
 
                             });
-                } else {
-                    getActivity().finish();
-                }
+
 
             }
         });

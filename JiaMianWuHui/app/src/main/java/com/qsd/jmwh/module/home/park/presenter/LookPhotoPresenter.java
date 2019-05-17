@@ -31,7 +31,9 @@ public class LookPhotoPresenter extends BaseViewPresenter<LookPhotoViewer> {
             @Override
             protected void onSuccess(Object o) {
                 assert getViewer() != null;
-                getViewer().startLookPhoto();
+                if (nBrowseInfType == 1 || nBrowseInfType == 3) {
+                    getViewer().startLookPhoto();
+                }
             }
         });
     }

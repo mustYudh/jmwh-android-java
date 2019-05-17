@@ -12,6 +12,7 @@ import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.park.activity.LookPhotoActivity;
 import com.qsd.jmwh.module.home.park.bean.OtherUserInfoBean;
 import com.yu.common.launche.LauncherHelper;
+import com.yu.common.toast.ToastUtils;
 import com.yu.common.utils.ImageLoader;
 
 import java.util.ArrayList;
@@ -36,43 +37,66 @@ public class UserPhotoAdapter extends BasicAdapter<OtherUserInfoBean.CdoFileList
                 ImageView userPic = findViewId(R.id.user_img);
                 ImageView photoBg = findViewId(R.id.photo_bg);
                 TextView hint = findViewId(R.id.image_hint);
+                boolean canClick = true;
                 if (userId != UserProfile.getInstance().getAppAccount()) {
-
                     if (isOpenAll) {
+                        //普通照片
                         if (data.nFileType == 0) {
+                            //展示照片
                             photoBg.setVisibility(View.GONE);
                             ImageLoader.loadCenterCrop(userPic.getContext(), data.sFileUrl, userPic);
+                            //阅后即焚照片
                         } else if (data.nFileType == 1) {
                             photoBg.setVisibility(View.VISIBLE);
                             ImageLoader.blurTransformation(userPic.getContext(), data.sFileUrl, userPic);
                             if (data.bView == 0) {
+                                //已被焚毁不展示
                                 photoBg.setImageResource(R.drawable.ic_destroy_photo);
                                 hint.setText("照片已焚毁");
+                                canClick = false;
                             } else {
+                                //为被焚毁需要
                                 photoBg.setImageResource(R.drawable.ic_destroy_img_bg);
                                 hint.setText("阅后即焚\n照片");
                             }
 
-                        }
-                        if (data.nFileType == 2) {
+                        } else if (data.nFileType == 2) {
+                            photoBg.setVisibility(View.VISIBLE);
+                            if (data.bView == 0) {
+                                ImageLoader.loadCenterCrop(userPic.getContext(), data.sFileUrl, userPic);
+                            } else {
+                                ImageLoader.blurTransformation(userPic.getContext(), data.sFileUrl, userPic);
+                                photoBg.setImageResource(R.drawable.ic_red_bag_bg);
+                                hint.setText("红包照片");
+                            }
+                        } else if (data.nFileType == 3) {
                             photoBg.setVisibility(View.VISIBLE);
                             ImageLoader.blurTransformation(userPic.getContext(), data.sFileUrl, userPic);
                             if (data.bView == 0) {
                                 photoBg.setImageResource(R.drawable.ic_destroy_photo);
                                 hint.setText("照片已焚毁");
+                                canClick = false;
                             } else {
                                 photoBg.setImageResource(R.drawable.ic_red_bag_bg);
                                 hint.setText("阅后即焚的\n红包照片");
                             }
-
                         }
-                        userPic.setOnClickListener(v -> LauncherHelper.from(context).startActivity(LookPhotoActivity.getIntent(context, data, isVip, userId)));
+                        boolean finalCanClick = canClick;
+                        userPic.setOnClickListener(v -> {
+                            if (finalCanClick) {
+                                LauncherHelper.from(context).startActivity(LookPhotoActivity.getIntent(context, data, isVip, userId, false));
+                            } else {
+                                ToastUtils.show("照片已焚毁");
+                            }
+                        });
                     } else {
                         ImageLoader.blurTransformation(userPic.getContext(), data.sFileUrl, userPic);
                     }
+
                 } else {
                     photoBg.setVisibility(View.GONE);
                     ImageLoader.loadCenterCrop(userPic.getContext(), data.sFileUrl, userPic);
+                    userPic.setOnClickListener(v -> LauncherHelper.from(context).startActivity(LookPhotoActivity.getIntent(context, data, isVip, userId, true)));
                 }
 
             }

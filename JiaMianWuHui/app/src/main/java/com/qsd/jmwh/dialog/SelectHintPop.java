@@ -105,6 +105,14 @@ public class SelectHintPop extends BasePopupWindow {
         void getText(String input);
     }
 
+    public SelectHintPop setHint(String text) {
+        if (!TextUtils.isEmpty(text)) {
+            EditText editText = bindView(R.id.input);
+            editText.setHint(text);
+        }
+        return this;
+    }
+
     public SelectHintPop setEditButton(CharSequence name, GetTextInputListener listener) {
         bindView(R.id.input,true);
         if (TextUtils.isEmpty(name)) {
