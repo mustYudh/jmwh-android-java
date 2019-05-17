@@ -174,4 +174,6 @@ public interface ApiServices {
     @NetMethod(ParameterNames = {"sDatingTitle", "sDatingRange", "sDatingTime", "sDatingTimeExt", "sContent", "nSex", "nLng", "nLat", "bCommentType", "bHiddenType", "sImg", "sDatingHope"}, Url = "/DatingService/addDating")
     Observable<Object> addDating(String sDatingTitle, String sDatingRange, String sDatingTime, String sDatingTimeExt, String sContent, String nSex, double nLng, double nLat, String bCommentType, String bHiddenType, String sImg, String sDatingHope);
 
+    @NetMethod(ParameterNames = {"lLoveUserId", "nType"}, Url = "/UserLoveService/getDatingByUserId")
+    Observable<Object> getDatingByUserId(String lLoveUserId, String nType);
 }

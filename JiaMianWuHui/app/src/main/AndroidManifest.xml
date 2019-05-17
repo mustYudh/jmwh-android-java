@@ -171,6 +171,8 @@
             android:name=".module.home.radio.activity.ViewBigImageActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
+        <activity android:name=".module.home.user.activity.MineRadioListActivity">
+        </activity>
     </application>
 
 </manifest>
