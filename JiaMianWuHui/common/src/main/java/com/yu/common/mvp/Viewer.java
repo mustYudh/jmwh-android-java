@@ -1,9 +1,9 @@
 package com.yu.common.mvp;
 
-import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 
 
 public interface Viewer {
 
-  Activity getActivity();
+  FragmentActivity getActivity();
 }

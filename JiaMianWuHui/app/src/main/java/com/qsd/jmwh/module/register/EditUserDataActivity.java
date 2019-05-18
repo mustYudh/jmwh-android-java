@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
+import com.qsd.jmwh.module.home.user.activity.WebViewActivity;
 import com.qsd.jmwh.module.register.bean.RangeData;
 import com.qsd.jmwh.module.register.bean.SelectData;
 import com.qsd.jmwh.module.register.bean.UploadUserInfoParams;
@@ -255,7 +256,7 @@ public class EditUserDataActivity extends BaseBarActivity
 
                 break;
             case R.id.agreement:
-                ToastUtils.show("用户协议");
+                getLaunchHelper().startActivity(WebViewActivity.class);
                 break;
             default:
         }

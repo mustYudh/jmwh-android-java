@@ -46,6 +46,7 @@
 
 
     <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/agreement"
         app:showArrow="false"
         android:layout_marginTop="10dp"
         app:user_left_text="假面舞会用户使用协议"

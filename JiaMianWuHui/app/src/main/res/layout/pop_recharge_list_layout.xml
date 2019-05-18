@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#A6000000"
+    android:gravity="center"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+
+  <LinearLayout
+      android:orientation="vertical"
+      android:layout_marginLeft="15dp"
+      android:layout_marginRight="15dp"
+      android:background="@drawable/shape_app_whit_bg_radious8"
+      android:layout_width="match_parent"
+      android:layout_height="397dp"
+      >
+
+    <TextView
+        android:textColor="@color/app_main_bg_color"
+        android:paddingTop="25dp"
+        android:paddingLeft="15dp"
+        android:textSize="20sp"
+        android:text="假面币充值"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        />
+
+
+    <android.support.v7.widget.RecyclerView
+        tools:listitem="@layout/item_jia_mian_coin_layout"
+        android:layout_marginBottom="25dp"
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    </android.support.v7.widget.RecyclerView>
+
+  </LinearLayout>
+
+</LinearLayout>

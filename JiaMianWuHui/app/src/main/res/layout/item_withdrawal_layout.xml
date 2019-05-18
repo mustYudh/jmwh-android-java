@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:gravity="center_vertical"
+    android:paddingLeft="15dp"
+    android:layout_height="60dp">
+
+    <com.qsd.jmwh.view.CircleImageView
+        android:id="@+id/header"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:paddingTop="15dp"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/desc"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textColor="@color/color_2A2A2A"
+            tools:text="你通过充值获得了假面币"
+            />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/time"
+                tools:text="5分钟前"
+                android:textColor="@color/color_666666"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_marginLeft="10dp"
+                tools:text="未入账"
+                android:textSize="12sp"
+                android:textColor="#F5A623"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginRight="10dp"
+        android:id="@+id/count"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/app_main_bg_color"
+        android:gravity="center"
+        tools:text="+40"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

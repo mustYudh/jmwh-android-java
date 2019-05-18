@@ -1,6 +1,8 @@
 package com.qsd.jmwh.http;
 
+import com.qsd.jmwh.module.home.user.bean.AccountBalance;
 import com.qsd.jmwh.module.home.user.bean.EvaluationBean;
+import com.qsd.jmwh.module.home.user.bean.MaskBallCoinBean;
 import com.qsd.jmwh.module.home.user.bean.PayInfoBean;
 import com.qsd.jmwh.module.home.user.bean.PrivacySettingStatusBean;
 import com.qsd.jmwh.module.home.user.bean.PushSettingBean;
@@ -54,5 +56,17 @@ public interface OtherApiServices {
 
     @NetMethod(Url = "/OrderService/getPayInfo")
     Observable<PayInfoBean> getPayInfo();
+
+    @NetMethod(ParameterNames = {"nAccountype","pageindex"},Url = "/AccountBalanceService/getAccountBalanceList")
+    Observable<AccountBalance> getAccountBalance(int nAccountype,int pageindex);
+
+    @NetMethod(ParameterNames = {"nPayFee"},Url = "/AccountBalanceService/getMaskBallCoinConvertMoney")
+    Observable<MaskBallCoinBean> getCoinConvertMoney(int nPayFee);
+
+    @NetMethod(ParameterNames = {"nPayFee"} ,Url = "/AccountBalanceService/withdrawMaskBallCoin")
+    Observable<Object> withdrawMaskBallCoin(int nPayFee);
+
+    @NetMethod(ParameterNames = {"sAliPayAccount","sAliPayName"},Url = "/AccountBalanceService/modifyAliPay")
+    Observable<Object> modifyAliPay(String sAliPayAccount, String sAliPayName);
 
 }

@@ -40,6 +40,7 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
     private int userID;
     private int dGalaryVal;
     private int authType;
+    private boolean firstLoading = true;
 
     private final static String USER_ID = "user_id";
 
@@ -65,7 +66,9 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.getUserInfo(getIntent().getIntExtra(USER_ID, -1), UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng());
+        mPresenter.getUserInfo(getIntent().getIntExtra(USER_ID, -1), UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(),firstLoading);
+        firstLoading = false;
+
     }
 
     private void initListener() {
@@ -149,7 +152,7 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
         bindView(R.id.empty_view, list.size() == 0);
         GridView gridView = bindView(R.id.user_center_photo, list.size() > 0);
         boolean isOpen = userCenterInfo.bOpenImg || isVip;
-        gridView.setAdapter(new UserPhotoAdapter(list, isOpen, isVip,userID));
+        gridView.setAdapter(new UserPhotoAdapter(list, isOpen, isVip, userID));
         bindView(R.id.unlock_all_photo_root, !userCenterInfo.bOpenImg && !isVip);
         bindText(R.id.dGalaryVal, "解锁相册" + userData.dGalaryVal + "假面币，会员免费");
         bindView(R.id.dGalaryVal, this);

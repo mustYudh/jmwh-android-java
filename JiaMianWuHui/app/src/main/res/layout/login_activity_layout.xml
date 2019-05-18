@@ -13,7 +13,9 @@
         app:left_text="登录账号"
         app:content_hint="请输入手机号/账号"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:input_type="password"
+        >
     </com.qsd.jmwh.view.NormaFormItemVIew>
 
 
