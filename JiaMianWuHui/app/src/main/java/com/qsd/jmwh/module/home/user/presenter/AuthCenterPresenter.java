@@ -3,6 +3,7 @@ package com.qsd.jmwh.module.home.user.presenter;
 import android.annotation.SuppressLint;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.http.OtherApiServices;
+import com.qsd.jmwh.http.subscriber.NoTipRequestSubscriber;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.home.user.bean.WomenVideoBean;
 import com.qsd.jmwh.thrid.UploadImage;
@@ -45,7 +46,7 @@ import com.yu.common.loading.LoadingDialog;
       String sFileCoverUrl = response.cloudUrl + "?x-oss-process=video/snapshot,t_100,m_fast";
       XHttpProxy.proxy(OtherApiServices.class)
           .userAuthByVideo(response.cloudUrl, sFileCoverUrl)
-          .subscribeWith(new TipRequestSubscriber<Object>() {
+          .subscribeWith(new NoTipRequestSubscriber<Object>() {
             @Override protected void onSuccess(Object o) {
               assert getViewer() != null;
               getViewer().uploadSuccess();

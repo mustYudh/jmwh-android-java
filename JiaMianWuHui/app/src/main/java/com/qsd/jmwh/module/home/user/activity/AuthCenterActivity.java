@@ -66,16 +66,19 @@ public class AuthCenterActivity extends BaseBarActivity implements AuthCenterVie
         return vedioBean.sFileUrl;
       }
     };
+    //if (vedioBean.nCheckStatus) {
+    //
+    //}
   }
 
   private void uploadingVideo() {
     RxGalleryFinalApi instance = RxGalleryFinalApi.getInstance(getActivity());
-    //setVDRadioResultEvent
-    instance.openRadioSelectVideo(getActivity(), new RxBusResultDisposable<ImageMultipleResultEvent>() {
-      @Override protected void onEvent(ImageMultipleResultEvent event) throws Exception {
-        mPresenter.uploadAuthVideo(event.getResult().get(0).getOriginalPath());
-      }
-    });
+    instance.openRadioSelectVideo(getActivity(),
+        new RxBusResultDisposable<ImageMultipleResultEvent>() {
+          @Override protected void onEvent(ImageMultipleResultEvent event) throws Exception {
+            mPresenter.uploadAuthVideo(event.getResult().get(0).getOriginalPath());
+          }
+        });
   }
 
   @Override public void uploadSuccess() {
@@ -86,7 +89,9 @@ public class AuthCenterActivity extends BaseBarActivity implements AuthCenterVie
 
   @Override protected void onPause() {
     super.onPause();
-    surfaceVideoViewCreator.onPause();
+    if (surfaceVideoViewCreator != null) {
+      surfaceVideoViewCreator.onPause();
+    }
   }
 
   @Override protected void onResume() {
@@ -98,11 +103,15 @@ public class AuthCenterActivity extends BaseBarActivity implements AuthCenterVie
 
   @Override protected void onDestroy() {
     super.onDestroy();
-    surfaceVideoViewCreator.onDestroy();
+    if (surfaceVideoViewCreator != null) {
+      surfaceVideoViewCreator.onDestroy();
+    }
   }
 
   @Override public boolean dispatchKeyEvent(KeyEvent event) {
-    surfaceVideoViewCreator.onKeyEvent(event);
+    if (surfaceVideoViewCreator != null) {
+      surfaceVideoViewCreator.onKeyEvent(event);
+    }
     return super.dispatchKeyEvent(event);
   }
 }
