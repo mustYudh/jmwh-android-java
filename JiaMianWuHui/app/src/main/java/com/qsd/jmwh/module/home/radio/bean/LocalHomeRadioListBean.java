@@ -27,6 +27,7 @@ public class LocalHomeRadioListBean implements MultiItemEntity {
     public int count_num;
     public int sex;
     public int is_apply;
+    public int nStatus;
     public String sDatingTitle;
     public String sDatingRange;
     public String sDatingTime;

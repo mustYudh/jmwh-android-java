@@ -11,7 +11,9 @@ import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.module.home.park.activity.LookUserInfoActivity;
 import com.qsd.jmwh.module.home.radio.adapter.MineRadioRvAdapter;
+import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.LocalHomeRadioListBean;
+import com.qsd.jmwh.module.home.radio.dialog.RadioItemPop;
 import com.qsd.jmwh.module.home.user.bean.MineRadioListBean;
 import com.qsd.jmwh.module.home.user.presenter.MineRadioPresenter;
 import com.qsd.jmwh.module.home.user.presenter.MineRadioViewer;
@@ -35,11 +37,15 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
         setContentView(R.layout.activity_mine_radio_list);
     }
 
+
     @PresenterLifeCycle
     private MineRadioPresenter mPresenter = new MineRadioPresenter(this);
 
     @Override
     protected void loadData() {
+        setTitle("我的广播");
+        setRightMenu("我要广播", v -> mPresenter.initRadioConfigData("0"));
+
         rv_radio = bindView(R.id.rv_radio);
         ll_empty = bindView(R.id.ll_empty);
         rv_radio.setLayoutManager(new LinearLayoutManager(this));
@@ -89,6 +95,7 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
 
                     localHomeRadioListBottomBean.cdoComment = cdoListBean.cdoComment;
                     localHomeRadioListBottomBean.cdoApply = cdoListBean.cdoApply;
+                    localHomeRadioListBottomBean.nStatus = cdoListBean.nStatus;
 
                     localHomeRadioListBottomBean.itemType = 2;
                     dataList.add(localHomeRadioListBottomBean);
@@ -124,7 +131,7 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
 
                     @Override
                     public void setOnCloseEnrollItemClick(LocalHomeRadioListBean item) {
-                        mPresenter.modifyStatus("1", item.lDatingId + "");
+                        mPresenter.modifyStatus("1", item.lDatingId + "", item);
                     }
                 });
                 rv_radio.setVisibility(View.VISIBLE);
@@ -139,8 +146,18 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
 
 
     @Override
-    public void getModifyStatus() {
+    public void getModifyStatus(LocalHomeRadioListBean item) {
         ToastUtils.show("取消成功");
+        item.nStatus = 1;
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void getConfigDataSuccess(GetRadioConfigListBean configListBean) {
+        if (configListBean != null && configListBean.cdoList != null && configListBean.cdoList.size() != 0) {
+            RadioItemPop infoPop = new RadioItemPop(getActivity());
+            infoPop.setOutsideTouchable(true);
+            infoPop.setTitle("发布约会广播").setData(configListBean.cdoList).showPopupWindow();
+        }
     }
 }
