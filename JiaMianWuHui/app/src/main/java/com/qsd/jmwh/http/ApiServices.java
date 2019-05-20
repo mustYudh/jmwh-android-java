@@ -6,6 +6,7 @@ import com.qsd.jmwh.module.home.radio.bean.GetDatingUserVipBean;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
 import com.qsd.jmwh.module.home.user.bean.MineLikeBean;
+import com.qsd.jmwh.module.home.user.bean.MineRadioListBean;
 import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
 import com.qsd.jmwh.module.login.bean.LoginInfo;
 import com.qsd.jmwh.module.register.bean.DateProjectBean;
@@ -174,6 +175,11 @@ public interface ApiServices {
     @NetMethod(ParameterNames = {"sDatingTitle", "sDatingRange", "sDatingTime", "sDatingTimeExt", "sContent", "nSex", "nLng", "nLat", "bCommentType", "bHiddenType", "sImg", "sDatingHope"}, Url = "/DatingService/addDating")
     Observable<Object> addDating(String sDatingTitle, String sDatingRange, String sDatingTime, String sDatingTimeExt, String sContent, String nSex, double nLng, double nLat, String bCommentType, String bHiddenType, String sImg, String sDatingHope);
 
-    @NetMethod(ParameterNames = {"lLoveUserId", "nType"}, Url = "/UserLoveService/getDatingByUserId")
-    Observable<Object> getDatingByUserId(String lLoveUserId, String nType);
+    @NetMethod(ParameterNames = {"pageindex"}, Url = "/DatingService/getDatingByUserId")
+    Observable<MineRadioListBean> getDatingByUserId(String pageindex);
+
+    @NetMethod(ParameterNames = {"nStatus","lDatingId"}, Url = "/DatingService/modifyStatus")
+    Observable<Object> modifyStatus(String nStatus,String lDatingId);
+
+
 }
