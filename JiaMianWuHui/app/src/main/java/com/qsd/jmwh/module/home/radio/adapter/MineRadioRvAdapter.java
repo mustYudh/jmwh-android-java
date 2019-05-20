@@ -89,6 +89,11 @@ public class MineRadioRvAdapter extends BaseMultiItemQuickAdapter<LocalHomeRadio
                 DelayClickTextView tv_apply = helper.getView(R.id.tv_apply);
                 DelayClickTextView tv_close = helper.getView(R.id.tv_close);
 
+                if (item.nStatus == 0) {
+                    tv_close.setVisibility(View.VISIBLE);
+                } else {
+                    tv_close.setVisibility(View.GONE);
+                }
 
                 tv_apply.setText("查看报名(" + item.nApplyCount + ")");
                 if (item.is_like == 0) {
@@ -149,7 +154,6 @@ public class MineRadioRvAdapter extends BaseMultiItemQuickAdapter<LocalHomeRadio
                     @Override
                     public void onClick(View view) {
                         if (onRadioItemClickListener != null) {
-                            tv_close.setVisibility(View.GONE);
                             onRadioItemClickListener.setOnCloseEnrollItemClick(item);
                         }
                     }
