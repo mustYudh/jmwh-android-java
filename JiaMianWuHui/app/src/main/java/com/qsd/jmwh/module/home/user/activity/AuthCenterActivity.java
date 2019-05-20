@@ -7,13 +7,15 @@ import android.view.KeyEvent;
 import android.widget.ImageView;
 import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
 import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
-import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
+import cn.finalteam.rxgalleryfinal.rxbus.event.ImageMultipleResultEvent;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.module.home.user.bean.WomenVideoBean;
 import com.qsd.jmwh.module.home.user.presenter.AuthCenterPresenter;
 import com.qsd.jmwh.module.home.user.presenter.AuthCenterViewer;
+import com.yu.common.loading.LoadingDialog;
 import com.yu.common.mvp.PresenterLifeCycle;
+import com.yu.common.toast.ToastUtils;
 import com.yu.common.ui.video.SurfaceVideoViewCreator;
 import com.yu.common.utils.ImageLoader;
 
@@ -67,19 +69,19 @@ public class AuthCenterActivity extends BaseBarActivity implements AuthCenterVie
   }
 
   private void uploadingVideo() {
-    RxGalleryFinalApi.getInstance(getActivity())
-        .setType(RxGalleryFinalApi.SelectRXType.TYPE_VIDEO,
-            RxGalleryFinalApi.SelectRXType.TYPE_SELECT_RADIO)
-        .setVDRadioResultEvent(new RxBusResultDisposable<ImageRadioResultEvent>() {
-          @Override protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) {
-            mPresenter.uploadAuthVideo(imageRadioResultEvent.getResult().getOriginalPath());
-          }
-        })
-        .open();
+    RxGalleryFinalApi instance = RxGalleryFinalApi.getInstance(getActivity());
+    //setVDRadioResultEvent
+    instance.openRadioSelectVideo(getActivity(), new RxBusResultDisposable<ImageMultipleResultEvent>() {
+      @Override protected void onEvent(ImageMultipleResultEvent event) throws Exception {
+        mPresenter.uploadAuthVideo(event.getResult().get(0).getOriginalPath());
+      }
+    });
   }
 
   @Override public void uploadSuccess() {
     mPresenter.getAuthInf();
+    ToastUtils.show("上传成功");
+    LoadingDialog.dismissLoading();
   }
 
   @Override protected void onPause() {

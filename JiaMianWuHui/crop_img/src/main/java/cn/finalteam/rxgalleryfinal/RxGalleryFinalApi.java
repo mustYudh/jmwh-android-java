@@ -228,6 +228,17 @@ public class RxGalleryFinalApi {
                 .openGallery();
     }
 
+
+    public static void openRadioSelectVideo(Activity context, RxBusResultDisposable<ImageMultipleResultEvent> rxBusResultDisposable) {
+        RxGalleryFinal
+            .with(context)
+            .multiple()
+            .video()
+            .imageLoader(ImageLoaderType.GLIDE)
+            .subscribe(rxBusResultDisposable)
+            .openGallery();
+    }
+
     /**
      * 多选视频 ：默认开启全部
      * 默认选9个视频

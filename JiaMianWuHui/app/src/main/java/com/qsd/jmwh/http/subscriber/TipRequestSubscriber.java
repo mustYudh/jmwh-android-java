@@ -27,14 +27,12 @@ public abstract class TipRequestSubscriber<T> extends BaseSubscriber<T> {
 
     public TipRequestSubscriber(FragmentActivity activity) {
         this.activity = activity;
+        LoadingDialog.showNormalLoading(activity,false);
+        LoadingDialog.startLoading( "正在加载");
     }
 
     @Override
     protected void onStart() {
-        if (activity != null) {
-            LoadingDialog.showNormalLoading(activity,false);
-            LoadingDialog.startLoading( "正在加载");
-        }
         super.onStart();
     }
 

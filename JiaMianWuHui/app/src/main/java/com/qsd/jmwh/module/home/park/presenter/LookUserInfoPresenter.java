@@ -21,7 +21,7 @@ public class LookUserInfoPresenter extends BaseViewPresenter<LookUserInfoViewer>
     public void getUserInfo(int lUserId, double nLat, double nLng,boolean firstLoading) {
         XHttpProxy.proxy(ApiServices.class)
                 .getOtherUserInfo(lUserId,nLat,nLng)
-                .subscribeWith(new TipRequestSubscriber<OtherUserInfoBean>(getActivity(),firstLoading) {
+                .subscribeWith(new TipRequestSubscriber<OtherUserInfoBean>() {
                     @Override
                     protected void onSuccess(OtherUserInfoBean userCenterInfo) {
                         assert getViewer() != null;

@@ -8,8 +8,9 @@ import com.qsd.jmwh.module.home.user.bean.WomenVideoBean;
 import com.qsd.jmwh.thrid.UploadImage;
 import com.qsd.jmwh.thrid.oss.PersistenceResponse;
 import com.xuexiang.xhttp2.XHttpProxy;
+import com.xuexiang.xhttp2.exception.ApiException;
 import com.yu.common.framework.BaseViewPresenter;
-import com.yu.common.toast.ToastUtils;
+import com.yu.common.loading.LoadingDialog;
 
 /**
  * @author yudneghao
@@ -35,14 +36,22 @@ public class AuthCenterPresenter extends BaseViewPresenter<AuthCenterViewer> {
   }
 
   public void uploadAuthVideo(String path) {
-    PersistenceResponse response = UploadImage.uploadImage(getActivity(), UserProfile.getInstance().getObjectName("auth","mp4"), path);
-    XHttpProxy.proxy(OtherApiServices.class).userAuthByVideo(response.cloudUrl,"http://img0.imgtn.bdimg.com/it/u=1251096059,3284062985&fm=26&gp=0.jpg").subscribeWith(
-        new TipRequestSubscriber<Object>() {
-          @Override protected void onSuccess(Object o) {
-            ToastUtils.show("上传成");
-            assert getViewer() != null;
-            getViewer().uploadSuccess();
-          }
-        });
+    LoadingDialog.showNormalLoading(getActivity(),false);
+    LoadingDialog.startLoading( "正在上传");
+    new Thread(() -> {
+      PersistenceResponse response = UploadImage.uploadImage(getActivity(), UserProfile.getInstance().getObjectName("auth","mp4"), path);
+      XHttpProxy.proxy(OtherApiServices.class).userAuthByVideo(response.cloudUrl,"http://img0.imgtn.bdimg.com/it/u=1251096059,3284062985&fm=26&gp=0.jpg").subscribeWith(
+          new TipRequestSubscriber<Object>() {
+            @Override protected void onSuccess(Object o) {
+              assert getViewer() != null;
+              getViewer().uploadSuccess();
+            }
+
+            @Override protected void onError(ApiException apiException) {
+              super.onError(apiException);
+              LoadingDialog.dismissLoading();
+            }
+          });
+    }).start();
   }
 }
