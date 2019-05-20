@@ -171,8 +171,11 @@
             android:name=".module.home.radio.activity.ViewBigImageActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
-        <activity android:name=".module.home.user.activity.WebViewActivity"
-                  android:screenOrientation="portrait"
+        <activity android:name=".module.home.user.activity.MineRadioListActivity">
+        </activity>
+        <activity
+            android:name=".module.home.user.activity.WebViewActivity"
+            android:screenOrientation="portrait"
             />
     </application>
 

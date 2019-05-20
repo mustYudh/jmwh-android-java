@@ -21,6 +21,7 @@ import com.qsd.jmwh.dialog.ShareDialog;
 import com.qsd.jmwh.module.home.user.activity.EditUserInfoActivity;
 import com.qsd.jmwh.module.home.user.activity.MineBlackMenuActivity;
 import com.qsd.jmwh.module.home.user.activity.MineLikeActivity;
+import com.qsd.jmwh.module.home.user.activity.MineRadioListActivity;
 import com.qsd.jmwh.module.home.user.activity.MoneyBagActivity;
 import com.qsd.jmwh.module.home.user.activity.PhotoDestroySelectActivity;
 import com.qsd.jmwh.module.home.user.activity.PrivacySettingActivity;
@@ -106,7 +107,7 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
                 getLaunchHelper().startActivity(EditUserInfoActivity.class);
                 break;
             case R.id.privacy_setting:
-                getLaunchHelper().startActivity(PrivacySettingActivity.getIntent(getActivity(),sNickName,header));
+                getLaunchHelper().startActivity(PrivacySettingActivity.getIntent(getActivity(), sNickName, header));
                 break;
             case R.id.setting:
                 getLaunchHelper().startActivity(SettingActivity.class);
@@ -136,7 +137,7 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
                 });
                 break;
             case R.id.my_radio:
-
+                getLaunchHelper().startActivity(MineRadioListActivity.class);
                 break;
             case R.id.my_like:
                 getLaunchHelper().startActivity(MineLikeActivity.class);
@@ -286,7 +287,7 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
     public void onResume() {
         super.onResume();
         update(getArguments());
-        Log.e("aaaa","走了吗");
+        Log.e("aaaa", "走了吗");
     }
 
     @Override
