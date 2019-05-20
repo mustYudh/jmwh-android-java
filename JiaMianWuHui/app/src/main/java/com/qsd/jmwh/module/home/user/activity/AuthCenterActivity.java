@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 import android.widget.ImageView;
+import android.widget.TextView;
 import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
 import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
 import cn.finalteam.rxgalleryfinal.rxbus.event.ImageMultipleResultEvent;
@@ -66,9 +67,16 @@ public class AuthCenterActivity extends BaseBarActivity implements AuthCenterVie
         return vedioBean.sFileUrl;
       }
     };
-    //if (vedioBean.nCheckStatus) {
-    //
-    //}
+
+    TextView textView = bindView(R.id.uploading);
+    if (vedioBean.nCheckStatus == 0) {
+      textView.setText("上传认证视频");
+    } else if (vedioBean.nCheckStatus == 2) {
+      textView.setText("更新认证");
+    } else if (vedioBean.nCheckStatus == 3) {
+      textView.setText("审核中（24小时内）");
+      textView.setClickable(false);
+    }
   }
 
   private void uploadingVideo() {

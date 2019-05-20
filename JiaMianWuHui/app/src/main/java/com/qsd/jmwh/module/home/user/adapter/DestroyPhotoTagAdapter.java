@@ -76,7 +76,18 @@ public class DestroyPhotoTagAdapter extends BasicAdapter<UserCenterInfo.CdoimgLi
                             tag.setText("审核失败");
                         } else {
                             tag.setBackgroundColor(Res.color(R.color.color_BC6C6D));
-                            tag.setText(item.nStatus == 3 ? "红包" : "阅后即焚红包");
+                            tag.setText("红包");
+                        }
+                    }  else if (item.nFileType == 3) {
+                        if (item.nStatus == 3) {
+                            tag.setBackgroundColor(Res.color(R.color.color_BD955C));
+                            tag.setText("待审核");
+                        } else if (item.nStatus == 4) {
+                            tag.setBackgroundColor(Res.color(R.color.color_5B5751));
+                            tag.setText("审核失败");
+                        } else {
+                            tag.setBackgroundColor(Res.color(R.color.color_BC6C6D));
+                            tag.setText("阅后即焚红包");
                         }
                     }
                     ImageLoader.loadCenterCrop(imageView.getContext(), item.sFileUrl, imageView);

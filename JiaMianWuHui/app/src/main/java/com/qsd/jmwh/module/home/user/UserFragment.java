@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
-
+import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
+import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
+import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
+import cn.finalteam.rxgalleryfinal.ui.base.IRadioImageCheckedListener;
 import com.denghao.control.view.utils.UpdataCurrentFragment;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseFragment;
@@ -35,14 +37,8 @@ import com.qsd.jmwh.module.splash.SplashActivity;
 import com.qsd.jmwh.view.UserItemView;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.utils.ImageLoader;
-
 import java.util.Objects;
 import java.util.UUID;
-
-import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
-import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
-import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
-import cn.finalteam.rxgalleryfinal.ui.base.IRadioImageCheckedListener;
 
 /**
  * @author yudneghao
@@ -232,7 +228,7 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
         ImageView authStatus = bindView(R.id.auth_type);
         authStatus.setImageResource(result);
         ImageView header = bindView(R.id.header);
-        ImageLoader.loadCenterCrop(getActivity(), cdoUser.sUserHeadPic, header, R.mipmap.ic_launcher);
+        ImageLoader.loadHader(getActivity(), cdoUser.sUserHeadPic, header);
         ImageLoader.blurTransformation(getActivity(), cdoUser.sUserHeadPic, bindView(R.id.header_bg), 4, 10);
         UserItemView money = bindView(R.id.money_bag);
         money.setHint(walletData.nMaskBallCoin + "假面币");
@@ -294,7 +290,6 @@ public class UserFragment extends BaseFragment implements UserViewer, View.OnCli
     public void onResume() {
         super.onResume();
         update(getArguments());
-        Log.e("aaaa","走了吗");
     }
 
     @Override

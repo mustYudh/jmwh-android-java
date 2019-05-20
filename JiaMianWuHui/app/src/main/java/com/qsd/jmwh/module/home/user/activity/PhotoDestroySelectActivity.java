@@ -96,7 +96,7 @@ public class PhotoDestroySelectActivity extends BaseBarActivity
           if (fileType == 0 || fileType == 1) {
             ToastUtils.show(selected ? "设为阅后即焚照片" : "设为普通照片");
             fileType = selected ? 1 : 0;
-          } else if (fileType == 2) {
+          } else if (fileType == 2 || fileType == 3) {
             ToastUtils.show(selected ? "设为阅后即焚红包照片" : "设为普红包照片");
             fileType = selected ? 3 : 2;
           }
@@ -104,11 +104,11 @@ public class PhotoDestroySelectActivity extends BaseBarActivity
         }
         break;
       case R.id.next_action:
-        PersistenceResponse response =
-            UploadImage.uploadImage(getActivity(), UserProfile.getInstance().getObjectName(),
-                getIntent().getStringExtra(URL));
         int fileId = getIntent().getIntExtra(FILE_ID, -1);
         if (fileId == -1) {
+          PersistenceResponse response =
+              UploadImage.uploadImage(getActivity(), UserProfile.getInstance().getObjectName(),
+                  getIntent().getStringExtra(URL));
           if (!needMoney) {
             mPresenter.uploadFile(response.cloudUrl, 0, 0, selected ? 1 : 0, 0);
           } else {

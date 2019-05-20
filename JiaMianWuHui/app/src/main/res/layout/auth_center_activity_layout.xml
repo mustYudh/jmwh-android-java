@@ -19,6 +19,12 @@
         android:layout_width="match_parent"
         android:layout_height="205dp">
 
+        <ImageView
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
         <FrameLayout
             android:id="@+id/video"
             android:layout_width="match_parent"
@@ -52,7 +58,7 @@
         android:id="@+id/uploading"
         style="@style/app_blue_button"
         android:layout_marginTop="35dp"
-        android:text="审核中（24小时内）"
+        android:text="上传认证视频"
         />
 
     <TextView

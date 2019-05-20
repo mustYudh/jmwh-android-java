@@ -1,16 +1,17 @@
 package com.yu.common.utils;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.widget.ImageView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.Target;
-
 import java.io.File;
 import java.util.concurrent.ExecutionException;
-
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
 public class ImageLoader {
@@ -42,7 +43,7 @@ public class ImageLoader {
      * @param defaultResId
      */
     public static void loadCenterCrop(Context context, String url, ImageView view, int defaultResId) {
-        Glide.with(context).load(url).centerCrop().placeholder(defaultResId).error(defaultResId).into(view);
+        Glide.with(context).load(url).centerCrop().dontAnimate().error(defaultResId).placeholder(defaultResId).into(view);
     }
 
     public static void loadCenterCrop(Context context, String url, ImageView view) {
@@ -115,6 +116,22 @@ public class ImageLoader {
                                        int width, int height) {
         Glide.with(context).load(url).fitCenter().override(width, height)
                 .placeholder(defaultResId).into(view);
+    }
+
+    public static void loadHader(final Context context, String url, ImageView view) {
+        Glide.with(context)
+            .load(url)
+            .asBitmap()  //这句不能少，否则下面的方法会报错
+            .centerCrop()
+            .into(new BitmapImageViewTarget(view) {
+                @Override
+                protected void setResource(Bitmap resource) {
+                    RoundedBitmapDrawable circularBitmapDrawable =
+                        RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+                    circularBitmapDrawable.setCircular(true);
+                    view.setImageDrawable(circularBitmapDrawable);
+                }
+            });
     }
 
     /**

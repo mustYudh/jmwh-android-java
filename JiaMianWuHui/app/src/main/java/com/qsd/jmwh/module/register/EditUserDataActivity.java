@@ -267,7 +267,7 @@ public class EditUserDataActivity extends BaseBarActivity
         headerHint.setVisibility(View.GONE);
         selectHeader.setVisibility(View.VISIBLE);
         headerUrl = url;
-        ImageLoader.loadCenterCrop(EditUserDataActivity.this, url, selectHeader, R.mipmap.ic_launcher);
+        ImageLoader.loadHader(EditUserDataActivity.this, url, selectHeader);
     }
 
     @Override

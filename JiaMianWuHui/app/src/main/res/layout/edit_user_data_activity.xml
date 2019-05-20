@@ -25,7 +25,7 @@
 
 
 
-            <com.qsd.jmwh.view.CircleImageView
+            <ImageView
                 android:background="@drawable/shape_circle_header_bg"
                 android:id="@+id/header"
                 android:layout_width="100dp"
