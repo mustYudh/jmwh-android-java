@@ -1,6 +1,7 @@
 package com.qsd.jmwh.module.home.radio.bean;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
+import com.qsd.jmwh.module.home.user.bean.MineRadioListBean;
 
 import java.util.List;
 
@@ -30,4 +31,6 @@ public class LocalHomeRadioListBean implements MultiItemEntity {
     public String sDatingRange;
     public String sDatingTime;
     public String sContent;
+    public List<MineRadioListBean.CdoListBean.CdoCommentBean> cdoComment;
+    public List<MineRadioListBean.CdoListBean.CdoApplyBean> cdoApply;
 }

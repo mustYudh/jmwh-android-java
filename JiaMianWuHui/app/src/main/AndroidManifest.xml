@@ -180,8 +180,9 @@
             />
         <activity
             android:name=".module.home.user.activity.AuthCenterActivity"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait"/>
+        <activity android:name=".module.home.user.activity.MineRadioListActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -32,30 +32,35 @@
 
 
     <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/user_item_one"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:showArrow="false"
         app:type="selected"
         app:user_left_text="发广告"/>
     <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/user_item_two"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:showArrow="false"
         app:type="selected"
         app:user_left_text="骚扰谩骂"/>
     <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/user_item_three"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:showArrow="false"
         app:type="selected"
         app:user_left_text="虚假照片"/>
     <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/user_item_four"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:showArrow="false"
         app:type="selected"
         app:user_left_text="色情低俗"/>
     <com.qsd.jmwh.view.UserItemView
+        android:id="@+id/user_item_five"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:showArrow="false"
@@ -66,7 +71,7 @@
 
 
     <LinearLayout
-        android:visibility="gone"
+        android:visibility="visible"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
