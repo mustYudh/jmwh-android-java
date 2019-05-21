@@ -48,36 +48,26 @@ public class LoadingView extends LinearLayout {
         progressBar.setVisibility(VISIBLE);
     }
 
-    /**
-     * 成功
-     */
+
     public void showSuccess() {
         iv.setImageResource(R.drawable.load_success);
         iv.setVisibility(View.VISIBLE);
         progressBar.setVisibility(GONE);
     }
 
-    /**
-     * 失败
-     */
+
     public void showFail() {
         iv.setImageResource(R.drawable.load_fail);
         iv.setVisibility(View.VISIBLE);
         progressBar.setVisibility(GONE);
     }
 
-    /**
-     * 提示文字
-     *
-     * @param txt string
-     */
+
     public void setText(String txt) {
         tv.setText(txt);
     }
 
-    /**
-     * 提示文字
-     */
+
     public void setText(@StringRes int txtId) {
         tv.setText(txtId);
     }

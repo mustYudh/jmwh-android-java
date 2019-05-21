@@ -37,9 +37,7 @@ public class AbstractSupportFragment extends Fragment {
     super.onDestroy();
   }
 
-  /**
-   * 简化View的获取
-   */
+
   public <T extends View> T bindView(@IdRes int id) {
     return (T) findViewById(id);
   }

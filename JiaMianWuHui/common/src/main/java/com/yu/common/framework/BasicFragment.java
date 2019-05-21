@@ -10,10 +10,7 @@ import com.yu.common.R;
 import com.yu.common.launche.LauncherHelper;
 import com.yu.common.utils.NetWorkUtil;
 
-/**
- * @author yudneghao
- * @date 2019/3/5
- */
+
 public abstract class BasicFragment extends AbstractExtendsFragment {
 
     private boolean isVisibleToUser = true;
@@ -126,22 +123,15 @@ public abstract class BasicFragment extends AbstractExtendsFragment {
     }
 
 
-    /**
-     * 是否存在于ViewPager中
-     * 返回true则根据UserVisibleHint的值懒加载
-     */
+
     protected boolean inFragmentPageAdapter() {
         return false;
     }
 
-    /***
-     * 获取当前界面的XML layout Id
-     */
+
     protected abstract int getContentViewId();
 
-    /**
-     * 数据，界面处理
-     */
+
     protected abstract void setView(@Nullable Bundle savedInstanceState);
 
     protected abstract void loadData();

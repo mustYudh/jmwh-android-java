@@ -18,10 +18,6 @@ import com.yu.common.navigation.StatusBarFontColorUtil;
 import com.yu.common.utils.NetWorkUtil;
 import com.yu.common.utils.ReflexUtils;
 
-/**
- * @author yudneghao
- * @date 2019/3/5
- */
 public abstract class BasicActivity extends AbstractExtendsActivity {
 
   private Fragment currentFragment;
@@ -158,9 +154,7 @@ public abstract class BasicActivity extends AbstractExtendsActivity {
     return super.onKeyDown(keyCode, event);
   }
 
-  /**
-   * 处理Fragment提交逻辑
-   */
+
   private void commitFragment(@IdRes int attachLayoutId, Fragment currentFragment,
       Fragment newFragment) {
     if (newFragment == null) {

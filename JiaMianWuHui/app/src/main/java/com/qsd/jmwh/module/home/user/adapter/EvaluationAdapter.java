@@ -32,6 +32,8 @@ public class EvaluationAdapter extends BasicAdapter<EvaluationBean.CdoListBean> 
                 if (userID != UserProfile.getInstance().getAppAccount()) {
                     count.setOnClickListener(v -> {
                         data.selected = !data.selected;
+                        int countValue = Integer.parseInt(data.nValue);
+                        data.nValue = data.selected ?  (countValue + 1) + "" : (countValue - 1) + "";
                         notifyDataSetChanged();
                     });
                 }

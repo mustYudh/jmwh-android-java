@@ -91,9 +91,6 @@ public class LauncherHelper {
     }
   }
 
-  /**
-   * 判断Intent是否存在
-   */
   public static boolean checkIntentAvailable(Context context, Intent intent) {
     return intent != null && intent.resolveActivity(context.getPackageManager()) != null;
   }

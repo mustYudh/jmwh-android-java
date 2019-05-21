@@ -413,9 +413,6 @@ public class StatusBarUtils {
     }
   }
 
-  /**
-   * 设置透明
-   */
   private static void setTransparentForWindow(Activity activity) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
       activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
@@ -430,9 +427,7 @@ public class StatusBarUtils {
     }
   }
 
-  /**
-   * 使状态栏透明
-   */
+
   @TargetApi(Build.VERSION_CODES.KITKAT) private static void transparentStatusBar(
       Activity activity) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -445,12 +440,7 @@ public class StatusBarUtils {
     }
   }
 
-  /**
-   * 创建半透明矩形 View
-   *
-   * @param alpha 透明值
-   * @return 半透明 View
-   */
+
   private static View createTranslucentStatusBarView(Activity activity, int alpha) {
     // 绘制一个和状态栏一样高的矩形
     View statusBarView = new View(activity);
@@ -463,13 +453,7 @@ public class StatusBarUtils {
     return statusBarView;
   }
 
-  /**
-   * 计算状态栏颜色
-   *
-   * @param color color值
-   * @param alpha alpha值
-   * @return 最终的状态栏颜色
-   */
+
   private static int calculateStatusColor(@ColorInt int color, int alpha) {
     if (alpha == 0) {
       return color;
