@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -94,7 +95,6 @@ public class MineRadioRvAdapter extends BaseMultiItemQuickAdapter<LocalHomeRadio
                 } else {
                     tv_close.setVisibility(View.GONE);
                 }
-
                 tv_apply.setText("查看报名(" + item.nApplyCount + ")");
                 if (item.is_like == 0) {
                     iv_like.setImageResource(R.drawable.zan);
@@ -158,6 +158,21 @@ public class MineRadioRvAdapter extends BaseMultiItemQuickAdapter<LocalHomeRadio
                         }
                     }
                 });
+
+                LinearLayout ll_user = helper.getView(R.id.ll_user);
+                HorizontalScrollView hs = helper.getView(R.id.hs);
+                if (item.cdoLove != null && item.cdoLove.size() != 0) {
+                    ll_user.removeAllViews();
+                    for (int i = 0; i < item.cdoLove.size(); i++) {
+                        View view = View.inflate(context, R.layout.item_love_user, null);
+                        CircleImageView iv_headimg_love = view.findViewById(R.id.iv_headimg);
+                        Glide.with(context).load(item.cdoLove.get(i).sUserHeadPic).into(iv_headimg_love);
+                        ll_user.addView(view);
+                    }
+                    hs.setVisibility(View.VISIBLE);
+                } else {
+                    hs.setVisibility(View.GONE);
+                }
                 break;
         }
     }

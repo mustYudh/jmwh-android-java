@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+
+        <com.qsd.jmwh.view.CircleImageView
+            android:id="@+id/iv_headimg"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/zhanwei"/>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.yu.common.ui.DelayClickTextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我是阿芳"
+                    android:textColor="#ff8a4efc"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 报名了您的约会广播"
+                    android:textColor="#222222"
+                    android:textSize="13sp"
+                    />
+            </LinearLayout>
+
+
+            <com.yu.common.ui.DelayClickTextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="2019.3.25 14:28"
+                android:textColor="#ff666666"
+                android:textSize="12sp"
+                />
+        </LinearLayout>
+
+
+        <com.yu.common.ui.DelayClickTextView
+            android:id="@+id/tv_get"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:text="联系她"
+            android:textColor="#ff8a4efc"
+            android:textSize="13sp"
+            />
+    </LinearLayout>
+
+</LinearLayout>

@@ -172,16 +172,16 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".module.home.user.activity.WebViewActivity"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".module.home.user.activity.SettingMoneyPhotoActivity"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".module.home.user.activity.AuthCenterActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".module.home.user.activity.MineRadioListActivity">
+        </activity>
+        <activity android:name=".module.home.user.activity.ApplyDetailsActivity">
         </activity>
     </application>
 
