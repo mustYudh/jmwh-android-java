@@ -1,5 +1,6 @@
 package com.qsd.jmwh.module.home.user.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.google.gson.Gson;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.module.home.park.activity.LookUserInfoActivity;
@@ -89,14 +91,25 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
                     localHomeRadioListBottomBean.nApplyCount = cdoListBean.nApplyCount;
                     localHomeRadioListBottomBean.bCommentType = cdoListBean.bCommentType;
                     localHomeRadioListBottomBean.sex = cdoListBean.nSex;
-                    if (cdoListBean.cdoUserData != null) {
-                        localHomeRadioListTitleBean.bVIP = cdoListBean.cdoUserData.bVIP;
-                    }
 
                     localHomeRadioListBottomBean.cdoComment = cdoListBean.cdoComment;
                     localHomeRadioListBottomBean.cdoApply = cdoListBean.cdoApply;
                     localHomeRadioListBottomBean.nStatus = cdoListBean.nStatus;
 
+
+                    if (cdoListBean.cdoUserData != null) {
+                        localHomeRadioListBottomBean.headImg = cdoListBean.cdoUserData.sUserHeadPic;
+                        localHomeRadioListBottomBean.userName = cdoListBean.cdoUserData.sNickName;
+                        localHomeRadioListBottomBean.lUserId = cdoListBean.cdoUserData.lUserId;
+                        localHomeRadioListBottomBean.bVIP = cdoListBean.cdoUserData.bVIP;
+                    }
+                    localHomeRadioListBottomBean.picList = cdoListBean.sImg;
+                    localHomeRadioListBottomBean.sDatingRange = cdoListBean.sDatingRange;
+                    localHomeRadioListBottomBean.sDatingTime = cdoListBean.sDatingTime;
+                    localHomeRadioListBottomBean.sContent = cdoListBean.sContent;
+                    localHomeRadioListBottomBean.sDatingTitle = cdoListBean.sDatingTitle;
+                    localHomeRadioListBottomBean.cTime = cdoListBean.dCreateTime;
+                    localHomeRadioListBottomBean.cdoLove = cdoListBean.cdoLove;
                     localHomeRadioListBottomBean.itemType = 2;
                     dataList.add(localHomeRadioListBottomBean);
                 }
@@ -126,7 +139,8 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
 
                     @Override
                     public void setOnAddDatingEnrollItemClick(LocalHomeRadioListBean item) {
-
+                        String json = new Gson().toJson(item);
+                        startActivity(new Intent(MineRadioListActivity.this, ApplyDetailsActivity.class).putExtra("json", json));
                     }
 
                     @Override

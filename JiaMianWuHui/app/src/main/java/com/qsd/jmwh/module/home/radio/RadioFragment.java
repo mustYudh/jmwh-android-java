@@ -38,6 +38,7 @@ import com.qsd.jmwh.thrid.UploadImage;
 import com.qsd.jmwh.thrid.oss.PersistenceResponse;
 import com.qsd.jmwh.utils.DialogUtils;
 import com.qsd.jmwh.view.CircleImageView;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 import com.yu.common.ui.DelayClickImageView;
@@ -77,6 +78,8 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
     private HomeRadioRvAdapter adapter;
     private Dialog commentDialog;
     private String select_city = "";
+    private SmartRefreshLayout refresh;
+    public int pageIndex = 0;
 
     @Override
     protected int getActionBarLayoutId() {
@@ -95,10 +98,11 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
 
     @Override
     protected void loadData() {
-        mPresenter.initRadioDataAll("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), "", "1", "0");
+        mPresenter.initRadioDataAll("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), "", "1", pageIndex + "");
     }
 
     private void initView() {
+        refresh = bindView(R.id.refresh);
         tv_left = bindView(R.id.tv_left);
         TextView tv_right = bindView(R.id.tv_right);
         right_menu = bindView(R.id.right_menu);
@@ -132,14 +136,50 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                 showTypeDialog(2);
             }
         });
+
+
+        refresh.setOnRefreshListener(refreshLayout -> {
+            pageIndex = 0;
+            switch (sexType) {
+                case 0:
+                    mPresenter.initRadioDataAll("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), select_city + "", (disType == 0 ? 1 : 2) + "", pageIndex + "");
+                    break;
+                case 1:
+                    mPresenter.initRadioData("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), select_city + "", (disType == 0 ? 1 : 2) + "", pageIndex + "", "0");
+                    break;
+                case 2:
+                    mPresenter.initRadioData("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), select_city + "", (disType == 0 ? 1 : 2) + "", pageIndex + "", "1");
+                    break;
+            }
+        });
+        refresh.setOnLoadMoreListener(refreshLayout -> {
+            pageIndex++;
+            switch (sexType) {
+                case 0:
+                    mPresenter.initRadioDataAll("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), select_city + "", (disType == 0 ? 1 : 2) + "", pageIndex + "");
+                    break;
+                case 1:
+                    mPresenter.initRadioData("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), select_city + "", (disType == 0 ? 1 : 2) + "", pageIndex + "", "0");
+                    break;
+                case 2:
+                    mPresenter.initRadioData("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), select_city + "", (disType == 0 ? 1 : 2) + "", pageIndex + "", "1");
+                    break;
+            }
+        });
     }
 
 
     @Override
     public void getDataSuccess(HomeRadioListBean homeRadioListBean) {
+        refresh.finishRefresh();
+        refresh.finishLoadMore();
         if (homeRadioListBean != null) {
             if (homeRadioListBean.cdoList != null && homeRadioListBean.cdoList.size() != 0) {
-                dataList.clear();
+                if (pageIndex > 0) {
+
+                } else {
+                    dataList.clear();
+                }
                 for (int i = 0; i < homeRadioListBean.cdoList.size(); i++) {
                     HomeRadioListBean.CdoListBean cdoListBean = homeRadioListBean.cdoList.get(i);
                     LocalHomeRadioListBean localHomeRadioListTitleBean = new LocalHomeRadioListBean();
@@ -208,7 +248,11 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                 });
                 ll_empty.setVisibility(View.GONE);
             } else {
-                ll_empty.setVisibility(View.VISIBLE);
+                if (pageIndex > 0) {
+                    ToastUtils.show("没有更多了");
+                } else {
+                    ll_empty.setVisibility(View.VISIBLE);
+                }
             }
         }
 
@@ -339,6 +383,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pageIndex = 0;
                 switch (v.getId()) {
                     case R.id.ll_top:
                         if (typeDialog.isShowing()) {
@@ -349,13 +394,13 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                             left_menu.setText("最新发布");
                             switch (sexType) {
                                 case 0:
-                                    mPresenter.initRadioDataAll("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), "", "1", "0");
+                                    mPresenter.initRadioDataAll("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), "", "1", pageIndex + "");
                                     break;
                                 case 1:
-                                    mPresenter.initRadioData("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), "", "1", "0", "0");
+                                    mPresenter.initRadioData("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), "", "1", pageIndex + "", "0");
                                     break;
                                 case 2:
-                                    mPresenter.initRadioData("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), "", "1", "0", "1");
+                                    mPresenter.initRadioData("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), "", "1", pageIndex + "", "1");
                                     break;
                             }
                         } else {
@@ -363,10 +408,10 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                             right_menu.setText("全部");
                             switch (disType) {
                                 case 0:
-                                    mPresenter.initRadioDataAll("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), "", "1", "0");
+                                    mPresenter.initRadioDataAll("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), "", "1", pageIndex + "");
                                     break;
                                 case 1:
-                                    mPresenter.initRadioDataAll("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), "", "2", "0");
+                                    mPresenter.initRadioDataAll("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), "", "2", pageIndex + "");
                                     break;
                             }
 
@@ -508,17 +553,18 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
             RangeData.Range range = (RangeData.Range) bundle.getSerializable(DateRangeActivity.RANGE_RESULT);
             if (range != null) {
                 if (requestCode == DATE_RANGE_REQUEST_CODE) {
+                    pageIndex = 0;
                     tv_left.setText(range.sName);
                     select_city = range.sName;
                     switch (sexType) {
                         case 0:
-                            mPresenter.initRadioDataAll("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), range.sName + "", (disType == 0 ? 1 : 2) + "", "0");
+                            mPresenter.initRadioDataAll("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), range.sName + "", (disType == 0 ? 1 : 2) + "", pageIndex + "");
                             break;
                         case 1:
-                            mPresenter.initRadioData("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), range.sName + "", (disType == 0 ? 1 : 2) + "", "0", "0");
+                            mPresenter.initRadioData("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), range.sName + "", (disType == 0 ? 1 : 2) + "", pageIndex + "", "0");
                             break;
                         case 2:
-                            mPresenter.initRadioData("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), range.sName + "", (disType == 0 ? 1 : 2) + "", "0", "1");
+                            mPresenter.initRadioData("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), range.sName + "", (disType == 0 ? 1 : 2) + "", pageIndex + "", "1");
                             break;
                     }
 
@@ -542,15 +588,16 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
     //刷新数据
     @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行
     public void onEvent(DataRefreshRadioDataEvent event) {
+        pageIndex = 0;
         switch (sexType) {
             case 0:
-                mPresenter.initRadioDataAll("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), select_city + "", (disType == 0 ? 1 : 2) + "", "0");
+                mPresenter.initRadioDataAll("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), select_city + "", (disType == 0 ? 1 : 2) + "", pageIndex + "");
                 break;
             case 1:
-                mPresenter.initRadioData("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), select_city + "", (disType == 0 ? 1 : 2) + "", "0", "0");
+                mPresenter.initRadioData("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), select_city + "", (disType == 0 ? 1 : 2) + "", pageIndex + "", "0");
                 break;
             case 2:
-                mPresenter.initRadioData("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), select_city + "", (disType == 0 ? 1 : 2) + "", "0", "1");
+                mPresenter.initRadioData("", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), select_city + "", (disType == 0 ? 1 : 2) + "", pageIndex + "", "1");
                 break;
         }
     }

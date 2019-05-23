@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:overScrollMode="never"
+    android:scrollbars="none"
+    tools:context=".module.home.user.activity.ApplyDetailsActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical">
+
+                <com.qsd.jmwh.view.CircleImageView
+                    android:id="@+id/iv_headimg"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_launcher"/>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        >
+
+                        <com.yu.common.ui.DelayClickTextView
+                            android:id="@+id/tv_user_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:includeFontPadding="false"
+                            android:text="曾经是好女孩"
+                            android:textColor="#ff222222"
+                            android:textSize="15sp"
+                            />
+
+                        <com.yu.common.ui.DelayClickImageView
+                            android:id="@+id/iv_sex"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:layout_marginLeft="5dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/woman"/>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_vertical">
+
+                        <com.yu.common.ui.DelayClickTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/shape_home_person"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:paddingLeft="6dp"
+                            android:paddingTop="3dp"
+                            android:paddingRight="6dp"
+                            android:paddingBottom="3dp"
+                            android:text="真实"
+                            android:textColor="#ffffffff"
+                            android:textSize="10sp"
+                            />
+
+                        <com.yu.common.ui.DelayClickTextView
+                            android:id="@+id/tv_ctime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:ellipsize="end"
+                            android:includeFontPadding="false"
+                            android:singleLine="true"
+                            android:text="发布于 2019.3.29 14:28"
+                            android:textColor="#ff666666"
+                            android:textSize="12sp"
+                            />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <com.yu.common.ui.DelayClickImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="18dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/iv_more"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <com.yu.common.ui.DelayClickImageView
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_gravity="top"
+                    android:src="@drawable/liaotian"/>
+
+                <com.yu.common.ui.DelayClickTextView
+                    android:id="@+id/tv_label_top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:includeFontPadding="false"
+                    android:text="夜蒲聚会 / 不限时间，上海市"
+                    android:textColor="#ff666666"
+                    android:textSize="14sp"
+                    />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <com.yu.common.ui.DelayClickImageView
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_gravity="top"
+                    android:src="@drawable/zhuti"/>
+
+                <com.yu.common.ui.DelayClickTextView
+                    android:id="@+id/tv_label_bottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:includeFontPadding="false"
+                    android:text="大叔勿扰"
+                    android:textColor="#ff666666"
+                    android:textSize="14sp"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <com.qsd.jmwh.view.NoSlidingGridView
+            android:id="@+id/gv_pic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:horizontalSpacing="5dp"
+            android:listSelector="@android:color/transparent"
+            android:numColumns="3"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            android:verticalSpacing="5dp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                >
+
+                <LinearLayout
+                    android:id="@+id/ll_zan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center">
+
+                    <com.yu.common.ui.DelayClickImageView
+                        android:id="@+id/iv_like"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/zan"/>
+
+                    <com.yu.common.ui.DelayClickTextView
+                        android:id="@+id/tv_like"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="#ff666666"
+                        android:textSize="12sp"
+                        />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="28dp"
+                    android:gravity="center">
+
+                    <com.yu.common.ui.DelayClickImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/comment"/>
+
+                    <com.yu.common.ui.DelayClickTextView
+                        android:id="@+id/tv_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="评论(3)"
+                        android:textColor="#ff666666"
+                        android:textSize="12sp"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_enroll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="28dp"
+                    android:gravity="center">
+
+                    <com.yu.common.ui.DelayClickImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/apply_select"/>
+
+                    <com.yu.common.ui.DelayClickTextView
+                        android:id="@+id/tv_apply"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="查看报名(1)"
+                        android:textColor="#8A4EFC"
+                        android:textSize="12sp"
+                        />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <com.yu.common.ui.DelayClickTextView
+                        android:id="@+id/tv_close"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:text="结束报名"
+                        android:textColor="#ffeb3200"
+                        android:textSize="12sp"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:background="@color/color_EEEEEE"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+            <HorizontalScrollView
+                android:id="@+id/hs"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:id="@+id/ll_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"/>
+            </HorizontalScrollView>
+
+            <LinearLayout
+                android:id="@+id/ll_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+
+                <LinearLayout
+                    android:id="@+id/ll_root"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="#F2F2F2"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <com.qsd.jmwh.view.NoSlidingGridView
+            android:id="@+id/gv_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="1"
+            android:visibility="gone"/>
+    </LinearLayout>
+</ScrollView>
