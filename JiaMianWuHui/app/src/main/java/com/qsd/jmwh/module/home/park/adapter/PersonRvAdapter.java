@@ -17,10 +17,12 @@ import java.util.List;
 
 public class PersonRvAdapter extends BaseQuickAdapter<HomePersonListBean.CdoListBean, BaseViewHolder> {
     private Context context;
+    private String local_sex;
 
-    public PersonRvAdapter(int layoutResId, @Nullable List<HomePersonListBean.CdoListBean> data, Context context) {
+    public PersonRvAdapter(int layoutResId, @Nullable List<HomePersonListBean.CdoListBean> data, Context context, String local_sex) {
         super(layoutResId, data);
         this.context = context;
+        this.local_sex = local_sex;
     }
 
     @Override
@@ -52,16 +54,31 @@ public class PersonRvAdapter extends BaseQuickAdapter<HomePersonListBean.CdoList
             tv_online.setTextColor(context.getResources().getColor(R.color.color_666666));
         }
 
+        helper.setGone(R.id.tv_nInfoSet, item.nInfoSet == 1 ? true : false);
+
         DelayClickTextView tv_auth_type = helper.getView(R.id.tv_auth_type);
-        if (item.nAuthType == 1) {
-            //已认证
-            helper.setText(R.id.tv_auth_type, "真实");
-            tv_auth_type.setBackground(context.getResources().getDrawable(R.drawable.shape_home_person));
+        if ("0".equals(local_sex)) {
+            if (item.nAuthType == 0) {
+                //未认证
+                helper.setText(R.id.tv_auth_type, "未认证");
+                tv_auth_type.setBackground(context.getResources().getDrawable(R.drawable.shape_home_person_no));
+            } else {
+                //已认证
+                helper.setText(R.id.tv_auth_type, "真实");
+                tv_auth_type.setBackground(context.getResources().getDrawable(R.drawable.shape_home_person));
+            }
+            tv_auth_type.setVisibility(View.VISIBLE);
         } else {
-            //未认证
-            helper.setText(R.id.tv_auth_type, "未认证");
-            tv_auth_type.setBackground(context.getResources().getDrawable(R.drawable.shape_home_person_no));
+            if (item.bVip) {
+                tv_auth_type.setVisibility(View.VISIBLE);
+                tv_auth_type.setText("VIP");
+                tv_auth_type.setBackground(context.getResources().getDrawable(R.drawable.shape_home_person_vip));
+            } else {
+                tv_auth_type.setVisibility(View.GONE);
+            }
+
         }
+
 
         DelayClickImageView iv_love = helper.getView(R.id.iv_love);
         if (item.blove) {

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.dialog.SelectHintPop;
-import com.qsd.jmwh.http.OtherApiServices;
+import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.home.park.activity.ToReportActivity;
 import com.xuexiang.xhttp2.XHttpProxy;
@@ -17,7 +17,8 @@ import com.yu.common.windown.BasePopupWindow;
 
 public class MoreActionDialog extends BasePopupWindow implements View.OnClickListener {
     private int userId;
-    public MoreActionDialog(Context context,int userId) {
+
+    public MoreActionDialog(Context context, int userId) {
         super(context, View.inflate(context, R.layout.more_action_dialog, null),
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         bindView(R.id.cancel, this);
@@ -63,12 +64,13 @@ public class MoreActionDialog extends BasePopupWindow implements View.OnClickLis
 
     @SuppressLint("CheckResult")
     private void toBlackList() {
-        XHttpProxy.proxy(OtherApiServices.class)
-                    .toBlackList(userId,1).subscribeWith(new TipRequestSubscriber<Object>() {
-            @Override
-            protected void onSuccess(Object o) {
-                ToastUtils.show("已拉黑");
-            }
-        });
+        XHttpProxy.proxy(ApiServices.class)
+                .addLoveUser(userId + "", "1")
+                .subscribeWith(new TipRequestSubscriber<Object>() {
+                    @Override
+                    protected void onSuccess(Object o) {
+                        ToastUtils.show("已拉黑");
+                    }
+                });
     }
 }

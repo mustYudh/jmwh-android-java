@@ -38,6 +38,7 @@ public class SearchActivity extends BaseBarActivity implements SearchViewer {
     private DialogUtils loveDialog;
     private List<HomePersonListBean.CdoListBean> list = new ArrayList<>();
     private LinearLayout ll_empty;
+    private String sex;
 
     @Override
     protected int getActionBarLayoutId() {
@@ -52,7 +53,7 @@ public class SearchActivity extends BaseBarActivity implements SearchViewer {
 
     @Override
     protected void loadData() {
-        String sex = getIntent().getStringExtra("SEX");
+        sex = getIntent().getStringExtra("SEX");
         EditText edit = bindView(R.id.edit);
         LinearLayout ll_back = bindView(R.id.ll_back);
         ll_empty = bindView(R.id.ll_empty);
@@ -92,7 +93,7 @@ public class SearchActivity extends BaseBarActivity implements SearchViewer {
             if (homePersonListBean.cdoList != null && homePersonListBean.cdoList.size() != 0) {
                 list = homePersonListBean.cdoList;
                 if (adapter == null) {
-                    adapter = new PersonRvAdapter(R.layout.item_person, homePersonListBean.cdoList, getActivity());
+                    adapter = new PersonRvAdapter(R.layout.item_person, homePersonListBean.cdoList, getActivity(),sex);
                     rv_person.setAdapter(adapter);
                 } else {
                     adapter.setNewData(homePersonListBean.cdoList);

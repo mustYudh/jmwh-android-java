@@ -110,11 +110,38 @@ public class ParkFragment extends BaseBarFragment implements ParkViewer, TabLayo
             @Override
             public void onClick(View view) {
                 sex = !sex;
-                adapter.getFragment(viewPager.getCurrentItem()).mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), viewPager.getCurrentItem() + "", "", "0", !sex ? "0" : "1");
+                adapter.getFragment(viewPager.getCurrentItem()).sex = !sex ? 0 : 1;
+                adapter.getFragment(viewPager.getCurrentItem()).mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), viewPager.getCurrentItem() + "", "", adapter.getFragment(viewPager.getCurrentItem()).pageIndex + "", adapter.getFragment(viewPager.getCurrentItem()).sex + "");
                 right_menu.setText(!sex ? "女士列表" : "男士列表");
             }
         });
 
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                if (i != 0) {
+                    adapter.getFragment(i).tv_top_num.setVisibility(View.GONE);
+                } else {
+                    adapter.getFragment(i).tv_top_num.setVisibility(View.VISIBLE);
+                }
+
+                right_menu.setText("女士列表");
+                sex = false;
+                adapter.getFragment(viewPager.getCurrentItem()).pageIndex = 0;
+                adapter.getFragment(viewPager.getCurrentItem()).sex = !sex ? 0 : 1;
+                adapter.getFragment(viewPager.getCurrentItem()).mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), viewPager.getCurrentItem() + "", "", adapter.getFragment(viewPager.getCurrentItem()).pageIndex + "", adapter.getFragment(viewPager.getCurrentItem()).sex + "");
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
     }
 
     @Override
@@ -131,8 +158,6 @@ public class ParkFragment extends BaseBarFragment implements ParkViewer, TabLayo
             textView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
             textView.setTextSize(22);
         }
-        right_menu.setText("女士列表");
-        sex = false;
     }
 
     @Override
