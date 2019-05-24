@@ -78,7 +78,7 @@ public class SearchActivity extends BaseBarActivity implements SearchViewer {
                     if (TextUtils.isEmpty(edit.getText().toString().trim())) {
                         ToastUtils.show("请输入搜索内容");
                     } else {
-                        mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), "3", edit.getText().toString() + "", "0", sex + "");
+                        mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), "3", edit.getText().toString() + "", "0", sex + "", UserProfile.getInstance().getHomeCityName());
                     }
                     return true;
                 }
@@ -93,7 +93,7 @@ public class SearchActivity extends BaseBarActivity implements SearchViewer {
             if (homePersonListBean.cdoList != null && homePersonListBean.cdoList.size() != 0) {
                 list = homePersonListBean.cdoList;
                 if (adapter == null) {
-                    adapter = new PersonRvAdapter(R.layout.item_person, homePersonListBean.cdoList, getActivity(),sex);
+                    adapter = new PersonRvAdapter(R.layout.item_person, homePersonListBean.cdoList, getActivity(), sex);
                     rv_person.setAdapter(adapter);
                 } else {
                     adapter.setNewData(homePersonListBean.cdoList);
@@ -109,7 +109,7 @@ public class SearchActivity extends BaseBarActivity implements SearchViewer {
                         if (is_love) {
                             showLoveDialog(lLoveUserId, iv_love, position);
                         } else {
-                            mPresenter.initAddLoveUser(lLoveUserId, "0",position, iv_love);
+                            mPresenter.initAddLoveUser(lLoveUserId, "0", position, iv_love);
                         }
                     }
                 });
