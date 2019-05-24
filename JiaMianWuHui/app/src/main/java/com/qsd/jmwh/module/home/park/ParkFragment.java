@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -17,12 +20,17 @@ import com.qsd.jmwh.base.BaseBarFragment;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.park.activity.SearchActivity;
 import com.qsd.jmwh.module.home.park.adapter.HomeParkPageAdapter;
+import com.qsd.jmwh.module.home.park.adapter.PackCityRvAdapter;
 import com.qsd.jmwh.module.home.park.presenter.ParkPresenter;
 import com.qsd.jmwh.module.home.park.presenter.ParkViewer;
+import com.qsd.jmwh.module.register.bean.RangeData;
+import com.qsd.jmwh.utils.DialogUtils;
 import com.qsd.jmwh.view.ProxyDrawable;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.ui.Res;
 import com.yu.common.utils.DensityUtil;
+
+import java.util.List;
 
 /**
  * @author yudneghao
@@ -34,7 +42,10 @@ public class ParkFragment extends BaseBarFragment implements ParkViewer, TabLayo
     @PresenterLifeCycle
     ParkPresenter mPresenter = new ParkPresenter(this);
     private TextView right_menu;
-
+    private TextView back;
+    private HomeParkPageAdapter adapter;
+    private DialogUtils cityDialog;
+    private ViewPager viewPager;
 
     @Override
     protected int getActionBarLayoutId() {
@@ -55,9 +66,10 @@ public class ParkFragment extends BaseBarFragment implements ParkViewer, TabLayo
         EditText edit = bindView(R.id.edit);
         edit.setInputType(InputType.TYPE_NULL);
         right_menu = bindView(R.id.right_menu);
+        back = bindView(R.id.back);
         LinearLayout ll_edit = bindView(R.id.ll_edit);
         TabLayout tabLayout = bindView(R.id.tab_layout);
-        ViewPager viewPager = bindView(R.id.view_pager);
+        viewPager = bindView(R.id.view_pager);
         initTabLayout(tabLayout, viewPager);
         ll_edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,9 +78,16 @@ public class ParkFragment extends BaseBarFragment implements ParkViewer, TabLayo
             }
         });
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.getRangeData(1, 0, UserProfile.getInstance().getAppAccount(), UserProfile.getInstance().getAppToken(), 0);
+            }
+        });
     }
 
     private void initTabLayout(TabLayout tabLayout, ViewPager viewPager) {
+
         View tabStrip = tabLayout.getChildAt(0);
         if (tabStrip != null) {
             ProxyDrawable proxyDrawable = new ProxyDrawable(tabStrip, 7);
@@ -80,7 +99,7 @@ public class ParkFragment extends BaseBarFragment implements ParkViewer, TabLayo
             tabStrip.setBackground(proxyDrawable);
         }
         tabLayout.addOnTabSelectedListener(this);
-        HomeParkPageAdapter adapter = new HomeParkPageAdapter(getChildFragmentManager());
+        adapter = new HomeParkPageAdapter(getChildFragmentManager());
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         for (int i = 0; i < 3; i++) {
@@ -111,7 +130,7 @@ public class ParkFragment extends BaseBarFragment implements ParkViewer, TabLayo
             public void onClick(View view) {
                 sex = !sex;
                 adapter.getFragment(viewPager.getCurrentItem()).sex = !sex ? 0 : 1;
-                adapter.getFragment(viewPager.getCurrentItem()).mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), viewPager.getCurrentItem() + "", "", adapter.getFragment(viewPager.getCurrentItem()).pageIndex + "", adapter.getFragment(viewPager.getCurrentItem()).sex + "");
+                adapter.getFragment(viewPager.getCurrentItem()).mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), viewPager.getCurrentItem() + "", "", adapter.getFragment(viewPager.getCurrentItem()).pageIndex + "", adapter.getFragment(viewPager.getCurrentItem()).sex + "", UserProfile.getInstance().getHomeCityName());
                 right_menu.setText(!sex ? "女士列表" : "男士列表");
             }
         });
@@ -134,7 +153,7 @@ public class ParkFragment extends BaseBarFragment implements ParkViewer, TabLayo
                 sex = false;
                 adapter.getFragment(viewPager.getCurrentItem()).pageIndex = 0;
                 adapter.getFragment(viewPager.getCurrentItem()).sex = !sex ? 0 : 1;
-                adapter.getFragment(viewPager.getCurrentItem()).mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), viewPager.getCurrentItem() + "", "", adapter.getFragment(viewPager.getCurrentItem()).pageIndex + "", adapter.getFragment(viewPager.getCurrentItem()).sex + "");
+                adapter.getFragment(viewPager.getCurrentItem()).mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), viewPager.getCurrentItem() + "", "", adapter.getFragment(viewPager.getCurrentItem()).pageIndex + "", adapter.getFragment(viewPager.getCurrentItem()).sex + "", UserProfile.getInstance().getHomeCityName());
             }
 
             @Override
@@ -174,5 +193,59 @@ public class ParkFragment extends BaseBarFragment implements ParkViewer, TabLayo
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
 
+    }
+
+
+    /**
+     * 城市弹窗
+     */
+    private void showCityDialog(List<RangeData.Range> provinces, int type) {
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.tv_fujin:
+                        if (cityDialog.isShowing()) {
+                            cityDialog.dismiss();
+                        }
+                        UserProfile.getInstance().setHomeCityName("");
+                        adapter.getFragment(viewPager.getCurrentItem()).mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), viewPager.getCurrentItem() + "", "", adapter.getFragment(viewPager.getCurrentItem()).pageIndex + "", adapter.getFragment(viewPager.getCurrentItem()).sex + "", UserProfile.getInstance().getHomeCityName());
+                        break;
+                }
+            }
+        };
+
+        cityDialog = new DialogUtils.Builder(getActivity())
+                .view(R.layout.dialog_city)
+                .gravity(Gravity.BOTTOM)
+                .style(R.style.Dialog)
+                .cancelTouchout(false)
+                .addViewOnclick(R.id.tv_fujin, listener)
+                .build();
+        cityDialog.show();
+
+        RecyclerView rv_city = cityDialog.findViewById(R.id.rv_city);
+        rv_city.setLayoutManager(new LinearLayoutManager(getActivity()));
+        PackCityRvAdapter adapter_city = new PackCityRvAdapter(R.layout.item_pack_city, provinces, getActivity());
+        rv_city.setAdapter(adapter_city);
+
+        adapter_city.setOnItemCityClickListener(new PackCityRvAdapter.OnItemCityClickListener() {
+            @Override
+            public void setOnItemCityClick(int id, String name) {
+                cityDialog.dismiss();
+                if (type == 1) {
+                    UserProfile.getInstance().setHomeCityName(name);
+                    adapter.getFragment(viewPager.getCurrentItem()).mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), viewPager.getCurrentItem() + "", "", adapter.getFragment(viewPager.getCurrentItem()).pageIndex + "", adapter.getFragment(viewPager.getCurrentItem()).sex + "", UserProfile.getInstance().getHomeCityName());
+                } else {
+                    mPresenter.getRangeData(1, id, UserProfile.getInstance().getAppAccount(), UserProfile.getInstance().getAppToken(), 1);
+                }
+            }
+        });
+    }
+
+
+    @Override
+    public void setCity(List<RangeData.Range> provinces, int type) {
+        showCityDialog(provinces, type);
     }
 }
