@@ -77,6 +77,7 @@ public class UserCenterInfo implements Serializable {
 
         public int lFileId;
         public String sFileUrl;
+        public String sFileCoverUrl;
         public int nFileType;
         public int nFileFee;
         public int nAttribute;
