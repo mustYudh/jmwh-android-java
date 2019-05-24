@@ -1,6 +1,10 @@
 package com.qsd.jmwh.module.home.user.presenter;
 
 import android.annotation.SuppressLint;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.os.Environment;
+import android.util.Log;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.http.OtherApiServices;
 import com.qsd.jmwh.http.subscriber.NoTipRequestSubscriber;
@@ -8,10 +12,12 @@ import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.home.user.bean.WomenVideoBean;
 import com.qsd.jmwh.thrid.UploadImage;
 import com.qsd.jmwh.thrid.oss.PersistenceResponse;
+import com.vincent.videocompressor.VideoCompress;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.xuexiang.xhttp2.exception.ApiException;
 import com.yu.common.framework.BaseViewPresenter;
 import com.yu.common.loading.LoadingDialog;
+import java.util.UUID;
 
 /**
  * @author yudneghao
@@ -38,25 +44,48 @@ import com.yu.common.loading.LoadingDialog;
   }
 
   public void uploadAuthVideo(String path) {
-    LoadingDialog.showNormalLoading(getActivity(), false);
-    LoadingDialog.startLoading("正在上传");
-    new Thread(() -> {
-      PersistenceResponse response = UploadImage.uploadImage(getActivity(),
-          UserProfile.getInstance().getObjectName("auth", "mp4"), path);
-      String sFileCoverUrl = response.cloudUrl + "?x-oss-process=video/snapshot,t_100,m_fast";
-      XHttpProxy.proxy(OtherApiServices.class)
-          .userAuthByVideo(response.cloudUrl, sFileCoverUrl)
-          .subscribeWith(new NoTipRequestSubscriber<Object>() {
-            @Override protected void onSuccess(Object o) {
-              assert getViewer() != null;
-              getViewer().uploadSuccess();
-            }
+        PackageManager packageManager = getActivity().getPackageManager();
+        PackageInfo packInfo = null;
+        try {
+          packInfo = packageManager.getPackageInfo(getActivity().getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+          e.printStackTrace();
+        }
+        String outputDir =
+            Environment.getDataDirectory().getPath() + "/data/" + packInfo.packageName + "/files/";
+        String destPath = outputDir + "/mwh" + UUID.randomUUID().toString() + ".mp4";
+        VideoCompress.compressVideoMedium(path, destPath, new VideoCompress.CompressListener() {
+          @Override public void onStart() {
+            LoadingDialog.showNormalLoading(getActivity(), false);
+            LoadingDialog.startLoading("正在上传");
+          }
 
-            @Override protected void onError(ApiException apiException) {
-              super.onError(apiException);
-              LoadingDialog.dismissLoading();
-            }
-          });
-    }).start();
-  }
+          @Override public void onSuccess() {
+            PersistenceResponse response = UploadImage.uploadImage(getActivity(),
+                UserProfile.getInstance().getObjectName("auth", "mp4"), destPath);
+            String sFileCoverUrl = response.cloudUrl + "?x-oss-process=video/snapshot,t_100,m_fast";
+            XHttpProxy.proxy(OtherApiServices.class)
+                .userAuthByVideo(response.cloudUrl, sFileCoverUrl)
+                .subscribeWith(new NoTipRequestSubscriber<Object>() {
+                  @Override protected void onSuccess(Object o) {
+                    assert getViewer() != null;
+                    getViewer().uploadSuccess();
+                  }
+
+                  @Override protected void onError(ApiException apiException) {
+                    super.onError(apiException);
+                    LoadingDialog.dismissLoading();
+                  }
+                });
+          }
+
+          @Override public void onFail() {
+            LoadingDialog.dismissLoading();
+          }
+
+          @Override public void onProgress(float percent) {
+            Log.e("======>", percent + "");
+          }
+        });
+      }
 }

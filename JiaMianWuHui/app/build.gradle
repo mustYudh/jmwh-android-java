@@ -45,7 +45,7 @@ android {
                                 BAIDU_LOCATION: rootProject.ext.baidu]
 
         ndk {
-            abiFilters "armeabi-v7a"
+//            abiFilters "armeabi-v7a"
         }
     }
 
@@ -73,7 +73,7 @@ android {
         abi {
             reset()
             universalApk false
-            include "armeabi-v7a"
+//            include "armeabi-v7a"
         }
     }
 
@@ -99,7 +99,7 @@ android {
         }
 
         variant.outputs.all { output ->
-            def versionCodes = ["armeabi-v7a": 1]
+//            def versionCodes = ["armeabi-v7a": 1]
             def abi = output.getFilter(com.android.build.OutputFile.ABI)
             if (abi != null) {
                 output.versionCodeOverride = versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
@@ -196,6 +196,7 @@ dependencies {
     //    implementation fileTree(include: ['*.jar'], dir: 'src/libs')
     implementation project(path: ':common')
     implementation project(path: ':http-lib')
+    implementation project(path: ':videocompressor')
     implementation project(path: ':bottom_tab')
     implementation project(':crop_img')
     implementation project(':share')
