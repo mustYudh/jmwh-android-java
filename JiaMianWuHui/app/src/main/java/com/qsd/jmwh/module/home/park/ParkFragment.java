@@ -38,7 +38,6 @@ import java.util.List;
  */
 
 public class ParkFragment extends BaseBarFragment implements ParkViewer, TabLayout.OnTabSelectedListener {
-    private boolean sex = false;
     @PresenterLifeCycle
     ParkPresenter mPresenter = new ParkPresenter(this);
     private TextView right_menu;
@@ -71,10 +70,19 @@ public class ParkFragment extends BaseBarFragment implements ParkViewer, TabLayo
         TabLayout tabLayout = bindView(R.id.tab_layout);
         viewPager = bindView(R.id.view_pager);
         initTabLayout(tabLayout, viewPager);
+        if (UserProfile.getInstance().getSex() == 0) {
+            UserProfile.getInstance().setHomeSexType(1);
+            right_menu.setText("男士列表");
+        } else {
+            UserProfile.getInstance().setHomeSexType(0);
+            right_menu.setText("女士列表");
+        }
+
+
         ll_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), SearchActivity.class).putExtra("SEX", !sex ? "0" : "1"));
+                startActivity(new Intent(getActivity(), SearchActivity.class));
             }
         });
 
@@ -128,10 +136,13 @@ public class ParkFragment extends BaseBarFragment implements ParkViewer, TabLayo
         right_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sex = !sex;
-                adapter.getFragment(viewPager.getCurrentItem()).sex = !sex ? 0 : 1;
-                adapter.getFragment(viewPager.getCurrentItem()).mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), viewPager.getCurrentItem() + "", "", adapter.getFragment(viewPager.getCurrentItem()).pageIndex + "", adapter.getFragment(viewPager.getCurrentItem()).sex + "", UserProfile.getInstance().getHomeCityName());
-                right_menu.setText(!sex ? "女士列表" : "男士列表");
+                if (UserProfile.getInstance().getHomeSexType() == 0) {
+                    UserProfile.getInstance().setHomeSexType(1);
+                } else {
+                    UserProfile.getInstance().setHomeSexType(0);
+                }
+                adapter.getFragment(viewPager.getCurrentItem()).mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), viewPager.getCurrentItem() + "", "", adapter.getFragment(viewPager.getCurrentItem()).pageIndex + "", UserProfile.getInstance().getHomeSexType() + "", UserProfile.getInstance().getHomeCityName());
+                right_menu.setText(UserProfile.getInstance().getHomeSexType() == 0 ? "女士列表" : "男士列表");
             }
         });
 
@@ -148,12 +159,7 @@ public class ParkFragment extends BaseBarFragment implements ParkViewer, TabLayo
                 } else {
                     adapter.getFragment(i).tv_top_num.setVisibility(View.VISIBLE);
                 }
-
-                right_menu.setText("女士列表");
-                sex = false;
-                adapter.getFragment(viewPager.getCurrentItem()).pageIndex = 0;
-                adapter.getFragment(viewPager.getCurrentItem()).sex = !sex ? 0 : 1;
-                adapter.getFragment(viewPager.getCurrentItem()).mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), viewPager.getCurrentItem() + "", "", adapter.getFragment(viewPager.getCurrentItem()).pageIndex + "", adapter.getFragment(viewPager.getCurrentItem()).sex + "", UserProfile.getInstance().getHomeCityName());
+                adapter.getFragment(viewPager.getCurrentItem()).mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), viewPager.getCurrentItem() + "", "", adapter.getFragment(viewPager.getCurrentItem()).pageIndex + "", UserProfile.getInstance().getHomeSexType() + "", UserProfile.getInstance().getHomeCityName());
             }
 
             @Override
@@ -209,7 +215,7 @@ public class ParkFragment extends BaseBarFragment implements ParkViewer, TabLayo
                             cityDialog.dismiss();
                         }
                         UserProfile.getInstance().setHomeCityName("");
-                        adapter.getFragment(viewPager.getCurrentItem()).mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), viewPager.getCurrentItem() + "", "", adapter.getFragment(viewPager.getCurrentItem()).pageIndex + "", adapter.getFragment(viewPager.getCurrentItem()).sex + "", UserProfile.getInstance().getHomeCityName());
+                        adapter.getFragment(viewPager.getCurrentItem()).mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), viewPager.getCurrentItem() + "", "", adapter.getFragment(viewPager.getCurrentItem()).pageIndex + "", UserProfile.getInstance().getHomeSexType() + "", UserProfile.getInstance().getHomeCityName());
                         break;
                 }
             }
@@ -235,7 +241,7 @@ public class ParkFragment extends BaseBarFragment implements ParkViewer, TabLayo
                 cityDialog.dismiss();
                 if (type == 1) {
                     UserProfile.getInstance().setHomeCityName(name);
-                    adapter.getFragment(viewPager.getCurrentItem()).mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), viewPager.getCurrentItem() + "", "", adapter.getFragment(viewPager.getCurrentItem()).pageIndex + "", adapter.getFragment(viewPager.getCurrentItem()).sex + "", UserProfile.getInstance().getHomeCityName());
+                    adapter.getFragment(viewPager.getCurrentItem()).mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), viewPager.getCurrentItem() + "", "", adapter.getFragment(viewPager.getCurrentItem()).pageIndex + "", UserProfile.getInstance().getHomeSexType() + "", UserProfile.getInstance().getHomeCityName());
                 } else {
                     mPresenter.getRangeData(1, id, UserProfile.getInstance().getAppAccount(), UserProfile.getInstance().getAppToken(), 1);
                 }

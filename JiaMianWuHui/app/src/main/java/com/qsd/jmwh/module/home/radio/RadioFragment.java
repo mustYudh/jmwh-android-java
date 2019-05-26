@@ -192,6 +192,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                     localHomeRadioListTitleBean.sDatingTime = cdoListBean.sDatingTime;
                     localHomeRadioListTitleBean.sContent = cdoListBean.sContent;
                     localHomeRadioListTitleBean.sDatingTitle = cdoListBean.sDatingTitle;
+                    localHomeRadioListTitleBean.sDatingHope = cdoListBean.sDatingHope;
                     localHomeRadioListTitleBean.sex = cdoListBean.nSex;
                     localHomeRadioListTitleBean.cTime = cdoListBean.dCreateTime;
                     localHomeRadioListTitleBean.itemType = 0;
