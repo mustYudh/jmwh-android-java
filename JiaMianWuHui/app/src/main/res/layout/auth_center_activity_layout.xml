@@ -25,13 +25,23 @@
                 android:visibility="gone"
                 />
 
-            <FrameLayout
-                android:id="@+id/video"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
 
-            </FrameLayout>
+                <ImageView
+                    android:scaleType="centerCrop"
+                    android:id="@+id/cover_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+
+                <Button
+                    android:id="@+id/play_button"
+                    android:visibility="gone"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_play_24dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    />
+
 
         </FrameLayout>
 

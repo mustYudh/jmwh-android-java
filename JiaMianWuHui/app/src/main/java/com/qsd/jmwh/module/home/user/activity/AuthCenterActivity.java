@@ -1,9 +1,10 @@
 package com.qsd.jmwh.module.home.user.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.KeyEvent;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
@@ -17,13 +18,10 @@ import com.qsd.jmwh.module.home.user.presenter.AuthCenterViewer;
 import com.yu.common.loading.LoadingDialog;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
-import com.yu.common.ui.video.SurfaceVideoViewCreator;
 import com.yu.common.utils.ImageLoader;
 
 public class AuthCenterActivity extends BaseBarActivity implements AuthCenterViewer {
   @PresenterLifeCycle private AuthCenterPresenter mPresenter = new AuthCenterPresenter(this);
-
-  private SurfaceVideoViewCreator surfaceVideoViewCreator;
 
   @Override protected void setView(@Nullable Bundle savedInstanceState) {
     setContentView(R.layout.auth_center_activity_layout);
@@ -38,35 +36,15 @@ public class AuthCenterActivity extends BaseBarActivity implements AuthCenterVie
   }
 
   @Override public void getInfo(WomenVideoBean vedioBean) {
-    surfaceVideoViewCreator = new SurfaceVideoViewCreator(getActivity(), bindView(R.id.video)) {
-      @Override protected Activity getActivity() {
-        return AuthCenterActivity.this;
-      }
-
-      @Override protected boolean setAutoPlay() {
-        return false;
-      }
-
-      @Override protected int getSurfaceWidth() {
-        return 0;
-      }
-
-      @Override protected int getSurfaceHeight() {
-        return 205;
-      }
-
-      @Override protected void setThumbImage(ImageView thumbImageView) {
-        ImageLoader.loadCenterCrop(getActivity(), vedioBean.sFileCoverUrl, thumbImageView);
-      }
-
-      @Override protected String getSecondVideoCachePath() {
-        return null;
-      }
-
-      @Override protected String getVideoPath() {
-        return vedioBean.sFileUrl;
-      }
-    };
+    ImageView view = bindView(R.id.cover_img);
+    Button button = bindView(R.id.play_button);
+    if (!TextUtils.isEmpty(vedioBean.sFileCoverUrl)) {
+      view.setVisibility(View.VISIBLE);
+      ImageLoader.loadCenterCrop(getActivity(), vedioBean.sFileCoverUrl, view);
+      button.setVisibility(View.VISIBLE);
+      button.setOnClickListener(v -> getLaunchHelper().startActivity(
+          PlayVideoActivity.getIntent(getActivity(), vedioBean.sFileUrl, vedioBean.sFileCoverUrl)));
+    }
 
     TextView textView = bindView(R.id.uploading);
     if (vedioBean.nCheckStatus == 0) {
@@ -93,33 +71,5 @@ public class AuthCenterActivity extends BaseBarActivity implements AuthCenterVie
     mPresenter.getAuthInf();
     ToastUtils.show("上传成功");
     LoadingDialog.dismissLoading();
-  }
-
-  @Override protected void onPause() {
-    super.onPause();
-    if (surfaceVideoViewCreator != null) {
-      surfaceVideoViewCreator.onPause();
-    }
-  }
-
-  @Override protected void onResume() {
-    super.onResume();
-    if (surfaceVideoViewCreator != null) {
-      surfaceVideoViewCreator.onResume();
-    }
-  }
-
-  @Override protected void onDestroy() {
-    super.onDestroy();
-    if (surfaceVideoViewCreator != null) {
-      surfaceVideoViewCreator.onDestroy();
-    }
-  }
-
-  @Override public boolean dispatchKeyEvent(KeyEvent event) {
-    if (surfaceVideoViewCreator != null) {
-      surfaceVideoViewCreator.onKeyEvent(event);
-    }
-    return super.dispatchKeyEvent(event);
   }
 }
