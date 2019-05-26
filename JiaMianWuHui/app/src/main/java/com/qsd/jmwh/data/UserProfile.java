@@ -23,6 +23,7 @@ public class UserProfile implements Serializable {
     private static final String LNG = "lng";
     private static final String CITY_NAME = "city_name";
     private static final String HOME_CITY_NAME = "home_city_name";
+    private static final String HOME_SEX_TYPE = "home_sex_type";
     private static final String USER_PIC = "user_pic";
 
     private SharedPreferencesHelper spHelper;
@@ -48,6 +49,14 @@ public class UserProfile implements Serializable {
         setAppToken(userInfo.token);
         setSex(userInfo.nSex);
         setUserPic(userInfo.sUserHeadPic);
+    }
+
+    public void setHomeSexType(int homeSexType) {
+        spHelper.putInt(HOME_SEX_TYPE, homeSexType);
+    }
+
+    public int getHomeSexType() {
+        return spHelper.getInt(HOME_SEX_TYPE, 0);
     }
 
     public void setHomeCityName(String homeCityName) {

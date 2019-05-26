@@ -152,6 +152,33 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <com.yu.common.ui.DelayClickImageView
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_gravity="top"
+                    android:src="@drawable/qiwang"/>
+
+                <com.yu.common.ui.DelayClickTextView
+                    android:id="@+id/tv_label_middle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:includeFontPadding="false"
+                    android:text="大叔勿扰"
+                    android:textColor="#ff666666"
+                    android:textSize="14sp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -298,15 +325,16 @@
             </LinearLayout>
 
             <View
-                android:background="@color/color_EEEEEE"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"/>
+                android:layout_height="1dp"
+                android:background="@color/color_EEEEEE"/>
+
             <HorizontalScrollView
                 android:id="@+id/hs"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                android:layout_margin="10dp"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:id="@+id/ll_user"
