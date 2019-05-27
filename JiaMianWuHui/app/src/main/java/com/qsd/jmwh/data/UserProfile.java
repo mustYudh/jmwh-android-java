@@ -22,6 +22,7 @@ public class UserProfile implements Serializable {
     private static final String LAT = "lat";
     private static final String LNG = "lng";
     private static final String CITY_NAME = "city_name";
+    private static final String HOME_CITY_NAME = "home_city_name";
     private static final String USER_PIC = "user_pic";
 
     private SharedPreferencesHelper spHelper;
@@ -47,6 +48,14 @@ public class UserProfile implements Serializable {
         setAppToken(userInfo.token);
         setSex(userInfo.nSex);
         setUserPic(userInfo.sUserHeadPic);
+    }
+
+    public void setHomeCityName(String homeCityName) {
+        spHelper.putString(HOME_CITY_NAME, homeCityName);
+    }
+
+    public String getHomeCityName() {
+        return spHelper.getString(HOME_CITY_NAME, "");
     }
 
     private void setSex(int sex) {
@@ -130,7 +139,7 @@ public class UserProfile implements Serializable {
         return getAppAccount() + "/head_" + UUID.randomUUID().toString() + ".jpg";
     }
 
-    public String getObjectName(String name,String type) {
+    public String getObjectName(String name, String type) {
         return getAppAccount() + "/" + name + "_" + UUID.randomUUID().toString() + "." + type;
     }
 }

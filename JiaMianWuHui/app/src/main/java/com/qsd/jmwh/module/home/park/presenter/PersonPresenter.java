@@ -15,9 +15,9 @@ public class PersonPresenter extends BaseViewPresenter<PersonViewer> {
     }
 
     @SuppressLint("CheckResult")
-    public void initPersonListData(double nLat, double nLng, String nTab, String nickName, String pageindex, String nSex) {
+    public void initPersonListData(double nLat, double nLng, String nTab, String nickName, String pageindex, String nSex, String city) {
         XHttpProxy.proxy(ApiServices.class)
-                .getPersonListDate(nLat, nLng, nTab, nickName, pageindex, nSex)
+                .getPersonListDate(nLat, nLng, nTab, nickName, pageindex, nSex, city)
                 .subscribeWith(new TipRequestSubscriber<HomePersonListBean>() {
                     @Override
                     protected void onSuccess(HomePersonListBean homePersonListBean) {
@@ -28,14 +28,14 @@ public class PersonPresenter extends BaseViewPresenter<PersonViewer> {
     }
 
     @SuppressLint("CheckResult")
-    public void initAddLoveUser(String lLoveUserId, String nType,int position, DelayClickImageView iv_love) {
+    public void initAddLoveUser(String lLoveUserId, String nType, int position, DelayClickImageView iv_love) {
         XHttpProxy.proxy(ApiServices.class)
                 .addLoveUser(lLoveUserId, nType)
                 .subscribeWith(new TipRequestSubscriber<Object>() {
                     @Override
                     protected void onSuccess(Object o) {
                         assert getViewer() != null;
-                        getViewer().addLoveUserSuccess(position,iv_love);
+                        getViewer().addLoveUserSuccess(position, iv_love);
                     }
                 });
     }

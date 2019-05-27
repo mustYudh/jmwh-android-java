@@ -13,4 +13,6 @@ public interface UserViewer extends Viewer {
     void setUserHeaderSuccess(String url);
 
     void refreshData();
+
+    void uploadVideoSuccess();
 }

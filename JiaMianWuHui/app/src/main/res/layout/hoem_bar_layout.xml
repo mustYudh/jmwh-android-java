@@ -16,7 +16,7 @@
         android:paddingRight="18dp"
         android:text="附近"
         android:textColor="@color/app_main_bg_color"
-        android:visibility="gone">
+        android:visibility="visible">
 
     </TextView>
 

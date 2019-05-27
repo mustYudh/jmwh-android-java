@@ -1,19 +1,5 @@
 package com.qsd.jmwh.module.home.user.adapter;
 
-//public class DestroyPhotoTagAdapter extends BaseQuickAdapter<UserCenterInfo.CdoimgListBean, BaseViewHolder> {
-//
-//    public DestroyPhotoTagAdapter(int layoutResId, @Nullable List<UserCenterInfo.CdoimgListBean> data) {
-//        super(layoutResId, data);
-//    }
-//
-//
-//    @Override
-//    protected void convert(BaseViewHolder helper, UserCenterInfo.CdoimgListBean item) {
-//        helper.setVisible(R.id.destroy_tag, item.nFileType == 1);
-//        ImageView imageView = helper.getView(R.id.destroy_img);
-//        ImageLoader.loadCenterCrop(imageView.getContext(), item.sFileUrl, imageView);
-//    }
-//}
 
 import android.content.Context;
 import android.view.View;

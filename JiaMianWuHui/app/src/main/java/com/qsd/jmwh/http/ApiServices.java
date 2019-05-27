@@ -66,10 +66,10 @@ public interface ApiServices {
     Observable<VipInfoBean> getVipInfoList(int lUserId, String token);
 
     @NetMethod(ParameterNames = {
-            "nLat", "nLng", "nTab", "sNickName", "pageindex", "nSex"
+            "nLat", "nLng", "nTab", "sNickName", "pageindex", "nSex", "sCity"
     }, Url = "/UserService/getUserList")
     Observable<HomePersonListBean> getPersonListDate(double nLat,
-                                                     double nLng, String nTab, String sNickName, String pageindex, String nSex);
+                                                     double nLng, String nTab, String sNickName, String pageindex, String nSex, String sCity);
 
     @NetMethod(ParameterNames = {
             "lUserId", "token", "sUserHeadPic"
@@ -178,8 +178,8 @@ public interface ApiServices {
     @NetMethod(ParameterNames = {"pageindex"}, Url = "/DatingService/getDatingByUserId")
     Observable<MineRadioListBean> getDatingByUserId(String pageindex);
 
-    @NetMethod(ParameterNames = {"nStatus","lDatingId"}, Url = "/DatingService/modifyStatus")
-    Observable<Object> modifyStatus(String nStatus,String lDatingId);
+    @NetMethod(ParameterNames = {"nStatus", "lDatingId"}, Url = "/DatingService/modifyStatus")
+    Observable<Object> modifyStatus(String nStatus, String lDatingId);
 
 
 }

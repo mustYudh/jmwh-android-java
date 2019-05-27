@@ -269,7 +269,7 @@ public abstract class SurfaceVideoViewCreator
   }
 
   @Override public void onClick(View v) {
-    getActivity().finish();
+    //getActivity().finish();
   }
 
   @Override public void onStateChanged(boolean isPlaying) {

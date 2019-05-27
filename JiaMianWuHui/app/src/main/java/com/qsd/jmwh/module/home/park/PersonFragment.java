@@ -77,16 +77,18 @@ public class PersonFragment extends BaseFragment implements PersonViewer {
         tv_top_num = bindView(R.id.tv_top_num);
         rv_person.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), home_type, "", pageIndex + "", sex + "");
+        mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), home_type, "", pageIndex + "", sex + "",UserProfile.getInstance().getHomeCityName());
 
 
         refresh.setOnRefreshListener(refreshLayout -> {
             pageIndex = 0;
-            mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), home_type, "", pageIndex + "", sex + "");
+            mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), home_type, "", pageIndex + "", sex + "",UserProfile.getInstance().getHomeCityName());
+
         });
         refresh.setOnLoadMoreListener(refreshLayout -> {
             pageIndex++;
-            mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), home_type, "", pageIndex + "", sex + "");
+            mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), home_type, "", pageIndex + "", sex + "",UserProfile.getInstance().getHomeCityName());
+
         });
     }
 

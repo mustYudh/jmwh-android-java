@@ -10,7 +10,6 @@ import android.util.Log;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.http.OtherApiServices;
 import com.qsd.jmwh.http.subscriber.NoTipRequestSubscriber;
-import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.home.user.bean.WomenVideoBean;
 import com.qsd.jmwh.thrid.UploadImage;
 import com.qsd.jmwh.thrid.oss.PersistenceResponse;
@@ -58,11 +57,11 @@ import java.util.UUID;
   public void getAuthInf() {
     XHttpProxy.proxy(OtherApiServices.class)
         .getWomenVideo()
-        .subscribeWith(new TipRequestSubscriber<WomenVideoBean>() {
-          @Override protected void onSuccess(WomenVideoBean vedioBean) {
-            assert getViewer() != null;
-            if (vedioBean != null) {
-              getViewer().getInfo(vedioBean);
+        .subscribeWith(new NoTipRequestSubscriber<WomenVideoBean>() {
+          @Override protected void onSuccess(WomenVideoBean bean) {
+            if (bean != null) {
+              assert getViewer() != null;
+              getViewer().getInfo(bean);
             }
           }
         });
@@ -78,7 +77,7 @@ import java.util.UUID;
     }
     String outputDir =
         Environment.getDataDirectory().getPath() + "/data/" + packInfo.packageName + "/files/";
-    String destPath = outputDir + "/mwh" + UUID.randomUUID().toString() + ".mp4";
+    String destPath = outputDir + "/jmwh" + UUID.randomUUID().toString() + ".mp4";
     VideoCompress.compressVideoMedium(path, destPath, new VideoCompress.CompressListener() {
       @Override public void onStart() {
         LoadingDialog.showNormalLoading(getActivity(), false);

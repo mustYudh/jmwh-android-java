@@ -7,9 +7,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
@@ -34,8 +32,8 @@ public class PhotoDestroySelectActivity extends BaseBarActivity
   private final static String FILE_ID = "file_id";
   private final static String NEED_MONEY = "need_money";
   private final static String FILE_FEE = "file_fee";
+  private final static String FILE_COVER_URL = "file_cover_url";
   private ImageView selectDestroy;
-  private LinearLayout selectDestroyBtn;
   private boolean selected = false;
   private boolean needMoney;
   private static boolean itemClick = false;
@@ -57,20 +55,24 @@ public class PhotoDestroySelectActivity extends BaseBarActivity
     starter.putExtra(FILE_TYPE, cdoimgListBean.nFileType);
     starter.putExtra(FILE_ID, cdoimgListBean.lFileId);
     starter.putExtra(FILE_FEE, cdoimgListBean.nFileFee);
+    starter.putExtra(FILE_COVER_URL, cdoimgListBean.sFileCoverUrl);
     itemClick = true;
     return starter;
   }
 
   @Override protected void loadData() {
     ImageView resource = bindView(R.id.resource);
-    String url = getIntent().getStringExtra(URL);
+    String fileCoverUrl = getIntent().getStringExtra(FILE_COVER_URL);
+    String url = TextUtils.isEmpty(fileCoverUrl) ? getIntent().getStringExtra(URL) : fileCoverUrl;
     ImageLoader.loadCenterCrop(getActivity(), url, resource);
+    bindView(R.id.play_button, !TextUtils.isEmpty(fileCoverUrl)).setOnClickListener(
+        v -> getLaunchHelper().startActivity(
+            PlayVideoActivity.getIntent(getActivity(), url, fileCoverUrl)));
     needMoney = getIntent().getBooleanExtra(NEED_MONEY, false);
     selectDestroy = bindView(R.id.select_destroy_btn, !needMoney);
-    selectDestroyBtn = bindView(R.id.select_destroy, this);
     TextView nextAction = bindView(R.id.next_action, this);
     if (needMoney) {
-      bindText(R.id.hint, "上传为红包图片");
+      bindText(R.id.hint, TextUtils.isEmpty(fileCoverUrl) ? "上传为红包视频" : "上传为红包图片");
     }
     int fileId = getIntent().getIntExtra(FILE_ID, -1);
     int fileType = getIntent().getIntExtra(FILE_TYPE, -1);
@@ -78,7 +80,7 @@ public class PhotoDestroySelectActivity extends BaseBarActivity
       selected = fileType == 1 || fileType == 3;
       selectDestroy.setSelected(selected);
       nextAction.setText("删除");
-      setTitle("删除图片");
+      setTitle(TextUtils.isEmpty(fileCoverUrl) ? "删除视频" : "删除图片");
     } else {
       setTitle("选择图片");
       selectDestroy.setSelected(selected);
@@ -147,6 +149,5 @@ public class PhotoDestroySelectActivity extends BaseBarActivity
 
   @Override public void modifySuccess(int fileType) {
     selectDestroy.setSelected(selected);
-
   }
 }

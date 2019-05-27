@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 import android.widget.ImageView;
 import com.qsd.jmwh.R;
-import com.qsd.jmwh.base.BaseActivity;
+import com.qsd.jmwh.base.BaseBarActivity;
 import com.yu.common.ui.video.SurfaceVideoViewCreator;
 import com.yu.common.utils.DensityUtil;
 import com.yu.common.utils.ImageLoader;
@@ -17,7 +17,7 @@ import com.yu.common.utils.ImageLoader;
  * @author yudneghao
  * @date 2019-05-26
  */
-public class PlayVideoActivity  extends BaseActivity {
+public class PlayVideoActivity extends BaseBarActivity {
   private final static String FILE_COVER_URL = "file_cover_url";
   private final static String FILE_URL = "file_url";
   private SurfaceVideoViewCreator surfaceVideoViewCreator;
@@ -56,6 +56,7 @@ public class PlayVideoActivity  extends BaseActivity {
   }
 
   @Override protected void loadData() {
+    setTitle("视频");
   }
 
   public static Intent getIntent(Context context,String fileUrl,String sFileCoverUrl) {
