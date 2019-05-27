@@ -47,6 +47,7 @@ public class HomeRadioRvAdapter extends BaseMultiItemQuickAdapter<LocalHomeRadio
                 helper.setText(R.id.tv_ctime, item.cTime);
                 helper.setText(R.id.tv_label_top, item.sDatingTitle + " / " + item.sDatingTime + "," + item.sDatingRange);
                 helper.setText(R.id.tv_label_bottom, item.sContent);
+                helper.setText(R.id.tv_label_middle, item.sDatingHope);
                 DelayClickImageView iv_sex = helper.getView(R.id.iv_sex);
                 if (item.sex == 1) {
                     //男

@@ -42,6 +42,7 @@ public class ApplyDetailsActivity extends BaseBarActivity {
         DelayClickTextView tv_ctime = bindView(R.id.tv_ctime);
         DelayClickTextView tv_label_top = bindView(R.id.tv_label_top);
         DelayClickTextView tv_label_bottom = bindView(R.id.tv_label_bottom);
+        DelayClickTextView tv_label_middle = bindView(R.id.tv_label_middle);
         DelayClickImageView iv_sex = bindView(R.id.iv_sex);
         DelayClickImageView iv_like = bindView(R.id.iv_like);
         NoSlidingGridView gv_pic = bindView(R.id.gv_pic);
@@ -81,6 +82,7 @@ public class ApplyDetailsActivity extends BaseBarActivity {
             tv_ctime.setText(localHomeRadioListBean.cTime);
             tv_label_top.setText(localHomeRadioListBean.sDatingTitle + " / " + localHomeRadioListBean.sDatingTime + "," + localHomeRadioListBean.sDatingRange);
             tv_label_bottom.setText(localHomeRadioListBean.sContent);
+            tv_label_middle.setText(localHomeRadioListBean.sDatingHope);
 
 
             if (localHomeRadioListBean.picList != null && localHomeRadioListBean.picList.size() != 0) {

@@ -32,6 +32,7 @@ public class LocalHomeRadioListBean implements MultiItemEntity {
     public String sDatingRange;
     public String sDatingTime;
     public String sContent;
+    public String sDatingHope;
     public List<MineRadioListBean.CdoListBean.CdoCommentBean> cdoComment;
     public List<MineRadioListBean.CdoListBean.CdoApplyBean> cdoApply;
     public List<MineRadioListBean.CdoListBean.CdoLoveBean> cdoLove;
