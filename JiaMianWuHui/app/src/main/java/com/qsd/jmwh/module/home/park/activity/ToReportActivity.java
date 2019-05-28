@@ -5,9 +5,13 @@ import android.support.annotation.Nullable;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
+import com.qsd.jmwh.view.NoSlidingGridView;
 import com.qsd.jmwh.view.UserItemView;
 
 public class ToReportActivity extends BaseBarActivity {
+
+    private NoSlidingGridView gv_photo;
+
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.to_report_layout);
@@ -20,6 +24,7 @@ public class ToReportActivity extends BaseBarActivity {
         UserItemView user_item_three = bindView(R.id.user_item_three);
         UserItemView user_item_four = bindView(R.id.user_item_four);
         UserItemView user_item_five = bindView(R.id.user_item_five);
+        gv_photo = bindView(R.id.gv_photo);
 
 
         user_item_one.setSwichlistener(new UserItemView.SwitchListener() {
