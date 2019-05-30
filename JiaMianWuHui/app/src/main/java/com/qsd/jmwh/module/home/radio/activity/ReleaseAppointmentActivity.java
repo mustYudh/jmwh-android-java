@@ -25,10 +25,12 @@ import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.radio.adapter.RadioLoveRvAdapter;
 import com.qsd.jmwh.module.home.radio.bean.DataRefreshRadioDataEvent;
+import com.qsd.jmwh.module.home.radio.bean.GetDatingUserVipBean;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.presenter.ReleaseAppointmentPresenter;
 import com.qsd.jmwh.module.home.radio.presenter.ReleaseAppointmentViewer;
 import com.qsd.jmwh.module.register.DateRangeActivity;
+import com.qsd.jmwh.module.register.bean.PayInfo;
 import com.qsd.jmwh.module.register.bean.RangeData;
 import com.qsd.jmwh.thrid.UploadImage;
 import com.qsd.jmwh.thrid.oss.PersistenceResponse;
@@ -182,8 +184,10 @@ public class ReleaseAppointmentActivity extends BaseBarActivity implements View.
                         }
                     }
                     mPresenter.addDatingData(activity_title, sDatingRange, sDatingTime, sDatingTimeExt, et_buchong.getText().toString(), UserProfile.getInstance().getSex() + "", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), bCommentType + "", bHiddenType + "", url.toString(), sDatingHope);
+
                 } else {
                     mPresenter.addDatingData(activity_title, sDatingRange, sDatingTime, sDatingTimeExt, et_buchong.getText().toString(), UserProfile.getInstance().getSex() + "", UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), bCommentType + "", bHiddenType + "", "", sDatingHope);
+
                 }
 
                 break;

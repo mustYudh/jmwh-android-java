@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,22 +25,28 @@ import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarFragment;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.park.activity.LookUserInfoActivity;
+import com.qsd.jmwh.module.home.radio.activity.ReleaseAppointmentActivity;
+import com.qsd.jmwh.module.home.radio.adapter.DateRadioListDialogAdapter;
 import com.qsd.jmwh.module.home.radio.adapter.HomeRadioRvAdapter;
 import com.qsd.jmwh.module.home.radio.bean.DataRefreshRadioDataEvent;
 import com.qsd.jmwh.module.home.radio.bean.GetDatingUserVipBean;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
 import com.qsd.jmwh.module.home.radio.bean.LocalHomeRadioListBean;
-import com.qsd.jmwh.module.home.radio.dialog.RadioItemPop;
 import com.qsd.jmwh.module.home.radio.presenter.RadioPresenter;
 import com.qsd.jmwh.module.home.radio.presenter.RadioViewer;
+import com.qsd.jmwh.module.home.user.activity.AuthCenterActivity;
 import com.qsd.jmwh.module.register.DateRangeActivity;
+import com.qsd.jmwh.module.register.ToByVipActivity;
+import com.qsd.jmwh.module.register.bean.PayInfo;
 import com.qsd.jmwh.module.register.bean.RangeData;
 import com.qsd.jmwh.thrid.UploadImage;
 import com.qsd.jmwh.thrid.oss.PersistenceResponse;
 import com.qsd.jmwh.utils.DialogUtils;
+import com.qsd.jmwh.utils.PayUtils;
 import com.qsd.jmwh.view.CircleImageView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.yu.common.launche.LauncherHelper;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 import com.yu.common.ui.DelayClickImageView;
@@ -69,7 +77,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
     RadioPresenter mPresenter = new RadioPresenter(this);
     private RecyclerView rv_radio;
     private LinearLayout ll_empty;
-    private DialogUtils typeDialog, enrollDialog;
+    private DialogUtils typeDialog, enrollDialog, releaseDialog, upVipDialog, payDialog;
     private int sexType = 0;
     private int disType = 0;
     private DelayClickTextView right_menu;
@@ -262,9 +270,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
     @Override
     public void getConfigDataSuccess(GetRadioConfigListBean configListBean) {
         if (configListBean != null && configListBean.cdoList != null && configListBean.cdoList.size() != 0) {
-            RadioItemPop infoPop = new RadioItemPop(getActivity());
-            infoPop.setOutsideTouchable(true);
-            infoPop.setTitle("发布约会广播").setData(configListBean.cdoList).showPopupWindow();
+            showReleaseDialog(configListBean);
         }
     }
 
@@ -322,6 +328,44 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
         item.nApplyCount = item.nApplyCount + 1;
         adapter.notifyDataSetChanged();
         ToastUtils.show("报名成功,如果对方觉得合适将会联系您!");
+    }
+
+    @Override
+    public void getDatingUserVIPPaySuccess(GetDatingUserVipBean getDatingUserVipBean, String name) {
+        if (getDatingUserVipBean != null) {
+            if (getDatingUserVipBean.nSex == 0) {
+                if (getDatingUserVipBean.nAuthType == 3 || getDatingUserVipBean.nAuthType == 4) {
+                    getContext().startActivity(new Intent(getContext(), ReleaseAppointmentActivity.class).putExtra("activity_title", name));
+                } else {
+                    //为认证
+                    getLaunchHelper().startActivity(AuthCenterActivity.class);
+                }
+            } else {
+                if (getDatingUserVipBean.bVIP) {
+                    getContext().startActivity(new Intent(getContext(), ReleaseAppointmentActivity.class).putExtra("activity_title", name));
+                } else {
+                    //非会员
+                    showUpVipDialog(getDatingUserVipBean, name);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void getBuyDatingPaySignSuccess(PayInfo payInfo, String name) {
+        PayUtils.getInstance().pay(getActivity(), payType, payInfo)
+                .getPayResult(new PayUtils.PayCallBack() {
+                    @Override
+                    public void onPaySuccess(int type) {
+                        getContext().startActivity(new Intent(getContext(), ReleaseAppointmentActivity.class).putExtra("activity_title", name));
+                    }
+
+                    @Override
+                    public void onFailed(int type) {
+                        ToastUtils.show("支付失败，请重试");
+                    }
+                });
+        ;
     }
 
     /**
@@ -525,6 +569,145 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                 .build();
         enrollDialog.show();
 
+    }
+
+
+    /**
+     * 发布约会弹窗
+     */
+    private void showReleaseDialog(GetRadioConfigListBean configListBean) {
+        releaseDialog = new DialogUtils.Builder(getActivity())
+                .view(R.layout.radio_item_layout)
+                .gravity(Gravity.CENTER)
+                .style(R.style.Dialog_NoAnimation)
+                .cancelTouchout(true)
+                .settext("发布约会广播", R.id.title)
+                .build();
+        releaseDialog.show();
+
+
+        RecyclerView recyclerView = releaseDialog.findViewById(R.id.list_data);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 4));
+        DateRadioListDialogAdapter adapter = new DateRadioListDialogAdapter(R.layout.item_date_radio_layout, configListBean.cdoList, getContext());
+        recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener((adapter1, view, position) -> {
+            if (releaseDialog.isShowing()) {
+                releaseDialog.dismiss();
+            }
+            mPresenter.getDatingUserPayVIP(configListBean.cdoList.get(position).sDatingConfigName);
+        });
+
+    }
+
+
+    /**
+     * 提醒升级弹窗
+     */
+    private void showUpVipDialog(GetDatingUserVipBean getDatingUserVipBean, String name) {
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (upVipDialog.isShowing()) {
+                    upVipDialog.dismiss();
+                }
+                switch (v.getId()) {
+                    case R.id.tv_vip:
+                        LauncherHelper.from(getActivity()).startActivity(ToByVipActivity
+                                .getIntent(getActivity(), UserProfile.getInstance().getAppAccount(),
+                                        UserProfile.getInstance().getAppToken()));
+                        break;
+                    case R.id.tv_pay:
+                        payType = 0;
+                        showPayDialog(getDatingUserVipBean, name);
+                        break;
+                    case R.id.tv_cancle:
+                        break;
+                }
+            }
+        };
+
+        upVipDialog = new DialogUtils.Builder(getActivity())
+                .view(R.layout.radio_up_vip_layout)
+                .gravity(Gravity.CENTER)
+                .style(R.style.Dialog_NoAnimation)
+                .cancelTouchout(true)
+                .settext("会员免费,非会员需支付" + getDatingUserVipBean.cdoList.get(0).nGoodsRealFee + "元", R.id.title)
+                .addViewOnclick(R.id.tv_vip, listener)
+                .addViewOnclick(R.id.tv_pay, listener)
+                .addViewOnclick(R.id.tv_cancle, listener)
+                .build();
+        upVipDialog.show();
+
+
+    }
+
+    ImageView iv1;
+    ImageView iv2;
+    ImageView iv3;
+    private int payType = 0;
+
+    /**
+     * 选择付款弹窗
+     */
+    private void showPayDialog(GetDatingUserVipBean getDatingUserVipBean, String name) {
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.rl_alipay:
+                        iv1.setImageResource(R.drawable.ic_button_selected);
+                        iv2.setImageResource(R.drawable.ic_button_unselected);
+                        iv3.setImageResource(R.drawable.ic_button_unselected);
+                        payType = 1;
+                        break;
+                    case R.id.rl_wechat:
+                        iv1.setImageResource(R.drawable.ic_button_unselected);
+                        iv2.setImageResource(R.drawable.ic_button_selected);
+                        iv3.setImageResource(R.drawable.ic_button_unselected);
+                        payType = 2;
+                        break;
+                    case R.id.rl_wallet:
+                        iv1.setImageResource(R.drawable.ic_button_unselected);
+                        iv2.setImageResource(R.drawable.ic_button_unselected);
+                        iv3.setImageResource(R.drawable.ic_button_selected);
+                        payType = 3;
+                        break;
+                    case R.id.tv_pay:
+                        if (payType == 0) {
+                            ToastUtils.show("请选择支付方式");
+                            return;
+                        }
+                        if (payDialog.isShowing()) {
+                            payDialog.dismiss();
+                        }
+                        mPresenter.getBuyDatingPaySign(getDatingUserVipBean.cdoList.get(0).lGoodsId + "", payType + "", name);
+                        break;
+                    case R.id.iv_close:
+                        if (payDialog.isShowing()) {
+                            payDialog.dismiss();
+                        }
+                        break;
+                }
+            }
+        };
+
+        payDialog = new DialogUtils.Builder(getActivity())
+                .view(R.layout.radio_pay_layout)
+                .gravity(Gravity.CENTER)
+                .style(R.style.Dialog_NoAnimation)
+                .cancelTouchout(true)
+                .settext(getDatingUserVipBean.cdoList.get(0).nGoodsRealFee + "", R.id.tv_money)
+                .addViewOnclick(R.id.rl_wallet, listener)
+                .addViewOnclick(R.id.rl_alipay, listener)
+                .addViewOnclick(R.id.rl_wechat, listener)
+                .addViewOnclick(R.id.iv_close, listener)
+                .addViewOnclick(R.id.tv_pay, listener)
+                .build();
+        payDialog.show();
+
+        iv1 = payDialog.findViewById(R.id.iv1);
+        iv2 = payDialog.findViewById(R.id.iv2);
+        iv3 = payDialog.findViewById(R.id.iv3);
     }
 
     /**
