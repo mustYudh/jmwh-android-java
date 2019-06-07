@@ -5,7 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.view.View;
-
+import com.netease.nim.uikit.api.NimUIKit;
+import com.netease.nim.uikit.common.ToastHelper;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.RequestCallback;
+import com.netease.nimlib.sdk.auth.AuthService;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
@@ -18,46 +22,59 @@ import com.qsd.jmwh.view.NormaFormItemVIew;
 import com.yu.common.mvp.PresenterLifeCycle;
 
 public class LoginActivity extends BaseBarActivity implements LoginViewer, View.OnClickListener {
-    @PresenterLifeCycle
-    LoginPresenter mPresenter = new LoginPresenter(this);
+  @PresenterLifeCycle LoginPresenter mPresenter = new LoginPresenter(this);
 
-    @Override
-    protected void setView(@Nullable Bundle savedInstanceState) {
-        setContentView(R.layout.login_activity_layout);
+  @Override protected void setView(@Nullable Bundle savedInstanceState) {
+    setContentView(R.layout.login_activity_layout);
+  }
+
+  @Override protected void loadData() {
+    setTitle("登录");
+    bindView(R.id.login, this);
+    setRightMenu("忘记密码", v -> getLaunchHelper().startActivity(EditPasswordActivity.class));
+  }
+
+  @Override public void onClick(View v) {
+    switch (v.getId()) {
+      case R.id.login:
+        mPresenter.login(getTextResult(R.id.account), getTextResult(R.id.password));
+        break;
+      default:
     }
+  }
 
+  private String getTextResult(@IdRes int id) {
+    NormaFormItemVIew editText = bindView(id);
+    return editText.getText();
+  }
 
-    @Override
-    protected void loadData() {
-        setTitle("登录");
-        bindView(R.id.login, this);
-        setRightMenu("忘记密码", v -> getLaunchHelper().startActivity(EditPasswordActivity.class));
+  @Override public void handleLoginResult(LoginInfo loginInfo) {
+    if (loginInfo != null) {
+      UserProfile.getInstance().appLogin(loginInfo);
+      //NIMClient.getService(AuthService.class).login(LoginInfo(loginInfo.sIMID, simid)).setCallback(new )
+      NIMClient.getService(AuthService.class)
+          .login(new com.netease.nimlib.sdk.auth.LoginInfo("a1122334455", "e807f1fcf82d132f9bb018ca6738a19f"))
+          .setCallback(new RequestCallback<com.netease.nimlib.sdk.auth.LoginInfo>() {
+
+            @Override public void onSuccess(com.netease.nimlib.sdk.auth.LoginInfo info) {
+              NimUIKit.setAccount(info.getAccount());
+              getLaunchHelper().startActivity(HomeActivity.class);
+              setResult(Activity.RESULT_OK);
+              finish();
+            }
+
+            @Override public void onFailed(int code) {
+              if (code == 302 || code == 404) {
+                ToastHelper.showToast(LoginActivity.this, "帐号或密码错误");
+              } else {
+                ToastHelper.showToast(LoginActivity.this, "登录失败: " + code);
+              }
+            }
+
+            @Override public void onException(Throwable throwable) {
+              ToastHelper.showToast(LoginActivity.this, "无效输入");
+            }
+          });
     }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.login:
-                mPresenter.login(getTextResult(R.id.account), getTextResult(R.id.password));
-                break;
-            default:
-        }
-    }
-
-
-    private String getTextResult(@IdRes int id) {
-        NormaFormItemVIew editText = bindView(id);
-        return editText.getText();
-    }
-
-
-    @Override
-    public void handleLoginResult(LoginInfo loginInfo) {
-        if (loginInfo != null) {
-            UserProfile.getInstance().appLogin(loginInfo);
-            getLaunchHelper().startActivity(HomeActivity.class);
-            setResult(Activity.RESULT_OK);
-            finish();
-        }
-    }
+  }
 }

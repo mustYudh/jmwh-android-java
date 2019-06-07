@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">test</string>
+    <string name="input_panel_guess">猜 拳</string>
+    <string name="snapchat_longclick_to_view">按住查看</string>
+    <string name="message_info">聊天信息</string>
+    <string name="create_normal_team">创建讨论组</string>
+    <string name="msg_notice">消息提醒</string>
+    <string name="message_p2p_clear_tips">确定清空点对点历史消息?</string>
+    <string name="sure_keep_roam">确认单保留漫游</string>
+
 </resources>
