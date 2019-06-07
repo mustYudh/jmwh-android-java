@@ -200,6 +200,8 @@ dependencies {
     implementation project(path: ':bottom_tab')
     implementation project(':crop_img')
     implementation project(':share')
+    implementation project(path: ':uikit')
+
     //noinspection GradleCompatible
     implementation "com.android.support:appcompat-v7:${V7_APPCOMPAT_VERSION}"
     implementation "com.android.support.constraint:constraint-layout:${CONSTRAIT_SUPPORT_VERSION}"
