@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
-
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseActivity;
 import com.qsd.jmwh.data.UserProfile;
@@ -21,13 +20,13 @@ import com.qsd.jmwh.module.home.park.dialog.MoreActionDialog;
 import com.qsd.jmwh.module.home.park.presenter.LookUserInfoPresenter;
 import com.qsd.jmwh.module.home.park.presenter.LookUserInfoViewer;
 import com.qsd.jmwh.module.home.user.dialog.EvaluationDialog;
+import com.qsd.jmwh.module.im.SessionHelper;
 import com.qsd.jmwh.module.register.ToByVipActivity;
 import com.qsd.jmwh.view.NormaFormItemVIew;
 import com.yu.common.launche.LauncherHelper;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 import com.yu.common.utils.ImageLoader;
-
 import java.util.ArrayList;
 
 public class LookUserInfoActivity extends BaseActivity implements LookUserInfoViewer, View.OnClickListener {
@@ -185,7 +184,7 @@ public class LookUserInfoActivity extends BaseActivity implements LookUserInfoVi
                 if (userID == UserProfile.getInstance().getAppAccount()) {
                     ToastUtils.show("不能私信自己");
                 } else {
-
+                    SessionHelper.startP2PSession(getActivity(),"im_18");
                 }
                 break;
             case R.id.qq:

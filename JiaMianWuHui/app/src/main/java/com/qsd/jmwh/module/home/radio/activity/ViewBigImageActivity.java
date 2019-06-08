@@ -1,6 +1,8 @@
 package com.qsd.jmwh.module.home.radio.activity;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -11,9 +13,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.FutureTarget;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
@@ -21,7 +23,6 @@ import com.github.chrisbanes.photoview.OnPhotoTapListener;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.qsd.jmwh.R;
 import com.yu.common.toast.ToastUtils;
-
 import java.io.File;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -217,16 +218,16 @@ public class ViewBigImageActivity extends FragmentActivity implements OnPageChan
 
             spinner.setVisibility(View.VISIBLE);
             spinner.setClickable(false);
-            Glide.with(ViewBigImageActivity.this).load(imageUrl).listener(new RequestListener<String, GlideDrawable>() {
-                @Override
-                public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+            Glide.with(ViewBigImageActivity.this).load(imageUrl).listener(new RequestListener<Drawable>() {
+                @Override public boolean onLoadFailed(@Nullable GlideException e, Object model,
+                    Target<Drawable> target, boolean isFirstResource) {
                     ToastUtils.show("资源加载异常");
                     spinner.setVisibility(View.GONE);
                     return false;
                 }
 
-                @Override
-                public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                @Override public boolean onResourceReady(Drawable resource, Object model,
+                    Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                     spinner.setVisibility(View.GONE);
                     return false;
                 }

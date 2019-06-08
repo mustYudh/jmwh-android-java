@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.netease.nim.uikit.R;
 import com.netease.nim.uikit.api.UIKitOptions;
 import com.netease.nim.uikit.api.model.main.CustomPushContentProvider;
@@ -15,7 +14,6 @@ import com.netease.nim.uikit.api.model.session.SessionCustomization;
 import com.netease.nim.uikit.business.ait.AitManager;
 import com.netease.nim.uikit.business.session.actions.BaseAction;
 import com.netease.nim.uikit.business.session.actions.ImageAction;
-import com.netease.nim.uikit.business.session.actions.LocationAction;
 import com.netease.nim.uikit.business.session.actions.VideoAction;
 import com.netease.nim.uikit.business.session.constant.Extras;
 import com.netease.nim.uikit.business.session.module.Container;
@@ -42,7 +40,6 @@ import com.netease.nimlib.sdk.msg.model.MessageReceipt;
 import com.netease.nimlib.sdk.robot.model.NimRobotInfo;
 import com.netease.nimlib.sdk.robot.model.RobotAttachment;
 import com.netease.nimlib.sdk.robot.model.RobotMsgType;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -381,7 +378,7 @@ public class MessageFragment extends TFragment implements ModuleProxy {
         List<BaseAction> actions = new ArrayList<>();
         actions.add(new ImageAction());
         actions.add(new VideoAction());
-        actions.add(new LocationAction());
+        //actions.add(new LocationAction());
 
         if (customization != null && customization.actions != null) {
             actions.addAll(customization.actions);

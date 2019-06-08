@@ -86,6 +86,7 @@ public class APP extends BaseApp {
     String account = UserProfile.getInstance().getSimUserId();
     String token = UserProfile.getInstance().getSimToken();
     if (!TextUtils.isEmpty(account) && !TextUtils.isEmpty(token)) {
+      NimUIKit.setAccount(account);
       return new LoginInfo(account, token);
     } else {
       return null;

@@ -1,56 +1,58 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+  compileSdkVersion rootProject.ext.compileSdkVersion
 
-    defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.appTargetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
+  defaultConfig {
+    minSdkVersion rootProject.ext.minSdkVersion
+    targetSdkVersion rootProject.ext.appTargetSdkVersion
+    versionCode rootProject.ext.versionCode
+    versionName rootProject.ext.versionName
 
-        renderscriptTargetApi rootProject.ext.compileSdkVersion
-        renderscriptSupportModeEnabled true
+    renderscriptTargetApi rootProject.ext.compileSdkVersion
+    renderscriptSupportModeEnabled true
+  }
+
+  sourceSets {
+    main {
+      manifest.srcFile 'AndroidManifest.xml'
+      java.srcDirs = ['src']
+      resources.srcDirs = ['src']
+      aidl.srcDirs = ['src']
+      renderscript.srcDirs = ['src']
+      res.srcDirs = ['res', 'res-ptr2', 'res-chatroom']
+      assets.srcDirs = ['assets']
+      jniLibs.srcDirs = ['libs']
     }
+  }
 
-    sourceSets {
-        main {
-            manifest.srcFile 'AndroidManifest.xml'
-            java.srcDirs = ['src']
-            resources.srcDirs = ['src']
-            aidl.srcDirs = ['src']
-            renderscript.srcDirs = ['src']
-            res.srcDirs = ['res', 'res-ptr2', 'res-chatroom']
-            assets.srcDirs = ['assets']
-            jniLibs.srcDirs = ['libs']
-        }
-    }
+  compileOptions {
+    sourceCompatibility 1.7
+    targetCompatibility 1.7
+  }
 
-    compileOptions {
-        sourceCompatibility 1.7
-        targetCompatibility 1.7
-    }
-
-    packagingOptions{
-        doNotStrip '*/mips/*.so'
-        doNotStrip '*/mips64/*.so'
-    }
+  packagingOptions {
+    doNotStrip '*/mips/*.so'
+    doNotStrip '*/mips64/*.so'
+  }
 }
 
 dependencies {
-    api fileTree(dir: 'libs', include: '*.jar')
-    api("com.android.support:appcompat-v7:${V7_APPCOMPAT_VERSION}")
-    api("com.android.support:support-v4:${V4_SUPPORT_VERSION}")
-    api("com.android.support:design:${DESIGIN_SUPPORT_VERSION}")
-    api("com.android.support.constraint:constraint-layout:${CONSTRAIT_SUPPORT_VERSION}")
+  api fileTree(dir: 'libs', include: '*.jar')
+  api("com.android.support:appcompat-v7:${V7_APPCOMPAT_VERSION}")
+  api("com.android.support:support-v4:${V4_SUPPORT_VERSION}")
+  api("com.android.support:design:${DESIGIN_SUPPORT_VERSION}")
+  api("com.android.support.constraint:constraint-layout:${CONSTRAIT_SUPPORT_VERSION}")
 
-    api 'me.everything:overscroll-decor-android:1.0.4'
-    api "me.leolin:ShortcutBadger:1.1.17@aar"
+  api 'me.everything:overscroll-decor-android:1.0.4'
+  api "me.leolin:ShortcutBadger:1.1.17@aar"
+//    implementation'com.github.bumptech.glide:glide:4.2.0'
+  implementation('com.github.bumptech.glide:glide:4.2.0') {
+    exclude group: "com.android.support"
+  }
+  annotationProcessor 'com.github.bumptech.glide:compiler:4.2.0'
+  implementation 'jp.wasabeef:glide-transformations:2.0.1'
 
-    implementation 'com.github.bumptech.glide:glide:4.2.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.2.0'
-    api 'jp.wasabeef:glide-transformations:3.0.1'
-
-    implementation "com.github.chrisbanes.photoview:library:1.2.4"
-    //api 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1' // if you want to use the Glide GPU Filters
+  implementation "com.github.chrisbanes.photoview:library:1.2.4"
+  //api 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1' // if you want to use the Glide GPU Filters
 }

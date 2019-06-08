@@ -95,7 +95,7 @@
 
     <meta-data
         android:name="com.netease.nim.appKey"
-        android:value="45c6af3c98409b18a84451215d0bdd6e" />
+        android:value="06c65a60ac6559d618d7887e95b9ad73" />
 
 
 
@@ -160,9 +160,7 @@
     <meta-data
         android:name="android.max_aspect"
         android:value="2.1"/>
-    <meta-data
-        android:name="com.qsd.jmwh.utils.glide.OkHttpGlideModule"
-        android:value="GlideModule"/>
+
     <meta-data
         android:name="com.baidu.lbsapi.API_KEY"
         android:value="${BAIDU_LOCATION}"/>

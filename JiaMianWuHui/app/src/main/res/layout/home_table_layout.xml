@@ -1,21 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:gravity="center"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    >
+
+  <FrameLayout
+      android:layout_width="28dp"
+      android:layout_height="25dp"
+      >
+
 
     <com.yu.common.ui.DelayClickImageView
+        android:layout_gravity="bottom"
         android:id="@+id/tab_icon"
         android:layout_width="22dp"
-        android:layout_height="22dp"/>
+        android:layout_height="22dp"
+        />
 
-    <TextView
-        android:id="@+id/tab_name"
-        android:textColor="@color/home_tab_text_cloor"
-        android:layout_marginTop="2dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+
+
+    <View
+        android:visibility="gone"
+        android:id="@+id/message_hint"
+        android:layout_gravity="right"
+        android:background="@drawable/shape_red_circle_for_msg"
+        android:layout_width="10dp"
+        android:layout_height="10dp"/>
+
+  </FrameLayout>
+
+  <TextView
+      android:id="@+id/tab_name"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="2dp"
+      android:textColor="@color/home_tab_text_cloor"
+      />
 
 </LinearLayout>

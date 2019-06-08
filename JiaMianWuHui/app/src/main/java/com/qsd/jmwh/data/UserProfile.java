@@ -3,6 +3,7 @@ package com.qsd.jmwh.data;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.netease.nim.uikit.api.NimUIKit;
 import com.qsd.jmwh.APP;
 import com.qsd.jmwh.module.login.bean.LoginInfo;
 
@@ -162,6 +163,8 @@ public class UserProfile implements Serializable {
      * 退出登录
      */
     public void clean() {
+        NimUIKit.setAccount("");
+        NimUIKit.logout();
         spHelper.clear();
     }
 
