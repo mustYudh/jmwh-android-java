@@ -12,7 +12,6 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.Target;
 import java.io.File;
 import java.util.concurrent.ExecutionException;
-import jp.wasabeef.glide.transformations.BlurTransformation;
 
 public class ImageLoader {
   private ImageLoader() {
@@ -60,7 +59,7 @@ public class ImageLoader {
     Glide.with(context)
         .load(url)
         .apply(RequestOptions
-            .bitmapTransform(new BlurTransformation(context, 24, 8)))
+            .bitmapTransform(new GlideBlurTransformation(context)))
         .into(view);
   }
 
@@ -69,18 +68,10 @@ public class ImageLoader {
     Glide.with(context)
         .load(url)
         .apply(RequestOptions
-            .bitmapTransform(new BlurTransformation(context, radius, sampling)))
+            .bitmapTransform(new GlideBlurTransformation(context)))
         .into(view);
   }
 
-  public static void blurTransformation(Context context, int res, ImageView view, int radius,
-      int sampling) {
-    Glide.with(context)
-        .load(res)
-        .apply(RequestOptions
-            .bitmapTransform(new BlurTransformation(context, radius, sampling)))
-        .into(view);
-  }
 
   public static void loadHader(final Context context, String url, ImageView view) {
     Glide.with(context)
