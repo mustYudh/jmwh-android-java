@@ -201,6 +201,7 @@
 
 
     <com.yu.common.ui.DelayClickTextView
+        android:visibility="gone"
         android:id="@+id/chat"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -221,7 +222,6 @@
         android:text="社交账号"
         android:textColor="@color/app_main_color"
         android:textSize="16sp"
-        android:visibility="gone"
         />
 
   </LinearLayout>

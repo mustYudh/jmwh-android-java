@@ -78,6 +78,7 @@ public class LookUserInfoActivity extends BaseActivity
   @Override public void setUserInfo(OtherUserInfoBean userCenterInfo) {
     OtherUserInfoBean.CdoUserDataBean userData = userCenterInfo.cdoUserData;
     isVip = userCenterInfo.bVIP;
+
     int nSubViewUserCount = userCenterInfo.nSubViewUserCount;
     if (nSubViewUserCount <= 3) {
       SelectHintPop hint = new SelectHintPop(this);
@@ -224,7 +225,6 @@ public class LookUserInfoActivity extends BaseActivity
             .setBottomButton("取消", v13 -> hint.dismiss())
             .showPopupWindow();
       } else {
-        bindView(R.id.chat, false);
         SessionHelper.startP2PSession(getActivity(), "im_" + userID);
       }
     } else {
@@ -238,7 +238,7 @@ public class LookUserInfoActivity extends BaseActivity
             .setNegativeButton("取消", v12 -> hint.dismiss())
             .showPopupWindow();
       } else {
-        ToastUtils.show("私信");
+        SessionHelper.startP2PSession(getActivity(), "im_" + userID);
       }
     }
   }

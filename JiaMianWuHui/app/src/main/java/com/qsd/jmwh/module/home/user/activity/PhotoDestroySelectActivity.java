@@ -80,7 +80,12 @@ public class PhotoDestroySelectActivity extends BaseBarActivity
       selected = fileType == 1 || fileType == 3;
       selectDestroy.setSelected(selected);
       nextAction.setText("删除");
-      setTitle(TextUtils.isEmpty(fileCoverUrl) ? "删除视频" : "删除图片");
+      boolean isVideo = !TextUtils.isEmpty(fileCoverUrl);
+      setTitle(isVideo ? "删除视频" : "删除图片");
+      bindView(R.id.select_destroy_btn,!isVideo);
+      //if (isVideo) {
+      //  bindText(R.id.hint,"");
+      //}
     } else {
       setTitle("选择图片");
       selectDestroy.setSelected(selected);

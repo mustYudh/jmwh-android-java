@@ -82,7 +82,7 @@ public interface OtherApiServices {
   @NetMethod(ParameterNames = { "nGoodsType" }, Url = "/GoodsService/getGoods")
   Observable<GoodsInfoBean> getGoods(int nGoodsType);
 
-  @NetMethod(ParameterNames = { "lGoodsId", "nPayType" }, Url = "/OrderService/getBuyDatingPaySign")
+  @NetMethod(ParameterNames = { "lGoodsId", "nPayType" }, Url = "/OrderService/getBuyMaskBallCoinPaySign")
   Observable<PayInfo> getBuyDatingPaySign(int lGoodsId, int nPayType);
 
   @NetMethod(ParameterNames = {

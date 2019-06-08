@@ -886,9 +886,9 @@ public class MessageListPanelEx {
 
             if (!NimUIKitImpl.getMsgForwardFilter().shouldIgnore(selectedItem) && !recordOnly) {
                 // 6 forward to person
-                longClickItemForwardToPerson(selectedItem, alertDialog);
+                //longClickItemForwardToPerson(selectedItem, alertDialog);
                 // 7 forward to team
-                longClickItemForwardToTeam(selectedItem, alertDialog);
+                //longClickItemForwardToTeam(selectedItem, alertDialog);
             }
             // 7 cancel upload attachment
             longClickItemCancelUpload(selectedItem, alertDialog);
@@ -1025,36 +1025,36 @@ public class MessageListPanelEx {
 
         // 长按菜单项 -- 转发到个人
         private void longClickItemForwardToPerson(final IMMessage item, CustomAlertDialog alertDialog) {
-            alertDialog.addItem(container.activity.getString(R.string.forward_to_person), new CustomAlertDialog.onSeparateItemClickListener() {
-
-                @Override
-                public void onClick() {
-                    forwardMessage = item;
-                    ContactSelectActivity.Option option = new ContactSelectActivity.Option();
-                    option.title = "选择转发的人";
-                    option.type = ContactSelectActivity.ContactSelectType.BUDDY;
-                    option.multi = false;
-                    option.maxSelectNum = 1;
-                    NimUIKit.startContactSelector(container.activity, option, REQUEST_CODE_FORWARD_PERSON);
-                }
-            });
+            //alertDialog.addItem(container.activity.getString(R.string.forward_to_person), new CustomAlertDialog.onSeparateItemClickListener() {
+            //
+            //    @Override
+            //    public void onClick() {
+            //        forwardMessage = item;
+            //        ContactSelectActivity.Option option = new ContactSelectActivity.Option();
+            //        option.title = "选择转发的人";
+            //        option.type = ContactSelectActivity.ContactSelectType.BUDDY;
+            //        option.multi = false;
+            //        option.maxSelectNum = 1;
+            //        NimUIKit.startContactSelector(container.activity, option, REQUEST_CODE_FORWARD_PERSON);
+            //    }
+            //});
         }
 
         // 长按菜单项 -- 转发到群组
         private void longClickItemForwardToTeam(final IMMessage item, CustomAlertDialog alertDialog) {
-            alertDialog.addItem(container.activity.getString(R.string.forward_to_team), new CustomAlertDialog.onSeparateItemClickListener() {
-
-                @Override
-                public void onClick() {
-                    forwardMessage = item;
-                    ContactSelectActivity.Option option = new ContactSelectActivity.Option();
-                    option.title = "选择转发的群";
-                    option.type = ContactSelectActivity.ContactSelectType.TEAM;
-                    option.multi = false;
-                    option.maxSelectNum = 1;
-                    NimUIKit.startContactSelector(container.activity, option, REQUEST_CODE_FORWARD_TEAM);
-                }
-            });
+            //alertDialog.addItem(container.activity.getString(R.string.forward_to_team), new CustomAlertDialog.onSeparateItemClickListener() {
+            //
+            //    @Override
+            //    public void onClick() {
+            //        forwardMessage = item;
+            //        ContactSelectActivity.Option option = new ContactSelectActivity.Option();
+            //        option.title = "选择转发的群";
+            //        option.type = ContactSelectActivity.ContactSelectType.TEAM;
+            //        option.multi = false;
+            //        option.maxSelectNum = 1;
+            //        NimUIKit.startContactSelector(container.activity, option, REQUEST_CODE_FORWARD_TEAM);
+            //    }
+            //});
         }
 
         // 长按菜单项 -- 撤回消息

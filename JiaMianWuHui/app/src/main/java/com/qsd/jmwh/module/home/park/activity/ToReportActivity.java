@@ -7,6 +7,7 @@ import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.view.NoSlidingGridView;
 import com.qsd.jmwh.view.UserItemView;
+import com.yu.common.toast.ToastUtils;
 
 public class ToReportActivity extends BaseBarActivity {
 
@@ -30,7 +31,7 @@ public class ToReportActivity extends BaseBarActivity {
         user_item_one.setSwichlistener(new UserItemView.SwitchListener() {
             @Override
             public void onSwitch(boolean switchStatus) {
-
+                ToastUtils.show("举报成功");
             }
         });
         bindView(R.id.commit, v -> finish());
