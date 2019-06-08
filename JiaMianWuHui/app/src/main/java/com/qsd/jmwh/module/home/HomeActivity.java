@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.denghao.control.TabItem;
 import com.denghao.control.TabView;
 import com.denghao.control.view.BottomNavigationView;
-import com.netease.nim.uikit.business.recent.RecentContactsFragment;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.auth.AuthService;
@@ -20,6 +19,7 @@ import com.netease.nimlib.sdk.msg.model.RecentContact;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseActivity;
 import com.qsd.jmwh.data.UserProfile;
+import com.qsd.jmwh.module.home.message.MessageFragment;
 import com.qsd.jmwh.module.home.park.ParkFragment;
 import com.qsd.jmwh.module.home.presenter.HomePresenter;
 import com.qsd.jmwh.module.home.presenter.HomeViewer;
@@ -60,7 +60,7 @@ public class HomeActivity extends BaseActivity implements HomeViewer {
     items.add(new TabView(createTabView("假面舞会", R.drawable.tab_01, 0), new ParkFragment()));
     items.add(new TabView(createTabView("约会电台", R.drawable.tab_03, 1), new RadioFragment()));
     items.add(
-        new TabView(createTabView("消息中心", R.drawable.tab_02, 2), new RecentContactsFragment()));
+        new TabView(createTabView("消息中心", R.drawable.tab_02, 2), new MessageFragment()));
     items.add(new TabView(createTabView("个人中心", R.drawable.tab_04, 3), new UserFragment()));
     navigationView.initControl(this).setPagerView(items, 0);
     navigationView.getNavgation().setTabControlHeight(60);
