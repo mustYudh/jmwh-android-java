@@ -92,6 +92,7 @@
       android:supportsRtl="true"
       android:theme="@style/AppGrayTheme"
       tools:ignore="GoogleAppIndexingWarning"
+      android:testOnly="false"
       tools:replace="android:label">
 
     <meta-data
