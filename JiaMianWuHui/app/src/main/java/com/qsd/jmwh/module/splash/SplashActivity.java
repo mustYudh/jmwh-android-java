@@ -126,7 +126,7 @@ public class SplashActivity extends BaseActivity
         break;
       case R.id.wechat_login:
         boolean installWeChat =
-            UMShareAPI.get(getActivity()).isInstall(getActivity(), SHARE_MEDIA.QQ);
+            UMShareAPI.get(getActivity()).isInstall(getActivity(), SHARE_MEDIA.WEIXIN);
         if (installWeChat) {
           mAuthLoginHelp.login(SHARE_MEDIA.WEIXIN);
         } else {
@@ -145,7 +145,7 @@ public class SplashActivity extends BaseActivity
   }
 
   @Override public void onStart(SHARE_MEDIA media) {
-    Log.e("======onStart", "吊起SDK");
+
   }
 
   @Override public void onComplete(SHARE_MEDIA media, int i, Map<String, String> map) {
@@ -160,7 +160,7 @@ public class SplashActivity extends BaseActivity
   }
 
   @Override public void onError(SHARE_MEDIA media, int i, Throwable throwable) {
-    Log.e("======onError", "onError");
+
   }
 
   @Override public void onCancel(SHARE_MEDIA media, int i) {

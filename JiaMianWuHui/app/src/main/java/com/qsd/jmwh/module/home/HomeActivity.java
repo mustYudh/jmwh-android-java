@@ -31,6 +31,7 @@ import com.qsd.jmwh.utils.countdown.RxCountDownAdapter;
 import com.yu.common.mvp.PresenterLifeCycle;
 import java.util.ArrayList;
 import java.util.List;
+import org.greenrobot.eventbus.EventBus;
 
 public class HomeActivity extends BaseActivity implements HomeViewer {
 
@@ -54,6 +55,7 @@ public class HomeActivity extends BaseActivity implements HomeViewer {
 
   @Override protected void loadData() {
     setTitle("首页");
+    EventBus.getDefault().post(true);
     mPresenter.modifyLngAndLat();
     navigationView = findViewById(R.id.bottom_navigation_view);
     List<TabItem> items = new ArrayList<>();

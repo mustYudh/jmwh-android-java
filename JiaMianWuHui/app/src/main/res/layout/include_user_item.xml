@@ -171,6 +171,7 @@
         app:user_hint_text="消息推送、修改密码"/>
 
     <com.qsd.jmwh.view.UserItemView
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         app:user_left_text="帮朋友申请验证码"
@@ -188,6 +189,7 @@
 
 
     <com.qsd.jmwh.view.UserItemView
+        android:visibility="gone"
         android:layout_marginTop="10dp"
         app:left_text_color="@color/app_main_bg_color"
         android:layout_width="match_parent"

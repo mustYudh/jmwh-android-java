@@ -36,7 +36,6 @@ public class PhotoDestroySelectActivity extends BaseBarActivity
   private ImageView selectDestroy;
   private boolean selected = false;
   private boolean needMoney;
-  private static boolean itemClick = false;
 
   @Override protected void setView(@Nullable Bundle savedInstanceState) {
     setContentView(R.layout.photo_destroy_select_layout);
@@ -56,7 +55,6 @@ public class PhotoDestroySelectActivity extends BaseBarActivity
     starter.putExtra(FILE_ID, cdoimgListBean.lFileId);
     starter.putExtra(FILE_FEE, cdoimgListBean.nFileFee);
     starter.putExtra(FILE_COVER_URL, cdoimgListBean.sFileCoverUrl);
-    itemClick = true;
     return starter;
   }
 
@@ -90,6 +88,7 @@ public class PhotoDestroySelectActivity extends BaseBarActivity
       setTitle("选择图片");
       selectDestroy.setSelected(selected);
     }
+    bindView(R.id.select_destroy,this);
   }
 
   @Override public void onClick(View v) {
@@ -99,7 +98,6 @@ public class PhotoDestroySelectActivity extends BaseBarActivity
         int fileType = getIntent().getIntExtra(FILE_TYPE, 0);
         int fileFee = getIntent().getIntExtra(FILE_FEE, 0);
         int id = getIntent().getIntExtra(FILE_ID, -1);
-        if (itemClick) {
           if (fileType == 0 || fileType == 1) {
             ToastUtils.show(selected ? "设为阅后即焚照片" : "设为普通照片");
             fileType = selected ? 1 : 0;
@@ -108,7 +106,6 @@ public class PhotoDestroySelectActivity extends BaseBarActivity
             fileType = selected ? 3 : 2;
           }
           mPresenter.modifyFile(fileType, fileFee, id);
-        }
         break;
       case R.id.next_action:
         int fileId = getIntent().getIntExtra(FILE_ID, -1);
@@ -149,6 +146,7 @@ public class PhotoDestroySelectActivity extends BaseBarActivity
           }).showPopupWindow();
         }
         break;
+        default:
     }
   }
 

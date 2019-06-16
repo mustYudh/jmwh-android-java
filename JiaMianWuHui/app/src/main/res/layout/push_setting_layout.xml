@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         app:showArrow="false"
         app:type="switch"
-        app:user_left_text="邀请码生申请成功"/>
+        app:user_left_text="邀请码申请成功"/>
 
 
 </LinearLayout>

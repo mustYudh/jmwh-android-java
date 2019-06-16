@@ -20,6 +20,9 @@ import com.qsd.jmwh.module.login.presenter.LoginPresenter;
 import com.qsd.jmwh.module.login.presenter.LoginViewer;
 import com.qsd.jmwh.view.NormaFormItemVIew;
 import com.yu.common.mvp.PresenterLifeCycle;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class LoginActivity extends BaseBarActivity implements LoginViewer, View.OnClickListener {
   @PresenterLifeCycle LoginPresenter mPresenter = new LoginPresenter(this);
@@ -32,6 +35,7 @@ public class LoginActivity extends BaseBarActivity implements LoginViewer, View.
     setTitle("登录");
     bindView(R.id.login, this);
     setRightMenu("忘记密码", v -> getLaunchHelper().startActivity(EditPasswordActivity.class));
+    EventBus.getDefault().register(this);
   }
 
   @Override public void onClick(View v) {
@@ -80,6 +84,17 @@ public class LoginActivity extends BaseBarActivity implements LoginViewer, View.
   }
 
 
+  @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行
+  public void onEvent(Boolean event) {
+    if (event) {
+      finish();
+    }
+
+  }
 
 
+  @Override protected void onDestroy() {
+    super.onDestroy();
+    EventBus.getDefault().unregister(this);
+  }
 }
