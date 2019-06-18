@@ -19,7 +19,7 @@ public class NavigationUtils {
 
       WindowManager.LayoutParams winParams = window.getAttributes();
       winParams.flags |= WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS;
-      winParams.flags |= WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+      //winParams.flags |= WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
       winParams.flags &= ~WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
 
       window.setAttributes(winParams);

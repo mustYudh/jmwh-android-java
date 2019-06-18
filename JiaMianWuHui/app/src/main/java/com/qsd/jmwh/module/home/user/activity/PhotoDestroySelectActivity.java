@@ -36,6 +36,7 @@ public class PhotoDestroySelectActivity extends BaseBarActivity
   private ImageView selectDestroy;
   private boolean selected = false;
   private boolean needMoney;
+  private boolean isVideo;
 
   @Override protected void setView(@Nullable Bundle savedInstanceState) {
     setContentView(R.layout.photo_destroy_select_layout);
@@ -78,9 +79,10 @@ public class PhotoDestroySelectActivity extends BaseBarActivity
       selected = fileType == 1 || fileType == 3;
       selectDestroy.setSelected(selected);
       nextAction.setText("删除");
-      boolean isVideo = !TextUtils.isEmpty(fileCoverUrl);
+      this.isVideo = !TextUtils.isEmpty(fileCoverUrl);
       setTitle(isVideo ? "删除视频" : "删除图片");
-      bindView(R.id.select_destroy_btn,!isVideo);
+      bindView(R.id.select_destroy, !isVideo);
+      bindView(R.id.divider, isVideo);
       //if (isVideo) {
       //  bindText(R.id.hint,"");
       //}
@@ -88,7 +90,7 @@ public class PhotoDestroySelectActivity extends BaseBarActivity
       setTitle("选择图片");
       selectDestroy.setSelected(selected);
     }
-    bindView(R.id.select_destroy,this);
+    bindView(R.id.select_destroy, this);
   }
 
   @Override public void onClick(View v) {
@@ -98,14 +100,14 @@ public class PhotoDestroySelectActivity extends BaseBarActivity
         int fileType = getIntent().getIntExtra(FILE_TYPE, 0);
         int fileFee = getIntent().getIntExtra(FILE_FEE, 0);
         int id = getIntent().getIntExtra(FILE_ID, -1);
-          if (fileType == 0 || fileType == 1) {
-            ToastUtils.show(selected ? "设为阅后即焚照片" : "设为普通照片");
-            fileType = selected ? 1 : 0;
-          } else if (fileType == 2 || fileType == 3) {
-            ToastUtils.show(selected ? "设为阅后即焚红包照片" : "设为普红包照片");
-            fileType = selected ? 3 : 2;
-          }
-          mPresenter.modifyFile(fileType, fileFee, id);
+        if (fileType == 0 || fileType == 1) {
+          ToastUtils.show(selected ? "设为阅后即焚照片" : "设为普通照片");
+          fileType = selected ? 1 : 0;
+        } else if (fileType == 2 || fileType == 3) {
+          ToastUtils.show(selected ? "设为阅后即焚红包照片" : "设为普红包照片");
+          fileType = selected ? 3 : 2;
+        }
+        mPresenter.modifyFile(fileType, fileFee, id);
         break;
       case R.id.next_action:
         int fileId = getIntent().getIntExtra(FILE_ID, -1);
@@ -138,15 +140,20 @@ public class PhotoDestroySelectActivity extends BaseBarActivity
           }
         } else {
           SelectHintPop selectHintPop = new SelectHintPop(getActivity());
-          selectHintPop.setTitle("提示").setMessage("确定要删除这张照片吗？").setNegativeButton("取消", v1 -> {
-            selectHintPop.dismiss();
-          }).setPositiveButton("删除", v12 -> {
-            mPresenter.deleteFile(fileId, getIntent().getIntExtra(FILE_TYPE, -1));
-            selectHintPop.dismiss();
-          }).showPopupWindow();
+          String title = isVideo ? "个视频" : "张照片";
+          selectHintPop.setTitle("提示")
+              .setMessage("确定要删除这" + title + "吗？")
+              .setNegativeButton("取消", v1 -> {
+                selectHintPop.dismiss();
+              })
+              .setPositiveButton("删除", v12 -> {
+                mPresenter.deleteFile(fileId, getIntent().getIntExtra(FILE_TYPE, -1));
+                selectHintPop.dismiss();
+              })
+              .showPopupWindow();
         }
         break;
-        default:
+      default:
     }
   }
 

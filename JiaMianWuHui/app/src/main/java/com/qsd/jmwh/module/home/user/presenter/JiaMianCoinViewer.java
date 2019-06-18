@@ -9,10 +9,9 @@ import java.util.List;
 
 public interface JiaMianCoinViewer extends Viewer {
 
-    void getInfo(AccountBalance accountBalance);
+  void getInfo(AccountBalance accountBalance, int type);
 
-    void coinConvertMoney(MaskBallCoinBean maskBallCoinBean);
+  void coinConvertMoney(MaskBallCoinBean maskBallCoinBean);
 
-
-    void setGoodsInfo(List<GoodsInfoBean.CdoListBean> goods);
+  void setGoodsInfo(List<GoodsInfoBean.CdoListBean> goods);
 }
