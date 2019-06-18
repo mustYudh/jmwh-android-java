@@ -13,18 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package uk.co.senab.photoview.gestures;
+package uk.co.senab.appphotoview.gestures;
 
-import android.view.MotionEvent;
+public interface OnGestureListener {
 
-public interface GestureDetector {
+    void onDrag(float dx, float dy);
 
-    boolean onTouchEvent(MotionEvent ev);
+    void onFling(float startX, float startY, float velocityX,
+                 float velocityY);
 
-    boolean isScaling();
-
-    boolean isDragging();
-
-    void setOnGestureListener(OnGestureListener listener);
+    void onScale(float scaleFactor, float focusX, float focusY);
 
 }

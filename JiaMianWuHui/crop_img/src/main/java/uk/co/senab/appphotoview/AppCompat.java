@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package uk.co.senab.photoview;
+package uk.co.senab.appphotoview;
 
 import android.annotation.TargetApi;
 import android.os.Build.VERSION;
@@ -21,7 +21,7 @@ import android.os.Build.VERSION_CODES;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class Compat {
+public class AppCompat {
 
     private static final int SIXTY_FPS_INTERVAL = 1000 / 60;
 

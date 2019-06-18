@@ -1,4 +1,4 @@
-package uk.co.senab.photoview;
+package uk.co.senab.appphotoview;
 
 import android.graphics.RectF;
 import android.view.GestureDetector;

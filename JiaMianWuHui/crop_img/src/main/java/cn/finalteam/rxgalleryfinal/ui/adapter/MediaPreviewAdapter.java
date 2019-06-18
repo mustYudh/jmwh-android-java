@@ -10,7 +10,7 @@ import java.util.List;
 import cn.finalteam.rxgalleryfinal.Configuration;
 import cn.finalteam.rxgalleryfinal.R;
 import cn.finalteam.rxgalleryfinal.bean.MediaBean;
-import uk.co.senab.photoview.PhotoView;
+import uk.co.senab.appphotoview.PhotoView;
 
 /**
  * Desction:

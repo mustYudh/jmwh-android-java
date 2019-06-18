@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package uk.co.senab.photoview.gestures;
+package uk.co.senab.appphotoview.gestures;
 
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.view.MotionEvent;
 
-import uk.co.senab.photoview.Compat;
+import uk.co.senab.appphotoview.AppCompat;
 
 @TargetApi(5)
 public class EclairGestureDetector extends CupcakeGestureDetector {
@@ -65,7 +65,7 @@ public class EclairGestureDetector extends CupcakeGestureDetector {
                 // Ignore deprecation, ACTION_POINTER_ID_MASK and
                 // ACTION_POINTER_ID_SHIFT has same value and are deprecated
                 // You can have either deprecation or lint target api warning
-                final int pointerIndex = Compat.getPointerIndex(ev.getAction());
+                final int pointerIndex = AppCompat.getPointerIndex(ev.getAction());
                 final int pointerId = ev.getPointerId(pointerIndex);
                 if (pointerId == mActivePointerId) {
                     // This was our active pointer going up. Choose a new

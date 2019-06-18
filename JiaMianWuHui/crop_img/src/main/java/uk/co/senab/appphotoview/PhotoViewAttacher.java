@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package uk.co.senab.photoview;
+package uk.co.senab.appphotoview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -38,9 +38,9 @@ import android.widget.ImageView.ScaleType;
 import java.lang.ref.WeakReference;
 
 import cn.finalteam.rxgalleryfinal.utils.Logger;
-import uk.co.senab.photoview.gestures.OnGestureListener;
-import uk.co.senab.photoview.gestures.VersionedGestureDetector;
-import uk.co.senab.photoview.scrollerproxy.ScrollerProxy;
+import uk.co.senab.appphotoview.gestures.OnGestureListener;
+import uk.co.senab.appphotoview.gestures.VersionedGestureDetector;
+import uk.co.senab.appphotoview.scrollerproxy.ScrollerProxy;
 
 import static android.view.MotionEvent.ACTION_CANCEL;
 import static android.view.MotionEvent.ACTION_DOWN;
@@ -75,7 +75,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener,
     private WeakReference<ImageView> mImageView;
     // Gesture Detectors
     private GestureDetector mGestureDetector;
-    private uk.co.senab.photoview.gestures.GestureDetector mScaleDragDetector;
+    private uk.co.senab.appphotoview.gestures.GestureDetector mScaleDragDetector;
     // Listeners
     private OnMatrixChangedListener mMatrixChangeListener;
     private OnPhotoTapListener mPhotoTapListener;
@@ -1112,7 +1112,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener,
 
             // We haven't hit our target scale yet, so post ourselves again
             if (t < 1f) {
-                Compat.postOnAnimation(imageView, this);
+                AppCompat.postOnAnimation(imageView, this);
             }
         }
 
@@ -1191,7 +1191,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener,
                 mCurrentY = newY;
 
                 // Post On animation
-                Compat.postOnAnimation(imageView, this);
+                AppCompat.postOnAnimation(imageView, this);
             }
         }
     }

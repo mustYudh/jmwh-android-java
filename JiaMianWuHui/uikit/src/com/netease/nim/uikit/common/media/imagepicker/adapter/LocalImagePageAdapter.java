@@ -4,14 +4,11 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.netease.nim.uikit.R;
 import com.netease.nim.uikit.common.media.imagepicker.ImagePicker;
 import com.netease.nim.uikit.common.media.imagepicker.loader.GlideImageLoader;
 import com.netease.nim.uikit.common.media.model.GLImage;
-
 import java.util.ArrayList;
-
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
