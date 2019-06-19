@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import com.qsd.jmwh.data.UserProfile;
+import com.qsd.jmwh.dialog.net.NetLoadingDialog;
 import com.qsd.jmwh.http.OtherApiServices;
 import com.qsd.jmwh.http.subscriber.NoTipRequestSubscriber;
 import com.qsd.jmwh.module.home.user.bean.WomenVideoBean;
@@ -17,7 +18,6 @@ import com.vincent.videocompressor.VideoCompress;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.xuexiang.xhttp2.exception.ApiException;
 import com.yu.common.framework.BaseViewPresenter;
-import com.yu.common.loading.LoadingDialog;
 import java.util.UUID;
 
 /**
@@ -43,7 +43,7 @@ import java.util.UUID;
 
               @Override protected void onError(ApiException apiException) {
                 super.onError(apiException);
-                LoadingDialog.dismissLoading();
+                NetLoadingDialog.dismissLoading();
               }
             });
       }
@@ -80,8 +80,7 @@ import java.util.UUID;
     String destPath = outputDir + "/jmwh" + UUID.randomUUID().toString() + ".mp4";
     VideoCompress.compressVideoMedium(path, destPath, new VideoCompress.CompressListener() {
       @Override public void onStart() {
-        LoadingDialog.showNormalLoading(getActivity(), false);
-        LoadingDialog.startLoading("正在上传");
+        NetLoadingDialog.showLoading(getActivity(), false);
       }
 
       @Override public void onSuccess() {
@@ -96,7 +95,7 @@ import java.util.UUID;
       }
 
       @Override public void onFail() {
-        LoadingDialog.dismissLoading();
+        NetLoadingDialog.dismissLoading();
       }
 
       @Override public void onProgress(float percent) {

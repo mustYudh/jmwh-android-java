@@ -38,7 +38,6 @@ import com.qsd.jmwh.module.home.user.presenter.UserViewer;
 import com.qsd.jmwh.module.register.ToByVipActivity;
 import com.qsd.jmwh.module.splash.SplashActivity;
 import com.qsd.jmwh.view.UserItemView;
-import com.yu.common.loading.LoadingDialog;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 import com.yu.common.utils.ImageLoader;
@@ -290,7 +289,6 @@ public class UserFragment extends BaseFragment
 
   @Override public void uploadVideoSuccess() {
     ToastUtils.show("上传成功");
-    LoadingDialog.dismissLoading();
     loadData();
   }
 

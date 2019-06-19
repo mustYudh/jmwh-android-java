@@ -1,14 +1,13 @@
 package com.qsd.jmwh.module.home.user.presenter;
 
-
 import android.annotation.SuppressLint;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import com.qsd.jmwh.data.UserProfile;
+import com.qsd.jmwh.dialog.net.NetLoadingDialog;
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.OtherApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
@@ -19,7 +18,6 @@ import com.vincent.videocompressor.VideoCompress;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.xuexiang.xhttp2.exception.ApiException;
 import com.yu.common.framework.BaseViewPresenter;
-import com.yu.common.loading.LoadingDialog;
 import com.yu.common.toast.ToastUtils;
 import java.util.UUID;
 
@@ -28,59 +26,49 @@ import java.util.UUID;
  * @date 2019/3/7
  */
 
-@SuppressLint("CheckResult")
-public class UserPresenter extends BaseViewPresenter<UserViewer> {
+@SuppressLint("CheckResult") public class UserPresenter extends BaseViewPresenter<UserViewer> {
 
+  public UserPresenter(UserViewer viewer) {
+    super(viewer);
+  }
 
-    public UserPresenter(UserViewer viewer) {
-        super(viewer);
-    }
-
-
-    public void setHeader(String path, String objectName, String userId) {
-        PersistenceResponse response = UploadImage.uploadImage(getActivity(), objectName, path);
-        if (response.success) {
-            XHttpProxy.proxy(ApiServices.class)
-                    .uploadHeader(userId, UserProfile.getInstance().getAppToken(), response.cloudUrl)
-                    .safeSubscribe(new TipRequestSubscriber<Object>() {
-                        @Override
-                        protected void onSuccess(Object o) {
-                            assert getViewer() != null;
-                            getViewer().setUserHeaderSuccess(response.cloudUrl);
-                        }
-                    });
-
-        }
-
-    }
-
-
-    public void getMyInfo() {
-        XHttpProxy.proxy(ApiServices.class)
-                .getUserCenterInfo()
-                .subscribeWith(new TipRequestSubscriber<UserCenterInfo>() {
-                    @Override
-                    protected void onSuccess(UserCenterInfo userCenterMyInfo) {
-                        assert getViewer() != null;
-                        getViewer().setUserInfo(userCenterMyInfo);
-                    }
-                });
-    }
-
-    public void destroyImgBrowsingHis() {
-        XHttpProxy.proxy(OtherApiServices.class)
-                .destroyImgBrowsingHis(UserProfile.getInstance().getLat(),
-                        UserProfile.getInstance().getLng())
-        .subscribeWith(new TipRequestSubscriber<Object>() {
-            @Override
-            protected void onSuccess(Object o) {
-                ToastUtils.show("恢复成功");
-                assert getViewer() != null;
-                getViewer().refreshData();
+  public void setHeader(String path, String objectName, String userId) {
+    PersistenceResponse response = UploadImage.uploadImage(getActivity(), objectName, path);
+    if (response.success) {
+      XHttpProxy.proxy(ApiServices.class)
+          .uploadHeader(userId, UserProfile.getInstance().getAppToken(), response.cloudUrl)
+          .safeSubscribe(new TipRequestSubscriber<Object>() {
+            @Override protected void onSuccess(Object o) {
+              assert getViewer() != null;
+              getViewer().setUserHeaderSuccess(response.cloudUrl);
             }
-        });
+          });
     }
+  }
 
+  public void getMyInfo() {
+    XHttpProxy.proxy(ApiServices.class)
+        .getUserCenterInfo()
+        .subscribeWith(new TipRequestSubscriber<UserCenterInfo>() {
+          @Override protected void onSuccess(UserCenterInfo userCenterMyInfo) {
+            assert getViewer() != null;
+            getViewer().setUserInfo(userCenterMyInfo);
+          }
+        });
+  }
+
+  public void destroyImgBrowsingHis() {
+    XHttpProxy.proxy(OtherApiServices.class)
+        .destroyImgBrowsingHis(UserProfile.getInstance().getLat(),
+            UserProfile.getInstance().getLng())
+        .subscribeWith(new TipRequestSubscriber<Object>() {
+          @Override protected void onSuccess(Object o) {
+            ToastUtils.show("恢复成功");
+            assert getViewer() != null;
+            getViewer().refreshData();
+          }
+        });
+  }
 
   @SuppressLint("HandlerLeak") private Handler mHandler = new Handler() {
     @Override public void handleMessage(Message msg) {
@@ -89,26 +77,21 @@ public class UserPresenter extends BaseViewPresenter<UserViewer> {
         PersistenceResponse response = (PersistenceResponse) msg.obj;
         String sFileCoverUrl = response.cloudUrl + "?x-oss-process=video/snapshot,t_100,m_fast";
         XHttpProxy.proxy(ApiServices.class)
-            .addFile(response.cloudUrl,1,0,0,0,sFileCoverUrl)
+            .addFile(response.cloudUrl, 1, 0, 0, 0, sFileCoverUrl)
             .subscribeWith(new TipRequestSubscriber<Object>() {
-              @Override
-              protected void onSuccess(Object o) {
+              @Override protected void onSuccess(Object o) {
                 assert getViewer() != null;
                 getViewer().uploadVideoSuccess();
-
               }
 
               @Override protected void onError(ApiException apiException) {
                 super.onError(apiException);
-                LoadingDialog.dismissLoading();
+                NetLoadingDialog.dismissLoading();
               }
             });
       }
     }
   };
-
-
-
 
   public void uploadFile(String path) {
     PackageManager packageManager = getActivity().getPackageManager();
@@ -123,8 +106,7 @@ public class UserPresenter extends BaseViewPresenter<UserViewer> {
     String destPath = outputDir + "/jmwh" + UUID.randomUUID().toString() + ".mp4";
     VideoCompress.compressVideoMedium(path, destPath, new VideoCompress.CompressListener() {
       @Override public void onStart() {
-        LoadingDialog.showNormalLoading(getActivity(), false);
-        LoadingDialog.startLoading("正在上传");
+        NetLoadingDialog.showLoading(getActivity(), true);
       }
 
       @Override public void onSuccess() {
@@ -139,14 +121,12 @@ public class UserPresenter extends BaseViewPresenter<UserViewer> {
       }
 
       @Override public void onFail() {
-        LoadingDialog.dismissLoading();
+        NetLoadingDialog.dismissLoading();
       }
 
       @Override public void onProgress(float percent) {
-        Log.e("======>", percent + "");
+
       }
     });
-
   }
-
 }
