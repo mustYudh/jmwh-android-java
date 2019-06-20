@@ -38,7 +38,7 @@ public class PlayVideoActivity extends BaseBarActivity {
       }
 
       @Override protected int getSurfaceHeight() {
-        return DensityUtil.getScreenHeight();
+        return DensityUtil.dip2px(375F);
       }
 
       @Override protected void setThumbImage(ImageView thumbImageView) {

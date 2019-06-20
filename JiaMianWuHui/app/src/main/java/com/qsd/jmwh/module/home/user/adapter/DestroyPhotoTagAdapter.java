@@ -5,14 +5,12 @@ import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseHolder;
 import com.qsd.jmwh.base.BasicAdapter;
 import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
 import com.yu.common.ui.Res;
 import com.yu.common.utils.ImageLoader;
-
 import java.util.ArrayList;
 
 public class DestroyPhotoTagAdapter extends BasicAdapter<UserCenterInfo.CdoimgListBean> {

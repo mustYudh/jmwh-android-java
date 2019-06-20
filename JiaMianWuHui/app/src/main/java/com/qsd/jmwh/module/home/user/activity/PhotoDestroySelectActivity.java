@@ -62,7 +62,7 @@ public class PhotoDestroySelectActivity extends BaseBarActivity
   @Override protected void loadData() {
     ImageView resource = bindView(R.id.resource);
     String fileCoverUrl = getIntent().getStringExtra(FILE_COVER_URL);
-    String url = TextUtils.isEmpty(fileCoverUrl) ? getIntent().getStringExtra(URL) : fileCoverUrl;
+    String url =getIntent().getStringExtra(URL);
     ImageLoader.loadCenterCrop(getActivity(), url, resource);
     bindView(R.id.play_button, !TextUtils.isEmpty(fileCoverUrl)).setOnClickListener(
         v -> getLaunchHelper().startActivity(

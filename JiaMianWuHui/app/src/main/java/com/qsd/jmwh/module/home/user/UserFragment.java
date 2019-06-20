@@ -178,7 +178,8 @@ public class UserFragment extends BaseFragment
       @Override protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) {
         String imgUrl = imageRadioResultEvent.getResult().getOriginalPath();
         if (!TextUtils.isEmpty(imgUrl)) {
-          getLaunchHelper().startActivity(PhotoDestroySelectActivity.getIntent(getActivity(), imgUrl, false));
+          getLaunchHelper().startActivity(
+              PhotoDestroySelectActivity.getIntent(getActivity(), imgUrl, false));
         }
       }
     });
@@ -197,6 +198,8 @@ public class UserFragment extends BaseFragment
 
   @Override public void setUserInfo(UserCenterInfo userInfo) {
     bindView(R.id.vip, UserProfile.getInstance().getSex() == 1);
+    bindView(R.id.user_hint, UserProfile.getInstance().getSex() == 1);
+    bindView(R.id.auth, UserProfile.getInstance().getSex() != 1);
     UserCenterInfo.CdoUserBean cdoUser = userInfo.cdoUser;
     UserCenterInfo.CdoWalletDataBean walletData = userInfo.cdoWalletData;
     sNickName = cdoUser.sNickName;
@@ -261,8 +264,9 @@ public class UserFragment extends BaseFragment
         }
 
         @Override public void clickImage(UserCenterInfo.CdoimgListBean cdoimgListBean) {
-            getLaunchHelper().startActivity(PhotoDestroySelectActivity.getIntent(getActivity(), cdoimgListBean));
-          }
+          getLaunchHelper().startActivity(
+              PhotoDestroySelectActivity.getIntent(getActivity(), cdoimgListBean));
+        }
       });
     }
   }

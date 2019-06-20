@@ -64,6 +64,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:id="@+id/user_hint"
             android:layout_marginTop="5dp"
             android:text="照片可以让女士对约会更有安全感"
             android:textSize="13sp"
