@@ -168,6 +168,14 @@ public class NormaFormItemVIew extends LinearLayout {
 
     }
 
+
+    public void setEditText(CharSequence contentText) {
+        if (mEdit != null && !TextUtils.isEmpty(contentText.toString().trim())) {
+            mEdit.setText(contentText.toString().trim());
+            mEdit.setSelection(contentText.toString().trim().length());
+        }
+    }
+
     public void setRightButtonListener(View.OnClickListener listener) {
         rightBtn.setOnClickListener(listener);
     }

@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
+import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.user.presenter.SettingPhoneNumberPresenter;
 import com.qsd.jmwh.module.home.user.presenter.SettingPhoneNumberViewer;
 import com.qsd.jmwh.utils.countdown.RxCountDown;
@@ -29,6 +30,7 @@ public class SettingPhoneNumberActivity extends BaseBarActivity implements Setti
         setTitle("绑定手机号");
         NormaFormItemVIew mSendVerCode = bindView(R.id.get_ver_code);
         NormaFormItemVIew phoneNum = bindView(R.id.phone);
+        phoneNum.setEditText(UserProfile.getInstance().getPhoneNo());
         mSendVerCode.setRightButtonListener(v -> {
             if (TextUtils.isEmpty(phoneNum.getText())) {
                 ToastUtils.show("手机号输入不能为空");
