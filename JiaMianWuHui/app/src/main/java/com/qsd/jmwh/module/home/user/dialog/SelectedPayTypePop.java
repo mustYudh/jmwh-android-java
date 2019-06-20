@@ -80,6 +80,8 @@ public class SelectedPayTypePop extends BasePopupWindow {
                     payTypeBean.money = payInfoBean.cdoData.nMoney + "";
                     list.add(payTypeBean);
                 }
+                list.get(0).selected = true;
+                currentPayType = list.get(0).type;
                 SelectPayTypeAdapter payTypeAdapter = new SelectPayTypeAdapter(R.layout.item_pay_type_layout, list);
                 payTypeList.setLayoutManager(new LinearLayoutManager(getContext()));
                 payTypeList.setAdapter(payTypeAdapter);

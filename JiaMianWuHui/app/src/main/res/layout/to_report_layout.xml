@@ -9,113 +9,126 @@
     >
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="15dp"
-        android:text="如果您在最近3天层在假面舞会向她支付过  查看社交账号/相册/红包 费用，则我们核实举报之后，系统将自动向您退回消费金额"
-        android:textColor="@color/color_333333"
-        android:textSize="14sp"/>
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="15dp"
+      android:layout_marginRight="15dp"
+      android:layout_marginTop="10dp"
+      android:text="如果您在最近3天层在假面舞会向她支付过  查看社交账号/相册/红包 费用，则我们核实举报之后，系统将自动向您退回消费金额"
+      android:textColor="@color/color_333333"
+      android:textSize="14sp"
+      />
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="15dp"
+      android:layout_marginRight="15dp"
+      android:paddingBottom="5dp"
+      android:paddingTop="15dp"
+      android:text="请选择举报原因"
+      android:textColor="@color/color_999999"
+      android:textSize="16sp"
+      />
+
+
+  <com.qsd.jmwh.view.UserItemView
+      android:id="@+id/user_item_one"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:showArrow="false"
+      app:type="selected"
+      app:user_left_text="发广告"
+      />
+
+  <com.qsd.jmwh.view.UserItemView
+      android:id="@+id/user_item_two"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:showArrow="false"
+      app:type="selected"
+      app:user_left_text="骚扰谩骂"
+      />
+
+  <com.qsd.jmwh.view.UserItemView
+      android:id="@+id/user_item_three"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:showArrow="false"
+      app:type="selected"
+      app:user_left_text="虚假照片"
+      />
+
+  <com.qsd.jmwh.view.UserItemView
+      android:id="@+id/user_item_four"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:showArrow="false"
+      app:type="selected"
+      app:user_left_text="色情低俗"
+      />
+
+  <com.qsd.jmwh.view.UserItemView
+      android:id="@+id/user_item_five"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:showArrow="false"
+      app:type="selected"
+      app:user_left_text="她是骗子"
+      />
+
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:visibility="visible"
+      >
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="5dp"
-        android:text="请选择举报原因"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="请提供相关截图，以便我们核实"
         android:textColor="@color/color_999999"
-        android:textSize="16sp"/>
-
-
-    <com.qsd.jmwh.view.UserItemView
-        android:id="@+id/user_item_one"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:showArrow="false"
-        app:type="selected"
-        app:user_left_text="发广告"/>
-
-    <com.qsd.jmwh.view.UserItemView
-        android:id="@+id/user_item_two"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:showArrow="false"
-        app:type="selected"
-        app:user_left_text="骚扰谩骂"/>
-
-    <com.qsd.jmwh.view.UserItemView
-        android:id="@+id/user_item_three"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:showArrow="false"
-        app:type="selected"
-        app:user_left_text="虚假照片"/>
-
-    <com.qsd.jmwh.view.UserItemView
-        android:id="@+id/user_item_four"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:showArrow="false"
-        app:type="selected"
-        app:user_left_text="色情低俗"/>
-
-    <com.qsd.jmwh.view.UserItemView
-        android:id="@+id/user_item_five"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:showArrow="false"
-        app:type="selected"
-        app:user_left_text="她是骗子"/>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="visible">
-
-        <TextView
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:text="请提供相关截图，以便我们核实"
-            android:textColor="@color/color_999999"
-            android:textSize="16sp"/>
-
-
-        <com.qsd.jmwh.view.NoscrollerGridView
-            android:id="@+id/report_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:listSelector="@android:color/transparent"
-            android:overScrollMode="never"
-            android:scrollbars="none">
-
-        </com.qsd.jmwh.view.NoscrollerGridView>
-    </LinearLayout>
-
-
-    <com.qsd.jmwh.view.NoSlidingGridView
-        android:id="@+id/gv_photo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:numColumns="3"/>
-
-
-    <com.yu.common.ui.DelayClickTextView
-        android:id="@+id/commit"
-        style="@style/app_blue_button"
-        android:layout_marginTop="30dp"
-        android:text="提交"
+        android:textSize="16sp"
         />
+
+
+    <com.qsd.jmwh.view.NoscrollerGridView
+        android:id="@+id/report_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:listSelector="@android:color/transparent"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        >
+
+    </com.qsd.jmwh.view.NoscrollerGridView>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:text="补充描述（选填）"
+        android:textColor="@color/color_666666"
+        android:textSize="16sp"
+        />
+  </LinearLayout>
+
+
+  <com.yu.common.ui.DelayClickTextView
+
+      android:id="@+id/commit"
+      android:layout_marginTop="30dp"
+      android:text="提交"
+      style="@style/app_blue_button"
+      />
 
 
 </LinearLayout>
