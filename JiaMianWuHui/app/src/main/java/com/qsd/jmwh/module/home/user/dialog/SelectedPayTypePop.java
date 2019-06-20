@@ -32,37 +32,37 @@ public class SelectedPayTypePop extends BasePopupWindow {
     private int currentPayType;
     public SelectedPayTypePop(Context context, GoodsInfoBean.CdoListBean data,PayUtils.PayCallBack payCallBack) {
         super(context, LayoutInflater.from(context).inflate(R.layout.sele_pay_type_pop_layout, null),
-                RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+            RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         bindView(R.id.close, v -> dismiss());
         getPayType();
         bindView(R.id.pay, v -> XHttpProxy.proxy(OtherApiServices.class)
-                .getBuyDatingPaySign(data.lGoodsId,currentPayType)
-                .subscribeWith(new TipRequestSubscriber<PayInfo>() {
-            @Override
-            protected void onSuccess(PayInfo payInfo) {
-                PayUtils.getInstance().pay((Activity) context,currentPayType,payInfo).getPayResult(new PayUtils.PayCallBack() {
-                    @Override
-                    public void onPaySuccess(int type) {
-                        ToastUtils.show("充值成功");
-                        payCallBack.onPaySuccess(type);
-                        dismiss();
-                    }
+            .getBuyDatingPaySign(data.lGoodsId,currentPayType)
+            .subscribeWith(new TipRequestSubscriber<PayInfo>() {
+                @Override
+                protected void onSuccess(PayInfo payInfo) {
+                    PayUtils.getInstance().pay((Activity) context,currentPayType,payInfo).getPayResult(new PayUtils.PayCallBack() {
+                        @Override
+                        public void onPaySuccess(int type) {
+                            ToastUtils.show("充值成功");
+                            payCallBack.onPaySuccess(type);
+                            dismiss();
+                        }
 
-                    @Override
-                    public void onFailed(int type) {
-                        ToastUtils.show("充值失败，请重试");
-                        dismiss();
-                    }
-                });
+                        @Override
+                        public void onFailed(int type) {
+                            ToastUtils.show("充值失败，请重试");
+                            dismiss();
+                        }
+                    });
 
-            }
+                }
 
-                    @Override
-                    protected void onError(ApiException apiException) {
-                        super.onError(apiException);
-                        dismiss();
-                    }
-                }));
+                @Override
+                protected void onError(ApiException apiException) {
+                    super.onError(apiException);
+                    dismiss();
+                }
+            }));
     }
 
 
@@ -80,6 +80,8 @@ public class SelectedPayTypePop extends BasePopupWindow {
                     payTypeBean.money = payInfoBean.cdoData.nMoney + "";
                     list.add(payTypeBean);
                 }
+                list.get(0).selected = true;
+                currentPayType = list.get(0).type;
                 SelectPayTypeAdapter payTypeAdapter = new SelectPayTypeAdapter(R.layout.item_pay_type_layout, list);
                 payTypeList.setLayoutManager(new LinearLayoutManager(getContext()));
                 payTypeList.setAdapter(payTypeAdapter);
