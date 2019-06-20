@@ -205,6 +205,7 @@ public class LookUserInfoActivity extends BaseActivity
         MoreActionDialog moreActionDialog = new MoreActionDialog(getActivity(), userID);
         moreActionDialog.showPopupWindow();
         break;
+        default:
     }
   }
 
