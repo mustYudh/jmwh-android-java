@@ -30,7 +30,7 @@ public class UserPhotoAdapter extends BasicAdapter<OtherUserInfoBean.CdoFileList
     }
 
     @Override
-    protected BaseHolder<OtherUserInfoBean.CdoFileListDataBean> getHolder(Context context) {
+    protected BaseHolder<OtherUserInfoBean.CdoFileListDataBean> getHolder(Context context,int position) {
         return new BaseHolder<OtherUserInfoBean.CdoFileListDataBean>(context, R.layout.item_user_photo_layout) {
             @Override
             public void bindData(OtherUserInfoBean.CdoFileListDataBean data) {

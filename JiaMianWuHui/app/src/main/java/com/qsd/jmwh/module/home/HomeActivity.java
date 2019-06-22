@@ -59,7 +59,7 @@ public class HomeActivity extends BaseActivity implements HomeViewer {
     mPresenter.modifyLngAndLat();
     navigationView = findViewById(R.id.bottom_navigation_view);
     List<TabItem> items = new ArrayList<>();
-    items.add(new TabView(createTabView("假面舞会", R.drawable.tab_01, 0), new ParkFragment()));
+    items.add(new TabView(createTabView("首页", R.drawable.tab_01, 0), new ParkFragment()));
     items.add(new TabView(createTabView("约会电台", R.drawable.tab_03, 1), new RadioFragment()));
     items.add(
         new TabView(createTabView("消息中心", R.drawable.tab_02, 2), new MessageFragment()));

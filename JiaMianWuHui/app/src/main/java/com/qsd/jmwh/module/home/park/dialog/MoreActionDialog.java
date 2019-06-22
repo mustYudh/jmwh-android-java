@@ -17,14 +17,18 @@ import com.yu.common.windown.BasePopupWindow;
 
 public class MoreActionDialog extends BasePopupWindow implements View.OnClickListener {
     private int userId;
+    private int lBizId;
+    private int nType;
 
-    public MoreActionDialog(Context context, int userId) {
+    public MoreActionDialog(Context context, int userId,int lBizId,int nType) {
         super(context, View.inflate(context, R.layout.more_action_dialog, null),
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         bindView(R.id.cancel, this);
         bindView(R.id.to_black_list, this);
         bindView(R.id.to_report, this);
         this.userId = userId;
+        this.lBizId = lBizId;
+        this.nType = nType;
     }
 
     @Override
@@ -55,7 +59,7 @@ public class MoreActionDialog extends BasePopupWindow implements View.OnClickLis
                 dismiss();
                 break;
             case R.id.to_report:
-                LauncherHelper.from(getContext()).startActivity(ToReportActivity.class);
+                LauncherHelper.from(getContext()).startActivity(ToReportActivity.getIntent(getContext(),userId,lBizId,nType));
                 dismiss();
                 break;
         }

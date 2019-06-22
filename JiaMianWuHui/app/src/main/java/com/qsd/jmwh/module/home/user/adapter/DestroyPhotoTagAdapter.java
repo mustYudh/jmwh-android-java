@@ -30,7 +30,7 @@ public class DestroyPhotoTagAdapter extends BasicAdapter<UserCenterInfo.CdoimgLi
     super(list);
   }
 
-  @Override protected BaseHolder<UserCenterInfo.CdoimgListBean> getHolder(Context context) {
+  @Override protected BaseHolder<UserCenterInfo.CdoimgListBean> getHolder(Context context,int position) {
     return new BaseHolder<UserCenterInfo.CdoimgListBean>(context, R.layout.item_user_center_img) {
       @Override public void bindData(UserCenterInfo.CdoimgListBean item) {
         ImageView imageView = findViewId(R.id.destroy_img);

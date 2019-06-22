@@ -242,7 +242,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
 
                     @Override
                     public void setOnPersonInfoItemClick(int lLoveUserId) {
-                        getLaunchHelper().startActivity(LookUserInfoActivity.getIntent(getActivity(), lLoveUserId));
+                        getLaunchHelper().startActivity(LookUserInfoActivity.getIntent(getActivity(), lLoveUserId,lLoveUserId,2));
                     }
 
                     @Override

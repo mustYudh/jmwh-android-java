@@ -14,13 +14,25 @@ import java.util.ArrayList;
 public class EvaluationAdapter extends BasicAdapter<EvaluationBean.CdoListBean> {
     private int userID;
 
+
+    private EvaluationClickedListener mListener;
+
+    public interface EvaluationClickedListener {
+        void onClicked(boolean select,int position);
+    }
+
+
+    public void setOnEvaluationClickedListener(EvaluationClickedListener listener) {
+        this.mListener = listener;
+    }
+
     public EvaluationAdapter(ArrayList<EvaluationBean.CdoListBean> list, int userID) {
         super(list);
         this.userID = userID;
     }
 
     @Override
-    protected BaseHolder<EvaluationBean.CdoListBean> getHolder(Context context) {
+    protected BaseHolder<EvaluationBean.CdoListBean> getHolder(Context context,int position) {
         return new BaseHolder<EvaluationBean.CdoListBean>(context, R.layout.item_evaluation_layout) {
             @Override
             public void bindData(EvaluationBean.CdoListBean data) {
@@ -35,6 +47,9 @@ public class EvaluationAdapter extends BasicAdapter<EvaluationBean.CdoListBean> 
                         int countValue = Integer.parseInt(data.nValue);
                         data.nValue = data.selected ?  (countValue + 1) + "" : (countValue - 1) + "";
                         notifyDataSetChanged();
+                        if (mListener != null) {
+                            mListener.onClicked(data.selected,position);
+                        }
                     });
                 }
             }
