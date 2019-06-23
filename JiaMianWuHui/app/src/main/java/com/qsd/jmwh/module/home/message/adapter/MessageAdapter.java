@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import com.netease.nim.uikit.business.recent.RecentContactsFragment;
+import com.qsd.jmwh.module.home.message.SystemMessageFragment;
 
 /**
  * @author yudneghao
@@ -16,10 +17,15 @@ public class MessageAdapter extends FragmentStatePagerAdapter {
   }
 
   @Override public Fragment getItem(int i) {
-    return new RecentContactsFragment();
+    if (i == 0) {
+      return new RecentContactsFragment();
+
+    } else  {
+      return new SystemMessageFragment();
+    }
   }
 
   @Override public int getCount() {
-    return 1;
+    return 2;
   }
 }

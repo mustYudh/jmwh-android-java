@@ -69,6 +69,7 @@
             </LinearLayout>
 
             <ImageView
+                android:tint="@color/black"
                 android:id="@+id/edit_user_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

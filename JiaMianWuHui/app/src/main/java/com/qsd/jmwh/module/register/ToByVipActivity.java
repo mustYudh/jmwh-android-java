@@ -95,6 +95,8 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
         payTypeBeans.add(payTypeBean);
       }
     }
+    payTypeBeans.get(0).selected = true;
+    currentType = payTypeBeans.get(0);
     payTypeAdapter = new PayTypeAdapter(R.layout.item_pay_type_layout, payTypeBeans);
     payType.setAdapter(payTypeAdapter);
     vipInfoAdapter.setOnItemClickListener((adapter, view, position) -> {

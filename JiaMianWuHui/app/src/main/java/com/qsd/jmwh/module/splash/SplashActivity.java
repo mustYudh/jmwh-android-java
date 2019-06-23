@@ -9,11 +9,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
-import com.netease.nimlib.sdk.NIMClient;
-import com.netease.nimlib.sdk.Observer;
-import com.netease.nimlib.sdk.StatusCode;
-import com.netease.nimlib.sdk.auth.AuthServiceObserver;
-import com.netease.nimlib.sdk.auth.OnlineClient;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseActivity;
 import com.qsd.jmwh.data.UserProfile;
@@ -30,7 +25,6 @@ import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 import com.yu.share.AuthLoginHelp;
 import com.yu.share.callback.AuthLoginCallback;
-import java.util.List;
 import java.util.Map;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -42,30 +36,13 @@ public class SplashActivity extends BaseActivity
   @PresenterLifeCycle private SplashPresenter mPresenter = new SplashPresenter(this);
 
 
-  Observer<StatusCode> userStatusObserver = (Observer<StatusCode>) code -> {
-    //            ToastHelper.showToast(ChatAndVideoActivity.this, code + "");
-    if (code == StatusCode.UNLOGIN || code == StatusCode.KICKOUT || code == StatusCode.KICK_BY_OTHER_CLIENT) {
-      //ToastUtils.show("当前设备已退出登录或其他设备登录该账号");
-      UserProfile.getInstance().clean();
-    } else {
-      //if (UserProfile.getInstance().isAppLogin()) {
-      //  getLaunchHelper().startActivityForResult(HomeActivity.class, REQUEST_CODE);
-      //  finish();
-      //}
-    }
-  };
 
-
-  Observer<List<OnlineClient>> clientsObserver = (Observer<List<OnlineClient>>) onlineClients -> {
-
-  };
 
   private static int REQUEST_CODE = 0x123;
   private AuthLoginHelp mAuthLoginHelp;
 
   @Override protected void setView(@Nullable Bundle savedInstanceState) {
     setContentView(R.layout.splash_activity_layout);
-    //registerObservers(true);
     if (UserProfile.getInstance().isAppLogin()) {
       getLaunchHelper().startActivityForResult(HomeActivity.class, REQUEST_CODE);
       finish();
@@ -74,10 +51,6 @@ public class SplashActivity extends BaseActivity
 
 
 
-  private void registerObservers(boolean register) {
-    NIMClient.getService(AuthServiceObserver.class).observeOtherClients(clientsObserver, register);
-    NIMClient.getService(AuthServiceObserver.class).observeOnlineStatus(userStatusObserver, register);
-  }
 
 
 

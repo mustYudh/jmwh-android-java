@@ -48,12 +48,12 @@ public class MessageFragment extends BaseBarFragment
     MessageAdapter adapter = new MessageAdapter(getChildFragmentManager());
     viewPager.setAdapter(adapter);
 
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < 2; i++) {
       TabLayout.Tab tab = tabLayout.getTabAt(i);
       if (tab != null) {
         View view = View.inflate(getActivity(), R.layout.item_home_tab, null);
         TextView textView = view.findViewById(R.id.title);
-        textView.setText("聊天");
+        textView.setText(i == 0 ? "聊天" :"系统消息");
         textView.setTextColor(Res.color(R.color.color_666666));
         textView.setTextSize(15);
         textView.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
@@ -66,8 +66,8 @@ public class MessageFragment extends BaseBarFragment
     if (tabStrip != null) {
       ProxyDrawable proxyDrawable = new ProxyDrawable(tabStrip, 7);
       proxyDrawable.setIndicatorColor(Res.color(R.color.app_main_bg_color));
-      proxyDrawable.setIndicatorPaddingLeft(DensityUtil.dip2px(getActivity(), 25));
-      proxyDrawable.setIndicatorPaddingRight(DensityUtil.dip2px(getActivity(), 25));
+      proxyDrawable.setIndicatorPaddingLeft(DensityUtil.dip2px(getActivity(), 45));
+      proxyDrawable.setIndicatorPaddingRight(DensityUtil.dip2px(getActivity(), 45));
       proxyDrawable.setRadius(DensityUtil.dip2px(2));
       proxyDrawable.setIndicatorPaddingTop(DensityUtil.dip2px(getActivity(), 7));
       tabStrip.setBackground(proxyDrawable);

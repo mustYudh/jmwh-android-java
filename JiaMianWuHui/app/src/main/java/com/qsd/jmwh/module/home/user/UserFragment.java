@@ -56,6 +56,7 @@ public class UserFragment extends BaseFragment
   private String selectPhotoUrl;
   private String header;
   private String sNickName;
+  private boolean isVip = false;
 
   @Override protected int getContentViewId() {
     return R.layout.user_fragment;
@@ -133,7 +134,17 @@ public class UserFragment extends BaseFragment
             });
         break;
       case R.id.my_radio:
-        getLaunchHelper().startActivity(MineRadioListActivity.class);
+        if (UserProfile.getInstance().getSex() == 1) {
+          if (isVip) {
+            getLaunchHelper().startActivity(MineRadioListActivity.class);
+          } else {
+            getLaunchHelper().startActivity(
+                ToByVipActivity.getIntent(getActivity(), UserProfile.getInstance().getAppAccount(),
+                    UserProfile.getInstance().getAppToken()));
+          }
+        } else {
+          getLaunchHelper().startActivity(MineRadioListActivity.class);
+        }
         break;
       case R.id.my_like:
         getLaunchHelper().startActivity(MineLikeActivity.class);
@@ -210,6 +221,7 @@ public class UserFragment extends BaseFragment
     bindText(R.id.auth_info, cdoUser.sAuthInfo);
     UserItemView vip = bindView(R.id.vip);
     vip.showTag(cdoUser.bVIP);
+    isVip = cdoUser.bVIP;
     if (!TextUtils.isEmpty(cdoUser.dVIPInvalidTime)) {
       vip.setHint(cdoUser.dVIPInvalidTime + "到期");
     }

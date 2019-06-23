@@ -12,7 +12,10 @@ import com.denghao.control.TabView;
 import com.denghao.control.view.BottomNavigationView;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.Observer;
+import com.netease.nimlib.sdk.StatusCode;
 import com.netease.nimlib.sdk.auth.AuthService;
+import com.netease.nimlib.sdk.auth.AuthServiceObserver;
+import com.netease.nimlib.sdk.auth.OnlineClient;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.MsgServiceObserve;
 import com.netease.nimlib.sdk.msg.model.RecentContact;
@@ -47,14 +50,34 @@ public class HomeActivity extends BaseActivity implements HomeViewer {
 
   @Override protected void setView(@Nullable Bundle savedInstanceState) {
     setContentView(R.layout.home_activity);
-    NIMClient.getService(AuthService.class)
-        .login(new com.netease.nimlib.sdk.auth.LoginInfo(UserProfile.getInstance().getSimUserId(),
-            UserProfile.getInstance().getSimToken()));
-
   }
+
+
+  Observer<StatusCode> userStatusObserver = (Observer<StatusCode>) code -> {
+    if (code == StatusCode.UNLOGIN || code == StatusCode.KICKOUT || code == StatusCode.KICK_BY_OTHER_CLIENT) {
+      //ToastUtils.show("当前设备已退出登录或其他设备登录该账号");
+      //UserProfile.getInstance().clean();
+      NIMClient.getService(AuthService.class)
+          .login(new com.netease.nimlib.sdk.auth.LoginInfo(UserProfile.getInstance().getSimUserId(),
+              UserProfile.getInstance().getSimToken()));
+    }
+  };
+
+
+  private void registerObservers(boolean register) {
+    NIMClient.getService(AuthServiceObserver.class).observeOtherClients(clientsObserver, register);
+    NIMClient.getService(AuthServiceObserver.class).observeOnlineStatus(userStatusObserver, register);
+  }
+
+
+
+  Observer<List<OnlineClient>> clientsObserver = (Observer<List<OnlineClient>>) onlineClients -> {
+
+  };
 
   @Override protected void loadData() {
     setTitle("首页");
+    registerObservers(true);
     EventBus.getDefault().post(true);
     mPresenter.modifyLngAndLat();
     navigationView = findViewById(R.id.bottom_navigation_view);
@@ -123,6 +146,7 @@ public class HomeActivity extends BaseActivity implements HomeViewer {
 
   @Override protected void onDestroy() {
     super.onDestroy();
+    registerObservers(false);
     UserProfile.getInstance().setHomeCityName("");
     if (looperTime != null) {
       looperTime.stop();

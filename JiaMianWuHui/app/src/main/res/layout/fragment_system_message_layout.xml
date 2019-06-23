@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="80dp"
+      android:orientation="horizontal"
+      android:paddingLeft="15dp"
+      android:paddingRight="15dp"
+      >
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/shape_circle_main_color"
+        android:gravity="center"
+        android:text="系统"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        >
+
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_vertical"
+          android:orientation="horizontal"
+          >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="系统消息"
+            android:textColor="@color/color_222222"
+            android:textSize="15sp"
+            />
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/shape_circle_red_color"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="3"
+            android:textColor="@color/white"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+      </LinearLayout>
+
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="4dp"
+          android:ellipsize="end"
+          android:maxLines="1"
+          android:singleLine="true"
+          android:text="暂无"
+          android:textColor="@color/color_888888"
+          android:textSize="13sp"
+          />
+
+
+    </LinearLayout>
+
+
+  </LinearLayout>
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="@color/color_EEEEEE"
+      />
+
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="80dp"
+      android:orientation="horizontal"
+      android:paddingLeft="15dp"
+      android:paddingRight="15dp"
+      >
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/shape_circle_main_color"
+        android:gravity="center"
+        android:text="广播"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        >
+
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_vertical"
+          android:orientation="horizontal"
+          >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="电台广播"
+            android:textColor="@color/color_222222"
+            android:textSize="15sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/shape_circle_red_color"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="3"
+            android:textColor="@color/white"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+      </LinearLayout>
+
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="4dp"
+          android:ellipsize="end"
+          android:maxLines="1"
+          android:singleLine="true"
+          android:text="暂无"
+          android:textColor="@color/color_888888"
+          android:textSize="13sp"
+          />
+
+
+    </LinearLayout>
+
+
+  </LinearLayout>
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="0.5dp"
+      android:background="@color/color_EEEEEE"
+      />
+
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="80dp"
+      android:orientation="horizontal"
+      android:paddingLeft="15dp"
+      android:paddingRight="15dp"
+      >
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/shape_circle_main_color"
+        android:gravity="center"
+        android:text="收益"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        >
+
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_vertical"
+          android:orientation="horizontal"
+          >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="收益提醒"
+            android:textColor="@color/color_222222"
+            android:textSize="15sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/shape_circle_red_color"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="3"
+            android:textColor="@color/white"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+      </LinearLayout>
+
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="4dp"
+          android:ellipsize="end"
+          android:maxLines="1"
+          android:singleLine="true"
+          android:text="暂无"
+          android:textColor="@color/color_888888"
+          android:textSize="13sp"
+          />
+
+
+    </LinearLayout>
+
+
+  </LinearLayout>
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="0.5dp"
+      android:background="@color/color_EEEEEE"
+      />
+
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="80dp"
+      android:orientation="horizontal"
+      android:paddingLeft="15dp"
+      android:paddingRight="15dp"
+      >
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/shape_circle_main_color"
+        android:gravity="center"
+        android:text="评价"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        >
+
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_vertical"
+          android:orientation="horizontal"
+          >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="评价消息"
+            android:textColor="@color/color_222222"
+            android:textSize="15sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/shape_circle_red_color"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="3"
+            android:textColor="@color/white"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+      </LinearLayout>
+
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="4dp"
+          android:ellipsize="end"
+          android:maxLines="1"
+          android:singleLine="true"
+          android:text="暂无"
+          android:textColor="@color/color_888888"
+          android:textSize="13sp"
+          />
+
+
+    </LinearLayout>
+
+
+  </LinearLayout>
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="0.5dp"
+      android:background="@color/color_EEEEEE"
+      />
+
+
+</LinearLayout>

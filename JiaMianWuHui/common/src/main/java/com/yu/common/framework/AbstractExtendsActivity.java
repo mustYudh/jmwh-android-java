@@ -17,7 +17,7 @@ public class AbstractExtendsActivity extends AbstractPresenterActivity {
 
   @Override protected void onViewCreated(View view) {
     super.onViewCreated(view);
-    NavigationUtils.setNavigationBaColor(getWindow(), Color.WHITE);
+    NavigationUtils.setNavigationBaColor(getWindow(), Color.BLACK);
   }
 
 
