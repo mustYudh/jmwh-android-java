@@ -1,16 +1,17 @@
 package com.qsd.jmwh.module.home.user.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
+import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
 import com.qsd.jmwh.module.home.user.presenter.EditUserInfoPresenter;
 import com.qsd.jmwh.module.home.user.presenter.EditUserInfoViewer;
 import com.qsd.jmwh.module.register.DateRangeActivity;
@@ -23,7 +24,6 @@ import com.qsd.jmwh.view.NormaFormItemVIew;
 import com.qsd.jmwh.view.UserItemView;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,20 +48,28 @@ public class EditUserInfoActivity extends BaseBarActivity
   private UserItemView switchSocial;
   private String bugsSize;
   private EditText edit;
+  private final static String USER_INFO = "user_info";
+
+  public static Intent getIntent(Context context, UserCenterInfo.CdoUserBean bean) {
+    Intent intent = new Intent(context, EditUserInfoActivity.class);
+    intent.putExtra(USER_INFO, bean);
+    return intent;
+  }
 
   @Override protected void setView(@Nullable Bundle savedInstanceState) {
     setContentView(R.layout.edit_user_info_layout);
   }
 
   @Override protected void loadData() {
+    UserCenterInfo.CdoUserBean userInfo =
+        (UserCenterInfo.CdoUserBean) getIntent().getSerializableExtra(USER_INFO);
     setTitle("编辑资料");
-    initView();
+    initView(userInfo);
     initListener();
     setRightMenu("保存", v -> commitUserInfo());
   }
 
-  private void initView() {
-    bindView(R.id.social_info, UserProfile.getInstance().getSex() == 0);
+  private void initView(UserCenterInfo.CdoUserBean userInfo) {
     location = bindView(R.id.location);
     sNickName = bindView(R.id.sNickName);
     professional = bindView(R.id.professional);
@@ -72,10 +80,23 @@ public class EditUserInfoActivity extends BaseBarActivity
     qq = bindView(R.id.qq);
     wechat = bindView(R.id.we_chat);
     measure = bindView(R.id.measure);
-    measure = bindView(R.id.measure);
     switchSocial = bindView(R.id.switchSocial);
     edit = bindView(R.id.edit_sIntroduce);
     bindView(R.id.measure, UserProfile.getInstance().getSex() == 0);
+    if (userInfo != null) {
+      sNickName.setEditText(userInfo.sNickName);
+      location.setContentText(userInfo.sDateRange,false);
+      professional.setContentText(userInfo.sJob,false);
+      project.setContentText(userInfo.sDatePro,false);
+      age.setContentText(userInfo.sAge,false);
+      edit.setText(userInfo.sIntroduce);
+      edit.setSelection(userInfo.sIntroduce.length());
+      qq.setEditText(userInfo.QQ);
+      wechat.setEditText(userInfo.WX);
+      height.setContentText(userInfo.sHeight,false);
+      weight.setContentText(userInfo.sWeight,false);
+      measure.setContentText(userInfo.sBust,false);
+    }
   }
 
   private void initListener() {

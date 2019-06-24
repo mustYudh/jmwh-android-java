@@ -57,6 +57,7 @@ public class UserFragment extends BaseFragment
   private String header;
   private String sNickName;
   private boolean isVip = false;
+  private UserCenterInfo.CdoUserBean mCenterInfo = new UserCenterInfo.CdoUserBean();
 
   @Override protected int getContentViewId() {
     return R.layout.user_fragment;
@@ -100,7 +101,7 @@ public class UserFragment extends BaseFragment
         getLaunchHelper().startActivity(MoneyBagActivity.class);
         break;
       case R.id.edit_user_info:
-        getLaunchHelper().startActivity(EditUserInfoActivity.class);
+        getLaunchHelper().startActivity(EditUserInfoActivity.getIntent(getActivity(),mCenterInfo));
         break;
       case R.id.privacy_setting:
         getLaunchHelper().startActivity(
@@ -208,6 +209,7 @@ public class UserFragment extends BaseFragment
   }
 
   @Override public void setUserInfo(UserCenterInfo userInfo) {
+    this.mCenterInfo = userInfo.cdoUser;
     bindView(R.id.vip, UserProfile.getInstance().getSex() == 1);
     bindView(R.id.user_hint, UserProfile.getInstance().getSex() == 1);
     bindView(R.id.auth, UserProfile.getInstance().getSex() != 1);

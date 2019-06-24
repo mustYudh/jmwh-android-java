@@ -69,7 +69,6 @@
             app:show_top_line="false"/>
 
         <LinearLayout
-            android:visibility="gone"
             android:id="@+id/social_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

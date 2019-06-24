@@ -146,6 +146,19 @@ public class NormaFormItemVIew extends LinearLayout {
         }
     }
 
+    public void setContentText(CharSequence contentText,boolean show) {
+        if (!TextUtils.isEmpty(contentText)) {
+            content.setText(contentText);
+            content.setTextColor(getContext().getResources().getColor(R.color.color_222222));
+        } else {
+            if (!show) {
+                rootView.setVisibility(GONE);
+            }
+
+        }
+    }
+
+
     public void setContent(CharSequence contentText) {
         if (!TextUtils.isEmpty(contentText)) {
             content.setText(contentText);
