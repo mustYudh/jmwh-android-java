@@ -52,7 +52,6 @@ public class UserProfile implements Serializable {
     public void appLogin(LoginInfo userInfo) {
         setAppAccount(userInfo.lUserId);
         setAppToken(userInfo.token);
-        setSex(userInfo.nSex);
         setUserPic(userInfo.sUserHeadPic);
         setSimToken(userInfo.sIMToken);
         setSimUserId(userInfo.sIMID);
@@ -74,7 +73,7 @@ public class UserProfile implements Serializable {
         return spHelper.getString(HOME_CITY_NAME, "");
     }
 
-    private void setSex(int sex) {
+    public void setSex(int sex) {
         spHelper.putInt(SEX, sex);
     }
 

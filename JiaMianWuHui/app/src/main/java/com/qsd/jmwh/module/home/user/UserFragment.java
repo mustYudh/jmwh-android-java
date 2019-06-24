@@ -135,17 +135,7 @@ public class UserFragment extends BaseFragment
             });
         break;
       case R.id.my_radio:
-        if (UserProfile.getInstance().getSex() == 1) {
-          if (isVip) {
             getLaunchHelper().startActivity(MineRadioListActivity.class);
-          } else {
-            getLaunchHelper().startActivity(
-                ToByVipActivity.getIntent(getActivity(), UserProfile.getInstance().getUserId(),
-                    UserProfile.getInstance().getAppToken()));
-          }
-        } else {
-          getLaunchHelper().startActivity(MineRadioListActivity.class);
-        }
         break;
       case R.id.my_like:
         getLaunchHelper().startActivity(MineLikeActivity.class);
@@ -298,7 +288,7 @@ public class UserFragment extends BaseFragment
 
   @Override public void setUserHeaderSuccess(String url) {
     ImageView header = bindView(R.id.header);
-    ImageLoader.loadCenterCrop(getActivity(), url, header, R.mipmap.ic_launcher);
+    ImageLoader.loadCenterCrop(getActivity(), url, header, R.drawable.ic_launcher);
   }
 
   @Override public void refreshData() {

@@ -33,8 +33,10 @@ public class HomeParkPageAdapter extends FragmentStatePagerAdapter {
         return personFragment;
     }
 
-    public HomeParkPageAdapter(FragmentManager fm) {
+    private int count;
+    public HomeParkPageAdapter(FragmentManager fm,int count) {
         super(fm);
+        this.count = count;
     }
 
     @Override
@@ -57,6 +59,6 @@ public class HomeParkPageAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return count;
     }
 }

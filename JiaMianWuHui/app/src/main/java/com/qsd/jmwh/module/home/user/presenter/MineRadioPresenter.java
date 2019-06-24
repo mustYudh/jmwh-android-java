@@ -8,6 +8,7 @@ import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.LocalHomeRadioListBean;
 import com.qsd.jmwh.module.home.user.bean.MineRadioListBean;
+import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.framework.BaseViewPresenter;
 
@@ -61,4 +62,17 @@ public class MineRadioPresenter extends BaseViewPresenter<MineRadioViewer> {
                     }
                 });
     }
+
+
+
+  public void getMyInfo() {
+    XHttpProxy.proxy(ApiServices.class)
+        .getUserCenterInfo()
+        .subscribeWith(new TipRequestSubscriber<UserCenterInfo>() {
+          @Override protected void onSuccess(UserCenterInfo userCenterMyInfo) {
+            assert getViewer() != null;
+            getViewer().getUserInfo(userCenterMyInfo);
+          }
+        });
+  }
 }

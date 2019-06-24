@@ -2,8 +2,6 @@ package com.qsd.jmwh.module.home.park.presenter;
 
 
 import android.annotation.SuppressLint;
-import android.view.View;
-
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.NoTipRequestSubscriber;
 import com.qsd.jmwh.module.register.bean.RangeData;
@@ -41,24 +39,4 @@ public class ParkPresenter extends BaseViewPresenter<ParkViewer> {
         }
     }
 
-
-    @Override
-    public void createdView(View view) {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void willDestroy() {
-
-    }
 }

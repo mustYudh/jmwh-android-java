@@ -85,14 +85,30 @@ public class LookUserInfoActivity extends BaseActivity
     int nSubViewUserCount = userCenterInfo.nSubViewUserCount;
     if (nSubViewUserCount <= 3) {
       SelectHintPop hint = new SelectHintPop(this);
+      hint.setOutsideTouchable(false);
+      hint.setFocusable(true);
       hint.setTitle("查看人数提示")
           .setMessage("你今天还能查看" + nSubViewUserCount + "位女士，非会员用户每天只能查看10位女士。")
           .setPositiveButton("升级会员", v1 -> {
             buyVip();
             hint.dismiss();
           })
-          .setNegativeButton("继续查看", v12 -> hint.dismiss())
+          .setNegativeButton(nSubViewUserCount != 0 ? "继续查看" : "取消", v12 -> {
+            if (nSubViewUserCount != 0) {
+              hint.dismiss();
+            } else {
+              finish();
+            }
+          })
           .showPopupWindow();
+      hint.setOnDismissListener(() -> {
+          if (nSubViewUserCount == 0) {
+            finish();
+          }
+      });
+      if (nSubViewUserCount == 0) {
+        return;
+      }
     }
     NormaFormItemVIew bust = bindView(R.id.bust);
     if (userData.nSex == 0) {
@@ -101,15 +117,13 @@ public class LookUserInfoActivity extends BaseActivity
       qq.setContent(isVip ? userData.QQ : "已填写，点击查看");
       NormaFormItemVIew weChat = bindView(R.id.wechat, this);
       weChat.setContent(isVip ? userData.WX : "已填写，点击查看");
-
     } else {
       bindView(R.id.bust, false);
       bindView(R.id.qq, false);
       bindView(R.id.we_chat, false);
     }
     if (UserProfile.getInstance().getSex() == 1) {
-      bindView(R.id.social_account,
-          !isVip && UserProfile.getInstance().getUserId() != userID);
+      bindView(R.id.social_account, !isVip && UserProfile.getInstance().getUserId() != userID);
     }
 
     ImageLoader.loadCenterCrop(getActivity(), userData.sUserHeadPic, bindView(R.id.header));
@@ -190,7 +204,7 @@ public class LookUserInfoActivity extends BaseActivity
         if (userID == UserProfile.getInstance().getUserId()) {
           ToastUtils.show("不能私信自己");
         } else {
-          SessionHelper.startP2PSession(getActivity(), "im_" + userID);
+          toChat();
         }
         break;
       case R.id.qq:
@@ -257,6 +271,10 @@ public class LookUserInfoActivity extends BaseActivity
         .startActivity(
             ToByVipActivity.getIntent(getActivity(), UserProfile.getInstance().getUserId(),
                 UserProfile.getInstance().getAppToken()));
+  }
+
+  @Override public void onBackPressed() {
+    super.onBackPressed();
   }
 
   @Override public void refreshData() {

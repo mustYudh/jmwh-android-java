@@ -54,7 +54,7 @@
                     android:paddingTop="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="面具币总额（个）"
+                    android:text="假面币总额（个）"
                     android:textColor="@color/color_2A2A2A"
                     android:textSize="15sp"/>
 
@@ -97,7 +97,7 @@
                     android:paddingTop="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="面具币总额（个）"
+                    android:text="假面币总额（个）"
                     android:textColor="@color/color_2A2A2A"
                     android:textSize="15sp"/>
 

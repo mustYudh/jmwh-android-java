@@ -76,11 +76,11 @@ public class JiaMianCoinFragment extends BaseFragment
         SelectHintPop selectHintPop = new SelectHintPop(getActivity());
         selectHintPop.
             setTitle("现金提现金额")
-            .setMessage("提现金额必须是10元的整数倍，如10、20、50、100 …")
+            .setMessage("提现金额必须是100元的整数倍，如100、200、500、1000 …")
             .setEditButton("确定", input -> {
               if (TextUtils.isEmpty(input)) {
                 ToastUtils.show("输入金额不能为空");
-              } else if (Integer.parseInt(input) % 10 != 0) {
+              } else if (Integer.parseInt(input) % 100 != 0) {
                 ToastUtils.show("输入正确类型");
               } else {
                 mPresenter.getCoinConvertMoney(Integer.parseInt(input));

@@ -45,6 +45,8 @@ public class ParkFragment extends BaseBarFragment
   private HomeParkPageAdapter adapter;
   private DialogUtils cityDialog;
   private ViewPager viewPager;
+  private TabLayout mTabLayout;
+  private ViewPager mPager;
 
   @Override protected int getActionBarLayoutId() {
     return R.layout.hoem_bar_layout;
@@ -64,9 +66,9 @@ public class ParkFragment extends BaseBarFragment
     right_menu = bindView(R.id.right_menu);
     back = bindView(R.id.back);
     LinearLayout ll_edit = bindView(R.id.ll_edit);
-    TabLayout tabLayout = bindView(R.id.tab_layout);
-    viewPager = bindView(R.id.view_pager);
-    initTabLayout(tabLayout, viewPager);
+    mTabLayout = bindView(R.id.tab_layout);
+    mPager = bindView(R.id.view_pager);
+    initTabLayout();
     if (UserProfile.getInstance().getSex() == 0) {
       UserProfile.getInstance().setHomeSexType(1);
       right_menu.setText("男士列表");
@@ -89,24 +91,25 @@ public class ParkFragment extends BaseBarFragment
     });
   }
 
-  private void initTabLayout(TabLayout tabLayout, ViewPager viewPager) {
-
-    View tabStrip = tabLayout.getChildAt(0);
+  private void initTabLayout() {
+    boolean isGirl = UserProfile.getInstance().getHomeSexType() == 1;
+    View tabStrip = mTabLayout.getChildAt(0);
     if (tabStrip != null) {
       ProxyDrawable proxyDrawable = new ProxyDrawable(tabStrip, 7);
       proxyDrawable.setIndicatorColor(Res.color(R.color.app_main_bg_color));
-      proxyDrawable.setIndicatorPaddingLeft(DensityUtil.dip2px(getActivity(), 25));
-      proxyDrawable.setIndicatorPaddingRight(DensityUtil.dip2px(getActivity(), 25));
+      int dividerWith = isGirl ? 25 : 44;
+      proxyDrawable.setIndicatorPaddingLeft(DensityUtil.dip2px(getActivity(), dividerWith));
+      proxyDrawable.setIndicatorPaddingRight(DensityUtil.dip2px(getActivity(), dividerWith));
       proxyDrawable.setRadius(DensityUtil.dip2px(2));
       proxyDrawable.setIndicatorPaddingTop(DensityUtil.dip2px(getActivity(), 7));
       tabStrip.setBackground(proxyDrawable);
     }
-    tabLayout.addOnTabSelectedListener(this);
-    adapter = new HomeParkPageAdapter(getChildFragmentManager());
-    viewPager.setAdapter(adapter);
-    tabLayout.setupWithViewPager(viewPager);
-    for (int i = 0; i < 3; i++) {
-      TabLayout.Tab tab = tabLayout.getTabAt(i);
+    mTabLayout.addOnTabSelectedListener(this);
+    adapter = new HomeParkPageAdapter(getChildFragmentManager(), isGirl ? 3 : 2);
+    mPager.setAdapter(adapter);
+    mTabLayout.setupWithViewPager(mPager);
+    for (int i = 0; i < (isGirl ? 3 : 2); i++) {
+      TabLayout.Tab tab = mTabLayout.getTabAt(i);
       if (tab != null) {
         View view = View.inflate(getActivity(), R.layout.item_home_tab, null);
         TextView textView = view.findViewById(R.id.title);
@@ -127,7 +130,6 @@ public class ParkFragment extends BaseBarFragment
         tab.setCustomView(view);
       }
     }
-
     right_menu.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
         if (UserProfile.getInstance().getHomeSexType() == 0) {
@@ -135,17 +137,18 @@ public class ParkFragment extends BaseBarFragment
         } else {
           UserProfile.getInstance().setHomeSexType(0);
         }
-        adapter.getFragment(viewPager.getCurrentItem()).mPresenter.initPersonListData(
+        initTabLayout();
+        adapter.getFragment(mPager.getCurrentItem()).mPresenter.initPersonListData(
             UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(),
-            viewPager.getCurrentItem() + "", "",
-            adapter.getFragment(viewPager.getCurrentItem()).pageIndex + "",
+            mPager.getCurrentItem() + "", "",
+            adapter.getFragment(mPager.getCurrentItem()).pageIndex + "",
             UserProfile.getInstance().getHomeSexType() + "",
             UserProfile.getInstance().getHomeCityName());
         right_menu.setText(UserProfile.getInstance().getHomeSexType() == 0 ? "女士列表" : "男士列表");
       }
     });
 
-    viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+    mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
       @Override public void onPageScrolled(int i, float v, int i1) {
 
       }
@@ -156,10 +159,10 @@ public class ParkFragment extends BaseBarFragment
         } else {
           adapter.getFragment(i).tv_top_num.setVisibility(View.VISIBLE);
         }
-        adapter.getFragment(viewPager.getCurrentItem()).mPresenter.initPersonListData(
+        adapter.getFragment(mPager.getCurrentItem()).mPresenter.initPersonListData(
             UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(),
-            viewPager.getCurrentItem() + "", "",
-            adapter.getFragment(viewPager.getCurrentItem()).pageIndex + "",
+            mPager.getCurrentItem() + "", "",
+            adapter.getFragment(mPager.getCurrentItem()).pageIndex + "",
             UserProfile.getInstance().getHomeSexType() + "",
             UserProfile.getInstance().getHomeCityName());
       }
