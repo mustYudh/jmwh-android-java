@@ -24,15 +24,14 @@ public class SystemMessageFragment extends BaseFragment implements SystemMessage
   }
 
   @Override protected void setView(@Nullable Bundle savedInstanceState) {
+  }
+
+  @Override protected void loadData() {
     mPresenter.getMessageList(0);
     mPresenter.getMessageList(1);
     mPresenter.getMessageList(2);
     mPresenter.getMessageList(4);
     mPresenter.getMessageCount();
-  }
-
-  @Override protected void loadData() {
-
   }
 
   @Override public void getSystemMessage(List<SystemMessageBean.CdoListBean> cdoList) {
@@ -91,5 +90,9 @@ public class SystemMessageFragment extends BaseFragment implements SystemMessage
     bindText(R.id.evaluate_message_count,
         systemCountBean.nCount3 < 99 ? (systemCountBean.nCount3 + "") : "99+");
     bindView(R.id.evaluate_message_count, systemCountBean.nCount3 > 0);
+  }
+
+  public void updateMessage() {
+    loadData();
   }
 }
