@@ -8,6 +8,7 @@
     >
 
   <LinearLayout
+      android:id="@+id/system_message_root"
       android:layout_width="match_parent"
       android:layout_height="80dp"
       android:orientation="horizontal"
@@ -50,7 +51,8 @@
             />
 
         <TextView
-
+            android:visibility="gone"
+            android:id="@+id/system_message_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -58,7 +60,7 @@
             android:gravity="center"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:text="3"
+            tools:text="3"
             android:textColor="@color/white"
             />
 
@@ -71,6 +73,7 @@
 
 
       <TextView
+          android:id="@+id/system_message"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="4dp"
@@ -96,6 +99,7 @@
 
 
   <LinearLayout
+      android:id="@+id/broadcast_message_root"
       android:layout_width="match_parent"
       android:layout_height="80dp"
       android:orientation="horizontal"
@@ -138,6 +142,8 @@
             />
 
         <TextView
+            android:visibility="gone"
+            android:id="@+id/broadcast_message_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -145,7 +151,7 @@
             android:gravity="center"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:text="3"
+            tools:text="3"
             android:textColor="@color/white"
             />
 
@@ -158,6 +164,7 @@
 
 
       <TextView
+          android:id="@+id/broadcast_message"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="4dp"
@@ -183,6 +190,7 @@
 
 
   <LinearLayout
+      android:id="@+id/earnings_message_root"
       android:layout_width="match_parent"
       android:layout_height="80dp"
       android:orientation="horizontal"
@@ -225,6 +233,8 @@
             />
 
         <TextView
+            android:visibility="gone"
+            android:id="@+id/earnings_message_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -245,6 +255,7 @@
 
 
       <TextView
+          android:id="@+id/earnings_message"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="4dp"
@@ -269,7 +280,14 @@
       />
 
 
+
+
+
+
+
+
   <LinearLayout
+      android:id="@+id/evaluate_message_root"
       android:layout_width="match_parent"
       android:layout_height="80dp"
       android:orientation="horizontal"
@@ -312,6 +330,8 @@
             />
 
         <TextView
+            android:visibility="gone"
+            android:id="@+id/evaluate_message_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -319,7 +339,7 @@
             android:gravity="center"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:text="3"
+            tools:text="3"
             android:textColor="@color/white"
             />
 
@@ -332,6 +352,7 @@
 
 
       <TextView
+          android:id="@+id/evaluate_message"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="4dp"
