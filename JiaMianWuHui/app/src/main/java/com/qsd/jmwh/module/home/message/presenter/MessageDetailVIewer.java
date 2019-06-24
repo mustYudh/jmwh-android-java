@@ -9,5 +9,5 @@ import com.yu.common.mvp.Viewer;
  */
 public interface MessageDetailVIewer extends Viewer {
 
-  void getMessageDetail(SystemMessageBean bean);
+  void getMessageDetail(SystemMessageBean bean, int refreshType);
 }
