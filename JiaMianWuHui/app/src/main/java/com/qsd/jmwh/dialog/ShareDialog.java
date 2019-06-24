@@ -40,8 +40,8 @@ public class ShareDialog extends BasePopupWindow implements ViewGroup.OnClickLis
         SharesBean sharesBean = new SharesBean();
         sharesBean.title = "假面舞会";
         sharesBean.content = "欢迎使用假面舞会";
-        sharesBean.targetUrl = "http://maskball.oss-cn-beijing.aliyuncs.com/1/head_cbc044a5-2c51-4e4b-bc1c-5f07eb132516.jpg";
-        sharesBean.iconUrl = "https://maskball.oss-cn-beijing.aliyuncs.com/headpic/222.jpg";
+        sharesBean.targetUrl = "https://maskball.oss-cn-beijing.aliyuncs.com/app/ic_launcher.png";
+        sharesBean.iconUrl = "https://maskball.oss-cn-beijing.aliyuncs.com/app/ic_launcher.png";
         switch (v.getId()) {
             case R.id.cancel:
                 dismiss();
