@@ -43,7 +43,7 @@ import org.greenrobot.eventbus.EventBus;
   }
 
   public void uploadUserInfo(UploadUserInfoParams params, boolean isGirl) {
-    if (params.checkEmpty(isGirl)) {
+    if (params.registerCheckEmpty(isGirl)) {
       XHttpProxy.proxy(ApiServices.class)
           .modifyUserInfo(params.sNickName, params.sDateRange, params.sAge, params.sJob,
               params.sDatePro, params.sHeight, params.sWeight, params.lUserId, params.sIntroduce,

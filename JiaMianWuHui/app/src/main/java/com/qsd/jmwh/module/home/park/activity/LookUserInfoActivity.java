@@ -59,7 +59,7 @@ public class LookUserInfoActivity extends BaseActivity
   @Override protected void loadData() {
     initListener();
     userID = getIntent().getIntExtra(USER_ID, -1);
-    bindView(R.id.more_action, UserProfile.getInstance().getAppAccount() != userID);
+    bindView(R.id.more_action, UserProfile.getInstance().getUserId() != userID);
   }
 
   @Override protected void onResume() {
@@ -109,7 +109,7 @@ public class LookUserInfoActivity extends BaseActivity
     }
     if (UserProfile.getInstance().getSex() == 1) {
       bindView(R.id.social_account,
-          !isVip && UserProfile.getInstance().getAppAccount() != userID);
+          !isVip && UserProfile.getInstance().getUserId() != userID);
     }
 
     ImageLoader.loadCenterCrop(getActivity(), userData.sUserHeadPic, bindView(R.id.header));
@@ -187,7 +187,7 @@ public class LookUserInfoActivity extends BaseActivity
         selectHintPop.showPopupWindow();
         break;
       case R.id.chat:
-        if (userID == UserProfile.getInstance().getAppAccount()) {
+        if (userID == UserProfile.getInstance().getUserId()) {
           ToastUtils.show("不能私信自己");
         } else {
           SessionHelper.startP2PSession(getActivity(), "im_" + userID);
@@ -255,7 +255,7 @@ public class LookUserInfoActivity extends BaseActivity
   private void buyVip() {
     LauncherHelper.from(getActivity())
         .startActivity(
-            ToByVipActivity.getIntent(getActivity(), UserProfile.getInstance().getAppAccount(),
+            ToByVipActivity.getIntent(getActivity(), UserProfile.getInstance().getUserId(),
                 UserProfile.getInstance().getAppToken()));
   }
 

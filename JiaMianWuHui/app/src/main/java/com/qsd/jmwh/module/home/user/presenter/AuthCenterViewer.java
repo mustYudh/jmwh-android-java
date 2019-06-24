@@ -12,4 +12,6 @@ public interface AuthCenterViewer extends Viewer {
   void getInfo(WomenVideoBean video);
 
   void uploadSuccess();
+
+  void setAuthCode(String code);
 }

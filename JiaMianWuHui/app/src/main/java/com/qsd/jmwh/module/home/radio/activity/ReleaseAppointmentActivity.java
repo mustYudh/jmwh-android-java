@@ -25,12 +25,10 @@ import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.radio.adapter.RadioLoveRvAdapter;
 import com.qsd.jmwh.module.home.radio.bean.DataRefreshRadioDataEvent;
-import com.qsd.jmwh.module.home.radio.bean.GetDatingUserVipBean;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.presenter.ReleaseAppointmentPresenter;
 import com.qsd.jmwh.module.home.radio.presenter.ReleaseAppointmentViewer;
 import com.qsd.jmwh.module.register.DateRangeActivity;
-import com.qsd.jmwh.module.register.bean.PayInfo;
 import com.qsd.jmwh.module.register.bean.RangeData;
 import com.qsd.jmwh.thrid.UploadImage;
 import com.qsd.jmwh.thrid.oss.PersistenceResponse;
@@ -153,7 +151,7 @@ public class ReleaseAppointmentActivity extends BaseBarActivity implements View.
                 mPresenter.initRadioConfigData("1");
                 break;
             case R.id.ll_city:
-                getLaunchHelper().startActivityForResult(DateRangeActivity.getIntent(getActivity(), 1, UserProfile.getInstance().getAppToken(), UserProfile.getInstance().getAppAccount(), "约会范围"), DATE_RANGE_REQUEST_CODE);
+                getLaunchHelper().startActivityForResult(DateRangeActivity.getIntent(getActivity(), 1, UserProfile.getInstance().getAppToken(), UserProfile.getInstance().getUserId(), "约会范围"), DATE_RANGE_REQUEST_CODE);
                 break;
             case R.id.ll_time:
                 showTimeDialog();

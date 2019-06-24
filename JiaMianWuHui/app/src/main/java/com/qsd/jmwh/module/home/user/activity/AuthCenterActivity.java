@@ -30,9 +30,8 @@ public class AuthCenterActivity extends BaseBarActivity implements AuthCenterVie
   @Override protected void loadData() {
     setTitle("认证中心");
     mPresenter.getAuthInf();
-    bindView(R.id.uploading, view -> {
-      uploadingVideo();
-    });
+    mPresenter.getAuthCode();
+    bindView(R.id.uploading, view -> uploadingVideo());
   }
 
   @Override public void getInfo(WomenVideoBean vedioBean) {
@@ -71,5 +70,9 @@ public class AuthCenterActivity extends BaseBarActivity implements AuthCenterVie
     mPresenter.getAuthInf();
     ToastUtils.show("上传成功");
     LoadingDialog.dismissLoading();
+  }
+
+  @Override public void setAuthCode(String code) {
+    bindText(R.id.auth_code,"假面舞会 " + code);
   }
 }

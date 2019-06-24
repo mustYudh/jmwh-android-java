@@ -83,7 +83,7 @@ public class ParkFragment extends BaseBarFragment
 
     back.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
-        mPresenter.getRangeData(1, 0, UserProfile.getInstance().getAppAccount(),
+        mPresenter.getRangeData(1, 0, UserProfile.getInstance().getUserId(),
             UserProfile.getInstance().getAppToken(), 0);
       }
     });
@@ -247,7 +247,7 @@ public class ParkFragment extends BaseBarFragment
               UserProfile.getInstance().getHomeSexType() + "",
               UserProfile.getInstance().getHomeCityName());
         } else {
-          mPresenter.getRangeData(1, id, UserProfile.getInstance().getAppAccount(),
+          mPresenter.getRangeData(1, id, UserProfile.getInstance().getUserId(),
               UserProfile.getInstance().getAppToken(), 1);
         }
       }

@@ -82,7 +82,7 @@ public class EvaluationDialog extends BasePopupWindow {
             });
           }
         });
-    bindView(R.id.evaluation, userID != UserProfile.getInstance().getAppAccount());
+    bindView(R.id.evaluation, userID != UserProfile.getInstance().getUserId());
   }
 
   @SuppressLint("CheckResult") private void initListener() {

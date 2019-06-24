@@ -41,7 +41,7 @@ public class EvaluationAdapter extends BasicAdapter<EvaluationBean.CdoListBean> 
                 count.setText(data.nValue);
                 evaluation.setText(data.sName);
                 count.setSelected(data.selected);
-                if (userID != UserProfile.getInstance().getAppAccount()) {
+                if (userID != UserProfile.getInstance().getUserId()) {
                     count.setOnClickListener(v -> {
                         data.selected = !data.selected;
                         int countValue = Integer.parseInt(data.nValue);

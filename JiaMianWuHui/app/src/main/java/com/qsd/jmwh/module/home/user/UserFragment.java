@@ -93,7 +93,7 @@ public class UserFragment extends BaseFragment
     switch (v.getId()) {
       case R.id.vip:
         getLaunchHelper().startActivity(
-            ToByVipActivity.getIntent(getActivity(), UserProfile.getInstance().getAppAccount(),
+            ToByVipActivity.getIntent(getActivity(), UserProfile.getInstance().getUserId(),
                 UserProfile.getInstance().getAppToken()));
         break;
       case R.id.money_bag:
@@ -123,8 +123,8 @@ public class UserFragment extends BaseFragment
               @Override public void cropAfter(Object t) {
                 if (!TextUtils.isEmpty(selectPhotoUrl)) {
                   mPresenter.setHeader(selectPhotoUrl,
-                      +UserProfile.getInstance().getAppAccount() + "/head_" + UUID.randomUUID()
-                          .toString() + ".jpg", UserProfile.getInstance().getAppAccount() + "");
+                      +UserProfile.getInstance().getUserId() + "/head_" + UUID.randomUUID()
+                          .toString() + ".jpg", UserProfile.getInstance().getUserId() + "");
                 }
               }
 
@@ -139,7 +139,7 @@ public class UserFragment extends BaseFragment
             getLaunchHelper().startActivity(MineRadioListActivity.class);
           } else {
             getLaunchHelper().startActivity(
-                ToByVipActivity.getIntent(getActivity(), UserProfile.getInstance().getAppAccount(),
+                ToByVipActivity.getIntent(getActivity(), UserProfile.getInstance().getUserId(),
                     UserProfile.getInstance().getAppToken()));
           }
         } else {
@@ -154,7 +154,7 @@ public class UserFragment extends BaseFragment
         break;
       case R.id.my_evaluation:
         EvaluationDialog dialog = new EvaluationDialog(getActivity(), header, sNickName,
-            UserProfile.getInstance().getAppAccount());
+            UserProfile.getInstance().getUserId());
         dialog.showPopupWindow();
         break;
       case R.id.share:
