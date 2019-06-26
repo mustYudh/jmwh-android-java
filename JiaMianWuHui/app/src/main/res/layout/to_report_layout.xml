@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
+    android:overScrollMode="never"
+    android:scrollbars="none"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_F2F2F2"
     android:orientation="vertical"
     >
+
+
 
 
   <TextView
@@ -98,32 +106,43 @@
         />
 
 
-    <com.qsd.jmwh.view.NoscrollerGridView
-        android:id="@+id/report_image"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:listSelector="@android:color/transparent"
-        android:overScrollMode="never"
-        android:scrollbars="none"
+        android:orientation="vertical"
         >
 
-    </com.qsd.jmwh.view.NoscrollerGridView>
+      <com.yu.common.ui.DelayClickImageView
+          android:id="@+id/report_image"
+          android:layout_width="75dp"
+          android:layout_height="75dp"
+          android:scrollbars="none"
+          android:layout_margin="20dp"
+          android:src="@drawable/pic_add"
+          >
+
+      </com.yu.common.ui.DelayClickImageView>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:text="补充描述（选填）"
-        android:textColor="@color/color_666666"
-        android:textSize="16sp"
-        />
+      <TextView
+          android:paddingTop="5dp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="15dp"
+          android:text="补充描述（选填）"
+          android:textColor="@color/color_666666"
+          android:textSize="16sp"
+          android:paddingBottom="30dp"
+          />
+
+    </LinearLayout>
+
   </LinearLayout>
 
 
   <com.yu.common.ui.DelayClickTextView
-
+      android:layout_marginBottom="50dp"
       android:id="@+id/commit"
       android:layout_marginTop="30dp"
       android:text="提交"
@@ -132,3 +151,4 @@
 
 
 </LinearLayout>
+</ScrollView>

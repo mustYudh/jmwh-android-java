@@ -74,7 +74,7 @@ public class MineBlackMenuActivity extends BaseBarActivity implements MineLikeVi
 
                     @Override
                     public void setOnPersonInfoItemClick(int lLoveUserId) {
-                        getLaunchHelper().startActivity(LookUserInfoActivity.getIntent(getActivity(), lLoveUserId));
+                        getLaunchHelper().startActivity(LookUserInfoActivity.getIntent(getActivity(), lLoveUserId,lLoveUserId,2));
                     }
                 });
                 rv_list.setVisibility(View.VISIBLE);

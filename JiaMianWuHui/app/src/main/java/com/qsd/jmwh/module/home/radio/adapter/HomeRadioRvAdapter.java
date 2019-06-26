@@ -107,7 +107,7 @@ public class HomeRadioRvAdapter extends BaseMultiItemQuickAdapter<LocalHomeRadio
                     @Override
                     public void onClick(View view) {
                         if (onRadioItemClickListener != null) {
-                            onRadioItemClickListener.setOnRadioItemClick(iv_like, tv_like, helper.getLayoutPosition(), item.is_like, item.lDatingId + "", UserProfile.getInstance().getAppAccount() + "", item.lUserId + "");
+                            onRadioItemClickListener.setOnRadioItemClick(iv_like, tv_like, helper.getLayoutPosition(), item.is_like, item.lDatingId + "", UserProfile.getInstance().getUserId() + "", item.lUserId + "");
                         }
                     }
                 });

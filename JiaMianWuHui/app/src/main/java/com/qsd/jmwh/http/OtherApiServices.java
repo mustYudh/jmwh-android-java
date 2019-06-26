@@ -1,5 +1,7 @@
 package com.qsd.jmwh.http;
 
+import com.qsd.jmwh.module.home.message.bean.SystemCountBean;
+import com.qsd.jmwh.module.home.message.bean.SystemMessageBean;
 import com.qsd.jmwh.module.home.user.bean.AccountBalance;
 import com.qsd.jmwh.module.home.user.bean.EvaluationBean;
 import com.qsd.jmwh.module.home.user.bean.GoodsInfoBean;
@@ -10,7 +12,6 @@ import com.qsd.jmwh.module.home.user.bean.PushSettingBean;
 import com.qsd.jmwh.module.home.user.bean.WomenVideoBean;
 import com.qsd.jmwh.module.register.bean.PayInfo;
 import com.xuexiang.xhttp2.annotation.NetMethod;
-
 import io.reactivex.Observable;
 
 public interface OtherApiServices {
@@ -82,8 +83,10 @@ public interface OtherApiServices {
   @NetMethod(ParameterNames = { "nGoodsType" }, Url = "/GoodsService/getGoods")
   Observable<GoodsInfoBean> getGoods(int nGoodsType);
 
-  @NetMethod(ParameterNames = { "lGoodsId", "nPayType" }, Url = "/OrderService/getBuyMaskBallCoinPaySign")
-  Observable<PayInfo> getBuyDatingPaySign(int lGoodsId, int nPayType);
+  @NetMethod(ParameterNames = {
+      "lGoodsId", "nPayType"
+  }, Url = "/OrderService/getBuyMaskBallCoinPaySign") Observable<PayInfo> getBuyDatingPaySign(
+      int lGoodsId, int nPayType);
 
   @NetMethod(ParameterNames = {
       "nFileType", "nFileFee", "lFileId"
@@ -95,6 +98,25 @@ public interface OtherApiServices {
   @NetMethod(ParameterNames = { "sFileUrl", "sFileCoverUrl" }, Url = "/UserService/userAuthByVideo")
   Observable<Object> userAuthByVideo(String sFileUrl, String sFileCoverUrl);
 
-  @NetMethod(ParameterNames = "lInitiatorId",Url = "/UserEvaluateService/updateValiate")
-  Observable<Object> updateValiate(int sFileUrl, String sFileCoverUrl);
+  @NetMethod(ParameterNames = {
+      "lInitiatorId", "nCount1", "nCount2", "nCount3", "nCount4", "nCount5", "nCount6", "nCount7",
+      "nCount8"
+  }, Url = "/UserEvaluateService/updateValiate") Observable<Object> updateValiate(int lInitiatorId,
+      int nCount1, int nCount2, int nCount3, int nCount4, int nCount5, int nCount6, int nCount7,
+      int nCount8);
+
+  @NetMethod(ParameterNames = {
+      "lBeReportedUserId", "lBizId", "sContent", "nType", "sFileUrl"
+  }, Url = "/FeedBackService/addFeedBack") Observable<Object> addFeedBack(int lBeReportedUserId,
+      int lBizId, String sContent, int nType, String sFileUrl);
+
+  @NetMethod(ParameterNames = { "pageindex", "nType" }, Url = "/MsgService/getMsgList")
+  Observable<SystemMessageBean> getMsgList(int pageIndex, int nType);
+
+  @NetMethod(Url = "/MsgService/getMsgLists")
+  Observable<SystemCountBean> getMsgCount();
+
+
+  @NetMethod(ParameterNames = {"nType","sTitle","sContent","lSenderId","lReceiverId","nBizId","nStatus"},Url = "/MsgService/addMsgCount")
+  Observable<SystemCountBean> addMsgCount(int nType,String sTitle,String sContent,int lSenderId,int lReceiverId,int nBizId,int nStatus);
 }

@@ -7,23 +7,24 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
-
 import com.google.gson.Gson;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
+import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.park.activity.LookUserInfoActivity;
 import com.qsd.jmwh.module.home.radio.adapter.MineRadioRvAdapter;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.LocalHomeRadioListBean;
 import com.qsd.jmwh.module.home.radio.dialog.RadioItemPop;
 import com.qsd.jmwh.module.home.user.bean.MineRadioListBean;
+import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
 import com.qsd.jmwh.module.home.user.presenter.MineRadioPresenter;
 import com.qsd.jmwh.module.home.user.presenter.MineRadioViewer;
+import com.qsd.jmwh.module.register.ToByVipActivity;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 import com.yu.common.ui.DelayClickImageView;
 import com.yu.common.ui.DelayClickTextView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,18 +41,18 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
     }
 
 
+
     @PresenterLifeCycle
     private MineRadioPresenter mPresenter = new MineRadioPresenter(this);
 
     @Override
     protected void loadData() {
         setTitle("我的广播");
-        setRightMenu("我要广播", v -> mPresenter.initRadioConfigData("0"));
-
         rv_radio = bindView(R.id.rv_radio);
         ll_empty = bindView(R.id.ll_empty);
         rv_radio.setLayoutManager(new LinearLayoutManager(this));
         mPresenter.getDatingByUserIdData("0");
+        mPresenter.getMyInfo();
     }
 
     @Override
@@ -130,7 +131,7 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
 
                     @Override
                     public void setOnPersonInfoItemClick(int lLoveUserId) {
-                        getLaunchHelper().startActivity(LookUserInfoActivity.getIntent(getActivity(), lLoveUserId));
+                        getLaunchHelper().startActivity(LookUserInfoActivity.getIntent(getActivity(), lLoveUserId,lLoveUserId,2));
                     }
 
                     @Override
@@ -173,6 +174,16 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
             RadioItemPop infoPop = new RadioItemPop(getActivity());
             infoPop.setOutsideTouchable(true);
             infoPop.setTitle("发布约会广播").setData(configListBean.cdoList).showPopupWindow();
+        }
+    }
+
+    @Override public void getUserInfo(UserCenterInfo userCenterMyInfo) {
+        if (userCenterMyInfo.cdoUser.bVIP) {
+            setRightMenu("我要广播", v -> mPresenter.initRadioConfigData("0"));
+        } else {
+            getLaunchHelper().startActivity(
+                ToByVipActivity.getIntent(getActivity(), UserProfile.getInstance().getUserId(),
+                    UserProfile.getInstance().getAppToken()));
         }
     }
 }

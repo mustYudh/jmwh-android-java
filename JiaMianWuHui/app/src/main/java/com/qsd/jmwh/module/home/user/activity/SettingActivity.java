@@ -3,6 +3,7 @@ package com.qsd.jmwh.module.home.user.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import android.text.TextUtils;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
@@ -36,11 +37,19 @@ public class SettingActivity extends BaseBarActivity {
         String cacheSize = glideCacheUtil.getCacheSize(getActivity());
         clearCache.setHint(cacheSize);
         initListener();
+        phoneNumber.setHint(UserProfile.getInstance().getPhoneNo());
     }
 
     private void initListener() {
         push.setOnClickListener(v -> getLaunchHelper().startActivity(PushSettingActivity.class));
-        phoneNumber.setOnClickListener(v -> getLaunchHelper().startActivity(SettingPhoneNumberActivity.class));
+        phoneNumber.setOnClickListener(v -> {
+            if (TextUtils.isEmpty(UserProfile.getInstance().getPhoneNo())) {
+                getLaunchHelper().startActivity(SettingPhoneNumberActivity.class);
+            } else {
+                ToastUtils.show("您已经绑定过手机号");
+            }
+
+        });
         editPassword.setOnClickListener(v -> getLaunchHelper().startActivity(EditPasswordActivity.class));
         agreement.setOnClickListener(v -> getLaunchHelper().startActivity(WebViewActivity.class));
         logout.setOnClickListener(v -> {

@@ -96,7 +96,6 @@
 
         <LinearLayout
             android:id="@+id/social"
-            android:visibility="gone"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -128,6 +127,7 @@
 
 
             <com.qsd.jmwh.view.UserItemView
+                android:visibility="gone"
                 android:id="@+id/switch_social"
                 app:type="switch"
                 app:showArrow="false"

@@ -56,6 +56,8 @@ public class UserFragment extends BaseFragment
   private String selectPhotoUrl;
   private String header;
   private String sNickName;
+  private boolean isVip = false;
+  private UserCenterInfo.CdoUserBean mCenterInfo = new UserCenterInfo.CdoUserBean();
 
   @Override protected int getContentViewId() {
     return R.layout.user_fragment;
@@ -92,14 +94,14 @@ public class UserFragment extends BaseFragment
     switch (v.getId()) {
       case R.id.vip:
         getLaunchHelper().startActivity(
-            ToByVipActivity.getIntent(getActivity(), UserProfile.getInstance().getAppAccount(),
+            ToByVipActivity.getIntent(getActivity(), UserProfile.getInstance().getUserId(),
                 UserProfile.getInstance().getAppToken()));
         break;
       case R.id.money_bag:
         getLaunchHelper().startActivity(MoneyBagActivity.class);
         break;
       case R.id.edit_user_info:
-        getLaunchHelper().startActivity(EditUserInfoActivity.class);
+        getLaunchHelper().startActivity(EditUserInfoActivity.getIntent(getActivity(),mCenterInfo));
         break;
       case R.id.privacy_setting:
         getLaunchHelper().startActivity(
@@ -122,8 +124,8 @@ public class UserFragment extends BaseFragment
               @Override public void cropAfter(Object t) {
                 if (!TextUtils.isEmpty(selectPhotoUrl)) {
                   mPresenter.setHeader(selectPhotoUrl,
-                      +UserProfile.getInstance().getAppAccount() + "/head_" + UUID.randomUUID()
-                          .toString() + ".jpg", UserProfile.getInstance().getAppAccount() + "");
+                      +UserProfile.getInstance().getUserId() + "/head_" + UUID.randomUUID()
+                          .toString() + ".jpg", UserProfile.getInstance().getUserId() + "");
                 }
               }
 
@@ -133,7 +135,7 @@ public class UserFragment extends BaseFragment
             });
         break;
       case R.id.my_radio:
-        getLaunchHelper().startActivity(MineRadioListActivity.class);
+            getLaunchHelper().startActivity(MineRadioListActivity.class);
         break;
       case R.id.my_like:
         getLaunchHelper().startActivity(MineLikeActivity.class);
@@ -143,7 +145,7 @@ public class UserFragment extends BaseFragment
         break;
       case R.id.my_evaluation:
         EvaluationDialog dialog = new EvaluationDialog(getActivity(), header, sNickName,
-            UserProfile.getInstance().getAppAccount());
+            UserProfile.getInstance().getUserId());
         dialog.showPopupWindow();
         break;
       case R.id.share:
@@ -197,6 +199,7 @@ public class UserFragment extends BaseFragment
   }
 
   @Override public void setUserInfo(UserCenterInfo userInfo) {
+    this.mCenterInfo = userInfo.cdoUser;
     bindView(R.id.vip, UserProfile.getInstance().getSex() == 1);
     bindView(R.id.user_hint, UserProfile.getInstance().getSex() == 1);
     bindView(R.id.auth, UserProfile.getInstance().getSex() != 1);
@@ -210,6 +213,7 @@ public class UserFragment extends BaseFragment
     bindText(R.id.auth_info, cdoUser.sAuthInfo);
     UserItemView vip = bindView(R.id.vip);
     vip.showTag(cdoUser.bVIP);
+    isVip = cdoUser.bVIP;
     if (!TextUtils.isEmpty(cdoUser.dVIPInvalidTime)) {
       vip.setHint(cdoUser.dVIPInvalidTime + "到期");
     }
@@ -284,7 +288,7 @@ public class UserFragment extends BaseFragment
 
   @Override public void setUserHeaderSuccess(String url) {
     ImageView header = bindView(R.id.header);
-    ImageLoader.loadCenterCrop(getActivity(), url, header, R.mipmap.ic_launcher);
+    ImageLoader.loadCenterCrop(getActivity(), url, header, R.drawable.ic_launcher);
   }
 
   @Override public void refreshData() {

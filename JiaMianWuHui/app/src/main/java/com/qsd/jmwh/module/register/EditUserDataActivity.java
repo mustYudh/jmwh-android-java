@@ -65,6 +65,7 @@ public class EditUserDataActivity extends BaseBarActivity
     private String headerUrl;
     private String bugsSize = "";
     private String selectPhotoUrl;
+    private boolean mIsGirl;
 
     public static Intent getIntent(Context context, String token, int lUserId, int sex) {
         Intent starter = new Intent(context, EditUserDataActivity.class);
@@ -100,9 +101,8 @@ public class EditUserDataActivity extends BaseBarActivity
         qq = bindView(R.id.qq);
         sNickName = bindView(R.id.sNickName);
         switchSocial = bindView(R.id.switch_social);
-        boolean isGirl = getIntent().getIntExtra(SEX, -1) == 0;
-        bindView(R.id.bust, isGirl);
-        bindView(R.id.social, isGirl);
+        mIsGirl = getIntent().getIntExtra(SEX, -1) == 0;
+        bindView(R.id.bust, mIsGirl);
     }
 
     private void initListener() {
@@ -252,8 +252,7 @@ public class EditUserDataActivity extends BaseBarActivity
                 EditText edit = bindView(R.id.edit_sIntroduce);
                 params.sIntroduce = edit.getText().toString().trim();
                 params.token = getIntent().getStringExtra(TOKEN);
-                mPresenter.uploadUserInfo(params);
-
+                mPresenter.uploadUserInfo(params,mIsGirl);
                 break;
             case R.id.agreement:
                 getLaunchHelper().startActivity(WebViewActivity.class);

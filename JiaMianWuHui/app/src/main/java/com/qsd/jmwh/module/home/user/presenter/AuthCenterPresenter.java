@@ -9,9 +9,12 @@ import android.os.Message;
 import android.util.Log;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.dialog.net.NetLoadingDialog;
+import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.OtherApiServices;
 import com.qsd.jmwh.http.subscriber.NoTipRequestSubscriber;
+import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.home.user.bean.WomenVideoBean;
+import com.qsd.jmwh.module.register.bean.UserAuthCodeBean;
 import com.qsd.jmwh.thrid.UploadImage;
 import com.qsd.jmwh.thrid.oss.PersistenceResponse;
 import com.vincent.videocompressor.VideoCompress;
@@ -102,5 +105,17 @@ import java.util.UUID;
         Log.e("======>", percent + "");
       }
     });
+  }
+
+  public void getAuthCode() {
+    XHttpProxy.proxy(ApiServices.class)
+        .getCod(UserProfile.getInstance().getUserId(),UserProfile.getInstance().getAppToken())
+        .subscribeWith(new TipRequestSubscriber<UserAuthCodeBean>() {
+          @Override
+          protected void onSuccess(UserAuthCodeBean result) {
+            assert getViewer() != null;
+            getViewer().setAuthCode(result.sAuthCode);
+          }
+        });
   }
 }

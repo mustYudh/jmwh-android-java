@@ -65,6 +65,7 @@ public class SelectGenderActivity extends BaseBarActivity implements SelectGende
                 SelectHintPop selectGenderHintPop = new SelectHintPop(this);
                 selectGenderHintPop.setMessage("注册之后不能修改性别，并且，你不能与相同性别的用户交流。")
                         .setPositiveButton("确定", v1 -> {
+                            UserProfile.getInstance().setSex(currentType);
                             UserProfile.getInstance().setHomeSexType(currentType);
                                     mPresenter.selectGender(currentType, getIntent().getIntExtra(APP_ACCOUNT, -1));
                                     selectGenderHintPop.dismiss();
@@ -74,6 +75,7 @@ public class SelectGenderActivity extends BaseBarActivity implements SelectGende
                         .showPopupWindow();
 
                 break;
+                default:
         }
     }
 

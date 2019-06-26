@@ -30,7 +30,7 @@ public class UserPhotoAdapter extends BasicAdapter<OtherUserInfoBean.CdoFileList
     }
 
     @Override
-    protected BaseHolder<OtherUserInfoBean.CdoFileListDataBean> getHolder(Context context) {
+    protected BaseHolder<OtherUserInfoBean.CdoFileListDataBean> getHolder(Context context,int position) {
         return new BaseHolder<OtherUserInfoBean.CdoFileListDataBean>(context, R.layout.item_user_photo_layout) {
             @Override
             public void bindData(OtherUserInfoBean.CdoFileListDataBean data) {
@@ -38,7 +38,7 @@ public class UserPhotoAdapter extends BasicAdapter<OtherUserInfoBean.CdoFileList
                 ImageView photoBg = findViewId(R.id.photo_bg);
                 TextView hint = findViewId(R.id.image_hint);
                 boolean canClick = true;
-                if (userId != UserProfile.getInstance().getAppAccount()) {
+                if (userId != UserProfile.getInstance().getUserId()) {
                     if (isOpenAll) {
                         //普通照片
                         if (data.nFileType == 0) {

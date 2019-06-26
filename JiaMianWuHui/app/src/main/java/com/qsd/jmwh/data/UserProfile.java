@@ -16,7 +16,7 @@ public class UserProfile implements Serializable {
 
     private static final String SHARE_PREFERENCES_NAME = ".public_profile";
 
-    private static final String APP_ACCOUNT = "account";
+    private static final String APP_USER_ID = "account";
     private static final String APP_TOKEN = "token";
     private static final String PHONE_NO = "phone_no";
     private static final String SEX = "sex";
@@ -52,7 +52,6 @@ public class UserProfile implements Serializable {
     public void appLogin(LoginInfo userInfo) {
         setAppAccount(userInfo.lUserId);
         setAppToken(userInfo.token);
-        setSex(userInfo.nSex);
         setUserPic(userInfo.sUserHeadPic);
         setSimToken(userInfo.sIMToken);
         setSimUserId(userInfo.sIMID);
@@ -74,7 +73,7 @@ public class UserProfile implements Serializable {
         return spHelper.getString(HOME_CITY_NAME, "");
     }
 
-    private void setSex(int sex) {
+    public void setSex(int sex) {
         spHelper.putInt(SEX, sex);
     }
 
@@ -82,12 +81,12 @@ public class UserProfile implements Serializable {
         return spHelper.getInt(SEX, -1);
     }
 
-    public int getAppAccount() {
-        return spHelper.getInt(APP_ACCOUNT, -1);
+    public int getUserId() {
+        return spHelper.getInt(APP_USER_ID, -1);
     }
 
     private void setAppAccount(int account) {
-        spHelper.putInt(APP_ACCOUNT, account);
+        spHelper.putInt(APP_USER_ID, account);
     }
 
     private void setUserPic(String user_pic) {
@@ -132,7 +131,7 @@ public class UserProfile implements Serializable {
     }
 
     public boolean isAppLogin() {
-        return !TextUtils.isEmpty(getAppToken()) && getAppAccount() != -1;
+        return !TextUtils.isEmpty(getAppToken()) && getUserId() != -1;
     }
 
     public void setCityName(String cityName) {
@@ -169,10 +168,14 @@ public class UserProfile implements Serializable {
     }
 
     public String getObjectName() {
-        return getAppAccount() + "/head_" + UUID.randomUUID().toString() + ".jpg";
+        return getUserId() + "/head_" + UUID.randomUUID().toString() + ".jpg";
+    }
+
+    public String getObjectName(String name) {
+        return getUserId() + "/" + name + UUID.randomUUID().toString() + ".jpg";
     }
 
     public String getObjectName(String name, String type) {
-        return getAppAccount() + "/" + name + "_" + UUID.randomUUID().toString() + "." + type;
+        return getUserId() + "/" + name + "_" + UUID.randomUUID().toString() + "." + type;
     }
 }

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -42,10 +41,14 @@ public class LookUserInfoActivity extends BaseActivity
   private boolean firstLoading = true;
 
   private final static String USER_ID = "user_id";
+  private final static String TYPE = "type";
+  private final static String BIZ_ID = "biz_id";
 
-  public static Intent getIntent(Context context, int userId) {
+  public static Intent getIntent(Context context, int userId, int lBizId, int nType) {
     Intent starter = new Intent(context, LookUserInfoActivity.class);
     starter.putExtra(USER_ID, userId);
+    starter.putExtra(BIZ_ID, lBizId);
+    starter.putExtra(TYPE, nType);
     return starter;
   }
 
@@ -56,7 +59,7 @@ public class LookUserInfoActivity extends BaseActivity
   @Override protected void loadData() {
     initListener();
     userID = getIntent().getIntExtra(USER_ID, -1);
-    bindView(R.id.more_action, UserProfile.getInstance().getAppAccount() != userID);
+    bindView(R.id.more_action, UserProfile.getInstance().getUserId() != userID);
   }
 
   @Override protected void onResume() {
@@ -82,14 +85,30 @@ public class LookUserInfoActivity extends BaseActivity
     int nSubViewUserCount = userCenterInfo.nSubViewUserCount;
     if (nSubViewUserCount <= 3) {
       SelectHintPop hint = new SelectHintPop(this);
+      hint.setOutsideTouchable(false);
+      hint.setFocusable(true);
       hint.setTitle("查看人数提示")
           .setMessage("你今天还能查看" + nSubViewUserCount + "位女士，非会员用户每天只能查看10位女士。")
           .setPositiveButton("升级会员", v1 -> {
             buyVip();
             hint.dismiss();
           })
-          .setNegativeButton("继续查看", v12 -> hint.dismiss())
+          .setNegativeButton(nSubViewUserCount != 0 ? "继续查看" : "取消", v12 -> {
+            if (nSubViewUserCount != 0) {
+              hint.dismiss();
+            } else {
+              finish();
+            }
+          })
           .showPopupWindow();
+      hint.setOnDismissListener(() -> {
+          if (nSubViewUserCount == 0) {
+            finish();
+          }
+      });
+      if (nSubViewUserCount == 0) {
+        return;
+      }
     }
     NormaFormItemVIew bust = bindView(R.id.bust);
     if (userData.nSex == 0) {
@@ -98,15 +117,15 @@ public class LookUserInfoActivity extends BaseActivity
       qq.setContent(isVip ? userData.QQ : "已填写，点击查看");
       NormaFormItemVIew weChat = bindView(R.id.wechat, this);
       weChat.setContent(isVip ? userData.WX : "已填写，点击查看");
-      bindView(R.id.social_account,
-          (!TextUtils.isEmpty(userData.QQ) || !TextUtils.isEmpty(userData.WX))
-              && UserProfile.getInstance().getAppAccount() != userID);
     } else {
       bindView(R.id.bust, false);
       bindView(R.id.qq, false);
       bindView(R.id.we_chat, false);
-      bindView(R.id.social_account, false);
     }
+    if (UserProfile.getInstance().getSex() == 1) {
+      bindView(R.id.social_account, !isVip && UserProfile.getInstance().getUserId() != userID);
+    }
+
     ImageLoader.loadCenterCrop(getActivity(), userData.sUserHeadPic, bindView(R.id.header));
     header = userData.sUserHeadPic;
     sNickName = userData.sNickName;
@@ -182,10 +201,10 @@ public class LookUserInfoActivity extends BaseActivity
         selectHintPop.showPopupWindow();
         break;
       case R.id.chat:
-        if (userID == UserProfile.getInstance().getAppAccount()) {
+        if (userID == UserProfile.getInstance().getUserId()) {
           ToastUtils.show("不能私信自己");
         } else {
-          SessionHelper.startP2PSession(getActivity(), "im_" + userID);
+          toChat();
         }
         break;
       case R.id.qq:
@@ -202,10 +221,13 @@ public class LookUserInfoActivity extends BaseActivity
         shareDialog.showPopupWindow();
         break;
       case R.id.more_action:
-        MoreActionDialog moreActionDialog = new MoreActionDialog(getActivity(), userID);
+        Intent intent = getIntent();
+        MoreActionDialog moreActionDialog =
+            new MoreActionDialog(getActivity(), userID, intent.getIntExtra(BIZ_ID, -1),
+                intent.getIntExtra(TYPE, -1));
         moreActionDialog.showPopupWindow();
         break;
-        default:
+      default:
     }
   }
 
@@ -247,8 +269,12 @@ public class LookUserInfoActivity extends BaseActivity
   private void buyVip() {
     LauncherHelper.from(getActivity())
         .startActivity(
-            ToByVipActivity.getIntent(getActivity(), UserProfile.getInstance().getAppAccount(),
+            ToByVipActivity.getIntent(getActivity(), UserProfile.getInstance().getUserId(),
                 UserProfile.getInstance().getAppToken()));
+  }
+
+  @Override public void onBackPressed() {
+    super.onBackPressed();
   }
 
   @Override public void refreshData() {

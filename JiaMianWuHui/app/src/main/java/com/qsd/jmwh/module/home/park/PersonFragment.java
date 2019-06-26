@@ -117,7 +117,7 @@ public class PersonFragment extends BaseFragment implements PersonViewer {
 
                 adapter.setOnItemClickListener((adapter, view, position) -> {
                     HomePersonListBean.CdoListBean cdoListBean = (HomePersonListBean.CdoListBean) adapter.getData().get(position);
-                    getLaunchHelper().startActivity(LookUserInfoActivity.getIntent(getActivity(), cdoListBean.lUserId));
+                    getLaunchHelper().startActivity(LookUserInfoActivity.getIntent(getActivity(), cdoListBean.lUserId,cdoListBean.lUserId,2));
                 });
 
                 adapter.setOnPersonItemClickListener(new PersonRvAdapter.OnPersonItemClickListener() {

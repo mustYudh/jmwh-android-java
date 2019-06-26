@@ -42,18 +42,20 @@ import org.greenrobot.eventbus.EventBus;
     }
   }
 
-  public void uploadUserInfo(UploadUserInfoParams params) {
-    XHttpProxy.proxy(ApiServices.class)
-        .modifyUserInfo(params.sNickName, params.sDateRange, params.sAge, params.sJob,
-            params.sDatePro, params.sHeight, params.sWeight, params.lUserId, params.sIntroduce,
-            params.token, params.sUserHeadPic, params.sBust, params.QQ, params.WX,
-            params.bHiddenQQandWX)
-        .subscribeWith(new TipRequestSubscriber<Object>() {
-          @Override protected void onSuccess(Object o) {
-            assert getViewer() != null;
-            getViewer().commitUserInfo();
-          }
-        });
+  public void uploadUserInfo(UploadUserInfoParams params, boolean isGirl) {
+    if (params.registerCheckEmpty(isGirl)) {
+      XHttpProxy.proxy(ApiServices.class)
+          .modifyUserInfo(params.sNickName, params.sDateRange, params.sAge, params.sJob,
+              params.sDatePro, params.sHeight, params.sWeight, params.lUserId, params.sIntroduce,
+              params.token, params.sUserHeadPic, params.sBust, params.QQ, params.WX,
+              params.bHiddenQQandWX)
+          .subscribeWith(new TipRequestSubscriber<Object>() {
+            @Override protected void onSuccess(Object o) {
+              assert getViewer() != null;
+              getViewer().commitUserInfo();
+            }
+          });
+    }
   }
 
   public void getDateProject() {
@@ -81,7 +83,7 @@ import org.greenrobot.eventbus.EventBus;
           .getCod(userId, token)
           .subscribeWith(new TipRequestSubscriber<UserAuthCodeBean>() {
             @Override protected void onSuccess(UserAuthCodeBean result) {
-//              ToastUtils.show("邀请码获取成功");
+              //              ToastUtils.show("邀请码获取成功");
               Intent intent = new Intent();
               intent.putExtra(EditRegisterCodeActivity.GET_AUTH_CODE_RESULT, result.sAuthCode);
               getActivity().setResult(Activity.RESULT_OK, intent);

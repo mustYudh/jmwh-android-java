@@ -2,10 +2,9 @@ package com.qsd.jmwh.module.login.presenter;
 
 import android.annotation.SuppressLint;
 import android.text.TextUtils;
-
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.params.PostParams;
-import com.qsd.jmwh.http.subscriber.NoTipRequestSubscriber;
+import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.login.bean.LoginInfo;
 import com.qsd.jmwh.module.register.EditRegisterCodeActivity;
 import com.qsd.jmwh.module.register.EditUserDataActivity;
@@ -40,7 +39,7 @@ public class LoginPresenter extends BaseViewPresenter<LoginViewer> {
                         .put("sPwd",MD5Utils.string2MD5(pwd))
                         .creatBody())
                 .compose(RxSchedulerUtils.<ApiResult<LoginInfo>>_io_main_o())
-                .subscribeWith(new NoTipRequestSubscriber<ApiResult<LoginInfo>>() {
+                .subscribeWith(new TipRequestSubscriber<ApiResult<LoginInfo>>() {
                     @Override
                     protected void onSuccess(ApiResult<LoginInfo> result) {
                         int code = result.getCode();

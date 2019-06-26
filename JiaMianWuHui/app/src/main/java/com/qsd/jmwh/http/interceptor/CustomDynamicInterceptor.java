@@ -112,8 +112,8 @@ public class CustomDynamicInterceptor extends BaseDynamicInterceptor<CustomDynam
         TreeMap<String, Object> newParams = new TreeMap<>();
         newParams.put("sDeviceType", "Android");
 
-        if (UserProfile.getInstance().getAppAccount() != -1 && !oldParams.keySet().contains("lUserId")) {
-            newParams.put("lUserId", UserProfile.getInstance().getAppAccount() + "");
+        if (UserProfile.getInstance().getUserId() != -1 && !oldParams.keySet().contains("lUserId")) {
+            newParams.put("lUserId", UserProfile.getInstance().getUserId() + "");
         }
         newParams.putAll(oldParams);
         StringBuilder sing = new StringBuilder();

@@ -22,7 +22,7 @@ public class UserCenterInfo implements Serializable {
     public ArrayList<CdoimgListBean> cdoimgList;
 
 
-    public static class CdoUserBean {
+    public static class CdoUserBean implements Serializable {
         /**
          * lUserId : 18
          * sNickName : 测试专属账户-男
@@ -52,9 +52,16 @@ public class UserCenterInfo implements Serializable {
         public String sIntroduce;
         public String sMobile;
 
+
+        public String QQ = "";
+        public String WX = "";
+        public String sBust = "";
+        public String sHeight = "";
+        public String sWeight = "";
+
     }
 
-    public static class CdoWalletDataBean {
+    public static class CdoWalletDataBean implements Serializable {
         /**
          * nMoney : 390
          * nMaskBallCoin : 1000
@@ -66,7 +73,7 @@ public class UserCenterInfo implements Serializable {
 
     }
 
-    public static class CdoimgListBean {
+    public static class CdoimgListBean implements Serializable {
         /**
          * lFileId : 18
          * sFileUrl : https://maskball.oss-cn-beijing.aliyuncs.com/headpic/222.jpg

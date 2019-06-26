@@ -121,7 +121,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
         tv_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getLaunchHelper().startActivityForResult(DateRangeActivity.getIntent(getActivity(), 1, UserProfile.getInstance().getAppToken(), UserProfile.getInstance().getAppAccount(), "约会范围"), DATE_RANGE_REQUEST_CODE);
+                getLaunchHelper().startActivityForResult(DateRangeActivity.getIntent(getActivity(), 1, UserProfile.getInstance().getAppToken(), UserProfile.getInstance().getUserId(), "约会范围"), DATE_RANGE_REQUEST_CODE);
             }
         });
         tv_right.setOnClickListener(new View.OnClickListener() {
@@ -242,7 +242,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
 
                     @Override
                     public void setOnPersonInfoItemClick(int lLoveUserId) {
-                        getLaunchHelper().startActivity(LookUserInfoActivity.getIntent(getActivity(), lLoveUserId));
+                        getLaunchHelper().startActivity(LookUserInfoActivity.getIntent(getActivity(), lLoveUserId,lLoveUserId,2));
                     }
 
                     @Override
@@ -398,7 +398,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                     if (commentDialog.isShowing()) {
                         commentDialog.dismiss();
                     }
-                    mPresenter.addDatingCommentCount(item.lDatingId + "", UserProfile.getInstance().getAppAccount() + "", item.lUserId + "", et_talk.getText().toString().trim(), item);
+                    mPresenter.addDatingCommentCount(item.lDatingId + "", UserProfile.getInstance().getUserId() + "", item.lUserId + "", et_talk.getText().toString().trim(), item);
                 }
             }
         });
@@ -613,7 +613,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                 switch (v.getId()) {
                     case R.id.tv_vip:
                         LauncherHelper.from(getActivity()).startActivity(ToByVipActivity
-                                .getIntent(getActivity(), UserProfile.getInstance().getAppAccount(),
+                                .getIntent(getActivity(), UserProfile.getInstance().getUserId(),
                                         UserProfile.getInstance().getAppToken()));
                         break;
                     case R.id.tv_pay:
@@ -723,7 +723,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                         if (!TextUtils.isEmpty(imgUrl)) {
                             PersistenceResponse response = UploadImage.uploadImage(getActivity(), UserProfile.getInstance().getObjectName(), imgUrl);
 
-                            mPresenter.addDatingEnroll(item.lDatingId + "", UserProfile.getInstance().getAppAccount() + "", item.lUserId + "", response.cloudUrl, item);
+                            mPresenter.addDatingEnroll(item.lDatingId + "", UserProfile.getInstance().getUserId() + "", item.lUserId + "", response.cloudUrl, item);
                         }
                     }
                 });

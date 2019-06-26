@@ -102,7 +102,7 @@ public class LookPhotoActivity extends BaseActivity implements LookPhotoViewer {
         bindView(R.id.back, v -> onBackPressed());
         bindView(R.id.buy_vip, v -> {
                     LauncherHelper.from(getActivity()).startActivity(ToByVipActivity
-                            .getIntent(getActivity(), UserProfile.getInstance().getAppAccount(),
+                            .getIntent(getActivity(), UserProfile.getInstance().getUserId(),
                                     UserProfile.getInstance().getAppToken()));
                     finish();
                 }

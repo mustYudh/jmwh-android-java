@@ -37,7 +37,7 @@ public abstract class BasicAdapter<T> extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            holder = getHolder(parent.getContext());
+            holder = getHolder(parent.getContext(),position);
         } else {
             holder = (BaseHolder) convertView.getTag();
         }
@@ -45,7 +45,7 @@ public abstract class BasicAdapter<T> extends BaseAdapter {
         return holder.getHolderView();
     }
 
-    protected abstract BaseHolder<T> getHolder(Context context);
+    protected abstract BaseHolder<T> getHolder(Context context,int position);
 
 
     protected <V extends View> V findViewId(int id) {

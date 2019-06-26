@@ -83,6 +83,11 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
         new VipTextAdapter(R.layout.item_vip_text_layout, vipInfoBean.sVIPPrivilegeList);
     vipTextList.setAdapter(vipTextAdapter);
     vipInfoAdapter = new VipInfoAdapter(R.layout.item_vip_info_layout, vipInfoBean.cdoList);
+    for (VipInfoBean.CdoListBean bean : vipInfoBean.cdoList) {
+      if (bean.bRecommend) {
+        cdoListBean = bean;
+      }
+    }
     vipInfoList.setAdapter(vipInfoAdapter);
     List<PayTypeBean> payTypeBeans = new ArrayList<>();
     for (String payType : vipInfoBean.nPayTypeList) {
@@ -95,6 +100,8 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
         payTypeBeans.add(payTypeBean);
       }
     }
+    payTypeBeans.get(0).selected = true;
+    currentType = payTypeBeans.get(0);
     payTypeAdapter = new PayTypeAdapter(R.layout.item_pay_type_layout, payTypeBeans);
     payType.setAdapter(payTypeAdapter);
     vipInfoAdapter.setOnItemClickListener((adapter, view, position) -> {
