@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 
+import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.park.PersonFragment;
 
 import java.util.HashMap;
@@ -34,7 +35,8 @@ public class HomeParkPageAdapter extends FragmentStatePagerAdapter {
     }
 
     private int count;
-    public HomeParkPageAdapter(FragmentManager fm,int count) {
+
+    public HomeParkPageAdapter(FragmentManager fm, int count) {
         super(fm);
         this.count = count;
     }
@@ -44,10 +46,10 @@ public class HomeParkPageAdapter extends FragmentStatePagerAdapter {
         Fragment ft = null;
         switch (position) {
             case 0:
-                ft = PersonFragment.newInstance("0");
+                ft = PersonFragment.newInstance(UserProfile.getInstance().getHomeSexType() == 0 ? "0" : "3");
                 break;
             case 1:
-                ft = PersonFragment.newInstance("1");
+                ft = PersonFragment.newInstance(UserProfile.getInstance().getHomeSexType() == 0 ? "1" : "4");
                 break;
             case 2:
                 ft = PersonFragment.newInstance("2");
