@@ -6,10 +6,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
-
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseFragment;
 import com.qsd.jmwh.dialog.SelectHintPop;
+import com.qsd.jmwh.module.home.user.activity.WithdrawalHintBean;
 import com.qsd.jmwh.module.home.user.adapter.WithdrawalAdapter;
 import com.qsd.jmwh.module.home.user.bean.AccountBalance;
 import com.qsd.jmwh.module.home.user.bean.GoodsInfoBean;
@@ -22,7 +22,6 @@ import com.qsd.jmwh.utils.PayUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
-
 import java.util.List;
 
 public class JiaMianCoinFragment extends BaseFragment
@@ -73,28 +72,12 @@ public class JiaMianCoinFragment extends BaseFragment
         }).setNegativeButton(v1 -> payPop.dismiss()).showPopupWindow();
         break;
       case R.id.withdrawal:
-        SelectHintPop selectHintPop = new SelectHintPop(getActivity());
-        selectHintPop.
-            setTitle("现金提现金额")
-            .setMessage("提现金额必须是100元的整数倍，如100、200、500、1000 …")
-            .setEditButton("确定", input -> {
-              if (TextUtils.isEmpty(input)) {
-                ToastUtils.show("输入金额不能为空");
-              } else if (Integer.parseInt(input) % 100 != 0) {
-                ToastUtils.show("输入正确类型");
-              } else {
-                mPresenter.getCoinConvertMoney(Integer.parseInt(input));
-                selectHintPop.dismiss();
-              }
-            })
-            .setBottomButton("取消", v12 -> {
-              selectHintPop.dismiss();
-            });
-        selectHintPop.showPopupWindow();
+        mPresenter.getWithdrawalHint();
         break;
       case R.id.top_up:
         mPresenter.getGoods();
         break;
+        default:
     }
   }
 
@@ -138,5 +121,26 @@ public class JiaMianCoinFragment extends BaseFragment
           }
         });
     dialog.showPopupWindow();
+  }
+
+  @Override public void setWithdrawHint(WithdrawalHintBean hint) {
+    SelectHintPop selectHintPop = new SelectHintPop(getActivity());
+    selectHintPop.
+        setTitle(hint.sText1)
+        .setMessage(hint.sText2)
+        .setEditButton("确定", input -> {
+          if (TextUtils.isEmpty(input)) {
+            ToastUtils.show("输入金额不能为空");
+          } else if (Integer.parseInt(input) % 100 != 0) {
+            ToastUtils.show("输入正确类型");
+          } else {
+            mPresenter.getCoinConvertMoney(Integer.parseInt(input));
+            selectHintPop.dismiss();
+          }
+        })
+        .setBottomButton("取消", v12 -> {
+          selectHintPop.dismiss();
+        });
+    selectHintPop.showPopupWindow();
   }
 }

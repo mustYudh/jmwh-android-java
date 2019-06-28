@@ -2,6 +2,7 @@ package com.qsd.jmwh.http;
 
 import com.qsd.jmwh.module.home.message.bean.SystemCountBean;
 import com.qsd.jmwh.module.home.message.bean.SystemMessageBean;
+import com.qsd.jmwh.module.home.user.activity.WithdrawalHintBean;
 import com.qsd.jmwh.module.home.user.bean.AccountBalance;
 import com.qsd.jmwh.module.home.user.bean.EvaluationBean;
 import com.qsd.jmwh.module.home.user.bean.GoodsInfoBean;
@@ -119,4 +120,8 @@ public interface OtherApiServices {
 
   @NetMethod(ParameterNames = {"nType","sTitle","sContent","lSenderId","lReceiverId","nBizId","nStatus"},Url = "/MsgService/addMsgCount")
   Observable<SystemCountBean> addMsgCount(int nType,String sTitle,String sContent,int lSenderId,int lReceiverId,int nBizId,int nStatus);
+
+
+  @NetMethod(Url = "/SystemService/getWithdrawMaskBallCoinText")
+  Observable<WithdrawalHintBean> getWithdrawMaskBallCoinText();
 }

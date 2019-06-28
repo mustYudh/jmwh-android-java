@@ -1,9 +1,9 @@
 package com.qsd.jmwh.module.home.user.presenter;
 
 import android.annotation.SuppressLint;
-
 import com.qsd.jmwh.http.OtherApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
+import com.qsd.jmwh.module.home.user.activity.WithdrawalHintBean;
 import com.qsd.jmwh.module.home.user.bean.AccountBalance;
 import com.qsd.jmwh.module.home.user.bean.GoodsInfoBean;
 import com.qsd.jmwh.module.home.user.bean.MaskBallCoinBean;
@@ -12,7 +12,6 @@ import com.xuexiang.xhttp2.XHttpProxy;
 import com.xuexiang.xhttp2.exception.ApiException;
 import com.yu.common.framework.BaseViewPresenter;
 import com.yu.common.toast.ToastUtils;
-
 import java.util.List;
 
 @SuppressLint("CheckResult") public class JiaMianCoinPresenter
@@ -99,5 +98,17 @@ import java.util.List;
             getViewer().setGoodsInfo(goodsInfoBean.cdoList);
           }
         });
+  }
+
+
+  public void getWithdrawalHint() {
+    XHttpProxy.proxy(OtherApiServices.class)
+        .getWithdrawMaskBallCoinText().subscribeWith(new TipRequestSubscriber<WithdrawalHintBean>() {
+      @Override protected void onSuccess(WithdrawalHintBean bean) {
+        assert getViewer() != null;
+        getViewer().setWithdrawHint(bean);
+      }
+    });
+
   }
 }

@@ -1,10 +1,10 @@
 package com.qsd.jmwh.module.home.user.presenter;
 
+import com.qsd.jmwh.module.home.user.activity.WithdrawalHintBean;
 import com.qsd.jmwh.module.home.user.bean.AccountBalance;
 import com.qsd.jmwh.module.home.user.bean.GoodsInfoBean;
 import com.qsd.jmwh.module.home.user.bean.MaskBallCoinBean;
 import com.yu.common.mvp.Viewer;
-
 import java.util.List;
 
 public interface JiaMianCoinViewer extends Viewer {
@@ -14,4 +14,6 @@ public interface JiaMianCoinViewer extends Viewer {
   void coinConvertMoney(MaskBallCoinBean maskBallCoinBean);
 
   void setGoodsInfo(List<GoodsInfoBean.CdoListBean> goods);
+
+  void setWithdrawHint(WithdrawalHintBean hint);
 }

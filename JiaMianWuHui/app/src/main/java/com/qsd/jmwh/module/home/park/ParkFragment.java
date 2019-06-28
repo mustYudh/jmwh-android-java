@@ -60,6 +60,7 @@ public class ParkFragment extends BaseBarFragment
 
   @Override protected void loadData() {
     initView();
+    initTabLayout();
     initListener();
   }
 
@@ -72,13 +73,12 @@ public class ParkFragment extends BaseBarFragment
     mTabLayout = bindView(R.id.tab_layout);
     mPager = bindView(R.id.view_pager);
     if (UserProfile.getInstance().getSex() == 0) {
-      UserProfile.getInstance().setHomeSexType(1);
+      UserProfile.getInstance().setHomeSexType(0);
       rightMenu.setText("男士列表");
     } else {
-      UserProfile.getInstance().setHomeSexType(0);
+      UserProfile.getInstance().setHomeSexType(1);
       rightMenu.setText("女士列表");
     }
-    initTabLayout();
   }
 
   private void initTabLayout() {
@@ -132,8 +132,10 @@ public class ParkFragment extends BaseBarFragment
     rightMenu.setOnClickListener(view -> {
       if (UserProfile.getInstance().getHomeSexType() == 0) {
         UserProfile.getInstance().setHomeSexType(1);
+        rightMenu.setText("女士列表");
       } else {
         UserProfile.getInstance().setHomeSexType(0);
+        rightMenu.setText("男士列表");
       }
       initTabLayout();
     });
