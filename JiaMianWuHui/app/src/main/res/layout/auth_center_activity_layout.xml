@@ -28,13 +28,13 @@
           />
 
 
-      <TextView
+      <ImageView
           android:id="@+id/cover_img"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:gravity="center"
-          android:scaleType="centerCrop"
-          android:text="请上传认证视频"
+          android:scaleType="centerInside"
+          android:src="@drawable/ic_auth_step"
           android:textSize="18sp"
           />
 

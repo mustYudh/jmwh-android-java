@@ -21,6 +21,7 @@ import com.qsd.jmwh.base.BaseFragment;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.dialog.SelectHintPop;
 import com.qsd.jmwh.dialog.ShareDialog;
+import com.qsd.jmwh.dialog.net.NetLoadingDialog;
 import com.qsd.jmwh.module.home.user.activity.AuthCenterActivity;
 import com.qsd.jmwh.module.home.user.activity.EditUserInfoActivity;
 import com.qsd.jmwh.module.home.user.activity.MineBlackMenuActivity;
@@ -101,7 +102,7 @@ public class UserFragment extends BaseFragment
         getLaunchHelper().startActivity(MoneyBagActivity.class);
         break;
       case R.id.edit_user_info:
-        getLaunchHelper().startActivity(EditUserInfoActivity.getIntent(getActivity(),mCenterInfo));
+        getLaunchHelper().startActivity(EditUserInfoActivity.getIntent(getActivity(), mCenterInfo));
         break;
       case R.id.privacy_setting:
         getLaunchHelper().startActivity(
@@ -135,7 +136,7 @@ public class UserFragment extends BaseFragment
             });
         break;
       case R.id.my_radio:
-            getLaunchHelper().startActivity(MineRadioListActivity.class);
+        getLaunchHelper().startActivity(MineRadioListActivity.class);
         break;
       case R.id.my_like:
         getLaunchHelper().startActivity(MineLikeActivity.class);
@@ -298,6 +299,8 @@ public class UserFragment extends BaseFragment
   @Override public void uploadVideoSuccess() {
     ToastUtils.show("上传成功");
     loadData();
+    refreshData();
+    NetLoadingDialog.dismissLoading();
   }
 
   private static String getAppVersion(Context context) {
