@@ -54,7 +54,7 @@ ext {
     applicationId = 'com.qsd.jmwh'
     compileSdkVersion = 28
     minSdkVersion = 17
-    targetSdkVersion = 22
+    targetSdkVersion = 26
     appTargetSdkVersion = 26
 
     sdkSourceCompatibility = 1.7

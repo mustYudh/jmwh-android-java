@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarFragment;
 import com.qsd.jmwh.data.UserProfile;
@@ -29,7 +28,6 @@ import com.qsd.jmwh.view.ProxyDrawable;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.ui.Res;
 import com.yu.common.utils.DensityUtil;
-
 import java.util.List;
 
 /**
@@ -38,15 +36,15 @@ import java.util.List;
  */
 
 public class ParkFragment extends BaseBarFragment
-    implements ParkViewer, TabLayout.OnTabSelectedListener {
+    implements ParkViewer, TabLayout.OnTabSelectedListener, ViewPager.OnPageChangeListener {
   @PresenterLifeCycle ParkPresenter mPresenter = new ParkPresenter(this);
-  private TextView right_menu;
+  private TextView rightMenu;
   private TextView back;
   private HomeParkPageAdapter adapter;
   private DialogUtils cityDialog;
-  private ViewPager viewPager;
   private TabLayout mTabLayout;
   private ViewPager mPager;
+  private LinearLayout mLlEdit;
 
   @Override protected int getActionBarLayoutId() {
     return R.layout.hoem_bar_layout;
@@ -60,35 +58,27 @@ public class ParkFragment extends BaseBarFragment
 
   }
 
+  @Override protected void loadData() {
+    initView();
+    initListener();
+  }
+
   private void initView() {
     EditText edit = bindView(R.id.edit);
     edit.setInputType(InputType.TYPE_NULL);
-    right_menu = bindView(R.id.right_menu);
+    rightMenu = bindView(R.id.right_menu);
     back = bindView(R.id.back);
-    LinearLayout ll_edit = bindView(R.id.ll_edit);
+    mLlEdit = bindView(R.id.ll_edit);
     mTabLayout = bindView(R.id.tab_layout);
     mPager = bindView(R.id.view_pager);
-    initTabLayout();
     if (UserProfile.getInstance().getSex() == 0) {
       UserProfile.getInstance().setHomeSexType(1);
-      right_menu.setText("男士列表");
+      rightMenu.setText("男士列表");
     } else {
       UserProfile.getInstance().setHomeSexType(0);
-      right_menu.setText("女士列表");
+      rightMenu.setText("女士列表");
     }
-
-    ll_edit.setOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View view) {
-        startActivity(new Intent(getActivity(), SearchActivity.class));
-      }
-    });
-
-    back.setOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View view) {
-        mPresenter.getRangeData(1, 0, UserProfile.getInstance().getUserId(),
-            UserProfile.getInstance().getAppToken(), 0);
-      }
-    });
+    initTabLayout();
   }
 
   private void initTabLayout() {
@@ -130,51 +120,24 @@ public class ParkFragment extends BaseBarFragment
         tab.setCustomView(view);
       }
     }
-    right_menu.setOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View view) {
-        if (UserProfile.getInstance().getHomeSexType() == 0) {
-          UserProfile.getInstance().setHomeSexType(1);
-        } else {
-          UserProfile.getInstance().setHomeSexType(0);
-        }
-        initTabLayout();
-        adapter.getFragment(mPager.getCurrentItem()).mPresenter.initPersonListData(
-            UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(),
-            mPager.getCurrentItem() + "", "",
-            adapter.getFragment(mPager.getCurrentItem()).pageIndex + "",
-            UserProfile.getInstance().getHomeSexType() + "",
-            UserProfile.getInstance().getHomeCityName());
-        right_menu.setText(UserProfile.getInstance().getHomeSexType() == 0 ? "女士列表" : "男士列表");
-      }
-    });
-
-    mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-      @Override public void onPageScrolled(int i, float v, int i1) {
-
-      }
-
-      @Override public void onPageSelected(int i) {
-        if (i != 0) {
-          adapter.getFragment(i).tv_top_num.setVisibility(View.GONE);
-        } else {
-          adapter.getFragment(i).tv_top_num.setVisibility(View.VISIBLE);
-        }
-        adapter.getFragment(mPager.getCurrentItem()).mPresenter.initPersonListData(
-            UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(),
-            mPager.getCurrentItem() + "", "",
-            adapter.getFragment(mPager.getCurrentItem()).pageIndex + "",
-            UserProfile.getInstance().getHomeSexType() + "",
-            UserProfile.getInstance().getHomeCityName());
-      }
-
-      @Override public void onPageScrollStateChanged(int i) {
-
-      }
-    });
+    mPager.setOffscreenPageLimit(isGirl ? 3 : 2);
   }
 
-  @Override protected void loadData() {
-    initView();
+  private void initListener() {
+    mLlEdit.setOnClickListener(
+        view -> startActivity(new Intent(getActivity(), SearchActivity.class)));
+    back.setOnClickListener(
+        view -> mPresenter.getRangeData(1, 0, UserProfile.getInstance().getUserId(),
+            UserProfile.getInstance().getAppToken(), 0));
+    rightMenu.setOnClickListener(view -> {
+      if (UserProfile.getInstance().getHomeSexType() == 0) {
+        UserProfile.getInstance().setHomeSexType(1);
+      } else {
+        UserProfile.getInstance().setHomeSexType(0);
+      }
+      initTabLayout();
+    });
+    mPager.addOnPageChangeListener(this);
   }
 
   @Override public void onTabSelected(TabLayout.Tab tab) {
@@ -205,22 +168,18 @@ public class ParkFragment extends BaseBarFragment
    * 城市弹窗
    */
   private void showCityDialog(List<RangeData.Range> provinces, int type) {
-    View.OnClickListener listener = new View.OnClickListener() {
-      @Override public void onClick(View v) {
-        switch (v.getId()) {
-          case R.id.tv_fujin:
-            if (cityDialog.isShowing()) {
-              cityDialog.dismiss();
-            }
-            UserProfile.getInstance().setHomeCityName("");
-            adapter.getFragment(viewPager.getCurrentItem()).mPresenter.initPersonListData(
-                UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(),
-                viewPager.getCurrentItem() + "", "",
-                adapter.getFragment(viewPager.getCurrentItem()).pageIndex + "",
-                UserProfile.getInstance().getHomeSexType() + "",
-                UserProfile.getInstance().getHomeCityName());
-            break;
+    View.OnClickListener listener = v -> {
+      if (v.getId() == R.id.tv_fujin) {
+        if (cityDialog.isShowing()) {
+          cityDialog.dismiss();
         }
+        UserProfile.getInstance().setHomeCityName("");
+        adapter.getFragment(mPager.getCurrentItem()).mPresenter.initPersonListData(
+            UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(),
+            mPager.getCurrentItem() + "", "",
+            adapter.getFragment(mPager.getCurrentItem()).pageIndex + "",
+            UserProfile.getInstance().getHomeSexType() + "",
+            UserProfile.getInstance().getHomeCityName());
       }
     };
 
@@ -238,26 +197,40 @@ public class ParkFragment extends BaseBarFragment
         new PackCityRvAdapter(R.layout.item_pack_city, provinces, getActivity());
     rv_city.setAdapter(adapter_city);
 
-    adapter_city.setOnItemCityClickListener(new PackCityRvAdapter.OnItemCityClickListener() {
-      @Override public void setOnItemCityClick(int id, String name) {
-        cityDialog.dismiss();
-        if (type == 1) {
-          UserProfile.getInstance().setHomeCityName(name);
-          adapter.getFragment(viewPager.getCurrentItem()).mPresenter.initPersonListData(
-              UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(),
-              viewPager.getCurrentItem() + "", "",
-              adapter.getFragment(viewPager.getCurrentItem()).pageIndex + "",
-              UserProfile.getInstance().getHomeSexType() + "",
-              UserProfile.getInstance().getHomeCityName());
-        } else {
-          mPresenter.getRangeData(1, id, UserProfile.getInstance().getUserId(),
-              UserProfile.getInstance().getAppToken(), 1);
-        }
+    adapter_city.setOnItemCityClickListener((id, name) -> {
+      cityDialog.dismiss();
+      if (type == 1) {
+        UserProfile.getInstance().setHomeCityName(name);
+        adapter.getFragment(mPager.getCurrentItem()).mPresenter.initPersonListData(
+            UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(),
+            mPager.getCurrentItem() + "", "",
+            adapter.getFragment(mPager.getCurrentItem()).pageIndex + "",
+            UserProfile.getInstance().getHomeSexType() + "",
+            UserProfile.getInstance().getHomeCityName());
+      } else {
+        mPresenter.getRangeData(1, id, UserProfile.getInstance().getUserId(),
+            UserProfile.getInstance().getAppToken(), 1);
       }
     });
   }
 
   @Override public void setCity(List<RangeData.Range> provinces, int type) {
     showCityDialog(provinces, type);
+  }
+
+  @Override public void onPageScrolled(int i, float v, int i1) {
+
+  }
+
+  @Override public void onPageSelected(int i) {
+    if (i != 0) {
+      adapter.getFragment(i).tv_top_num.setVisibility(View.GONE);
+    } else {
+      adapter.getFragment(i).tv_top_num.setVisibility(View.VISIBLE);
+    }
+  }
+
+  @Override public void onPageScrollStateChanged(int i) {
+
   }
 }

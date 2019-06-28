@@ -54,6 +54,7 @@ public class HomeParkPageAdapter extends FragmentStatePagerAdapter {
             case 2:
                 ft = PersonFragment.newInstance("2");
                 break;
+                default:
 
         }
         return ft;
