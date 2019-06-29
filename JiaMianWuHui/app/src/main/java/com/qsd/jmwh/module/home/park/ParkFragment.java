@@ -73,17 +73,15 @@ public class ParkFragment extends BaseBarFragment
     mLlEdit = bindView(R.id.ll_edit);
     mTabLayout = bindView(R.id.tab_layout);
     mPager = bindView(R.id.view_pager);
-    if (UserProfile.getInstance().getSex() == 0) {
-      UserProfile.getInstance().setHomeSexType(0);
+    if (currentSelectListType == 1) {
       rightMenu.setText("男士列表");
     } else {
-      UserProfile.getInstance().setHomeSexType(1);
       rightMenu.setText("女士列表");
     }
   }
 
   private void initTabLayout() {
-    boolean isGirl = UserProfile.getInstance().getHomeSexType() == 1;
+    boolean isGirl = currentSelectListType == 0;
     View tabStrip = mTabLayout.getChildAt(0);
     if (tabStrip != null) {
       ProxyDrawable proxyDrawable = new ProxyDrawable(tabStrip, 7);
@@ -108,7 +106,7 @@ public class ParkFragment extends BaseBarFragment
           textView.setText("附近");
           textView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         } else if (i == 1) {
-          textView.setText(UserProfile.getInstance().getHomeSexType() == 0 ?  "会员" : "注册");
+          textView.setText(currentSelectListType == 0 ?  "会员" : "注册");
           textView.setTextColor(Res.color(R.color.color_666666));
           textView.setTextSize(15);
           textView.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
@@ -131,11 +129,11 @@ public class ParkFragment extends BaseBarFragment
         view -> mPresenter.getRangeData(1, 0, UserProfile.getInstance().getUserId(),
             UserProfile.getInstance().getAppToken(), 0));
     rightMenu.setOnClickListener(view -> {
-      if (UserProfile.getInstance().getHomeSexType() == 0) {
-        UserProfile.getInstance().setHomeSexType(1);
+      if (currentSelectListType == 0) {
+        currentSelectListType = 1;
         rightMenu.setText("女士列表");
       } else {
-        UserProfile.getInstance().setHomeSexType(0);
+        currentSelectListType = 0;
         rightMenu.setText("男士列表");
       }
       initTabLayout();
@@ -181,7 +179,7 @@ public class ParkFragment extends BaseBarFragment
             UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(),
             mPager.getCurrentItem() + "", "",
             adapter.getFragment(mPager.getCurrentItem()).pageIndex + "",
-            UserProfile.getInstance().getHomeSexType() + "",
+            currentSelectListType + "",
             UserProfile.getInstance().getHomeCityName());
       }
     };
@@ -208,7 +206,7 @@ public class ParkFragment extends BaseBarFragment
             UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(),
             mPager.getCurrentItem() + "", "",
             adapter.getFragment(mPager.getCurrentItem()).pageIndex + "",
-            UserProfile.getInstance().getHomeSexType() + "",
+            currentSelectListType + "",
             UserProfile.getInstance().getHomeCityName());
       } else {
         mPresenter.getRangeData(1, id, UserProfile.getInstance().getUserId(),
