@@ -46,10 +46,10 @@ public class HomeParkPageAdapter extends FragmentStatePagerAdapter {
         Fragment ft = null;
         switch (position) {
             case 0:
-                ft = PersonFragment.newInstance(UserProfile.getInstance().getHomeSexType() == 0 ? "0" : "3");
+                ft = PersonFragment.newInstance(UserProfile.getInstance().getHomeSexType() == 1 ? "0" : "3");
                 break;
             case 1:
-                ft = PersonFragment.newInstance(UserProfile.getInstance().getHomeSexType() == 0 ? "1" : "4");
+                ft = PersonFragment.newInstance(UserProfile.getInstance().getHomeSexType() == 1 ? "1" : "4");
                 break;
             case 2:
                 ft = PersonFragment.newInstance("2");

@@ -45,6 +45,7 @@ public class ParkFragment extends BaseBarFragment
   private TabLayout mTabLayout;
   private ViewPager mPager;
   private LinearLayout mLlEdit;
+  private int currentSelectListType = UserProfile.getInstance().getSex() == 1 ? 0 : 1;
 
   @Override protected int getActionBarLayoutId() {
     return R.layout.hoem_bar_layout;
@@ -107,7 +108,7 @@ public class ParkFragment extends BaseBarFragment
           textView.setText("附近");
           textView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         } else if (i == 1) {
-          textView.setText("注册");
+          textView.setText(UserProfile.getInstance().getHomeSexType() == 0 ?  "会员" : "注册");
           textView.setTextColor(Res.color(R.color.color_666666));
           textView.setTextSize(15);
           textView.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));

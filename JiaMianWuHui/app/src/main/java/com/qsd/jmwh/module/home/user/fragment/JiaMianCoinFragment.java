@@ -32,6 +32,7 @@ public class JiaMianCoinFragment extends BaseFragment
   private RecyclerView recyclerView;
   private WithdrawalAdapter adapter;
   private SmartRefreshLayout refresh;
+  private SelectHintPop mSelectHintPop;
 
   @Override protected int getContentViewId() {
     return R.layout.jia_mian_coin_fragment;
@@ -60,6 +61,7 @@ public class JiaMianCoinFragment extends BaseFragment
     adapter = new WithdrawalAdapter(R.layout.item_withdrawal_layout);
     recyclerView.setAdapter(adapter);
     mPresenter.getInfo(pageIndex, null, 0);
+    mPresenter.getWithdrawalHint();
   }
 
   @Override public void onClick(View v) {
@@ -72,12 +74,12 @@ public class JiaMianCoinFragment extends BaseFragment
         }).setNegativeButton(v1 -> payPop.dismiss()).showPopupWindow();
         break;
       case R.id.withdrawal:
-        mPresenter.getWithdrawalHint();
+        mSelectHintPop.showPopupWindow();
         break;
       case R.id.top_up:
         mPresenter.getGoods();
         break;
-        default:
+      default:
     }
   }
 
@@ -124,23 +126,19 @@ public class JiaMianCoinFragment extends BaseFragment
   }
 
   @Override public void setWithdrawHint(WithdrawalHintBean hint) {
-    SelectHintPop selectHintPop = new SelectHintPop(getActivity());
-    selectHintPop.
-        setTitle(hint.sText1)
-        .setMessage(hint.sText2)
-        .setEditButton("确定", input -> {
-          if (TextUtils.isEmpty(input)) {
-            ToastUtils.show("输入金额不能为空");
-          } else if (Integer.parseInt(input) % 100 != 0) {
-            ToastUtils.show("输入正确类型");
-          } else {
-            mPresenter.getCoinConvertMoney(Integer.parseInt(input));
-            selectHintPop.dismiss();
-          }
-        })
-        .setBottomButton("取消", v12 -> {
-          selectHintPop.dismiss();
-        });
-    selectHintPop.showPopupWindow();
+    bindText(R.id.hint,hint.sText1);
+    mSelectHintPop = new SelectHintPop(getActivity());
+    mSelectHintPop.
+        setTitle("现金提现金额")
+        .setMessage(hint.sText2).setEditButton("确定", input -> {
+      if (TextUtils.isEmpty(input)) {
+        ToastUtils.show("输入金额不能为空");
+      } else {
+        mPresenter.getCoinConvertMoney(Integer.parseInt(input));
+        mSelectHintPop.dismiss();
+      }
+    }).setBottomButton("取消", v12 -> {
+      mSelectHintPop.dismiss();
+    });
   }
 }
