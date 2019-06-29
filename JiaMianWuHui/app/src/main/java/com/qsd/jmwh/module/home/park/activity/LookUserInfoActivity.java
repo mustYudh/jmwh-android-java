@@ -15,6 +15,7 @@ import com.qsd.jmwh.dialog.SelectHintPop;
 import com.qsd.jmwh.dialog.ShareDialog;
 import com.qsd.jmwh.module.home.park.adapter.UserPhotoAdapter;
 import com.qsd.jmwh.module.home.park.bean.OtherUserInfoBean;
+import com.qsd.jmwh.module.home.park.bean.SubViewCount;
 import com.qsd.jmwh.module.home.park.dialog.MoreActionDialog;
 import com.qsd.jmwh.module.home.park.presenter.LookUserInfoPresenter;
 import com.qsd.jmwh.module.home.park.presenter.LookUserInfoViewer;
@@ -39,7 +40,8 @@ public class LookUserInfoActivity extends BaseActivity
   private int dGalaryVal;
   private int authType;
   private boolean firstLoading = true;
-
+  private boolean showContact = false;
+  private OtherUserInfoBean userCenterInfo;
   private final static String USER_ID = "user_id";
   private final static String TYPE = "type";
   private final static String BIZ_ID = "biz_id";
@@ -79,16 +81,17 @@ public class LookUserInfoActivity extends BaseActivity
   }
 
   @Override public void setUserInfo(OtherUserInfoBean userCenterInfo) {
+    this.userCenterInfo = userCenterInfo;
     OtherUserInfoBean.CdoUserDataBean userData = userCenterInfo.cdoUserData;
     isVip = userCenterInfo.bVIP;
 
     int nSubViewUserCount = userCenterInfo.nSubViewUserCount;
-    if (nSubViewUserCount <= 3) {
+    if (UserProfile.getInstance().getSex() == 1 && nSubViewUserCount <= 5) {
       SelectHintPop hint = new SelectHintPop(this);
       hint.setOutsideTouchable(false);
       hint.setFocusable(true);
       hint.setTitle("查看人数提示")
-          .setMessage("你今天还能查看" + nSubViewUserCount + "位女士，非会员用户每天只能查看10位女士。")
+          .setMessage("你今天还能查看" + nSubViewUserCount + "位女士，非会员用户每天只能查看15位女士。")
           .setPositiveButton("升级会员", v1 -> {
             buyVip();
             hint.dismiss();
@@ -102,9 +105,9 @@ public class LookUserInfoActivity extends BaseActivity
           })
           .showPopupWindow();
       hint.setOnDismissListener(() -> {
-          if (nSubViewUserCount == 0) {
-            finish();
-          }
+        if (nSubViewUserCount == 0) {
+          finish();
+        }
       });
       if (nSubViewUserCount == 0) {
         return;
@@ -114,16 +117,13 @@ public class LookUserInfoActivity extends BaseActivity
     if (userData.nSex == 0) {
       bust.setContentText(userData.sBust);
       NormaFormItemVIew qq = bindView(R.id.qq, this);
-      qq.setContent(isVip ? userData.QQ : "已填写，点击查看");
+      qq.setContent(showContact ? userData.QQ : "已填写，点击查看");
       NormaFormItemVIew weChat = bindView(R.id.wechat, this);
-      weChat.setContent(isVip ? userData.WX : "已填写，点击查看");
+      weChat.setContent(showContact ? userData.WX : "已填写，点击查看");
     } else {
       bindView(R.id.bust, false);
       bindView(R.id.qq, false);
       bindView(R.id.we_chat, false);
-    }
-    if (UserProfile.getInstance().getSex() == 1) {
-      bindView(R.id.social_account, !isVip && UserProfile.getInstance().getUserId() != userID);
     }
 
     ImageLoader.loadCenterCrop(getActivity(), userData.sUserHeadPic, bindView(R.id.header));
@@ -208,13 +208,13 @@ public class LookUserInfoActivity extends BaseActivity
         }
         break;
       case R.id.qq:
-        toChat();
+        mPresenter.getSubViewCount();
         break;
       case R.id.wechat:
-        toChat();
+        mPresenter.getSubViewCount();
         break;
       case R.id.social_account:
-        toChat();
+
         break;
       case R.id.share:
         ShareDialog shareDialog = new ShareDialog(getActivity());
@@ -241,8 +241,8 @@ public class LookUserInfoActivity extends BaseActivity
               buyVip();
               hint.dismiss();
             })
-            .setNegativeButton("付费查看和私聊 (10假面币)", v12 -> {
-              mPresenter.buyContactPay(userID);
+            .setNegativeButton("付费查看和私聊 (" + userCenterInfo.nSubViewUserCount + "假面币)", v12 -> {
+              mPresenter.buyContactPay(userID, userCenterInfo.nSubViewUserCount);
               hint.dismiss();
             })
             .setBottomButton("取消", v13 -> hint.dismiss())
@@ -255,9 +255,7 @@ public class LookUserInfoActivity extends BaseActivity
         SelectHintPop hint = new SelectHintPop(this);
         hint.setTitle("你还没有进行认证")
             .setMessage("认证你的真实性之后，才能私聊男士用户。")
-            .setPositiveButton("马上认证", v1 -> {
-              hint.dismiss();
-            })
+            .setPositiveButton("马上认证", v1 -> hint.dismiss())
             .setNegativeButton("取消", v12 -> hint.dismiss())
             .showPopupWindow();
       } else {
@@ -278,6 +276,53 @@ public class LookUserInfoActivity extends BaseActivity
   }
 
   @Override public void refreshData() {
-    loadData();
+    showContact = true;
+    mPresenter.getUserInfo(getIntent().getIntExtra(USER_ID, -1), UserProfile.getInstance().getLat(),
+        UserProfile.getInstance().getLng(), firstLoading);
+  }
+
+  @Override public void getViewCount(SubViewCount count) {
+    if (UserProfile.getInstance().getSex() == 1) {
+      if (!count.bVIP) {
+        SelectHintPop hint = new SelectHintPop(this);
+        hint.setTitle("联系" + sNickName)
+            .setMessage("查看 " + sNickName + " 的全部资料和私聊她")
+            .setPositiveButton("成为会员 免费私聊", v1 -> {
+              buyVip();
+              hint.dismiss();
+            })
+            .setNegativeButton("付费查看和私聊 (" + count.dContactVal + "假面币)", v12 -> {
+              mPresenter.buyContactPay(userID, count.dContactVal);
+              hint.dismiss();
+            })
+            .setBottomButton("取消", v13 -> hint.dismiss())
+            .showPopupWindow();
+      } else {
+        boolean free = count.nSurContactViewCount > 0;
+        SelectHintPop hint = new SelectHintPop(this);
+        hint.setTitle("联系" + sNickName)
+            .setMessage(free ? "您还有" + count.nSurContactViewCount + "次查看联系方式机会" : "您的免费查看次数已上线")
+            .setSingleButton(free ? "确定" : "付费查看和私聊 (" + count.dContactVal + "假面币)", v -> {
+              if (free) {
+                refreshData();
+              } else {
+                mPresenter.buyContactPay(userID, count.dContactVal);
+              }
+              hint.dismiss();
+            })
+            .setBottomButton("取消", v13 -> hint.dismiss())
+            .showPopupWindow();
+      }
+    } else {
+      SelectHintPop hint = new SelectHintPop(this);
+      hint.setTitle("联系" + sNickName)
+          .setMessage("查看 " + sNickName + " 的全部资料和私聊她")
+          .setNegativeButton("付费查看和私聊 (" + count.dContactVal + "假面币)", v12 -> {
+            mPresenter.buyContactPay(userID, count.dContactVal);
+            hint.dismiss();
+          })
+          .setBottomButton("取消", v13 -> hint.dismiss())
+          .showPopupWindow();
+    }
   }
 }

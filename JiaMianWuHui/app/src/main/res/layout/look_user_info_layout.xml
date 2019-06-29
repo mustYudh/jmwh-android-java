@@ -213,6 +213,7 @@
 
 
     <com.yu.common.ui.DelayClickTextView
+        android:visibility="gone"
         android:id="@+id/social_account"
         android:layout_width="0dp"
         android:layout_height="match_parent"

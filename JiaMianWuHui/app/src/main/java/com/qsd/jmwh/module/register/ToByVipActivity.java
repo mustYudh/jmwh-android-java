@@ -85,6 +85,7 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
     vipInfoAdapter = new VipInfoAdapter(R.layout.item_vip_info_layout, vipInfoBean.cdoList);
     for (VipInfoBean.CdoListBean bean : vipInfoBean.cdoList) {
       if (bean.bRecommend) {
+        bean.selected = true;
         cdoListBean = bean;
       }
     }
