@@ -133,9 +133,24 @@
           android:text="补充描述（选填）"
           android:textColor="@color/color_666666"
           android:textSize="16sp"
-          android:paddingBottom="30dp"
           />
 
+
+      <EditText
+          android:id="@+id/info"
+          android:paddingTop="15dp"
+          android:paddingBottom="15dp"
+          android:gravity="center_vertical"
+          android:hint="请输入描述"
+          android:textColor="@color/color_666666"
+          android:textSize="16sp"
+          android:background="@null"
+          android:layout_marginLeft="15dp"
+          android:layout_marginRight="15dp"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+
+          />
     </LinearLayout>
 
   </LinearLayout>
@@ -148,6 +163,8 @@
       android:text="提交"
       style="@style/app_blue_button"
       />
+
+
 
 
 </LinearLayout>

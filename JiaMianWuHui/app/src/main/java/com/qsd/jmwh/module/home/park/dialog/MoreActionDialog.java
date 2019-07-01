@@ -50,7 +50,7 @@ public class MoreActionDialog extends BasePopupWindow implements View.OnClickLis
             case R.id.to_black_list:
                 SelectHintPop hint = new SelectHintPop(getContext());
                 hint.setTitle("提示")
-                        .setMessage("你们将无法再在假面舞会与会对方，确定吗？")
+                        .setMessage("你们将无法再在假面舞会约会对方，确定吗？")
                         .setSingleButton("确定拉黑", v1 -> {
                             toBlackList();
                             hint.dismiss();
@@ -62,6 +62,7 @@ public class MoreActionDialog extends BasePopupWindow implements View.OnClickLis
                 LauncherHelper.from(getContext()).startActivity(ToReportActivity.getIntent(getContext(),userId,lBizId,nType));
                 dismiss();
                 break;
+                default:
         }
     }
 

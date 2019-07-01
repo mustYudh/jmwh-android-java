@@ -106,7 +106,7 @@ public class ParkFragment extends BaseBarFragment
           textView.setText("附近");
           textView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         } else if (i == 1) {
-          textView.setText(currentSelectListType == 0 ?  "会员" : "注册");
+          textView.setText(currentSelectListType == 1 ?  "会员" : "注册");
           textView.setTextColor(Res.color(R.color.color_666666));
           textView.setTextSize(15);
           textView.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
@@ -131,10 +131,10 @@ public class ParkFragment extends BaseBarFragment
     rightMenu.setOnClickListener(view -> {
       if (currentSelectListType == 0) {
         currentSelectListType = 1;
-        rightMenu.setText("女士列表");
+        rightMenu.setText("男士列表");
       } else {
         currentSelectListType = 0;
-        rightMenu.setText("男士列表");
+        rightMenu.setText("女士列表");
       }
       initTabLayout();
     });

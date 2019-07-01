@@ -114,16 +114,14 @@ public class LookUserInfoActivity extends BaseActivity
       }
     }
     NormaFormItemVIew bust = bindView(R.id.bust);
+    NormaFormItemVIew qq = bindView(R.id.qq, this);
+    qq.setContent(showContact ? userData.QQ : "已填写，点击查看");
+    NormaFormItemVIew weChat = bindView(R.id.wechat, this);
+    weChat.setContent(showContact ? userData.WX : "已填写，点击查看");
     if (userData.nSex == 0) {
       bust.setContentText(userData.sBust);
-      NormaFormItemVIew qq = bindView(R.id.qq, this);
-      qq.setContent(showContact ? userData.QQ : "已填写，点击查看");
-      NormaFormItemVIew weChat = bindView(R.id.wechat, this);
-      weChat.setContent(showContact ? userData.WX : "已填写，点击查看");
     } else {
       bindView(R.id.bust, false);
-      bindView(R.id.qq, false);
-      bindView(R.id.we_chat, false);
     }
 
     ImageLoader.loadCenterCrop(getActivity(), userData.sUserHeadPic, bindView(R.id.header));

@@ -1,10 +1,12 @@
 package com.qsd.jmwh.module.splash;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -19,6 +21,7 @@ import com.qsd.jmwh.module.register.RegisterActivity;
 import com.qsd.jmwh.module.splash.bean.RegisterSuccess;
 import com.qsd.jmwh.module.splash.presenter.SplashPresenter;
 import com.qsd.jmwh.module.splash.presenter.SplashViewer;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.yu.common.mvp.PresenterLifeCycle;
@@ -35,24 +38,26 @@ public class SplashActivity extends BaseActivity
 
   @PresenterLifeCycle private SplashPresenter mPresenter = new SplashPresenter(this);
 
-
-
-
   private static int REQUEST_CODE = 0x123;
   private AuthLoginHelp mAuthLoginHelp;
 
   @Override protected void setView(@Nullable Bundle savedInstanceState) {
     setContentView(R.layout.splash_activity_layout);
+    String[] permiss = {
+        Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE,
+        Manifest.permission.CALL_PHONE
+    };
+    if (Build.VERSION.SDK_INT >= 23) {
+      final RxPermissions rxPermissions = new RxPermissions(this);
+      rxPermissions.request(permiss).subscribe(granted -> {});
+    }
     if (UserProfile.getInstance().isAppLogin()) {
       getLaunchHelper().startActivityForResult(HomeActivity.class, REQUEST_CODE);
       finish();
     }
   }
-
-
-
-
-
 
   @Override protected void onDestroy() {
     super.onDestroy();
@@ -65,7 +70,7 @@ public class SplashActivity extends BaseActivity
     bindView(R.id.register, this);
     bindView(R.id.wechat_login, this);
     bindView(R.id.qq_login, this);
-    bindText(R.id.app_name,getAppName(this));
+    bindText(R.id.app_name, getAppName(this));
     mAuthLoginHelp = new AuthLoginHelp(getActivity());
     mAuthLoginHelp.callback(this);
   }
@@ -149,8 +154,7 @@ public class SplashActivity extends BaseActivity
     }
   }
 
-  @Subscribe(threadMode = ThreadMode.MAIN)
-  public void onMessageEvent(RegisterSuccess event) {
+  @Subscribe(threadMode = ThreadMode.MAIN) public void onMessageEvent(RegisterSuccess event) {
     if (event.success) {
       finish();
     }

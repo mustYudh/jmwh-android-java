@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.widget.EditText;
 import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
 import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
 import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
@@ -59,10 +60,11 @@ public class ToReportActivity extends BaseBarActivity implements ToReportViewer 
     user_item_five.setSwichlistener(switchStatus -> e = switchStatus ? "她是骗子" : "");
 
     bindView(R.id.commit, v -> {
+      EditText text = bindView(R.id.info);
       Intent intent = getIntent();
       mPresenter.addFeedBack(intent.getIntExtra(BE_REPORTED_USER_ID, -1),
-          intent.getIntExtra(BIZ_ID, -1), a + b + c + d + e, intent.getIntExtra(TYPE, -1),
-          imageUrl);
+          intent.getIntExtra(BIZ_ID, -1), a + b + c + d + e + text.getText().toString().trim(),
+          intent.getIntExtra(TYPE, -1), imageUrl);
     });
 
     bindView(R.id.report_image, v -> {

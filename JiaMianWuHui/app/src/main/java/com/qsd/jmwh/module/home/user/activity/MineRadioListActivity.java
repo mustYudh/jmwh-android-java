@@ -7,10 +7,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
-
 import com.google.gson.Gson;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
+import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.park.activity.LookUserInfoActivity;
 import com.qsd.jmwh.module.home.radio.adapter.MineRadioRvAdapter;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
@@ -20,11 +20,11 @@ import com.qsd.jmwh.module.home.user.bean.MineRadioListBean;
 import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
 import com.qsd.jmwh.module.home.user.presenter.MineRadioPresenter;
 import com.qsd.jmwh.module.home.user.presenter.MineRadioViewer;
+import com.qsd.jmwh.module.register.ToByVipActivity;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 import com.yu.common.ui.DelayClickImageView;
 import com.yu.common.ui.DelayClickTextView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,13 +50,9 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
         ll_empty = bindView(R.id.ll_empty);
         rv_radio.setLayoutManager(new LinearLayoutManager(this));
         mPresenter.getDatingByUserIdData("0");
+      setRightMenu("我要广播", v ->  mPresenter.getMyInfo());
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mPresenter.getMyInfo();
-    }
 
     @Override
     public void getMineRadioList(MineRadioListBean mineRadioListBean) {
@@ -186,14 +182,12 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
 
     @Override
     public void getUserInfo(UserCenterInfo userCenterMyInfo) {
-        setRightMenu("我要广播", v -> mPresenter.initRadioConfigData("0"));
-
-//        if (userCenterMyInfo.cdoUser.bVIP) {
-//            setRightMenu("我要广播", v -> mPresenter.initRadioConfigData("0"));
-//        } else {
-//            getLaunchHelper().startActivity(
-//                ToByVipActivity.getIntent(getActivity(), UserProfile.getInstance().getUserId(),
-//                    UserProfile.getInstance().getAppToken()));
-//        }
+        if (userCenterMyInfo.cdoUser.bVIP) {
+          mPresenter.initRadioConfigData("0");
+        } else {
+            getLaunchHelper().startActivity(
+                ToByVipActivity.getIntent(getActivity(), UserProfile.getInstance().getUserId(),
+                    UserProfile.getInstance().getAppToken()));
+        }
     }
 }

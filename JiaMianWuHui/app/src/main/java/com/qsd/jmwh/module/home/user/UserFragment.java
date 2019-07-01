@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -231,7 +232,8 @@ public class UserFragment extends BaseFragment
         UserItemView vip = bindView(R.id.vip);
         vip.showTag(cdoUser.bVIP);
         isVip = cdoUser.bVIP;
-        if (!TextUtils.isEmpty(cdoUser.dVIPInvalidTime)) {
+        Log.e("======>",isVip  +"");
+        if (!TextUtils.isEmpty(cdoUser.dVIPInvalidTime) && isVip) {
             vip.setHint(cdoUser.dVIPInvalidTime + "到期");
         }
         UserItemView nViewCount = bindView(R.id.nViewCount);
