@@ -21,7 +21,7 @@ public class WithdrawalAdapter
   @SuppressLint("SetTextI18n") @Override
   protected void convert(BaseViewHolder helper, AccountBalance.CdoAccountBalanceListBean item) {
     helper.setText(R.id.time, item.dCreateTime);
-    helper.setText(R.id.status, item.nStatus == 0 ? "出账" : "入账");
+    helper.setText(R.id.status, item.nStatus == 0 ? "未入账" : "已入账");
     helper.setText(R.id.desc, item.sRemark);
     TextView view = helper.getView(R.id.count);
     view.setText((item.nABType == 0 ? "+" : "-") + item.nPayFee);

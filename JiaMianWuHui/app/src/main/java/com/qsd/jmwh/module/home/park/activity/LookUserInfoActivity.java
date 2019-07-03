@@ -171,7 +171,7 @@ public class LookUserInfoActivity extends BaseActivity
     GridView gridView = bindView(R.id.user_center_photo, list.size() > 0);
     boolean isOpen = userCenterInfo.bOpenImg || isVip;
     gridView.setAdapter(new UserPhotoAdapter(list, isOpen, isVip, userID));
-    bindView(R.id.unlock_all_photo_root, !userCenterInfo.bOpenImg && !isVip);
+    bindView(R.id.unlock_all_photo_root, !userCenterInfo.bOpenImg && !isVip && UserProfile.getInstance().getSex() == 1);
     bindText(R.id.dGalaryVal, "解锁相册" + userData.dGalaryVal + "假面币，会员免费");
     bindView(R.id.dGalaryVal, this);
     dGalaryVal = userData.dGalaryVal;

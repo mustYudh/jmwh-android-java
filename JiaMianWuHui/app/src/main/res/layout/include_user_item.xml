@@ -182,7 +182,7 @@
         android:id="@+id/share"
         android:layout_width="match_parent"
         android:layout_height="49dp"
-        app:show_line="false"
+        app:show_line="true"
         app:user_left_text="分享假面舞会给朋友"
         />
 
