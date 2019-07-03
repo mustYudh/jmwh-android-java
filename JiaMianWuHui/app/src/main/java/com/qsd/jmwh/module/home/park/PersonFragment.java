@@ -76,17 +76,17 @@ public class PersonFragment extends BaseFragment implements PersonViewer {
         tv_top_num = bindView(R.id.tv_top_num);
         rv_person.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), home_type, "", pageIndex + "", UserProfile.getInstance().getHomeSexType() + "",UserProfile.getInstance().getHomeCityName());
+        mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), home_type, "", pageIndex + "", UserProfile.getInstance().getHomeSexType() + "", UserProfile.getInstance().getHomeCityName());
 
 
         refresh.setOnRefreshListener(refreshLayout -> {
             pageIndex = 0;
-            mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), home_type, "", pageIndex + "", UserProfile.getInstance().getHomeSexType() + "",UserProfile.getInstance().getHomeCityName());
+            mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), home_type, "", pageIndex + "", UserProfile.getInstance().getHomeSexType() + "", UserProfile.getInstance().getHomeCityName());
 
         });
         refresh.setOnLoadMoreListener(refreshLayout -> {
             pageIndex++;
-            mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), home_type, "", pageIndex + "", UserProfile.getInstance().getHomeSexType() + "",UserProfile.getInstance().getHomeCityName());
+            mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), home_type, "", pageIndex + "", UserProfile.getInstance().getHomeSexType() + "", UserProfile.getInstance().getHomeCityName());
 
         });
     }
@@ -112,12 +112,12 @@ public class PersonFragment extends BaseFragment implements PersonViewer {
 //                } else {
 //                    adapter.setNewData(list);
 //                }
-                adapter = new PersonRvAdapter(R.layout.item_person, list, getActivity(),UserProfile.getInstance().getHomeSexType()+"");
+                adapter = new PersonRvAdapter(R.layout.item_person, list, getActivity(), UserProfile.getInstance().getHomeSexType() + "");
                 rv_person.setAdapter(adapter);
 
                 adapter.setOnItemClickListener((adapter, view, position) -> {
                     HomePersonListBean.CdoListBean cdoListBean = (HomePersonListBean.CdoListBean) adapter.getData().get(position);
-                    getLaunchHelper().startActivity(LookUserInfoActivity.getIntent(getActivity(), cdoListBean.lUserId,cdoListBean.lUserId,2));
+                    getLaunchHelper().startActivity(LookUserInfoActivity.getIntent(getActivity(), cdoListBean.lUserId, cdoListBean.lUserId, 2));
                 });
 
                 adapter.setOnPersonItemClickListener(new PersonRvAdapter.OnPersonItemClickListener() {
@@ -134,16 +134,20 @@ public class PersonFragment extends BaseFragment implements PersonViewer {
                 refresh.setVisibility(View.VISIBLE);
             } else {
                 //空页面
-                if (pageIndex > 0){
+                if (pageIndex > 0) {
                     ToastUtils.show("没有更多了");
-                }else {
+                } else {
                     ll_empty.setVisibility(View.VISIBLE);
                     refresh.setVisibility(View.GONE);
                 }
             }
             if ("0".equals(home_type)) {
                 if (homePersonListBean.nNotExistGalaryCount != 0) {
-                    tv_top_num.setVisibility(View.VISIBLE);
+                    if (UserProfile.getInstance().getSex() == 0) {
+                        tv_top_num.setVisibility(View.GONE);
+                    } else {
+                        tv_top_num.setVisibility(View.VISIBLE);
+                    }
                     tv_top_num.setText("已经隐藏" + homePersonListBean.nNotExistGalaryCount + "位没有照片的" + (UserProfile.getInstance().getHomeSexType() == 0 ? "女士" : "男士"));
                 } else {
                     tv_top_num.setVisibility(View.GONE);

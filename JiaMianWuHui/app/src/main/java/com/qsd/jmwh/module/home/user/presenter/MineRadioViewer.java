@@ -1,9 +1,11 @@
 package com.qsd.jmwh.module.home.user.presenter;
 
+import com.qsd.jmwh.module.home.radio.bean.GetDatingUserVipBean;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.LocalHomeRadioListBean;
 import com.qsd.jmwh.module.home.user.bean.MineRadioListBean;
 import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
+import com.qsd.jmwh.module.register.bean.PayInfo;
 import com.yu.common.mvp.Viewer;
 
 /**
@@ -17,5 +19,7 @@ public interface MineRadioViewer extends Viewer {
 
     void getConfigDataSuccess(GetRadioConfigListBean configListBean);
 
-    void getUserInfo(UserCenterInfo userCenterMyInfo);
+    void getDatingUserVIPPaySuccess(GetDatingUserVipBean getDatingUserVipBean, String name);
+
+    void getBuyDatingPaySignSuccess(PayInfo payInfo, String name);
 }
