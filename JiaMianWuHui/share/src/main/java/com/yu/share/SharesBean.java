@@ -9,10 +9,10 @@ import java.io.Serializable;
  */
 public class SharesBean implements Serializable{
   public SHARE_MEDIA type;
-  public String title;
-  public String content;
-  public String targetUrl;
-  public String iconUrl;
+  public String sTitle;
+  public String sContent;
+  public String sTargerUrl;
+  public String sShowImg;
 
 
 }

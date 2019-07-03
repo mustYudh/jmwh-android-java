@@ -25,7 +25,7 @@ public class DateRangeActivity extends BaseBarActivity implements DateRangeViewe
 
     private static final String TOKEN = "token";
     private static final String USER_ID = "user_id";
-    private static final String TITLE = "title";
+    private static final String TITLE = "sTitle";
     private static final String LEVEL = "level";
     public static final String RANGE_RESULT = "range_result";
     public static final int PROVINCE = 0;

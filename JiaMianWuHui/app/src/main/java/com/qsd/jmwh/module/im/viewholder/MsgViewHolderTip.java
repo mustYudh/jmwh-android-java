@@ -37,7 +37,7 @@ public class MsgViewHolderTip extends MsgViewHolderBase {
         if (TextUtils.isEmpty(message.getContent())) {
             Map<String, Object> content = message.getRemoteExtension();
             if (content != null && !content.isEmpty()) {
-                text = (String) content.get("content");
+                text = (String) content.get("sContent");
             }
         } else {
             text = message.getContent();

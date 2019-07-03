@@ -14,6 +14,7 @@ import com.qsd.jmwh.module.home.user.bean.PushSettingBean;
 import com.qsd.jmwh.module.home.user.bean.WomenVideoBean;
 import com.qsd.jmwh.module.register.bean.PayInfo;
 import com.xuexiang.xhttp2.annotation.NetMethod;
+import com.yu.share.SharesBean;
 import io.reactivex.Observable;
 
 public interface OtherApiServices {
@@ -130,5 +131,9 @@ public interface OtherApiServices {
 
   @NetMethod(Url = "/UserService/getSubViewCount")
   Observable<SubViewCount> getSubViewCount();
+
+
+  @NetMethod(Url = "/SystemService/getShareInfo")
+  Observable<SharesBean> getShareInfo();
 
 }

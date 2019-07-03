@@ -55,16 +55,16 @@ public class ShareHelp {
           });
       if (action != null) {
         UMWeb web = null;
-        if (bean.targetUrl != null) {
-          web = new UMWeb(bean.targetUrl);
-          if (!TextUtils.isEmpty(bean.title)) {
-            web.setTitle(bean.title);
+        if (bean.sTargerUrl != null) {
+          web = new UMWeb(bean.sTargerUrl);
+          if (!TextUtils.isEmpty(bean.sTitle)) {
+            web.setTitle(bean.sTitle);
           }
-          if (!TextUtils.isEmpty(bean.iconUrl)) {
-            web.setThumb(new UMImage(this.mActivity, bean.iconUrl));
+          if (!TextUtils.isEmpty(bean.sShowImg)) {
+            web.setThumb(new UMImage(this.mActivity, bean.sShowImg));
           }
-          if (!TextUtils.isEmpty(bean.content)) {
-            web.setDescription(bean.content);
+          if (!TextUtils.isEmpty(bean.sContent)) {
+            web.setDescription(bean.sContent);
           }
         }
         if (web != null) {
