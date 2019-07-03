@@ -64,6 +64,7 @@
 
 
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/rl_alipay"
             android:layout_width="match_parent"
             android:layout_height="60dp">
@@ -103,12 +104,14 @@
         </RelativeLayout>
 
         <View
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/color_EEEEEE"/>
 
 
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/rl_wechat"
             android:layout_width="match_parent"
             android:layout_height="60dp">
@@ -147,6 +150,7 @@
         </RelativeLayout>
 
         <View
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/color_EEEEEE"/>
@@ -171,7 +175,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="钱包余额"
+                    android:text="假面币"
                     android:textColor="#ff2a2a2a"
                     android:textSize="16sp"
                     />

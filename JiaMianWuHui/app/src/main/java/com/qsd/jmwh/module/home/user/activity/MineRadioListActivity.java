@@ -282,7 +282,7 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
                 .gravity(Gravity.CENTER)
                 .style(R.style.Dialog_NoAnimation)
                 .cancelTouchout(true)
-                .settext("会员免费,非会员需支付" + getDatingUserVipBean.cdoList.get(0).nGoodsRealFee + "元", R.id.title)
+                .settext("会员免费,非会员需支付" + getDatingUserVipBean.cdoList.get(0).nGoodsSaleFee + "假面币", R.id.title)
                 .addViewOnclick(R.id.tv_vip, listener)
                 .addViewOnclick(R.id.tv_pay, listener)
                 .addViewOnclick(R.id.tv_cancle, listener)
@@ -319,7 +319,7 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
                         iv1.setImageResource(R.drawable.ic_button_unselected);
                         iv2.setImageResource(R.drawable.ic_button_unselected);
                         iv3.setImageResource(R.drawable.ic_button_selected);
-                        payType = 3;
+                        payType = 5;
                         break;
                     case R.id.tv_pay:
                         if (payType == 0) {
@@ -345,7 +345,7 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
                 .gravity(Gravity.CENTER)
                 .style(R.style.Dialog_NoAnimation)
                 .cancelTouchout(true)
-                .settext(getDatingUserVipBean.cdoList.get(0).nGoodsRealFee + "", R.id.tv_money)
+                .settext(getDatingUserVipBean.cdoList.get(0).nGoodsSaleFee + "", R.id.tv_money)
                 .addViewOnclick(R.id.rl_wallet, listener)
                 .addViewOnclick(R.id.rl_alipay, listener)
                 .addViewOnclick(R.id.rl_wechat, listener)

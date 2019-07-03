@@ -181,7 +181,7 @@ public interface ApiServices {
     @NetMethod(ParameterNames = {"nStatus", "lDatingId"}, Url = "/DatingService/modifyStatus")
     Observable<Object> modifyStatus(String nStatus, String lDatingId);
 
-    @NetMethod(ParameterNames = {"lGoodsId", "nPayType"}, Url = "/DatingService/getBuyDatingPaySign")
+    @NetMethod(ParameterNames = {"lGoodsId", "nPayType"}, Url = "/OrderService/getBuyDatingPaySign")
     Observable<PayInfo> getBuyDatingPaySign(String lGoodsId, String nPayType);
 
 
