@@ -4,6 +4,7 @@ import com.qsd.jmwh.module.home.radio.bean.GetDatingUserVipBean;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
 import com.qsd.jmwh.module.home.radio.bean.LocalHomeRadioListBean;
+import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
 import com.qsd.jmwh.module.register.bean.PayInfo;
 import com.yu.common.mvp.Viewer;
 import com.yu.common.ui.DelayClickImageView;
@@ -29,4 +30,6 @@ public interface RadioViewer extends Viewer {
     void getDatingUserVIPPaySuccess(GetDatingUserVipBean getDatingUserVipBean,String name);
 
     void getBuyDatingPaySignSuccess(PayInfo payInfo,String name);
+
+    void getUserInfo(UserCenterInfo userCenterMyInfo);
 }

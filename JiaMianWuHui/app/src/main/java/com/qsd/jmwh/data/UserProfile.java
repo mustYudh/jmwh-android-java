@@ -26,6 +26,7 @@ public class UserProfile implements Serializable {
     private static final String HOME_CITY_NAME = "home_city_name";
     private static final String HOME_SEX_TYPE = "home_sex_type";
     private static final String USER_PIC = "user_pic";
+    private static final String USER_NAUTHTYPE = "user_nauthtype";
 
 
     private static final String SIM_USERID = "sim_userid";
@@ -55,6 +56,15 @@ public class UserProfile implements Serializable {
         setUserPic(userInfo.sUserHeadPic);
         setSimToken(userInfo.sIMToken);
         setSimUserId(userInfo.sIMID);
+
+    }
+
+    public void setUserNauthtype(String user_nauthtype) {
+        spHelper.putString(USER_NAUTHTYPE, user_nauthtype);
+    }
+
+    public String getUserNauthtype() {
+        return spHelper.getString(USER_NAUTHTYPE, "0");
     }
 
     public void setHomeSexType(int homeSexType) {
@@ -104,6 +114,7 @@ public class UserProfile implements Serializable {
     private void setAppToken(String token) {
         spHelper.putString(APP_TOKEN, token);
     }
+
     private void setSimToken(String token) {
         spHelper.putString(SIM_TOKEN, token);
     }
@@ -113,11 +124,11 @@ public class UserProfile implements Serializable {
     }
 
     public String getSimUserId() {
-        return spHelper.getString(SIM_USERID,"");
+        return spHelper.getString(SIM_USERID, "");
     }
 
     public String getSimToken() {
-        return spHelper.getString(SIM_TOKEN,"");
+        return spHelper.getString(SIM_TOKEN, "");
     }
 
     public void setPhoneNo(String phoneNo) {

@@ -120,6 +120,12 @@ public class HomeRadioRvAdapter extends BaseMultiItemQuickAdapter<LocalHomeRadio
                             ToastUtils.show("该广播禁止评论");
                             return;
                         }
+                        if (item.sex == UserProfile.getInstance().getSex()) {
+                            //不能评价
+                            ToastUtils.show("抱歉,不能评论其他同性别人士的广播哦");
+                            return;
+                        }
+
                         if (onRadioItemClickListener != null) {
                             onRadioItemClickListener.setOnAddContentItemClick(item);
                         }

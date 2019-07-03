@@ -10,6 +10,7 @@ import com.qsd.jmwh.module.home.radio.bean.GetDatingUserVipBean;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
 import com.qsd.jmwh.module.home.radio.bean.LocalHomeRadioListBean;
+import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
 import com.qsd.jmwh.module.register.bean.PayInfo;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.framework.BaseViewPresenter;
@@ -150,6 +151,17 @@ public class RadioPresenter extends BaseViewPresenter<RadioViewer> {
                 });
     }
 
+    @SuppressLint("CheckResult")
+    public void getMyInfo() {
+        XHttpProxy.proxy(ApiServices.class)
+                .getUserCenterInfo()
+                .subscribeWith(new TipRequestSubscriber<UserCenterInfo>() {
+                    @Override protected void onSuccess(UserCenterInfo userCenterMyInfo) {
+                        assert getViewer() != null;
+                        getViewer().getUserInfo(userCenterMyInfo);
+                    }
+                });
+    }
     @Override
     public void createdView(View view) {
 

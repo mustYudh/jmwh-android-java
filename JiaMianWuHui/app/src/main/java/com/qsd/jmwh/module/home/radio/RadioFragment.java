@@ -36,6 +36,7 @@ import com.qsd.jmwh.module.home.radio.bean.LocalHomeRadioListBean;
 import com.qsd.jmwh.module.home.radio.presenter.RadioPresenter;
 import com.qsd.jmwh.module.home.radio.presenter.RadioViewer;
 import com.qsd.jmwh.module.home.user.activity.AuthCenterActivity;
+import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
 import com.qsd.jmwh.module.register.DateRangeActivity;
 import com.qsd.jmwh.module.register.ToByVipActivity;
 import com.qsd.jmwh.module.register.bean.PayInfo;
@@ -117,6 +118,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
         left_menu = bindView(R.id.left_menu);
         rv_radio = bindView(R.id.rv_radio);
         ll_empty = bindView(R.id.ll_empty);
+        mPresenter.getMyInfo();
         rv_radio.setLayoutManager(new LinearLayoutManager(getActivity()));
         tv_left.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,7 +244,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
 
                     @Override
                     public void setOnPersonInfoItemClick(int lLoveUserId) {
-                        getLaunchHelper().startActivity(LookUserInfoActivity.getIntent(getActivity(), lLoveUserId,lLoveUserId,2));
+                        getLaunchHelper().startActivity(LookUserInfoActivity.getIntent(getActivity(), lLoveUserId, lLoveUserId, 2));
                     }
 
                     @Override
@@ -296,17 +298,26 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
         if (getDatingUserVipBean != null) {
             if (type == 0) {
                 //评论
-                if (item.sex == 1 && !getDatingUserVipBean.bVIP) {
+                if (UserProfile.getInstance().getSex() == 1 && !getDatingUserVipBean.bVIP) {
                     //非会员,男士
                     ToastUtils.show("非会员不能评论");
+                    return;
+                }
+
+                if (UserProfile.getInstance().getSex() == 0 && "0".equals(UserProfile.getInstance().getUserNauthtype())) {
+                    ToastUtils.show("未认证不能评论");
                     return;
                 }
                 showCommentDialog(item);
             } else {
                 //报名
-                if (item.sex == 1 && !getDatingUserVipBean.bVIP) {
+                if (UserProfile.getInstance().getSex() == 1 && !getDatingUserVipBean.bVIP) {
                     //非会员,男士
                     ToastUtils.show("非会员不能报名");
+                    return;
+                }
+                if (UserProfile.getInstance().getSex() == 0 && "0".equals(UserProfile.getInstance().getUserNauthtype())) {
+                    ToastUtils.show("未认证不能报名");
                     return;
                 }
                 showEnrollDialog(item);
@@ -334,7 +345,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
     public void getDatingUserVIPPaySuccess(GetDatingUserVipBean getDatingUserVipBean, String name) {
         if (getDatingUserVipBean != null) {
             if (getDatingUserVipBean.nSex == 0) {
-                if (getDatingUserVipBean.nAuthType == 3 || getDatingUserVipBean.nAuthType == 4) {
+                if (getDatingUserVipBean.nAuthType != 0) {
                     getContext().startActivity(new Intent(getContext(), ReleaseAppointmentActivity.class).putExtra("activity_title", name));
                 } else {
                     //为认证
@@ -365,7 +376,11 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                         ToastUtils.show("支付失败，请重试");
                     }
                 });
-        ;
+    }
+
+    @Override
+    public void getUserInfo(UserCenterInfo userCenterMyInfo) {
+        UserProfile.getInstance().setUserNauthtype(userCenterMyInfo.cdoUser.nAuthType);
     }
 
     /**

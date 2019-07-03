@@ -5,10 +5,12 @@ import android.annotation.SuppressLint;
 
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
+import com.qsd.jmwh.module.home.radio.bean.GetDatingUserVipBean;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
 import com.qsd.jmwh.module.home.radio.bean.LocalHomeRadioListBean;
 import com.qsd.jmwh.module.home.user.bean.MineRadioListBean;
 import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
+import com.qsd.jmwh.module.register.bean.PayInfo;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.framework.BaseViewPresenter;
 
@@ -38,7 +40,7 @@ public class MineRadioPresenter extends BaseViewPresenter<MineRadioViewer> {
     }
 
 
-    public void modifyStatus(String nStatus, String lDatingId,LocalHomeRadioListBean item) {
+    public void modifyStatus(String nStatus, String lDatingId, LocalHomeRadioListBean item) {
         XHttpProxy.proxy(ApiServices.class)
                 .modifyStatus(nStatus, lDatingId)
                 .subscribeWith(new TipRequestSubscriber<Object>() {
@@ -64,15 +66,29 @@ public class MineRadioPresenter extends BaseViewPresenter<MineRadioViewer> {
     }
 
 
+    @SuppressLint("CheckResult")
+    public void getDatingUserPayVIP(String name) {
+        XHttpProxy.proxy(ApiServices.class)
+                .getDatingUserVIP()
+                .subscribeWith(new TipRequestSubscriber<GetDatingUserVipBean>() {
+                    @Override
+                    protected void onSuccess(GetDatingUserVipBean getDatingUserVipBean) {
+                        assert getViewer() != null;
+                        getViewer().getDatingUserVIPPaySuccess(getDatingUserVipBean, name);
+                    }
+                });
+    }
 
-  public void getMyInfo() {
-    XHttpProxy.proxy(ApiServices.class)
-        .getUserCenterInfo()
-        .subscribeWith(new TipRequestSubscriber<UserCenterInfo>() {
-          @Override protected void onSuccess(UserCenterInfo userCenterMyInfo) {
-            assert getViewer() != null;
-            getViewer().getUserInfo(userCenterMyInfo);
-          }
-        });
-  }
+    @SuppressLint("CheckResult")
+    public void getBuyDatingPaySign(String lGoodsId, String nPayType, String name) {
+        XHttpProxy.proxy(ApiServices.class)
+                .getBuyDatingPaySign(lGoodsId, nPayType)
+                .subscribeWith(new TipRequestSubscriber<PayInfo>() {
+                    @Override
+                    protected void onSuccess(PayInfo payInfo) {
+                        assert getViewer() != null;
+                        getViewer().getBuyDatingPaySignSuccess(payInfo, name);
+                    }
+                });
+    }
 }

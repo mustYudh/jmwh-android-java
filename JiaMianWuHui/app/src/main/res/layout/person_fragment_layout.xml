@@ -14,7 +14,8 @@
         android:gravity="center"
         android:text="已经隐藏28位没有照片的女士"
         android:textColor="@color/white"
-        android:textSize="14sp"/>
+        android:textSize="14sp"
+        android:visibility="gone"/>
 
     <FrameLayout
         android:layout_width="match_parent"
