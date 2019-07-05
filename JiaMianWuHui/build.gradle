@@ -46,7 +46,7 @@ ext {
     versionName = '1.0.0'
 
 
-    uMengKey = '5c822ba120365716ce0014a2'
+    uMengKey = '5d1afe890cafb29716000c51'
     uMengChannel = 'jmwh'
     nimKey = '20fee5c3c32934e1ad3f74cf5ecb94bb'
     baidu = 'uLcQRjd7Yfz4ZK7AbqmvrIwehVOHrS4x'
