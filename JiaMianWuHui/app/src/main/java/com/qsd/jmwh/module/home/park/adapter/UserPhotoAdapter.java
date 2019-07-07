@@ -21,12 +21,14 @@ public class UserPhotoAdapter extends BasicAdapter<OtherUserInfoBean.CdoFileList
     private boolean isOpenAll = true;
     private boolean isVip;
     private int userId;
+    private int authType;
 
-    public UserPhotoAdapter(ArrayList<OtherUserInfoBean.CdoFileListDataBean> list, boolean isOpenAll, boolean isVip, int userId) {
+    public UserPhotoAdapter(ArrayList<OtherUserInfoBean.CdoFileListDataBean> list, boolean isOpenAll, boolean isVip, int userId,int authType) {
         super(list);
         this.isOpenAll = isOpenAll;
         this.isVip = isVip;
         this.userId = userId;
+        this.authType = authType;
     }
 
     @Override
@@ -84,7 +86,7 @@ public class UserPhotoAdapter extends BasicAdapter<OtherUserInfoBean.CdoFileList
                         boolean finalCanClick = canClick;
                         userPic.setOnClickListener(v -> {
                             if (finalCanClick) {
-                                LauncherHelper.from(context).startActivity(LookPhotoActivity.getIntent(context, data, isVip, userId, false));
+                                LauncherHelper.from(context).startActivity(LookPhotoActivity.getIntent(context, data, isVip, userId, false,authType));
                             } else {
                                 ToastUtils.show("照片已焚毁");
                             }
@@ -96,7 +98,7 @@ public class UserPhotoAdapter extends BasicAdapter<OtherUserInfoBean.CdoFileList
                 } else {
                     photoBg.setVisibility(View.GONE);
                     ImageLoader.loadCenterCrop(userPic.getContext(), data.sFileUrl, userPic);
-                    userPic.setOnClickListener(v -> LauncherHelper.from(context).startActivity(LookPhotoActivity.getIntent(context, data, isVip, userId, true)));
+                    userPic.setOnClickListener(v -> LauncherHelper.from(context).startActivity(LookPhotoActivity.getIntent(context, data, isVip, userId, true,authType)));
                 }
 
             }

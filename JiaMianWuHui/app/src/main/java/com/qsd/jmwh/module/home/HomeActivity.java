@@ -7,14 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.denghao.control.TabItem;
 import com.denghao.control.TabView;
 import com.denghao.control.view.BottomNavigationView;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.StatusCode;
-import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.auth.AuthServiceObserver;
 import com.netease.nimlib.sdk.auth.OnlineClient;
 import com.netease.nimlib.sdk.msg.MsgService;
@@ -33,11 +31,10 @@ import com.qsd.jmwh.utils.PressHandle;
 import com.qsd.jmwh.utils.countdown.RxCountDown;
 import com.qsd.jmwh.utils.countdown.RxCountDownAdapter;
 import com.yu.common.mvp.PresenterLifeCycle;
-
-import org.greenrobot.eventbus.EventBus;
-
+import com.yu.common.toast.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
+import org.greenrobot.eventbus.EventBus;
 
 public class HomeActivity extends BaseActivity implements HomeViewer {
 
@@ -60,11 +57,11 @@ public class HomeActivity extends BaseActivity implements HomeViewer {
 
     Observer<StatusCode> userStatusObserver = (Observer<StatusCode>) code -> {
         if (code == StatusCode.UNLOGIN || code == StatusCode.KICKOUT || code == StatusCode.KICK_BY_OTHER_CLIENT) {
-            //ToastUtils.show("当前设备已退出登录或其他设备登录该账号");
-            //UserProfile.getInstance().clean();
-            NIMClient.getService(AuthService.class)
-                    .login(new com.netease.nimlib.sdk.auth.LoginInfo(UserProfile.getInstance().getSimUserId(),
-                            UserProfile.getInstance().getSimToken()));
+            ToastUtils.show("当前设备已退出登录或其他设备登录该账号");
+            UserProfile.getInstance().clean();
+            //NIMClient.getService(AuthService.class)
+            //        .login(new com.netease.nimlib.sdk.auth.LoginInfo(UserProfile.getInstance().getSimUserId(),
+            //                UserProfile.getInstance().getSimToken()));
         }
     };
 

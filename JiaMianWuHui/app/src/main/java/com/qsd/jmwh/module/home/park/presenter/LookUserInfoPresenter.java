@@ -2,6 +2,7 @@ package com.qsd.jmwh.module.home.park.presenter;
 
 import android.annotation.SuppressLint;
 
+import com.qsd.jmwh.dialog.SelectHintPop;
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.OtherApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
@@ -42,14 +43,19 @@ import com.yu.common.toast.ToastUtils;
   }
 
   public void buyContactPay(int lBuyOtherUserId, int count) {
-    XHttpProxy.proxy(OtherApiServices.class)
-        .getBuyContactPaySign(lBuyOtherUserId, 5, count)
-        .subscribeWith(new TipRequestSubscriber<Object>() {
-          @Override protected void onSuccess(Object o) {
-            assert getViewer() != null;
-            getViewer().refreshData();
-          }
-        });
+    SelectHintPop hint = new SelectHintPop(getActivity());
+    hint.setTitle("温馨提示").setMessage("确认支付").setPositiveButton("确定", v1 -> {
+      XHttpProxy.proxy(OtherApiServices.class)
+          .getBuyContactPaySign(lBuyOtherUserId, 5, count)
+          .subscribeWith(new TipRequestSubscriber<Object>() {
+            @Override protected void onSuccess(Object o) {
+              assert getViewer() != null;
+              getViewer().refreshData();
+              getViewer().payToChat();
+            }
+          });
+      hint.dismiss();
+    }).setNegativeButton("取消", v12 -> hint.dismiss()).showPopupWindow();
   }
 
   public void getSubViewCount() {

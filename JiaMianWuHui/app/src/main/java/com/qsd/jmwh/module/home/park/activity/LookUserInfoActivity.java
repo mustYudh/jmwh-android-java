@@ -46,6 +46,7 @@ public class LookUserInfoActivity extends BaseActivity
   private final static String TYPE = "type";
   private final static String BIZ_ID = "biz_id";
 
+
   public static Intent getIntent(Context context, int userId, int lBizId, int nType) {
     Intent starter = new Intent(context, LookUserInfoActivity.class);
     starter.putExtra(USER_ID, userId);
@@ -170,8 +171,9 @@ public class LookUserInfoActivity extends BaseActivity
     bindView(R.id.empty_view, list.size() == 0);
     GridView gridView = bindView(R.id.user_center_photo, list.size() > 0);
     boolean isOpen = userCenterInfo.bOpenImg || isVip;
-    gridView.setAdapter(new UserPhotoAdapter(list, isOpen, isVip, userID));
-    bindView(R.id.unlock_all_photo_root, !userCenterInfo.bOpenImg && !isVip && UserProfile.getInstance().getSex() == 1);
+    gridView.setAdapter(new UserPhotoAdapter(list, isOpen, isVip, userID, authType));
+    bindView(R.id.unlock_all_photo_root,
+        !userCenterInfo.bOpenImg && !isVip && UserProfile.getInstance().getSex() == 1);
     bindText(R.id.dGalaryVal, "解锁相册" + userData.dGalaryVal + "假面币，会员免费");
     bindView(R.id.dGalaryVal, this);
     dGalaryVal = userData.dGalaryVal;
@@ -206,10 +208,14 @@ public class LookUserInfoActivity extends BaseActivity
         }
         break;
       case R.id.qq:
-        mPresenter.getSubViewCount();
+        if (!showContact) {
+          mPresenter.getSubViewCount();
+        }
         break;
       case R.id.wechat:
-        mPresenter.getSubViewCount();
+        if (!showContact) {
+          mPresenter.getSubViewCount();
+        }
         break;
       case R.id.social_account:
 
@@ -322,5 +328,9 @@ public class LookUserInfoActivity extends BaseActivity
           .setBottomButton("取消", v13 -> hint.dismiss())
           .showPopupWindow();
     }
+  }
+
+  @Override public void payToChat() {
+    SessionHelper.startP2PSession(getActivity(), "im_" + userID);
   }
 }
