@@ -51,6 +51,9 @@ ext {
     nimKey = '20fee5c3c32934e1ad3f74cf5ecb94bb'
     baidu = 'uLcQRjd7Yfz4ZK7AbqmvrIwehVOHrS4x'
 
+    JPUSH_CHANNEL = ""
+    JPUSH_APPKEY = ""
+
     applicationId = 'com.qsd.jmwh'
     compileSdkVersion = 28
     minSdkVersion = 17
