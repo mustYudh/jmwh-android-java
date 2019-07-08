@@ -27,6 +27,7 @@ import com.qsd.jmwh.module.home.presenter.HomePresenter;
 import com.qsd.jmwh.module.home.presenter.HomeViewer;
 import com.qsd.jmwh.module.home.radio.RadioFragment;
 import com.qsd.jmwh.module.home.user.UserFragment;
+import com.qsd.jmwh.module.splash.SplashActivity;
 import com.qsd.jmwh.utils.PressHandle;
 import com.qsd.jmwh.utils.countdown.RxCountDown;
 import com.qsd.jmwh.utils.countdown.RxCountDownAdapter;
@@ -59,6 +60,7 @@ public class HomeActivity extends BaseActivity implements HomeViewer {
         if (code == StatusCode.UNLOGIN || code == StatusCode.KICKOUT || code == StatusCode.KICK_BY_OTHER_CLIENT) {
             ToastUtils.show("当前设备已退出登录或其他设备登录该账号");
             UserProfile.getInstance().clean();
+            getLaunchHelper().startActivity(SplashActivity.class);
             //NIMClient.getService(AuthService.class)
             //        .login(new com.netease.nimlib.sdk.auth.LoginInfo(UserProfile.getInstance().getSimUserId(),
             //                UserProfile.getInstance().getSimToken()));

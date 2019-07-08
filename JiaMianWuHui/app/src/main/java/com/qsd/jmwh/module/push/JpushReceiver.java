@@ -94,13 +94,15 @@ public class JpushReceiver extends BroadcastReceiver {
     bundle.putSerializable(PUSH_PAGE, bean);
     //Intent intent = DialogActivity.getIntent(context, bundle);
     Intent intent = new Intent();
-    PendingIntent pendingIntent = PendingIntent.getActivity(context, PUSH_NOTIFY_ID, intent,PendingIntent.FLAG_UPDATE_CURRENT);
-    mBuilder.setContentIntent(pendingIntent) ;
+    PendingIntent pendingIntent = PendingIntent.getActivity(context, PUSH_NOTIFY_ID, intent,
+        PendingIntent.FLAG_UPDATE_CURRENT);
+    mBuilder.setContentIntent(pendingIntent);
     NotificationManager notificationManager =
         (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
     if (notificationManager != null) {
       notificationManager.notify(PUSH_NOTIFY_ID, mBuilder.build());
     }
   }
+
 
 }
