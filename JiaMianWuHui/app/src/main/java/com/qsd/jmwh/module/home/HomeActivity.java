@@ -39,127 +39,118 @@ import org.greenrobot.eventbus.EventBus;
 
 public class HomeActivity extends BaseActivity implements HomeViewer {
 
-    private View messageHin;
-    @PresenterLifeCycle
-    private HomePresenter mPresenter = new HomePresenter(this);
-    private PressHandle pressHandle = new PressHandle(this);
+  private View messageHin;
+  @PresenterLifeCycle private HomePresenter mPresenter = new HomePresenter(this);
+  private PressHandle pressHandle = new PressHandle(this);
 
-    private BottomNavigationView navigationView;
-    private RxCountDown looperTime = new RxCountDown();
-    private final static int LOCATION_UPLOAD_TIMER = 10;
-    private MsgServiceObserve mService;
-    private Observer<List<RecentContact>> mMessageObserver;
+  private BottomNavigationView navigationView;
+  private RxCountDown looperTime = new RxCountDown();
+  private final static int LOCATION_UPLOAD_TIMER = 10;
+  private MsgServiceObserve mService;
+  private Observer<List<RecentContact>> mMessageObserver;
 
-    @Override
-    protected void setView(@Nullable Bundle savedInstanceState) {
-        setContentView(R.layout.home_activity);
+  @Override protected void setView(@Nullable Bundle savedInstanceState) {
+    setContentView(R.layout.home_activity);
+  }
+
+  Observer<StatusCode> userStatusObserver = (Observer<StatusCode>) code -> {
+    if (code == StatusCode.UNLOGIN
+        || code == StatusCode.KICKOUT
+        || code == StatusCode.KICK_BY_OTHER_CLIENT) {
+      ToastUtils.show("当前设备已退出登录或其他设备登录该账号");
+      UserProfile.getInstance().clean();
+      getLaunchHelper().startActivity(SplashActivity.class);
+      //NIMClient.getService(AuthService.class)
+      //        .login(new com.netease.nimlib.sdk.auth.LoginInfo(UserProfile.getInstance().getSimUserId(),
+      //                UserProfile.getInstance().getSimToken()));
     }
+  };
 
+  private void registerObservers(boolean register) {
+    NIMClient.getService(AuthServiceObserver.class).observeOtherClients(clientsObserver, register);
+    NIMClient.getService(AuthServiceObserver.class)
+        .observeOnlineStatus(userStatusObserver, register);
+  }
 
-    Observer<StatusCode> userStatusObserver = (Observer<StatusCode>) code -> {
-        if (code == StatusCode.UNLOGIN || code == StatusCode.KICKOUT || code == StatusCode.KICK_BY_OTHER_CLIENT) {
-            ToastUtils.show("当前设备已退出登录或其他设备登录该账号");
-            UserProfile.getInstance().clean();
-            getLaunchHelper().startActivity(SplashActivity.class);
-            //NIMClient.getService(AuthService.class)
-            //        .login(new com.netease.nimlib.sdk.auth.LoginInfo(UserProfile.getInstance().getSimUserId(),
-            //                UserProfile.getInstance().getSimToken()));
-        }
+  Observer<List<OnlineClient>> clientsObserver = (Observer<List<OnlineClient>>) onlineClients -> {
+
+  };
+
+  @Override protected void loadData() {
+    setTitle("首页");
+    registerObservers(true);
+    EventBus.getDefault().post(true);
+    mPresenter.modifyLngAndLat();
+    navigationView = findViewById(R.id.bottom_navigation_view);
+    List<TabItem> items = new ArrayList<>();
+    items.add(new TabView(createTabView("首页", R.drawable.tab_01, 0), new ParkFragment()));
+    items.add(new TabView(createTabView("约会广场", R.drawable.tab_03, 1), new RadioFragment()));
+    items.add(new TabView(createTabView("消息中心", R.drawable.tab_02, 2), new MessageFragment()));
+    items.add(new TabView(createTabView("个人中心", R.drawable.tab_04, 3), new UserFragment()));
+    navigationView.initControl(this).setPagerView(items, 0);
+    navigationView.getNavgation().setTabControlHeight(60);
+    navigationView.getControl().setOnTabClickListener((position, view) -> {
+
+    });
+    looperTime.setCountDownTimeListener(new RxCountDownAdapter() {
+      @Override public void onStart() {
+        super.onStart();
+      }
+
+      @Override public void onError(Throwable e) {
+        super.onError(e);
+        looperTime.restart(LOCATION_UPLOAD_TIMER, true);
+      }
+
+      @Override public void onComplete() {
+        super.onComplete();
+        looperTime.restart(LOCATION_UPLOAD_TIMER, true);
+      }
+    });
+    looperTime.start(LOCATION_UPLOAD_TIMER);
+
+    mService = NIMClient.getService(MsgServiceObserve.class);
+    mMessageObserver = (Observer<List<RecentContact>>) contacts -> {
+      getUnReadMessageCont();
     };
+    mService.observeRecentContact(mMessageObserver, true);
+  }
 
-
-    private void registerObservers(boolean register) {
-        NIMClient.getService(AuthServiceObserver.class).observeOtherClients(clientsObserver, register);
-        NIMClient.getService(AuthServiceObserver.class).observeOnlineStatus(userStatusObserver, register);
+  void getUnReadMessageCont() {
+    int unreadNum = NIMClient.getService(MsgService.class).getTotalUnreadCount();
+    if (unreadNum > 0) {
+      messageHin.setVisibility(View.VISIBLE);
+    } else {
+      messageHin.setVisibility(View.GONE);
     }
+  }
 
-
-    Observer<List<OnlineClient>> clientsObserver = (Observer<List<OnlineClient>>) onlineClients -> {
-
-    };
-
-    @Override
-    protected void loadData() {
-        setTitle("首页");
-        registerObservers(true);
-        EventBus.getDefault().post(true);
-        mPresenter.modifyLngAndLat();
-        navigationView = findViewById(R.id.bottom_navigation_view);
-        List<TabItem> items = new ArrayList<>();
-        items.add(new TabView(createTabView("首页", R.drawable.tab_01, 0), new ParkFragment()));
-        items.add(new TabView(createTabView("约会广场", R.drawable.tab_03, 1), new RadioFragment()));
-        items.add(
-                new TabView(createTabView("消息中心", R.drawable.tab_02, 2), new MessageFragment()));
-        items.add(new TabView(createTabView("个人中心", R.drawable.tab_04, 3), new UserFragment()));
-        navigationView.initControl(this).setPagerView(items, 0);
-        navigationView.getNavgation().setTabControlHeight(60);
-        navigationView.getControl().setOnTabClickListener((position, view) -> {
-
-        });
-        looperTime.setCountDownTimeListener(new RxCountDownAdapter() {
-            @Override
-            public void onStart() {
-                super.onStart();
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                super.onError(e);
-                looperTime.restart(LOCATION_UPLOAD_TIMER, true);
-            }
-
-            @Override
-            public void onComplete() {
-                super.onComplete();
-                looperTime.restart(LOCATION_UPLOAD_TIMER, true);
-            }
-        });
-        looperTime.start(LOCATION_UPLOAD_TIMER);
-
-        mService = NIMClient.getService(MsgServiceObserve.class);
-        mMessageObserver = (Observer<List<RecentContact>>) contacts -> {
-            getUnReadMessageCont();
-        };
-        mService.observeRecentContact(mMessageObserver, true);
+  public View createTabView(String name, int drawable, int position) {
+    View view =
+        LayoutInflater.from(this).inflate(R.layout.home_table_layout, navigationView, false);
+    ImageView imageView = view.findViewById(R.id.tab_icon);
+    TextView tabName = view.findViewById(R.id.tab_name);
+    imageView.setImageResource(drawable);
+    tabName.setText(name);
+    if (position == 2) {
+      messageHin = view.findViewById(R.id.message_hint);
     }
+    return view;
+  }
 
-    void getUnReadMessageCont() {
-        int unreadNum = NIMClient.getService(MsgService.class).getTotalUnreadCount();
-        if (unreadNum > 0) {
-            messageHin.setVisibility(View.VISIBLE);
-        } else {
-            messageHin.setVisibility(View.GONE);
-        }
+  @Override public void onBackPressed() {
+    if (!pressHandle.handlePress(KeyEvent.KEYCODE_BACK)) {
+      super.onBackPressed();
     }
+  }
 
-    public View createTabView(String name, int drawable, int position) {
-        View view =
-                LayoutInflater.from(this).inflate(R.layout.home_table_layout, navigationView, false);
-        ImageView imageView = view.findViewById(R.id.tab_icon);
-        TextView tabName = view.findViewById(R.id.tab_name);
-        imageView.setImageResource(drawable);
-        tabName.setText(name);
-        if (position == 2) {
-            messageHin = view.findViewById(R.id.message_hint);
-        }
-        return view;
+  @Override protected void onDestroy() {
+    super.onDestroy();
+    registerObservers(false);
+    UserProfile.getInstance().setHomeCityName("");
+    if (looperTime != null) {
+      looperTime.stop();
     }
-
-    @Override
-    public void onBackPressed() {
-        if (!pressHandle.handlePress(KeyEvent.KEYCODE_BACK)) {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        registerObservers(false);
-        UserProfile.getInstance().setHomeCityName("");
-        if (looperTime != null) {
-            looperTime.stop();
-        }
-        mService.observeRecentContact(mMessageObserver, false);
-    }
+    mService.observeRecentContact(mMessageObserver, false);
+  }
 }
