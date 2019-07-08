@@ -93,10 +93,9 @@ public class JpushReceiver extends BroadcastReceiver {
     //bundle.putString(DialogActivity.FROM, PUSH_PAGE);
     bundle.putSerializable(PUSH_PAGE, bean);
     //Intent intent = DialogActivity.getIntent(context, bundle);
-    Intent intent = new 
-    PendingIntent pendingIntent = PendingIntent.getActivity(context, PUSH_NOTIFY_ID, intent,
-        PendingIntent.FLAG_UPDATE_CURRENT);
-    mBuilder.setContentIntent(pendingIntent);
+    Intent intent = new Intent();
+    PendingIntent pendingIntent = PendingIntent.getActivity(context, PUSH_NOTIFY_ID, intent,PendingIntent.FLAG_UPDATE_CURRENT);
+    mBuilder.setContentIntent(pendingIntent) ;
     NotificationManager notificationManager =
         (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
     if (notificationManager != null) {
@@ -104,17 +103,4 @@ public class JpushReceiver extends BroadcastReceiver {
     }
   }
 
-  /**
-   * 首页
-   */
-  private Intent goHomeIntent(Context context) {
-    Intent intent;
-    //是本应用但是不是SplashActivity
-    if (HomePageActivity.exist) {
-      intent = new Intent(context, HomePageActivity.class);
-    } else {
-      intent = new Intent(context, SplashActivity.class);
-    }
-    return intent;
-  }
 }
