@@ -240,7 +240,7 @@ public class LookUserInfoActivity extends BaseActivity
       if (!isVip) {
         SelectHintPop hint = new SelectHintPop(this);
         hint.setTitle("联系她")
-            .setMessage("查看 " + sNickName + " 的全部资料和私聊她")
+            .setMessage("查看 " + sNickName + " 的全部资料和私聊")
             .setPositiveButton("成为会员 免费私聊", v1 -> {
               buyVip();
               hint.dismiss();
@@ -290,7 +290,7 @@ public class LookUserInfoActivity extends BaseActivity
       if (!count.bVIP) {
         SelectHintPop hint = new SelectHintPop(this);
         hint.setTitle("联系" + sNickName)
-            .setMessage("查看 " + sNickName + " 的全部资料和私聊她")
+            .setMessage("查看 " + sNickName + " 的全部资料和私聊")
             .setPositiveButton("成为会员 免费私聊", v1 -> {
               buyVip();
               hint.dismiss();
@@ -320,8 +320,8 @@ public class LookUserInfoActivity extends BaseActivity
     } else {
       SelectHintPop hint = new SelectHintPop(this);
       hint.setTitle("联系" + sNickName)
-          .setMessage("查看 " + sNickName + " 的全部资料和私聊她")
-          .setNegativeButton("付费查看和私聊 (" + count.dContactVal + "假面币)", v12 -> {
+          .setMessage("查看 " + sNickName + " 的全部资料和私聊")
+          .setSingleButton("付费查看和私聊 (" + count.dContactVal + "假面币)", v12 -> {
             mPresenter.buyContactPay(userID, count.dContactVal);
             hint.dismiss();
           })
