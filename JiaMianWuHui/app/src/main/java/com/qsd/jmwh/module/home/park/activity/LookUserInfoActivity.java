@@ -91,6 +91,7 @@ public class LookUserInfoActivity extends BaseActivity
       hint.setSingleButton("确定",v -> hint.dismiss());
       hint.setOnDismissListener(() -> getActivity().finish());
       hint.showPopupWindow();
+      return;
     }
     this.userCenterInfo = userCenterInfo;
     OtherUserInfoBean.CdoUserDataBean userData = userCenterInfo.cdoUserData;
