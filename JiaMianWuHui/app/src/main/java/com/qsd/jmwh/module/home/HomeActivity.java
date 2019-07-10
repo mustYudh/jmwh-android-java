@@ -1,5 +1,7 @@
 package com.qsd.jmwh.module.home;
 
+import android.Manifest;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
@@ -31,6 +33,7 @@ import com.qsd.jmwh.module.splash.SplashActivity;
 import com.qsd.jmwh.utils.PressHandle;
 import com.qsd.jmwh.utils.countdown.RxCountDown;
 import com.qsd.jmwh.utils.countdown.RxCountDownAdapter;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 import java.util.ArrayList;
@@ -78,6 +81,17 @@ public class HomeActivity extends BaseActivity implements HomeViewer {
 
   @Override protected void loadData() {
     setTitle("首页");
+    String[] permiss = {
+        Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE,
+        Manifest.permission.CALL_PHONE,
+        Manifest.permission.RECORD_AUDIO,
+    };
+    if (Build.VERSION.SDK_INT >= 23) {
+      final RxPermissions rxPermissions = new RxPermissions(this);
+      rxPermissions.request(permiss).subscribe(granted -> {});
+    }
     registerObservers(true);
     EventBus.getDefault().post(true);
     mPresenter.modifyLngAndLat();

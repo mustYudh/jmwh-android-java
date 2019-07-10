@@ -47,7 +47,8 @@ public class SplashActivity extends BaseActivity
         Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION,
         Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE,
-        Manifest.permission.CALL_PHONE
+        Manifest.permission.CALL_PHONE,
+        Manifest.permission.RECORD_AUDIO,
     };
     if (Build.VERSION.SDK_INT >= 23) {
       final RxPermissions rxPermissions = new RxPermissions(this);
