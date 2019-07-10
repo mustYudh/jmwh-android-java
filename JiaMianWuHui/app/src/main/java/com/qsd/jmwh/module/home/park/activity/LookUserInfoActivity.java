@@ -180,10 +180,8 @@ public class LookUserInfoActivity extends BaseActivity
     ArrayList<OtherUserInfoBean.CdoFileListDataBean> list = userCenterInfo.cdoFileListData;
     bindView(R.id.empty_view, list.size() == 0);
     GridView gridView = bindView(R.id.user_center_photo, list.size() > 0);
-      boolean isOpen = userCenterInfo.bOpenImg || isVip || UserProfile.getInstance().getSex() == 0;
-    gridView.setAdapter(new UserPhotoAdapter(list, isOpen, isVip, userID, authType));
-    bindView(R.id.unlock_all_photo_root,
-        !userCenterInfo.bOpenImg && !isVip && UserProfile.getInstance().getSex() == 1);
+    gridView.setAdapter(new UserPhotoAdapter(list, userCenterInfo.bOpenImg || isVip, isVip, userID, authType));
+    bindView(R.id.unlock_all_photo_root, UserProfile.getInstance().getSex() == 1 ? !userCenterInfo.bOpenImg && !isVip : !userCenterInfo.bOpenImg );
     bindText(R.id.dGalaryVal, "解锁相册" + userData.dGalaryVal + "假面币，会员免费");
     bindView(R.id.dGalaryVal, this);
     dGalaryVal = userData.dGalaryVal;

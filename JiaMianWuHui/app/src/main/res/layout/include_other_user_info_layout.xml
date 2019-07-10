@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageView
-                android:background="#B45800FF"
+                android:background="@color/app_main_color"
                 android:id="@+id/unlock_all_photo"
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"

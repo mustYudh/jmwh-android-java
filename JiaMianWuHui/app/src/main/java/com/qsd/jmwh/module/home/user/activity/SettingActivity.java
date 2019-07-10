@@ -7,10 +7,12 @@ import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.dialog.SelectHintPop;
+import com.qsd.jmwh.module.home.user.bean.Logout;
 import com.qsd.jmwh.module.splash.SplashActivity;
 import com.qsd.jmwh.utils.GlideCacheUtil;
 import com.qsd.jmwh.view.UserItemView;
 import com.yu.common.toast.ToastUtils;
+import org.greenrobot.eventbus.EventBus;
 
 public class SettingActivity extends BaseBarActivity {
 
@@ -58,6 +60,9 @@ public class SettingActivity extends BaseBarActivity {
                     .setMessage("确认退出登录？")
                     .setPositiveButton("确定", v1 -> {
                         getLaunchHelper().startActivity(SplashActivity.class);
+                        Logout logout = new Logout();
+                        logout.isLogout = true;
+                        EventBus.getDefault().post(logout);
                         UserProfile.getInstance().clean();
                         logoutPop.dismiss();
                         finish();
