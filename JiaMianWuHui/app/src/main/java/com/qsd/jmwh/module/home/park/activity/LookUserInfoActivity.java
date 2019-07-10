@@ -82,10 +82,19 @@ public class LookUserInfoActivity extends BaseActivity
   }
 
   @Override public void setUserInfo(OtherUserInfoBean userCenterInfo) {
+    if (UserProfile.getInstance().getSex() == userCenterInfo.cdoUserData.nSex) {
+      SelectHintPop hint = new SelectHintPop(this);
+      hint.setOutsideTouchable(false);
+      hint.setFocusable(true);
+      hint.setTitle("温馨提示");
+      hint.setMessage("同性之间禁止相互查看");
+      hint.setSingleButton("确定",v -> hint.dismiss());
+      hint.setOnDismissListener(() -> getActivity().finish());
+      hint.showPopupWindow();
+    }
     this.userCenterInfo = userCenterInfo;
     OtherUserInfoBean.CdoUserDataBean userData = userCenterInfo.cdoUserData;
     isVip = userCenterInfo.bVIP;
-
     int nSubViewUserCount = userCenterInfo.nSubViewUserCount;
     if (UserProfile.getInstance().getSex() == 1 && nSubViewUserCount <= 5) {
       SelectHintPop hint = new SelectHintPop(this);
@@ -170,7 +179,7 @@ public class LookUserInfoActivity extends BaseActivity
     ArrayList<OtherUserInfoBean.CdoFileListDataBean> list = userCenterInfo.cdoFileListData;
     bindView(R.id.empty_view, list.size() == 0);
     GridView gridView = bindView(R.id.user_center_photo, list.size() > 0);
-    boolean isOpen = userCenterInfo.bOpenImg || isVip;
+      boolean isOpen = userCenterInfo.bOpenImg || isVip || UserProfile.getInstance().getSex() == 0;
     gridView.setAdapter(new UserPhotoAdapter(list, isOpen, isVip, userID, authType));
     bindView(R.id.unlock_all_photo_root,
         !userCenterInfo.bOpenImg && !isVip && UserProfile.getInstance().getSex() == 1);

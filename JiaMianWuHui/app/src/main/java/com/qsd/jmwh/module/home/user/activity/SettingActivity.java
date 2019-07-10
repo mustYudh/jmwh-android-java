@@ -2,12 +2,12 @@ package com.qsd.jmwh.module.home.user.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
 import android.text.TextUtils;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.dialog.SelectHintPop;
+import com.qsd.jmwh.module.splash.SplashActivity;
 import com.qsd.jmwh.utils.GlideCacheUtil;
 import com.qsd.jmwh.view.UserItemView;
 import com.yu.common.toast.ToastUtils;
@@ -57,6 +57,7 @@ public class SettingActivity extends BaseBarActivity {
             logoutPop.setTitle("温馨提示")
                     .setMessage("确认退出登录？")
                     .setPositiveButton("确定", v1 -> {
+                        getLaunchHelper().startActivity(SplashActivity.class);
                         UserProfile.getInstance().clean();
                         logoutPop.dismiss();
                         finish();

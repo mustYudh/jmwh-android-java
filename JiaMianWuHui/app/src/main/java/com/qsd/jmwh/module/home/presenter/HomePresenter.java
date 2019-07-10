@@ -1,8 +1,10 @@
 package com.qsd.jmwh.module.home.presenter;
 
-import android.os.Handler;
 import com.qsd.jmwh.utils.LocationHelper;
 import com.yu.common.framework.BaseViewPresenter;
+import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author yudneghao
@@ -12,24 +14,24 @@ import com.yu.common.framework.BaseViewPresenter;
 
 public class HomePresenter extends BaseViewPresenter<HomeViewer> {
 
-    private Handler handler=new Handler();
-    private Runnable runnable = new Runnable() {
-        @Override public void run() {
-            LocationHelper.getInstance(getActivity()).requestLocationToLocal();
-            handler.postDelayed(this,1000 * 60 * 5);
-        }
-    };
+
+    private Disposable disposable;
 
     public HomePresenter(HomeViewer viewer) {
         super(viewer);
     }
 
     public void modifyLngAndLat() {
-        handler.postDelayed(runnable, 1000 * 60 * 5);
+        disposable = Observable.interval(0, 5, TimeUnit.MINUTES)
+            .map(aLong -> aLong + 1)
+            .subscribe(count -> LocationHelper.getInstance(getActivity()).requestLocationToLocal());
+
     }
 
     @Override public void willDestroy() {
         super.willDestroy();
-        handler.removeCallbacks(runnable);
+      if (disposable != null) {
+        disposable.dispose();
+      }
     }
 }

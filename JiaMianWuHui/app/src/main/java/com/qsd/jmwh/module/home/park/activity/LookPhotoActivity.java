@@ -139,7 +139,7 @@ public class LookPhotoActivity extends BaseActivity implements LookPhotoViewer {
         super.onComplete();
         showView(timeText, url, photo, false);
         destroyTitle.setText("照片已经焚毁");
-        if (!isVip) {
+        if (!isVip && UserProfile.getInstance().getSex() == 1) {
           bindText(R.id.vip_hint, "会员可延长查看时间至6秒");
           bindView(R.id.buy_vip, true);
         } else {
