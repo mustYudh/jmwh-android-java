@@ -400,7 +400,6 @@ public class SessionHelper {
             popupMenu = new NIMPopupMenu(context, menuItemList, listener);
         }
         menuItemList.clear();
-        menuItemList.addAll(getMoreMenuItems(context, sessionId, sessionTypeEnum));
         popupMenu.notifyData();
         popupMenu.show(view);
     }
@@ -469,13 +468,9 @@ public class SessionHelper {
                     });
                     alertDialog.show();
                     break;
+                    default:
             }
         }
     };
 
-    private static List<PopupMenuItem> getMoreMenuItems(Context context, String sessionId,
-                                                        SessionTypeEnum sessionTypeEnum) {
-        List<PopupMenuItem> moreMenuItems = new ArrayList<PopupMenuItem>();
-        return moreMenuItems;
-    }
 }
