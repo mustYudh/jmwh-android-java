@@ -1,6 +1,8 @@
 package com.qsd.jmwh.module.home.user;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -62,6 +64,7 @@ public class UserFragment extends BaseFragment
     private String selectPhotoUrl;
     private String header;
     private String sNickName;
+    public final int START_SETTING_RESULT = 1122;
     private boolean isVip = false;
     private UserCenterInfo.CdoUserBean mCenterInfo = new UserCenterInfo.CdoUserBean();
 
@@ -119,7 +122,7 @@ public class UserFragment extends BaseFragment
                         PrivacySettingActivity.getIntent(getActivity(), sNickName, header));
                 break;
             case R.id.setting:
-                getLaunchHelper().startActivity(SettingActivity.class);
+                getLaunchHelper().startActivityForResult(SettingActivity.class,START_SETTING_RESULT);
                 break;
             case R.id.add_photo:
                 upload();
@@ -353,6 +356,16 @@ public class UserFragment extends BaseFragment
         } else {
             getLaunchHelper().startActivity(SplashActivity.class);
             finish();
+        }
+    }
+
+    @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == START_SETTING_RESULT) {
+            if (getActivity() != null) {
+                getLaunchHelper().startActivity(SplashActivity.class);
+                getActivity().finish();
+            }
         }
     }
 }

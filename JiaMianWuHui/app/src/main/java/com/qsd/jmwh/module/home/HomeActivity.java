@@ -29,7 +29,6 @@ import com.qsd.jmwh.module.home.presenter.HomePresenter;
 import com.qsd.jmwh.module.home.presenter.HomeViewer;
 import com.qsd.jmwh.module.home.radio.RadioFragment;
 import com.qsd.jmwh.module.home.user.UserFragment;
-import com.qsd.jmwh.module.home.user.bean.Logout;
 import com.qsd.jmwh.module.splash.SplashActivity;
 import com.qsd.jmwh.utils.PressHandle;
 import com.qsd.jmwh.utils.countdown.RxCountDown;
@@ -40,8 +39,6 @@ import com.yu.common.toast.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 public class HomeActivity extends BaseActivity implements HomeViewer {
 
@@ -97,7 +94,6 @@ public class HomeActivity extends BaseActivity implements HomeViewer {
     }
     registerObservers(true);
     EventBus.getDefault().post(true);
-    EventBus.getDefault().register(this);
     mPresenter.modifyLngAndLat();
     navigationView = findViewById(R.id.bottom_navigation_view);
     List<TabItem> items = new ArrayList<>();
@@ -162,8 +158,6 @@ public class HomeActivity extends BaseActivity implements HomeViewer {
     }
   }
 
-
-
   @Override protected void onDestroy() {
     super.onDestroy();
     registerObservers(false);
@@ -172,17 +166,5 @@ public class HomeActivity extends BaseActivity implements HomeViewer {
       looperTime.stop();
     }
     mService.observeRecentContact(mMessageObserver, false);
-    EventBus.getDefault().unregister(this);
   }
-
-
-  @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行
-  public void onEvent(Logout event) {
-    if (event.isLogout) {
-      finish();
-    }
-
-  }
-
-
 }
