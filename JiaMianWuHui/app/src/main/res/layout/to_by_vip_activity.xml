@@ -57,7 +57,6 @@
         </android.support.v7.widget.RecyclerView>
 
         <LinearLayout
-            android:visibility="gone"
             android:id="@+id/money_root"
             android:layout_width="match_parent"
             android:layout_height="48dp"

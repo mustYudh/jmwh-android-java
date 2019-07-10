@@ -351,12 +351,7 @@ public class UserFragment extends BaseFragment
 
     @Override
     public void update(Bundle bundle) {
-        if (UserProfile.getInstance().isAppLogin()) {
-            mPresenter.getMyInfo();
-        } else {
-            getLaunchHelper().startActivity(SplashActivity.class);
-            finish();
-        }
+        mPresenter.getMyInfo();
     }
 
     @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {

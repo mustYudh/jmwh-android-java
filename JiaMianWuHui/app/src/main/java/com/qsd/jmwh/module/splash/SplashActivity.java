@@ -90,10 +90,10 @@ public class SplashActivity extends BaseActivity
   @Override public void onClick(View v) {
     switch (v.getId()) {
       case R.id.login:
-        getLaunchHelper().startActivityForResult(LoginActivity.class, REQUEST_CODE);
+        getLaunchHelper().startActivity(LoginActivity.class);
         break;
       case R.id.register:
-        getLaunchHelper().startActivityForResult(RegisterActivity.class, REQUEST_CODE);
+        getLaunchHelper().startActivity(RegisterActivity.class);
         break;
       case R.id.qq_login:
         boolean installQQ = UMShareAPI.get(getActivity()).isInstall(getActivity(), SHARE_MEDIA.QQ);
@@ -118,9 +118,6 @@ public class SplashActivity extends BaseActivity
   @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
-    if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-      finish();
-    }
   }
 
   @Override public void onStart(SHARE_MEDIA media) {

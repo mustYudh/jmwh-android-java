@@ -13,11 +13,13 @@ import com.netease.nimlib.sdk.auth.AuthService;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
+import com.qsd.jmwh.dialog.net.NetLoadingDialog;
 import com.qsd.jmwh.module.home.HomeActivity;
 import com.qsd.jmwh.module.home.user.activity.EditPasswordActivity;
 import com.qsd.jmwh.module.login.bean.LoginInfo;
 import com.qsd.jmwh.module.login.presenter.LoginPresenter;
 import com.qsd.jmwh.module.login.presenter.LoginViewer;
+import com.qsd.jmwh.module.splash.bean.RegisterSuccess;
 import com.qsd.jmwh.view.NormaFormItemVIew;
 import com.yu.common.mvp.PresenterLifeCycle;
 import org.greenrobot.eventbus.EventBus;
@@ -64,6 +66,8 @@ public class LoginActivity extends BaseBarActivity implements LoginViewer, View.
               UserProfile.getInstance().setSex(loginInfo.nSex);
               NimUIKit.loginSuccess(loginInfo.sIMID);
               NIMClient.toggleNotification(true);
+              EventBus.getDefault().post(new RegisterSuccess(true));
+              NetLoadingDialog.dismissLoading();
               getLaunchHelper().startActivity(HomeActivity.class);
               setResult(Activity.RESULT_OK);
               finish();
@@ -72,13 +76,16 @@ public class LoginActivity extends BaseBarActivity implements LoginViewer, View.
             @Override public void onFailed(int code) {
               if (code == 302 || code == 404) {
                 ToastHelper.showToast(LoginActivity.this, "帐号或密码错误");
+                NetLoadingDialog.dismissLoading();
               } else {
                 ToastHelper.showToast(LoginActivity.this, "登录失败: " + code);
+                NetLoadingDialog.dismissLoading();
               }
             }
 
             @Override public void onException(Throwable throwable) {
               ToastHelper.showToast(LoginActivity.this, "无效输入");
+              NetLoadingDialog.dismissLoading();
             }
           });
     }

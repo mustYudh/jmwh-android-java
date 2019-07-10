@@ -15,7 +15,6 @@ import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.module.home.user.bean.WomenVideoBean;
 import com.qsd.jmwh.module.home.user.presenter.AuthCenterPresenter;
 import com.qsd.jmwh.module.home.user.presenter.AuthCenterViewer;
-import com.yu.common.loading.LoadingDialog;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 import com.yu.common.utils.ImageLoader;
@@ -52,6 +51,7 @@ public class AuthCenterActivity extends BaseBarActivity implements AuthCenterVie
       textView.setText("更新认证");
     } else if (vedioBean.nCheckStatus == 3) {
       textView.setText("审核中（24小时内）");
+      ToastUtils.show("未通过请您耐心等待");
       textView.setClickable(false);
     }
   }
@@ -69,7 +69,6 @@ public class AuthCenterActivity extends BaseBarActivity implements AuthCenterVie
   @Override public void uploadSuccess() {
     mPresenter.getAuthInf();
     ToastUtils.show("上传成功");
-    LoadingDialog.dismissLoading();
   }
 
   @Override public void setAuthCode(String code) {

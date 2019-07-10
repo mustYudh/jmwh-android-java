@@ -105,6 +105,7 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
     currentType = payTypeBeans.get(0);
     payTypeAdapter = new PayTypeAdapter(R.layout.item_pay_type_layout, payTypeBeans);
     payType.setAdapter(payTypeAdapter);
+    payCount.setText(cdoListBean.nGoodsSaleFee + "");
     vipInfoAdapter.setOnItemClickListener((adapter, view, position) -> {
       for (Object datum : adapter.getData()) {
         VipInfoBean.CdoListBean bean = (VipInfoBean.CdoListBean) datum;
@@ -114,7 +115,6 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
       bean.selected = true;
       adapter.notifyDataSetChanged();
       cdoListBean = (VipInfoBean.CdoListBean) adapter.getData().get(position);
-      bindView(R.id.money_root, true);
       payCount.setText(cdoListBean.nGoodsSaleFee + "");
       notifyDataSetChanged();
     });

@@ -41,6 +41,7 @@ public class LookPhotoActivity extends BaseActivity implements LookPhotoViewer {
   @PresenterLifeCycle private LookPhotoPresenter mPresenter = new LookPhotoPresenter(this);
   private RxCountDown rxCountDown = new RxCountDown();
   private OtherUserInfoBean.CdoFileListDataBean data;
+  private boolean mIsVip;
 
   @Override protected void setView(@Nullable Bundle savedInstanceState) {
     setContentView(R.layout.look_photo_layout);
@@ -59,6 +60,7 @@ public class LookPhotoActivity extends BaseActivity implements LookPhotoViewer {
 
   @SuppressLint("ClickableViewAccessibility") @Override protected void loadData() {
     data = (OtherUserInfoBean.CdoFileListDataBean) getIntent().getSerializableExtra(DATA);
+    mIsVip = getIntent().getBooleanExtra(IS_VIP, false);
     url = data.sFileUrl;
     int type = data.nFileType;
     Log.e("======>", type + "");
@@ -100,7 +102,7 @@ public class LookPhotoActivity extends BaseActivity implements LookPhotoViewer {
       }
     }
     bindView(R.id.back, v -> onBackPressed());
-    bindView(R.id.buy_vip, UserProfile.getInstance().getSex() == 1);
+    bindView(R.id.buy_vip, UserProfile.getInstance().getSex() == 1 && !mIsVip);
     bindView(R.id.buy_vip, v -> {
       LauncherHelper.from(getActivity())
           .startActivity(
@@ -118,7 +120,6 @@ public class LookPhotoActivity extends BaseActivity implements LookPhotoViewer {
   }
 
   @SuppressLint("ClickableViewAccessibility") public void lookPhoto() {
-    boolean isVip = getIntent().getBooleanExtra(IS_VIP, false);
     rxCountDown.setCountDownTimeListener(new RxCountDownAdapter() {
       @Override public void onStart() {
         super.onStart();
@@ -139,7 +140,7 @@ public class LookPhotoActivity extends BaseActivity implements LookPhotoViewer {
         super.onComplete();
         showView(timeText, url, photo, false);
         destroyTitle.setText("照片已经焚毁");
-        if (!isVip && UserProfile.getInstance().getSex() == 1) {
+        if (!mIsVip && UserProfile.getInstance().getSex() == 1) {
           bindText(R.id.vip_hint, "会员可延长查看时间至6秒");
           bindView(R.id.buy_vip, true);
         } else {

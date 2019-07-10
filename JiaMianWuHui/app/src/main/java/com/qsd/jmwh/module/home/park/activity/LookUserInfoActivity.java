@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -126,9 +127,9 @@ public class LookUserInfoActivity extends BaseActivity
     }
     NormaFormItemVIew bust = bindView(R.id.bust);
     NormaFormItemVIew qq = bindView(R.id.qq, this);
-    qq.setContent(showContact ? userData.QQ : "已填写，点击查看");
+    qq.setContent(showContact ? TextUtils.isEmpty(userData.QQ) ? "未填写" : userData.QQ : "已填写，点击查看");
     NormaFormItemVIew weChat = bindView(R.id.wechat, this);
-    weChat.setContent(showContact ? userData.WX : "已填写，点击查看");
+    weChat.setContent(showContact ? TextUtils.isEmpty(userData.WX) ? "未填写" : userData.WX : "已填写，点击查看");
     if (userData.nSex == 0) {
       bust.setContentText(userData.sBust);
     } else {
@@ -212,17 +213,25 @@ public class LookUserInfoActivity extends BaseActivity
         if (userID == UserProfile.getInstance().getUserId()) {
           ToastUtils.show("不能私信自己");
         } else {
-          toChat();
+          if (showContact) {
+            SessionHelper.startP2PSession(getActivity(), "im_" + userID);
+          } else {
+            toChat();
+          }
         }
         break;
       case R.id.qq:
         if (!showContact) {
           mPresenter.getSubViewCount();
+        } else {
+          SessionHelper.startP2PSession(getActivity(), "im_" + userID);
         }
         break;
       case R.id.wechat:
         if (!showContact) {
           mPresenter.getSubViewCount();
+        } else {
+          SessionHelper.startP2PSession(getActivity(), "im_" + userID);
         }
         break;
       case R.id.social_account:
