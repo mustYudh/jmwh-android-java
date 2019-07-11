@@ -19,7 +19,7 @@ public class WomenVideoBean implements Serializable {
    */
 
   public long server_timestamp;
-  public int nCheckStatus;
+  public int nCheckStatus = -1;
   public boolean bVip;
   public int nSubViewVideoCount;
   public int lFileId;

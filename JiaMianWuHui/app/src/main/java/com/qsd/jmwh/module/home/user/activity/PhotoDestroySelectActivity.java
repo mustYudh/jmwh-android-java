@@ -1,5 +1,6 @@
 package com.qsd.jmwh.module.home.user.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.dialog.SelectHintPop;
+import com.qsd.jmwh.dialog.net.NetLoadingDialog;
 import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
 import com.qsd.jmwh.module.home.user.presenter.PhotoDestroySelectPresenter;
 import com.qsd.jmwh.module.home.user.presenter.PhotoDestroySelectViewer;
@@ -20,6 +22,9 @@ import com.qsd.jmwh.thrid.oss.PersistenceResponse;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 import com.yu.common.utils.ImageLoader;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class PhotoDestroySelectActivity extends BaseBarActivity
     implements PhotoDestroySelectViewer, View.OnClickListener {
@@ -93,7 +98,7 @@ public class PhotoDestroySelectActivity extends BaseBarActivity
     bindView(R.id.select_destroy, this);
   }
 
-  @Override public void onClick(View v) {
+  @SuppressLint("CheckResult") @Override public void onClick(View v) {
     switch (v.getId()) {
       case R.id.select_destroy:
         selected = !selected;
@@ -112,32 +117,43 @@ public class PhotoDestroySelectActivity extends BaseBarActivity
       case R.id.next_action:
         int fileId = getIntent().getIntExtra(FILE_ID, -1);
         if (fileId == -1) {
-          PersistenceResponse response =
-              UploadImage.uploadImage(getActivity(), UserProfile.getInstance().getObjectName(),
-                  getIntent().getStringExtra(URL));
-          if (!needMoney) {
-            mPresenter.uploadFile(response.cloudUrl, 0, 0, selected ? 1 : 0, 0);
-          } else {
-            SelectHintPop selectHintPop = new SelectHintPop(getActivity());
-            selectHintPop.
-                setTitle("设置红包照片查看金额")
-                .setMessage("每次选择1张照片作为红包照片，用户必须向你发假面币红包才能查看（红包金额随机，每个不超过30假面币）")
-                .setEditButton("确定", input -> {
-                  if (TextUtils.isEmpty(input)) {
-                    ToastUtils.show("输入金额不能为空");
-                  } else if (Integer.parseInt(input) > 30) {
-                    ToastUtils.show("不能超过30假面币");
+          NetLoadingDialog.showLoading(getActivity(),false);
+          String url = getIntent().getStringExtra(URL);
+          Observable.just(url)
+              .observeOn(Schedulers.io())
+              .subscribe(threadTask1 -> {
+                PersistenceResponse response =
+                    UploadImage.uploadImage(getActivity(), UserProfile.getInstance().getObjectName(),
+                        getIntent().getStringExtra(URL));
+                Observable.just(response)
+                    .observeOn(AndroidSchedulers.mainThread()).subscribe(result -> {
+                  if (!needMoney) {
+                    mPresenter.uploadFile(result.cloudUrl, 0, 0, selected ? 1 : 0, 0);
                   } else {
-                    // TODO: 2019/5/17 阅后即焚红包需要完善
-                    mPresenter.uploadFile(response.cloudUrl, 0, 0, selected ? 3 : 2,
-                        Integer.parseInt(input));
-                    selectHintPop.dismiss();
+                    SelectHintPop selectHintPop = new SelectHintPop(getActivity());
+                    selectHintPop.
+                        setTitle("设置红包照片查看金额")
+                        .setMessage("每次选择1张照片作为红包照片，用户必须向你发假面币红包才能查看（红包金额随机，每个不超过30假面币）")
+                        .setEditButton("确定", input -> {
+                          if (TextUtils.isEmpty(input)) {
+                            ToastUtils.show("输入金额不能为空");
+                          } else if (Integer.parseInt(input) > 30) {
+                            ToastUtils.show("不能超过30假面币");
+                          } else {
+                            mPresenter.uploadFile(response.cloudUrl, 0, 0, selected ? 3 : 2,
+                                Integer.parseInt(input));
+                            selectHintPop.dismiss();
+                          }
+                        })
+                        .setHint("不能超过30假面币")
+                        .setBottomButton("取消", v12 -> selectHintPop.dismiss())
+                        .showPopupWindow();
                   }
-                })
-                .setHint("不能超过30假面币")
-                .setBottomButton("取消", v12 -> selectHintPop.dismiss())
-                .showPopupWindow();
-          }
+                }
+
+
+                );
+              });
         } else {
           SelectHintPop selectHintPop = new SelectHintPop(getActivity());
           String title = isVideo ? "个视频" : "张照片";
