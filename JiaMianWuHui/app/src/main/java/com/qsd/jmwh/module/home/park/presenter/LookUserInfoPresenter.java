@@ -37,7 +37,7 @@ import com.yu.common.toast.ToastUtils;
           @Override protected void onSuccess(Object info) {
             ToastUtils.show("解锁成功");
             assert getViewer() != null;
-            getViewer().refreshData();
+            getViewer().refreshData(0);
           }
         });
   }
@@ -50,7 +50,7 @@ import com.yu.common.toast.ToastUtils;
           .subscribeWith(new TipRequestSubscriber<Object>() {
             @Override protected void onSuccess(Object o) {
               assert getViewer() != null;
-              getViewer().refreshData();
+              getViewer().refreshData(1);
               getViewer().payToChat();
             }
           });

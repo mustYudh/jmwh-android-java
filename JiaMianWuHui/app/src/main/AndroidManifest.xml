@@ -301,7 +301,6 @@
     </activity>
     <activity
         android:name=".module.home.user.activity.PlayVideoActivity"
-        android:screenOrientation="portrait"
         />
     <activity
         android:name=".module.im.activity.MessageInfoActivity"

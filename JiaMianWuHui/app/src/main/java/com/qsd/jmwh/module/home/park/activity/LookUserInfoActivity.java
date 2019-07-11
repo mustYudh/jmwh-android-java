@@ -296,8 +296,10 @@ public class LookUserInfoActivity extends BaseActivity
     super.onBackPressed();
   }
 
-  @Override public void refreshData() {
-    showContact = true;
+  @Override public void refreshData(int type) {
+    if (type == 1) {
+      showContact = true;
+    }
     mPresenter.getUserInfo(getIntent().getIntExtra(USER_ID, -1), UserProfile.getInstance().getLat(),
         UserProfile.getInstance().getLng(), firstLoading);
   }
@@ -325,7 +327,7 @@ public class LookUserInfoActivity extends BaseActivity
             .setMessage(free ? "您还有" + count.nSurContactViewCount + "次查看联系方式机会" : "您的免费查看次数已上线")
             .setSingleButton(free ? "确定" : "付费查看和私聊 (" + count.dContactVal + "假面币)", v -> {
               if (free) {
-                refreshData();
+                refreshData(1);
               } else {
                 mPresenter.buyContactPay(userID, count.dContactVal);
               }
@@ -335,6 +337,7 @@ public class LookUserInfoActivity extends BaseActivity
             .showPopupWindow();
       }
     } else {
+
       SelectHintPop hint = new SelectHintPop(this);
       hint.setTitle("联系" + sNickName)
           .setMessage("查看 " + sNickName + " 的全部资料和私聊")
@@ -348,6 +351,6 @@ public class LookUserInfoActivity extends BaseActivity
   }
 
   @Override public void payToChat() {
-    SessionHelper.startP2PSession(getActivity(), "im_" + userID);
+    //SessionHelper.startP2PSession(getActivity(), "im_" + userID);
   }
 }

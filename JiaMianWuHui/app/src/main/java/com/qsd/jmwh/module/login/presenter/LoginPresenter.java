@@ -65,13 +65,14 @@ public class LoginPresenter extends BaseViewPresenter<LoginViewer> {
                                 break;
                             default:
                                 ToastUtils.show(result.getMsg());
+                                NetLoadingDialog.dismissLoading();
                                 break;
                         }
                     }
 
                     @Override protected void onError(ApiException apiException) {
-                        super.onError(apiException);
                         NetLoadingDialog.dismissLoading();
+                        super.onError(apiException);
                     }
                 });
 
