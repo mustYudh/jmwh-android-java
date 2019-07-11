@@ -1,5 +1,6 @@
 package com.qsd.jmwh.http.interceptor;
 
+import android.content.Intent;
 import com.qsd.jmwh.APP;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.splash.SplashActivity;
@@ -32,7 +33,9 @@ public class CustomExpiredInterceptor extends BaseExpiredInterceptor {
         switch (expiredInfo.getExpiredType()) {
             case 106:
                 UserProfile.getInstance().clean();
-                LauncherHelper.from(APP.getInstance()).startActivity(SplashActivity.class);
+                Intent intent = new Intent(APP.getInstance(), SplashActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                LauncherHelper.from(APP.getInstance()).startActivity(intent);
                 break;
             default:
         }
