@@ -38,7 +38,7 @@ public class PersonFragment extends BaseFragment implements PersonViewer {
     private SmartRefreshLayout refresh;
     private LinearLayout ll_empty;
     public int pageIndex = 0;
-    private String home_type;
+    public String home_type;
 
     @Override
     protected int getContentViewId() {
