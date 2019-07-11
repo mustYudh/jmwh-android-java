@@ -68,6 +68,7 @@ public class HomeRadioRvAdapter extends BaseMultiItemQuickAdapter<LocalHomeRadio
             case 1:
                 NoSlidingGridView gv_pic = helper.getView(R.id.gv_pic);
                 if (item.picList != null && item.picList.size() != 0) {
+                    gv_pic.setVisibility(View.VISIBLE);
                     HomeRadioPicGvAdapter picAdapter = new HomeRadioPicGvAdapter(context, item.picList);
                     gv_pic.setAdapter(picAdapter);
                     gv_pic.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -82,6 +83,8 @@ public class HomeRadioRvAdapter extends BaseMultiItemQuickAdapter<LocalHomeRadio
                             context.startActivity(intent);
                         }
                     });
+                } else {
+                    gv_pic.setVisibility(View.GONE);
                 }
                 break;
             case 2:
