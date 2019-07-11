@@ -9,6 +9,7 @@ import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.util.NIMUtil;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.http.interceptor.CustomDynamicInterceptor;
+import com.qsd.jmwh.http.interceptor.CustomExpiredInterceptor;
 import com.qsd.jmwh.http.interceptor.CustomLoggingInterceptor;
 import com.qsd.jmwh.module.im.ChatRoomSessionHelper;
 import com.qsd.jmwh.module.im.NIMInitManager;
@@ -102,7 +103,7 @@ public class APP extends BaseApp {
     XHttpSDK.setBaseUrl(getBaseUrl());
     XHttpSDK.setSubUrl(getSubUrl());
     XHttpSDK.addInterceptor(new CustomDynamicInterceptor());
-    //XHttpSDK.addInterceptor(new CustomExpiredInterceptor());
+    XHttpSDK.addInterceptor(new CustomExpiredInterceptor());
     XHttp.getInstance().setTimeout(60000);
     XHttp.getInstance().setRetryCount(3);
     XHttp.getInstance().addCommonHeaders(getHttpHeaders());

@@ -1,11 +1,12 @@
 package com.qsd.jmwh.module.home.user.presenter;
 
 import android.annotation.SuppressLint;
-
+import com.qsd.jmwh.dialog.net.NetLoadingDialog;
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.OtherApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.xuexiang.xhttp2.XHttpProxy;
+import com.xuexiang.xhttp2.exception.ApiException;
 import com.yu.common.framework.BaseViewPresenter;
 import com.yu.common.toast.ToastUtils;
 
@@ -19,13 +20,20 @@ public class PhotoDestroySelectPresenter extends BaseViewPresenter<PhotoDestroyS
 
 
     public void uploadFile(String sFileUrl,int nAttribute,int nInfoType,int nFileType,int nFileFee) {
-        XHttpProxy.proxy(ApiServices.class)
+      NetLoadingDialog.showLoading(getActivity(),false);
+      XHttpProxy.proxy(ApiServices.class)
                     .addFile(sFileUrl,nAttribute,nInfoType,nFileType,nFileFee,"")
                     .subscribeWith(new TipRequestSubscriber<Object>() {
                         @Override
                         protected void onSuccess(Object o) {
+                          NetLoadingDialog.dismissLoading();
                             getActivity().finish();
                         }
+
+                      @Override protected void onError(ApiException apiException) {
+                        super.onError(apiException);
+                        NetLoadingDialog.dismissLoading();
+                      }
                     });
     }
 
