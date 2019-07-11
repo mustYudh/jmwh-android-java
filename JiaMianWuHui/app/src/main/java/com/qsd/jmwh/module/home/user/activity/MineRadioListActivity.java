@@ -44,7 +44,7 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
     private LinearLayout ll_empty;
     private List<LocalHomeRadioListBean> dataList = new ArrayList<>();
     private MineRadioRvAdapter adapter;
-    private DialogUtils releaseDialog, upVipDialog, payDialog;
+    private DialogUtils releaseDialog, upVipDialog, payDialog,womanDialog;
 
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
@@ -222,7 +222,7 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
                     startActivity(new Intent(getActivity(), ReleaseAppointmentActivity.class).putExtra("activity_title", name));
                 } else {
                     //为认证
-                    getLaunchHelper().startActivity(AuthCenterActivity.class);
+                    showWomanDialog(getDatingUserVipBean, name);
                 }
             } else {
                 if (getDatingUserVipBean.bVIP) {
@@ -357,5 +357,43 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
         iv1 = payDialog.findViewById(R.id.iv1);
         iv2 = payDialog.findViewById(R.id.iv2);
         iv3 = payDialog.findViewById(R.id.iv3);
+    }
+
+    /**
+     * 女性认证弹窗
+     */
+    private void showWomanDialog(GetDatingUserVipBean getDatingUserVipBean,String name) {
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (womanDialog.isShowing()) {
+                    womanDialog.dismiss();
+                }
+                switch (v.getId()) {
+                    case R.id.ll_pay:
+                        payType = 0;
+                        showPayDialog(getDatingUserVipBean, name);
+                        break;
+                    case R.id.ll_renzhen:
+                        getLaunchHelper().startActivity(AuthCenterActivity.class);
+                        break;
+                    case R.id.ll_bottom:
+
+                        break;
+                }
+            }
+        };
+
+        womanDialog = new DialogUtils.Builder(getActivity())
+                .view(R.layout.dialog_radio_woman)
+                .gravity(Gravity.CENTER)
+                .style(R.style.Dialog_NoAnimation)
+                .cancelTouchout(true)
+                .addViewOnclick(R.id.ll_pay, listener)
+                .addViewOnclick(R.id.ll_renzhen, listener)
+                .addViewOnclick(R.id.ll_bottom, listener)
+                .build();
+        womanDialog.show();
+
     }
 }

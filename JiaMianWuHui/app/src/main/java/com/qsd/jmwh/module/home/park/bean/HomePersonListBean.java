@@ -33,6 +33,7 @@ public class HomePersonListBean implements Serializable {
          */
 
         public int lUserId;
+        public int nSex;
         public String sNickName;
         public String sUserHeadPic;
         public String sDateRange;
