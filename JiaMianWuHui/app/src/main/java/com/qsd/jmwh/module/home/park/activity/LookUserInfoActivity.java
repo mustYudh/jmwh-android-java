@@ -20,6 +20,7 @@ import com.qsd.jmwh.module.home.park.bean.SubViewCount;
 import com.qsd.jmwh.module.home.park.dialog.MoreActionDialog;
 import com.qsd.jmwh.module.home.park.presenter.LookUserInfoPresenter;
 import com.qsd.jmwh.module.home.park.presenter.LookUserInfoViewer;
+import com.qsd.jmwh.module.home.user.activity.AuthCenterActivity;
 import com.qsd.jmwh.module.home.user.dialog.EvaluationDialog;
 import com.qsd.jmwh.module.im.SessionHelper;
 import com.qsd.jmwh.module.register.ToByVipActivity;
@@ -46,7 +47,6 @@ public class LookUserInfoActivity extends BaseActivity
   private final static String USER_ID = "user_id";
   private final static String TYPE = "type";
   private final static String BIZ_ID = "biz_id";
-
 
   public static Intent getIntent(Context context, int userId, int lBizId, int nType) {
     Intent starter = new Intent(context, LookUserInfoActivity.class);
@@ -89,7 +89,7 @@ public class LookUserInfoActivity extends BaseActivity
       hint.setFocusable(true);
       hint.setTitle("温馨提示");
       hint.setMessage("同性之间禁止相互查看");
-      hint.setSingleButton("确定",v -> hint.dismiss());
+      hint.setSingleButton("确定", v -> hint.dismiss());
       hint.setOnDismissListener(() -> getActivity().finish());
       hint.showPopupWindow();
       return;
@@ -129,7 +129,8 @@ public class LookUserInfoActivity extends BaseActivity
     NormaFormItemVIew qq = bindView(R.id.qq, this);
     qq.setContent(showContact ? TextUtils.isEmpty(userData.QQ) ? "未填写" : userData.QQ : "已填写，点击查看");
     NormaFormItemVIew weChat = bindView(R.id.wechat, this);
-    weChat.setContent(showContact ? TextUtils.isEmpty(userData.WX) ? "未填写" : userData.WX : "已填写，点击查看");
+    weChat.setContent(
+        showContact ? TextUtils.isEmpty(userData.WX) ? "未填写" : userData.WX : "已填写，点击查看");
     if (userData.nSex == 0) {
       bust.setContentText(userData.sBust);
     } else {
@@ -161,7 +162,7 @@ public class LookUserInfoActivity extends BaseActivity
         + userData.nOnLine
         + "m");
     bindText(R.id.sDateRange, "约会范围：" + userData.sDateRange + " · " + userData.nOffLineMin + "分钟前");
-    authType = userData.nAuthType;
+    authType = userCenterInfo.nAuthType;
     @DrawableRes int result;
     if (authType == 0) {
       result = R.drawable.ic_not_auth;
@@ -181,8 +182,11 @@ public class LookUserInfoActivity extends BaseActivity
     ArrayList<OtherUserInfoBean.CdoFileListDataBean> list = userCenterInfo.cdoFileListData;
     bindView(R.id.empty_view, list.size() == 0);
     GridView gridView = bindView(R.id.user_center_photo, list.size() > 0);
-    gridView.setAdapter(new UserPhotoAdapter(list, userCenterInfo.bOpenImg || isVip, isVip, userID, authType));
-    bindView(R.id.unlock_all_photo_root, UserProfile.getInstance().getSex() == 1 ? !userCenterInfo.bOpenImg && !isVip : !userCenterInfo.bOpenImg );
+    gridView.setAdapter(
+        new UserPhotoAdapter(list, userCenterInfo.bOpenImg || isVip, isVip, userID, authType));
+    bindView(R.id.unlock_all_photo_root,
+        UserProfile.getInstance().getSex() == 1 ? !userCenterInfo.bOpenImg && !isVip
+            : !userCenterInfo.bOpenImg);
     bindText(R.id.dGalaryVal, "解锁相册" + userData.dGalaryVal + "假面币，会员免费");
     bindView(R.id.dGalaryVal, this);
     dGalaryVal = userData.dGalaryVal;
@@ -213,11 +217,11 @@ public class LookUserInfoActivity extends BaseActivity
         if (userID == UserProfile.getInstance().getUserId()) {
           ToastUtils.show("不能私信自己");
         } else {
-          if (showContact) {
-            SessionHelper.startP2PSession(getActivity(), "im_" + userID);
-          } else {
-            toChat();
-          }
+          //if (showContact) {
+          //  SessionHelper.startP2PSession(getActivity(), "im_" + userID);
+          //} else {
+          toChat();
+          //}
         }
         break;
       case R.id.qq:
@@ -276,7 +280,11 @@ public class LookUserInfoActivity extends BaseActivity
         SelectHintPop hint = new SelectHintPop(this);
         hint.setTitle("你还没有进行认证")
             .setMessage("认证你的真实性之后，才能私聊男士用户。")
-            .setPositiveButton("马上认证", v1 -> hint.dismiss())
+            .setPositiveButton("马上认证", v1 -> {
+              getLaunchHelper().startActivity(AuthCenterActivity.class);
+              getActivity().finish();
+              hint.dismiss();
+            })
             .setNegativeButton("取消", v12 -> hint.dismiss())
             .showPopupWindow();
       } else {
