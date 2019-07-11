@@ -86,6 +86,7 @@ public class OtherUserInfoBean implements Serializable {
     public int nFileType;
     public int nFileFee;
     public int bView;
+    public int nAttribute;
     public int nStatus;
   }
 }
