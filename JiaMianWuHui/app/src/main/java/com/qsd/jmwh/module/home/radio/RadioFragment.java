@@ -465,6 +465,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                             }
                         } else {
                             sexType = 0;
+                            disType = 0;
                             right_menu.setText("全部");
                             switch (disType) {
                                 case 0:
