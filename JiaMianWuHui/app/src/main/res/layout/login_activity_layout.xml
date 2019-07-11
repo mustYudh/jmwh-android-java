@@ -10,6 +10,8 @@
         android:id="@+id/account"
         android:layout_marginTop="30dp"
         app:show_bottom_line="false"
+        app:length="11"
+        app:input_type="number"
         app:left_text="登录账号"
         app:content_hint="请输入手机号/账号"
         android:layout_width="match_parent"

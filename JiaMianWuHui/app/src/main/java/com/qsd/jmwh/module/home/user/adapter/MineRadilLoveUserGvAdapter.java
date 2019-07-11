@@ -80,7 +80,7 @@ public class MineRadilLoveUserGvAdapter extends BaseAdapter {
             .getSubViewCount()
             .subscribeWith(new TipRequestSubscriber<SubViewCount>() {
                 @Override protected void onSuccess(SubViewCount count) {
-                    
+
                 }
             });
     }
