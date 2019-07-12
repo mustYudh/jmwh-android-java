@@ -19,6 +19,7 @@ public class OtherUserInfoBean implements Serializable {
   public int nSubViewUserCount;
   public boolean bOpenImg;
   public boolean bVIP;
+  public int nAuthType;
   public CdoUserDataBean cdoUserData;
   public boolean bExistDating;
   public ArrayList<CdoFileListDataBean> cdoFileListData;

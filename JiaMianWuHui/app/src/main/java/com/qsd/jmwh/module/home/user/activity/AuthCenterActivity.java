@@ -48,14 +48,14 @@ public class AuthCenterActivity extends BaseBarActivity implements AuthCenterVie
     if (vedioBean.nCheckStatus == 0) {
       textView.setText("认证通过");
       textView.setClickable(false);
-    } else if (vedioBean.nCheckStatus == 2) {
+    } else if (vedioBean.nCheckStatus == 1) {
       textView.setText("更新认证");
     } else if (vedioBean.nCheckStatus == 3) {
       textView.setText("审核中（24小时内）");
       ToastUtils.show("未通过请您耐心等待");
       textView.setClickable(false);
     } else {
-      textView.setText("上传认证视频");
+      textView.setText("认证失败");
     }
   }
 

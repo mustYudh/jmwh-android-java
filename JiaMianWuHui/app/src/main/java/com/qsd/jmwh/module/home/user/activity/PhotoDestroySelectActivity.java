@@ -13,7 +13,6 @@ import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.dialog.SelectHintPop;
-import com.qsd.jmwh.dialog.net.NetLoadingDialog;
 import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
 import com.qsd.jmwh.module.home.user.presenter.PhotoDestroySelectPresenter;
 import com.qsd.jmwh.module.home.user.presenter.PhotoDestroySelectViewer;
@@ -117,7 +116,6 @@ public class PhotoDestroySelectActivity extends BaseBarActivity
       case R.id.next_action:
         int fileId = getIntent().getIntExtra(FILE_ID, -1);
         if (fileId == -1) {
-          NetLoadingDialog.showLoading(getActivity(),false);
           String url = getIntent().getStringExtra(URL);
           Observable.just(url)
               .observeOn(Schedulers.io())
