@@ -146,7 +146,7 @@ public class PersonFragment extends BaseFragment implements PersonViewer {
                     if (UserProfile.getInstance().getSex() == 0) {
                         tv_top_num.setVisibility(View.GONE);
                     } else {
-                        tv_top_num.setVisibility(View.VISIBLE);
+                        //tv_top_num.setVisibility(View.VISIBLE);
                     }
                     tv_top_num.setText("已经隐藏" + homePersonListBean.nNotExistGalaryCount + "位没有照片的" + (UserProfile.getInstance().getHomeSexType() == 0 ? "女士" : "男士"));
                 } else {

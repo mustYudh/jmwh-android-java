@@ -39,7 +39,7 @@ public class ShareDialog extends BasePopupWindow implements ViewGroup.OnClickLis
 
     @SuppressLint("CheckResult") @Override
     public void onClick(View v) {
-        XHttpProxy.proxy(OtherApiServices.class).getShareInfo().subscribeWith(new TipRequestSubscriber<SharesBean>() {
+        XHttpProxy.proxy(OtherApiServices.class).getShareInfo().subscribeWith(new  TipRequestSubscriber<SharesBean>() {
             @Override protected void onSuccess(SharesBean sharesBean) {
                 ShareHelp shareHelp = new ShareHelp((Activity) getContext());
                 switch (v.getId()) {

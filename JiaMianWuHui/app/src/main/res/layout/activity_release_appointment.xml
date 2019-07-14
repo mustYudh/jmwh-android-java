@@ -366,7 +366,7 @@
             android:id="@+id/tv_sure"
             style="@style/app_blue_button"
             android:layout_marginTop="30dp"
-            android:text="进入假面舞会"
+            android:text="发布广播"
             />
 
 

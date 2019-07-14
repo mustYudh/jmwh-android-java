@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="center"
+    android:background="#26000000"
+    android:gravity="center"
+    android:id="@+id/root"
+    >
+
+
+  <LinearLayout
+      android:id="@+id/content"
+      android:background="@drawable/shape_app_whit_bg_radious8"
+      android:layout_gravity="center"
+      android:gravity="center_horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="400dp"
+      android:layout_marginLeft="40dp"
+      android:layout_marginRight="40dp"
+      android:orientation="vertical"
+      >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+    <View
+      android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"/>
+      <com.yu.common.ui.DelayClickImageView
+          android:id="@+id/close"
+          android:scaleType="centerCrop"
+          android:layout_marginTop="10dp"
+          android:src="@drawable/ic_close"
+          android:layout_width="30dp"
+          android:layout_height="30dp"
+          android:layout_marginRight="10dp"
+          />
+    </LinearLayout>
+
+    <com.qsd.jmwh.view.CircleImageView
+        android:src="@drawable/ic_launcher"
+        android:layout_marginTop="10dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        />
+
+    <TextView
+        tools:text="社交账号"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:id="@+id/nick_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        />
+    <TextView
+        android:id="@+id/hint"
+        android:textSize="14sp"
+        tools:text="社交账号"
+        android:textColor="#803C3B3B"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+
+    <View
+        android:layout_marginTop="16dp"
+        android:background="#F5F5F5"
+        android:layout_width="wrap_content"
+        android:layout_height="0.5dp"/>
+
+    <LinearLayout
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+      <TextView
+          android:textSize="16sp"
+          android:text="微信"
+          android:textColor="@color/black"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          />
+
+      <TextView
+          android:id="@+id/we_chat"
+          android:paddingRight="16dp"
+          android:paddingLeft="12dp"
+          android:textSize="16sp"
+          tools:text="qwewrqwr"
+          android:textColor="@color/black"
+          android:layout_width="0dp"
+          android:layout_weight="1"
+          android:layout_height="wrap_content"
+          />
+
+
+      <com.yu.common.ui.DelayClickTextView
+          android:id="@+id/copy_we_chat"
+          android:gravity="right"
+          android:textSize="16sp"
+          android:text="复制"
+          android:textColor="@color/app_main_color"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          />
+    </LinearLayout>
+
+    <View
+        android:background="#F5F5F5"
+        android:layout_width="wrap_content"
+        android:layout_height="0.5dp"/>
+
+
+
+    <LinearLayout
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+      <TextView
+          android:textSize="16sp"
+          android:text="QQ"
+          android:textColor="@color/black"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          />
+
+      <TextView
+          android:id="@+id/qq"
+          android:paddingRight="16dp"
+          android:paddingLeft="12dp"
+          android:textSize="16sp"
+          tools:text="qwewrqwr"
+          android:textColor="@color/black"
+          android:layout_width="0dp"
+          android:layout_weight="1"
+          android:layout_height="wrap_content"
+          />
+
+
+      <com.yu.common.ui.DelayClickTextView
+          android:id="@+id/copy_qq"
+          android:gravity="right"
+          android:textSize="16sp"
+          android:text="复制"
+          android:textColor="@color/app_main_color"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          />
+    </LinearLayout>
+
+    <View
+        android:background="#F5F5F5"
+        android:layout_width="wrap_content"
+        android:layout_height="0.5dp"/>
+
+
+
+    <com.yu.common.ui.DelayClickTextView
+        android:id="@+id/to_chat"
+        style="@style/app_blue_button"
+        android:layout_marginTop="35dp"
+        android:text="私聊"
+        />
+
+  </LinearLayout>
+
+
+
+
+
+</FrameLayout>

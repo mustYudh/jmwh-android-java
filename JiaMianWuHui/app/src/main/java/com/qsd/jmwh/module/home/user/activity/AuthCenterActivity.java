@@ -75,6 +75,6 @@ public class AuthCenterActivity extends BaseBarActivity implements AuthCenterVie
   }
 
   @Override public void setAuthCode(String code) {
-    bindText(R.id.auth_code,"假面舞会 " + code);
+    bindText(R.id.auth_code, "假面舞会 " + code);
   }
 }

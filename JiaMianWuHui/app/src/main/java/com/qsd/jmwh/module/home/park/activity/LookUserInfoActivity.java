@@ -204,10 +204,7 @@ public class LookUserInfoActivity extends BaseActivity
         break;
       case R.id.dGalaryVal:
         SelectHintPop selectHintPop = new SelectHintPop(getActivity());
-        selectHintPop.setTitle("解锁付费相册").setPositiveButton("成为会员，免费解锁相册", v1 -> {
-          buyVip();
-          selectHintPop.dismiss();
-        }).setNegativeButton("付费解锁 (" + dGalaryVal + "假面币)", v12 -> {
+        selectHintPop.setTitle("解锁付费相册").setSingleButton("付费解锁 (" + dGalaryVal + "假面币)", v12 -> {
           mPresenter.buyGalleryPay(userID, dGalaryVal);
           selectHintPop.dismiss();
         }).setBottomButton("取消", v13 -> selectHintPop.dismiss());
@@ -227,15 +224,11 @@ public class LookUserInfoActivity extends BaseActivity
       case R.id.qq:
         if (!showContact) {
           mPresenter.getSubViewCount();
-        } else {
-          SessionHelper.startP2PSession(getActivity(), "im_" + userID);
         }
         break;
       case R.id.wechat:
         if (!showContact) {
           mPresenter.getSubViewCount();
-        } else {
-          SessionHelper.startP2PSession(getActivity(), "im_" + userID);
         }
         break;
       case R.id.social_account:
