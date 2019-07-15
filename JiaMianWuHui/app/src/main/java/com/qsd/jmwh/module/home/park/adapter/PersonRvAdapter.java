@@ -79,11 +79,8 @@ public class PersonRvAdapter extends BaseQuickAdapter<HomePersonListBean.CdoList
 //
 //        }
 
-        if (item.bVip) {
-            tv_auth_type.setVisibility(View.VISIBLE);
-            tv_auth_type.setText("VIP");
-            tv_auth_type.setBackground(context.getResources().getDrawable(R.drawable.shape_home_person_vip));
-        } else {
+        if (item.nSex == 0) {
+            //女性
             if (item.nAuthType == 0) {
                 //未认证
                 helper.setText(R.id.tv_auth_type, "未认证");
@@ -94,6 +91,15 @@ public class PersonRvAdapter extends BaseQuickAdapter<HomePersonListBean.CdoList
                 tv_auth_type.setBackground(context.getResources().getDrawable(R.drawable.shape_home_person));
             }
             tv_auth_type.setVisibility(View.VISIBLE);
+        } else {
+            //男性
+            if (item.bVip) {
+                tv_auth_type.setVisibility(View.VISIBLE);
+                tv_auth_type.setText("VIP");
+                tv_auth_type.setBackground(context.getResources().getDrawable(R.drawable.shape_home_person_vip));
+            } else {
+                tv_auth_type.setVisibility(View.GONE);
+            }
         }
 
 
