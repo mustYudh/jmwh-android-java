@@ -45,22 +45,21 @@ public class LoginPresenter extends BaseViewPresenter<LoginViewer> {
                     @Override
                     protected void onSuccess(ApiResult<LoginInfo> result) {
                         int code = result.getCode();
-                        LoginInfo loginInfo = result.getData();
                         switch (code) {
                             case 0:
                                 assert getViewer() != null;
                                 getViewer().handleLoginResult(result.getData());
                                 break;
                             case 3:
-                                getLauncherHelper().startActivity(SelectGenderActivity.getIntent(getActivity(), loginInfo.lUserId, loginInfo.token));
+                                getLauncherHelper().startActivity(SelectGenderActivity.class);
                                 NetLoadingDialog.dismissLoading();
                                 break;
                             case 4:
-                                getLaunchHelper().startActivity(EditRegisterCodeActivity.getIntent(getActivity(), loginInfo.token, loginInfo.lUserId,loginInfo.nSex,1));
+                                getLaunchHelper().startActivity(EditRegisterCodeActivity.class);
                                 NetLoadingDialog.dismissLoading();
                                 break;
                             case 5:
-                                getLauncherHelper().startActivity(EditUserDataActivity.getIntent(getActivity(), loginInfo.token, loginInfo.lUserId,loginInfo.nSex));
+                                getLauncherHelper().startActivity(EditUserDataActivity.class);
                                 NetLoadingDialog.dismissLoading();
                                 break;
                             default:

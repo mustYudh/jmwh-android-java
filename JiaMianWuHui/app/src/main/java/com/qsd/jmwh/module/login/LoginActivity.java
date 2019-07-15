@@ -56,14 +56,12 @@ public class LoginActivity extends BaseBarActivity implements LoginViewer, View.
 
   @Override public void handleLoginResult(LoginInfo loginInfo) {
     if (loginInfo != null) {
-      //NIMClient.getService(AuthService.class).login(LoginInfo(loginInfo.sIMID, simid)).setCallback(new )
       NIMClient.getService(AuthService.class)
           .login(new com.netease.nimlib.sdk.auth.LoginInfo(loginInfo.sIMID, loginInfo.sIMToken))
           .setCallback(new RequestCallback<com.netease.nimlib.sdk.auth.LoginInfo>() {
 
             @Override public void onSuccess(com.netease.nimlib.sdk.auth.LoginInfo info) {
               UserProfile.getInstance().appLogin(loginInfo);
-              UserProfile.getInstance().setSex(loginInfo.nSex);
               NimUIKit.loginSuccess(loginInfo.sIMID);
               NIMClient.toggleNotification(true);
               EventBus.getDefault().post(new RegisterSuccess(true));

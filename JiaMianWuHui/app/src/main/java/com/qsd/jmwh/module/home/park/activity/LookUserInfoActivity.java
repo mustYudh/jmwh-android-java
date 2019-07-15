@@ -159,8 +159,7 @@ public class LookUserInfoActivity extends BaseActivity
         + " · "
         + userData.sAge
         + " · "
-        + userData.nOnLine
-        + "m");
+        + (userData.nOnLine >= 1000 ? (userData.nOnLine / 1000) + "km" : (userData.nOnLine + "m")));
     bindText(R.id.sDateRange, "约会范围：" + userData.sDateRange + " · " + userData.nOffLineMin + "分钟前");
     authType = userCenterInfo.nAuthType;
     @DrawableRes int result;
@@ -289,8 +288,7 @@ public class LookUserInfoActivity extends BaseActivity
   private void buyVip() {
     LauncherHelper.from(getActivity())
         .startActivity(
-            ToByVipActivity.getIntent(getActivity(), UserProfile.getInstance().getUserId(),
-                UserProfile.getInstance().getAppToken()));
+            ToByVipActivity.class);
   }
 
   @Override public void onBackPressed() {

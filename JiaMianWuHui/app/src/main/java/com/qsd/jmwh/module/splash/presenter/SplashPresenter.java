@@ -32,20 +32,19 @@ public class SplashPresenter extends BaseViewPresenter<SplashViewer> {
                     @Override
                     protected void onSuccess(ApiResult<LoginInfo> result) {
                         int code = result.getCode();
-                        LoginInfo loginInfo = result.getData();
                         switch (code) {
                             case 0:
                                 assert getViewer() != null;
                                 getViewer().authLoginSuccess(result.getData());
                                 break;
                             case 3:
-                                getLauncherHelper().startActivity(SelectGenderActivity.getIntent(getActivity(), loginInfo.lUserId, loginInfo.token));
+                                getLauncherHelper().startActivity(SelectGenderActivity.class);
                                 break;
                             case 4:
-                                getLaunchHelper().startActivity(EditRegisterCodeActivity.getIntent(getActivity(), loginInfo.token, loginInfo.lUserId,loginInfo.nSex,0));
+                                getLaunchHelper().startActivity(EditRegisterCodeActivity.class);
                                 break;
                             case 5:
-                                getLauncherHelper().startActivity(EditUserDataActivity.getIntent(getActivity(), loginInfo.token, loginInfo.lUserId,loginInfo.nSex));
+                                getLauncherHelper().startActivity(EditUserDataActivity.class);
                                 break;
                             default:
                                 ToastUtils.show(result.getMsg());

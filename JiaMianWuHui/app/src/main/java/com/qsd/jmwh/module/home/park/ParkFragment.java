@@ -113,7 +113,7 @@ public class ParkFragment extends BaseBarFragment
                     textView.setText("附近");
                     textView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
                 } else if (i == 1) {
-                    textView.setText(currentSelectListType == 1 ? "会员" : "注册");
+                    textView.setText(currentSelectListType == 1 ? "会员" : "新注册");
                     textView.setTextColor(Res.color(R.color.color_666666));
                     textView.setTextSize(15);
                     textView.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));

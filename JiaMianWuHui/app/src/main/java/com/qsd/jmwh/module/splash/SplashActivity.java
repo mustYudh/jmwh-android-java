@@ -151,7 +151,6 @@ public class SplashActivity extends BaseActivity
 
   @Override public void authLoginSuccess(LoginInfo loginInfo) {
     if (loginInfo != null) {
-      UserProfile.getInstance().appLogin(loginInfo);
       NetLoadingDialog.showLoading(getActivity(), false);
       NIMClient.getService(AuthService.class)
           .login(new com.netease.nimlib.sdk.auth.LoginInfo(loginInfo.sIMID, loginInfo.sIMToken))

@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.common.ToastHelper;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.RequestCallback;
@@ -31,24 +32,22 @@ public class EditRegisterCodeActivity extends BaseBarActivity
     implements View.OnClickListener, EditRegisterCodeViewer {
   @PresenterLifeCycle EditRegisterCodePresenter mPresenter = new EditRegisterCodePresenter(this);
 
+  private int userId = UserProfile.getInstance().getUserId();
+  private String userToken = UserProfile.getInstance().getAppToken();
+  private int sex = UserProfile.getInstance().getSex();
+
   @Override protected void setView(@Nullable Bundle savedInstanceState) {
     setContentView(R.layout.edit_register_code_activity_layout);
   }
 
-  private static final String TOKEN = "token";
-  private static final String USER_ID = "user_id";
-  private static final String SEX = "sex";
-  private static final String TYPE = "sex";
+
+
 
   public static int GET_AUTH_CODE_REQUEST = 124;
   public static String GET_AUTH_CODE_RESULT = "get_auth_code_result";
 
-  public static Intent getIntent(Context context, String token, int lUserId, int sex, int type) {
+  public static Intent getIntent(Context context) {
     Intent starter = new Intent(context, EditRegisterCodeActivity.class);
-    starter.putExtra(TOKEN, token);
-    starter.putExtra(USER_ID, lUserId);
-    starter.putExtra(SEX, sex);
-    starter.putExtra(TYPE, type);
     return starter;
   }
 
@@ -67,14 +66,11 @@ public class EditRegisterCodeActivity extends BaseBarActivity
     switch (v.getId()) {
       case R.id.to_register:
         getLaunchHelper().startActivityForResult(
-            EditUserDataActivity.getIntent(getActivity(), getIntent().getStringExtra(TOKEN),
-                getIntent().getIntExtra(USER_ID, -1), getIntent().getIntExtra(SEX, -1)),
-            GET_AUTH_CODE_REQUEST);
+            EditUserDataActivity.class, GET_AUTH_CODE_REQUEST);
         break;
       case R.id.to_by:
         getLaunchHelper().startActivityForResult(
-            ToByVipActivity.getIntent(getActivity(), getIntent().getIntExtra(USER_ID, -1),
-                getIntent().getStringExtra(TOKEN)), GET_AUTH_CODE_REQUEST);
+            ToByVipActivity.class, GET_AUTH_CODE_REQUEST);
         break;
       case R.id.login:
         EditText editText = bindView(R.id.code);
@@ -84,8 +80,7 @@ public class EditRegisterCodeActivity extends BaseBarActivity
           selectHintPop.setTitle("验证码验证通过")
               .setMessage("欢迎加入假面舞会！请勿把您的的账户泄露给他人，一经发现登录异常，账户会被自动冻结。")
               .setSingleButton("好的", v1 -> {
-                mPresenter.commitCode(getIntent().getIntExtra(USER_ID, -1),
-                    getIntent().getStringExtra(TOKEN), code);
+                mPresenter.commitCode(userId, userToken, code);
                 selectHintPop.dismiss();
               })
               .showPopupWindow();
@@ -115,7 +110,9 @@ public class EditRegisterCodeActivity extends BaseBarActivity
         .login(new com.netease.nimlib.sdk.auth.LoginInfo(UserProfile.getInstance().getSimUserId(), UserProfile.getInstance().getSimToken()))
         .setCallback(new RequestCallback<LoginInfo>() {
           @Override public void onSuccess(com.netease.nimlib.sdk.auth.LoginInfo info) {
-            if (getIntent().getIntExtra(TYPE, -1) == 0) {
+            if (sex == 0) {
+              NimUIKit.loginSuccess(UserProfile.getInstance().getSimUserId());
+              NIMClient.toggleNotification(true);
               getLaunchHelper().startActivity(HomeActivity.class);
             } else {
               EventBus.getDefault().post(new RegisterSuccess(true));
@@ -148,7 +145,7 @@ public class EditRegisterCodeActivity extends BaseBarActivity
 
   @Override protected void onResume() {
     super.onResume();
-    mPresenter.getUserCode(getIntent().getIntExtra(USER_ID, -1), getIntent().getStringExtra(TOKEN));
+    mPresenter.getUserCode(userId,userToken);
   }
 
 }

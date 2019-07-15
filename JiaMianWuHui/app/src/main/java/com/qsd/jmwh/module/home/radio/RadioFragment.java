@@ -122,7 +122,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
         tv_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getLaunchHelper().startActivityForResult(DateRangeActivity.getIntent(getActivity(), 1, UserProfile.getInstance().getAppToken(), UserProfile.getInstance().getUserId(), "约会范围"), DATE_RANGE_REQUEST_CODE);
+                getLaunchHelper().startActivityForResult(DateRangeActivity.getIntent(getActivity(), 1, "约会范围"), DATE_RANGE_REQUEST_CODE);
             }
         });
         tv_right.setOnClickListener(new View.OnClickListener() {
@@ -671,9 +671,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                 }
                 switch (v.getId()) {
                     case R.id.tv_vip:
-                        LauncherHelper.from(getActivity()).startActivity(ToByVipActivity
-                                .getIntent(getActivity(), UserProfile.getInstance().getUserId(),
-                                        UserProfile.getInstance().getAppToken()));
+                        LauncherHelper.from(getActivity()).startActivity(ToByVipActivity.class);
                         break;
                     case R.id.tv_pay:
                         payType = 0;

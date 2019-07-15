@@ -54,6 +54,7 @@ public class UserProfile implements Serializable {
     setUserPic(userInfo.sUserHeadPic);
     setSimToken(userInfo.sIMToken);
     setSimUserId(userInfo.sIMID);
+    setSex(userInfo.nSex);
     JPushInterface.setAlias(APP.getInstance().getApplicationContext(), 1, "jg_" + userInfo.lUserId);
   }
 

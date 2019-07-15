@@ -54,7 +54,9 @@ public class ToByVipPresenter extends BaseViewPresenter<ToByVipViewer> {
                                                 @Override
                                                 protected void onSuccess(UserAuthCodeBean result) {
                                                     Intent intent = new Intent();
-                                                    intent.putExtra(EditRegisterCodeActivity.GET_AUTH_CODE_RESULT, result.sAuthCode);
+                                                    if (result != null) {
+                                                      intent.putExtra(EditRegisterCodeActivity.GET_AUTH_CODE_RESULT, result.sAuthCode);
+                                                    }
                                                     getActivity().setResult(Activity.RESULT_OK, intent);
                                                     getActivity().finish();
                                                 }

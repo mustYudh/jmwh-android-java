@@ -1,13 +1,10 @@
 package com.qsd.jmwh.module.register;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
-
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
@@ -22,17 +19,9 @@ public class SelectGenderActivity extends BaseBarActivity implements SelectGende
     private ImageView boy;
     private ImageView girle;
     private int currentType = 1;
-    public static String APP_ACCOUNT = "APP_ACCOUNT";
-    public static String APP_TOKEN = "APP_TOKEN";
 
 
 
-    public static Intent getIntent(Context context, int account, String token) {
-        Intent intent = new Intent(context, SelectGenderActivity.class);
-        intent.putExtra(APP_ACCOUNT, account);
-        intent.putExtra(APP_TOKEN, token);
-        return intent;
-    }
 
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
@@ -67,7 +56,7 @@ public class SelectGenderActivity extends BaseBarActivity implements SelectGende
                         .setPositiveButton("确定", v1 -> {
                             UserProfile.getInstance().setSex(currentType);
                             UserProfile.getInstance().setHomeSexType(currentType);
-                                    mPresenter.selectGender(currentType, getIntent().getIntExtra(APP_ACCOUNT, -1));
+                                    mPresenter.selectGender(currentType, UserProfile.getInstance().getUserId());
                                     selectGenderHintPop.dismiss();
                                 }
                         )
@@ -85,12 +74,10 @@ public class SelectGenderActivity extends BaseBarActivity implements SelectGende
     public void selectedSuccess(int type) {
         if (type == 0) {
             setResult(Activity.RESULT_OK);
-            getLaunchHelper().startActivity(
-                    EditUserDataActivity.getIntent(getActivity(), getIntent().getStringExtra(APP_TOKEN),
-                            getIntent().getIntExtra(APP_ACCOUNT, -1), type));
+            getLaunchHelper().startActivity(EditUserDataActivity.class);
             finish();
         } else {
-            getLaunchHelper().startActivity(EditRegisterCodeActivity.getIntent(getActivity(), getIntent().getStringExtra(APP_TOKEN), getIntent().getIntExtra(APP_ACCOUNT, -1), type,1));
+            getLaunchHelper().startActivity(EditRegisterCodeActivity.class);
             setResult(Activity.RESULT_OK);
             finish();
         }

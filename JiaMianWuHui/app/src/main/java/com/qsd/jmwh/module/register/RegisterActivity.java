@@ -4,12 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
-
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
-import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.login.bean.LoginInfo;
-import com.qsd.jmwh.module.register.bean.UserInfo;
 import com.qsd.jmwh.module.register.presenter.RegisterPresenter;
 import com.qsd.jmwh.module.register.presenter.RegisterViewer;
 import com.qsd.jmwh.utils.countdown.RxCountDown;
@@ -113,14 +110,8 @@ public class RegisterActivity extends BaseBarActivity implements RegisterViewer,
 
 
     @Override
-    public void registerSuccess(UserInfo registerBean) {
-        LoginInfo info = new LoginInfo();
-        info.sIMID = registerBean.sIMID;
-        info.lUserId = registerBean.lUserId;
-        info.sIMToken = registerBean.sIMToken;
-        info.token = registerBean.token;
-        UserProfile.getInstance().appLogin(info);
-        getLaunchHelper().startActivity(SelectGenderActivity.getIntent(getActivity(),registerBean.lUserId,registerBean.token));
+    public void registerSuccess(LoginInfo registerBean) {
+        getLaunchHelper().startActivity(SelectGenderActivity.class);
         finish();
     }
 }

@@ -10,11 +10,9 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import com.google.gson.Gson;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
-import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.park.activity.LookUserInfoActivity;
 import com.qsd.jmwh.module.home.radio.activity.ReleaseAppointmentActivity;
 import com.qsd.jmwh.module.home.radio.adapter.DateRadioListDialogAdapter;
@@ -33,7 +31,6 @@ import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 import com.yu.common.ui.DelayClickImageView;
 import com.yu.common.ui.DelayClickTextView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -263,9 +260,7 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
                 }
                 switch (v.getId()) {
                     case R.id.tv_vip:
-                        LauncherHelper.from(getActivity()).startActivity(ToByVipActivity
-                                .getIntent(getActivity(), UserProfile.getInstance().getUserId(),
-                                        UserProfile.getInstance().getAppToken()));
+                        LauncherHelper.from(getActivity()).startActivity(ToByVipActivity.class);
                         break;
                     case R.id.tv_pay:
                         payType = 0;

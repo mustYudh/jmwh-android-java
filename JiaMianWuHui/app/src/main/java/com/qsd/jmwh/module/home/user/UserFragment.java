@@ -108,8 +108,7 @@ public class UserFragment extends BaseFragment
         switch (v.getId()) {
             case R.id.vip:
                 getLaunchHelper().startActivity(
-                        ToByVipActivity.getIntent(getActivity(), UserProfile.getInstance().getUserId(),
-                                UserProfile.getInstance().getAppToken()));
+                        ToByVipActivity.class);
                 break;
             case R.id.money_bag:
                 getLaunchHelper().startActivity(MoneyBagActivity.class);

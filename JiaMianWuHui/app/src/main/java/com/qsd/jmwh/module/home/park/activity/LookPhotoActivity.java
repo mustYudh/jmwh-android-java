@@ -106,8 +106,7 @@ public class LookPhotoActivity extends BaseActivity implements LookPhotoViewer {
     bindView(R.id.buy_vip, v -> {
       LauncherHelper.from(getActivity())
           .startActivity(
-              ToByVipActivity.getIntent(getActivity(), UserProfile.getInstance().getUserId(),
-                  UserProfile.getInstance().getAppToken()));
+              ToByVipActivity.class);
       finish();
     });
     bindView(R.id.pay, v -> {

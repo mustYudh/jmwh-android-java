@@ -151,7 +151,7 @@ public class ReleaseAppointmentActivity extends BaseBarActivity implements View.
                 mPresenter.initRadioConfigData("1");
                 break;
             case R.id.ll_city:
-                getLaunchHelper().startActivityForResult(DateRangeActivity.getIntent(getActivity(), 1, UserProfile.getInstance().getAppToken(), UserProfile.getInstance().getUserId(), "约会范围"), DATE_RANGE_REQUEST_CODE);
+                getLaunchHelper().startActivityForResult(DateRangeActivity.getIntent(getActivity(), 1, "约会范围"), DATE_RANGE_REQUEST_CODE);
                 break;
             case R.id.ll_time:
                 showTimeDialog();

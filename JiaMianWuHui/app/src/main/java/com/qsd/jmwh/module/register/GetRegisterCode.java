@@ -1,14 +1,12 @@
 package com.qsd.jmwh.module.register;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.EditText;
-
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
+import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.register.presenter.GetRegisterPresenter;
 import com.qsd.jmwh.module.register.presenter.GetRegisterViewer;
 import com.yu.common.mvp.PresenterLifeCycle;
@@ -22,8 +20,10 @@ public class GetRegisterCode extends BaseBarActivity implements GetRegisterViewe
     private EditText weChat;
     private EditText referees;
 
-    private final static String TOKEN = "token";
-    private final static String USER_ID = "user_id";
+    private int userId = UserProfile.getInstance().getUserId();
+    private String userToken = UserProfile.getInstance().getAppToken();
+    private int userSex = UserProfile.getInstance().getSex();
+
 
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
@@ -31,19 +31,13 @@ public class GetRegisterCode extends BaseBarActivity implements GetRegisterViewe
     }
 
 
-    public static Intent getIntent(Context context, String token, int userId) {
-        Intent starter = new Intent(context, GetRegisterCode.class);
-        starter.putExtra(TOKEN, token);
-        starter.putExtra(USER_ID, userId);
-        return starter;
-    }
 
     @Override
     protected void loadData() {
         setTitle("申请邀请码");
         initView();
-        bindView(R.id.next, v -> mPresenter.getRegisterCode(getIntent().getIntExtra(USER_ID, -1),
-                getIntent().getStringExtra(TOKEN), getEditSting(know), getEditSting(referees), getEditSting(weChat), getEditSting(city)));
+        bindView(R.id.next, v -> mPresenter.getRegisterCode(userId,
+                userToken, getEditSting(know), getEditSting(referees), getEditSting(weChat), getEditSting(city)));
     }
 
     private void initView() {

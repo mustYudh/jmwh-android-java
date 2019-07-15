@@ -1,16 +1,14 @@
 package com.qsd.jmwh.module.register;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
+import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.register.adapter.PayTypeAdapter;
 import com.qsd.jmwh.module.register.adapter.VipInfoAdapter;
 import com.qsd.jmwh.module.register.adapter.VipTextAdapter;
@@ -20,7 +18,6 @@ import com.qsd.jmwh.module.register.presenter.ToByVipPresenter;
 import com.qsd.jmwh.module.register.presenter.ToByVipViewer;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,23 +30,18 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
   private RecyclerView payType;
   private PayTypeAdapter payTypeAdapter;
   private VipInfoBean.CdoListBean cdoListBean;
-  private final static String USER_ID = "user_id";
-  private final static String TOKEN = "token";
   private final static String IS_REGISTER = "is_register";
   private TextView payCount;
   private double currentMoney;
   private PayTypeBean currentType;
 
+  private int userId = UserProfile.getInstance().getUserId();
+  private String userToken = UserProfile.getInstance().getAppToken();
+  private int userSex = UserProfile.getInstance().getSex();
+
   @Override protected void setView(@Nullable Bundle savedInstanceState) {
     setContentView(R.layout.to_by_vip_activity);
     initView();
-  }
-
-  public static Intent getIntent(Context context, int lUserId, String token) {
-    Intent intent = new Intent(context, ToByVipActivity.class);
-    intent.putExtra(USER_ID, lUserId);
-    intent.putExtra(TOKEN, token);
-    return intent;
   }
 
   private void initView() {
@@ -64,8 +56,7 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
     payType.setLayoutManager(new LinearLayoutManager(getActivity()));
     bindView(R.id.pay, v -> {
       if (currentType != null) {
-        mPresenter.pay(cdoListBean.lGoodsId, currentType.type, getIntent().getIntExtra(USER_ID, -1),
-            getIntent().getStringExtra(TOKEN));
+        mPresenter.pay(cdoListBean.lGoodsId, currentType.type, userId, userToken);
       } else {
         ToastUtils.show("请选择支付方式");
       }
@@ -74,7 +65,7 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
 
   @Override protected void loadData() {
     setTitle("会员中心");
-    mPresenter.getVipInfo(getIntent().getIntExtra(USER_ID, -1), getIntent().getStringExtra(TOKEN));
+    mPresenter.getVipInfo(userId, userToken);
   }
 
   @Override public void getVipInfo(VipInfoBean vipInfoBean) {

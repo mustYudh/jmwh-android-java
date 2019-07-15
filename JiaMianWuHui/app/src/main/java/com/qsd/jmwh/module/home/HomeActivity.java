@@ -63,9 +63,6 @@ public class HomeActivity extends BaseActivity implements HomeViewer {
       ToastUtils.show("当前设备已退出登录或其他设备登录该账号");
       UserProfile.getInstance().clean();
       getLaunchHelper().startActivity(SplashActivity.class);
-      //NIMClient.getService(AuthService.class)
-      //        .login(new com.netease.nimlib.sdk.auth.LoginInfo(UserProfile.getInstance().getSimUserId(),
-      //                UserProfile.getInstance().getSimToken()));
     }
   };
 
@@ -97,9 +94,9 @@ public class HomeActivity extends BaseActivity implements HomeViewer {
     mPresenter.modifyLngAndLat();
     navigationView = findViewById(R.id.bottom_navigation_view);
     List<TabItem> items = new ArrayList<>();
-    items.add(new TabView(createTabView("首页", R.drawable.tab_01, 0), new ParkFragment()));
-    items.add(new TabView(createTabView("约会广场", R.drawable.tab_03, 1), new RadioFragment()));
-    items.add(new TabView(createTabView("消息中心", R.drawable.tab_02, 2), new MessageFragment()));
+    items.add(new TabView(createTabView("首页", R.drawable.tab_02, 0), new ParkFragment()));
+    items.add(new TabView(createTabView("约会广场", R.drawable.tab_01, 1), new RadioFragment()));
+    items.add(new TabView(createTabView("消息中心", R.drawable.tab_03, 2), new MessageFragment()));
     items.add(new TabView(createTabView("个人中心", R.drawable.tab_04, 3), new UserFragment()));
     navigationView.initControl(this).setPagerView(items, 0);
     navigationView.getNavgation().setTabControlHeight(60);

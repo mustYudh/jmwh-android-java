@@ -14,11 +14,9 @@ import com.qsd.jmwh.module.register.bean.PayInfo;
 import com.qsd.jmwh.module.register.bean.RangeData;
 import com.qsd.jmwh.module.register.bean.SendVerCodeBean;
 import com.qsd.jmwh.module.register.bean.UserAuthCodeBean;
-import com.qsd.jmwh.module.register.bean.UserInfo;
 import com.qsd.jmwh.module.register.bean.VipInfoBean;
 import com.xuexiang.xhttp2.annotation.NetMethod;
 import com.xuexiang.xhttp2.model.ApiResult;
-
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
@@ -31,7 +29,7 @@ public interface ApiServices {
     @NetMethod(ParameterNames = {
             "sAuthCode", "sLoginName", "sLoginMode", "sPwd"
     }, Url = "/UserService/registUser")
-    Observable<UserInfo> register(String sAuthCode,
+    Observable<LoginInfo> register(String sAuthCode,
                                   String sLoginName, String sLoginMode, String sPwd);
 
     @NetMethod(ParameterNames = {"nSex", "lUserId"}, Url = "/UserService/modifySex")

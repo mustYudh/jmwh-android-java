@@ -1,7 +1,6 @@
 package com.qsd.jmwh.module.register;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,9 +9,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
+import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
+import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
+import cn.finalteam.rxgalleryfinal.ui.base.IRadioImageCheckedListener;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
+import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.user.activity.WebViewActivity;
 import com.qsd.jmwh.module.register.bean.RangeData;
 import com.qsd.jmwh.module.register.bean.SelectData;
@@ -26,25 +29,20 @@ import com.qsd.jmwh.view.UserItemView;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 import com.yu.common.utils.ImageLoader;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
-import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
-import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
-import cn.finalteam.rxgalleryfinal.ui.base.IRadioImageCheckedListener;
 
 public class EditUserDataActivity extends BaseBarActivity
         implements EditUserInfoViewer, View.OnClickListener {
     @PresenterLifeCycle
     EditUserInfoPresenter mPresenter = new EditUserInfoPresenter(this);
 
+    private int userId = UserProfile.getInstance().getUserId();
+    private String userToken = UserProfile.getInstance().getAppToken();
+    private int userSex = UserProfile.getInstance().getSex();
 
-    private static final String TOKEN = "token";
-    private static final String USER_ID = "user_id";
-    private static final String SEX = "sex";
+
     public static final int DATE_RANGE_REQUEST_CODE = 0X123;
     public static final int PROJECT_REQUEST_CODE = 0X124;
     private List<String> ranges = new ArrayList<>();
@@ -67,13 +65,7 @@ public class EditUserDataActivity extends BaseBarActivity
     private String selectPhotoUrl;
     private boolean mIsGirl;
 
-    public static Intent getIntent(Context context, String token, int lUserId, int sex) {
-        Intent starter = new Intent(context, EditUserDataActivity.class);
-        starter.putExtra(TOKEN, token);
-        starter.putExtra(USER_ID, lUserId);
-        starter.putExtra(SEX, sex);
-        return starter;
-    }
+
 
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
@@ -101,7 +93,7 @@ public class EditUserDataActivity extends BaseBarActivity
         qq = bindView(R.id.qq);
         sNickName = bindView(R.id.sNickName);
         switchSocial = bindView(R.id.switch_social);
-        mIsGirl = getIntent().getIntExtra(SEX, -1) == 0;
+        mIsGirl = userSex == 0;
         bindView(R.id.bust, mIsGirl);
     }
 
@@ -115,12 +107,10 @@ public class EditUserDataActivity extends BaseBarActivity
     private void initItemClickListener() {
         location.setOnClickSelectedItem(v ->
                 getLaunchHelper().startActivityForResult(
-                        DateRangeActivity.getIntent(getActivity(), 1, getIntent().getStringExtra(TOKEN),
-                                getIntent().getIntExtra(USER_ID, -1), "约会范围"), DATE_RANGE_REQUEST_CODE));
+                        DateRangeActivity.getIntent(getActivity(), 1, "约会范围"), DATE_RANGE_REQUEST_CODE));
         professional.setOnClickSelectedItem(v ->
                 getLaunchHelper().startActivityForResult(
-                        DateRangeActivity.getIntent(getActivity(), 0, getIntent().getStringExtra(TOKEN),
-                                getIntent().getIntExtra(USER_ID, -1), "职业"), PROJECT_REQUEST_CODE));
+                        DateRangeActivity.getIntent(getActivity(), 0, "职业"), PROJECT_REQUEST_CODE));
         project.setOnClickSelectedItem(v -> mPresenter.getDateProject());
         height.setOnClickSelectedItem(v -> {
             List<SelectData> datas = new ArrayList<>();
@@ -222,8 +212,8 @@ public class EditUserDataActivity extends BaseBarActivity
                     public void cropAfter(Object t) {
                         if (!TextUtils.isEmpty(selectPhotoUrl)) {
                             mPresenter.setHeader(selectPhotoUrl,
-                                    +getIntent().getIntExtra(USER_ID, -1) + "/head_" + UUID.randomUUID().toString() + ".jpg",
-                                    getIntent().getIntExtra(USER_ID, -1) + "", getIntent().getStringExtra(TOKEN));
+                                    +userId + "/head_" + UUID.randomUUID().toString() + ".jpg",
+                                    userId + "", userToken);
                         }
                     }
 
@@ -248,10 +238,10 @@ public class EditUserDataActivity extends BaseBarActivity
                 params.sBust = bust.getText();
                 params.bHiddenQQandWX = switchSocial.getSwitched();
                 params.sUserHeadPic = headerUrl;
-                params.lUserId = getIntent().getIntExtra(USER_ID, -1) + "";
+                params.lUserId = userId + "";
                 EditText edit = bindView(R.id.edit_sIntroduce);
                 params.sIntroduce = edit.getText().toString().trim();
-                params.token = getIntent().getStringExtra(TOKEN);
+                params.token = userToken;
                 mPresenter.uploadUserInfo(params,mIsGirl);
                 break;
             case R.id.agreement:
@@ -291,7 +281,7 @@ public class EditUserDataActivity extends BaseBarActivity
 
     @Override
     public void commitUserInfo() {
-        mPresenter.getCode(getIntent().getIntExtra(USER_ID, -1), getIntent().getStringExtra(TOKEN), getIntent().getIntExtra(SEX, -1));
+        mPresenter.getCode(userId, userToken, userSex);
     }
 
 

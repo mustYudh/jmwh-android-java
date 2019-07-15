@@ -108,11 +108,9 @@ public class EditUserInfoActivity extends BaseBarActivity
 
   private void initItemClickListener() {
     location.setOnClickSelectedItem(v -> getLaunchHelper().startActivityForResult(
-        DateRangeActivity.getIntent(getActivity(), 1, UserProfile.getInstance().getAppToken(),
-            UserProfile.getInstance().getUserId(), "约会范围"), DATE_RANGE_REQUEST_CODE));
+        DateRangeActivity.getIntent(getActivity(), 1, "约会范围"), DATE_RANGE_REQUEST_CODE));
     professional.setOnClickSelectedItem(v -> getLaunchHelper().startActivityForResult(
-        DateRangeActivity.getIntent(getActivity(), 0, UserProfile.getInstance().getAppToken(),
-            UserProfile.getInstance().getUserId(), "职业"), PROJECT_REQUEST_CODE));
+        DateRangeActivity.getIntent(getActivity(), 0, "职业"), PROJECT_REQUEST_CODE));
     project.setOnClickSelectedItem(v -> mPresenter.getDateProject());
     height.setOnClickSelectedItem(v -> {
       List<SelectData> datas = new ArrayList<>();
