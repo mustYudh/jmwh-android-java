@@ -28,7 +28,6 @@ import com.qsd.jmwh.module.home.user.presenter.MineRadioViewer;
 import com.qsd.jmwh.module.register.ToByVipActivity;
 import com.qsd.jmwh.module.register.bean.PayInfo;
 import com.qsd.jmwh.utils.DialogUtils;
-import com.qsd.jmwh.utils.PayUtils;
 import com.yu.common.launche.LauncherHelper;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
@@ -237,18 +236,19 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
 
     @Override
     public void getBuyDatingPaySignSuccess(PayInfo payInfo, String name) {
-        PayUtils.getInstance().pay(getActivity(), payType, payInfo)
-                .getPayResult(new PayUtils.PayCallBack() {
-                    @Override
-                    public void onPaySuccess(int type) {
-                        startActivity(new Intent(getActivity(), ReleaseAppointmentActivity.class).putExtra("activity_title", name));
-                    }
-
-                    @Override
-                    public void onFailed(int type) {
-                        ToastUtils.show("支付失败，请重试");
-                    }
-                });
+//        PayUtils.getInstance().pay(getActivity(), payType, payInfo)
+//                .getPayResult(new PayUtils.PayCallBack() {
+//                    @Override
+//                    public void onPaySuccess(int type) {
+//                        startActivity(new Intent(getActivity(), ReleaseAppointmentActivity.class).putExtra("activity_title", name));
+//                    }
+//
+//                    @Override
+//                    public void onFailed(int type) {
+//                        ToastUtils.show("支付失败，请重试");
+//                    }
+//                });
+        startActivity(new Intent(getActivity(), ReleaseAppointmentActivity.class).putExtra("activity_title", name));
     }
 
     /**

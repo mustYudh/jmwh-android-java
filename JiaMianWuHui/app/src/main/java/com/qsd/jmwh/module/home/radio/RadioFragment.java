@@ -44,7 +44,6 @@ import com.qsd.jmwh.module.register.bean.RangeData;
 import com.qsd.jmwh.thrid.UploadImage;
 import com.qsd.jmwh.thrid.oss.PersistenceResponse;
 import com.qsd.jmwh.utils.DialogUtils;
-import com.qsd.jmwh.utils.PayUtils;
 import com.qsd.jmwh.view.CircleImageView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.yu.common.launche.LauncherHelper;
@@ -364,18 +363,22 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
 
     @Override
     public void getBuyDatingPaySignSuccess(PayInfo payInfo, String name) {
-        PayUtils.getInstance().pay(getActivity(), payType, payInfo)
-                .getPayResult(new PayUtils.PayCallBack() {
-                    @Override
-                    public void onPaySuccess(int type) {
-                        getContext().startActivity(new Intent(getContext(), ReleaseAppointmentActivity.class).putExtra("activity_title", name));
-                    }
+//        PayUtils.getInstance().pay(getActivity(), payType, payInfo)
+//                .getPayResult(new PayUtils.PayCallBack() {
+//                    @Override
+//                    public void onPaySuccess(int type) {
+//                        Log.e("aaaaa","支付成功了吗");
+//                        getContext().startActivity(new Intent(getContext(), ReleaseAppointmentActivity.class).putExtra("activity_title", name));
+//                    }
+//
+//                    @Override
+//                    public void onFailed(int type) {
+//                        ToastUtils.show("支付失败，请重试");
+//                    }
+//                });
 
-                    @Override
-                    public void onFailed(int type) {
-                        ToastUtils.show("支付失败，请重试");
-                    }
-                });
+        getContext().startActivity(new Intent(getContext(), ReleaseAppointmentActivity.class).putExtra("activity_title", name));
+
     }
 
     @Override
