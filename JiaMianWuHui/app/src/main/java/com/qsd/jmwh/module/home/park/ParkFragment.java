@@ -239,9 +239,9 @@ public class ParkFragment extends BaseBarFragment
     @Override
     public void onPageSelected(int i) {
         if (i != 0) {
-            adapter.getFragment(i).tv_top_num.setVisibility(View.GONE);
+            //adapter.getFragment(i).tv_top_num.setVisibility(View.GONE);
         } else {
-            adapter.getFragment(i).tv_top_num.setVisibility(View.VISIBLE);
+            //adapter.getFragment(i).tv_top_num.setVisibility(View.VISIBLE);
         }
     }
 

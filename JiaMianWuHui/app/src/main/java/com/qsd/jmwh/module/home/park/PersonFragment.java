@@ -8,8 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseFragment;
 import com.qsd.jmwh.data.UserProfile;
@@ -23,7 +21,6 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 import com.yu.common.ui.DelayClickImageView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +29,6 @@ public class PersonFragment extends BaseFragment implements PersonViewer {
     PersonPresenter mPresenter = new PersonPresenter(this);
     private RecyclerView rv_person;
     private PersonRvAdapter adapter;
-    public TextView tv_top_num;
     private DialogUtils loveDialog;
     private List<HomePersonListBean.CdoListBean> list = new ArrayList<>();
     private SmartRefreshLayout refresh;
@@ -73,7 +69,6 @@ public class PersonFragment extends BaseFragment implements PersonViewer {
         ll_empty = bindView(R.id.ll_empty);
         refresh = bindView(R.id.refresh);
         rv_person = bindView(R.id.rv_person);
-        tv_top_num = bindView(R.id.tv_top_num);
         rv_person.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         mPresenter.initPersonListData(UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng(), home_type, "", pageIndex + "", UserProfile.getInstance().getHomeSexType() + "", UserProfile.getInstance().getHomeCityName());
@@ -144,22 +139,18 @@ public class PersonFragment extends BaseFragment implements PersonViewer {
             if ("0".equals(home_type)) {
                 if (homePersonListBean.nNotExistGalaryCount != 0) {
                     if (UserProfile.getInstance().getSex() == 0) {
-                        tv_top_num.setVisibility(View.GONE);
                     } else {
                         //tv_top_num.setVisibility(View.VISIBLE);
                     }
-                    tv_top_num.setText("已经隐藏" + homePersonListBean.nNotExistGalaryCount + "位没有照片的" + (UserProfile.getInstance().getHomeSexType() == 0 ? "女士" : "男士"));
+                    //tv_top_num.setText("已经隐藏" + homePersonListBean.nNotExistGalaryCount + "位没有照片的" + (UserProfile.getInstance().getHomeSexType() == 0 ? "女士" : "男士"));
                 } else {
-                    tv_top_num.setVisibility(View.GONE);
                 }
             } else {
-                tv_top_num.setVisibility(View.GONE);
             }
 
 
         } else {
             //错误界面
-            tv_top_num.setVisibility(View.GONE);
         }
     }
 
