@@ -106,14 +106,14 @@ public class PersonFragment extends BaseFragment implements PersonViewer {
 
                 list.addAll(homePersonListBean.cdoList);
 
-//                if (adapter == null) {
-//                    adapter = new PersonRvAdapter(R.layout.item_person, list, getActivity(),sex+"");
-//                    rv_person.setAdapter(adapter);
-//                } else {
-//                    adapter.setNewData(list);
-//                }
-                adapter = new PersonRvAdapter(R.layout.item_person, list, getActivity(), UserProfile.getInstance().getHomeSexType() + "");
-                rv_person.setAdapter(adapter);
+                if (adapter == null) {
+                    adapter = new PersonRvAdapter(R.layout.item_person, list, getActivity(),UserProfile.getInstance().getHomeSexType()+"");
+                    rv_person.setAdapter(adapter);
+                } else {
+                    adapter.setNewData(list);
+                }
+//                adapter = new PersonRvAdapter(R.layout.item_person, list, getActivity(), UserProfile.getInstance().getHomeSexType() + "");
+//                rv_person.setAdapter(adapter);
 
                 adapter.setOnItemClickListener((adapter, view, position) -> {
                     HomePersonListBean.CdoListBean cdoListBean = (HomePersonListBean.CdoListBean) adapter.getData().get(position);
