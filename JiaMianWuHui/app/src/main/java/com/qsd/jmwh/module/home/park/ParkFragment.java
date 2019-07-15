@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -93,7 +94,10 @@ public class ParkFragment extends BaseBarFragment
         if (tabStrip != null) {
             ProxyDrawable proxyDrawable = new ProxyDrawable(tabStrip, 7);
             proxyDrawable.setIndicatorColor(Res.color(R.color.app_main_bg_color));
-            int dividerWith = isGirl ? 25 : 44;
+            int dividerWith = isGirl ? 30 : 34;
+            ViewGroup.LayoutParams params = mTabLayout.getLayoutParams();
+            params.width = isGirl? DensityUtil.dip2px(280) : DensityUtil.dip2px(200);
+            mTabLayout.setLayoutParams(params);
             proxyDrawable.setIndicatorPaddingLeft(DensityUtil.dip2px(getActivity(), dividerWith));
             proxyDrawable.setIndicatorPaddingRight(DensityUtil.dip2px(getActivity(), dividerWith));
             proxyDrawable.setRadius(DensityUtil.dip2px(2));
