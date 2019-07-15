@@ -3,11 +3,13 @@ package com.qsd.jmwh.module.register.presenter;
 import android.annotation.SuppressLint;
 import android.text.TextUtils;
 
+import com.qsd.jmwh.dialog.net.NetLoadingDialog;
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.NoTipRequestSubscriber;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.register.bean.UserAuthCodeBean;
 import com.xuexiang.xhttp2.XHttpProxy;
+import com.xuexiang.xhttp2.exception.ApiException;
 import com.yu.common.framework.BaseViewPresenter;
 
 @SuppressLint("CheckResult")
@@ -19,6 +21,7 @@ public class EditRegisterCodePresenter extends BaseViewPresenter<EditRegisterCod
 
 
     public void commitCode(int userCode,String token, String code) {
+        NetLoadingDialog.showLoading(getActivity(),false);
         XHttpProxy.proxy(ApiServices.class)
                 .getUserAuthByCode(userCode,token,code)
                 .subscribeWith(new TipRequestSubscriber<Object>() {
@@ -26,6 +29,11 @@ public class EditRegisterCodePresenter extends BaseViewPresenter<EditRegisterCod
                     protected void onSuccess(Object o) {
                         assert getViewer() != null;
                         getViewer().registerSuccess();
+                    }
+
+                    @Override protected void onError(ApiException apiException) {
+                        NetLoadingDialog.dismissLoading();
+                        super.onError(apiException);
                     }
                 });
 

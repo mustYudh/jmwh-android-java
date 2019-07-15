@@ -9,13 +9,17 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-
+import com.netease.nim.uikit.common.ToastHelper;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.RequestCallback;
+import com.netease.nimlib.sdk.auth.AuthService;
+import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.dialog.SelectHintPop;
+import com.qsd.jmwh.dialog.net.NetLoadingDialog;
 import com.qsd.jmwh.module.home.HomeActivity;
-import com.qsd.jmwh.module.login.bean.LoginInfo;
 import com.qsd.jmwh.module.register.presenter.EditRegisterCodePresenter;
 import com.qsd.jmwh.module.register.presenter.EditRegisterCodeViewer;
 import com.qsd.jmwh.module.splash.bean.RegisterSuccess;
@@ -107,17 +111,34 @@ public class EditRegisterCodeActivity extends BaseBarActivity
   }
 
   @Override public void registerSuccess() {
-    if (getIntent().getIntExtra(TYPE, -1) == 0) {
-      getLaunchHelper().startActivity(HomeActivity.class);
-    } else {
-      EventBus.getDefault().post(new RegisterSuccess(true));
-      LoginInfo info = new LoginInfo();
-      info.lUserId = getIntent().getIntExtra(USER_ID, -1);
-      info.token = getIntent().getStringExtra(TOKEN);
-      UserProfile.getInstance().appLogin(info);
-      getLaunchHelper().startActivity(HomeActivity.class);
-      finish();
-    }
+    NIMClient.getService(AuthService.class)
+        .login(new com.netease.nimlib.sdk.auth.LoginInfo(UserProfile.getInstance().getSimUserId(), UserProfile.getInstance().getSimToken()))
+        .setCallback(new RequestCallback<LoginInfo>() {
+          @Override public void onSuccess(com.netease.nimlib.sdk.auth.LoginInfo info) {
+            if (getIntent().getIntExtra(TYPE, -1) == 0) {
+              getLaunchHelper().startActivity(HomeActivity.class);
+            } else {
+              EventBus.getDefault().post(new RegisterSuccess(true));
+              getLaunchHelper().startActivity(HomeActivity.class);
+              finish();
+            }
+          }
+
+          @Override public void onFailed(int code) {
+            if (code == 302 || code == 404) {
+              ToastHelper.showToast(EditRegisterCodeActivity.this, "帐号或密码错误");
+              NetLoadingDialog.dismissLoading();
+            } else {
+              ToastHelper.showToast(EditRegisterCodeActivity.this, "登录失败: " + code);
+              NetLoadingDialog.dismissLoading();
+            }
+          }
+
+          @Override public void onException(Throwable throwable) {
+            ToastHelper.showToast(EditRegisterCodeActivity.this, "无效输入");
+            NetLoadingDialog.dismissLoading();
+          }
+        });
   }
 
   @Override public void getUserCode(String code) {
@@ -129,4 +150,5 @@ public class EditRegisterCodeActivity extends BaseBarActivity
     super.onResume();
     mPresenter.getUserCode(getIntent().getIntExtra(USER_ID, -1), getIntent().getStringExtra(TOKEN));
   }
+
 }

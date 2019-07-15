@@ -7,6 +7,8 @@ import android.view.View;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
+import com.qsd.jmwh.data.UserProfile;
+import com.qsd.jmwh.module.login.bean.LoginInfo;
 import com.qsd.jmwh.module.register.bean.UserInfo;
 import com.qsd.jmwh.module.register.presenter.RegisterPresenter;
 import com.qsd.jmwh.module.register.presenter.RegisterViewer;
@@ -112,6 +114,12 @@ public class RegisterActivity extends BaseBarActivity implements RegisterViewer,
 
     @Override
     public void registerSuccess(UserInfo registerBean) {
+        LoginInfo info = new LoginInfo();
+        info.sIMID = registerBean.sIMID;
+        info.lUserId = registerBean.lUserId;
+        info.sIMToken = registerBean.sIMToken;
+        info.token = registerBean.token;
+        UserProfile.getInstance().appLogin(info);
         getLaunchHelper().startActivity(SelectGenderActivity.getIntent(getActivity(),registerBean.lUserId,registerBean.token));
         finish();
     }
