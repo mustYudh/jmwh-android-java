@@ -12,10 +12,14 @@ import android.widget.TextView;
 import com.denghao.control.TabItem;
 import com.denghao.control.TabView;
 import com.denghao.control.view.BottomNavigationView;
+import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.Observer;
+import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.StatusCode;
+import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.auth.AuthServiceObserver;
+import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.auth.OnlineClient;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.MsgServiceObserve;
@@ -30,6 +34,7 @@ import com.qsd.jmwh.module.home.presenter.HomeViewer;
 import com.qsd.jmwh.module.home.radio.RadioFragment;
 import com.qsd.jmwh.module.home.user.UserFragment;
 import com.qsd.jmwh.module.splash.SplashActivity;
+import com.qsd.jmwh.module.splash.bean.RegisterSuccess;
 import com.qsd.jmwh.utils.PressHandle;
 import com.qsd.jmwh.utils.countdown.RxCountDown;
 import com.qsd.jmwh.utils.countdown.RxCountDownAdapter;
@@ -60,9 +65,28 @@ public class HomeActivity extends BaseActivity implements HomeViewer {
     if (code == StatusCode.UNLOGIN
         || code == StatusCode.KICKOUT
         || code == StatusCode.KICK_BY_OTHER_CLIENT) {
-      ToastUtils.show("当前设备已退出登录或其他设备登录该账号");
-      UserProfile.getInstance().clean();
-      getLaunchHelper().startActivity(SplashActivity.class);
+      NIMClient.getService(AuthService.class)
+          .login(new com.netease.nimlib.sdk.auth.LoginInfo(UserProfile.getInstance().getSimUserId(),
+              UserProfile.getInstance().getSimUserId()))
+          .setCallback(new RequestCallback<LoginInfo>() {
+            @Override public void onSuccess(com.netease.nimlib.sdk.auth.LoginInfo info) {
+              NimUIKit.loginSuccess(UserProfile.getInstance().getSimUserId());
+              NIMClient.toggleNotification(true);
+              EventBus.getDefault().post(new RegisterSuccess(true));
+            }
+
+            @Override public void onFailed(int code) {
+              ToastUtils.show("登录失效,请重新登录");
+              getLaunchHelper().startActivity(SplashActivity.class);
+              finish();
+            }
+
+            @Override public void onException(Throwable throwable) {
+              ToastUtils.show("登录失效,请重新登录");
+              getLaunchHelper().startActivity(SplashActivity.class);
+              finish();
+            }
+          });
     }
   };
 
@@ -82,12 +106,12 @@ public class HomeActivity extends BaseActivity implements HomeViewer {
         Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION,
         Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE,
-        Manifest.permission.CALL_PHONE,
-        Manifest.permission.RECORD_AUDIO,
+        Manifest.permission.CALL_PHONE, Manifest.permission.RECORD_AUDIO,
     };
     if (Build.VERSION.SDK_INT >= 23) {
       final RxPermissions rxPermissions = new RxPermissions(this);
-      rxPermissions.request(permiss).subscribe(granted -> {});
+      rxPermissions.request(permiss).subscribe(granted -> {
+      });
     }
     registerObservers(true);
     EventBus.getDefault().post(true);

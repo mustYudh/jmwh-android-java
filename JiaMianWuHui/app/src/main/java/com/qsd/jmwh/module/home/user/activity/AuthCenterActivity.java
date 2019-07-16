@@ -44,11 +44,16 @@ public class AuthCenterActivity extends BaseBarActivity implements AuthCenterVie
           PlayVideoActivity.getIntent(getActivity(), vedioBean.sFileUrl, vedioBean.sFileCoverUrl)));
     }
 
+    //`nCheckStatus` int(10) NOT NULL DEFAULT '0' COMMENT '0：未审核，1、已审核 2、审核未通过，3、审核中',
     TextView textView = bindView(R.id.uploading);
     if (vedioBean.nCheckStatus == 0) {
-      textView.setText("认证通过");
+      textView.setText("未审核");
       textView.setClickable(false);
-    } else if (vedioBean.nCheckStatus == 1) {
+    } if (vedioBean.nCheckStatus == 1) {
+      textView.setText("已审核");
+      textView.setClickable(false);
+      textView.setClickable(false);
+    } else if (vedioBean.nCheckStatus == 2) {
       textView.setText("更新认证");
     } else if (vedioBean.nCheckStatus == 3) {
       textView.setText("审核中（24小时内）");
