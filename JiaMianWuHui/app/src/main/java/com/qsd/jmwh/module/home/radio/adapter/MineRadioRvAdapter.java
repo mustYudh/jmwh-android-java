@@ -68,9 +68,14 @@ public class MineRadioRvAdapter extends BaseMultiItemQuickAdapter<LocalHomeRadio
                 break;
             case 1:
                 NoSlidingGridView gv_pic = helper.getView(R.id.gv_pic);
-                if (item.picList != null && item.picList.size() != 0) {
-                    HomeRadioPicGvAdapter picAdapter = new HomeRadioPicGvAdapter(context, item.picList);
+                if (item.cdoApply != null && item.cdoApply.size() != 0) {
+                    MineRadioPicGvAdapter picAdapter = new MineRadioPicGvAdapter(context, item.cdoApply);
                     gv_pic.setAdapter(picAdapter);
+                    item.picList = new ArrayList<>();
+                    item.picList.clear();
+                    for (int i = 0; i < item.cdoApply.size(); i++) {
+                        item.picList.add(item.cdoApply.get(i).sContent);
+                    }
                     gv_pic.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
