@@ -265,7 +265,7 @@ public class LookUserInfoActivity extends BaseActivity
             .setBottomButton("取消", v13 -> hint.dismiss())
             .showPopupWindow();
       } else {
-        SessionHelper.startP2PSession(getActivity(), "im_" + userID);
+        mPresenter.toChat(sNickName,userID);
       }
     } else {
       if (authType == 0) {
@@ -326,7 +326,7 @@ public class LookUserInfoActivity extends BaseActivity
             .setMessage(free ? "您还有" + count.nSurContactViewCount + "次查看联系方式机会" : "您的免费查看次数已上线")
             .setSingleButton(free ? "确定" : "付费查看和私聊 (" + count.dContactVal + "假面币)", v -> {
               if (free) {
-                refreshData(1);
+                mPresenter.addBrowsingHis(userID, 0, 0, 5, () -> refreshData(1));
               } else {
                 mPresenter.buyContactPay(userID, count.dContactVal);
               }

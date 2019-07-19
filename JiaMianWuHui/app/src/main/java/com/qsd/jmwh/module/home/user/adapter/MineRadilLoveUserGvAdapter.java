@@ -12,6 +12,7 @@ import com.qsd.jmwh.dialog.SelectHintPop;
 import com.qsd.jmwh.http.OtherApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.home.park.bean.SubViewCount;
+import com.qsd.jmwh.module.home.park.presenter.LookUserInfoPresenter;
 import com.qsd.jmwh.module.home.user.bean.MineRadioListBean;
 import com.qsd.jmwh.module.home.user.dialog.GetContactInfoDialog;
 import com.qsd.jmwh.view.CircleImageView;
@@ -87,7 +88,9 @@ public class MineRadilLoveUserGvAdapter extends BaseAdapter {
                         .setMessage(free ? "您还有" + count.nSurContactViewCount + "次查看联系方式机会" : "您的免费查看次数已上线")
                         .setSingleButton(free ? "确定" : "付费查看和私聊 (" + count.dContactVal + "假面币)", v -> {
                             if (free) {
-                                showInfoDialog(cdoApplyBean.lUserId);
+                                addBrowsingHis(cdoApplyBean.lUserId,0, 0, 5, () -> {
+                                    showInfoDialog(cdoApplyBean.lUserId);
+                                });
                             } else {
                                 buyContactPay(cdoApplyBean.lUserId, count.dContactVal);
                             }
@@ -97,6 +100,18 @@ public class MineRadilLoveUserGvAdapter extends BaseAdapter {
                         .showPopupWindow();
                 }
             });
+    }
+
+
+    public void addBrowsingHis(int lUserId,int lBrowseInfoId,int nPayType,int nBrowseInfType,
+        LookUserInfoPresenter.ConsumptionListener listener) {
+        XHttpProxy.proxy(OtherApiServices.class).addBrowsingHis(lUserId,lBrowseInfoId,nPayType,nBrowseInfType).subscribeWith(new TipRequestSubscriber<Object>() {
+            @Override
+            protected void onSuccess(Object o) {
+                listener.consumption();
+
+            }
+        });
     }
 
 

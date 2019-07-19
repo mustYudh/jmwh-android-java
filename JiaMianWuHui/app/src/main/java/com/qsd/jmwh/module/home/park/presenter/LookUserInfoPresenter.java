@@ -8,6 +8,7 @@ import com.qsd.jmwh.http.OtherApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.home.park.bean.OtherUserInfoBean;
 import com.qsd.jmwh.module.home.park.bean.SubViewCount;
+import com.qsd.jmwh.module.im.SessionHelper;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.framework.BaseViewPresenter;
 import com.yu.common.toast.ToastUtils;
@@ -67,5 +68,58 @@ import com.yu.common.toast.ToastUtils;
             getViewer().getViewCount(count);
           }
         });
+  }
+
+
+  public void toChat(String sNickName,int lBuyOtherUserId) {
+    XHttpProxy.proxy(OtherApiServices.class)
+        .getSubViewCount()
+        .subscribeWith(new TipRequestSubscriber<SubViewCount>() {
+          @Override protected void onSuccess(SubViewCount count) {
+            boolean free = count.nSurContactViewCount > 0;
+            SelectHintPop hint = new SelectHintPop(getActivity());
+            hint.setTitle("联系" + sNickName)
+                .setMessage(free ? "您还有" + count.nSurContactViewCount + "次查看联系方式机会" : "您的免费查看次数已上线")
+                .setSingleButton(free ? "确定" : "付费查看和私聊 (" + count.dContactVal + "假面币)", v -> {
+                  if (free) {
+                    addBrowsingHis(lBuyOtherUserId, 0, 0, 5,
+                        () -> SessionHelper.startP2PSession(getActivity(), "im_" + lBuyOtherUserId));
+
+                  } else {
+                    SelectHintPop payChat = new SelectHintPop(getActivity());
+                    payChat.setTitle("温馨提示").setMessage("确认支付").setPositiveButton("确定", v1 -> {
+                      XHttpProxy.proxy(OtherApiServices.class)
+                          .getBuyContactPaySign(lBuyOtherUserId, 5,  count.dContactVal)
+                          .subscribeWith(new TipRequestSubscriber<Object>() {
+                            @Override protected void onSuccess(Object o) {
+                              assert getViewer() != null;
+                              getViewer().refreshData(1);
+                              getViewer().payToChat();
+                            }
+                          });
+                      payChat.dismiss();
+                    }).setNegativeButton("取消", v12 -> payChat.dismiss()).showPopupWindow();
+                  }
+                  hint.dismiss();
+                })
+                .setBottomButton("取消", v13 -> hint.dismiss())
+                .showPopupWindow();
+          }
+        });
+  }
+
+
+  public void addBrowsingHis(int lUserId,int lBrowseInfoId,int nPayType,int nBrowseInfType,ConsumptionListener listener) {
+    XHttpProxy.proxy(OtherApiServices.class).addBrowsingHis(lUserId,lBrowseInfoId,nPayType,nBrowseInfType).subscribeWith(new TipRequestSubscriber<Object>() {
+      @Override
+      protected void onSuccess(Object o) {
+        listener.consumption();
+
+      }
+    });
+  }
+
+  public interface ConsumptionListener {
+    void consumption();
   }
 }
