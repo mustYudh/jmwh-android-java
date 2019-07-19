@@ -43,7 +43,7 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
     private LinearLayout ll_empty;
     private List<LocalHomeRadioListBean> dataList = new ArrayList<>();
     private MineRadioRvAdapter adapter;
-    private DialogUtils releaseDialog, upVipDialog, payDialog,womanDialog;
+    private DialogUtils releaseDialog, upVipDialog, payDialog, womanDialog;
 
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
@@ -88,7 +88,7 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
                     dataList.add(localHomeRadioListTitleBean);
 
                     LocalHomeRadioListBean localHomeRadioListPicBean = new LocalHomeRadioListBean();
-                    localHomeRadioListPicBean.picList = cdoListBean.sImg;
+                    localHomeRadioListPicBean.cdoApply = cdoListBean.cdoApply;
                     localHomeRadioListPicBean.itemType = 1;
                     dataList.add(localHomeRadioListPicBean);
 
@@ -362,7 +362,7 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
     /**
      * 女性认证弹窗
      */
-    private void showWomanDialog(GetDatingUserVipBean getDatingUserVipBean,String name) {
+    private void showWomanDialog(GetDatingUserVipBean getDatingUserVipBean, String name) {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
