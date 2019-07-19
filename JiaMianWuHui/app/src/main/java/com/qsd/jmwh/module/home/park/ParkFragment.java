@@ -192,6 +192,7 @@ public class ParkFragment extends BaseBarFragment
                         currentSelectListType + "",
                         UserProfile.getInstance().getHomeCityName());
 
+                back.setText("附近");
             }
         };
 
@@ -203,12 +204,18 @@ public class ParkFragment extends BaseBarFragment
                 .build();
         cityDialog.show();
 
+        TextView tv_fujin = cityDialog.findViewById(R.id.tv_fujin);
         RecyclerView rv_city = cityDialog.findViewById(R.id.rv_city);
         rv_city.setLayoutManager(new LinearLayoutManager(getActivity()));
         PackCityRvAdapter adapter_city =
                 new PackCityRvAdapter(R.layout.item_pack_city, provinces, getActivity());
         rv_city.setAdapter(adapter_city);
 
+        if (type == 1){
+            tv_fujin.setVisibility(View.GONE);
+        }else {
+            tv_fujin.setVisibility(View.VISIBLE);
+        }
         adapter_city.setOnItemCityClickListener((id, name) -> {
             cityDialog.dismiss();
             if (type == 1) {
@@ -222,6 +229,10 @@ public class ParkFragment extends BaseBarFragment
             } else {
                 mPresenter.getRangeData(1, id, UserProfile.getInstance().getUserId(),
                         UserProfile.getInstance().getAppToken(), 1);
+            }
+
+            if (type == 1){
+                back.setText(name);
             }
         });
     }
