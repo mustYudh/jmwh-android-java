@@ -1,6 +1,7 @@
 package com.qsd.jmwh;
 
 import android.text.TextUtils;
+import cn.jpush.android.api.JPushInterface;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.api.UIKitOptions;
 import com.netease.nim.uikit.business.contact.core.query.PinYin;
@@ -52,6 +53,7 @@ public class APP extends BaseApp {
     ShareAuthSDK.init(this, DEBUG);
     initHttp();
     initIm();
+    initTuiSong();
   }
 
   private void initIm() {
@@ -124,6 +126,13 @@ public class APP extends BaseApp {
     } else {
       return "http://api.jmwhapp.com";
     }
+  }
+
+
+
+  private void initTuiSong() {
+    JPushInterface.setDebugMode(APP.DEBUG);
+    JPushInterface.init(this);
   }
 
   public String getSubUrl() {

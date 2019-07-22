@@ -52,7 +52,7 @@ ext {
     baidu = 'uLcQRjd7Yfz4ZK7AbqmvrIwehVOHrS4x'
 
     JPUSH_CHANNEL = ""
-    JPUSH_APPKEY = ""
+    JPUSH_APPKEY = "209abcf275c59aa8004a65b2"
 
     applicationId = 'com.qsd.jmwh'
     compileSdkVersion = 28
