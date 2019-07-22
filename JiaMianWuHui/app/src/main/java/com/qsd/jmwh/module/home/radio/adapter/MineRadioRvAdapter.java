@@ -41,6 +41,7 @@ public class MineRadioRvAdapter extends BaseMultiItemQuickAdapter<LocalHomeRadio
     protected void convert(BaseViewHolder helper, LocalHomeRadioListBean item) {
         switch (item.itemType) {
             case 0:
+                TextView tv_auth_type = helper.getView(R.id.tv_auth_type);
                 CircleImageView iv_headimg = helper.getView(R.id.iv_headimg);
                 Glide.with(context).load(item.headImg).into(iv_headimg);
                 ImageLoader.loadCenterCrop(context, item.headImg, iv_headimg, R.drawable.zhanwei);
@@ -65,6 +66,29 @@ public class MineRadioRvAdapter extends BaseMultiItemQuickAdapter<LocalHomeRadio
                         }
                     }
                 });
+
+                if (item.sex == 0) {
+                    //女性
+                    if (item.nAuthType == 0) {
+                        //未认证
+                        helper.setText(R.id.tv_auth_type, "未认证");
+                        tv_auth_type.setBackground(context.getResources().getDrawable(R.drawable.shape_home_person_no));
+                    } else {
+                        //已认证
+                        helper.setText(R.id.tv_auth_type, "真实");
+                        tv_auth_type.setBackground(context.getResources().getDrawable(R.drawable.shape_home_person));
+                    }
+                    tv_auth_type.setVisibility(View.VISIBLE);
+                } else {
+                    //男性
+                    if (item.bVIP) {
+                        tv_auth_type.setVisibility(View.VISIBLE);
+                        tv_auth_type.setText("VIP");
+                        tv_auth_type.setBackground(context.getResources().getDrawable(R.drawable.shape_home_person_vip));
+                    } else {
+                        tv_auth_type.setVisibility(View.GONE);
+                    }
+                }
                 break;
             case 1:
                 NoSlidingGridView gv_pic = helper.getView(R.id.gv_pic);
