@@ -13,6 +13,10 @@ import android.util.Log;
 import cn.jpush.android.api.JPushInterface;
 import com.google.gson.Gson;
 import com.qsd.jmwh.R;
+import com.qsd.jmwh.data.UserProfile;
+import com.qsd.jmwh.module.home.HomeActivity;
+import com.qsd.jmwh.module.splash.SplashActivity;
+import com.yu.common.launche.LauncherHelper;
 
 /**
  * @author changwei
@@ -31,18 +35,27 @@ public class JpushReceiver extends BroadcastReceiver {
       return;
     }
     Bundle bundle = intent.getExtras();
+    Log.e("======>",intent.getAction());
     if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
       String clientId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
       Log.e(TAG, "onReceive: " + clientId);
-
     } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
-      receivingNotification(context, JPushInterface.ACTION_MESSAGE_RECEIVED, bundle);
+      getPush(context);
     } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
-      receivingNotification(context, JPushInterface.ACTION_MESSAGE_RECEIVED, bundle);
+      getPush(context);
     } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
-      openNotification(context, bundle);
+      getPush(context);
     } else {
 
+    }
+  }
+
+
+  public void getPush(Context context) {
+    if (UserProfile.getInstance().isAppLogin()) {
+      LauncherHelper.from(context).startActivity(HomeActivity.class);
+    } else {
+      LauncherHelper.from(context).startActivity(SplashActivity.class);
     }
   }
 

@@ -15,6 +15,7 @@ public class LocalHomeRadioListBean implements MultiItemEntity {
     public int itemType;
     public int lDatingId;
     public int lUserId;
+    public int nAuthType;
     public String headImg;
     public String userName;
     public String cTime;
@@ -36,4 +37,5 @@ public class LocalHomeRadioListBean implements MultiItemEntity {
     public List<MineRadioListBean.CdoListBean.CdoCommentBean> cdoComment;
     public List<MineRadioListBean.CdoListBean.CdoApplyBean> cdoApply;
     public List<MineRadioListBean.CdoListBean.CdoLoveBean> cdoLove;
+    public MineRadioListBean.CdoListBean.CdoUserDataBean cdoUserData;
 }
