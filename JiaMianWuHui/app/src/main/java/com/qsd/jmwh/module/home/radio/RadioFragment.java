@@ -77,7 +77,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
     RadioPresenter mPresenter = new RadioPresenter(this);
     private RecyclerView rv_radio;
     private LinearLayout ll_empty;
-    private DialogUtils typeDialog, enrollDialog, releaseDialog, upVipDialog, payDialog,womanDialog;
+    private DialogUtils typeDialog, enrollDialog, releaseDialog, upVipDialog, payDialog, womanDialog;
     private int sexType = 0;
     private int disType = 0;
     private DelayClickTextView right_menu;
@@ -196,6 +196,8 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                         localHomeRadioListTitleBean.headImg = cdoListBean.cdoUserData.sUserHeadPic;
                         localHomeRadioListTitleBean.userName = cdoListBean.cdoUserData.sNickName;
                         localHomeRadioListTitleBean.lUserId = cdoListBean.cdoUserData.lUserId;
+                        localHomeRadioListTitleBean.nAuthType = cdoListBean.cdoUserData.nAuthType;
+                        localHomeRadioListTitleBean.bVIP = cdoListBean.cdoUserData.bVIP;
                     }
                     localHomeRadioListTitleBean.sDatingRange = cdoListBean.sDatingRange;
                     localHomeRadioListTitleBean.sDatingTime = cdoListBean.sDatingTime;
@@ -348,7 +350,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                     getContext().startActivity(new Intent(getContext(), ReleaseAppointmentActivity.class).putExtra("activity_title", name));
                 } else {
                     //未认证
-                    showWomanDialog(getDatingUserVipBean,name);
+                    showWomanDialog(getDatingUserVipBean, name);
                 }
             } else {
                 if (getDatingUserVipBean.bVIP) {
@@ -594,7 +596,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
     /**
      * 女性认证弹窗
      */
-    private void showWomanDialog(GetDatingUserVipBean getDatingUserVipBean,String name) {
+    private void showWomanDialog(GetDatingUserVipBean getDatingUserVipBean, String name) {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -628,7 +630,6 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
         womanDialog.show();
 
     }
-
 
 
     /**
