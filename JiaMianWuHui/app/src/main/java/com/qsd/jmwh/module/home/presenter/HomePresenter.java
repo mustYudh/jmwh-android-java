@@ -21,7 +21,9 @@ public class HomePresenter extends BaseViewPresenter<HomeViewer> {
         super(viewer);
     }
 
-    public void modifyLngAndLat() {
+
+
+  public void modifyLngAndLat() {
         disposable = Observable.interval(0, 5, TimeUnit.MINUTES)
             .map(aLong -> aLong + 1)
             .subscribe(count -> LocationHelper.getInstance(getActivity()).requestLocationToLocal());

@@ -40,9 +40,9 @@ public class JpushReceiver extends BroadcastReceiver {
       String clientId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
       Log.e(TAG, "onReceive: " + clientId);
     } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
-      getPush(context);
+
     } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
-      getPush(context);
+
     } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
       getPush(context);
     } else {

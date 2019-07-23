@@ -46,10 +46,6 @@
   <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
 
-
-
-
-
   <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
   <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
@@ -104,8 +100,8 @@
       android:name=".APP"
       android:allowBackup="true"
       android:icon="@drawable/ic_launcher"
-      android:roundIcon="@drawable/ic_launcher"
       android:label="${APP_NAME}"
+      android:roundIcon="@drawable/ic_launcher"
       android:supportsRtl="true"
       android:testOnly="false"
       android:theme="@style/AppGrayTheme"
@@ -342,6 +338,12 @@
         <category android:name="${JPUSH_PKGNAME}"/>
       </intent-filter>
     </receiver>
+
+    <service
+        android:name="com.baidu.location.f"
+        android:enabled="true"
+        android:process=":remote">
+    </service>
   </application>
 
 </manifest>
