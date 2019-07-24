@@ -159,7 +159,7 @@ public class LookUserInfoActivity extends BaseActivity
         + " · "
         + userData.sAge
         + " · "
-        + (userData.nOnLine >= 1000 ? (userData.nOnLine / 1000) + "km" : (userData.nOnLine + "m")));
+        + (userData.distance_um >= 1000 ? (userData.distance_um / 1000) + "km" : (userData.distance_um + "m")));
     bindText(R.id.sDateRange, "约会范围：" + userData.sDateRange + " · " + userData.nOffLineMin + "分钟前");
     authType = userCenterInfo.nAuthType;
     @DrawableRes int result;

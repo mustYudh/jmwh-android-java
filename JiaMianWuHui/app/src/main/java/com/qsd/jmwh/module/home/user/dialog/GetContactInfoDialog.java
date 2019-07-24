@@ -16,6 +16,7 @@ import com.qsd.jmwh.module.home.park.bean.OtherUserInfoBean;
 import com.qsd.jmwh.module.im.SessionHelper;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.toast.ToastUtils;
+import com.yu.common.utils.ImageLoader;
 import com.yu.common.windown.BasePopupWindow;
 
 /**
@@ -60,6 +61,7 @@ public class GetContactInfoDialog extends BasePopupWindow {
            TextView hint = bindView(R.id.hint);
            hint.setText(userCenterInfo.cdoUserData.nSex == 1 ? "他的社交账号" : "她的社交账号");
            TextView nickName = bindView(R.id.nick_name);
+            ImageLoader.blurTransformation(context, userCenterInfo.cdoUserData.sUserHeadPic, bindView(R.id.header));
            nickName.setText(userCenterInfo.cdoUserData.sNickName);
           }
         });

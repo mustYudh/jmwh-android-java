@@ -44,6 +44,7 @@
     </LinearLayout>
 
     <com.qsd.jmwh.view.CircleImageView
+        android:id="@+id/header"
         android:src="@drawable/ic_launcher"
         android:layout_marginTop="10dp"
         android:layout_width="60dp"

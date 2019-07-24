@@ -146,7 +146,7 @@ public interface ApiServices {
     Observable<Object> modifyLngAndLat(double nLng, double nLat, String sCity);
 
 
-    @NetMethod(ParameterNames = {"lUserId", "nLng", "nLat"}, Url = "/UserService/getUserCenterInfo")
+    @NetMethod(ParameterNames = {"lUserId", "nLat", "nLng"}, Url = "/UserService/getUserCenterInfo")
     Observable<OtherUserInfoBean> getOtherUserInfo(int lUserId, double nLat, double nLng);
 
     @NetMethod(ParameterNames = {"nLat", "nLng", "nType"}, Url = "/UserLoveService/getUserLoveList")
