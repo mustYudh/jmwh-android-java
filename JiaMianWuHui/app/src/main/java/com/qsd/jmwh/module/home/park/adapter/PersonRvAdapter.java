@@ -34,15 +34,15 @@ public class PersonRvAdapter extends BaseQuickAdapter<HomePersonListBean.CdoList
         helper.setText(R.id.tv_photo_num, item.nGalaryCapacity + "");
         if (item.distance_um >= 1000) {
             if (item.bHiddenRang) {
-                helper.setText(R.id.tv_middle, item.sDateRange + " · " + item.sJob + " · " + item.sAge);
+                helper.setText(R.id.tv_middle, item.sCity + " · " + item.sJob + " · " + item.sAge);
             } else {
-                helper.setText(R.id.tv_middle, item.sDateRange + " · " + item.sJob + " · " + item.sAge + " · " + (item.distance_um / 1000) + "km");
+                helper.setText(R.id.tv_middle, item.sCity + " · " + item.sJob + " · " + item.sAge + " · " + (item.distance_um / 1000) + "km");
             }
         } else {
             if (item.bHiddenRang) {
-                helper.setText(R.id.tv_middle, item.sDateRange + " · " + item.sJob + " · " + item.sAge);
+                helper.setText(R.id.tv_middle, item.sCity + " · " + item.sJob + " · " + item.sAge);
             } else {
-                helper.setText(R.id.tv_middle, item.sDateRange + " · " + item.sJob + " · " + item.sAge + " · " + item.distance_um + "m");
+                helper.setText(R.id.tv_middle, item.sCity + " · " + item.sJob + " · " + item.sAge + " · " + item.distance_um + "m");
             }
         }
         if (item.nOnLine == 0) {

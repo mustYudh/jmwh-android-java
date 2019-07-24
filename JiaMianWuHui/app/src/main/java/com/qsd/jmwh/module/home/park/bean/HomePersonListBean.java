@@ -37,6 +37,7 @@ public class HomePersonListBean implements Serializable {
         public String sNickName;
         public String sUserHeadPic;
         public String sDateRange;
+        public String sCity;
         public String sAge;
         public String sJob;
         public String sDatePro;
