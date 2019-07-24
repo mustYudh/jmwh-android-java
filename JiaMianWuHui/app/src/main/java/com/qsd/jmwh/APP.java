@@ -98,10 +98,10 @@ public class APP extends BaseApp {
 
   private void initHttp() {
     XHttpSDK.init(this);
-    if (DEBUG) {
+    //if (DEBUG) {
       XHttpSDK.debug();
       XHttpSDK.debug(new CustomLoggingInterceptor());
-    }
+    //}
     XHttpSDK.setBaseUrl(getBaseUrl());
     XHttpSDK.setSubUrl(getSubUrl());
     XHttpSDK.addInterceptor(new CustomDynamicInterceptor());
@@ -119,10 +119,10 @@ public class APP extends BaseApp {
   }
 
   private String getBaseUrl() {
-    if (APP.NET_TYPE == 1) {
+    if (APP.NET_TYPE == 0) {
       return "http://api.jmwhapp.com";
-    } else if (APP.NET_TYPE == 2) {
-      return "http://api.jmwhapp.com";
+    } else if (APP.NET_TYPE == 1) {
+      return "http://api.test.jmwhapp.com";
     } else {
       return "http://api.jmwhapp.com";
     }

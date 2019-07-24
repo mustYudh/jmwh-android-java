@@ -20,6 +20,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url 'http://developer.huawei.com/repo' }
         maven { url 'https://jitpack.io' }
         maven { url 'https://dl.bintray.com/umsdk/release' }
         flatDir {
@@ -53,7 +54,7 @@ ext {
 
     JPUSH_CHANNEL = ""
     JPUSH_APPKEY = "209abcf275c59aa8004a65b2"
-
+    TENCENT_MAP_KEY    = "FK5BZ-43H3X-J4M42-7VZRY-AJQG3-4YBT7"
     applicationId = 'com.qsd.jmwh'
     compileSdkVersion = 28
     minSdkVersion = 17

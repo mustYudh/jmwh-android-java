@@ -223,11 +223,15 @@ public class LookUserInfoActivity extends BaseActivity
       case R.id.qq:
         if (!showContact) {
           mPresenter.getSubViewCount();
+        } else {
+          SessionHelper.startP2PSession(getActivity(), "im_" + userID);
         }
         break;
       case R.id.wechat:
         if (!showContact) {
           mPresenter.getSubViewCount();
+        } else {
+          SessionHelper.startP2PSession(getActivity(), "im_" + userID);
         }
         break;
       case R.id.social_account:

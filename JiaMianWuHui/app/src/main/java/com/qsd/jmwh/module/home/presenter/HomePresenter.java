@@ -1,21 +1,23 @@
 package com.qsd.jmwh.module.home.presenter;
 
-import com.qsd.jmwh.utils.LocationHelper;
+import android.annotation.SuppressLint;
+import com.qsd.jmwh.data.UserProfile;
+import com.qsd.jmwh.http.ApiServices;
+import com.qsd.jmwh.http.subscriber.NoTipRequestSubscriber;
+import com.tencent.map.geolocation.TencentLocation;
+import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.framework.BaseViewPresenter;
-import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author yudneghao
  * @date 2019/3/7
  */
 
-
+@SuppressLint("CheckResult")
 public class HomePresenter extends BaseViewPresenter<HomeViewer> {
 
 
-    private Disposable disposable;
+
 
     public HomePresenter(HomeViewer viewer) {
         super(viewer);
@@ -23,17 +25,26 @@ public class HomePresenter extends BaseViewPresenter<HomeViewer> {
 
 
 
-  public void modifyLngAndLat() {
-        disposable = Observable.interval(0, 5, TimeUnit.MINUTES)
-            .map(aLong -> aLong + 1)
-            .subscribe(count -> LocationHelper.getInstance(getActivity()).requestLocationToLocal());
-
+  public void modifyLngAndLat(TencentLocation location) {
+    double longitude = location.getLongitude();
+    double latitude = location.getLatitude();
+    XHttpProxy.proxy(ApiServices.class)
+        .modifyLngAndLat(longitude, latitude, location.getCity() == null ? "" : location.getCity())
+        .subscribeWith(new NoTipRequestSubscriber<Object>() {
+          @Override protected void onSuccess(Object o) {
+            storeToLocal(location);
+          }
+        });
     }
 
-    @Override public void willDestroy() {
-        super.willDestroy();
-      if (disposable != null) {
-        disposable.dispose();
-      }
+
+  private void storeToLocal(TencentLocation location) {
+    if (location != null) {
+      UserProfile.getInstance().setLat((float) location.getLatitude());
+      UserProfile.getInstance().setLng((float) location.getLongitude());
+      UserProfile.getInstance().setCityName(location.getCity());
     }
+  }
+
+
 }

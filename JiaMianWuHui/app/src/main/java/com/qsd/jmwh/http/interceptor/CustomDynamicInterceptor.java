@@ -2,13 +2,12 @@ package com.qsd.jmwh.http.interceptor;
 
 import android.text.TextUtils;
 import android.util.Log;
-
+import com.qsd.jmwh.APP;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.utils.JSONUtils;
 import com.qsd.jmwh.utils.MD5Utils;
 import com.xuexiang.xhttp2.interceptor.BaseDynamicInterceptor;
 import com.xuexiang.xhttp2.utils.HttpUtils;
-
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
@@ -124,7 +122,8 @@ public class CustomDynamicInterceptor extends BaseDynamicInterceptor<CustomDynam
                 }
             }
         }
-        sing.append("secretkey=405e73b3d");
+        String key = APP.NET_TYPE == 0 ? "secretkey=405e73b3d" : "secretkey=85124wd2a";
+        sing.append(key);
         Log.e("======>明文结果", sing.toString());
         String singResult = MD5Utils.string2MD5(sing.toString()).toUpperCase();
         Log.e("======>加密结果", singResult);
