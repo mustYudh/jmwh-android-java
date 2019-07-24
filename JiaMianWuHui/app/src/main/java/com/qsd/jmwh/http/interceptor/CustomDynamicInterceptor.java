@@ -122,7 +122,7 @@ public class CustomDynamicInterceptor extends BaseDynamicInterceptor<CustomDynam
                 }
             }
         }
-        String key = APP.NET_TYPE == 0 ? "secretkey=405e73b3d" : "secretkey=85124wd2a";
+        String key = APP.NET_TYPE == 0 ?   "secretkey=85124wd2a" : "secretkey=405e73b3d";
         sing.append(key);
         Log.e("======>明文结果", sing.toString());
         String singResult = MD5Utils.string2MD5(sing.toString()).toUpperCase();

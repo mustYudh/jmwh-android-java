@@ -81,7 +81,7 @@ public class HomeActivity extends BaseActivity implements HomeViewer, TencentLoc
   @Override protected void loadData() {
     setTitle("首页");
     TencentLocationRequest request = TencentLocationRequest.create()
-        .setInterval(2000)
+        .setInterval(1000 * 5 * 60)
         .setRequestLevel(TencentLocationRequest.REQUEST_LEVEL_ADMIN_AREA);
     TencentLocationManager locationManager = TencentLocationManager.getInstance(getActivity());
     int error = locationManager.requestLocationUpdates(request, this);
@@ -174,7 +174,7 @@ public class HomeActivity extends BaseActivity implements HomeViewer, TencentLoc
     mService.observeRecentContact(mMessageObserver, false);
   }
 
-   @Override public void onLocationChanged(TencentLocation location, int i, String s) {
+  @Override public void onLocationChanged(TencentLocation location, int i, String s) {
     if (i == 0) {
       double longitude = location.getLongitude();
       double latitude = location.getLatitude();
@@ -188,11 +188,8 @@ public class HomeActivity extends BaseActivity implements HomeViewer, TencentLoc
           + "===="
           + location.getCity());
       mPresenter.modifyLngAndLat(location);
-
     }
   }
-
-
 
   @Override public void onStatusUpdate(String s, int i, String s1) {
 

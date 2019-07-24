@@ -5,6 +5,8 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+
 import com.bumptech.glide.Glide;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.data.UserProfile;
@@ -18,6 +20,7 @@ import com.qsd.jmwh.module.home.user.dialog.GetContactInfoDialog;
 import com.qsd.jmwh.view.CircleImageView;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.ui.DelayClickTextView;
+
 import java.util.List;
 
 @SuppressLint("CheckResult")
@@ -52,6 +55,7 @@ public class MineRadilLoveUserGvAdapter extends BaseAdapter {
             view = View.inflate(context, R.layout.item_apply_user, null);
             holder = new ViewHolder();
             holder.iv_headimg = view.findViewById(R.id.iv_headimg);
+            holder.gv_pic = view.findViewById(R.id.gv_pic);
             holder.tv_name = view.findViewById(R.id.tv_name);
             holder.tv_time = view.findViewById(R.id.tv_time);
             holder.tv_get = view.findViewById(R.id.tv_get);
@@ -63,21 +67,24 @@ public class MineRadilLoveUserGvAdapter extends BaseAdapter {
 
         holder.tv_name.setText(list.get(i).sNickName);
         Glide.with(context).load(list.get(i).sUserHeadPic).into(holder.iv_headimg);
+        Glide.with(context).load(list.get(i).sContent).into(holder.gv_pic);
         holder.tv_get.setOnClickListener(view1 -> {
             getSubViewCount(list.get(i));
         });
         holder.tv_get.setText(UserProfile.getInstance().getSex() == 1 ? "联系她" : "联系他");
+
+
         return view;
     }
 
     class ViewHolder {
         CircleImageView iv_headimg;
         DelayClickTextView tv_name, tv_time, tv_get;
-
+        ImageView gv_pic;
     }
 
 
-     private void getSubViewCount(MineRadioListBean.CdoListBean.CdoApplyBean cdoApplyBean) {
+    private void getSubViewCount(MineRadioListBean.CdoListBean.CdoApplyBean cdoApplyBean) {
         XHttpProxy.proxy(OtherApiServices.class)
             .getSubViewCount()
             .subscribeWith(new TipRequestSubscriber<SubViewCount>() {
@@ -116,22 +123,22 @@ public class MineRadilLoveUserGvAdapter extends BaseAdapter {
 
 
     private void showInfoDialog(int userId) {
-        GetContactInfoDialog dialog = new GetContactInfoDialog(context,userId);
+        GetContactInfoDialog dialog = new GetContactInfoDialog(context, userId);
         dialog.showPopupWindow();
     }
-
 
 
     private void buyContactPay(int lBuyOtherUserId, int count) {
         SelectHintPop hint = new SelectHintPop(context);
         hint.setTitle("温馨提示").setMessage("确认支付").setPositiveButton("确定", v1 -> {
             XHttpProxy.proxy(OtherApiServices.class)
-                .getBuyContactPaySign(lBuyOtherUserId, 5, count)
-                .subscribeWith(new TipRequestSubscriber<Object>() {
-                    @Override protected void onSuccess(Object o) {
-                        showInfoDialog(lBuyOtherUserId);
-                    }
-                });
+                    .getBuyContactPaySign(lBuyOtherUserId, 5, count)
+                    .subscribeWith(new TipRequestSubscriber<Object>() {
+                        @Override
+                        protected void onSuccess(Object o) {
+                            showInfoDialog(lBuyOtherUserId);
+                        }
+                    });
             hint.dismiss();
         }).setNegativeButton("取消", v12 -> hint.dismiss()).showPopupWindow();
     }

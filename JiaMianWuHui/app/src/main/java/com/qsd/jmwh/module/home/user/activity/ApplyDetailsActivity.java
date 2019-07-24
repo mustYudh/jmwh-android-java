@@ -28,6 +28,8 @@ import java.util.ArrayList;
 public class ApplyDetailsActivity extends BaseBarActivity {
 
 
+    private DelayClickTextView tv_auth_type;
+
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.activity_apply_details);
@@ -38,6 +40,7 @@ public class ApplyDetailsActivity extends BaseBarActivity {
         setTitle("我的广播");
         String json = getIntent().getStringExtra("json");
         CircleImageView iv_headimg = bindView(R.id.iv_headimg);
+        tv_auth_type = bindView(R.id.tv_auth_type);
         DelayClickTextView tv_user_name = bindView(R.id.tv_user_name);
         DelayClickTextView tv_ctime = bindView(R.id.tv_ctime);
         DelayClickTextView tv_label_top = bindView(R.id.tv_label_top);
@@ -76,6 +79,29 @@ public class ApplyDetailsActivity extends BaseBarActivity {
             } else if (localHomeRadioListBean.sex == 0) {
                 //女
                 iv_sex.setImageResource(R.drawable.woman);
+            }
+
+            if (localHomeRadioListBean.sex == 0) {
+                //女性
+                if (localHomeRadioListBean.nAuthType == 0) {
+                    //未认证
+                    bindText(R.id.tv_auth_type,"未认证");
+                    tv_auth_type.setBackground(getResources().getDrawable(R.drawable.shape_home_person_no));
+                } else {
+                    //已认证
+                    bindText(R.id.tv_auth_type,"真实");
+                    tv_auth_type.setBackground(getResources().getDrawable(R.drawable.shape_home_person));
+                }
+                tv_auth_type.setVisibility(View.VISIBLE);
+            } else {
+                //男性
+                if (localHomeRadioListBean.bVIP) {
+                    tv_auth_type.setVisibility(View.VISIBLE);
+                    tv_auth_type.setText("VIP");
+                    tv_auth_type.setBackground(getResources().getDrawable(R.drawable.shape_home_person_vip));
+                } else {
+                    tv_auth_type.setVisibility(View.GONE);
+                }
             }
 
             tv_user_name.setText(localHomeRadioListBean.userName);

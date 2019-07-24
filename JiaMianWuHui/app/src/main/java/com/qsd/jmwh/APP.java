@@ -120,9 +120,9 @@ public class APP extends BaseApp {
 
   private String getBaseUrl() {
     if (APP.NET_TYPE == 0) {
-      return "http://api.jmwhapp.com";
-    } else if (APP.NET_TYPE == 1) {
       return "http://api.test.jmwhapp.com";
+    } else if (APP.NET_TYPE == 1) {
+      return "http://api.jmwhapp.com";
     } else {
       return "http://api.jmwhapp.com";
     }

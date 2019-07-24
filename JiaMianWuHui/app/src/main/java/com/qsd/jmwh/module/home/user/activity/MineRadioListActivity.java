@@ -111,6 +111,7 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
                         localHomeRadioListBottomBean.userName = cdoListBean.cdoUserData.sNickName;
                         localHomeRadioListBottomBean.lUserId = cdoListBean.cdoUserData.lUserId;
                         localHomeRadioListBottomBean.bVIP = cdoListBean.cdoUserData.bVIP;
+                        localHomeRadioListBottomBean.nAuthType = cdoListBean.cdoUserData.nAuthType;
                     }
                     localHomeRadioListBottomBean.picList = cdoListBean.sImg;
                     localHomeRadioListBottomBean.sDatingRange = cdoListBean.sDatingRange;
