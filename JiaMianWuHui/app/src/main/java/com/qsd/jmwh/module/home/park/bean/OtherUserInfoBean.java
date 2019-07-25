@@ -66,7 +66,7 @@ public class OtherUserInfoBean implements Serializable {
     public String sIntroduce;
     public int dGalaryVal;
     public int nAuthType;
-    public int nOffLineMin;
+    public long nOffLineMin;
     public int nOnLine;
     public int distance_um;
     public String sAuthInfo;

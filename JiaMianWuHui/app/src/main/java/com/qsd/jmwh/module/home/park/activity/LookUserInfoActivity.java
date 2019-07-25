@@ -153,14 +153,19 @@ public class LookUserInfoActivity extends BaseActivity
     project.setContentText(userData.sDatePro);
     NormaFormItemVIew sIntroduce = bindView(R.id.sIntroduce);
     sIntroduce.setContentText(userData.sIntroduce);
-    bindText(R.id.job_age_loc, userData.sCity
-        + " · "
-        + userData.sJob
-        + " · "
-        + userData.sAge
-        + " · "
-        + (userData.distance_um >= 1000 ? (userData.distance_um / 1000) + "km" : (userData.distance_um + "m")));
-    bindText(R.id.sDateRange, "约会范围：" + userData.sDateRange + " · " + userData.nOffLineMin + "分钟前");
+    bindText(R.id.job_age_loc,
+        userData.sCity + " · " + userData.sJob + " · " + userData.sAge + " · " + (
+            userData.distance_um >= 1000 ? (userData.distance_um / 1000) + "km"
+                : (userData.distance_um + "m")));
+    String showTime = "";
+    long time = userData.nOffLineMin;
+    if (time / 60 < 24) {
+      showTime = (time / 60) + "小时";
+    }
+    if (time / 60 >= 24) {
+      showTime = (time / 24) > 3 ? "3天前" : (time / 24) + "天";
+    }
+    bindText(R.id.sDateRange, "约会范围：" + userData.sDateRange + " · " + showTime);
     authType = userCenterInfo.nAuthType;
     @DrawableRes int result;
     if (authType == 0) {
@@ -269,7 +274,7 @@ public class LookUserInfoActivity extends BaseActivity
             .setBottomButton("取消", v13 -> hint.dismiss())
             .showPopupWindow();
       } else {
-        mPresenter.toChat(sNickName,userID);
+        mPresenter.toChat(sNickName, userID);
       }
     } else {
       if (authType == 0) {
@@ -290,9 +295,7 @@ public class LookUserInfoActivity extends BaseActivity
   }
 
   private void buyVip() {
-    LauncherHelper.from(getActivity())
-        .startActivity(
-            ToByVipActivity.class);
+    LauncherHelper.from(getActivity()).startActivity(ToByVipActivity.class);
   }
 
   @Override public void onBackPressed() {
