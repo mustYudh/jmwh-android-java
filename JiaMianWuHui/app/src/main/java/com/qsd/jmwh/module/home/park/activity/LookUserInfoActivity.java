@@ -43,6 +43,7 @@ public class LookUserInfoActivity extends BaseActivity
   private int authType;
   private boolean firstLoading = true;
   private boolean showContact = false;
+  private boolean canChat;
   private OtherUserInfoBean userCenterInfo;
   private final static String USER_ID = "user_id";
   private final static String TYPE = "type";
@@ -221,23 +222,28 @@ public class LookUserInfoActivity extends BaseActivity
           //if (showContact) {
           //  SessionHelper.startP2PSession(getActivity(), "im_" + userID);
           //} else {
-          toChat();
+          if (!canChat) {
+            toChat();
+          } else {
+            SessionHelper.startP2PSession(getActivity(), "im_" + userID);
+          }
+
           //}
         }
         break;
       case R.id.qq:
         if (!showContact) {
-          mPresenter.getSubViewCount();
-        } else {
+          mPresenter.getSubViewCount(0);
+        } /*else {
           SessionHelper.startP2PSession(getActivity(), "im_" + userID);
-        }
+        }*/
         break;
       case R.id.wechat:
         if (!showContact) {
-          mPresenter.getSubViewCount();
-        } else {
+          mPresenter.getSubViewCount(0);
+        } /*else {
           SessionHelper.startP2PSession(getActivity(), "im_" + userID);
-        }
+        }*/
         break;
       case R.id.social_account:
 
@@ -268,13 +274,13 @@ public class LookUserInfoActivity extends BaseActivity
               hint.dismiss();
             })
             .setNegativeButton("付费查看和私聊 (" + userCenterInfo.nSubViewUserCount + "假面币)", v12 -> {
-              mPresenter.buyContactPay(userID, userCenterInfo.nSubViewUserCount);
+              mPresenter.buyContactPay(userID, userCenterInfo.nSubViewUserCount,1);
               hint.dismiss();
             })
             .setBottomButton("取消", v13 -> hint.dismiss())
             .showPopupWindow();
       } else {
-        mPresenter.toChat(sNickName, userID);
+        mPresenter.toChat(sNickName, userID,1);
       }
     } else {
       if (authType == 0) {
@@ -310,7 +316,7 @@ public class LookUserInfoActivity extends BaseActivity
         UserProfile.getInstance().getLng(), firstLoading);
   }
 
-  @Override public void getViewCount(SubViewCount count) {
+  @Override public void getViewCount(SubViewCount count,int type) {
     if (UserProfile.getInstance().getSex() == 1) {
       if (!count.bVIP) {
         SelectHintPop hint = new SelectHintPop(this);
@@ -321,7 +327,7 @@ public class LookUserInfoActivity extends BaseActivity
               hint.dismiss();
             })
             .setNegativeButton("付费查看和私聊 (" + count.dContactVal + "假面币)", v12 -> {
-              mPresenter.buyContactPay(userID, count.dContactVal);
+              mPresenter.buyContactPay(userID, count.dContactVal,type);
               hint.dismiss();
             })
             .setBottomButton("取消", v13 -> hint.dismiss())
@@ -335,7 +341,7 @@ public class LookUserInfoActivity extends BaseActivity
               if (free) {
                 mPresenter.addBrowsingHis(userID, 0, 0, 5, () -> refreshData(1));
               } else {
-                mPresenter.buyContactPay(userID, count.dContactVal);
+                mPresenter.buyContactPay(userID, count.dContactVal,type);
               }
               hint.dismiss();
             })
@@ -343,12 +349,11 @@ public class LookUserInfoActivity extends BaseActivity
             .showPopupWindow();
       }
     } else {
-
       SelectHintPop hint = new SelectHintPop(this);
       hint.setTitle("联系" + sNickName)
           .setMessage("查看 " + sNickName + " 的全部资料和私聊")
           .setSingleButton("付费查看和私聊 (" + count.dContactVal + "假面币)", v12 -> {
-            mPresenter.buyContactPay(userID, count.dContactVal);
+            mPresenter.buyContactPay(userID, count.dContactVal,type);
             hint.dismiss();
           })
           .setBottomButton("取消", v13 -> hint.dismiss())
@@ -356,7 +361,10 @@ public class LookUserInfoActivity extends BaseActivity
     }
   }
 
-  @Override public void payToChat() {
-    //SessionHelper.startP2PSession(getActivity(), "im_" + userID);
+  @Override public void payToChat(int type) {
+    if (type == 1) {
+      SessionHelper.startP2PSession(getActivity(), "im_" + userID);
+    }
+    canChat = true;
   }
 }

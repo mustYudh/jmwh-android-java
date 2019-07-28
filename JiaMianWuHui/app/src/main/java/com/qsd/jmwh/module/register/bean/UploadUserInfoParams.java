@@ -77,7 +77,7 @@ public class UploadUserInfoParams {
     } else if (TextUtils.isEmpty(sDatePro)) {
       ToastUtils.show("约会节目不能为空");
       return false;
-    } else if (TextUtils.isEmpty(QQ) && TextUtils.isEmpty(WX) && isGirl) {
+    } else if (TextUtils.isEmpty(QQ) && TextUtils.isEmpty(WX)) {
       ToastUtils.show("微信或者QQ必须填写一项");
       return false;
     } else if (TextUtils.isEmpty(sHeight)) {

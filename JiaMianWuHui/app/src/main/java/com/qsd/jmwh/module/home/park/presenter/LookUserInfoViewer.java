@@ -10,8 +10,8 @@ public interface LookUserInfoViewer extends Viewer {
 
     void refreshData(int type);
 
-    void getViewCount(SubViewCount count);
+    void getViewCount(SubViewCount count,int type);
 
-    void payToChat();
+    void payToChat(int type);
 
 }

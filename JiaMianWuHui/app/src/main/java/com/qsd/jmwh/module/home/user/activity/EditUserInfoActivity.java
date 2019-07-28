@@ -224,7 +224,9 @@ public class EditUserInfoActivity extends BaseBarActivity
     params.lUserId = UserProfile.getInstance().getUserId() + "";
     params.sIntroduce = edit.getText().toString().trim();
     params.token = UserProfile.getInstance().getAppToken();
-    mPresenter.uploadUserInfo(params);
+    if (params.editCheckEmpty()) {
+      mPresenter.uploadUserInfo(params);
+    }
   }
 
   @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
