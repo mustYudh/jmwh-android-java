@@ -160,6 +160,10 @@ public class ReleaseAppointmentActivity extends BaseBarActivity implements View.
                 showDataDialog();
                 break;
             case R.id.tv_sure:
+                if (TextUtils.isEmpty(sDatingHope)) {
+                    ToastUtils.show("请选择约会期望");
+                    return;
+                }
                 if (TextUtils.isEmpty(sDatingRange)) {
                     ToastUtils.show("请选择约会城市");
                     return;
@@ -172,6 +176,11 @@ public class ReleaseAppointmentActivity extends BaseBarActivity implements View.
                     ToastUtils.show("请选择时间");
                     return;
                 }
+                if (TextUtils.isEmpty(et_buchong.getText().toString().trim())) {
+                    ToastUtils.show("请填写补充说明");
+                    return;
+                }
+
                 if (allLocationSelectedPicture.size() != 0) {
                     StringBuffer url = new StringBuffer();
                     for (int i = 0; i < allLocationSelectedPicture.size(); i++) {

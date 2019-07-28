@@ -448,6 +448,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                rv_radio.scrollToPosition(0);
                 pageIndex = 0;
                 switch (v.getId()) {
                     case R.id.ll_top:

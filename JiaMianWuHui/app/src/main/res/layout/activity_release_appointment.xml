@@ -185,17 +185,6 @@
                     android:text="补充说明"
                     android:textColor="@color/color_2A2A2A"
                     android:textSize="15sp"/>
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="(选填)"
-                    android:textColor="#AAAAAA"
-                    android:textSize="15sp"/>
-
-
             </LinearLayout>
 
 

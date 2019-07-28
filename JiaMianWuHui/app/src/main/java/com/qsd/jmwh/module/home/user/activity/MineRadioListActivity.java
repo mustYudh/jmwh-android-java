@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import com.google.gson.Gson;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
@@ -26,11 +27,13 @@ import com.qsd.jmwh.module.home.user.presenter.MineRadioViewer;
 import com.qsd.jmwh.module.register.ToByVipActivity;
 import com.qsd.jmwh.module.register.bean.PayInfo;
 import com.qsd.jmwh.utils.DialogUtils;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.yu.common.launche.LauncherHelper;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 import com.yu.common.ui.DelayClickImageView;
 import com.yu.common.ui.DelayClickTextView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,9 +41,10 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
 
     private RecyclerView rv_radio;
     private LinearLayout ll_empty;
-    private List<LocalHomeRadioListBean> dataList = new ArrayList<>();
+    private SmartRefreshLayout refresh;
     private MineRadioRvAdapter adapter;
     private DialogUtils releaseDialog, upVipDialog, payDialog, womanDialog;
+    private int pageIndex = 0;
 
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
@@ -53,117 +57,132 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
     @Override
     protected void loadData() {
         setTitle("我的广播");
+        refresh = bindView(R.id.refresh);
         rv_radio = bindView(R.id.rv_radio);
         ll_empty = bindView(R.id.ll_empty);
         rv_radio.setLayoutManager(new LinearLayoutManager(this));
-        mPresenter.getDatingByUserIdData("0");
+        adapter = new MineRadioRvAdapter(getActivity());
+        rv_radio.setAdapter(adapter);
+
+        mPresenter.getDatingByUserIdData(pageIndex + "");
         setRightMenu("我要广播", v -> mPresenter.initRadioConfigData("0"));
+
+        refresh.setOnRefreshListener(refreshLayout -> {
+            pageIndex = 0;
+            mPresenter.getDatingByUserIdData(pageIndex + "");
+
+        });
+        refresh.setOnLoadMoreListener(refreshLayout -> {
+            pageIndex++;
+            mPresenter.getDatingByUserIdData(pageIndex + "");
+        });
     }
 
 
     @Override
     public void getMineRadioList(MineRadioListBean mineRadioListBean) {
-        if (mineRadioListBean != null) {
-            if (mineRadioListBean.cdoList != null && mineRadioListBean.cdoList.size() != 0) {
-                dataList.clear();
-                for (int i = 0; i < mineRadioListBean.cdoList.size(); i++) {
-                    MineRadioListBean.CdoListBean cdoListBean = mineRadioListBean.cdoList.get(i);
-                    LocalHomeRadioListBean localHomeRadioListTitleBean = new LocalHomeRadioListBean();
-                    if (cdoListBean.cdoUserData != null) {
-                        localHomeRadioListTitleBean.headImg = cdoListBean.cdoUserData.sUserHeadPic;
-                        localHomeRadioListTitleBean.userName = cdoListBean.cdoUserData.sNickName;
-                        localHomeRadioListTitleBean.lUserId = cdoListBean.cdoUserData.lUserId;
-                        localHomeRadioListTitleBean.bVIP = cdoListBean.cdoUserData.bVIP;
-                        localHomeRadioListTitleBean.nAuthType = cdoListBean.cdoUserData.nAuthType;
-                    }
-                    localHomeRadioListTitleBean.sDatingRange = cdoListBean.sDatingRange;
-                    localHomeRadioListTitleBean.sDatingTime = cdoListBean.sDatingTime;
-                    localHomeRadioListTitleBean.sContent = cdoListBean.sContent;
-                    localHomeRadioListTitleBean.sDatingHope = cdoListBean.sDatingHope;
-                    localHomeRadioListTitleBean.sDatingTitle = cdoListBean.sDatingTitle;
-                    localHomeRadioListTitleBean.sex = cdoListBean.nSex;
-                    localHomeRadioListTitleBean.cTime = cdoListBean.dCreateTime;
-                    localHomeRadioListTitleBean.itemType = 0;
-                    dataList.add(localHomeRadioListTitleBean);
+        refresh.finishRefresh();
+        refresh.finishLoadMore();
+        if (mineRadioListBean != null && mineRadioListBean.cdoList != null && mineRadioListBean.cdoList.size() != 0) {
+            List<LocalHomeRadioListBean> dataList = new ArrayList<>();
+            for (int i = 0; i < mineRadioListBean.cdoList.size(); i++) {
+                MineRadioListBean.CdoListBean cdoListBean = mineRadioListBean.cdoList.get(i);
+                LocalHomeRadioListBean localHomeRadioListTitleBean = new LocalHomeRadioListBean();
+                if (cdoListBean.cdoUserData != null) {
+                    localHomeRadioListTitleBean.headImg = cdoListBean.cdoUserData.sUserHeadPic;
+                    localHomeRadioListTitleBean.userName = cdoListBean.cdoUserData.sNickName;
+                    localHomeRadioListTitleBean.lUserId = cdoListBean.cdoUserData.lUserId;
+                    localHomeRadioListTitleBean.bVIP = cdoListBean.cdoUserData.bVIP;
+                    localHomeRadioListTitleBean.nAuthType = cdoListBean.cdoUserData.nAuthType;
+                }
+                localHomeRadioListTitleBean.sDatingRange = cdoListBean.sDatingRange;
+                localHomeRadioListTitleBean.sDatingTime = cdoListBean.sDatingTime;
+                localHomeRadioListTitleBean.sContent = cdoListBean.sContent;
+                localHomeRadioListTitleBean.sDatingHope = cdoListBean.sDatingHope;
+                localHomeRadioListTitleBean.sDatingTitle = cdoListBean.sDatingTitle;
+                localHomeRadioListTitleBean.sex = cdoListBean.nSex;
+                localHomeRadioListTitleBean.cTime = cdoListBean.dCreateTime;
+                localHomeRadioListTitleBean.itemType = 0;
+                dataList.add(localHomeRadioListTitleBean);
 
-                    LocalHomeRadioListBean localHomeRadioListPicBean = new LocalHomeRadioListBean();
-                    localHomeRadioListPicBean.cdoApply = cdoListBean.cdoApply;
-                    localHomeRadioListPicBean.itemType = 1;
-                    dataList.add(localHomeRadioListPicBean);
+                LocalHomeRadioListBean localHomeRadioListPicBean = new LocalHomeRadioListBean();
+                localHomeRadioListPicBean.cdoApply = cdoListBean.cdoApply;
+                localHomeRadioListPicBean.itemType = 1;
+                dataList.add(localHomeRadioListPicBean);
 
-                    LocalHomeRadioListBean localHomeRadioListBottomBean = new LocalHomeRadioListBean();
-                    localHomeRadioListBottomBean.is_like = cdoListBean.bLove;
-                    localHomeRadioListBottomBean.like_count = cdoListBean.nLikeCount;
-                    localHomeRadioListBottomBean.count_num = cdoListBean.nCommentCount;
-                    localHomeRadioListBottomBean.is_apply = cdoListBean.bApply;
-                    localHomeRadioListBottomBean.lDatingId = cdoListBean.lDatingId;
-                    localHomeRadioListBottomBean.lUserId = cdoListBean.lUserId;
-                    localHomeRadioListBottomBean.nApplyCount = cdoListBean.nApplyCount;
-                    localHomeRadioListBottomBean.bCommentType = cdoListBean.bCommentType;
-                    localHomeRadioListBottomBean.sex = cdoListBean.nSex;
+                LocalHomeRadioListBean localHomeRadioListBottomBean = new LocalHomeRadioListBean();
+                localHomeRadioListBottomBean.is_like = cdoListBean.bLove;
+                localHomeRadioListBottomBean.like_count = cdoListBean.nLikeCount;
+                localHomeRadioListBottomBean.count_num = cdoListBean.nCommentCount;
+                localHomeRadioListBottomBean.is_apply = cdoListBean.bApply;
+                localHomeRadioListBottomBean.lDatingId = cdoListBean.lDatingId;
+                localHomeRadioListBottomBean.lUserId = cdoListBean.lUserId;
+                localHomeRadioListBottomBean.nApplyCount = cdoListBean.nApplyCount;
+                localHomeRadioListBottomBean.bCommentType = cdoListBean.bCommentType;
+                localHomeRadioListBottomBean.sex = cdoListBean.nSex;
 
-                    localHomeRadioListBottomBean.cdoComment = cdoListBean.cdoComment;
-                    localHomeRadioListBottomBean.cdoApply = cdoListBean.cdoApply;
-                    localHomeRadioListBottomBean.nStatus = cdoListBean.nStatus;
+                localHomeRadioListBottomBean.cdoComment = cdoListBean.cdoComment;
+                localHomeRadioListBottomBean.nStatus = cdoListBean.nStatus;
 
-                    if (cdoListBean.cdoUserData != null) {
-                        localHomeRadioListBottomBean.headImg = cdoListBean.cdoUserData.sUserHeadPic;
-                        localHomeRadioListBottomBean.userName = cdoListBean.cdoUserData.sNickName;
-                        localHomeRadioListBottomBean.lUserId = cdoListBean.cdoUserData.lUserId;
-                        localHomeRadioListBottomBean.bVIP = cdoListBean.cdoUserData.bVIP;
-                        localHomeRadioListBottomBean.nAuthType = cdoListBean.cdoUserData.nAuthType;
-                    }
-                    localHomeRadioListBottomBean.picList = cdoListBean.sImg;
-                    localHomeRadioListBottomBean.sDatingRange = cdoListBean.sDatingRange;
-                    localHomeRadioListBottomBean.sDatingTime = cdoListBean.sDatingTime;
-                    localHomeRadioListBottomBean.sContent = cdoListBean.sContent;
-                    localHomeRadioListBottomBean.sDatingTitle = cdoListBean.sDatingTitle;
-                    localHomeRadioListBottomBean.cTime = cdoListBean.dCreateTime;
-                    localHomeRadioListBottomBean.cdoLove = cdoListBean.cdoLove;
-                    localHomeRadioListBottomBean.itemType = 2;
-                    dataList.add(localHomeRadioListBottomBean);
+                if (cdoListBean.cdoUserData != null) {
+                    localHomeRadioListBottomBean.headImg = cdoListBean.cdoUserData.sUserHeadPic;
+                    localHomeRadioListBottomBean.userName = cdoListBean.cdoUserData.sNickName;
+                    localHomeRadioListBottomBean.lUserId = cdoListBean.cdoUserData.lUserId;
+                    localHomeRadioListBottomBean.bVIP = cdoListBean.cdoUserData.bVIP;
+                    localHomeRadioListBottomBean.nAuthType = cdoListBean.cdoUserData.nAuthType;
+                }
+                localHomeRadioListBottomBean.sDatingRange = cdoListBean.sDatingRange;
+                localHomeRadioListBottomBean.sDatingTime = cdoListBean.sDatingTime;
+                localHomeRadioListBottomBean.sContent = cdoListBean.sContent;
+                localHomeRadioListBottomBean.sDatingTitle = cdoListBean.sDatingTitle;
+                localHomeRadioListBottomBean.cTime = cdoListBean.dCreateTime;
+                localHomeRadioListBottomBean.cdoLove = cdoListBean.cdoLove;
+                localHomeRadioListBottomBean.itemType = 2;
+                dataList.add(localHomeRadioListBottomBean);
+            }
+
+            if (pageIndex > 0) {
+                adapter.addData(dataList);
+            } else {
+                adapter.setNewData(dataList);
+            }
+
+            adapter.setOnPersonItemClickListener(new MineRadioRvAdapter.OnRadioItemClickListener() {
+                @Override
+                public void setOnRadioItemClick(DelayClickImageView iv_like, DelayClickTextView tv_like,
+                                                int position, int is_like, String lDatingId, String lJoinerId, String lInitiatorId) {
+                    ToastUtils.show("你不能赞自己");
                 }
 
-                if (adapter == null) {
-                    adapter = new MineRadioRvAdapter(dataList, getActivity());
-                    rv_radio.setAdapter(adapter);
-                } else {
-                    adapter.setNewData(dataList);
+                @Override
+                public void setOnPersonInfoItemClick(int lLoveUserId) {
+                    getLaunchHelper().startActivity(
+                            LookUserInfoActivity.getIntent(getActivity(), lLoveUserId, lLoveUserId, 2));
                 }
 
-                adapter.setOnPersonItemClickListener(new MineRadioRvAdapter.OnRadioItemClickListener() {
-                    @Override
-                    public void setOnRadioItemClick(DelayClickImageView iv_like, DelayClickTextView tv_like,
-                                                    int position, int is_like, String lDatingId, String lJoinerId, String lInitiatorId) {
-                        ToastUtils.show("你不能赞自己");
-                    }
+                @Override
+                public void setOnAddContentItemClick(LocalHomeRadioListBean item) {
+                    ToastUtils.show("你不能评论自己");
+                }
 
-                    @Override
-                    public void setOnPersonInfoItemClick(int lLoveUserId) {
-                        getLaunchHelper().startActivity(
-                                LookUserInfoActivity.getIntent(getActivity(), lLoveUserId, lLoveUserId, 2));
-                    }
+                @Override
+                public void setOnAddDatingEnrollItemClick(LocalHomeRadioListBean item) {
+                    String json = new Gson().toJson(item);
+                    startActivity(
+                            new Intent(MineRadioListActivity.this, ApplyDetailsActivity.class).putExtra("json",
+                                    json));
+                }
 
-                    @Override
-                    public void setOnAddContentItemClick(LocalHomeRadioListBean item) {
-                        ToastUtils.show("你不能评论自己");
-                    }
-
-                    @Override
-                    public void setOnAddDatingEnrollItemClick(LocalHomeRadioListBean item) {
-                        String json = new Gson().toJson(item);
-                        startActivity(
-                                new Intent(MineRadioListActivity.this, ApplyDetailsActivity.class).putExtra("json",
-                                        json));
-                    }
-
-                    @Override
-                    public void setOnCloseEnrollItemClick(LocalHomeRadioListBean item) {
-                        mPresenter.modifyStatus("1", item.lDatingId + "", item);
-                    }
-                });
-                rv_radio.setVisibility(View.VISIBLE);
-                ll_empty.setVisibility(View.GONE);
+                @Override
+                public void setOnCloseEnrollItemClick(LocalHomeRadioListBean item) {
+                    mPresenter.modifyStatus("1", item.lDatingId + "", item);
+                }
+            });
+            rv_radio.setVisibility(View.VISIBLE);
+            ll_empty.setVisibility(View.GONE);
+        } else {
+            if (pageIndex > 0) {
+                ToastUtils.show("没有更多了");
             } else {
                 //空界面
                 rv_radio.setVisibility(View.GONE);

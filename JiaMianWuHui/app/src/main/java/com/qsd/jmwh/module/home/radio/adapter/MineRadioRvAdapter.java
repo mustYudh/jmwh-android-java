@@ -23,13 +23,12 @@ import com.yu.common.ui.DelayClickTextView;
 import com.yu.common.utils.ImageLoader;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MineRadioRvAdapter extends BaseMultiItemQuickAdapter<LocalHomeRadioListBean, BaseViewHolder> {
     private Context context;
 
-    public MineRadioRvAdapter(List<LocalHomeRadioListBean> data, Context context) {
-        super(data);
+    public MineRadioRvAdapter(Context context) {
+        super(null);
         addItemType(0, R.layout.item_home_radio_title);
         addItemType(1, R.layout.item_home_radio_pic);
         addItemType(2, R.layout.item_mine_radio_bottom);
@@ -92,27 +91,25 @@ public class MineRadioRvAdapter extends BaseMultiItemQuickAdapter<LocalHomeRadio
                 break;
             case 1:
                 NoSlidingGridView gv_pic = helper.getView(R.id.gv_pic);
-                if (item.cdoApply != null && item.cdoApply.size() != 0) {
-                    MineRadioPicGvAdapter picAdapter = new MineRadioPicGvAdapter(context, item.cdoApply);
-                    gv_pic.setAdapter(picAdapter);
-                    item.picList = new ArrayList<>();
-                    item.picList.clear();
-                    for (int i = 0; i < item.cdoApply.size(); i++) {
-                        item.picList.add(item.cdoApply.get(i).sContent);
-                    }
-                    gv_pic.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            Bundle bundle = new Bundle();
-                            bundle.putInt("selet", 2);// 2,大图显示当前页数，1,头像，不显示页数
-                            bundle.putInt("code", i);//第几张
-                            bundle.putStringArrayList("imageuri", (ArrayList<String>) item.picList);
-                            Intent intent = new Intent(context, ViewBigImageActivity.class);
-                            intent.putExtras(bundle);
-                            context.startActivity(intent);
-                        }
-                    });
+                MineRadioPicGvAdapter picAdapter = new MineRadioPicGvAdapter(context, item.cdoApply);
+                gv_pic.setAdapter(picAdapter);
+                item.picList = new ArrayList<>();
+                item.picList.clear();
+                for (int i = 0; i < item.cdoApply.size(); i++) {
+                    item.picList.add(item.cdoApply.get(i).sContent);
                 }
+                gv_pic.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("selet", 2);// 2,大图显示当前页数，1,头像，不显示页数
+                        bundle.putInt("code", i);//第几张
+                        bundle.putStringArrayList("imageuri", (ArrayList<String>) item.picList);
+                        Intent intent = new Intent(context, ViewBigImageActivity.class);
+                        intent.putExtras(bundle);
+                        context.startActivity(intent);
+                    }
+                });
                 break;
             case 2:
                 DelayClickImageView iv_like = helper.getView(R.id.iv_like);
