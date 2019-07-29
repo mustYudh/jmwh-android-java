@@ -106,7 +106,7 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
                 dataList.add(localHomeRadioListTitleBean);
 
                 LocalHomeRadioListBean localHomeRadioListPicBean = new LocalHomeRadioListBean();
-                localHomeRadioListPicBean.cdoApply = cdoListBean.cdoApply;
+                localHomeRadioListPicBean.picList = cdoListBean.sImg;
                 localHomeRadioListPicBean.itemType = 1;
                 dataList.add(localHomeRadioListPicBean);
 
