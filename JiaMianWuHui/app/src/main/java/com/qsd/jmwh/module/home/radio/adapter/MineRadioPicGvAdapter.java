@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.qsd.jmwh.R;
-import com.qsd.jmwh.module.home.user.bean.MineRadioListBean;
 import com.qsd.jmwh.utils.ScreentUtils;
 import com.yu.common.utils.ImageLoader;
 
@@ -16,10 +15,10 @@ import java.util.List;
 
 public class MineRadioPicGvAdapter extends BaseAdapter {
     private Context context;
-    private List<MineRadioListBean.CdoListBean.CdoApplyBean> list;
+    private List<String> list;
 
 
-    public MineRadioPicGvAdapter(Context context, List<MineRadioListBean.CdoListBean.CdoApplyBean> list) {
+    public MineRadioPicGvAdapter(Context context, List<String> list) {
         this.context = context;
         this.list = list;
     }
@@ -59,7 +58,7 @@ public class MineRadioPicGvAdapter extends BaseAdapter {
         para.width = (int) (width / 3);
         para.height = (int) (width / 3);
         holder.iv_pic.setLayoutParams(para);
-        ImageLoader.loadCenterCrop(context, list.get(i).sContent, holder.iv_pic, R.drawable.zhanwei);
+        ImageLoader.loadCenterCrop(context, list.get(i), holder.iv_pic, R.drawable.zhanwei);
         return view;
     }
 
