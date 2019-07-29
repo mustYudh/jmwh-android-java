@@ -165,7 +165,7 @@ public class PayUtils {
 
     public void checkPaySuccess(int type, PayInfo info, PayCallBack payCallback) {
         if (!isStart) {
-            looperTime.start(5 * 60);
+            looperTime.start(30);
             isStart = true;
         }
         if (needCheck) {
