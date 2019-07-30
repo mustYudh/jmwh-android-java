@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -288,11 +287,9 @@ public abstract class SurfaceVideoViewCreator
     videoWidth = (int) Math.ceil((float) videoWidth / max);
     videoHeight = (int) Math.ceil((float) videoHeight / max);
 
-    mView.findViewById(R.id.surface_video_container).getLayoutParams().height =
-        (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, videoHeight, mActivity.getResources().getDisplayMetrics());
+    mView.findViewById(R.id.surface_video_container).getLayoutParams().height = videoHeight;
 
-    mView.findViewById(R.id.surface_video_container).getLayoutParams().width =
-        (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, videoWidth, mActivity.getResources().getDisplayMetrics());
+    mView.findViewById(R.id.surface_video_container).getLayoutParams().width = videoWidth;
     mView.findViewById(R.id.surface_video_container).requestLayout();
   }
 
