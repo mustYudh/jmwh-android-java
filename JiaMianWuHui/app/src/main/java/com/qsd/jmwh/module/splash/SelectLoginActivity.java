@@ -28,6 +28,10 @@ import com.qsd.jmwh.module.splash.bean.RegisterSuccess;
 import com.qsd.jmwh.module.splash.presenter.SplashPresenter;
 import com.qsd.jmwh.module.splash.presenter.SplashViewer;
 import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.tencent.map.geolocation.TencentLocation;
+import com.tencent.map.geolocation.TencentLocationListener;
+import com.tencent.map.geolocation.TencentLocationManager;
+import com.tencent.map.geolocation.TencentLocationRequest;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.yu.common.mvp.PresenterLifeCycle;
@@ -39,8 +43,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-public class SplashActivity extends BaseActivity
-    implements View.OnClickListener, AuthLoginCallback, SplashViewer {
+public class SelectLoginActivity extends BaseActivity
+    implements View.OnClickListener, AuthLoginCallback, SplashViewer, TencentLocationListener {
 
   @PresenterLifeCycle private SplashPresenter mPresenter = new SplashPresenter(this);
 
@@ -82,6 +86,11 @@ public class SplashActivity extends BaseActivity
     bindText(R.id.app_name, getAppName(this));
     mAuthLoginHelp = new AuthLoginHelp(getActivity());
     mAuthLoginHelp.callback(this);
+    TencentLocationRequest request = TencentLocationRequest.create()
+        .setInterval(1000 * 5 * 60)
+        .setRequestLevel(TencentLocationRequest.REQUEST_LEVEL_ADMIN_AREA);
+    TencentLocationManager locationManager = TencentLocationManager.getInstance(getActivity());
+    locationManager.requestLocationUpdates(request, this);
   }
 
   public static String getAppName(Context context) {
@@ -172,16 +181,16 @@ public class SplashActivity extends BaseActivity
 
             @Override public void onFailed(int code) {
               if (code == 302 || code == 404) {
-                ToastHelper.showToast(SplashActivity.this, "帐号或密码错误");
+                ToastHelper.showToast(SelectLoginActivity.this, "帐号或密码错误");
                 NetLoadingDialog.dismissLoading();
               } else {
-                ToastHelper.showToast(SplashActivity.this, "登录失败: " + code);
+                ToastHelper.showToast(SelectLoginActivity.this, "登录失败: " + code);
                 NetLoadingDialog.dismissLoading();
               }
             }
 
             @Override public void onException(Throwable throwable) {
-              ToastHelper.showToast(SplashActivity.this, "无效输入");
+              ToastHelper.showToast(SelectLoginActivity.this, "无效输入");
               NetLoadingDialog.dismissLoading();
             }
           });
@@ -192,5 +201,18 @@ public class SplashActivity extends BaseActivity
     if (event.success) {
       finish();
     }
+  }
+
+  @Override public void onLocationChanged(TencentLocation location, int i, String s) {
+    if (location != null) {
+      UserProfile.getInstance().setHomeCityName("");
+      UserProfile.getInstance().setLat((float) location.getLatitude());
+      UserProfile.getInstance().setLng((float) location.getLongitude());
+      UserProfile.getInstance().setCityName(location.getCity());
+    }
+  }
+
+  @Override public void onStatusUpdate(String s, int i, String s1) {
+
   }
 }

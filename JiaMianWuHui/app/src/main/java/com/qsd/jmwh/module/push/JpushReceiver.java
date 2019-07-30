@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.HomeActivity;
-import com.qsd.jmwh.module.splash.SplashActivity;
+import com.qsd.jmwh.module.splash.SelectLoginActivity;
 import com.yu.common.launche.LauncherHelper;
 
 /**
@@ -55,7 +55,7 @@ public class JpushReceiver extends BroadcastReceiver {
     if (UserProfile.getInstance().isAppLogin()) {
       LauncherHelper.from(context).startActivity(HomeActivity.class);
     } else {
-      LauncherHelper.from(context).startActivity(SplashActivity.class);
+      LauncherHelper.from(context).startActivity(SelectLoginActivity.class);
     }
   }
 

@@ -5,7 +5,7 @@ import com.netease.nim.uikit.api.NimUIKit;
 import com.qsd.jmwh.APP;
 import com.qsd.jmwh.base.BaseActivity;
 import com.qsd.jmwh.data.UserProfile;
-import com.qsd.jmwh.module.splash.SplashActivity;
+import com.qsd.jmwh.module.splash.SelectLoginActivity;
 import com.yu.common.launche.LauncherHelper;
 import java.util.HashSet;
 
@@ -48,7 +48,7 @@ public class ActivityManager {
   public void reLogin() {
     UserProfile.getInstance().clean();
     NimUIKit.logout();
-    Intent intent = new Intent(APP.getInstance(), SplashActivity.class);
+    Intent intent = new Intent(APP.getInstance(), SelectLoginActivity.class);
     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     LauncherHelper.from(APP.getInstance()).startActivity(intent);
     exit();

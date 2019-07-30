@@ -36,7 +36,7 @@ import com.qsd.jmwh.module.home.user.dialog.EvaluationDialog;
 import com.qsd.jmwh.module.home.user.presenter.UserPresenter;
 import com.qsd.jmwh.module.home.user.presenter.UserViewer;
 import com.qsd.jmwh.module.register.ToByVipActivity;
-import com.qsd.jmwh.module.splash.SplashActivity;
+import com.qsd.jmwh.module.splash.SelectLoginActivity;
 import com.qsd.jmwh.view.UserItemView;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
@@ -357,7 +357,7 @@ public class UserFragment extends BaseFragment
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK && requestCode == START_SETTING_RESULT) {
             if (getActivity() != null) {
-                getLaunchHelper().startActivity(SplashActivity.class);
+                getLaunchHelper().startActivity(SelectLoginActivity.class);
                 getActivity().finish();
             }
         }

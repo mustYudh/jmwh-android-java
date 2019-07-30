@@ -15,7 +15,7 @@ import com.netease.nimlib.sdk.msg.MessageNotifierCustomization;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.qsd.jmwh.APP;
 import com.qsd.jmwh.R;
-import com.qsd.jmwh.module.splash.SplashActivity;
+import com.qsd.jmwh.module.splash.SelectLoginActivity;
 import java.io.IOException;
 
 /**
@@ -126,7 +126,7 @@ public class NimSDKOptionConfig {
     private static StatusBarNotificationConfig loadStatusBarNotificationConfig() {
         StatusBarNotificationConfig config = new StatusBarNotificationConfig();
         // 点击通知需要跳转到的界面
-        config.notificationEntrance = SplashActivity.class;
+        config.notificationEntrance = SelectLoginActivity.class;
         config.notificationSmallIconId = R.drawable.ic_launcher;
         // 通知铃声的uri字符串
         config.notificationSound = "android.resource://com.netease.nim.demo/raw/msg";

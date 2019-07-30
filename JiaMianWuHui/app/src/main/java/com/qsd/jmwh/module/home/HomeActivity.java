@@ -165,28 +165,18 @@ public class HomeActivity extends BaseActivity implements HomeViewer, TencentLoc
   }
 
   @Override protected void onDestroy() {
-    super.onDestroy();
+    Log.e("======>","shouyexiaohsui");
     registerObservers(false);
     UserProfile.getInstance().setHomeCityName("");
     if (looperTime != null) {
       looperTime.stop();
     }
     mService.observeRecentContact(mMessageObserver, false);
+    super.onDestroy();
   }
 
   @Override public void onLocationChanged(TencentLocation location, int i, String s) {
     if (i == 0) {
-      double longitude = location.getLongitude();
-      double latitude = location.getLatitude();
-      Log.e("======>dingwei", "longitude:"
-          + longitude
-          + ",latitude:"
-          + latitude
-          + ",address:"
-          + location.getAddress()
-          + location.getName()
-          + "===="
-          + location.getCity());
       mPresenter.modifyLngAndLat(location);
     }
   }
