@@ -38,7 +38,11 @@ public class SettingActivity extends BaseBarActivity {
         String cacheSize = glideCacheUtil.getCacheSize(getActivity());
         clearCache.setHint(cacheSize);
         initListener();
+    }
+
+    @Override protected void onResume() {
         phoneNumber.setHint(UserProfile.getInstance().getPhoneNo());
+        super.onResume();
     }
 
     private void initListener() {

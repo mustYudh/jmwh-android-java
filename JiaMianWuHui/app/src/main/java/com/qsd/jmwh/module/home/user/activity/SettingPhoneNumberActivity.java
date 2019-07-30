@@ -19,6 +19,7 @@ public class SettingPhoneNumberActivity extends BaseBarActivity implements Setti
     @PresenterLifeCycle
     SettingPhoneNumberPresenter mPresenter = new SettingPhoneNumberPresenter(this);
     private RxCountDown countDown;
+    private NormaFormItemVIew mPhoneNum;
 
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
@@ -29,17 +30,17 @@ public class SettingPhoneNumberActivity extends BaseBarActivity implements Setti
     protected void loadData() {
         setTitle("绑定手机号");
         NormaFormItemVIew mSendVerCode = bindView(R.id.get_ver_code);
-        NormaFormItemVIew phoneNum = bindView(R.id.phone);
-        phoneNum.setEditText(UserProfile.getInstance().getPhoneNo());
+        mPhoneNum = bindView(R.id.phone);
+        mPhoneNum.setEditText(UserProfile.getInstance().getPhoneNo());
         mSendVerCode.setRightButtonListener(v -> {
-            if (TextUtils.isEmpty(phoneNum.getText())) {
+            if (TextUtils.isEmpty(mPhoneNum.getText())) {
                 ToastUtils.show("手机号输入不能为空");
-            } else if (!phoneNum.getText().startsWith("1") || phoneNum.getText().length() != 11) {
+            } else if (!mPhoneNum.getText().startsWith("1") || mPhoneNum.getText().length() != 11) {
                 ToastUtils.show("检查手机号输入是否正确");
             } else {
                 countDown = new RxCountDown();
                 countDown.start(60);
-                mPresenter.sendVerCode(phoneNum.getText(), countDown);
+                mPresenter.sendVerCode(mPhoneNum.getText(), countDown);
                 countDown.setCountDownTimeListener(new RxCountDownAdapter() {
 
                     @Override
@@ -75,11 +76,12 @@ public class SettingPhoneNumberActivity extends BaseBarActivity implements Setti
 
             }
         });
-        bindView(R.id.next, v -> mPresenter.bindPhone(phoneNum.getText(), mSendVerCode.getText()));
+        bindView(R.id.next, v -> mPresenter.bindPhone(mPhoneNum.getText(), mSendVerCode.getText()));
     }
 
     @Override
     public void onSuccess() {
+        UserProfile.getInstance().setPhoneNo(mPhoneNum.getText());
         ToastUtils.show("绑定成功");
         finish();
     }

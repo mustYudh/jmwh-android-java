@@ -78,6 +78,7 @@ public class SelectLoginActivity extends BaseActivity
   }
 
   @Override protected void loadData() {
+    UserProfile.getInstance().setHomeCityName("");
     EventBus.getDefault().register(this);
     bindView(R.id.login, this);
     bindView(R.id.register, this);
@@ -205,7 +206,6 @@ public class SelectLoginActivity extends BaseActivity
 
   @Override public void onLocationChanged(TencentLocation location, int i, String s) {
     if (location != null) {
-      UserProfile.getInstance().setHomeCityName("");
       UserProfile.getInstance().setLat((float) location.getLatitude());
       UserProfile.getInstance().setLng((float) location.getLongitude());
       UserProfile.getInstance().setCityName(location.getCity());
