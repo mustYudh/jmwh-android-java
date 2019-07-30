@@ -1,6 +1,7 @@
 package com.qsd.jmwh.utils;
 
 import android.content.Intent;
+import com.netease.nim.uikit.api.NimUIKit;
 import com.qsd.jmwh.APP;
 import com.qsd.jmwh.base.BaseActivity;
 import com.qsd.jmwh.data.UserProfile;
@@ -46,6 +47,7 @@ public class ActivityManager {
 
   public void reLogin() {
     UserProfile.getInstance().clean();
+    NimUIKit.logout();
     Intent intent = new Intent(APP.getInstance(), SplashActivity.class);
     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     LauncherHelper.from(APP.getInstance()).startActivity(intent);

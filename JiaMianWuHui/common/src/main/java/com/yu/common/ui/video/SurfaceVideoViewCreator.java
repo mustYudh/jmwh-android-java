@@ -2,6 +2,7 @@ package com.yu.common.ui.video;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -43,6 +44,7 @@ public abstract class SurfaceVideoViewCreator
   public boolean debugModel = false;
 
   private String videoPath;
+  private final View mView;
 
   protected abstract Activity getActivity();
 
@@ -58,20 +60,24 @@ public abstract class SurfaceVideoViewCreator
 
   protected abstract String getVideoPath();
 
+
+  private Activity mActivity;
+
   public void setUseCache(boolean useCache) {
     this.isUseCache = useCache;
   }
 
   public SurfaceVideoViewCreator(Activity activity, ViewGroup container) {
-    View view =
+    mActivity = activity;
+    mView =
         LayoutInflater.from(activity).inflate(R.layout.surface_video_view_layout, container, false);
 
-    container.addView(view);
+    container.addView(mView);
 
-    surfaceVideoView = (SurfaceVideoView) view.findViewById(R.id.surface_video_view);
-    progressBar = (LoadingCircleView) view.findViewById(R.id.surface_video_progress);
-    statusButton = (Button) view.findViewById(R.id.surface_video_button);
-    surface_video_screenshot = (ImageView) view.findViewById(R.id.surface_video_screenshot);
+    surfaceVideoView = (SurfaceVideoView) mView.findViewById(R.id.surface_video_view);
+    progressBar = (LoadingCircleView) mView.findViewById(R.id.surface_video_progress);
+    statusButton = (Button) mView.findViewById(R.id.surface_video_button);
+    surface_video_screenshot = (ImageView) mView.findViewById(R.id.surface_video_screenshot);
     setThumbImage(surface_video_screenshot);
 
     int width = getSurfaceWidth();
@@ -79,10 +85,8 @@ public abstract class SurfaceVideoViewCreator
       /** 默认就是手机宽度 */
       surfaceVideoView.getLayoutParams().width = width;
     }
-    view.findViewById(R.id.surface_video_container).getLayoutParams().height =
-        (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, getSurfaceHeight(),
-            container.getContext().getResources().getDisplayMetrics());
-    view.findViewById(R.id.surface_video_container).requestLayout();
+
+
 
     surfaceVideoView.setOnPreparedListener(this);
     surfaceVideoView.setOnPlayStateListener(this);
@@ -266,6 +270,30 @@ public abstract class SurfaceVideoViewCreator
     surfaceVideoView.start();
     //progressBar.setVisibility(View.GONE);
     surface_video_screenshot.setVisibility(View.GONE);
+
+    int videoWidth = mp.getVideoWidth();
+    int videoHeight = mp.getVideoHeight();
+    int surfaceWidth = surfaceVideoView.getWidth();
+    int surfaceHeight = surfaceVideoView.getHeight();
+
+    float max;
+    if (mActivity.getResources().getConfiguration().orientation== ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+      //竖屏模式下按视频宽度计算放大倍数值
+      max = Math.max((float) videoWidth / (float) surfaceWidth,(float) videoHeight / (float) surfaceHeight);
+    } else{
+      //横屏模式下按视频高度计算放大倍数值
+      max = Math.max(((float) videoWidth/(float) surfaceHeight),(float) videoHeight/(float) surfaceWidth);
+    }
+
+    videoWidth = (int) Math.ceil((float) videoWidth / max);
+    videoHeight = (int) Math.ceil((float) videoHeight / max);
+
+    mView.findViewById(R.id.surface_video_container).getLayoutParams().height =
+        (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, videoHeight, mActivity.getResources().getDisplayMetrics());
+
+    mView.findViewById(R.id.surface_video_container).getLayoutParams().width =
+        (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, videoWidth, mActivity.getResources().getDisplayMetrics());
+    mView.findViewById(R.id.surface_video_container).requestLayout();
   }
 
   @Override public void onClick(View v) {

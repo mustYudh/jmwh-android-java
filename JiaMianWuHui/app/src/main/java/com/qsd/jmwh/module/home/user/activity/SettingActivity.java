@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import com.netease.nim.uikit.api.NimUIKit;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
@@ -57,10 +58,11 @@ public class SettingActivity extends BaseBarActivity {
             logoutPop.setTitle("温馨提示")
                     .setMessage("确认退出登录？")
                     .setPositiveButton("确定", v1 -> {
+                        NimUIKit.logout();
                         UserProfile.getInstance().clean();
                         setResult(Activity.RESULT_OK);
-                        finish();
                         logoutPop.dismiss();
+                        finish();
                     })
                     .setNegativeButton("取消",v2 -> {
                         logoutPop.dismiss();
