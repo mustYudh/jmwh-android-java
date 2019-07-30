@@ -222,11 +222,33 @@ public class LookUserInfoActivity extends BaseActivity
           //if (showContact) {
           //  SessionHelper.startP2PSession(getActivity(), "im_" + userID);
           //} else {
-          if (!canChat) {
-            toChat();
+          if (UserProfile.getInstance().getSex() == 1) {
+            if (!canChat) {
+              toChat();
+            } else {
+              SessionHelper.startP2PSession(getActivity(), "im_" + userID);
+            }
           } else {
-            SessionHelper.startP2PSession(getActivity(), "im_" + userID);
+            if (authType == 0) {
+              SelectHintPop hint = new SelectHintPop(this);
+              hint.setTitle("你还没有进行认证")
+                  .setMessage("认证你的真实性之后，才能私聊男士用户。")
+                  .setPositiveButton("马上认证", v1 -> {
+                    getLaunchHelper().startActivity(AuthCenterActivity.class);
+                    getActivity().finish();
+                    hint.dismiss();
+                  })
+                  .setNegativeButton("取消", v12 -> hint.dismiss())
+                  .showPopupWindow();
+            } else {
+              if (!canChat) {
+                toChat();
+              } else {
+                SessionHelper.startP2PSession(getActivity(), "im_" + userID);
+              }
+            }
           }
+
 
           //}
         }
