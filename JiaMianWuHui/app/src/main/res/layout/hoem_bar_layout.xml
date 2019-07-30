@@ -45,7 +45,7 @@
             android:background="@android:color/transparent"
             android:ellipsize="end"
             android:gravity="center_vertical"
-            android:hint="搜索女士"
+            android:hint="搜索用户"
             android:imeOptions="actionSearch"
             android:maxLines="1"
             android:singleLine="true"

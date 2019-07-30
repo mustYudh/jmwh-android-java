@@ -82,7 +82,7 @@
                 android:paddingLeft="15dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:text="社交账号（选填）"
+                android:text="社交账号（最少填写1个）"
                 android:textSize="13sp"/>
 
             <com.qsd.jmwh.view.NormaFormItemVIew
@@ -120,7 +120,7 @@
             android:paddingLeft="15dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:text="更多信息（选填）"
+            android:text="更多信息"
             android:textSize="13sp"/>
 
 

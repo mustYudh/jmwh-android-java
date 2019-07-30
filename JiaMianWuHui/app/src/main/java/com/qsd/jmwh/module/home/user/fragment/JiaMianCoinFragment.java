@@ -33,6 +33,7 @@ public class JiaMianCoinFragment extends BaseFragment
   private WithdrawalAdapter adapter;
   private SmartRefreshLayout refresh;
   private SelectHintPop mSelectHintPop;
+  private boolean isBindAccount = false;
 
   @Override protected int getContentViewId() {
     return R.layout.jia_mian_coin_fragment;
@@ -74,7 +75,11 @@ public class JiaMianCoinFragment extends BaseFragment
         }).setNegativeButton(v1 -> payPop.dismiss()).showPopupWindow();
         break;
       case R.id.withdrawal:
-        mSelectHintPop.showPopupWindow();
+        if (isBindAccount) {
+          mSelectHintPop.showPopupWindow();
+        } else {
+          ToastUtils.show("请先绑定支付宝账号!");
+        }
         break;
       case R.id.top_up:
         mPresenter.getGoods();
@@ -90,6 +95,7 @@ public class JiaMianCoinFragment extends BaseFragment
     if (!TextUtils.isEmpty(listBean.sAliPayAccount) && !TextUtils.isEmpty(listBean.sAliPayName)) {
       bindText(R.id.ali_pay_hint, listBean.sAliPayAccount + "(" + listBean.sAliPayName + "）");
     }
+    isBindAccount = !TextUtils.isEmpty(listBean.sAliPayAccount);
     List<AccountBalance.CdoAccountBalanceListBean> list = accountBalance.cdoAccountBalanceList;
     if (type == 0) {
       adapter.setNewData(list);

@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
+import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.user.presenter.EditPasswordPresenter;
 import com.qsd.jmwh.module.home.user.presenter.EditPasswordViewer;
 import com.qsd.jmwh.utils.countdown.RxCountDown;
@@ -34,6 +35,7 @@ public class EditPasswordActivity extends BaseBarActivity implements EditPasswor
         againPwdEdit = bindView(R.id.again_pwd);
         mSendVerCode = bindView(R.id.get_ver_code);
         phoneNum = bindView(R.id.phone);
+        phoneNum.setEditText(UserProfile.getInstance().getPhoneNo());
 
         sendVerCode();
         bindView(R.id.next, v -> mPresenter.modifyPassword(phoneNum,againPwdEdit.getText(), mSendVerCode.getText()));
