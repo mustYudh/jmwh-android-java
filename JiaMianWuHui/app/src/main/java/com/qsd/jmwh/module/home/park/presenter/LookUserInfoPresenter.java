@@ -22,7 +22,7 @@ import com.yu.common.toast.ToastUtils;
     super(viewer);
   }
 
-  public void getUserInfo(int lUserId, double nLat, double nLng, boolean firstLoading) {
+  public void getUserInfo(int lUserId, double nLat, double nLng) {
     XHttpProxy.proxy(ApiServices.class)
         .getOtherUserInfo(lUserId, nLat, nLng)
         .subscribeWith(new TipRequestSubscriber<OtherUserInfoBean>() {
@@ -40,7 +40,7 @@ import com.yu.common.toast.ToastUtils;
           @Override protected void onSuccess(Object info) {
             ToastUtils.show("解锁成功");
             assert getViewer() != null;
-            getViewer().refreshData(0);
+            getViewer().refreshData();
           }
         });
   }
@@ -53,7 +53,7 @@ import com.yu.common.toast.ToastUtils;
           .subscribeWith(new TipRequestSubscriber<Object>() {
             @Override protected void onSuccess(Object o) {
               assert getViewer() != null;
-              getViewer().refreshData(1);
+              getViewer().refreshData();
               getViewer().payToChat(type);
             }
           });
@@ -89,6 +89,7 @@ import com.yu.common.toast.ToastUtils;
                           () -> {
                             SessionHelper.startP2PSession(getActivity(),
                                 "im_" + lBuyOtherUserId);
+                            getViewer().refreshData();
                             isOpen = true;
                           });
                     } else {
@@ -99,7 +100,7 @@ import com.yu.common.toast.ToastUtils;
                             .subscribeWith(new TipRequestSubscriber<Object>() {
                               @Override protected void onSuccess(Object o) {
                                 assert getViewer() != null;
-                                getViewer().refreshData(1);
+                                getViewer().refreshData();
                                 getViewer().payToChat(type);
                               }
                             });

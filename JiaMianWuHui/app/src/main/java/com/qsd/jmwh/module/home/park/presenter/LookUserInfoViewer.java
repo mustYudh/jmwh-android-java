@@ -8,7 +8,7 @@ public interface LookUserInfoViewer extends Viewer {
 
     void setUserInfo(OtherUserInfoBean userCenterInfo);
 
-    void refreshData(int type);
+    void refreshData();
 
     void getViewCount(SubViewCount count,int type);
 

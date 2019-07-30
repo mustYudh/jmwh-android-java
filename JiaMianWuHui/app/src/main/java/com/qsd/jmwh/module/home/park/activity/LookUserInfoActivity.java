@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -41,9 +42,7 @@ public class LookUserInfoActivity extends BaseActivity
   private int userID;
   private int dGalaryVal;
   private int authType;
-  private boolean firstLoading = true;
   private boolean showContact = false;
-  private boolean canChat;
   private OtherUserInfoBean userCenterInfo;
   private final static String USER_ID = "user_id";
   private final static String TYPE = "type";
@@ -65,13 +64,12 @@ public class LookUserInfoActivity extends BaseActivity
     initListener();
     userID = getIntent().getIntExtra(USER_ID, -1);
     bindView(R.id.more_action, UserProfile.getInstance().getUserId() != userID);
+    mPresenter.getUserInfo(getIntent().getIntExtra(USER_ID, -1), UserProfile.getInstance().getLat(),
+        UserProfile.getInstance().getLng());
   }
 
   @Override protected void onResume() {
     super.onResume();
-    mPresenter.getUserInfo(getIntent().getIntExtra(USER_ID, -1), UserProfile.getInstance().getLat(),
-        UserProfile.getInstance().getLng(), firstLoading);
-    firstLoading = false;
   }
 
   private void initListener() {
@@ -128,6 +126,7 @@ public class LookUserInfoActivity extends BaseActivity
     }
     NormaFormItemVIew bust = bindView(R.id.bust);
     NormaFormItemVIew qq = bindView(R.id.qq, this);
+    Log.e("======>showContact",showContact + "");
     qq.setContent(showContact ? TextUtils.isEmpty(userData.QQ) ? "未填写" : userData.QQ : "已填写，点击查看");
     NormaFormItemVIew weChat = bindView(R.id.wechat, this);
     weChat.setContent(
@@ -223,10 +222,10 @@ public class LookUserInfoActivity extends BaseActivity
           //  SessionHelper.startP2PSession(getActivity(), "im_" + userID);
           //} else {
           if (UserProfile.getInstance().getSex() == 1) {
-            if (!canChat) {
-              toChat();
-            } else {
+            if (showContact) {
               SessionHelper.startP2PSession(getActivity(), "im_" + userID);
+            } else {
+              toChat();
             }
           } else {
             if (authType == 0) {
@@ -241,14 +240,13 @@ public class LookUserInfoActivity extends BaseActivity
                   .setNegativeButton("取消", v12 -> hint.dismiss())
                   .showPopupWindow();
             } else {
-              if (!canChat) {
+              if (!showContact) {
                 toChat();
               } else {
                 SessionHelper.startP2PSession(getActivity(), "im_" + userID);
               }
             }
           }
-
 
           //}
         }
@@ -296,13 +294,13 @@ public class LookUserInfoActivity extends BaseActivity
               hint.dismiss();
             })
             .setNegativeButton("付费查看和私聊 (" + userCenterInfo.nSubViewUserCount + "假面币)", v12 -> {
-              mPresenter.buyContactPay(userID, userCenterInfo.nSubViewUserCount,1);
+              mPresenter.buyContactPay(userID, userCenterInfo.nSubViewUserCount, 1);
               hint.dismiss();
             })
             .setBottomButton("取消", v13 -> hint.dismiss())
             .showPopupWindow();
       } else {
-        mPresenter.toChat(sNickName, userID,1);
+        mPresenter.toChat(sNickName, userID, 1);
       }
     } else {
       if (authType == 0) {
@@ -330,15 +328,13 @@ public class LookUserInfoActivity extends BaseActivity
     super.onBackPressed();
   }
 
-  @Override public void refreshData(int type) {
-    if (type == 1) {
-      showContact = true;
-    }
+  @Override public void refreshData() {
+    showContact = true;
     mPresenter.getUserInfo(getIntent().getIntExtra(USER_ID, -1), UserProfile.getInstance().getLat(),
-        UserProfile.getInstance().getLng(), firstLoading);
+        UserProfile.getInstance().getLng());
   }
 
-  @Override public void getViewCount(SubViewCount count,int type) {
+  @Override public void getViewCount(SubViewCount count, int type) {
     if (UserProfile.getInstance().getSex() == 1) {
       if (!count.bVIP) {
         SelectHintPop hint = new SelectHintPop(this);
@@ -349,7 +345,7 @@ public class LookUserInfoActivity extends BaseActivity
               hint.dismiss();
             })
             .setNegativeButton("付费查看和私聊 (" + count.dContactVal + "假面币)", v12 -> {
-              mPresenter.buyContactPay(userID, count.dContactVal,type);
+              mPresenter.buyContactPay(userID, count.dContactVal, type);
               hint.dismiss();
             })
             .setBottomButton("取消", v13 -> hint.dismiss())
@@ -361,9 +357,9 @@ public class LookUserInfoActivity extends BaseActivity
             .setMessage(free ? "您还有" + count.nSurContactViewCount + "次查看联系方式机会" : "您的免费查看次数已上线")
             .setSingleButton(free ? "确定" : "付费查看和私聊 (" + count.dContactVal + "假面币)", v -> {
               if (free) {
-                mPresenter.addBrowsingHis(userID, 0, 0, 5, () -> refreshData(1));
+                mPresenter.addBrowsingHis(userID, 0, 0, 5, () -> refreshData());
               } else {
-                mPresenter.buyContactPay(userID, count.dContactVal,type);
+                mPresenter.buyContactPay(userID, count.dContactVal, type);
               }
               hint.dismiss();
             })
@@ -375,7 +371,7 @@ public class LookUserInfoActivity extends BaseActivity
       hint.setTitle("联系" + sNickName)
           .setMessage("查看 " + sNickName + " 的全部资料和私聊")
           .setSingleButton("付费查看和私聊 (" + count.dContactVal + "假面币)", v12 -> {
-            mPresenter.buyContactPay(userID, count.dContactVal,type);
+            mPresenter.buyContactPay(userID, count.dContactVal, type);
             hint.dismiss();
           })
           .setBottomButton("取消", v13 -> hint.dismiss())
@@ -387,6 +383,7 @@ public class LookUserInfoActivity extends BaseActivity
     if (type == 1) {
       SessionHelper.startP2PSession(getActivity(), "im_" + userID);
     }
-    canChat = true;
+
+    refreshData();
   }
 }
