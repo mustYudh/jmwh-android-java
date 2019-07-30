@@ -137,6 +137,7 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
                 localHomeRadioListBottomBean.sDatingTitle = cdoListBean.sDatingTitle;
                 localHomeRadioListBottomBean.cTime = cdoListBean.dCreateTime;
                 localHomeRadioListBottomBean.cdoLove = cdoListBean.cdoLove;
+                localHomeRadioListBottomBean.cdoApply = cdoListBean.cdoApply;
                 localHomeRadioListBottomBean.itemType = 2;
                 dataList.add(localHomeRadioListBottomBean);
             }
