@@ -119,6 +119,21 @@ import com.yu.common.toast.ToastUtils;
     }
   }
 
+
+
+  public void notVipPayChat(GetResultListener listener) {
+    XHttpProxy.proxy(OtherApiServices.class)
+        .getSubViewCount()
+        .subscribeWith(new TipRequestSubscriber<SubViewCount>() {
+          @Override protected void onSuccess(SubViewCount count) {
+            if (listener != null) {
+              listener.getResult(count);
+            }
+          }
+        });
+  }
+
+
   public void addBrowsingHis(int lUserId, int lBrowseInfoId, int nPayType, int nBrowseInfType,
       ConsumptionListener listener) {
     XHttpProxy.proxy(OtherApiServices.class)
@@ -132,5 +147,10 @@ import com.yu.common.toast.ToastUtils;
 
   public interface ConsumptionListener {
     void consumption();
+  }
+
+
+  public interface GetResultListener {
+    void getResult(SubViewCount count);
   }
 }

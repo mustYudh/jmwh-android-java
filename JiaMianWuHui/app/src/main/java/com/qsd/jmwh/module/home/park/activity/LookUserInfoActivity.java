@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -47,6 +46,10 @@ public class LookUserInfoActivity extends BaseActivity
   private final static String USER_ID = "user_id";
   private final static String TYPE = "type";
   private final static String BIZ_ID = "biz_id";
+  private NormaFormItemVIew mQq;
+  private NormaFormItemVIew mWeChat;
+  private String qq;
+  private String weChat;
 
   public static Intent getIntent(Context context, int userId, int lBizId, int nType) {
     Intent starter = new Intent(context, LookUserInfoActivity.class);
@@ -125,12 +128,12 @@ public class LookUserInfoActivity extends BaseActivity
       }
     }
     NormaFormItemVIew bust = bindView(R.id.bust);
-    NormaFormItemVIew qq = bindView(R.id.qq, this);
-    Log.e("======>showContact",showContact + "");
-    qq.setContent(showContact ? TextUtils.isEmpty(userData.QQ) ? "未填写" : userData.QQ : "已填写，点击查看");
-    NormaFormItemVIew weChat = bindView(R.id.wechat, this);
-    weChat.setContent(
-        showContact ? TextUtils.isEmpty(userData.WX) ? "未填写" : userData.WX : "已填写，点击查看");
+    mQq = bindView(R.id.qq, this);
+    mWeChat = bindView(R.id.wechat, this);
+    weChat = userData.WX;
+    qq = userData.QQ;
+    mQq.setContent(showContact ? TextUtils.isEmpty(qq) ? "未填写" : qq : "已填写，点击查看");
+    mWeChat.setContent(showContact ? TextUtils.isEmpty(weChat) ? "未填写" : weChat : "已填写，点击查看");
     if (userData.nSex == 0) {
       bust.setContentText(userData.sBust);
     } else {
@@ -286,19 +289,21 @@ public class LookUserInfoActivity extends BaseActivity
   private void toChat() {
     if (UserProfile.getInstance().getSex() == 1) {
       if (!isVip) {
-        SelectHintPop hint = new SelectHintPop(this);
-        hint.setTitle("联系她")
-            .setMessage("查看 " + sNickName + " 的全部资料和私聊")
-            .setPositiveButton("成为会员 免费私聊", v1 -> {
-              buyVip();
-              hint.dismiss();
-            })
-            .setNegativeButton("付费查看和私聊 (" + userCenterInfo.nSubViewUserCount + "假面币)", v12 -> {
-              mPresenter.buyContactPay(userID, userCenterInfo.nSubViewUserCount, 1);
-              hint.dismiss();
-            })
-            .setBottomButton("取消", v13 -> hint.dismiss())
-            .showPopupWindow();
+        mPresenter.notVipPayChat(count -> {
+          SelectHintPop hint = new SelectHintPop(this);
+          hint.setTitle("联系" + sNickName)
+              .setMessage("查看 " + sNickName + " 的全部资料和私聊")
+              .setPositiveButton("成为会员 免费私聊", v1 -> {
+                buyVip();
+                hint.dismiss();
+              })
+              .setNegativeButton("付费查看和私聊 (" + count.dContactVal + "假面币)", v12 -> {
+                mPresenter.buyContactPay(userID, count.dContactVal, 1);
+                hint.dismiss();
+              })
+              .setBottomButton("取消", v13 -> hint.dismiss())
+              .showPopupWindow();
+        });
       } else {
         mPresenter.toChat(sNickName, userID, 1);
       }
@@ -330,8 +335,8 @@ public class LookUserInfoActivity extends BaseActivity
 
   @Override public void refreshData() {
     showContact = true;
-    mPresenter.getUserInfo(getIntent().getIntExtra(USER_ID, -1), UserProfile.getInstance().getLat(),
-        UserProfile.getInstance().getLng());
+    mQq.setContent(showContact ? TextUtils.isEmpty(qq) ? "未填写" : qq : "已填写，点击查看");
+    mWeChat.setContent(showContact ? TextUtils.isEmpty(weChat) ? "未填写" : weChat : "已填写，点击查看");
   }
 
   @Override public void getViewCount(SubViewCount count, int type) {
@@ -383,7 +388,6 @@ public class LookUserInfoActivity extends BaseActivity
     if (type == 1) {
       SessionHelper.startP2PSession(getActivity(), "im_" + userID);
     }
-
     refreshData();
   }
 }
