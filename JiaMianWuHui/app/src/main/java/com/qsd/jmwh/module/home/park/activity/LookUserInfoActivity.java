@@ -170,13 +170,16 @@ public class LookUserInfoActivity extends BaseActivity
     }
     bindText(R.id.sDateRange, "约会范围：" + userData.sDateRange + " · " + showTime);
     authType = userCenterInfo.nAuthType;
+    int type = userCenterInfo.cdoUserData.nAuthType;
     @DrawableRes int result;
-    if (authType == 0) {
+    if (type == 0) {
       result = R.drawable.ic_not_auth;
-    } else if (authType == 3) {
+    } else if (type == 3) {
       bindView(R.id.video_auth, true);
       result = R.drawable.ic_video_auth;
-    } else {
+    } else if (type == 4) {
+      result = R.drawable.ic_video_auth;
+    }else {
       if (userData.nSex == 1) {
         result = R.drawable.ic_reliable;
       } else {
