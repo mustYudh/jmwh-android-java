@@ -10,8 +10,11 @@ import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.dialog.net.NetLoadingDialog;
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.OtherApiServices;
+import com.qsd.jmwh.http.subscriber.NoTipRequestSubscriber;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
+import com.qsd.jmwh.module.home.user.activity.PlayVideoActivity;
 import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
+import com.qsd.jmwh.module.home.user.bean.WomenVideoBean;
 import com.qsd.jmwh.thrid.UploadImage;
 import com.qsd.jmwh.thrid.oss.PersistenceResponse;
 import com.vincent.videocompressor.VideoCompress;
@@ -129,4 +132,19 @@ import java.util.UUID;
       }
     });
   }
+
+
+  public void getAuthInf() {
+    XHttpProxy.proxy(OtherApiServices.class)
+        .getWomenVideo()
+        .subscribeWith(new NoTipRequestSubscriber<WomenVideoBean>() {
+          @Override protected void onSuccess(WomenVideoBean bean) {
+            if (bean != null) {
+              PlayVideoActivity.getIntent(getActivity(), bean.sFileUrl, bean.sFileCoverUrl);
+            }
+          }
+        });
+  }
+
+
 }

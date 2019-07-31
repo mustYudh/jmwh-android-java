@@ -5,9 +5,12 @@ import android.annotation.SuppressLint;
 import com.qsd.jmwh.dialog.SelectHintPop;
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.OtherApiServices;
+import com.qsd.jmwh.http.subscriber.NoTipRequestSubscriber;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.home.park.bean.OtherUserInfoBean;
 import com.qsd.jmwh.module.home.park.bean.SubViewCount;
+import com.qsd.jmwh.module.home.user.activity.PlayVideoActivity;
+import com.qsd.jmwh.module.home.user.bean.WomenVideoBean;
 import com.qsd.jmwh.module.im.SessionHelper;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.framework.BaseViewPresenter;
@@ -152,5 +155,19 @@ import com.yu.common.toast.ToastUtils;
 
   public interface GetResultListener {
     void getResult(SubViewCount count);
+  }
+
+
+
+  public void getAuthInf() {
+    XHttpProxy.proxy(OtherApiServices.class)
+        .getWomenVideo()
+        .subscribeWith(new NoTipRequestSubscriber<WomenVideoBean>() {
+          @Override protected void onSuccess(WomenVideoBean bean) {
+            if (bean != null) {
+              PlayVideoActivity.getIntent(getActivity(), bean.sFileUrl, bean.sFileCoverUrl);
+            }
+          }
+        });
   }
 }

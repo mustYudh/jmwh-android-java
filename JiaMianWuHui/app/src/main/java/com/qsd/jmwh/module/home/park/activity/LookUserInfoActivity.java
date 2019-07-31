@@ -82,6 +82,7 @@ public class LookUserInfoActivity extends BaseActivity
     bindView(R.id.chat, this);
     bindView(R.id.share, this);
     bindView(R.id.more_action, this);
+    bindView(R.id.video_auth,this);
   }
 
   @Override public void setUserInfo(OtherUserInfoBean userCenterInfo) {
@@ -284,6 +285,9 @@ public class LookUserInfoActivity extends BaseActivity
             new MoreActionDialog(getActivity(), userID, intent.getIntExtra(BIZ_ID, -1),
                 intent.getIntExtra(TYPE, -1));
         moreActionDialog.showPopupWindow();
+        break;
+      case R.id.video_auth:
+        mPresenter.getAuthInf();
         break;
       default:
     }
