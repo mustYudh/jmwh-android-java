@@ -169,6 +169,9 @@ public class LookUserInfoActivity extends BaseActivity
     if (time / 60 >= 24) {
       showTime = (time / 24) > 3 ? "3天前" : (time / 24) + "天";
     }
+    if (time == 0) {
+      showTime = "当前在线";
+    }
     bindText(R.id.sDateRange, "约会范围：" + userData.sDateRange + " · " + showTime);
     authType = userCenterInfo.nAuthType;
     int type = userCenterInfo.cdoUserData.nAuthType;

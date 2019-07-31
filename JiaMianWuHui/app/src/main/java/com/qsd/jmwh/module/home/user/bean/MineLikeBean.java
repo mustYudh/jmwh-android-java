@@ -41,5 +41,6 @@ public class MineLikeBean implements Serializable {
         public int nGalaryCapacity;
         public boolean blove;
         public boolean is_black;
+        public long nOffLineMin;
     }
 }

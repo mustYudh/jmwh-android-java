@@ -43,7 +43,7 @@ public class HomePersonListBean implements Serializable {
         public String sDatePro;
         public int nGalaryCapacity;
         public int nAuthType;
-        public int nOffLineMin;
+        public long nOffLineMin;
         public int nInfoSet;
         public int nOnLine;
         public boolean bHiddenRang;

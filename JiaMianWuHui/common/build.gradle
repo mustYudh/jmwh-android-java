@@ -37,3 +37,34 @@ dependencies {
     api 'jp.wasabeef:glide-transformations:2.0.1'
 
 }
+
+
+
+
+def SDK_BASENAME = "myjar";
+def SDK_VERSION = "_v1.0.0";
+def sdkDestinationPath = "build/outputs/jar/";
+def zipFile = file('build/intermediates/packaged-classes/release/classes.jar')
+task deleteBuild(type: Delete) {
+    delete sdkDestinationPath + SDK_BASENAME + SDK_VERSION + ".jar"
+}
+task makeJar(type: Jar) {
+    from zipTree(zipFile)
+    from fileTree(dir: 'src/main', includes: ['assets/**']) // 打包assets目录下的所有文件
+
+    baseName = SDK_BASENAME + SDK_VERSION
+    destinationDir = file(sdkDestinationPath)
+}
+//configuration 'proguard-rules.pro'
+makeJar.dependsOn(deleteBuild, build)
+
+
+
+task proguard(type: proguard.gradle.ProGuardTask) {
+    // 未混淆的jar路径
+    injars 'build/build/outputs/jar/myjar_v1.00.jar'
+    // 混淆后的jar输出路径
+    outjars 'build/build/outputs/jar/myjar_v1.01.jar'
+    // 混淆协议
+    configuration 'proguard-rules.pro'
+}
