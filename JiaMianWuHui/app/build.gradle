@@ -194,7 +194,6 @@ dependencies {
 
 
   implementation project(path: ':http-lib')
-  implementation project(path: ':videocompressor')
   implementation project(':crop_img')
   implementation project(':share')
   implementation project(path: ':uikit')
@@ -220,6 +219,7 @@ dependencies {
   implementation 'ch.ielse:switchbutton:1.0.1'
   implementation 'org.greenrobot:eventbus:3.1.1'
   implementation(name: 'common', ext: 'aar')
+  implementation(name: 'video', ext: 'aar')
   implementation(name: 'bottom_tab', ext: 'aar')
   implementation(name: 'alipaySdk-15.6.2-20190416165036', ext: 'aar')
   //  implementation project(path: ':location')
