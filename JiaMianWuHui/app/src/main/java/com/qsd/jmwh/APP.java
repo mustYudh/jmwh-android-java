@@ -16,6 +16,7 @@ import com.qsd.jmwh.module.im.ChatRoomSessionHelper;
 import com.qsd.jmwh.module.im.NIMInitManager;
 import com.qsd.jmwh.module.im.NimSDKOptionConfig;
 import com.qsd.jmwh.module.im.SessionHelper;
+import com.qsd.jmwh.utils.bean.APPKEY;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -50,7 +51,7 @@ public class APP extends BaseApp {
     APP.instance = this;
     super.onCreate();
     CommonInit.init(this);
-    ShareAuthSDK.init(this, DEBUG);
+    ShareAuthSDK.init(this, DEBUG,new APPKEY());
     initHttp();
     initIm();
     initTuiSong();

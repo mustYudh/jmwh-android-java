@@ -8,11 +8,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
 import android.text.TextUtils;
-
 import com.alipay.sdk.app.PayTask;
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.register.bean.PayInfo;
+import com.qsd.jmwh.utils.bean.APPKEY;
 import com.qsd.jmwh.utils.bean.PayResult;
 import com.qsd.jmwh.utils.countdown.RxCountDown;
 import com.qsd.jmwh.utils.countdown.RxCountDownAdapter;
@@ -24,7 +24,6 @@ import com.xuexiang.xhttp2.XHttpProxy;
 import com.xuexiang.xhttp2.exception.ApiException;
 import com.yu.common.toast.ToastUtils;
 import com.yu.share.WXPayUtils;
-
 import java.util.Map;
 
 /**
@@ -90,7 +89,7 @@ public class PayUtils {
             request.nonceStr = info.noncestr;
             request.timeStamp = info.timestamp;
             request.sign = info.sign;
-            WXPayUtils.getInstance(context).sendRequest(request);
+            WXPayUtils.getInstance(context,new APPKEY()).sendRequest(request);
         } else {
             needCheck = false;
             if (payCallback != null) {

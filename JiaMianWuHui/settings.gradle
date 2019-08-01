@@ -1,1 +1,1 @@
-include ':app', ':http-lib', ':share',  'crop_img',':uikit'
+include ':app', ':http-lib', 'crop_img',':uikit'
