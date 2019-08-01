@@ -1,2 +1,2 @@
-include ':app', ':http-lib', ':share', ':location', 'crop_img',
+include ':app', ':http-lib', ':share',  'crop_img',
     ':videocompressor', ':uikit'
