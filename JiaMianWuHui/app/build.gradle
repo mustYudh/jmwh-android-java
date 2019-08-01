@@ -191,13 +191,19 @@ repositories {
 dependencies {
   implementation fileTree(include: ['*.jar'], dir: 'libs')
   //    implementation fileTree(include: ['*.jar'], dir: 'src/libs')
-  implementation project(path: ':common')
+
+
   implementation project(path: ':http-lib')
   implementation project(path: ':videocompressor')
-  implementation project(path: ':bottom_tab')
   implementation project(':crop_img')
   implementation project(':share')
   implementation project(path: ':uikit')
+
+  implementation "com.android.support:recyclerview-v7:28.0.0"
+  implementation 'com.github.bumptech.glide:glide:4.2.0'
+  implementation 'com.android.support:multidex:1.0.3'
+  implementation 'jp.wasabeef:glide-transformations:2.0.1'
+
   //noinspection GradleCompatible
   implementation "com.android.support:appcompat-v7:${V7_APPCOMPAT_VERSION}"
   implementation "com.android.support.constraint:constraint-layout:${CONSTRAIT_SUPPORT_VERSION}"
@@ -213,6 +219,8 @@ dependencies {
   implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
   implementation 'ch.ielse:switchbutton:1.0.1'
   implementation 'org.greenrobot:eventbus:3.1.1'
+  implementation(name: 'common', ext: 'aar')
+  implementation(name: 'bottom_tab', ext: 'aar')
   implementation(name: 'alipaySdk-15.6.2-20190416165036', ext: 'aar')
   //  implementation project(path: ':location')
   implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-25'
