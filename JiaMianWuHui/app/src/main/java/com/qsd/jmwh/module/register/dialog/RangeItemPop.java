@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.module.register.adapter.DateRangeProjectAdapter;
 import com.qsd.jmwh.module.register.bean.ProjectBean;
+import com.yu.common.toast.ToastUtils;
 import com.yu.common.windown.BasePopupWindow;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +38,16 @@ public class RangeItemPop extends BasePopupWindow {
     private void initView() {
         bindView(R.id.cancel, v -> dismiss());
         bindView(R.id.ok, v -> {
-            if (selectedProjectListener != null) {
-                selectedProjectListener.onSelected(selectedProject);
+            if (selectedProject.size() == 0) {
+                ToastUtils.show("至少选择一个");
+            } else  if (selectedProject.size() > 4){
+                ToastUtils.show("最多只能选择4个");
+            } else {
+                if (selectedProjectListener != null) {
+                    selectedProjectListener.onSelected(selectedProject);
+                }
             }
+
         });
     }
 
@@ -59,10 +67,12 @@ public class RangeItemPop extends BasePopupWindow {
         adapter.setOnItemClickListener((adapter1, view, position) -> {
             List<ProjectBean> data = adapter1.getData();
             data.get(position).selected = !data.get(position).selected;
-            adapter1.notifyDataSetChanged();
+            adapter1.setNewData(data);
             ProjectBean project = (ProjectBean) adapter1.getData().get(position);
             if (project.selected) {
                 selectedProject.add(project.name);
+            } else if (selectedProject.contains(project.name)) {
+                selectedProject.remove(selectedProject.indexOf(project.name));
             }
         });
         return this;
