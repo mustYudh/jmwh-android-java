@@ -174,7 +174,7 @@ public class ApplyDetailsActivity extends BaseBarActivity {
             }
 
             if (localHomeRadioListBean.cdoApply != null && localHomeRadioListBean.cdoApply.size() != 0) {
-                MineRadilLoveUserGvAdapter adapter = new MineRadilLoveUserGvAdapter(localHomeRadioListBean.cdoApply, ApplyDetailsActivity.this);
+                MineRadilLoveUserGvAdapter adapter = new MineRadilLoveUserGvAdapter(localHomeRadioListBean.cdoApply, localHomeRadioListBean.bVIP,localHomeRadioListBean.nAuthType,ApplyDetailsActivity.this);
                 gv_user.setAdapter(adapter);
                 gv_user.setVisibility(View.VISIBLE);
             } else {

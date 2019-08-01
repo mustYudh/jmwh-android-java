@@ -1,6 +1,7 @@
 package com.qsd.jmwh.module.home.park.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -195,5 +196,10 @@ public class LookPhotoActivity extends BaseActivity implements LookPhotoViewer {
     showView(timeText, url, photo, nBrowseInfType == 2);
     lookPhoto();
     ToastUtils.show("支付成功");
+  }
+
+  @Override public void finish() {
+    setResult(Activity.RESULT_OK);
+    super.finish();
   }
 }

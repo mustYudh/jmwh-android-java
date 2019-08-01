@@ -3,9 +3,9 @@ package com.qsd.jmwh.module.register.presenter;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
+import com.qsd.jmwh.module.home.user.adapter.MineRadilLoveUserGvAdapter;
 import com.qsd.jmwh.module.register.EditRegisterCodeActivity;
 import com.qsd.jmwh.module.register.bean.PayInfo;
 import com.qsd.jmwh.module.register.bean.UserAuthCodeBean;
@@ -47,6 +47,7 @@ public class ToByVipPresenter extends BaseViewPresenter<ToByVipViewer> {
                             .getPayResult(new PayUtils.PayCallBack() {
                                 @Override
                                 public void onPaySuccess(int type) {
+                                  MineRadilLoveUserGvAdapter.vip = true;
                                     ToastUtils.show("支付成功");
                                     XHttpProxy.proxy(ApiServices.class)
                                             .getCod(userId, token)

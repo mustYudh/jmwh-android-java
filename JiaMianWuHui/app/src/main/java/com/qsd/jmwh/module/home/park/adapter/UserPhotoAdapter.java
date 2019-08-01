@@ -21,6 +21,7 @@ public class UserPhotoAdapter extends BasicAdapter<OtherUserInfoBean.CdoFileList
   private boolean isVip;
   private int userId;
   private int authType;
+  public final static int LOOK_PHOTO_RESULT = 123;
 
   public UserPhotoAdapter(ArrayList<OtherUserInfoBean.CdoFileListDataBean> list, boolean isOpenAll,
       boolean isVip, int userId, int authType) {
@@ -88,9 +89,9 @@ public class UserPhotoAdapter extends BasicAdapter<OtherUserInfoBean.CdoFileList
               userPic.setOnClickListener(v -> {
                 if (finalCanClick) {
                   LauncherHelper.from(context)
-                      .startActivity(
+                      .startActivityForResult(
                           LookPhotoActivity.getIntent(context, data, isVip, userId, false,
-                              authType));
+                              authType),LOOK_PHOTO_RESULT);
                 } else {
                   ToastUtils.show("照片已焚毁");
                 }
@@ -99,8 +100,8 @@ public class UserPhotoAdapter extends BasicAdapter<OtherUserInfoBean.CdoFileList
               ImageLoader.loadCenterCrop(userPic.getContext(), data.sFileCoverUrl, userPic);
               videoTag.setVisibility(View.VISIBLE);
               userPic.setOnClickListener(v -> LauncherHelper.from(context)
-                  .startActivity(
-                      PlayVideoActivity.getIntent(context, data.sFileUrl, data.sFileCoverUrl)));
+                  .startActivityForResult(
+                      PlayVideoActivity.getIntent(context, data.sFileUrl, data.sFileCoverUrl),LOOK_PHOTO_RESULT));
             }
           } else {
             ImageLoader.blurTransformation(userPic.getContext(), data.sFileUrl, userPic);
@@ -109,8 +110,8 @@ public class UserPhotoAdapter extends BasicAdapter<OtherUserInfoBean.CdoFileList
           photoBg.setVisibility(View.GONE);
           ImageLoader.loadCenterCrop(userPic.getContext(), data.sFileUrl, userPic);
           userPic.setOnClickListener(v -> LauncherHelper.from(context)
-              .startActivity(
-                  LookPhotoActivity.getIntent(context, data, isVip, userId, true, authType)));
+              .startActivityForResult(
+                  LookPhotoActivity.getIntent(context, data, isVip, userId, true, authType),LOOK_PHOTO_RESULT));
         }
       }
     };

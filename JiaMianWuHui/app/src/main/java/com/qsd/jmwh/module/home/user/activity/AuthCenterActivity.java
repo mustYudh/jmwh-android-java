@@ -12,6 +12,7 @@ import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
 import cn.finalteam.rxgalleryfinal.rxbus.event.ImageMultipleResultEvent;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
+import com.qsd.jmwh.module.home.user.adapter.MineRadilLoveUserGvAdapter;
 import com.qsd.jmwh.module.home.user.bean.WomenVideoBean;
 import com.qsd.jmwh.module.home.user.presenter.AuthCenterPresenter;
 import com.qsd.jmwh.module.home.user.presenter.AuthCenterViewer;
@@ -43,6 +44,7 @@ public class AuthCenterActivity extends BaseBarActivity implements AuthCenterVie
       button.setOnClickListener(v -> getLaunchHelper().startActivity(
           PlayVideoActivity.getIntent(getActivity(), vedioBean.sFileUrl, vedioBean.sFileCoverUrl)));
     }
+    MineRadilLoveUserGvAdapter.nAuthType = vedioBean.nCheckStatus;
 
     //`nCheckStatus` int(10) NOT NULL DEFAULT '0' COMMENT '0：未审核，1、已审核 2、审核未通过，3、审核中',
     TextView textView = bindView(R.id.uploading);

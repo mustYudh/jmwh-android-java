@@ -1,5 +1,6 @@
 package com.qsd.jmwh.module.home.park.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,6 +51,7 @@ public class LookUserInfoActivity extends BaseActivity
   private NormaFormItemVIew mWeChat;
   private String qq;
   private String weChat;
+  private boolean showHint;
 
   public static Intent getIntent(Context context, int userId, int lBizId, int nType) {
     Intent starter = new Intent(context, LookUserInfoActivity.class);
@@ -82,7 +84,7 @@ public class LookUserInfoActivity extends BaseActivity
     bindView(R.id.chat, this);
     bindView(R.id.share, this);
     bindView(R.id.more_action, this);
-    bindView(R.id.video_auth,this);
+    bindView(R.id.video_auth, this);
   }
 
   @Override public void setUserInfo(OtherUserInfoBean userCenterInfo) {
@@ -101,7 +103,8 @@ public class LookUserInfoActivity extends BaseActivity
     OtherUserInfoBean.CdoUserDataBean userData = userCenterInfo.cdoUserData;
     isVip = userCenterInfo.bVIP;
     int nSubViewUserCount = userCenterInfo.nSubViewUserCount;
-    if (UserProfile.getInstance().getSex() == 1 && nSubViewUserCount <= 5) {
+    if (UserProfile.getInstance().getSex() == 1 && nSubViewUserCount <= 5 && !showHint) {
+      showHint = true;
       SelectHintPop hint = new SelectHintPop(this);
       hint.setOutsideTouchable(false);
       hint.setFocusable(true);
@@ -183,7 +186,7 @@ public class LookUserInfoActivity extends BaseActivity
       result = R.drawable.ic_video_auth;
     } else if (type == 4) {
       result = R.drawable.ic_video_auth;
-    }else {
+    } else {
       if (userData.nSex == 1) {
         result = R.drawable.ic_reliable;
       } else {
@@ -399,5 +402,13 @@ public class LookUserInfoActivity extends BaseActivity
       SessionHelper.startP2PSession(getActivity(), "im_" + userID);
     }
     refreshData();
+  }
+
+  @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if (resultCode == Activity.RESULT_OK && requestCode == UserPhotoAdapter.LOOK_PHOTO_RESULT) {
+      mPresenter.getUserInfo(getIntent().getIntExtra(USER_ID, -1),
+          UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng());
+    }
   }
 }
