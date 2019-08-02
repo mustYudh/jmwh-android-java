@@ -9,9 +9,9 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseActivity;
 import com.qsd.jmwh.data.UserProfile;
@@ -60,6 +60,7 @@ public class LookPhotoActivity extends BaseActivity implements LookPhotoViewer {
   }
 
   @SuppressLint("ClickableViewAccessibility") @Override protected void loadData() {
+    getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
     data = (OtherUserInfoBean.CdoFileListDataBean) getIntent().getSerializableExtra(DATA);
     mIsVip = getIntent().getBooleanExtra(IS_VIP, false);
     url = data.sFileUrl;

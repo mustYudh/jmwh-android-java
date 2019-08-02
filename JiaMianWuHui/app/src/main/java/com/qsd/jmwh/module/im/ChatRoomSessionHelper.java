@@ -3,7 +3,6 @@ package com.qsd.jmwh.module.im;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.api.model.chatroom.ChatRoomSessionCustomization;
 import com.netease.nim.uikit.business.session.actions.BaseAction;
-import com.qsd.jmwh.module.im.action.GuessAction;
 import java.util.ArrayList;
 
 /**
@@ -25,7 +24,7 @@ public class ChatRoomSessionHelper {
 
     private static ChatRoomSessionCustomization getChatRoomSessionCustomization() {
         ArrayList<BaseAction> actions = new ArrayList<>();
-        actions.add(new GuessAction());
+        //actions.add(new GuessAction());
         ChatRoomSessionCustomization customization = new ChatRoomSessionCustomization();
         customization.actions = actions;
         return customization;

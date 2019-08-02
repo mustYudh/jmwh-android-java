@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import com.netease.nim.uikit.api.NimUIKit;
@@ -40,9 +39,6 @@ public class EditRegisterCodeActivity extends BaseBarActivity
     setContentView(R.layout.edit_register_code_activity_layout);
   }
 
-
-
-
   public static int GET_AUTH_CODE_REQUEST = 124;
   public static String GET_AUTH_CODE_RESULT = "get_auth_code_result";
 
@@ -65,12 +61,10 @@ public class EditRegisterCodeActivity extends BaseBarActivity
   @Override public void onClick(View v) {
     switch (v.getId()) {
       case R.id.to_register:
-        getLaunchHelper().startActivityForResult(
-            EditUserDataActivity.class, GET_AUTH_CODE_REQUEST);
+        getLaunchHelper().startActivity(EditUserDataActivity.class);
         break;
       case R.id.to_by:
-        getLaunchHelper().startActivityForResult(
-            ToByVipActivity.class, GET_AUTH_CODE_REQUEST);
+        getLaunchHelper().startActivityForResult(ToByVipActivity.class, GET_AUTH_CODE_REQUEST);
         break;
       case R.id.login:
         EditText editText = bindView(R.id.code);
@@ -94,20 +88,25 @@ public class EditRegisterCodeActivity extends BaseBarActivity
 
   @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-    if (resultCode == Activity.RESULT_OK && data != null) {
-      String result = data.getStringExtra(GET_AUTH_CODE_RESULT);
-      Log.e("=========>获取成功", result);
-      EditText editText = bindView(R.id.code);
-      if (!TextUtils.isEmpty(result)) {
-        editText.setText(result);
-        editText.setSelection(result.length());
+    if (resultCode == Activity.RESULT_OK) {
+      if (requestCode == GET_AUTH_CODE_REQUEST) {
+        getLaunchHelper().startActivity(EditUserDataActivity.getIntent(getActivity(), true));
+        finish();
+      } else if (data != null) {
+        String result = data.getStringExtra(GET_AUTH_CODE_RESULT);
+        EditText editText = bindView(R.id.code);
+        if (!TextUtils.isEmpty(result)) {
+          editText.setText(result);
+          editText.setSelection(result.length());
+        }
       }
     }
   }
 
   @Override public void registerSuccess() {
     NIMClient.getService(AuthService.class)
-        .login(new com.netease.nimlib.sdk.auth.LoginInfo(UserProfile.getInstance().getSimUserId(), UserProfile.getInstance().getSimToken()))
+        .login(new com.netease.nimlib.sdk.auth.LoginInfo(UserProfile.getInstance().getSimUserId(),
+            UserProfile.getInstance().getSimToken()))
         .setCallback(new RequestCallback<LoginInfo>() {
           @Override public void onSuccess(com.netease.nimlib.sdk.auth.LoginInfo info) {
             if (sex == 0) {
@@ -145,7 +144,6 @@ public class EditRegisterCodeActivity extends BaseBarActivity
 
   @Override protected void onResume() {
     super.onResume();
-    mPresenter.getUserCode(userId,userToken);
+    mPresenter.getUserCode(userId, userToken);
   }
-
 }

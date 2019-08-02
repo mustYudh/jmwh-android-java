@@ -34,7 +34,6 @@ import com.netease.nimlib.sdk.msg.model.RecentContact;
 import com.netease.nimlib.sdk.robot.model.RobotAttachment;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.data.UserProfile;
-import com.qsd.jmwh.module.im.action.GuessAction;
 import com.qsd.jmwh.module.im.activity.MessageInfoActivity;
 import com.qsd.jmwh.module.im.extension.CustomAttachParser;
 import com.qsd.jmwh.module.im.extension.SnapChatAttachment;
@@ -154,7 +153,7 @@ public class SessionHelper {
             //            p2pCustomization.backgroundUri = "android.resource://com.netease.nim.demo/drawable/bk"
             // 定制加号点开后可以包含的操作， 默认已经有图片，视频等消息了
             ArrayList<BaseAction> actions = new ArrayList<>();
-            actions.add(new GuessAction());
+            //actions.add(new GuessAction());
             p2pCustomization.actions = actions;
             p2pCustomization.withSticker = true;
             // 定制ActionBar右边的按钮，可以加多个
@@ -217,7 +216,7 @@ public class SessionHelper {
             };
             // 定制加号点开后可以包含的操作， 默认已经有图片，视频等消息了
             ArrayList<BaseAction> actions = new ArrayList<>();
-            actions.add(new GuessAction());
+            //actions.add(new GuessAction());
             myP2pCustomization.actions = actions;
             myP2pCustomization.withSticker = true;
             // 定制ActionBar右边的按钮，可以加多个

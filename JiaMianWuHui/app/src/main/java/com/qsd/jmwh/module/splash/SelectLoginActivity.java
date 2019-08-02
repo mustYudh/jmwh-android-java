@@ -66,7 +66,7 @@ public class SelectLoginActivity extends BaseActivity
       rxPermissions.request(permiss).subscribe(granted -> {
       });
     }
-    if (UserProfile.getInstance().isAppLogin()) {
+    if (UserProfile.getInstance().isAppLogin() && UserProfile.getInstance().getOpenHome()) {
       getLaunchHelper().startActivityForResult(HomeActivity.class, REQUEST_CODE);
       finish();
     }

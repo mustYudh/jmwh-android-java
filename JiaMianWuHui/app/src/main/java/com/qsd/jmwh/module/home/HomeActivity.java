@@ -80,6 +80,7 @@ public class HomeActivity extends BaseActivity implements HomeViewer, TencentLoc
 
   @Override protected void loadData() {
     setTitle("首页");
+    UserProfile.getInstance().setOpenHome(true);
     TencentLocationRequest request = TencentLocationRequest.create()
         .setInterval(1000 * 5 * 60)
         .setRequestLevel(TencentLocationRequest.REQUEST_LEVEL_ADMIN_AREA);

@@ -1,6 +1,7 @@
 package com.qsd.jmwh.module.register;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -42,7 +43,7 @@ public class EditUserDataActivity extends BaseBarActivity
     private String userToken = UserProfile.getInstance().getAppToken();
     private int userSex = UserProfile.getInstance().getSex();
 
-
+    public final static String IS_VIP = "is_vip";
     public static final int DATE_RANGE_REQUEST_CODE = 0X123;
     public static final int PROJECT_REQUEST_CODE = 0X124;
     private List<String> ranges = new ArrayList<>();
@@ -65,6 +66,12 @@ public class EditUserDataActivity extends BaseBarActivity
     private String selectPhotoUrl;
     private boolean mIsGirl;
 
+
+    public static Intent getIntent(Context context,boolean isVip) {
+        Intent intent = new Intent(context,EditUserDataActivity.class);
+        intent.putExtra(IS_VIP,isVip);
+        return intent;
+    }
 
 
     @Override
@@ -281,7 +288,7 @@ public class EditUserDataActivity extends BaseBarActivity
 
     @Override
     public void commitUserInfo() {
-        mPresenter.getCode(userId, userToken, userSex);
+        mPresenter.getCode(userId, userToken, userSex,getIntent().getBooleanExtra(IS_VIP,false));
     }
 
 

@@ -73,8 +73,8 @@ import org.greenrobot.eventbus.EventBus;
         });
   }
 
-  public void getCode(int userId, String token, int sex) {
-    if (sex == 0) {
+  public void getCode(int userId, String token, int sex,boolean isVip) {
+    if (sex == 0 || isVip) {
       NetLoadingDialog.showLoading(getActivity(), false);
       NIMClient.getService(AuthService.class)
           .login(new com.netease.nimlib.sdk.auth.LoginInfo(UserProfile.getInstance().getSimUserId(), UserProfile.getInstance().getSimToken()))

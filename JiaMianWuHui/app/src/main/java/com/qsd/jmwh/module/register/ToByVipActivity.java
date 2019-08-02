@@ -1,5 +1,7 @@
 package com.qsd.jmwh.module.register;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,18 +32,24 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
   private RecyclerView payType;
   private PayTypeAdapter payTypeAdapter;
   private VipInfoBean.CdoListBean cdoListBean;
-  private final static String IS_REGISTER = "is_register";
   private TextView payCount;
   private double currentMoney;
   private PayTypeBean currentType;
+  private boolean isRegister;
+  private final static String IS_REGISTER = "is_register";
 
   private int userId = UserProfile.getInstance().getUserId();
   private String userToken = UserProfile.getInstance().getAppToken();
-  private int userSex = UserProfile.getInstance().getSex();
 
   @Override protected void setView(@Nullable Bundle savedInstanceState) {
     setContentView(R.layout.to_by_vip_activity);
     initView();
+  }
+
+  public Intent getIntent(Context context, boolean isRegister) {
+    Intent intent = new Intent(context, ToByVipActivity.class);
+    intent.putExtra(IS_REGISTER, isRegister);
+    return intent;
   }
 
   private void initView() {

@@ -29,6 +29,7 @@ public class UserProfile implements Serializable {
 
   private static final String SIM_USERID = "sim_userid";
   private static final String SIM_TOKEN = "sim_token";
+  private static final String OPEN_HOME = "open_home";
 
   private SharedPreferencesHelper spHelper;
 
@@ -166,6 +167,15 @@ public class UserProfile implements Serializable {
 
   public float getLng() {
     return spHelper.getFloat(LNG, 0);
+  }
+
+
+  public void setOpenHome(boolean lng) {
+    spHelper.putBoolean(OPEN_HOME, lng);
+  }
+
+  public boolean getOpenHome() {
+    return spHelper.getBoolean(OPEN_HOME, false);
   }
 
   /**
