@@ -2,6 +2,7 @@ package com.qsd.jmwh.module.splash.presenter;
 
 import android.annotation.SuppressLint;
 
+import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.params.PostParams;
 import com.qsd.jmwh.http.subscriber.NoTipRequestSubscriber;
@@ -32,6 +33,7 @@ public class SplashPresenter extends BaseViewPresenter<SplashViewer> {
                     @Override
                     protected void onSuccess(ApiResult<LoginInfo> result) {
                         int code = result.getCode();
+                        UserProfile.getInstance().appLogin(result.getData());
                         switch (code) {
                             case 0:
                                 assert getViewer() != null;

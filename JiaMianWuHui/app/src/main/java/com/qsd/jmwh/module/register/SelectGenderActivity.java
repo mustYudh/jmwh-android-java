@@ -3,6 +3,7 @@ package com.qsd.jmwh.module.register;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import com.qsd.jmwh.R;
@@ -51,9 +52,11 @@ public class SelectGenderActivity extends BaseBarActivity implements SelectGende
                 currentType = 0;
                 break;
             case R.id.next:
+                Log.e("======>","选择新北");
                 SelectHintPop selectGenderHintPop = new SelectHintPop(this);
                 selectGenderHintPop.setMessage("注册之后不能修改性别，并且，你不能与相同性别的用户交流。")
                         .setPositiveButton("确定", v1 -> {
+                            Log.e("======>","选择新北1");
                             UserProfile.getInstance().setSex(currentType);
                             UserProfile.getInstance().setHomeSexType(currentType);
                                     mPresenter.selectGender(currentType, UserProfile.getInstance().getUserId());

@@ -43,12 +43,12 @@ import com.yu.common.toast.ToastUtils;
           @Override protected void onSuccess(Object info) {
             ToastUtils.show("解锁成功");
             assert getViewer() != null;
-            getViewer().refreshData();
+            getViewer().refreshInfo();
           }
         });
   }
 
-  public void buyContactPay(int lBuyOtherUserId, int count,int type) {
+  public void buyContactPay(int lBuyOtherUserId, int count, int type) {
     SelectHintPop hint = new SelectHintPop(getActivity());
     hint.setTitle("温馨提示").setMessage("确认支付").setPositiveButton("确定", v1 -> {
       XHttpProxy.proxy(OtherApiServices.class)
@@ -56,7 +56,7 @@ import com.yu.common.toast.ToastUtils;
           .subscribeWith(new TipRequestSubscriber<Object>() {
             @Override protected void onSuccess(Object o) {
               assert getViewer() != null;
-              getViewer().refreshData();
+              getViewer().refreshConcat();
               getViewer().payToChat(type);
             }
           });
@@ -70,12 +70,12 @@ import com.yu.common.toast.ToastUtils;
         .subscribeWith(new TipRequestSubscriber<SubViewCount>() {
           @Override protected void onSuccess(SubViewCount count) {
             assert getViewer() != null;
-            getViewer().getViewCount(count,type);
+            getViewer().getViewCount(count, type);
           }
         });
   }
 
-  public void toChat(String sNickName, int lBuyOtherUserId,int type) {
+  public void toChat(String sNickName, int lBuyOtherUserId, int type) {
     if (!isOpen) {
       XHttpProxy.proxy(OtherApiServices.class)
           .getSubViewCount()
@@ -88,13 +88,11 @@ import com.yu.common.toast.ToastUtils;
                       free ? "您还有" + count.nSurContactViewCount + "次查看联系方式机会" : "您的免费查看次数已上线")
                   .setSingleButton(free ? "确定" : "付费查看和私聊 (" + count.dContactVal + "假面币)", v -> {
                     if (free) {
-                      addBrowsingHis(lBuyOtherUserId, 0, 0, 5,
-                          () -> {
-                            SessionHelper.startP2PSession(getActivity(),
-                                "im_" + lBuyOtherUserId);
-                            getViewer().refreshData();
-                            isOpen = true;
-                          });
+                      addBrowsingHis(lBuyOtherUserId, 0, 0, 5, () -> {
+                        SessionHelper.startP2PSession(getActivity(), "im_" + lBuyOtherUserId);
+                        getViewer().refreshConcat();
+                        isOpen = true;
+                      });
                     } else {
                       SelectHintPop payChat = new SelectHintPop(getActivity());
                       payChat.setTitle("温馨提示").setMessage("确认支付").setPositiveButton("确定", v1 -> {
@@ -103,7 +101,7 @@ import com.yu.common.toast.ToastUtils;
                             .subscribeWith(new TipRequestSubscriber<Object>() {
                               @Override protected void onSuccess(Object o) {
                                 assert getViewer() != null;
-                                getViewer().refreshData();
+                                getViewer().refreshConcat();
                                 getViewer().payToChat(type);
                               }
                             });
@@ -117,12 +115,9 @@ import com.yu.common.toast.ToastUtils;
             }
           });
     } else {
-      SessionHelper.startP2PSession(getActivity(),
-          "im_" + lBuyOtherUserId);
+      SessionHelper.startP2PSession(getActivity(), "im_" + lBuyOtherUserId);
     }
   }
-
-
 
   public void notVipPayChat(GetResultListener listener) {
     XHttpProxy.proxy(OtherApiServices.class)
@@ -135,7 +130,6 @@ import com.yu.common.toast.ToastUtils;
           }
         });
   }
-
 
   public void addBrowsingHis(int lUserId, int lBrowseInfoId, int nPayType, int nBrowseInfType,
       ConsumptionListener listener) {
@@ -152,12 +146,9 @@ import com.yu.common.toast.ToastUtils;
     void consumption();
   }
 
-
   public interface GetResultListener {
     void getResult(SubViewCount count);
   }
-
-
 
   public void getAuthInf() {
     XHttpProxy.proxy(OtherApiServices.class)

@@ -8,10 +8,11 @@ public interface LookUserInfoViewer extends Viewer {
 
     void setUserInfo(OtherUserInfoBean userCenterInfo);
 
-    void refreshData();
+    void refreshConcat();
 
     void getViewCount(SubViewCount count,int type);
 
     void payToChat(int type);
 
+    void refreshInfo();
 }

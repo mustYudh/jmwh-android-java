@@ -346,7 +346,7 @@ public class LookUserInfoActivity extends BaseActivity
     super.onBackPressed();
   }
 
-  @Override public void refreshData() {
+  @Override public void refreshConcat() {
     showContact = true;
     mQq.setContent(showContact ? TextUtils.isEmpty(qq) ? "未填写" : qq : "已填写，点击查看");
     mWeChat.setContent(showContact ? TextUtils.isEmpty(weChat) ? "未填写" : weChat : "已填写，点击查看");
@@ -375,7 +375,7 @@ public class LookUserInfoActivity extends BaseActivity
             .setMessage(free ? "您还有" + count.nSurContactViewCount + "次查看联系方式机会" : "您的免费查看次数已上线")
             .setSingleButton(free ? "确定" : "付费查看和私聊 (" + count.dContactVal + "假面币)", v -> {
               if (free) {
-                mPresenter.addBrowsingHis(userID, 0, 0, 5, () -> refreshData());
+                mPresenter.addBrowsingHis(userID, 0, 0, 5, () -> refreshConcat());
               } else {
                 mPresenter.buyContactPay(userID, count.dContactVal, type);
               }
@@ -401,7 +401,12 @@ public class LookUserInfoActivity extends BaseActivity
     if (type == 1) {
       SessionHelper.startP2PSession(getActivity(), "im_" + userID);
     }
-    refreshData();
+    refreshConcat();
+  }
+
+  @Override public void refreshInfo() {
+    mPresenter.getUserInfo(getIntent().getIntExtra(USER_ID, -1),
+        UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng());
   }
 
   @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {

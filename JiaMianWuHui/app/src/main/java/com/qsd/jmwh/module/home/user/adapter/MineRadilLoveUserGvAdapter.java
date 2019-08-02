@@ -13,6 +13,7 @@ import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.dialog.SelectHintPop;
 import com.qsd.jmwh.http.OtherApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
+import com.qsd.jmwh.module.home.park.activity.LookUserInfoActivity;
 import com.qsd.jmwh.module.home.park.bean.SubViewCount;
 import com.qsd.jmwh.module.home.park.presenter.LookUserInfoPresenter;
 import com.qsd.jmwh.module.home.user.activity.AuthCenterActivity;
@@ -78,7 +79,8 @@ import java.util.List;
           SelectHintPop hint = new SelectHintPop(context);
           hint.setTitle("提示");
           hint.setMessage("开通会员才能查看联系方式哦");
-          hint.setSingleButton("去开通", v -> LauncherHelper.from(context).startActivity(ToByVipActivity.class));
+          hint.setSingleButton("去开通",
+              v -> LauncherHelper.from(context).startActivity(ToByVipActivity.class));
           hint.setBottomButton("取消", v13 -> hint.dismiss());
           hint.showPopupWindow();
         }
@@ -87,13 +89,19 @@ import java.util.List;
           SelectHintPop hint = new SelectHintPop(context);
           hint.setTitle("提示");
           hint.setMessage("女士认证后才能查看联系方式哦");
-          hint.setSingleButton("去认证", v -> LauncherHelper.from(context).startActivity(AuthCenterActivity.class));
+          hint.setSingleButton("去认证",
+              v -> LauncherHelper.from(context).startActivity(AuthCenterActivity.class));
           hint.setBottomButton("取消", v13 -> hint.dismiss());
           hint.showPopupWindow();
         } else if (nAuthType == 3) {
           showInfoDialog(list.get(i).lUserId);
         }
       }
+    });
+    holder.iv_headimg.setOnClickListener(v -> {
+      LauncherHelper.from(context)
+          .startActivity(
+              LookUserInfoActivity.getIntent(context, list.get(i).lUserId, list.get(i).lUserId, 2));
     });
     holder.tv_get.setText(UserProfile.getInstance().getSex() == 1 ? "联系她" : "联系他");
 
