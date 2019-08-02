@@ -96,7 +96,7 @@ public class UserFragment extends BaseFragment
     bindView(R.id.nDestroyImgCount, this);
     bindView(R.id.setting_money_img, this);
     bindView(R.id.auth, this);
-    bindView(R.id.video_auth,this);
+    bindView(R.id.video_auth, this);
   }
 
   @Override public void onClick(View v) {
@@ -267,9 +267,8 @@ public class UserFragment extends BaseFragment
     boolean show = userInfo.cdoimgList.size() > 0;
     bindView(R.id.setting_money_img, show && UserProfile.getInstance().getSex() == 0);
     bindView(R.id.upload_img_root, !show);
+    GridView recyclerView = bindView(R.id.user_center_photo, show);
     if (show) {
-      GridView recyclerView = bindView(R.id.user_center_photo);
-      recyclerView.setVisibility(View.VISIBLE);
       UserCenterInfo.CdoimgListBean userCenterMyInfo = new UserCenterInfo.CdoimgListBean();
       userCenterMyInfo.last = true;
       userInfo.cdoimgList.add(userCenterMyInfo);

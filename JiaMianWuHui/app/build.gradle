@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 enum ApiEnvEnum {
-  DEV(0, "假面舞会测试"), ONLINE(1, "假面舞会"), PRE_RELEASE(2, "假面舞会预发")
+  DEV(0, "假面舞会"), ONLINE(1, "假面舞会"), PRE_RELEASE(2, "假面舞会")
 
   private final int value
   private final String name
