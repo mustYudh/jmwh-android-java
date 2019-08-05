@@ -30,8 +30,14 @@ public class SystemMessageFragment extends BaseFragment implements SystemMessage
   @Override protected void loadData() {
     getData();
     SmartRefreshLayout refreshLayout = bindView(R.id.refresh);
-    refreshLayout.setOnRefreshListener(refreshLayout1 -> getData());
-    refreshLayout.setEnableLoadMore(true);
+    refreshLayout.setOnRefreshListener(refreshLayout1 ->
+        {
+          getData();
+          refreshLayout1.finishRefresh();
+        }
+
+    );
+    refreshLayout.setEnableLoadMore(false);
   }
 
   private void getData() {

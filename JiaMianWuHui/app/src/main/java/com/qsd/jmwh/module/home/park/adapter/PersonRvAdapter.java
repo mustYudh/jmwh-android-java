@@ -134,10 +134,10 @@ public class PersonRvAdapter extends BaseQuickAdapter<HomePersonListBean.CdoList
     private String getTime(long time) {
         String showTime = "";
         if (time / 60 < 24) {
-            showTime = (time / 60) + "小时";
+            showTime = (time / 60) + "小时前";
         }
         if (time / 60 >= 24) {
-            showTime = (time / 24) > 3 ? "3天前" : (time / 24) + "天";
+            showTime = (time / 24) > 3 ? "3天前" : (time / 24) + "天前";
         }
         return showTime;
     }

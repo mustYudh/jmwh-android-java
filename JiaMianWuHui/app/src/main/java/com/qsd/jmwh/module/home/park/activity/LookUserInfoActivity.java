@@ -168,15 +168,17 @@ public class LookUserInfoActivity extends BaseActivity
                 : (userData.distance_um + "m")));
     String showTime = "";
     long time = userData.nOffLineMin;
-    if (time / 60 < 24) {
-      showTime = (time / 60) + "小时";
-    }
-    if (time / 60 >= 24) {
-      showTime = (time / 24) > 3 ? "3天前" : (time / 24) + "天";
-    }
-    if (time == 0) {
+    if (userData.nOnLine == 0) {
       showTime = "当前在线";
+    } else {
+      if (time / 60 < 24) {
+        showTime = (time / 60) + "小时前";
+      }
+      if (time / 60 >= 24) {
+        showTime = (time / 24) > 3 ? "3天前" : (time / 24) + "天";
+      }
     }
+
     bindText(R.id.sDateRange, "约会范围：" + userData.sDateRange + " · " + showTime);
     authType = userCenterInfo.nAuthType;
     int type = userCenterInfo.cdoUserData.nAuthType;

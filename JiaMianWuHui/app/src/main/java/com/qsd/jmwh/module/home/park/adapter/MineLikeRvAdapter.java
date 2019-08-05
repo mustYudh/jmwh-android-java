@@ -45,7 +45,8 @@ public class MineLikeRvAdapter extends BaseQuickAdapter<MineLikeBean.CdoListBean
         }
 
         DelayClickTextView tv_auth_type = helper.getView(R.id.tv_auth_type);
-        if (item.nAuthType == 1) {
+
+        if (item.nAuthType == 3) {
             //已认证
             helper.setText(R.id.tv_auth_type, "真实");
             tv_auth_type.setBackground(context.getResources().getDrawable(R.drawable.shape_home_person));
@@ -95,7 +96,7 @@ public class MineLikeRvAdapter extends BaseQuickAdapter<MineLikeBean.CdoListBean
     private String getTime(long time) {
         String showTime = "";
         if (time / 60 < 24) {
-            showTime = (time / 60) + "小时";
+            showTime = (time / 60) + "小时前";
         }
         if (time / 60 >= 24) {
             showTime = (time / 24) > 3 ? "3天前" : (time / 24) + "天";
