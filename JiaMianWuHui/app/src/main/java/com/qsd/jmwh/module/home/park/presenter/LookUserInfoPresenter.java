@@ -1,11 +1,9 @@
 package com.qsd.jmwh.module.home.park.presenter;
 
 import android.annotation.SuppressLint;
-
 import com.qsd.jmwh.dialog.SelectHintPop;
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.OtherApiServices;
-import com.qsd.jmwh.http.subscriber.NoTipRequestSubscriber;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.home.park.bean.OtherUserInfoBean;
 import com.qsd.jmwh.module.home.park.bean.SubViewCount;
@@ -13,7 +11,9 @@ import com.qsd.jmwh.module.home.user.activity.PlayVideoActivity;
 import com.qsd.jmwh.module.home.user.bean.WomenVideoBean;
 import com.qsd.jmwh.module.im.SessionHelper;
 import com.xuexiang.xhttp2.XHttpProxy;
+import com.xuexiang.xhttp2.exception.ApiException;
 import com.yu.common.framework.BaseViewPresenter;
+import com.yu.common.launche.LauncherHelper;
 import com.yu.common.toast.ToastUtils;
 
 @SuppressLint("CheckResult") public class LookUserInfoPresenter
@@ -32,6 +32,11 @@ import com.yu.common.toast.ToastUtils;
           @Override protected void onSuccess(OtherUserInfoBean userCenterInfo) {
             assert getViewer() != null;
             getViewer().setUserInfo(userCenterInfo);
+          }
+
+          @Override protected void onError(ApiException apiException) {
+            super.onError(apiException);
+            getActivity().finish();
           }
         });
   }
@@ -150,13 +155,14 @@ import com.yu.common.toast.ToastUtils;
     void getResult(SubViewCount count);
   }
 
-  public void getAuthInf() {
+  public void getAuthInf(String userId) {
     XHttpProxy.proxy(OtherApiServices.class)
-        .getWomenVideo()
-        .subscribeWith(new NoTipRequestSubscriber<WomenVideoBean>() {
+        .getWomenVideo(userId)
+        .subscribeWith(new TipRequestSubscriber<WomenVideoBean>() {
           @Override protected void onSuccess(WomenVideoBean bean) {
             if (bean != null) {
-              PlayVideoActivity.getIntent(getActivity(), bean.sFileUrl, bean.sFileCoverUrl);
+              LauncherHelper.from(getActivity()).startActivity(
+                  PlayVideoActivity.getIntent(getActivity(), bean.sFileUrl, bean.sFileCoverUrl));
             }
           }
         });

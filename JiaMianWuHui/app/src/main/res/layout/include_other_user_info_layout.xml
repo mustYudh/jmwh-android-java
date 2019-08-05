@@ -73,7 +73,7 @@
                     android:textSize="15sp"
                     android:textColor="@color/app_main_color"
                     android:gravity="center"
-                    android:text="解锁相册5元，会员免费"
+                    android:text="解锁相册5假面币，会员免费"
                     android:background="@drawable/white_btn_bg"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="41dp"

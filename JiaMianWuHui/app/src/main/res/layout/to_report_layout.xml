@@ -23,7 +23,7 @@
       android:layout_marginLeft="15dp"
       android:layout_marginRight="15dp"
       android:layout_marginTop="10dp"
-      android:text="如果您在最近3天层在假面舞会向她支付过  查看社交账号/相册/红包 费用，则我们核实举报之后，系统将自动向您退回消费金额"
+      android:text="如果您在最近3天曾在假面舞会向她支付过  查看社交账号/相册/红包 费用，则我们核实举报之后，系统将自动向您退回消费金额"
       android:textColor="@color/color_333333"
       android:textSize="14sp"
       />

@@ -88,6 +88,12 @@ public class LookUserInfoActivity extends BaseActivity
   }
 
   @Override public void setUserInfo(OtherUserInfoBean userCenterInfo) {
+    int nSubViewUserCount = userCenterInfo.nSubViewUserCount;
+    if (nSubViewUserCount == 0) {
+      ToastUtils.show("查看次数不足");
+      finish();
+      return;
+    }
     if (UserProfile.getInstance().getSex() == userCenterInfo.cdoUserData.nSex) {
       SelectHintPop hint = new SelectHintPop(this);
       hint.setOutsideTouchable(false);
@@ -102,7 +108,6 @@ public class LookUserInfoActivity extends BaseActivity
     this.userCenterInfo = userCenterInfo;
     OtherUserInfoBean.CdoUserDataBean userData = userCenterInfo.cdoUserData;
     isVip = userCenterInfo.bVIP;
-    int nSubViewUserCount = userCenterInfo.nSubViewUserCount;
     if (UserProfile.getInstance().getSex() == 1 && nSubViewUserCount <= 5 && !showHint) {
       showHint = true;
       SelectHintPop hint = new SelectHintPop(this);
@@ -127,9 +132,6 @@ public class LookUserInfoActivity extends BaseActivity
           finish();
         }
       });
-      if (nSubViewUserCount == 0) {
-        return;
-      }
     }
     NormaFormItemVIew bust = bindView(R.id.bust);
     mQq = bindView(R.id.qq, this);
@@ -293,7 +295,7 @@ public class LookUserInfoActivity extends BaseActivity
         moreActionDialog.showPopupWindow();
         break;
       case R.id.video_auth:
-        mPresenter.getAuthInf();
+        mPresenter.getAuthInf(userID + "");
         break;
       default:
     }
@@ -405,8 +407,8 @@ public class LookUserInfoActivity extends BaseActivity
   }
 
   @Override public void refreshInfo() {
-    mPresenter.getUserInfo(getIntent().getIntExtra(USER_ID, -1),
-        UserProfile.getInstance().getLat(), UserProfile.getInstance().getLng());
+    mPresenter.getUserInfo(getIntent().getIntExtra(USER_ID, -1), UserProfile.getInstance().getLat(),
+        UserProfile.getInstance().getLng());
   }
 
   @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {

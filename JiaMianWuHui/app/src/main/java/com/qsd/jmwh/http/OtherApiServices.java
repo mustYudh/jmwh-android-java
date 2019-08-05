@@ -96,7 +96,7 @@ public interface OtherApiServices {
   }, Url = "/MaskballService/modifyFile") Observable<PayInfo> modifyFile(int nFileType,
       int nFileFee, int lFileId);
 
-  @NetMethod(Url = "/MaskballService/getWomenVedio") Observable<WomenVideoBean> getWomenVideo();
+  @NetMethod(ParameterNames = {"lUserId"},Url = "/MaskballService/getWomenVedio") Observable<WomenVideoBean> getWomenVideo(String lUserId);
 
   @NetMethod(ParameterNames = { "sFileUrl", "sFileCoverUrl" }, Url = "/UserService/userAuthByVideo")
   Observable<Object> userAuthByVideo(String sFileUrl, String sFileCoverUrl);

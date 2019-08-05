@@ -53,7 +53,7 @@ import com.yu.common.framework.BaseViewPresenter;
 
   public void getAuthInf() {
     XHttpProxy.proxy(OtherApiServices.class)
-        .getWomenVideo()
+        .getWomenVideo(UserProfile.getInstance().getUserId() + "")
         .subscribeWith(new NoTipRequestSubscriber<WomenVideoBean>() {
           @Override protected void onSuccess(WomenVideoBean bean) {
             if (bean != null) {
