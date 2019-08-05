@@ -47,7 +47,7 @@ public class PersonRvAdapter extends BaseQuickAdapter<HomePersonListBean.CdoList
         }
         if (item.nOnLine == 0) {
             //在线
-            tv_online.setText(getTime(item.nOffLineMin));
+            tv_online.setText("当前在线");
             tv_online.setTextColor(context.getResources().getColor(R.color.app_main_color));
         } else if (item.nOnLine == 1) {
             tv_online.setText(getTime(item.nOffLineMin));
@@ -138,9 +138,6 @@ public class PersonRvAdapter extends BaseQuickAdapter<HomePersonListBean.CdoList
         }
         if (time / 60 >= 24) {
             showTime = (time / 24) > 3 ? "3天前" : (time / 24) + "天";
-        }
-        if (time == 0) {
-            showTime = "当前在线";
         }
         return showTime;
     }

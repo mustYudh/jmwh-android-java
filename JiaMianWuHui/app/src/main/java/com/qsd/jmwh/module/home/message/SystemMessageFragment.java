@@ -8,6 +8,7 @@ import com.qsd.jmwh.module.home.message.bean.SystemCountBean;
 import com.qsd.jmwh.module.home.message.bean.SystemMessageBean;
 import com.qsd.jmwh.module.home.message.presenter.SystemMessagePresenter;
 import com.qsd.jmwh.module.home.message.presenter.SystemMessageViewer;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.yu.common.mvp.PresenterLifeCycle;
 import java.util.List;
 
@@ -27,6 +28,13 @@ public class SystemMessageFragment extends BaseFragment implements SystemMessage
   }
 
   @Override protected void loadData() {
+    getData();
+    SmartRefreshLayout refreshLayout = bindView(R.id.refresh);
+    refreshLayout.setOnRefreshListener(refreshLayout1 -> getData());
+    refreshLayout.setEnableLoadMore(true);
+  }
+
+  private void getData() {
     mPresenter.getMessageList(0);
     mPresenter.getMessageList(1);
     mPresenter.getMessageList(2);
