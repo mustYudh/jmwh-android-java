@@ -65,6 +65,13 @@ public class EditUserDataActivity extends BaseBarActivity
     private String bugsSize = "";
     private String selectPhotoUrl;
     private boolean mIsGirl;
+    private final static String TYPE = "type";
+
+    public static Intent getIntent(Context context,int type) {
+        Intent intent = new Intent(context,EditUserDataActivity.class);
+        intent.putExtra(TYPE,type);
+        return intent;
+    }
 
 
     public static Intent getIntent(Context context,boolean isVip) {
@@ -288,7 +295,7 @@ public class EditUserDataActivity extends BaseBarActivity
 
     @Override
     public void commitUserInfo() {
-        mPresenter.getCode(userId, userToken, userSex,getIntent().getBooleanExtra(IS_VIP,false));
+        mPresenter.getCode(userId, userToken, userSex,getIntent().getBooleanExtra(IS_VIP,false),getIntent().getIntExtra(TYPE,-1));
     }
 
 

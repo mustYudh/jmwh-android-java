@@ -9,6 +9,7 @@ import com.qsd.jmwh.module.home.user.bean.MineLikeBean;
 import com.qsd.jmwh.module.home.user.bean.MineRadioListBean;
 import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
 import com.qsd.jmwh.module.login.bean.LoginInfo;
+import com.qsd.jmwh.module.register.bean.CommitCodeResultBean;
 import com.qsd.jmwh.module.register.bean.DateProjectBean;
 import com.qsd.jmwh.module.register.bean.PayInfo;
 import com.qsd.jmwh.module.register.bean.RangeData;
@@ -102,7 +103,7 @@ public interface ApiServices {
     @NetMethod(ParameterNames = {
             "lUserId", "token", "sAuthCode"
     }, Url = "/UserService/userAuthByCode")
-    Observable<Object> getUserAuthByCode(int lUserId,
+    Observable<CommitCodeResultBean> getUserAuthByCode(int lUserId,
                                          String token, String code);
 
     @NetMethod(Url = "/UserService/getMyUserCenterInfo")

@@ -73,11 +73,12 @@ import org.greenrobot.eventbus.EventBus;
         });
   }
 
-  public void getCode(int userId, String token, int sex,boolean isVip) {
+  public void getCode(int userId, String token, int sex, boolean isVip, int type) {
     if (sex == 0 || isVip) {
       NetLoadingDialog.showLoading(getActivity(), false);
       NIMClient.getService(AuthService.class)
-          .login(new com.netease.nimlib.sdk.auth.LoginInfo(UserProfile.getInstance().getSimUserId(), UserProfile.getInstance().getSimToken()))
+          .login(new com.netease.nimlib.sdk.auth.LoginInfo(UserProfile.getInstance().getSimUserId(),
+              UserProfile.getInstance().getSimToken()))
           .setCallback(new RequestCallback<LoginInfo>() {
 
             @Override public void onSuccess(com.netease.nimlib.sdk.auth.LoginInfo info) {
@@ -105,17 +106,50 @@ import org.greenrobot.eventbus.EventBus;
             }
           });
     } else {
-      XHttpProxy.proxy(ApiServices.class)
-          .getCod(userId, token)
-          .subscribeWith(new TipRequestSubscriber<UserAuthCodeBean>() {
-            @Override protected void onSuccess(UserAuthCodeBean result) {
-              //              ToastUtils.show("邀请码获取成功");
-              Intent intent = new Intent();
-              intent.putExtra(EditRegisterCodeActivity.GET_AUTH_CODE_RESULT, result.sAuthCode);
-              getActivity().setResult(Activity.RESULT_OK, intent);
-              getActivity().finish();
-            }
-          });
+      if (type == 333) {
+        login();
+      } else {
+        XHttpProxy.proxy(ApiServices.class)
+            .getCod(userId, token)
+            .subscribeWith(new TipRequestSubscriber<UserAuthCodeBean>() {
+              @Override protected void onSuccess(UserAuthCodeBean result) {
+                //              ToastUtils.show("邀请码获取成功");
+                Intent intent = new Intent();
+                intent.putExtra(EditRegisterCodeActivity.GET_AUTH_CODE_RESULT, result.sAuthCode);
+                getActivity().setResult(Activity.RESULT_OK, intent);
+                getActivity().finish();
+              }
+            });
+      }
     }
+  }
+
+  private void login() {
+    NIMClient.getService(AuthService.class)
+        .login(new com.netease.nimlib.sdk.auth.LoginInfo(UserProfile.getInstance().getSimUserId(),
+            UserProfile.getInstance().getSimToken()))
+        .setCallback(new RequestCallback<LoginInfo>() {
+          @Override public void onSuccess(com.netease.nimlib.sdk.auth.LoginInfo info) {
+            EventBus.getDefault().post(new RegisterSuccess(true));
+            getLaunchHelper().startActivity(HomeActivity.class);
+            getActivity().setResult(Activity.RESULT_OK);
+            getActivity().finish();
+          }
+
+          @Override public void onFailed(int code) {
+            if (code == 302 || code == 404) {
+              ToastHelper.showToast(getActivity(), "帐号或密码错误");
+              NetLoadingDialog.dismissLoading();
+            } else {
+              ToastHelper.showToast(getActivity(), "登录失败: " + code);
+              NetLoadingDialog.dismissLoading();
+            }
+          }
+
+          @Override public void onException(Throwable throwable) {
+            ToastHelper.showToast(getActivity(), "无效输入");
+            NetLoadingDialog.dismissLoading();
+          }
+        });
   }
 }

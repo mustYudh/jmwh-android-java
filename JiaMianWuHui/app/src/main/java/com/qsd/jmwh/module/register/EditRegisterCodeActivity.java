@@ -27,6 +27,8 @@ import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 import org.greenrobot.eventbus.EventBus;
 
+import static com.qsd.jmwh.module.register.presenter.EditRegisterCodePresenter.USERDATA_EDIT_REQUEST;
+
 public class EditRegisterCodeActivity extends BaseBarActivity
     implements View.OnClickListener, EditRegisterCodeViewer {
   @PresenterLifeCycle EditRegisterCodePresenter mPresenter = new EditRegisterCodePresenter(this);
@@ -91,6 +93,8 @@ public class EditRegisterCodeActivity extends BaseBarActivity
     if (resultCode == Activity.RESULT_OK) {
       if (requestCode == GET_AUTH_CODE_REQUEST) {
         getLaunchHelper().startActivity(EditUserDataActivity.getIntent(getActivity(), true));
+        finish();
+      } else if (requestCode == USERDATA_EDIT_REQUEST) {
         finish();
       } else if (data != null) {
         String result = data.getStringExtra(GET_AUTH_CODE_RESULT);
