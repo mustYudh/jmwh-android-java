@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseActivity;
 import com.qsd.jmwh.data.UserProfile;
@@ -90,8 +91,21 @@ public class LookUserInfoActivity extends BaseActivity
   @Override public void setUserInfo(OtherUserInfoBean userCenterInfo) {
     int nSubViewUserCount = userCenterInfo.nSubViewUserCount;
     if (nSubViewUserCount == 0) {
-      ToastUtils.show("查看次数不足");
-      finish();
+      SelectHintPop hint = new SelectHintPop(this);
+      hint.setTitle("温馨提示");
+      hint.setMessage("查看次数不足!");
+      hint.setSingleButton("确定", new View.OnClickListener() {
+        @Override public void onClick(View v) {
+          finish();
+          hint.dismiss();
+        }
+      });
+      hint.showPopupWindow();
+      hint.setOnDismissListener(new PopupWindow.OnDismissListener() {
+        @Override public void onDismiss() {
+          finish();
+        }
+      });
       return;
     }
     if (UserProfile.getInstance().getSex() == userCenterInfo.cdoUserData.nSex) {
@@ -203,7 +217,8 @@ public class LookUserInfoActivity extends BaseActivity
     ArrayList<OtherUserInfoBean.CdoFileListDataBean> list = userCenterInfo.cdoFileListData;
     bindView(R.id.empty_view, list.size() == 0);
     GridView gridView = bindView(R.id.user_center_photo, list.size() > 0);
-    gridView.setAdapter(new UserPhotoAdapter(list, userCenterInfo.bOpenImg || isVip, isVip, userID, authType));
+    gridView.setAdapter(
+        new UserPhotoAdapter(list, userCenterInfo.bOpenImg || isVip, isVip, userID, authType));
     bindView(R.id.unlock_all_photo_root, userCenterInfo.bOpenImg);
     String str = "";
     if (UserProfile.getInstance().getSex() == 1) {

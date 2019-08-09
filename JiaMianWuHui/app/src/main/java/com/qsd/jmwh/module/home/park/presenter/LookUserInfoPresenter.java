@@ -1,6 +1,8 @@
 package com.qsd.jmwh.module.home.park.presenter;
 
 import android.annotation.SuppressLint;
+import android.view.View;
+import android.widget.PopupWindow;
 import com.qsd.jmwh.dialog.SelectHintPop;
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.OtherApiServices;
@@ -35,8 +37,23 @@ import com.yu.common.toast.ToastUtils;
           }
 
           @Override protected void onError(ApiException apiException) {
+            SelectHintPop hint = new SelectHintPop(getActivity());
+            hint.setTitle("温馨提示");
+            hint.setMessage(apiException.getMessage());
+            hint.setSingleButton("确定", new View.OnClickListener() {
+              @Override public void onClick(View v) {
+                getActivity().finish();
+                hint.dismiss();
+              }
+            });
+            hint.showPopupWindow();
+            hint.setOnDismissListener(new PopupWindow.OnDismissListener() {
+              @Override public void onDismiss() {
+                getActivity().finish();
+              }
+            });
             super.onError(apiException);
-            getActivity().finish();
+
           }
         });
   }
