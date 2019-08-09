@@ -55,7 +55,13 @@ public class SettingActivity extends BaseBarActivity {
             }
 
         });
-        editPassword.setOnClickListener(v -> getLaunchHelper().startActivity(EditPasswordActivity.class));
+        editPassword.setOnClickListener(v -> {
+            if (!TextUtils.isEmpty(UserProfile.getInstance().getPhoneNo())) {
+                getLaunchHelper().startActivity(EditPasswordActivity.class);
+            } else {
+                ToastUtils.show("请先绑定手机号码");
+            }
+        });
         agreement.setOnClickListener(v -> getLaunchHelper().startActivity(WebViewActivity.class));
         logout.setOnClickListener(v -> {
             SelectHintPop logoutPop = new SelectHintPop(getActivity());

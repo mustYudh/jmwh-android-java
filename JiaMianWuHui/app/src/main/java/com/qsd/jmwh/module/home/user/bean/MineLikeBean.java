@@ -42,5 +42,7 @@ public class MineLikeBean implements Serializable {
         public boolean blove;
         public boolean is_black;
         public long nOffLineMin;
+        public int nSex;
+        public boolean bVip;
     }
 }
