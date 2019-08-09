@@ -14,5 +14,7 @@ public interface LookUserInfoViewer extends Viewer {
 
     void payToChat(int type);
 
-    void refreshInfo();
+    void refreshImage();
+
+    void getOpenImageCount(SubViewCount count);
 }

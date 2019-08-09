@@ -65,7 +65,7 @@ import com.yu.common.toast.ToastUtils;
           @Override protected void onSuccess(Object info) {
             ToastUtils.show("解锁成功");
             assert getViewer() != null;
-            getViewer().refreshInfo();
+            getViewer().refreshImage();
           }
         });
   }
@@ -93,6 +93,18 @@ import com.yu.common.toast.ToastUtils;
           @Override protected void onSuccess(SubViewCount count) {
             assert getViewer() != null;
             getViewer().getViewCount(count, type);
+          }
+        });
+  }
+
+
+  public void checkOpenImageCount() {
+    XHttpProxy.proxy(OtherApiServices.class)
+        .getSubViewCount()
+        .subscribeWith(new TipRequestSubscriber<SubViewCount>() {
+          @Override protected void onSuccess(SubViewCount count) {
+            assert getViewer() != null;
+            getViewer().getOpenImageCount(count);
           }
         });
   }
