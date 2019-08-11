@@ -6,6 +6,7 @@ import android.widget.PopupWindow;
 import com.qsd.jmwh.dialog.SelectHintPop;
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.OtherApiServices;
+import com.qsd.jmwh.http.subscriber.NoTipRequestSubscriber;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.home.park.bean.OtherUserInfoBean;
 import com.qsd.jmwh.module.home.park.bean.SubViewCount;
@@ -30,7 +31,7 @@ import com.yu.common.toast.ToastUtils;
   public void getUserInfo(int lUserId, double nLat, double nLng) {
     XHttpProxy.proxy(ApiServices.class)
         .getOtherUserInfo(lUserId, nLat, nLng)
-        .subscribeWith(new TipRequestSubscriber<OtherUserInfoBean>() {
+        .subscribeWith(new NoTipRequestSubscriber<OtherUserInfoBean>() {
           @Override protected void onSuccess(OtherUserInfoBean userCenterInfo) {
             assert getViewer() != null;
             getViewer().setUserInfo(userCenterInfo);

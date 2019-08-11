@@ -17,7 +17,6 @@ import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
-import com.qsd.jmwh.dialog.SelectHintPop;
 import com.qsd.jmwh.dialog.net.NetLoadingDialog;
 import com.qsd.jmwh.module.home.HomeActivity;
 import com.qsd.jmwh.module.register.presenter.EditRegisterCodePresenter;
@@ -72,14 +71,7 @@ public class EditRegisterCodeActivity extends BaseBarActivity
         EditText editText = bindView(R.id.code);
         String code = editText.getText().toString().trim();
         if (!TextUtils.isEmpty(code)) {
-          SelectHintPop selectHintPop = new SelectHintPop(getActivity());
-          selectHintPop.setTitle("验证码验证通过")
-              .setMessage("欢迎加入假面舞会！请勿把您的的账户泄露给他人，一经发现登录异常，账户会被自动冻结。")
-              .setSingleButton("好的", v1 -> {
-                mPresenter.commitCode(userId, userToken, code);
-                selectHintPop.dismiss();
-              })
-              .showPopupWindow();
+          mPresenter.commitCode(userId, userToken, code);
         } else {
           ToastUtils.show("邀请码输入不能为空");
         }
