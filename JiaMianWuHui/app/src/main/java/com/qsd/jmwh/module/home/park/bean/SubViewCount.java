@@ -22,4 +22,5 @@ public class SubViewCount implements Serializable {
   public int dContactVal;
   public boolean bVIP;
   public boolean bAuth;
+
 }

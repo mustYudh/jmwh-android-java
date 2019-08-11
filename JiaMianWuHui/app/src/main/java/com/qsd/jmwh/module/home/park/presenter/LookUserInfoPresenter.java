@@ -17,7 +17,6 @@ import com.xuexiang.xhttp2.XHttpProxy;
 import com.xuexiang.xhttp2.exception.ApiException;
 import com.yu.common.framework.BaseViewPresenter;
 import com.yu.common.launche.LauncherHelper;
-import com.yu.common.toast.ToastUtils;
 
 @SuppressLint("CheckResult") public class LookUserInfoPresenter
     extends BaseViewPresenter<LookUserInfoViewer> {
@@ -63,8 +62,7 @@ import com.yu.common.toast.ToastUtils;
     XHttpProxy.proxy(OtherApiServices.class)
         .buyGalleryPay(lBuyOtherUserId, 5, nPayVal)
         .subscribeWith(new TipRequestSubscriber<Object>() {
-          @Override protected void onSuccess(Object info) {
-            ToastUtils.show("解锁成功");
+          @Override protected void onSuccess(Object info) { ;
             assert getViewer() != null;
             getViewer().refreshImage();
           }
