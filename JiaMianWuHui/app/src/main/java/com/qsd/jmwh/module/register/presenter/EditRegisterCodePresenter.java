@@ -2,6 +2,7 @@ package com.qsd.jmwh.module.register.presenter;
 
 import android.annotation.SuppressLint;
 import android.text.TextUtils;
+import com.qsd.jmwh.dialog.SelectHintPop;
 import com.qsd.jmwh.dialog.net.NetLoadingDialog;
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.NoTipRequestSubscriber;
@@ -30,10 +31,21 @@ import com.yu.common.framework.BaseViewPresenter;
           @Override protected void onSuccess(CommitCodeResultBean data) {
             assert getViewer() != null;
             if (data.nStatus == 0) {
-              getLaunchHelper().startActivityForResult(
-                  EditUserDataActivity.getIntent(getActivity(), 333), USERDATA_EDIT_REQUEST);
+              SelectHintPop selectHintPop = new SelectHintPop(getActivity());
+              selectHintPop.setTitle("验证码验证通过").setMessage("请完善个人信息!").setSingleButton("好的", v1 -> {
+                getLaunchHelper().startActivityForResult(
+                    EditUserDataActivity.getIntent(getActivity(), 333), USERDATA_EDIT_REQUEST);
+                selectHintPop.dismiss();
+              }).showPopupWindow();
             } else {
-              getViewer().registerSuccess();
+              SelectHintPop selectHintPop = new SelectHintPop(getActivity());
+              selectHintPop.setTitle("验证码验证通过")
+                  .setMessage("欢迎加入假面舞会！请勿把您的的账户泄露给他人，一经发现登录异常，账户会被自动冻结。")
+                  .setSingleButton("好的", v1 -> {
+                    getViewer().registerSuccess();
+                    selectHintPop.dismiss();
+                  })
+                  .showPopupWindow();
             }
           }
 

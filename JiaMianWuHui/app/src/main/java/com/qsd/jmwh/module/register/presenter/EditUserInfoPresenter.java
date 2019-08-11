@@ -10,6 +10,7 @@ import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.qsd.jmwh.data.UserProfile;
+import com.qsd.jmwh.dialog.SelectHintPop;
 import com.qsd.jmwh.dialog.net.NetLoadingDialog;
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
@@ -107,7 +108,14 @@ import org.greenrobot.eventbus.EventBus;
           });
     } else {
       if (type == 333) {
-        login();
+        SelectHintPop selectHintPop = new SelectHintPop(getActivity());
+        selectHintPop.setTitle("温馨提示")
+            .setMessage("欢迎进入假面舞会!")
+            .setSingleButton("好的", v1 -> {
+              login();
+              selectHintPop.dismiss();
+            })
+            .showPopupWindow();
       } else {
         XHttpProxy.proxy(ApiServices.class)
             .getCod(userId, token)
