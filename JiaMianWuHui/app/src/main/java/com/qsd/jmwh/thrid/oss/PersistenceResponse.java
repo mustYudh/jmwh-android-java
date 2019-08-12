@@ -8,4 +8,5 @@ public class PersistenceResponse implements Serializable {
   public boolean success;
   public String fileAbsPath;
   public String cloudUrl;
+  public String coverUrl;
 }

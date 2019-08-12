@@ -29,9 +29,8 @@ import com.yu.common.framework.BaseViewPresenter;
       super.handleMessage(msg);
       if (msg.what == 1) {
         PersistenceResponse response = (PersistenceResponse) msg.obj;
-        String sFileCoverUrl = response.cloudUrl + "?x-oss-process=video/snapshot,t_100,m_fast";
         XHttpProxy.proxy(OtherApiServices.class)
-            .userAuthByVideo(response.cloudUrl, sFileCoverUrl)
+            .userAuthByVideo(response.cloudUrl, response.coverUrl)
             .subscribeWith(new NoTipRequestSubscriber<Object>() {
               @Override protected void onSuccess(Object o) {
                 assert getViewer() != null;
@@ -64,58 +63,30 @@ import com.yu.common.framework.BaseViewPresenter;
         });
   }
 
-  public void uploadAuthVideo(String path) {
-    NetLoadingDialog.showLoading(getActivity(),false);
-    //PackageManager packageManager = getActivity().getPackageManager();
-    //PackageInfo packInfo = null;
-    //try {
-    //  packInfo = packageManager.getPackageInfo(getActivity().getPackageName(), 0);
-    //} catch (PackageManager.NameNotFoundException e) {
-    //  e.printStackTrace();
-    //}
-    //String outputDir =
-    //    Environment.getDataDirectory().getPath() + "/data/" + packInfo.packageName + "/files/";
-    //String destPath = outputDir + "/jmwh" + UUID.randomUUID().toString() + ".mp4";
-    //VideoCompress.compressVideoMedium(path, destPath, new VideoCompress.CompressListener() {
-    //  @Override public void onStart() {
-    //    NetLoadingDialog.showLoading(getActivity(), false);
-    //  }
-    //
-    //  @Override public void onSuccess() {
-    //    new Thread(() -> {
-    //      PersistenceResponse response = UploadImage.uploadImage(getActivity(),
-    //          UserProfile.getInstance().getObjectName("auth", "mp4"), destPath);
-    //      Message message = mHandler.obtainMessage();
-    //      message.what = 1;
-    //      message.obj = response;
-    //      mHandler.sendMessage(message);
-    //    }).start();
-    //  }
-    //
-    //  @Override public void onFail() {
-    //    NetLoadingDialog.dismissLoading();
-    //  }
-    //
-    //  @Override public void onProgress(float percent) {
-    //    Log.e("======>", percent + "");
-    //  }
-    //});
+  public void uploadAuthVideo(String path, String coverUrl) {
+    NetLoadingDialog.showLoading(getActivity(), false);
     new Thread(() -> {
-      PersistenceResponse response = UploadImage.uploadImage(getActivity(),
-          UserProfile.getInstance().getObjectName("auth", "mp4"), path);
-      Message message = mHandler.obtainMessage();
-      message.what = 1;
-      message.obj = response;
-      mHandler.sendMessage(message);
+      PersistenceResponse sFileCoverUrl = UploadImage.uploadImage(getActivity(),
+          UserProfile.getInstance().getObjectName("auth", "png"), coverUrl);
+      if (sFileCoverUrl.success) {
+        PersistenceResponse response = UploadImage.uploadImage(getActivity(),
+            UserProfile.getInstance().getObjectName("auth", "mp4"), path);
+        Message message = mHandler.obtainMessage();
+        response.coverUrl = sFileCoverUrl.cloudUrl;
+        message.what = 1;
+        message.obj = response;
+        mHandler.sendMessage(message);
+      } else {
+        NetLoadingDialog.dismissLoading();
+      }
     }).start();
   }
 
   public void getAuthCode() {
     XHttpProxy.proxy(ApiServices.class)
-        .getCod(UserProfile.getInstance().getUserId(),UserProfile.getInstance().getAppToken())
+        .getCod(UserProfile.getInstance().getUserId(), UserProfile.getInstance().getAppToken())
         .subscribeWith(new TipRequestSubscriber<UserAuthCodeBean>() {
-          @Override
-          protected void onSuccess(UserAuthCodeBean result) {
+          @Override protected void onSuccess(UserAuthCodeBean result) {
             assert getViewer() != null;
             getViewer().setAuthCode(result.sAuthCode);
           }

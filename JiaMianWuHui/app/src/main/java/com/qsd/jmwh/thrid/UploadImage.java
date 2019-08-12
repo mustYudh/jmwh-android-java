@@ -3,6 +3,7 @@ package com.qsd.jmwh.thrid;
 import android.content.Context;
 import android.text.TextUtils;
 
+import android.util.Log;
 import com.alibaba.sdk.android.oss.ClientConfiguration;
 import com.alibaba.sdk.android.oss.OSS;
 import com.alibaba.sdk.android.oss.OSSClient;
@@ -25,7 +26,7 @@ public class UploadImage {
    * 同步上传图片到阿里云
    */
   public static PersistenceResponse uploadImage(Context context, String objectName,final String fileAbsPath) {
-
+    Log.e("======>fileAbsPath",fileAbsPath);
     //*********************** 构造 OSSClient ***********************
 
     ClientConfiguration conf = new ClientConfiguration();

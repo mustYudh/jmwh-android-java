@@ -5,7 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.media.MediaMetadataRetriever;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -13,7 +16,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
-
+import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
+import cn.finalteam.rxgalleryfinal.bean.MediaBean;
+import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
+import cn.finalteam.rxgalleryfinal.rxbus.event.ImageMultipleResultEvent;
+import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
+import cn.finalteam.rxgalleryfinal.ui.base.IRadioImageCheckedListener;
 import com.denghao.control.view.utils.UpdataCurrentFragment;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseFragment;
@@ -41,15 +49,11 @@ import com.qsd.jmwh.view.UserItemView;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 import com.yu.common.utils.ImageLoader;
-
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Objects;
 import java.util.UUID;
-
-import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
-import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
-import cn.finalteam.rxgalleryfinal.rxbus.event.ImageMultipleResultEvent;
-import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
-import cn.finalteam.rxgalleryfinal.ui.base.IRadioImageCheckedListener;
 
 /**
  * @author yudneghao
@@ -202,10 +206,39 @@ public class UserFragment extends BaseFragment
     instance.openRadioSelectVideo(getActivity(),
         new RxBusResultDisposable<ImageMultipleResultEvent>() {
           @Override protected void onEvent(ImageMultipleResultEvent event) throws Exception {
-            String videoImage = event.getResult().get(0).getOriginalPath();
-            mPresenter.uploadFile(videoImage);
+            MediaBean videoImage = event.getResult().get(0);
+            mPresenter.uploadFile(videoImage.getOriginalPath(),
+                getVideoThumbnail(videoImage.getOriginalPath()).getPath());
           }
         });
+  }
+
+  public File getVideoThumbnail(String filePath) {
+    PackageManager packageManager = getActivity().getPackageManager();
+    PackageInfo packInfo = null;
+    Bitmap b = null;
+    File file = null;
+    MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+    try {
+      packInfo = packageManager.getPackageInfo(getActivity().getPackageName(), 0);
+      String outputDir = Environment.getDataDirectory().getPath()
+          + "/data/"
+          + packInfo.packageName
+          + "/files/"
+          + System.currentTimeMillis()
+          + ".png";
+      file = new File(outputDir);
+      retriever.setDataSource(filePath);
+      b = retriever.getFrameAtTime();
+      BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+      b.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+      bos.flush();
+      bos.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+      retriever.release();
+    }
+    return file;
   }
 
   @Override public void setUserInfo(UserCenterInfo userInfo) {
