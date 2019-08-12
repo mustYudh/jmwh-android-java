@@ -32,7 +32,7 @@ import com.yu.common.framework.BaseViewPresenter;
             assert getViewer() != null;
             if (data.nStatus == 0) {
               SelectHintPop selectHintPop = new SelectHintPop(getActivity());
-              selectHintPop.setTitle("验证码验证通过").setMessage("请完善个人信息!").setSingleButton("好的", v1 -> {
+              selectHintPop.setTitle("温馨提示").setMessage("邀请码正确，请完善个人信息!").setSingleButton("好的", v1 -> {
                 getLaunchHelper().startActivityForResult(
                     EditUserDataActivity.getIntent(getActivity(), 333), USERDATA_EDIT_REQUEST);
                 selectHintPop.dismiss();
