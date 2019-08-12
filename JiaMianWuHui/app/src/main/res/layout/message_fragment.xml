@@ -23,6 +23,7 @@
         />
 
     <View
+        android:layout_marginRight="5dp"
         android:id="@+id/point"
         android:layout_width="5dp"
         android:layout_height="5dp"

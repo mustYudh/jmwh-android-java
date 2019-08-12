@@ -92,6 +92,7 @@ public class MessageFragment extends BaseBarFragment
           SystemMessageFragment fragment =
               (SystemMessageFragment) adapter.getListFragmentMap().get(1);
           fragment.updateMessage();
+          update(getArguments());
         }
       }
 
@@ -119,6 +120,11 @@ public class MessageFragment extends BaseBarFragment
       textView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
       textView.setTextSize(15);
     }
+  }
+
+  @Override public void onResume() {
+    super.onResume();
+    update(getArguments());
   }
 
   @Override public void onTabReselected(TabLayout.Tab tab) {

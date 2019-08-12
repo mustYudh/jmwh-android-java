@@ -25,6 +25,7 @@ import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseActivity;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.message.MessageFragment;
+import com.qsd.jmwh.module.home.message.bean.SystemCountBean;
 import com.qsd.jmwh.module.home.park.ParkFragment;
 import com.qsd.jmwh.module.home.presenter.HomePresenter;
 import com.qsd.jmwh.module.home.presenter.HomeViewer;
@@ -184,5 +185,21 @@ public class HomeActivity extends BaseActivity implements HomeViewer, TencentLoc
 
   @Override public void onStatusUpdate(String s, int i, String s1) {
 
+  }
+
+  @Override protected void onResume() {
+    super.onResume();
+    mPresenter.getMessageCount();
+  }
+
+  @Override public void getSystemMessageCount(SystemCountBean systemCountBean) {
+    if ((systemCountBean.nCount
+        + systemCountBean.nCount1
+        + systemCountBean.nCount2
+        + systemCountBean.nCount3) > 0) {
+      messageHin.setVisibility(View.VISIBLE);
+    } else {
+      messageHin.setVisibility(View.GONE);
+    }
   }
 }

@@ -1,5 +1,6 @@
 package com.qsd.jmwh.module.home.message.presenter;
 
+import android.annotation.SuppressLint;
 import android.view.View;
 import com.qsd.jmwh.http.OtherApiServices;
 import com.qsd.jmwh.http.subscriber.NoTipRequestSubscriber;
@@ -15,7 +16,7 @@ import com.yu.common.framework.BaseViewPresenter;
 
 public class MessagePresenter extends BaseViewPresenter<MessageViewer> {
 
-    public void getMessageCount() {
+    @SuppressLint("CheckResult") public void getMessageCount() {
         XHttpProxy.proxy(OtherApiServices.class)
             .getMsgCount()
             .subscribeWith(new NoTipRequestSubscriber<SystemCountBean>() {

@@ -3,7 +3,9 @@ package com.qsd.jmwh.module.home.presenter;
 import android.annotation.SuppressLint;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.http.ApiServices;
+import com.qsd.jmwh.http.OtherApiServices;
 import com.qsd.jmwh.http.subscriber.NoTipRequestSubscriber;
+import com.qsd.jmwh.module.home.message.bean.SystemCountBean;
 import com.tencent.map.geolocation.TencentLocation;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.yu.common.framework.BaseViewPresenter;
@@ -44,6 +46,17 @@ public class HomePresenter extends BaseViewPresenter<HomeViewer> {
       UserProfile.getInstance().setLng((float) location.getLongitude());
       UserProfile.getInstance().setCityName(location.getCity());
     }
+  }
+
+  @SuppressLint("CheckResult") public void getMessageCount() {
+    XHttpProxy.proxy(OtherApiServices.class)
+        .getMsgCount()
+        .subscribeWith(new NoTipRequestSubscriber<SystemCountBean>() {
+          @Override protected void onSuccess(SystemCountBean bean) {
+            assert getViewer() != null;
+            getViewer().getSystemMessageCount(bean);
+          }
+        });
   }
 
 
