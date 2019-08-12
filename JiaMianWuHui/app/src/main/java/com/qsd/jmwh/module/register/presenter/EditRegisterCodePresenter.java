@@ -30,6 +30,7 @@ import com.yu.common.framework.BaseViewPresenter;
         .subscribeWith(new TipRequestSubscriber<CommitCodeResultBean>() {
           @Override protected void onSuccess(CommitCodeResultBean data) {
             assert getViewer() != null;
+            NetLoadingDialog.dismissLoading();
             if (data.nStatus == 0) {
               SelectHintPop selectHintPop = new SelectHintPop(getActivity());
               selectHintPop.setTitle("温馨提示").setMessage("邀请码正确，请完善个人信息!").setSingleButton("好的", v1 -> {

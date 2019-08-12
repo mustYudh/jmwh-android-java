@@ -8,10 +8,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.TextView;
+import com.denghao.control.view.utils.UpdataCurrentFragment;
 import com.netease.nim.uikit.business.recent.RecentContactsFragment;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarFragment;
 import com.qsd.jmwh.module.home.message.adapter.MessageAdapter;
+import com.qsd.jmwh.module.home.message.bean.SystemCountBean;
 import com.qsd.jmwh.module.home.message.presenter.MessagePresenter;
 import com.qsd.jmwh.module.home.message.presenter.MessageViewer;
 import com.qsd.jmwh.module.home.user.activity.PushSettingActivity;
@@ -28,7 +30,7 @@ import java.util.List;
  */
 
 public class MessageFragment extends BaseBarFragment
-    implements MessageViewer, TabLayout.OnTabSelectedListener {
+    implements MessageViewer, TabLayout.OnTabSelectedListener, UpdataCurrentFragment {
 
   @PresenterLifeCycle private MessagePresenter mPresenter = new MessagePresenter(this);
 
@@ -52,7 +54,7 @@ public class MessageFragment extends BaseBarFragment
     List<Fragment> fragments = new ArrayList<>();
     fragments.add(new RecentContactsFragment());
     fragments.add(new SystemMessageFragment());
-    MessageAdapter adapter = new MessageAdapter(getChildFragmentManager(),fragments);
+    MessageAdapter adapter = new MessageAdapter(getChildFragmentManager(), fragments);
     viewPager.setAdapter(adapter);
 
     for (int i = 0; i < 2; i++) {
@@ -60,7 +62,7 @@ public class MessageFragment extends BaseBarFragment
       if (tab != null) {
         View view = View.inflate(getActivity(), R.layout.item_home_tab, null);
         TextView textView = view.findViewById(R.id.title);
-        textView.setText(i == 0 ? "聊天" :"系统消息");
+        textView.setText(i == 0 ? "聊天" : "系统消息");
         textView.setTextColor(Res.color(R.color.color_666666));
         textView.setTextSize(15);
         textView.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
@@ -86,10 +88,11 @@ public class MessageFragment extends BaseBarFragment
       }
 
       @Override public void onPageSelected(int position) {
-          if (position == 1) {
-            SystemMessageFragment fragment = (SystemMessageFragment)adapter.getListFragmentMap().get(1);
-            fragment.updateMessage();
-          }
+        if (position == 1) {
+          SystemMessageFragment fragment =
+              (SystemMessageFragment) adapter.getListFragmentMap().get(1);
+          fragment.updateMessage();
+        }
       }
 
       @Override public void onPageScrollStateChanged(int i) {
@@ -120,5 +123,17 @@ public class MessageFragment extends BaseBarFragment
 
   @Override public void onTabReselected(TabLayout.Tab tab) {
 
+  }
+
+  @Override public void update(Bundle bundle) {
+    mPresenter.getMessageCount();
+  }
+
+  @Override public void getSystemMessageCount(SystemCountBean systemCountBean) {
+    boolean show = (systemCountBean.nCount
+        + systemCountBean.nCount1
+        + systemCountBean.nCount2
+        + systemCountBean.nCount3) > 0;
+    bindView(R.id.point,show);
   }
 }

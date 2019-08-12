@@ -1,32 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
+  <FrameLayout
+      android:layout_width="240dp"
+      android:layout_height="wrap_content"
+      >
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="240dp"
         android:layout_height="45dp"
+        app:tabBackground="@android:color/transparent"
         app:tabIndicatorColor="@color/transparent"
         app:tabIndicatorHeight="4dp"
-        app:tabBackground="@android:color/transparent"
+        app:tabMinWidth="70dp"
         app:tabRippleColor="@android:color/transparent"
-        app:tabMinWidth="70dp"/>
+        />
 
     <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/color_EEEEEE"/>
+        android:id="@+id/point"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:layout_gravity="right|center"
+        android:background="@drawable/shape_red_circle_for_msg"
+        android:visibility="gone"
+        />
+
+  </FrameLayout>
 
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:overScrollMode="never">
-    </android.support.v4.view.ViewPager>
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="0.5dp"
+      android:background="@color/color_EEEEEE"
+      />
+
+
+  <android.support.v4.view.ViewPager
+      android:id="@+id/view_pager"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:overScrollMode="never"
+      >
+  </android.support.v4.view.ViewPager>
 </LinearLayout>

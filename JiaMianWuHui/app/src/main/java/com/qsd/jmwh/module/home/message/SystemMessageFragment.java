@@ -5,12 +5,10 @@ import android.support.annotation.Nullable;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseFragment;
 import com.qsd.jmwh.module.home.message.bean.SystemCountBean;
-import com.qsd.jmwh.module.home.message.bean.SystemMessageBean;
 import com.qsd.jmwh.module.home.message.presenter.SystemMessagePresenter;
 import com.qsd.jmwh.module.home.message.presenter.SystemMessageViewer;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.yu.common.mvp.PresenterLifeCycle;
-import java.util.List;
 
 /**
  * @author yudneghao
@@ -28,11 +26,10 @@ public class SystemMessageFragment extends BaseFragment implements SystemMessage
   }
 
   @Override protected void loadData() {
-    getData();
+    initListener();
     SmartRefreshLayout refreshLayout = bindView(R.id.refresh);
-    refreshLayout.setOnRefreshListener(refreshLayout1 ->
-        {
-          getData();
+    refreshLayout.setOnRefreshListener(refreshLayout1 -> {
+      mPresenter.getMessageCount();
           refreshLayout1.finishRefresh();
         }
 
@@ -40,53 +37,22 @@ public class SystemMessageFragment extends BaseFragment implements SystemMessage
     refreshLayout.setEnableLoadMore(false);
   }
 
-  private void getData() {
-    mPresenter.getMessageList(0);
-    mPresenter.getMessageList(1);
-    mPresenter.getMessageList(2);
-    mPresenter.getMessageList(4);
+  @Override public void onResume() {
+    super.onResume();
     mPresenter.getMessageCount();
   }
 
-  @Override public void getSystemMessage(List<SystemMessageBean.CdoListBean> cdoList) {
-    if (cdoList != null && cdoList.size() > 0) {
-      bindText(R.id.system_message, cdoList.get(0).sContent);
-    } else {
-      bindText(R.id.system_message, "暂无");
-    }
+  private void initListener() {
     bindView(R.id.system_message_root,
         v -> getLaunchHelper().startActivity(MessageDetailActivity.getIntent(getContext(), 0)));
-  }
-
-  @Override public void getBroadcastMessage(List<SystemMessageBean.CdoListBean> cdoList) {
-    if (cdoList != null && cdoList.size() > 0) {
-      bindText(R.id.broadcast_message, cdoList.get(0).sContent);
-    } else {
-      bindText(R.id.broadcast_message, "暂无");
-    }
     bindView(R.id.broadcast_message_root,
         v -> getLaunchHelper().startActivity(MessageDetailActivity.getIntent(getContext(), 1)));
-  }
-
-  @Override public void getEarningsMessage(List<SystemMessageBean.CdoListBean> cdoList) {
-    if (cdoList != null && cdoList.size() > 0) {
-      bindText(R.id.earnings_message, cdoList.get(0).sContent);
-    } else {
-      bindText(R.id.earnings_message, "暂无");
-    }
     bindView(R.id.earnings_message_root,
         v -> getLaunchHelper().startActivity(MessageDetailActivity.getIntent(getContext(), 2)));
-  }
-
-  @Override public void getEvaluateMessage(List<SystemMessageBean.CdoListBean> cdoList) {
-    if (cdoList != null && cdoList.size() > 0) {
-      bindText(R.id.evaluate_message, cdoList.get(0).sContent);
-    } else {
-      bindText(R.id.evaluate_message, "暂无");
-    }
     bindView(R.id.evaluate_message_root,
         v -> getLaunchHelper().startActivity(MessageDetailActivity.getIntent(getContext(), 4)));
   }
+
 
   @Override public void getSystemMessageCount(SystemCountBean systemCountBean) {
     bindText(R.id.system_message_count,
@@ -104,9 +70,14 @@ public class SystemMessageFragment extends BaseFragment implements SystemMessage
     bindText(R.id.evaluate_message_count,
         systemCountBean.nCount3 < 99 ? (systemCountBean.nCount3 + "") : "99+");
     bindView(R.id.evaluate_message_count, systemCountBean.nCount3 > 0);
+
+    bindText(R.id.system_message, systemCountBean.cdoList);
+    bindText(R.id.broadcast_message, systemCountBean.cdoList1);
+    bindText(R.id.earnings_message, systemCountBean.cdoList2);
+    bindText(R.id.evaluate_message, systemCountBean.cdoList3);
   }
 
   public void updateMessage() {
-    loadData();
+    mPresenter.getMessageCount();
   }
 }
