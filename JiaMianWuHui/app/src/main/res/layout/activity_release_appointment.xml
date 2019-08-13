@@ -211,8 +211,9 @@
             android:background="@color/color_EEEEEE"/>
 
         <LinearLayout
+            android:minHeight="115dp"
             android:layout_width="match_parent"
-            android:layout_height="115dp"
+            android:layout_height="wrap_content"
             android:background="@color/white"
             android:orientation="horizontal"
             android:paddingRight="15dp"
@@ -247,11 +248,10 @@
 
             <com.qsd.jmwh.view.NoSlidingGridView
                 android:id="@+id/gv_photo"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
-                android:layout_weight="1"
                 android:numColumns="3"/>
 
         </LinearLayout>

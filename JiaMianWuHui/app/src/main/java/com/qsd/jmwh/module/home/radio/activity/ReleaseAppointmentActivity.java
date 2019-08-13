@@ -222,7 +222,7 @@ public class ReleaseAppointmentActivity extends BaseBarActivity implements View.
 
         @Override
         public int getCount() {
-            if (allLocationSelectedPicture.size() == 3) {
+            if (allLocationSelectedPicture.size() == 6) {
                 return allLocationSelectedPicture.size();
             }
             return allLocationSelectedPicture.size() + 1;
@@ -252,7 +252,7 @@ public class ReleaseAppointmentActivity extends BaseBarActivity implements View.
                 holder = (ViewHolder) convertView.getTag();
             }
             if (position == allLocationSelectedPicture.size()) {
-                if (position == 3) {
+                if (position == 6) {
                     holder.ivDemo.setVisibility(View.GONE);
                 }
 
