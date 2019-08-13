@@ -280,11 +280,11 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
     @Override
     public void addDatingLikeCountSuccess(DelayClickImageView iv_like, DelayClickTextView tv_like, int position, int is_like) {
         if (is_like == 1) {
-            dataList.get(position).is_like = 0;
-            dataList.get(position).like_count = dataList.get(position).like_count - 1;
-            tv_like.setText("赞(" + dataList.get(position).like_count + ")");
-            iv_like.setImageResource(R.drawable.zan);
-            ToastUtils.show("取消点赞成功");
+            //dataList.get(position).is_like = 0;
+            //dataList.get(position).like_count = dataList.get(position).like_count - 1;
+            //tv_like.setText("赞(" + dataList.get(position).like_count + ")");
+            //iv_like.setImageResource(R.drawable.zan);
+            //ToastUtils.show("取消点赞成功");
         } else {
             dataList.get(position).is_like = 1;
             dataList.get(position).like_count = dataList.get(position).like_count + 1;
@@ -606,7 +606,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                 }
                 switch (v.getId()) {
                     case R.id.ll_pay:
-                        payType = 0;
+                        payType = 5;
                         showPayDialog(getDatingUserVipBean, name);
                         break;
                     case R.id.ll_renzhen:
@@ -615,6 +615,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                     case R.id.ll_bottom:
 
                         break;
+                        default:
                 }
             }
         };
@@ -676,7 +677,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                         LauncherHelper.from(getActivity()).startActivity(ToByVipActivity.class);
                         break;
                     case R.id.tv_pay:
-                        payType = 0;
+                        payType = 5;
                         showPayDialog(getDatingUserVipBean, name);
                         break;
                     case R.id.tv_cancle:
@@ -703,7 +704,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
     ImageView iv1;
     ImageView iv2;
     ImageView iv3;
-    private int payType = 0;
+    private int payType = 5;
 
     /**
      * 选择付款弹窗
@@ -746,6 +747,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                             payDialog.dismiss();
                         }
                         break;
+                        default:
                 }
             }
         };
@@ -767,6 +769,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
         iv1 = payDialog.findViewById(R.id.iv1);
         iv2 = payDialog.findViewById(R.id.iv2);
         iv3 = payDialog.findViewById(R.id.iv3);
+        iv3.setImageResource(R.drawable.ic_button_selected);
     }
 
     /**

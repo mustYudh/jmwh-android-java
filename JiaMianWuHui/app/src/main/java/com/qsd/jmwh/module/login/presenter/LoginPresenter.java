@@ -2,6 +2,7 @@ package com.qsd.jmwh.module.login.presenter;
 
 import android.annotation.SuppressLint;
 import android.text.TextUtils;
+import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.dialog.net.NetLoadingDialog;
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.params.PostParams;
@@ -44,6 +45,7 @@ public class LoginPresenter extends BaseViewPresenter<LoginViewer> {
                 .subscribeWith(new TipRequestSubscriber<ApiResult<LoginInfo>>() {
                     @Override
                     protected void onSuccess(ApiResult<LoginInfo> result) {
+                        UserProfile.getInstance().appLogin(result.getData());
                         int code = result.getCode();
                         switch (code) {
                             case 0:

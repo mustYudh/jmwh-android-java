@@ -286,11 +286,12 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
                         LauncherHelper.from(getActivity()).startActivity(ToByVipActivity.class);
                         break;
                     case R.id.tv_pay:
-                        payType = 0;
+                        payType = 5;
                         showPayDialog(getDatingUserVipBean, name);
                         break;
                     case R.id.tv_cancle:
                         break;
+                        default:
                 }
             }
         };
@@ -311,7 +312,7 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
     ImageView iv1;
     ImageView iv2;
     ImageView iv3;
-    private int payType = 0;
+    private int payType = 5;
 
     /**
      * 选择付款弹窗
@@ -354,6 +355,7 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
                             payDialog.dismiss();
                         }
                         break;
+                        default:
                 }
             }
         };
@@ -375,6 +377,7 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
         iv1 = payDialog.findViewById(R.id.iv1);
         iv2 = payDialog.findViewById(R.id.iv2);
         iv3 = payDialog.findViewById(R.id.iv3);
+        iv3.setImageResource(R.drawable.ic_button_selected);
     }
 
     /**
@@ -389,7 +392,7 @@ public class MineRadioListActivity extends BaseBarActivity implements MineRadioV
                 }
                 switch (v.getId()) {
                     case R.id.ll_pay:
-                        payType = 0;
+                        payType = 5;
                         showPayDialog(getDatingUserVipBean, name);
                         break;
                     case R.id.ll_renzhen:
