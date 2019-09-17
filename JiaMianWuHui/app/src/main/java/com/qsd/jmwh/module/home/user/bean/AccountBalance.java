@@ -1,6 +1,7 @@
 package com.qsd.jmwh.module.home.user.bean;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class AccountBalance implements Serializable {
@@ -49,7 +50,7 @@ public class AccountBalance implements Serializable {
 
         public String sRemark;
         public String dCreateTime;
-        public int nPayFee;
+        public BigDecimal nPayFee;
         public int nABType;
         public int nStatus;
         public String sNickName;
