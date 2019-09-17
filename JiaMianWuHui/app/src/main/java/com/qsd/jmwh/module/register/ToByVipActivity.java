@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
+import com.qsd.jmwh.module.home.user.bean.AccountBalance;
 import com.qsd.jmwh.module.register.adapter.PayTypeAdapter;
 import com.qsd.jmwh.module.register.adapter.VipInfoAdapter;
 import com.qsd.jmwh.module.register.adapter.VipTextAdapter;
@@ -73,6 +74,10 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
 
   @Override protected void loadData() {
     setTitle("会员中心");
+  }
+
+  @Override protected void onResume() {
+    super.onResume();
     mPresenter.getVipInfo(userId, userToken);
   }
 
@@ -89,21 +94,19 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
       }
     }
     vipInfoList.setAdapter(vipInfoAdapter);
-    List<PayTypeBean> payTypeBeans = new ArrayList<>();
-    for (String payType : vipInfoBean.nPayTypeList) {
-      PayTypeBean payTypeBean = new PayTypeBean();
-      if (Integer.parseInt(payType) == 3) {
-        payTypeBean.money = vipInfoBean.nMoney;
-      }
-      if (Integer.parseInt(payType) != 4) {
-        payTypeBean.type = Integer.parseInt(payType);
-        payTypeBeans.add(payTypeBean);
-      }
-    }
-    payTypeBeans.get(0).selected = true;
-    currentType = payTypeBeans.get(0);
-    payTypeAdapter = new PayTypeAdapter(R.layout.item_pay_type_layout, payTypeBeans);
-    payType.setAdapter(payTypeAdapter);
+
+    //for (String payType : vipInfoBean.nPayTypeList) {
+    //  PayTypeBean payTypeBean = new PayTypeBean();
+    //  if (Integer.parseInt(payType) == 3) {
+    //    payTypeBean.money = vipInfoBean.nMoney;
+    //  }
+    //  if (Integer.parseInt(payType) != 4) {
+    //    payTypeBean.type = Integer.parseInt(payType);
+    //    payTypeBeans.add(payTypeBean);
+    //  }
+    //}
+    //payTypeBeans.get(0).selected = true;
+
     payCount.setText(cdoListBean.nGoodsSaleFee + "");
     vipInfoAdapter.setOnItemClickListener((adapter, view, position) -> {
       for (Object datum : adapter.getData()) {
@@ -117,21 +120,21 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
       payCount.setText(cdoListBean.nGoodsSaleFee + "");
       notifyDataSetChanged();
     });
+    mPresenter.getCoinConvertMoney();
 
-    payTypeAdapter.setOnItemClickListener((adapter, view, position) -> {
-      if (cdoListBean != null) {
-        for (Object datum : adapter.getData()) {
-          PayTypeBean bean = (PayTypeBean) datum;
-          bean.selected = false;
-        }
-        PayTypeBean bean = (PayTypeBean) adapter.getData().get(position);
-        bean.selected = true;
-        adapter.notifyDataSetChanged();
-        currentType = bean;
-      } else {
-        ToastUtils.show("请先选择VIP");
-      }
-    });
+  }
+
+  @Override public void coinConvertMoney(AccountBalance maskBallCoinBean) {
+    List<PayTypeBean> payTypeBeans = new ArrayList<>();
+    PayTypeBean jiaMian = new PayTypeBean();
+    jiaMian.type = 5;
+    jiaMian.selected = true;
+    jiaMian.money = maskBallCoinBean.cdoUserAccountList.nMaskBallCoin + "";
+    payTypeBeans.add(jiaMian);
+    currentType = payTypeBeans.get(0);
+    payTypeAdapter = new PayTypeAdapter(R.layout.item_pay_type_layout, payTypeBeans);
+    payType.setAdapter(payTypeAdapter);
+    notifyDataSetChanged();
   }
 
   private void notifyDataSetChanged() {
@@ -139,13 +142,29 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
       for (PayTypeBean datum : payTypeAdapter.getData()) {
         if (datum.type == 3) {
           if (currentMoney < cdoListBean.nGoodsRealFee) {
-            datum.money = "余额不足";
+            datum.money = "假面币不足";
           } else {
             datum.money = currentMoney + "";
           }
         }
       }
       payTypeAdapter.notifyDataSetChanged();
+
+
+      //payTypeAdapter.setOnItemClickListener((adapter, view, position) -> {
+      //  if (cdoListBean != null) {
+      //    for (Object datum : adapter.getData()) {
+      //      PayTypeBean bean = (PayTypeBean) datum;
+      //      bean.selected = false;
+      //    }
+      //    PayTypeBean bean = (PayTypeBean) adapter.getData().get(position);
+      //    bean.selected = true;
+      //    adapter.notifyDataSetChanged();
+      //    currentType = bean;
+      //  } else {
+      //    ToastUtils.show("请先选择VIP");
+      //  }
+      //});
     }
   }
 }

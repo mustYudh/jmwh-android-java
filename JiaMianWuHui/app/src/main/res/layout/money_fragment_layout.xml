@@ -202,6 +202,7 @@
             android:layout_height="0.5dp"/>
 
         <LinearLayout
+            android:background="@color/app_main_bg_color"
             android:id="@+id/withdrawal"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -211,8 +212,8 @@
 
 
             <com.yu.common.ui.DelayClickTextView
-                android:textColor="@color/black"
-                android:text="提现"
+                android:textColor="@color/white"
+                android:text="可兑消"
                 android:textSize="16sp"
                 android:gravity="center"
                 android:layout_weight="1"

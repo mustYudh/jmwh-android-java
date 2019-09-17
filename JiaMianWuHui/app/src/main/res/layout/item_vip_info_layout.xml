@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 <LinearLayout
     android:orientation="vertical"
     android:background="@drawable/selector_vip"
@@ -43,13 +44,14 @@
 
 
     <TextView
+        android:gravity="center"
         android:id="@+id/money"
         android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="12sp"
         android:layout_marginTop="13dp"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/color_333333"
-        android:text="会员"
+        tools:text="会员"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

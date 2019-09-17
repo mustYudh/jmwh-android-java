@@ -28,9 +28,9 @@ public class PayTypeAdapter extends BaseQuickAdapter<PayTypeBean, BaseViewHolder
         } else if (item.type == 2) {
             helper.setImageDrawable(R.id.pay_icon, helper.itemView.getContext().getDrawable(R.drawable.ci_wechat_pay));
             helper.setText(R.id.pay_type, "微信");
-        } else if (item.type == 3) {
+        } else if (item.type == 5) {
             helper.setImageDrawable(R.id.pay_icon, helper.itemView.getContext().getDrawable(R.drawable.ic_money_bag));
-            helper.setText(R.id.pay_type, "钱包余额（" + item.money + "）");
+            helper.setText(R.id.pay_type, "假面币（" + item.money + "）");
         }
         ImageView imageView = helper.getView(R.id.select_button);
         imageView.setSelected(item.selected);

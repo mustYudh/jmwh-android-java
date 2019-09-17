@@ -3,8 +3,10 @@ package com.qsd.jmwh.module.register.presenter;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import com.qsd.jmwh.http.ApiServices;
+import com.qsd.jmwh.http.OtherApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.home.user.adapter.MineRadilLoveUserGvAdapter;
+import com.qsd.jmwh.module.home.user.bean.AccountBalance;
 import com.qsd.jmwh.module.register.bean.PayInfo;
 import com.qsd.jmwh.module.register.bean.VipInfoBean;
 import com.qsd.jmwh.utils.PayUtils;
@@ -18,6 +20,23 @@ import com.yu.common.toast.ToastUtils;
   public ToByVipPresenter(ToByVipViewer viewer) {
     super(viewer);
   }
+
+
+
+  public void getCoinConvertMoney() {
+    XHttpProxy.proxy(OtherApiServices.class)
+        .getAccountBalance(2, 1)
+        .subscribeWith(new TipRequestSubscriber<AccountBalance>() {
+          @Override protected void onSuccess(AccountBalance accountBalance) {
+            assert getViewer() != null;
+            getViewer().coinConvertMoney(accountBalance);
+
+          }
+        });
+  }
+
+
+
 
   public void getVipInfo(int lUserId, String token) {
     XHttpProxy.proxy(ApiServices.class)

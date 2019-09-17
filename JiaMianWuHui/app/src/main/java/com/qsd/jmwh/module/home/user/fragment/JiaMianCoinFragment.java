@@ -18,6 +18,7 @@ import com.qsd.jmwh.module.home.user.dialog.PayPop;
 import com.qsd.jmwh.module.home.user.dialog.RechargeListDialog;
 import com.qsd.jmwh.module.home.user.presenter.JiaMianCoinPresenter;
 import com.qsd.jmwh.module.home.user.presenter.JiaMianCoinViewer;
+import com.qsd.jmwh.module.im.SessionHelper;
 import com.qsd.jmwh.utils.PayUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.yu.common.mvp.PresenterLifeCycle;
@@ -75,11 +76,12 @@ public class JiaMianCoinFragment extends BaseFragment
         }).setNegativeButton(v1 -> payPop.dismiss()).showPopupWindow();
         break;
       case R.id.withdrawal:
-        if (isBindAccount) {
-          mSelectHintPop.showPopupWindow();
-        } else {
-          ToastUtils.show("请先绑定支付宝账号!");
-        }
+        //if (isBindAccount) {
+        //  mSelectHintPop.showPopupWindow();
+        //} else {
+        //  ToastUtils.show("请先绑定支付宝账号!");
+        //}
+        SessionHelper.startP2PSession(getActivity(),"im_1");
         break;
       case R.id.top_up:
         mPresenter.getGoods();
