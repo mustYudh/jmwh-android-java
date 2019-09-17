@@ -154,7 +154,7 @@ public class SelectLoginActivity extends BaseActivity
   }
 
   @Override public void onError(SHARE_MEDIA media, int i, Throwable throwable) {
-
+      ToastUtils.show("授权失败");
   }
 
   @Override public void onCancel(SHARE_MEDIA media, int i) {

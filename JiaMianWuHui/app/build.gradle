@@ -21,7 +21,7 @@ enum ApiEnvEnum {
 }
 
 android {
-  def envStr = project.hasProperty('API_MODE') ? API_MODE : "DEV"
+  def envStr = project.hasProperty('API_MODE') ? API_MODE : "ONLINE"
   def appNameStr = (envStr as ApiEnvEnum).name
 
   compileSdkVersion rootProject.ext.compileSdkVersion

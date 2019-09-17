@@ -1,5 +1,7 @@
 package com.qsd.jmwh.module.register;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -19,10 +21,22 @@ public class RegisterActivity extends BaseBarActivity implements RegisterViewer,
 
     @PresenterLifeCycle
     RegisterPresenter mPresenter = new RegisterPresenter(this);
+    private final static String TYPE = "type";
+
     private NormaFormItemVIew mSendVerCode;
     private NormaFormItemVIew phoneNum;
     private NormaFormItemVIew password;
     private RxCountDown countDown;
+
+
+
+
+    public static Intent getIntent(Context context,int type) {
+        Intent starter = new Intent(context, RegisterActivity.class);
+        starter.putExtra(TYPE,type);
+        return starter;
+    }
+
 
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
@@ -31,7 +45,8 @@ public class RegisterActivity extends BaseBarActivity implements RegisterViewer,
 
     @Override
     protected void loadData() {
-        setTitle("手机号码注册");
+        int type = getIntent().getIntExtra(TYPE,-1);
+        setTitle(type == 1 ? "绑定手机号" : "手机号码注册");
         initView();
         initListener();
 

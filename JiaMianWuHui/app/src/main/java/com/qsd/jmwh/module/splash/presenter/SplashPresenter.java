@@ -1,7 +1,6 @@
 package com.qsd.jmwh.module.splash.presenter;
 
 import android.annotation.SuppressLint;
-
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.params.PostParams;
@@ -9,7 +8,7 @@ import com.qsd.jmwh.http.subscriber.NoTipRequestSubscriber;
 import com.qsd.jmwh.module.login.bean.LoginInfo;
 import com.qsd.jmwh.module.register.EditRegisterCodeActivity;
 import com.qsd.jmwh.module.register.EditUserDataActivity;
-import com.qsd.jmwh.module.register.SelectGenderActivity;
+import com.qsd.jmwh.module.register.RegisterActivity;
 import com.qsd.jmwh.utils.RxSchedulerUtils;
 import com.xuexiang.xhttp2.XHttp;
 import com.xuexiang.xhttp2.model.ApiResult;
@@ -40,7 +39,7 @@ public class SplashPresenter extends BaseViewPresenter<SplashViewer> {
                                 getViewer().authLoginSuccess(result.getData());
                                 break;
                             case 3:
-                                getLauncherHelper().startActivity(SelectGenderActivity.class);
+                                getLauncherHelper().startActivity(RegisterActivity.getIntent(getActivity(),1));
                                 break;
                             case 4:
                                 getLaunchHelper().startActivity(EditRegisterCodeActivity.class);
