@@ -33,6 +33,17 @@
     </com.qsd.jmwh.view.NormaFormItemVIew>
 
 
+    <com.qsd.jmwh.view.NormaFormItemVIew
+        app:input_type="password"
+        android:id="@+id/password"
+        app:show_top_line="false"
+        app:left_text="设置密码"
+        app:content_hint="设置登录密码"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.qsd.jmwh.view.NormaFormItemVIew>
+
+
     <com.yu.common.ui.DelayClickTextView
         android:id="@+id/next"
         style="@style/app_blue_button"

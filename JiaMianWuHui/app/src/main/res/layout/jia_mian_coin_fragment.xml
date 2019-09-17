@@ -96,7 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="15dp"
-                    android:text="可提现(个)"
+                    android:text="可兑消(个)"
                     android:textColor="@color/color_2A2A2A"
                     android:textSize="15sp"/>
 
@@ -235,7 +235,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="可兑消"
+                android:text="咨询客服"
                 android:textColor="@color/white"
                 android:textSize="16sp"/>
 

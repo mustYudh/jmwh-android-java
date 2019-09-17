@@ -21,7 +21,7 @@ public class BannerViewHolder implements MZViewHolder<HomeBannerBean.CdoListBean
 
     @Override
     public View createView(Context context) {
-        // 返回页面布局
+        // 返回页面布局P2PMessageInfo
         View view = LayoutInflater.from(context).inflate(R.layout.item_banner, null);
         mImageView = (ImageView) view.findViewById(R.id.banner_image);
         return view;

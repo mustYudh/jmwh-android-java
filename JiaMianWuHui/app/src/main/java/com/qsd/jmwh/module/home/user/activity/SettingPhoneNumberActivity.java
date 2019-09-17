@@ -3,7 +3,6 @@ package com.qsd.jmwh.module.home.user.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
@@ -20,17 +19,20 @@ public class SettingPhoneNumberActivity extends BaseBarActivity implements Setti
     SettingPhoneNumberPresenter mPresenter = new SettingPhoneNumberPresenter(this);
     private RxCountDown countDown;
     private NormaFormItemVIew mPhoneNum;
+    private NormaFormItemVIew password;
 
     @Override
     protected void setView(@Nullable Bundle savedInstanceState) {
             setContentView(R.layout.setting_phone_number_layout);
     }
 
+
     @Override
     protected void loadData() {
         setTitle("绑定手机号");
         NormaFormItemVIew mSendVerCode = bindView(R.id.get_ver_code);
         mPhoneNum = bindView(R.id.phone);
+        password = bindView(R.id.password);
         mPhoneNum.setEditText(UserProfile.getInstance().getPhoneNo());
         mSendVerCode.setRightButtonListener(v -> {
             if (TextUtils.isEmpty(mPhoneNum.getText())) {
@@ -76,7 +78,8 @@ public class SettingPhoneNumberActivity extends BaseBarActivity implements Setti
 
             }
         });
-        bindView(R.id.next, v -> mPresenter.bindPhone(mPhoneNum.getText(), mSendVerCode.getText()));
+
+        bindView(R.id.next, v -> mPresenter.bindPhone(mPhoneNum.getText(),password.getText(), mSendVerCode.getText()));
     }
 
     @Override

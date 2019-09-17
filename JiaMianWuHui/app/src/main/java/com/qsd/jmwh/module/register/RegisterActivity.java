@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.view.View;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
-import com.qsd.jmwh.module.login.bean.LoginInfo;
 import com.qsd.jmwh.module.register.presenter.RegisterPresenter;
 import com.qsd.jmwh.module.register.presenter.RegisterViewer;
 import com.qsd.jmwh.utils.countdown.RxCountDown;
@@ -27,9 +26,7 @@ public class RegisterActivity extends BaseBarActivity implements RegisterViewer,
     private NormaFormItemVIew phoneNum;
     private NormaFormItemVIew password;
     private RxCountDown countDown;
-
-
-
+    private int mType;
 
     public static Intent getIntent(Context context,int type) {
         Intent starter = new Intent(context, RegisterActivity.class);
@@ -45,8 +42,8 @@ public class RegisterActivity extends BaseBarActivity implements RegisterViewer,
 
     @Override
     protected void loadData() {
-        int type = getIntent().getIntExtra(TYPE,-1);
-        setTitle(type == 1 ? "绑定手机号" : "手机号码注册");
+        mType = getIntent().getIntExtra(TYPE,-1);
+        setTitle(mType == 1 ? "绑定手机号" : "手机号码注册");
         initView();
         initListener();
 
@@ -118,14 +115,19 @@ public class RegisterActivity extends BaseBarActivity implements RegisterViewer,
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.next:
-                mPresenter.register(phoneNum.getText(), password.getText(), mSendVerCode.getText());
+                if (mType != 1) {
+                    mPresenter.register(phoneNum.getText(), password.getText(), mSendVerCode.getText());
+                } else  {
+                    mPresenter.bindPhone(phoneNum.getText(), password.getText(), mSendVerCode.getText());
+                }
                 break;
+                default:
         }
     }
 
 
     @Override
-    public void registerSuccess(LoginInfo registerBean) {
+    public void registerSuccess() {
         getLaunchHelper().startActivity(SelectGenderActivity.class);
         finish();
     }

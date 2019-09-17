@@ -65,8 +65,37 @@ import com.yu.common.toast.ToastUtils;
           @Override protected void onSuccess(LoginInfo userInfo) {
             assert getViewer() != null;
             UserProfile.getInstance().appLogin(userInfo);
-            getViewer().registerSuccess(userInfo);
+            getViewer().registerSuccess();
           }
         });
+  }
+
+
+
+  public void bindPhone(String phone, String sPwd, String verCode) {
+    if (TextUtils.isEmpty(phone)) {
+      ToastUtils.show("手机号输入不能为空");
+      return;
+    }
+    if (!phone.startsWith("1") || phone.length() != 11) {
+      ToastUtils.show("检查手机号输入是否正确");
+      return;
+    }
+    if (TextUtils.isEmpty(verCode)) {
+      ToastUtils.show("验证码号输入不能为空");
+      return;
+    }
+    if (TextUtils.isEmpty(sPwd)) {
+      ToastUtils.show("密码输入不能为空");
+    }
+    XHttpProxy.proxy(ApiServices.class)
+        .bindPhone(phone, MD5Utils.string2MD5(sPwd),verCode)
+        .subscribeWith(new TipRequestSubscriber<Object>() {
+          @Override
+          protected void onSuccess(Object o) {
+            getViewer().registerSuccess();
+          }
+        });
+
   }
 }

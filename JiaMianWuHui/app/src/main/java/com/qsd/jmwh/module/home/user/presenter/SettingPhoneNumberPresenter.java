@@ -2,10 +2,10 @@ package com.qsd.jmwh.module.home.user.presenter;
 
 import android.annotation.SuppressLint;
 import android.text.TextUtils;
-
 import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.register.bean.SendVerCodeBean;
+import com.qsd.jmwh.utils.MD5Utils;
 import com.qsd.jmwh.utils.countdown.RxCountDown;
 import com.xuexiang.xhttp2.XHttpProxy;
 import com.xuexiang.xhttp2.exception.ApiException;
@@ -39,21 +39,24 @@ public class SettingPhoneNumberPresenter extends BaseViewPresenter<SettingPhoneN
     }
 
 
-    public void bindPhone(String phone, String verCode) {
+    public void bindPhone(String phone, String sPwd, String verCode) {
         if (TextUtils.isEmpty(phone)) {
             ToastUtils.show("手机号输入不能为空");
             return;
         }
+      if (!phone.startsWith("1") || phone.length() != 11) {
+        ToastUtils.show("检查手机号输入是否正确");
+        return;
+      }
         if (TextUtils.isEmpty(verCode)) {
             ToastUtils.show("验证码号输入不能为空");
             return;
         }
-        if (!phone.startsWith("1") || phone.length() != 11) {
-            ToastUtils.show("检查手机号输入是否正确");
-            return;
+        if (TextUtils.isEmpty(sPwd)) {
+          ToastUtils.show("密码输入不能为空");
         }
         XHttpProxy.proxy(ApiServices.class)
-                    .bindPhone(phone,"",verCode)
+                    .bindPhone(phone, MD5Utils.string2MD5(sPwd),verCode)
                     .subscribeWith(new TipRequestSubscriber<Object>() {
                         @Override
                         protected void onSuccess(Object o) {

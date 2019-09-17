@@ -54,6 +54,7 @@
             />
 
         <TextView
+            android:gravity="center"
             android:id="@+id/job_age_loc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
