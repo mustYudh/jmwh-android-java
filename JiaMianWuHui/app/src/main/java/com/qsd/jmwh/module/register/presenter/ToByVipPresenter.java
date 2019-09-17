@@ -7,6 +7,7 @@ import com.qsd.jmwh.http.OtherApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.home.user.adapter.MineRadilLoveUserGvAdapter;
 import com.qsd.jmwh.module.home.user.bean.AccountBalance;
+import com.qsd.jmwh.module.home.user.bean.GoodsInfoBean;
 import com.qsd.jmwh.module.register.bean.PayInfo;
 import com.qsd.jmwh.module.register.bean.VipInfoBean;
 import com.qsd.jmwh.utils.PayUtils;
@@ -50,6 +51,19 @@ import com.yu.common.toast.ToastUtils;
           }
         });
   }
+
+
+  public void getGoods() {
+    XHttpProxy.proxy(OtherApiServices.class)
+        .getGoods(8)
+        .subscribeWith(new TipRequestSubscriber<GoodsInfoBean>() {
+          @Override protected void onSuccess(GoodsInfoBean goodsInfoBean) {
+            assert getViewer() != null;
+            getViewer().setGoodsInfo(goodsInfoBean.cdoList);
+          }
+        });
+  }
+
 
   public void pay(int lGoodsId, int type, int userId, String token) {
     XHttpProxy.proxy(ApiServices.class)

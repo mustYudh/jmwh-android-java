@@ -12,6 +12,8 @@ import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.user.bean.AccountBalance;
+import com.qsd.jmwh.module.home.user.bean.GoodsInfoBean;
+import com.qsd.jmwh.module.home.user.dialog.RechargeListDialog;
 import com.qsd.jmwh.module.register.adapter.PayTypeAdapter;
 import com.qsd.jmwh.module.register.adapter.VipInfoAdapter;
 import com.qsd.jmwh.module.register.adapter.VipTextAdapter;
@@ -19,6 +21,7 @@ import com.qsd.jmwh.module.register.bean.PayTypeBean;
 import com.qsd.jmwh.module.register.bean.VipInfoBean;
 import com.qsd.jmwh.module.register.presenter.ToByVipPresenter;
 import com.qsd.jmwh.module.register.presenter.ToByVipViewer;
+import com.qsd.jmwh.utils.PayUtils;
 import com.yu.common.mvp.PresenterLifeCycle;
 import com.yu.common.toast.ToastUtils;
 import java.util.ArrayList;
@@ -37,6 +40,7 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
   private double currentMoney;
   private PayTypeBean currentType;
   private boolean isRegister;
+  private boolean canPay;
   private final static String IS_REGISTER = "is_register";
 
   private int userId = UserProfile.getInstance().getUserId();
@@ -65,7 +69,11 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
     payType.setLayoutManager(new LinearLayoutManager(getActivity()));
     bindView(R.id.pay, v -> {
       if (currentType != null) {
-        mPresenter.pay(cdoListBean.lGoodsId, currentType.type, userId, userToken);
+        if (canPay) {
+          mPresenter.pay(cdoListBean.lGoodsId, currentType.type, userId, userToken);
+        } else {
+          mPresenter.getGoods();
+        }
       } else {
         ToastUtils.show("请选择支付方式");
       }
@@ -74,12 +82,10 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
 
   @Override protected void loadData() {
     setTitle("会员中心");
-  }
-
-  @Override protected void onResume() {
-    super.onResume();
     mPresenter.getVipInfo(userId, userToken);
   }
+
+
 
   @Override public void getVipInfo(VipInfoBean vipInfoBean) {
     currentMoney = Double.parseDouble(vipInfoBean.nMoney);
@@ -94,7 +100,7 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
       }
     }
     vipInfoList.setAdapter(vipInfoAdapter);
-
+    mPresenter.getCoinConvertMoney();
     //for (String payType : vipInfoBean.nPayTypeList) {
     //  PayTypeBean payTypeBean = new PayTypeBean();
     //  if (Integer.parseInt(payType) == 3) {
@@ -120,8 +126,6 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
       payCount.setText(cdoListBean.nGoodsSaleFee + "");
       notifyDataSetChanged();
     });
-    mPresenter.getCoinConvertMoney();
-
   }
 
   @Override public void coinConvertMoney(AccountBalance maskBallCoinBean) {
@@ -140,11 +144,13 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
   private void notifyDataSetChanged() {
     if (payTypeAdapter != null) {
       for (PayTypeBean datum : payTypeAdapter.getData()) {
-        if (datum.type == 3) {
+        if (datum.type == 5) {
           if (currentMoney < cdoListBean.nGoodsRealFee) {
             datum.money = "假面币不足";
+            canPay = false;
           } else {
             datum.money = currentMoney + "";
+            canPay = true;
           }
         }
       }
@@ -166,5 +172,19 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
       //  }
       //});
     }
+  }
+
+  @Override public void setGoodsInfo(List<GoodsInfoBean.CdoListBean> goods) {
+    RechargeListDialog dialog =
+        new RechargeListDialog(getActivity(), goods, new PayUtils.PayCallBack() {
+          @Override public void onPaySuccess(int type) {
+            mPresenter.getVipInfo(userId, userToken);
+          }
+
+          @Override public void onFailed(int type) {
+
+          }
+        });
+    dialog.showPopupWindow();
   }
 }
