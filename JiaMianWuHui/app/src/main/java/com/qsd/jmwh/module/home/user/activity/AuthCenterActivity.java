@@ -82,8 +82,7 @@ public class AuthCenterActivity extends BaseBarActivity implements AuthCenterVie
         new RxBusResultDisposable<ImageMultipleResultEvent>() {
           @Override protected void onEvent(ImageMultipleResultEvent event) throws Exception {
             MediaBean mediaBean = event.getResult().get(0);
-            mPresenter.uploadAuthVideo(mediaBean.getOriginalPath(),
-                getVideoThumbnail(mediaBean.getOriginalPath()).getPath());
+            mPresenter.uploadAuthVideo(mediaBean.getOriginalPath(), getVideoThumbnail(mediaBean.getOriginalPath()).getPath());
           }
         });
   }
