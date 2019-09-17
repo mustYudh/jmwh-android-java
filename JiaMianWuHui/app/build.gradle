@@ -21,7 +21,7 @@ enum ApiEnvEnum {
 }
 
 android {
-  def envStr = project.hasProperty('API_MODE') ? API_MODE : "DEV"
+  def envStr = project.hasProperty('API_MODE') ? API_MODE : "ONLINE"
   def appNameStr = (envStr as ApiEnvEnum).name
 
   compileSdkVersion rootProject.ext.compileSdkVersion
@@ -225,4 +225,5 @@ dependencies {
   implementation 'cn.jiguang.sdk:jpush:3.1.3'
   implementation 'cn.jiguang.sdk:jcore:1.2.1'
   implementation files('libs/TencentLocationSdk_v7.1.7_r02c4bb5a_20190523_115148.jar')
+  implementation 'com.github.pinguo-zhouwei:MZBannerView:v2.0.2'
 }

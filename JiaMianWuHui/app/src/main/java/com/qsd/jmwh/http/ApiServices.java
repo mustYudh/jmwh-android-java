@@ -4,6 +4,7 @@ import com.qsd.jmwh.module.home.park.bean.HomePersonListBean;
 import com.qsd.jmwh.module.home.park.bean.OtherUserInfoBean;
 import com.qsd.jmwh.module.home.radio.bean.GetDatingUserVipBean;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
+import com.qsd.jmwh.module.home.radio.bean.HomeBannerBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
 import com.qsd.jmwh.module.home.user.bean.MineLikeBean;
 import com.qsd.jmwh.module.home.user.bean.MineRadioListBean;
@@ -182,6 +183,9 @@ public interface ApiServices {
 
     @NetMethod(ParameterNames = {"lGoodsId", "nPayType"}, Url = "/OrderService/getBuyDatingPaySign")
     Observable<PayInfo> getBuyDatingPaySign(String lGoodsId, String nPayType);
+
+    @NetMethod(Url = "/MaskBallService/getBannerList")
+    Observable<HomeBannerBean> getBannerList();
 
 
 }

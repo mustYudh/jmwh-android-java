@@ -26,11 +26,13 @@ import com.qsd.jmwh.base.BaseBarFragment;
 import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.module.home.park.activity.LookUserInfoActivity;
 import com.qsd.jmwh.module.home.radio.activity.ReleaseAppointmentActivity;
+import com.qsd.jmwh.module.home.radio.adapter.BannerViewHolder;
 import com.qsd.jmwh.module.home.radio.adapter.DateRadioListDialogAdapter;
 import com.qsd.jmwh.module.home.radio.adapter.HomeRadioRvAdapter;
 import com.qsd.jmwh.module.home.radio.bean.DataRefreshRadioDataEvent;
 import com.qsd.jmwh.module.home.radio.bean.GetDatingUserVipBean;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
+import com.qsd.jmwh.module.home.radio.bean.HomeBannerBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
 import com.qsd.jmwh.module.home.radio.bean.LocalHomeRadioListBean;
 import com.qsd.jmwh.module.home.radio.presenter.RadioPresenter;
@@ -52,6 +54,7 @@ import com.yu.common.toast.ToastUtils;
 import com.yu.common.ui.DelayClickImageView;
 import com.yu.common.ui.DelayClickTextView;
 import com.yu.common.utils.ImageLoader;
+import com.zhouwei.mzbanner.MZBannerView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -88,6 +91,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
     private String select_city = "";
     private SmartRefreshLayout refresh;
     public int pageIndex = 0;
+    private MZBannerView mBanner;
 
     @Override
     protected int getActionBarLayoutId() {
@@ -112,12 +116,14 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
     private void initView() {
         refresh = bindView(R.id.refresh);
         tv_left = bindView(R.id.tv_left);
+        mBanner = bindView(R.id.banner);
         TextView tv_right = bindView(R.id.tv_right);
         right_menu = bindView(R.id.right_menu);
         left_menu = bindView(R.id.left_menu);
         rv_radio = bindView(R.id.rv_radio);
         ll_empty = bindView(R.id.ll_empty);
         mPresenter.getMyInfo();
+        mPresenter.getBannerList();
         rv_radio.setLayoutManager(new LinearLayoutManager(getActivity()));
         tv_left.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -615,7 +621,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                     case R.id.ll_bottom:
 
                         break;
-                        default:
+                    default:
                 }
             }
         };
@@ -747,7 +753,7 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                             payDialog.dismiss();
                         }
                         break;
-                        default:
+                    default:
                 }
             }
         };
@@ -827,8 +833,11 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         EventBus.getDefault().unregister(this);
+        if (mBanner != null) {
+            mBanner.pause();//暂停轮播
+        }
+        super.onDestroy();
     }
 
     //刷新数据
@@ -847,4 +856,46 @@ public class RadioFragment extends BaseBarFragment implements RadioViewer {
                 break;
         }
     }
+
+    @Override
+    public void getBannerListSuccess(HomeBannerBean homeBannerBean) {
+        if (homeBannerBean != null) {
+            if (homeBannerBean.cdoList != null && homeBannerBean.cdoList.size() != 0) {
+                initBanner(homeBannerBean.cdoList);
+            }
+        }
+    }
+
+    /**
+     * banner 初始化
+     *
+     * @param xbanner
+     */
+    private void initBanner(List<HomeBannerBean.CdoListBean> xbanner) {
+        if (mBanner != null) {
+            mBanner.setDuration(500);
+            mBanner.setDelayedTime(3000);
+            mBanner.setCanLoop(true);
+            mBanner.setPages(xbanner, BannerViewHolder::new);
+            mBanner.start();
+        }
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mBanner != null) {
+            mBanner.start();//开始轮播
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mBanner != null) {
+            mBanner.pause();//暂停轮播
+        }
+    }
+
 }

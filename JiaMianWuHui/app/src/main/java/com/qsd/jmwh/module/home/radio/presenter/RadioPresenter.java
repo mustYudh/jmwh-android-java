@@ -8,6 +8,7 @@ import com.qsd.jmwh.http.ApiServices;
 import com.qsd.jmwh.http.subscriber.TipRequestSubscriber;
 import com.qsd.jmwh.module.home.radio.bean.GetDatingUserVipBean;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
+import com.qsd.jmwh.module.home.radio.bean.HomeBannerBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
 import com.qsd.jmwh.module.home.radio.bean.LocalHomeRadioListBean;
 import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
@@ -159,6 +160,18 @@ public class RadioPresenter extends BaseViewPresenter<RadioViewer> {
                     @Override protected void onSuccess(UserCenterInfo userCenterMyInfo) {
                         assert getViewer() != null;
                         getViewer().getUserInfo(userCenterMyInfo);
+                    }
+                });
+    }
+
+    @SuppressLint("CheckResult")
+    public void getBannerList() {
+        XHttpProxy.proxy(ApiServices.class)
+                .getBannerList()
+                .subscribeWith(new TipRequestSubscriber<HomeBannerBean>() {
+                    @Override protected void onSuccess(HomeBannerBean homeBannerBean) {
+                        assert getViewer() != null;
+                        getViewer().getBannerListSuccess(homeBannerBean);
                     }
                 });
     }

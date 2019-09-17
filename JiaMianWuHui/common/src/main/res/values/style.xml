@@ -20,6 +20,9 @@
     <item name="android:background">@android:color/transparent</item>
   </style>
 
-
+  <declare-styleable name="BarIconContainer">
+    <attr format="reference" name="bar_icon"/>
+    <attr format="reference" name="bar_unread_icon"/>
+  </declare-styleable>
 
 </resources>

@@ -20,6 +20,6 @@
   <color name="lb_cm_dialog_text_color">#666666</color>
   <color name="lb_cm_dialog_title_color">#212121</color>
   <color name="lb_cm_dialog_left_button_color">#D4D9E6</color>
-
+  <color name="app_main_bg_color">#8A4EFC</color>
 
 </resources>

@@ -2,6 +2,7 @@ package com.qsd.jmwh.module.home.radio.presenter;
 
 import com.qsd.jmwh.module.home.radio.bean.GetDatingUserVipBean;
 import com.qsd.jmwh.module.home.radio.bean.GetRadioConfigListBean;
+import com.qsd.jmwh.module.home.radio.bean.HomeBannerBean;
 import com.qsd.jmwh.module.home.radio.bean.HomeRadioListBean;
 import com.qsd.jmwh.module.home.radio.bean.LocalHomeRadioListBean;
 import com.qsd.jmwh.module.home.user.bean.UserCenterInfo;
@@ -32,4 +33,6 @@ public interface RadioViewer extends Viewer {
     void getBuyDatingPaySignSuccess(PayInfo payInfo,String name);
 
     void getUserInfo(UserCenterInfo userCenterMyInfo);
+
+    void getBannerListSuccess(HomeBannerBean homeBannerBean);
 }
