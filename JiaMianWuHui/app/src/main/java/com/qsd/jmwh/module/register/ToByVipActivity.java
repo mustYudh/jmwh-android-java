@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.qsd.jmwh.R;
 import com.qsd.jmwh.base.BaseBarActivity;
 import com.qsd.jmwh.data.UserProfile;
-import com.qsd.jmwh.module.home.user.bean.AccountBalance;
 import com.qsd.jmwh.module.home.user.bean.GoodsInfoBean;
 import com.qsd.jmwh.module.home.user.dialog.RechargeListDialog;
 import com.qsd.jmwh.module.register.adapter.PayTypeAdapter;
@@ -88,7 +87,7 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
 
 
   @Override public void getVipInfo(VipInfoBean vipInfoBean) {
-    currentMoney = Double.parseDouble(vipInfoBean.nMoney);
+    currentMoney = Double.parseDouble(vipInfoBean.nMaskBallCoin);
     VipTextAdapter vipTextAdapter =
         new VipTextAdapter(R.layout.item_vip_text_layout, vipInfoBean.sVIPPrivilegeList);
     vipTextList.setAdapter(vipTextAdapter);
@@ -100,7 +99,7 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
       }
     }
     vipInfoList.setAdapter(vipInfoAdapter);
-    mPresenter.getCoinConvertMoney();
+
     //for (String payType : vipInfoBean.nPayTypeList) {
     //  PayTypeBean payTypeBean = new PayTypeBean();
     //  if (Integer.parseInt(payType) == 3) {
@@ -112,6 +111,18 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
     //  }
     //}
     //payTypeBeans.get(0).selected = true;
+
+    List<PayTypeBean> payTypeBeans = new ArrayList<>();
+    PayTypeBean jiaMian = new PayTypeBean();
+    jiaMian.type = 5;
+    jiaMian.selected = true;
+    jiaMian.money = vipInfoBean.nMaskBallCoin;
+    payTypeBeans.add(jiaMian);
+    currentType = payTypeBeans.get(0);
+    payTypeAdapter = new PayTypeAdapter(R.layout.item_pay_type_layout, payTypeBeans);
+    payType.setAdapter(payTypeAdapter);
+    notifyDataSetChanged();
+
 
     payCount.setText(cdoListBean.nGoodsSaleFee + "");
     vipInfoAdapter.setOnItemClickListener((adapter, view, position) -> {
@@ -128,18 +139,7 @@ public class ToByVipActivity extends BaseBarActivity implements ToByVipViewer {
     });
   }
 
-  @Override public void coinConvertMoney(AccountBalance maskBallCoinBean) {
-    List<PayTypeBean> payTypeBeans = new ArrayList<>();
-    PayTypeBean jiaMian = new PayTypeBean();
-    jiaMian.type = 5;
-    jiaMian.selected = true;
-    jiaMian.money = maskBallCoinBean.cdoUserAccountList.nMaskBallCoin + "";
-    payTypeBeans.add(jiaMian);
-    currentType = payTypeBeans.get(0);
-    payTypeAdapter = new PayTypeAdapter(R.layout.item_pay_type_layout, payTypeBeans);
-    payType.setAdapter(payTypeAdapter);
-    notifyDataSetChanged();
-  }
+
 
   private void notifyDataSetChanged() {
     if (payTypeAdapter != null) {
