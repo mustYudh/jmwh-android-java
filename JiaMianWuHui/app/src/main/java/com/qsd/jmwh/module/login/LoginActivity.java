@@ -36,7 +36,8 @@ public class LoginActivity extends BaseBarActivity implements LoginViewer, View.
   @Override protected void loadData() {
     setTitle("登录");
     bindView(R.id.login, this);
-    setRightMenu("忘记密码", v -> getLaunchHelper().startActivity(EditPasswordActivity.class));
+    setRightMenu("忘记密码", v -> getLaunchHelper().startActivity(
+        EditPasswordActivity.getIntent(getActivity(), true, "忘记密码")));
     EventBus.getDefault().register(this);
   }
 
@@ -89,15 +90,12 @@ public class LoginActivity extends BaseBarActivity implements LoginViewer, View.
     }
   }
 
-
   @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行
   public void onEvent(Boolean event) {
     if (event) {
       finish();
     }
-
   }
-
 
   @Override protected void onDestroy() {
     super.onDestroy();

@@ -182,6 +182,11 @@ public class NormaFormItemVIew extends LinearLayout {
     }
 
 
+    public EditText getEditTextView() {
+        mEdit = findViewById(R.id.edit);
+        return mEdit;
+    }
+
     public void setEditText(CharSequence contentText) {
         if (mEdit != null && !TextUtils.isEmpty(contentText.toString().trim())) {
             mEdit.setText(contentText.toString().trim());
