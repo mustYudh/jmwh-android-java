@@ -66,7 +66,7 @@ public class UserPhotoAdapter extends BasicAdapter<OtherUserInfoBean.CdoFileList
                 }
               } else if (data.nFileType == 2) {
                 photoBg.setVisibility(View.VISIBLE);
-                if (data.bView == 0) {
+                if (data.bView == 1) {
                   ImageLoader.loadCenterCrop(userPic.getContext(), data.sFileUrl, userPic);
                 } else {
                   ImageLoader.blurTransformation(userPic.getContext(), data.sFileUrl, userPic);

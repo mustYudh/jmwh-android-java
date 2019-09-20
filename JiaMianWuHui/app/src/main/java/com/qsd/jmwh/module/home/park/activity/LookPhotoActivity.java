@@ -85,12 +85,12 @@ public class LookPhotoActivity extends BaseActivity implements LookPhotoViewer {
         ImageView imageView = bindView(R.id.destroy_root_bg, false);
         imageView.setImageResource(R.drawable.ic_red_bag_bg);
         bindText(R.id.money, data.nFileFee + "");
-        if (data.bView == 1) {
+        if (data.bView != 1) {
           ImageLoader.blurTransformation(getActivity(), url, photo, 20, 3);
         } else {
           ImageLoader.loadCenterCrop(getActivity(), url, photo);
         }
-        bindView(R.id.red_bag_root, data.bView == 1);
+        bindView(R.id.red_bag_root, data.bView != 1);
         nPayType = data.nFileFee;
         nBrowseInfType = 2;
       } else if (type == 3) {
@@ -98,7 +98,7 @@ public class LookPhotoActivity extends BaseActivity implements LookPhotoViewer {
         imageView.setImageResource(R.drawable.ic_red_bag_bg);
         bindText(R.id.money, data.nFileFee + "");
         ImageLoader.blurTransformation(getActivity(), url, photo, 20, 3);
-        bindView(R.id.red_bag_root, data.bView == 1);
+        bindView(R.id.red_bag_root, data.bView != 1);
         nPayType = data.nFileFee;
         nBrowseInfType = 3;
       }
@@ -149,7 +149,7 @@ public class LookPhotoActivity extends BaseActivity implements LookPhotoViewer {
         }
       }
     });
-    if ((nBrowseInfType == 1 || nBrowseInfType == 3) && data.bView == 1) {
+    if ((nBrowseInfType == 1 || nBrowseInfType == 3) && data.bView != 1) {
       photo.setOnTouchListener((v, event) -> {
         switch (event.getAction()) {
           case MotionEvent.ACTION_DOWN:
