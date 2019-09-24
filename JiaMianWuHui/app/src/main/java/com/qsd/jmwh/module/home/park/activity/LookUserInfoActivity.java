@@ -1,6 +1,8 @@
 package com.qsd.jmwh.module.home.park.activity;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -391,6 +393,31 @@ public class LookUserInfoActivity extends BaseActivity
     showContact = true;
     mQq.setContent(showContact ? TextUtils.isEmpty(qq) ? "未填写" : qq : "已填写，点击查看");
     mWeChat.setContent(showContact ? TextUtils.isEmpty(weChat) ? "未填写" : weChat : "已填写，点击查看");
+    if (showContact) {
+      if (!TextUtils.isEmpty(qq)) {
+        mQq.setRightButtonListener("复制", v -> {
+          ClipboardManager cm =
+              (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+          ClipData mClipData = ClipData.newPlainText("Label", qq);
+          assert cm != null;
+          cm.setPrimaryClip(mClipData);
+          ToastUtils.show("复制成功");
+        });
+      }
+      if (!TextUtils.isEmpty(weChat)) {
+        mWeChat.setRightButtonListener("复制", v -> {
+          ClipboardManager cm =
+              (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+          ClipData mClipData = ClipData.newPlainText("Label", weChat);
+          assert cm != null;
+          cm.setPrimaryClip(mClipData);
+          ToastUtils.show("复制成功");
+        });
+      }
+    } else {
+      mQq.setRightButtonListener("", v -> {
+      });
+    }
   }
 
   @Override public void getViewCount(SubViewCount count, int type) {
@@ -456,22 +483,20 @@ public class LookUserInfoActivity extends BaseActivity
       SelectHintPop selectHintPop = new SelectHintPop(getActivity());
       selectHintPop.setTitle("温馨提示");
       selectHintPop.setMessage("还有" + count.nSurGalaryViewCount + "次机会免费解锁相册");
-      selectHintPop.setPositiveButton("确定",v -> {
-        mPresenter.addBrowsingHis(
-            userID, 0, 0, 6, () -> { ;
-              selectHintPop.dismiss();
-              refreshImage();
-            }
-        );
+      selectHintPop.setPositiveButton("确定", v -> {
+        mPresenter.addBrowsingHis(userID, 0, 0, 6, () -> {
+          ;
+          selectHintPop.dismiss();
+          refreshImage();
+        });
       });
-      selectHintPop.setNegativeButton("取消",v -> {
+      selectHintPop.setNegativeButton("取消", v -> {
         selectHintPop.dismiss();
       });
       selectHintPop.showPopupWindow();
     } else {
       openImage();
     }
-
   }
 
   @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {

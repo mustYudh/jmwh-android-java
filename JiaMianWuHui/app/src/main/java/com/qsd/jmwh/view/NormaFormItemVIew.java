@@ -68,6 +68,7 @@ public class NormaFormItemVIew extends LinearLayout {
         content.setHintTextColor(hintColor);
         content.setTextColor(textColor);
         mRightBtnText = typedArray.getString(R.styleable.NormaFormItemVIew_right_button_hint);
+        int rightHintColor = typedArray.getColor(R.styleable.NormaFormItemVIew_hint_color,-1);
         boolean showTopLine = typedArray.getBoolean(R.styleable.NormaFormItemVIew_show_top_line, true);
         boolean showBottomLine =
                 typedArray.getBoolean(R.styleable.NormaFormItemVIew_show_bottom_line, true);
@@ -98,6 +99,9 @@ public class NormaFormItemVIew extends LinearLayout {
         if (!TextUtils.isEmpty(mRightBtnText)) {
             rightBtn.setText(mRightBtnText);
             rightBtn.setVisibility(VISIBLE);
+        }
+        if (rightHintColor != -1) {
+            rightBtn.setTextColor(rightHintColor);
         }
         if (textLength != null) {
             mEdit.addTextChangedListener(new TextWatcher() {
@@ -195,6 +199,13 @@ public class NormaFormItemVIew extends LinearLayout {
     }
 
     public void setRightButtonListener(View.OnClickListener listener) {
+        rightBtn.setOnClickListener(listener);
+    }
+
+
+    public void setRightButtonListener(CharSequence text,View.OnClickListener listener) {
+        rightBtn.setVisibility(View.VISIBLE);
+        rightBtn.setText(text);
         rightBtn.setOnClickListener(listener);
     }
 }

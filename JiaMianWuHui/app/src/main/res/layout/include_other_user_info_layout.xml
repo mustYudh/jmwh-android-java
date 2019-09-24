@@ -127,6 +127,7 @@
         app:show_top_line="false"/>
 
     <com.qsd.jmwh.view.NormaFormItemVIew
+        app:right_button_hint_color="@color/color_2A2A2A"
         android:id="@+id/qq"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -136,6 +137,7 @@
         app:show_top_line="false"/>
 
     <com.qsd.jmwh.view.NormaFormItemVIew
+        app:right_button_hint_color="@color/color_2A2A2A"
         android:id="@+id/wechat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
