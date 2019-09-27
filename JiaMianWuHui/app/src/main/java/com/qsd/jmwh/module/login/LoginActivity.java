@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.common.ToastHelper;
 import com.netease.nimlib.sdk.NIMClient;
@@ -16,12 +18,14 @@ import com.qsd.jmwh.data.UserProfile;
 import com.qsd.jmwh.dialog.net.NetLoadingDialog;
 import com.qsd.jmwh.module.home.HomeActivity;
 import com.qsd.jmwh.module.home.user.activity.EditPasswordActivity;
+import com.qsd.jmwh.module.home.user.activity.WebViewActivity;
 import com.qsd.jmwh.module.login.bean.LoginInfo;
 import com.qsd.jmwh.module.login.presenter.LoginPresenter;
 import com.qsd.jmwh.module.login.presenter.LoginViewer;
 import com.qsd.jmwh.module.splash.bean.RegisterSuccess;
 import com.qsd.jmwh.view.NormaFormItemVIew;
 import com.yu.common.mvp.PresenterLifeCycle;
+import com.yu.common.toast.ToastUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -29,8 +33,18 @@ import org.greenrobot.eventbus.ThreadMode;
 public class LoginActivity extends BaseBarActivity implements LoginViewer, View.OnClickListener {
   @PresenterLifeCycle LoginPresenter mPresenter = new LoginPresenter(this);
 
+  private boolean isSelectedAgreement = true;
+
   @Override protected void setView(@Nullable Bundle savedInstanceState) {
     setContentView(R.layout.login_activity_layout);
+    ImageView imageView = bindView(R.id.agree_agreement);
+    imageView.setSelected(isSelectedAgreement);
+    FrameLayout agreementBtn = bindView(R.id.agree_agreement_btn);
+    agreementBtn.setOnClickListener(v -> {
+      isSelectedAgreement = !isSelectedAgreement;
+      imageView.setSelected(isSelectedAgreement);
+    });
+    bindView(R.id.agreement,v -> getLaunchHelper().startActivity(WebViewActivity.class));
   }
 
   @Override protected void loadData() {
@@ -44,7 +58,11 @@ public class LoginActivity extends BaseBarActivity implements LoginViewer, View.
   @Override public void onClick(View v) {
     switch (v.getId()) {
       case R.id.login:
-        mPresenter.login(getTextResult(R.id.account), getTextResult(R.id.password));
+        if (isSelectedAgreement) {
+          mPresenter.login(getTextResult(R.id.account), getTextResult(R.id.password));
+        } else {
+          ToastUtils.show("请阅读同意用户协议");
+        }
         break;
       default:
     }
