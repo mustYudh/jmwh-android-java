@@ -149,7 +149,7 @@ public class LookPhotoActivity extends BaseActivity implements LookPhotoViewer {
         }
       }
     });
-    if ((nBrowseInfType == 1 || nBrowseInfType == 3) && data.bView != 1) {
+    if ((nBrowseInfType == 1 || nBrowseInfType == 3) && data.bView == 1) {
       photo.setOnTouchListener((v, event) -> {
         switch (event.getAction()) {
           case MotionEvent.ACTION_DOWN:
