@@ -3,6 +3,7 @@
 buildscript {
     repositories {
         google()
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         jcenter()
 
     }
@@ -19,10 +20,11 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
         maven { url 'http://developer.huawei.com/repo' }
         maven { url 'https://jitpack.io' }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url 'https://dl.bintray.com/umsdk/release' }
+        jcenter()
         flatDir {
             dirs 'libs'
         }
